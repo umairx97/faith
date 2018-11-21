@@ -43,7 +43,7 @@ export default class Login extends React.Component {
 	
 		return (
 
-			<ImageBackground source={require("../../assets/images/bg-white.png") } style={styles.MainContainer} >
+			<ImageBackground source={require("../../assets/images/bg-plainwhite.png") } style={styles.MainContainer} >
 	  <Image
 						source={require("../../assets/images/logo.png")}
 						style={styles.migoLogoImage}/>
