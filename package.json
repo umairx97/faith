@@ -1,0 +1,27 @@
+{
+  "name": "DatingAppArc2",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.5",
+    "react": "^16.6.1",
+    "react-native": "0.57.1",
+    "react-native-gesture-handler": "^1.0.9",
+    "react-native-linear-gradient": "^2.4.4",
+    "react-navigation": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.49.2",
+    "react-test-renderer": "16.6.1",
+    "schedule": "^0.4.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
