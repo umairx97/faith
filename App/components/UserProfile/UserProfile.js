@@ -10,7 +10,7 @@ import { Text, StyleSheet, View, Image } from "react-native"
 import React from "react"
 import LinearGradient from "react-native-linear-gradient"
 import { ScrollView } from "react-native-gesture-handler";
-
+import ViewMoreText from 'react-native-view-more-text';
 
 export default class UserProfile extends React.Component {
 
@@ -23,6 +23,18 @@ export default class UserProfile extends React.Component {
 				headerRight: null,
 			}
 	}
+
+
+	renderViewMore(onPress){
+		return(
+		  <Text onPress={onPress}>View more</Text>
+		)
+	  }
+	  renderViewLess(onPress){
+		return(
+		  <Text onPress={onPress}>View less</Text>
+		)
+	  }
 
 	constructor(props) {
 		super(props)
@@ -49,7 +61,7 @@ export default class UserProfile extends React.Component {
 						<Image
 							source={require("../../../assets/images/photos-2.png")}
 							style={styles.photosImage}/>
-						<View
+						{/* <View
 							pointerEvents="box-none"
 							style={{
 								flexDirection: "row",
@@ -59,7 +71,7 @@ export default class UserProfile extends React.Component {
 							<Image
 								source={require("../../../assets/images/slides.png")}
 								style={styles.slidesImage}/>
-						</View>
+						</View> */}
 					</View>
 					<View
 						pointerEvents="box-none"
@@ -121,11 +133,11 @@ export default class UserProfile extends React.Component {
 							style={styles.seattleUsaText}>Seattle, USA </Text>
 					</View>
 					<View
-						pointerEvents="box-none"
+						
 						style={styles.aboutView}>
 						<Text
 							style={styles.aboutText}>About</Text>
-						<View
+						{/* <View
 							pointerEvents="box-none"
 							style={{
 								flex: 1,
@@ -135,8 +147,32 @@ export default class UserProfile extends React.Component {
 							<Text
 								style={styles.myNameIsMaryBurgText}>My name is Mary Burgess and I enjoy meeting new people and finding ways to help them have an uplifting experience. I enjoy reading, and the knowledge ...
 and perspective that my reading gives me has strengthened my teaching skills and presentation abilities.opportunities, through which I was able to have fewer returned products and increased repeat customers, when compared with co-workers.</Text>
-						</View>
-						<View
+						</View> */}
+
+
+     <ViewMoreText 
+          numberOfLines={3}
+          renderViewMore={this.renderViewMore}
+          renderViewLess={this.renderViewLess}
+         textStyle={{marginLeft:10,marginRight:10,
+								flexDirection: "column",
+								justifyContent: "flex-end",
+						}}
+        >
+          <Text style={styles.myNameIsMaryBurgText}>
+		  My name is Mary Burgess and I enjoy meeting new people and finding ways to help them have an uplifting experience. I enjoy reading, and the knowledge ...
+and perspective that my reading gives me has strengthened my teaching skills and presentation abilities.opportunities, through which I was able to have fewer returned products and increased repeat customers, when compared with co-workers.</Text>
+					
+         
+        </ViewMoreText>
+
+
+
+
+
+
+
+						{/* <View
 							pointerEvents="box-none"
 							style={{
 								position: "absolute",
@@ -145,10 +181,10 @@ and perspective that my reading gives me has strengthened my teaching skills and
 							}}>
 							<Text
 								style={styles.showMoreText}>Show more</Text>
-						</View>
+						</View> */}
 					</View>
 					<View
-						pointerEvents="box-none"
+						
 						style={styles.friendsView}>
 						<Text
 							style={styles.friendsText}>Friends</Text>
@@ -166,7 +202,7 @@ and perspective that my reading gives me has strengthened my teaching skills and
 								style={styles.user3Image}/>
 						</View>
 						<View
-							pointerEvents="box-none"
+							
 							style={{
 								position: "absolute",
 								width: "100%",
@@ -177,14 +213,14 @@ and perspective that my reading gives me has strengthened my teaching skills and
 								style={styles.user2Image}/>
 						</View>
 						<View
-							pointerEvents="box-none"
+							
 							style={{
 								position: "absolute",
 								width: "100%",
 								height: "100%",
 							}}>
 							<View
-								pointerEvents="box-none"
+							
 								style={{
 									flexDirection: "row",
 									justifyContent: "center",
@@ -544,9 +580,9 @@ and perspective that my reading gives me has strengthened my teaching skills and
 						</View>
 					</View>
 				</View>
-				<Image
+				{/* <Image
 					source={require("../../../assets/images/home-indicator---on-light.png")}
-					style={styles.iphoneXHomeIndicatorHomeIndicatorOnLightImage}/>
+					style={styles.iphoneXHomeIndicatorHomeIndicatorOnLightImage}/> */}
 			</View>
 			</ScrollView>
 		
@@ -594,16 +630,18 @@ const styles = StyleSheet.create({
 	},
 	aboutView: {
 		backgroundColor: 'rgba(0, 0, 0, 0.0)',
-		width: 345,
-		height: 157,
+		marginRight:15,
 		marginLeft: 15,
 		marginTop: 38,
+		justifyContent:'flex-end',
+		textAlign:'justify',
 	},
 	friendsView: {
 		backgroundColor: 'rgba(0, 0, 0, 0.0)',
 		height: 108,
 		marginLeft: 15,
 		marginTop: 23,
+		
 	},
 	basicProfileView: {
 		backgroundColor: 'rgba(0, 0, 0, 0.0)',

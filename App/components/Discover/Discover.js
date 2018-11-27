@@ -14,6 +14,8 @@ import BottomTabBar from "../BottomTabNavigation/BottomTabNavigation"
 import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import UnderlineTabBarExample from "../BottomTabNavigation/BottomTab"
 import TabBarNavigator from "../BottomTabNavigation/TabBarNavigator"
+import TabberBottom from '../TopScrollTabBarNavigator/SlideTabBarNavigator'
+import MyBottomTab from '../BottomTabNavigation/BottomTabNavigationPaper'
 export default class Discover extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -495,7 +497,7 @@ export default class Discover extends React.Component {
   
       </ScrollView>
       </View>
-      <View style={{flex: .1}}><UnderlineTabBarExample/></View>
+      {/* <View style={{flex: .1}}><MyBottomTab/></View> */}
       
       
       </View>

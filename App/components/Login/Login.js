@@ -33,7 +33,7 @@ export default class Login extends React.Component {
 	}
 
 	onFacebookPressed = () => {
-		this.props.navigation.navigate('Profile');
+		this.props.navigation.navigate('UniversalTabView');
 	}
 
 	// onGooglePressed = () => {

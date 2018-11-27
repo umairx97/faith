@@ -10,6 +10,22 @@ import { Text, StyleSheet, View, Image,TouchableOpacity } from "react-native"
 import React from "react"
 import LinearGradient from "react-native-linear-gradient"
 import { ScrollView } from "react-native-gesture-handler";
+import TopScrollTabBarNavigator from "../TopScrollTabBarNavigator/TopScrollTabBarNavigator"
+import GridView from 'react-native-super-grid';
+import SlidableTabBarNavigator from "../TopScrollTabBarNavigator/SlideTabBarNavigator"
+
+const items = [
+	{ name: 'TURQUOISE', code: '#1abc9c' }, { name: 'EMERALD', code: '#2ecc71' },
+	{ name: 'PETER RIVER', code: '#3498db' }, { name: 'AMETHYST', code: '#9b59b6' },
+	{ name: 'WET ASPHALT', code: '#34495e' }, { name: 'GREEN SEA', code: '#16a085' },
+	{ name: 'NEPHRITIS', code: '#27ae60' }, { name: 'BELIZE HOLE', code: '#2980b9' },
+	{ name: 'WISTERIA', code: '#8e44ad' }, { name: 'MIDNIGHT BLUE', code: '#2c3e50' },
+	{ name: 'SUN FLOWER', code: '#f1c40f' }, { name: 'CARROT', code: '#e67e22' },
+	{ name: 'ALIZARIN', code: '#e74c3c' }, { name: 'CLOUDS', code: '#ecf0f1' },
+	{ name: 'CONCRETE', code: '#95a5a6' }, { name: 'ORANGE', code: '#f39c12' },
+	{ name: 'PUMPKIN', code: '#d35400' }, { name: 'POMEGRANATE', code: '#c0392b' },
+	{ name: 'SILVER', code: '#bdc3c7' }, { name: 'ASBESTOS', code: '#7f8c8d' },
+  ];
 
 export default class NearbyAllUser extends React.Component {
 
@@ -17,9 +33,8 @@ export default class NearbyAllUser extends React.Component {
 	
 		const { params = {} } = navigation.state
 		return {
-				header: null,
-				headerLeft: null,
-				headerRight: null,
+			headerTitle: "Nearby",
+			
 			}
 	}
 
@@ -44,785 +59,823 @@ export default class NearbyAllUser extends React.Component {
 
 	render() {
 	
-		return <ScrollView>
-		<View
-				pointerEvents="box-none"
-				style={styles.nearbyAllUserView}>
-				<View
-					pointerEvents="box-none"
-					style={styles.contentsView}>
-					<View
-						pointerEvents="box-none"
-						style={styles.bgWhiteView}>
-						<View
-							pointerEvents="box-none"
-							style={{
-								flex: 1,
-								flexDirection: "column",
-								justifyContent: "flex-end",
-							}}/>
-					</View>
-					<View
-						pointerEvents="box-none"
-						style={{
-							position: "absolute",
-							width: "100%",
-							height: "100%",
-						}}>
-						<View
-							pointerEvents="box-none"
-							style={styles.barsNavigationNearbyFiltersView}>
-							<View
-								pointerEvents="box-none"
-								style={{
-									flexDirection: "row",
-									alignSelf: "stretch",
-									alignItems: "center",
-								}}>
-								<Text
-									style={styles.nearbyText}>Nearby</Text>
-								<View
-									pointerEvents="box-none"
-									style={{
-										flexDirection: "row",
-										flex: 1,
-										justifyContent: "flex-end",
-										alignItems: "center",
-									}}>
-									<Image
-										source={require("../../../assets/images/filters-btn.png")}
-										style={styles.filtersBtnImage}/>
-								</View>
-							</View>
-							<View
-								pointerEvents="box-none"
-								style={{
-									position: "absolute",
-									width: "100%",
-									height: "100%",
-								}}>
-								<View
-									pointerEvents="box-none"
-									style={styles.filtersView}>
-									<View
-										pointerEvents="box-none"
-										style={{
-											flex: 1,
-											flexDirection: "column",
-											justifyContent: "flex-end",
-										}}/>
-								</View>
-							</View>
-						</View>
-					</View>
-					<View
-						pointerEvents="box-none"
-						style={{
-							position: "absolute",
-							width: "100%",
-							height: "100%",
-						}}>
-						<View
-							pointerEvents="box-none"
-							style={styles.tabView}>
-							<View
-								pointerEvents="box-none"
-								style={{
-									flexDirection: "row",
-									alignSelf: "stretch",
-								}}>
-								  <TouchableOpacity
-						onPress={this.onAllUserPressed}
-						style={styles.facebookButton}>
-					<Text 
-									style={styles.allUserText}>All user</Text>
-						
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={this.onSpotlightPressed}
-						style={styles.facebookButton}>
-					<Text 
-									style={styles.spotlightText}>Spotlight</Text>
-						
-					</TouchableOpacity>
-								
-								
-								<View
-									pointerEvents="box-none"
-									style={{
-										flexDirection: "row",
-										flex: 1,
-										justifyContent: "flex-end",
-									}}>
-									<Text
-										style={styles.newText}>New</Text>
-
-			<TouchableOpacity
-						onPress={this.onNearbyPressed}
-						style={styles.facebookButton}>
-					<Text style={styles.nearbyTwoText}>Nearby</Text>
-						
-					</TouchableOpacity>
-
-
-								</View>
-							</View>
-							<View
-								pointerEvents="box-none"
-								style={{
-									flex: 1,
-									flexDirection: "column",
-									justifyContent: "flex-end",
-								}}>
-								<View
-									pointerEvents="box-none"
-									style={styles.rectangleView}>
-									<View
-										pointerEvents="box-none"
-										style={{
-											flex: 1,
-											flexDirection: "column",
-											justifyContent: "flex-end",
-										}}/>
-								</View>
-							</View>
-						</View>
-						<View
-							pointerEvents="box-none"
-							style={{
-								flexDirection: "row",
-								alignSelf: "stretch",
-							}}>
-							<View
-								pointerEvents="box-none"
-								style={styles.col18vView}>
-								<View
-									pointerEvents="box-none"
-									style={styles.items1View}>
-									<LinearGradient
-										start={{
-											x: 0.5,
-											y: 0.77,
-										}}
-										end={{
-											x: 0.5,
-											y: 1,
-										}}
-										locations={[0, 1]}
-										colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
-										style={styles.rectangle3ImageLinearGradient}>
-										<Image
-											source={require("../../../assets/images/rectangle-3-11.png")}
-											style={styles.rectangle3Image}/>
-									</LinearGradient>
-									<View
-										pointerEvents="box-none"
-										style={{
-											position: "absolute",
-											width: "100%",
-											height: "100%",
-										}}>
-										<View
-											pointerEvents="box-none"
-											style={{
-												flexDirection: "row",
-												alignSelf: "stretch",
-											}}>
-											<Text
-												style={styles.augustaCastroText}>Augusta Castro</Text>
-											<View
-												pointerEvents="box-none"
-												style={{
-													flexDirection: "row",
-													flex: 1,
-													justifyContent: "flex-end",
-												}}>
-												<LinearGradient
-													start={{
-														x: 1.07,
-														y: 0.39,
-													}}
-													end={{
-														x: -0.07,
-														y: 0.61,
-													}}
-													locations={[0, 1]}
-													colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
-													style={styles.genderAgeSmallViewLinearGradient}>
-													<View
-														pointerEvents="box-none"
-														style={styles.genderAgeSmallView}>
-														<View
-															pointerEvents="box-none"
-															style={{
-																flexDirection: "row",
-																alignSelf: "stretch",
-															}}>
-															<Image
-																source={require("../../../assets/images/oval-2.png")}
-																style={styles.oval2Image}/>
-															<Text
-																style={styles.textText}>23</Text>
-														</View>
-													</View>
-												</LinearGradient>
-											</View>
-										</View>
-									</View>
-								</View>
-								<View
-									pointerEvents="box-none"
-									style={{
-										position: "absolute",
-										width: "100%",
-										height: "100%",
-										justifyContent: "center",
-									}}>
-									<View
-										pointerEvents="box-none"
-										style={styles.items2View}>
-										<LinearGradient
-											start={{
-												x: 0.5,
-												y: 0.77,
-											}}
-											end={{
-												x: 0.5,
-												y: 1,
-											}}
-											locations={[0, 1]}
-											colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
-											style={styles.rectangle3TwoImageLinearGradient}>
-											<Image
-												source={require("../../../assets/images/rectangle-3-16.png")}
-												style={styles.rectangle3TwoImage}/>
-										</LinearGradient>
-										<View
-											pointerEvents="box-none"
-											style={{
-												position: "absolute",
-												width: "100%",
-												height: "100%",
-											}}>
-											<Image
-												source={require("../../../assets/images/videos.png")}
-												style={styles.videosImage}/>
-											<View
-												pointerEvents="box-none"
-												style={{
-													flex: 1,
-													flexDirection: "column",
-													justifyContent: "flex-end",
-												}}>
-												<View
-													pointerEvents="box-none"
-													style={{
-														flexDirection: "row",
-														alignSelf: "stretch",
-													}}>
-													<Text
-														style={styles.minaHowellText}>Mina Howell</Text>
-													<View
-														pointerEvents="box-none"
-														style={{
-															flexDirection: "row",
-															flex: 1,
-															justifyContent: "flex-end",
-														}}>
-														<LinearGradient
-															start={{
-																x: 1.07,
-																y: 0.39,
-															}}
-															end={{
-																x: -0.07,
-																y: 0.61,
-															}}
-															locations={[0, 1]}
-															colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
-															style={styles.genderAgeSmallTwoViewLinearGradient}>
-															<View
-																pointerEvents="box-none"
-																style={styles.genderAgeSmallTwoView}>
-																<Text
-																	style={styles.textTwoText}/>
-																<View
-																	pointerEvents="box-none"
-																	style={{
-																		position: "absolute",
-																		width: "100%",
-																		height: "100%",
-																	}}>
-																	<Image
-																		source={require("../../../assets/images/oval-2.png")}
-																		style={styles.oval2TwoImage}/>
-																</View>
-															</View>
-														</LinearGradient>
-													</View>
-												</View>
-											</View>
-										</View>
-									</View>
-								</View>
-								<View
-									pointerEvents="box-none"
-									style={{
-										position: "absolute",
-										width: "100%",
-										height: "100%",
-									}}>
-									<View
-										pointerEvents="box-none"
-										style={styles.items3View}>
-										<LinearGradient
-											start={{
-												x: 0.5,
-												y: 0.77,
-											}}
-											end={{
-												x: 0.5,
-												y: 1,
-											}}
-											locations={[0, 1]}
-											colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
-											style={styles.rectangle3ThreeImageLinearGradient}>
-											<Image
-												source={require("../../../assets/images/rectangle-3-6.png")}
-												style={styles.rectangle3ThreeImage}/>
-										</LinearGradient>
-										<View
-											pointerEvents="box-none"
-											style={{
-												position: "absolute",
-												width: "100%",
-												height: "100%",
-											}}>
-											<View
-												pointerEvents="box-none"
-												style={{
-													flexDirection: "row",
-													alignSelf: "stretch",
-												}}>
-												<Text
-													style={styles.hettieBarberText}>Hettie Barber</Text>
-												<View
-													pointerEvents="box-none"
-													style={{
-														flexDirection: "row",
-														flex: 1,
-														justifyContent: "flex-end",
-													}}>
-													<LinearGradient
-														start={{
-															x: 1.07,
-															y: 0.39,
-														}}
-														end={{
-															x: -0.07,
-															y: 0.61,
-														}}
-														locations={[0, 1]}
-														colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
-														style={styles.genderAgeSmallThreeViewLinearGradient}>
-														<View
-															pointerEvents="box-none"
-															style={styles.genderAgeSmallThreeView}>
-															<Text
-																style={styles.textThreeText}/>
-														</View>
-													</LinearGradient>
-												</View>
-											</View>
-										</View>
-									</View>
-								</View>
-							</View>
-							<View
-								pointerEvents="box-none"
-								style={{
-									flexDirection: "row",
-									flex: 1,
-									justifyContent: "flex-end",
-								}}>
-								<View
-									pointerEvents="box-none"
-									style={styles.col18vTwoView}>
-									<View
-										pointerEvents="box-none"
-										style={styles.items1TwoView}>
-										<LinearGradient
-											start={{
-												x: 0.5,
-												y: 0.77,
-											}}
-											end={{
-												x: 0.5,
-												y: 1,
-											}}
-											locations={[0, 1]}
-											colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
-											style={styles.rectangle3FourImageLinearGradient}>
-											<Image
-												source={require("../../../assets/images/rectangle-3-8.png")}
-												style={styles.rectangle3FourImage}/>
-										</LinearGradient>
-										<View
-											pointerEvents="box-none"
-											style={{
-												position: "absolute",
-												width: "100%",
-												height: "100%",
-											}}>
-											<Image
-												source={require("../../../assets/images/videos.png")}
-												style={styles.videosTwoImage}/>
-											<View
-												pointerEvents="box-none"
-												style={{
-													flex: 1,
-													flexDirection: "column",
-													justifyContent: "flex-end",
-												}}>
-												<View
-													pointerEvents="box-none"
-													style={{
-														flexDirection: "row",
-														alignSelf: "stretch",
-													}}>
-													<Text
-														style={styles.susieDelgadoText}>Susie Delgado</Text>
-													<View
-														pointerEvents="box-none"
-														style={{
-															flexDirection: "row",
-															flex: 1,
-															justifyContent: "flex-end",
-														}}>
-														<LinearGradient
-															start={{
-																x: 1.07,
-																y: 0.39,
-															}}
-															end={{
-																x: -0.07,
-																y: 0.61,
-															}}
-															locations={[0, 1]}
-															colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
-															style={styles.genderAgeSmallFourViewLinearGradient}>
-															<View
-																pointerEvents="box-none"
-																style={styles.genderAgeSmallFourView}>
-																<Text
-																	style={styles.textFourText}/>
-																<View
-																	pointerEvents="box-none"
-																	style={{
-																		position: "absolute",
-																		width: "100%",
-																		height: "100%",
-																	}}>
-																	<Image
-																		source={require("../../../assets/images/oval-2.png")}
-																		style={styles.oval2ThreeImage}/>
-																</View>
-															</View>
-														</LinearGradient>
-													</View>
-												</View>
-											</View>
-										</View>
-									</View>
-									<View
-										pointerEvents="box-none"
-										style={{
-											position: "absolute",
-											width: "100%",
-											height: "100%",
-											justifyContent: "center",
-										}}>
-										<View
-											pointerEvents="box-none"
-											style={styles.items2TwoView}>
-											<LinearGradient
-												start={{
-													x: 0.5,
-													y: 0.77,
-												}}
-												end={{
-													x: 0.5,
-													y: 1,
-												}}
-												locations={[0, 1]}
-												colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
-												style={styles.rectangle3FiveImageLinearGradient}>
-												<Image
-													source={require("../../../assets/images/rectangle-3-18.png")}
-													style={styles.rectangle3FiveImage}/>
-											</LinearGradient>
-											<View
-												pointerEvents="box-none"
-												style={{
-													position: "absolute",
-													width: "100%",
-													height: "100%",
-												}}>
-												<View
-													pointerEvents="box-none"
-													style={{
-														flexDirection: "row",
-														alignSelf: "stretch",
-													}}>
-													<Text
-														style={styles.corneliaGilbertText}>Cornelia Gilbert</Text>
-													<View
-														pointerEvents="box-none"
-														style={{
-															flexDirection: "row",
-															flex: 1,
-															justifyContent: "flex-end",
-														}}>
-														<LinearGradient
-															start={{
-																x: 1.07,
-																y: 0.39,
-															}}
-															end={{
-																x: -0.07,
-																y: 0.61,
-															}}
-															locations={[0, 1]}
-															colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
-															style={styles.genderAgeSmallFiveViewLinearGradient}>
-															<View
-																pointerEvents="box-none"
-																style={styles.genderAgeSmallFiveView}>
-																<Image
-																	source={require("../../../assets/images/oval-2-2.png")}
-																	style={styles.oval2FourImage}/>
-																<View
-																	pointerEvents="box-none"
-																	style={{
-																		position: "absolute",
-																		width: "100%",
-																		height: "100%",
-																	}}>
-																	<View
-																		pointerEvents="box-none"
-																		style={styles.rectangle3View}>
-																		<View
-																			pointerEvents="box-none"
-																			style={{
-																				flex: 1,
-																				flexDirection: "column",
-																				justifyContent: "flex-end",
-																			}}/>
-																	</View>
-																</View>
-																<View
-																	pointerEvents="box-none"
-																	style={{
-																		position: "absolute",
-																		width: "100%",
-																		height: "100%",
-																	}}>
-																	<View
-																		pointerEvents="box-none"
-																		style={{
-																			flexDirection: "row",
-																			alignSelf: "stretch",
-																		}}>
-																		<View
-																			pointerEvents="box-none"
-																			style={styles.rectangle3TwoView}>
-																			<View
-																				pointerEvents="box-none"
-																				style={{
-																					flex: 1,
-																					flexDirection: "column",
-																					justifyContent: "flex-end",
-																				}}/>
-																		</View>
-																		<Text
-																			style={styles.textFiveText}>23</Text>
-																	</View>
-																</View>
-															</View>
-														</LinearGradient>
-													</View>
-												</View>
-											</View>
-										</View>
-									</View>
-									<View
-										pointerEvents="box-none"
-										style={{
-											position: "absolute",
-											width: "100%",
-											height: "100%",
-										}}>
-										<View
-											pointerEvents="box-none"
-											style={styles.items3TwoView}>
-											<LinearGradient
-												start={{
-													x: 0.5,
-													y: 0.77,
-												}}
-												end={{
-													x: 0.5,
-													y: 1,
-												}}
-												locations={[0, 1]}
-												colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
-												style={styles.rectangle3SixImageLinearGradient}>
-												<Image
-													source={require("../../../assets/images/rectangle-3-3.png")}
-													style={styles.rectangle3SixImage}/>
-											</LinearGradient>
-											<View
-												pointerEvents="box-none"
-												style={{
-													position: "absolute",
-													width: "100%",
-													height: "100%",
-												}}>
-												<View
-													pointerEvents="box-none"
-													style={{
-														flexDirection: "row",
-														alignSelf: "stretch",
-													}}>
-													<Text
-														style={styles.claraMatthewsText}>Clara Matthews</Text>
-													<View
-														pointerEvents="box-none"
-														style={{
-															flexDirection: "row",
-															flex: 1,
-															justifyContent: "flex-end",
-														}}>
-														<LinearGradient
-															start={{
-																x: 1.07,
-																y: 0.39,
-															}}
-															end={{
-																x: -0.07,
-																y: 0.61,
-															}}
-															locations={[0, 1]}
-															colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
-															style={styles.genderAgeSmallSixViewLinearGradient}>
-															<View
-																pointerEvents="box-none"
-																style={styles.genderAgeSmallSixView}>
-																<Text
-																	style={styles.textSixText}/>
-																<View
-																	pointerEvents="box-none"
-																	style={{
-																		position: "absolute",
-																		width: "100%",
-																		height: "100%",
-																	}}>
-																	<Image
-																		source={require("../../../assets/images/oval-2.png")}
-																		style={styles.oval2FiveImage}/>
-																</View>
-															</View>
-														</LinearGradient>
-													</View>
-												</View>
-											</View>
-										</View>
-									</View>
-								</View>
-							</View>
-						</View>
-					</View>
-				</View>
-				<View
-					pointerEvents="box-none"
-					style={{
-						flex: 1,
-						flexDirection: "column",
-						justifyContent: "flex-end",
-					}}>
-					<View
-						pointerEvents="box-none"
-						style={styles.iphoneXBarsTabBar5ItemsView}>
-						<View
-							pointerEvents="box-none"
-							style={{
-								flexDirection: "row",
-								alignSelf: "stretch",
-							}}>
-							<Image
-								source={require("../../../assets/images/discover.png")}
-								style={styles.discoverImage}/>
-							<Image
-								source={require("../../../assets/images/neaby-2.png")}
-								style={styles.neabyImage}/>
-						</View>
-						<View
-							pointerEvents="box-none"
-							style={{
-								flex: 1,
-								flexDirection: "column",
-								justifyContent: "flex-end",
-							}}>
-							<View
-								pointerEvents="box-none"
-								style={styles.homeIndicatorOnLightView}>
-								<View
-									pointerEvents="box-none"
-									style={styles.rectangle24View}>
-									<View
-										pointerEvents="box-none"
-										style={{
-											flex: 1,
-											flexDirection: "column",
-											justifyContent: "flex-end",
-										}}/>
-								</View>
-							</View>
-						</View>
-						<View
-							pointerEvents="box-none"
-							style={{
-								position: "absolute",
-								width: "100%",
-								height: "100%",
-							}}>
-							<Image
-								source={require("../../../assets/images/favorite.png")}
-								style={styles.favoriteImage}/>
-						</View>
-						<View
-							pointerEvents="box-none"
-							style={{
-								position: "absolute",
-								width: "100%",
-								height: "100%",
-							}}>
-							<View
-								pointerEvents="box-none"
-								style={{
-									flexDirection: "row",
-									justifyContent: "center",
-									alignSelf: "stretch",
-								}}/>
-						</View>
-					</View>
-				</View>
-			</View>
-			</ScrollView>
+		return(<View style={{flex:1}}><View style={{flex:.1}}>
+		</View>
+		<View style={{flex:.9,marginTop:10,paddingTop:10,}}><ScrollView>
+		<GridView
+        itemDimension={130}
+        items={items}
+        style={styles.gridView}
+        renderItem={item => (
+          <View style={[styles.itemContainer, { backgroundColor: item.code }]}>
+            <Text style={styles.itemName}>{item.name}</Text>
+            <Text style={styles.itemCode}>{item.code}</Text>
+          </View>
+        )}
+      />
+</ScrollView></View>
+		
+		</View> )
 	}
 }
+	// 	<View
+	// 			pointerEvents="box-none"
+	// 			style={styles.nearbyAllUserView}>
+	// 			<View
+	// 				pointerEvents="box-none"
+	// 				style={styles.contentsView}>
+	// 				<View
+	// 					pointerEvents="box-none"
+	// 					style={styles.bgWhiteView}>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={{
+	// 							flex: 1,
+	// 							flexDirection: "column",
+	// 							justifyContent: "flex-end",
+	// 						}}/>
+	// 				</View>
+	// 				<View
+	// 					pointerEvents="box-none"
+	// 					style={{
+	// 						position: "absolute",
+	// 						width: "100%",
+	// 						height: "100%",
+	// 					}}>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={styles.barsNavigationNearbyFiltersView}>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={{
+	// 								flexDirection: "row",
+	// 								alignSelf: "stretch",
+	// 								alignItems: "center",
+	// 							}}>
+	// 							<Text
+	// 								style={styles.nearbyText}>Nearby</Text>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={{
+	// 									flexDirection: "row",
+	// 									flex: 1,
+	// 									justifyContent: "flex-end",
+	// 									alignItems: "center",
+	// 								}}>
+	// 								<Image
+	// 									source={require("../../../assets/images/filters-btn.png")}
+	// 									style={styles.filtersBtnImage}/>
+	// 							</View>
+	// 						</View>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={{
+	// 								position: "absolute",
+	// 								width: "100%",
+	// 								height: "100%",
+	// 							}}>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={styles.filtersView}>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={{
+	// 										flex: 1,
+	// 										flexDirection: "column",
+	// 										justifyContent: "flex-end",
+	// 									}}/>
+	// 							</View>
+	// 						</View>
+	// 					</View>
+	// 				</View>
+	// 				<View
+	// 					pointerEvents="box-none"
+	// 					style={{
+	// 						position: "absolute",
+	// 						width: "100%",
+	// 						height: "100%",
+	// 					}}>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={styles.tabView}>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={{
+	// 								flexDirection: "row",
+	// 								alignSelf: "stretch",
+	// 							}}>
+	// 							  <TouchableOpacity
+	// 					onPress={this.onAllUserPressed}
+	// 					style={styles.facebookButton}>
+	// 				<Text 
+	// 								style={styles.allUserText}>All user</Text>
+						
+	// 				</TouchableOpacity>
+	// 				<TouchableOpacity
+	// 					onPress={this.onSpotlightPressed}
+	// 					style={styles.facebookButton}>
+	// 				<Text 
+	// 								style={styles.spotlightText}>Spotlight</Text>
+						
+	// 				</TouchableOpacity>
+								
+								
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={{
+	// 									flexDirection: "row",
+	// 									flex: 1,
+	// 									justifyContent: "flex-end",
+	// 								}}>
+	// 								<Text
+	// 									style={styles.newText}>New</Text>
+
+	// 		<TouchableOpacity
+	// 					onPress={this.onNearbyPressed}
+	// 					style={styles.facebookButton}>
+	// 				<Text style={styles.nearbyTwoText}>Nearby</Text>
+						
+	// 				</TouchableOpacity>
+
+
+	// 							</View>
+	// 						</View>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={{
+	// 								flex: 1,
+	// 								flexDirection: "column",
+	// 								justifyContent: "flex-end",
+	// 							}}>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={styles.rectangleView}>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={{
+	// 										flex: 1,
+	// 										flexDirection: "column",
+	// 										justifyContent: "flex-end",
+	// 									}}/>
+	// 							</View>
+	// 						</View>
+	// 					</View>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={{
+	// 							flexDirection: "row",
+	// 							alignSelf: "stretch",
+	// 						}}>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={styles.col18vView}>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={styles.items1View}>
+	// 								<LinearGradient
+	// 									start={{
+	// 										x: 0.5,
+	// 										y: 0.77,
+	// 									}}
+	// 									end={{
+	// 										x: 0.5,
+	// 										y: 1,
+	// 									}}
+	// 									locations={[0, 1]}
+	// 									colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
+	// 									style={styles.rectangle3ImageLinearGradient}>
+	// 									<Image
+	// 										source={require("../../../assets/images/rectangle-3-11.png")}
+	// 										style={styles.rectangle3Image}/>
+	// 								</LinearGradient>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={{
+	// 										position: "absolute",
+	// 										width: "100%",
+	// 										height: "100%",
+	// 									}}>
+	// 									<View
+	// 										pointerEvents="box-none"
+	// 										style={{
+	// 											flexDirection: "row",
+	// 											alignSelf: "stretch",
+	// 										}}>
+	// 										<Text
+	// 											style={styles.augustaCastroText}>Augusta Castro</Text>
+	// 										<View
+	// 											pointerEvents="box-none"
+	// 											style={{
+	// 												flexDirection: "row",
+	// 												flex: 1,
+	// 												justifyContent: "flex-end",
+	// 											}}>
+	// 											<LinearGradient
+	// 												start={{
+	// 													x: 1.07,
+	// 													y: 0.39,
+	// 												}}
+	// 												end={{
+	// 													x: -0.07,
+	// 													y: 0.61,
+	// 												}}
+	// 												locations={[0, 1]}
+	// 												colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
+	// 												style={styles.genderAgeSmallViewLinearGradient}>
+	// 												<View
+	// 													pointerEvents="box-none"
+	// 													style={styles.genderAgeSmallView}>
+	// 													<View
+	// 														pointerEvents="box-none"
+	// 														style={{
+	// 															flexDirection: "row",
+	// 															alignSelf: "stretch",
+	// 														}}>
+	// 														<Image
+	// 															source={require("../../../assets/images/oval-2.png")}
+	// 															style={styles.oval2Image}/>
+	// 														<Text
+	// 															style={styles.textText}>23</Text>
+	// 													</View>
+	// 												</View>
+	// 											</LinearGradient>
+	// 										</View>
+	// 									</View>
+	// 								</View>
+	// 							</View>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={{
+	// 									position: "absolute",
+	// 									width: "100%",
+	// 									height: "100%",
+	// 									justifyContent: "center",
+	// 								}}>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={styles.items2View}>
+	// 									<LinearGradient
+	// 										start={{
+	// 											x: 0.5,
+	// 											y: 0.77,
+	// 										}}
+	// 										end={{
+	// 											x: 0.5,
+	// 											y: 1,
+	// 										}}
+	// 										locations={[0, 1]}
+	// 										colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
+	// 										style={styles.rectangle3TwoImageLinearGradient}>
+	// 										<Image
+	// 											source={require("../../../assets/images/rectangle-3-16.png")}
+	// 											style={styles.rectangle3TwoImage}/>
+	// 									</LinearGradient>
+	// 									<View
+	// 										pointerEvents="box-none"
+	// 										style={{
+	// 											position: "absolute",
+	// 											width: "100%",
+	// 											height: "100%",
+	// 										}}>
+	// 										<Image
+	// 											source={require("../../../assets/images/videos.png")}
+	// 											style={styles.videosImage}/>
+	// 										<View
+	// 											pointerEvents="box-none"
+	// 											style={{
+	// 												flex: 1,
+	// 												flexDirection: "column",
+	// 												justifyContent: "flex-end",
+	// 											}}>
+	// 											<View
+	// 												pointerEvents="box-none"
+	// 												style={{
+	// 													flexDirection: "row",
+	// 													alignSelf: "stretch",
+	// 												}}>
+	// 												<Text
+	// 													style={styles.minaHowellText}>Mina Howell</Text>
+	// 												<View
+	// 													pointerEvents="box-none"
+	// 													style={{
+	// 														flexDirection: "row",
+	// 														flex: 1,
+	// 														justifyContent: "flex-end",
+	// 													}}>
+	// 													<LinearGradient
+	// 														start={{
+	// 															x: 1.07,
+	// 															y: 0.39,
+	// 														}}
+	// 														end={{
+	// 															x: -0.07,
+	// 															y: 0.61,
+	// 														}}
+	// 														locations={[0, 1]}
+	// 														colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
+	// 														style={styles.genderAgeSmallTwoViewLinearGradient}>
+	// 														<View
+	// 															pointerEvents="box-none"
+	// 															style={styles.genderAgeSmallTwoView}>
+	// 															<Text
+	// 																style={styles.textTwoText}/>
+	// 															<View
+	// 																pointerEvents="box-none"
+	// 																style={{
+	// 																	position: "absolute",
+	// 																	width: "100%",
+	// 																	height: "100%",
+	// 																}}>
+	// 																<Image
+	// 																	source={require("../../../assets/images/oval-2.png")}
+	// 																	style={styles.oval2TwoImage}/>
+	// 															</View>
+	// 														</View>
+	// 													</LinearGradient>
+	// 												</View>
+	// 											</View>
+	// 										</View>
+	// 									</View>
+	// 								</View>
+	// 							</View>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={{
+	// 									position: "absolute",
+	// 									width: "100%",
+	// 									height: "100%",
+	// 								}}>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={styles.items3View}>
+	// 									<LinearGradient
+	// 										start={{
+	// 											x: 0.5,
+	// 											y: 0.77,
+	// 										}}
+	// 										end={{
+	// 											x: 0.5,
+	// 											y: 1,
+	// 										}}
+	// 										locations={[0, 1]}
+	// 										colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
+	// 										style={styles.rectangle3ThreeImageLinearGradient}>
+	// 										<Image
+	// 											source={require("../../../assets/images/rectangle-3-6.png")}
+	// 											style={styles.rectangle3ThreeImage}/>
+	// 									</LinearGradient>
+	// 									<View
+	// 										pointerEvents="box-none"
+	// 										style={{
+	// 											position: "absolute",
+	// 											width: "100%",
+	// 											height: "100%",
+	// 										}}>
+	// 										<View
+	// 											pointerEvents="box-none"
+	// 											style={{
+	// 												flexDirection: "row",
+	// 												alignSelf: "stretch",
+	// 											}}>
+	// 											<Text
+	// 												style={styles.hettieBarberText}>Hettie Barber</Text>
+	// 											<View
+	// 												pointerEvents="box-none"
+	// 												style={{
+	// 													flexDirection: "row",
+	// 													flex: 1,
+	// 													justifyContent: "flex-end",
+	// 												}}>
+	// 												<LinearGradient
+	// 													start={{
+	// 														x: 1.07,
+	// 														y: 0.39,
+	// 													}}
+	// 													end={{
+	// 														x: -0.07,
+	// 														y: 0.61,
+	// 													}}
+	// 													locations={[0, 1]}
+	// 													colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
+	// 													style={styles.genderAgeSmallThreeViewLinearGradient}>
+	// 													<View
+	// 														pointerEvents="box-none"
+	// 														style={styles.genderAgeSmallThreeView}>
+	// 														<Text
+	// 															style={styles.textThreeText}/>
+	// 													</View>
+	// 												</LinearGradient>
+	// 											</View>
+	// 										</View>
+	// 									</View>
+	// 								</View>
+	// 							</View>
+	// 						</View>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={{
+	// 								flexDirection: "row",
+	// 								flex: 1,
+	// 								justifyContent: "flex-end",
+	// 							}}>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={styles.col18vTwoView}>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={styles.items1TwoView}>
+	// 									<LinearGradient
+	// 										start={{
+	// 											x: 0.5,
+	// 											y: 0.77,
+	// 										}}
+	// 										end={{
+	// 											x: 0.5,
+	// 											y: 1,
+	// 										}}
+	// 										locations={[0, 1]}
+	// 										colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
+	// 										style={styles.rectangle3FourImageLinearGradient}>
+	// 										<Image
+	// 											source={require("../../../assets/images/rectangle-3-8.png")}
+	// 											style={styles.rectangle3FourImage}/>
+	// 									</LinearGradient>
+	// 									<View
+	// 										pointerEvents="box-none"
+	// 										style={{
+	// 											position: "absolute",
+	// 											width: "100%",
+	// 											height: "100%",
+	// 										}}>
+	// 										<Image
+	// 											source={require("../../../assets/images/videos.png")}
+	// 											style={styles.videosTwoImage}/>
+	// 										<View
+	// 											pointerEvents="box-none"
+	// 											style={{
+	// 												flex: 1,
+	// 												flexDirection: "column",
+	// 												justifyContent: "flex-end",
+	// 											}}>
+	// 											<View
+	// 												pointerEvents="box-none"
+	// 												style={{
+	// 													flexDirection: "row",
+	// 													alignSelf: "stretch",
+	// 												}}>
+	// 												<Text
+	// 													style={styles.susieDelgadoText}>Susie Delgado</Text>
+	// 												<View
+	// 													pointerEvents="box-none"
+	// 													style={{
+	// 														flexDirection: "row",
+	// 														flex: 1,
+	// 														justifyContent: "flex-end",
+	// 													}}>
+	// 													<LinearGradient
+	// 														start={{
+	// 															x: 1.07,
+	// 															y: 0.39,
+	// 														}}
+	// 														end={{
+	// 															x: -0.07,
+	// 															y: 0.61,
+	// 														}}
+	// 														locations={[0, 1]}
+	// 														colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
+	// 														style={styles.genderAgeSmallFourViewLinearGradient}>
+	// 														<View
+	// 															pointerEvents="box-none"
+	// 															style={styles.genderAgeSmallFourView}>
+	// 															<Text
+	// 																style={styles.textFourText}/>
+	// 															<View
+	// 																pointerEvents="box-none"
+	// 																style={{
+	// 																	position: "absolute",
+	// 																	width: "100%",
+	// 																	height: "100%",
+	// 																}}>
+	// 																<Image
+	// 																	source={require("../../../assets/images/oval-2.png")}
+	// 																	style={styles.oval2ThreeImage}/>
+	// 															</View>
+	// 														</View>
+	// 													</LinearGradient>
+	// 												</View>
+	// 											</View>
+	// 										</View>
+	// 									</View>
+	// 								</View>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={{
+	// 										position: "absolute",
+	// 										width: "100%",
+	// 										height: "100%",
+	// 										justifyContent: "center",
+	// 									}}>
+	// 									<View
+	// 										pointerEvents="box-none"
+	// 										style={styles.items2TwoView}>
+	// 										<LinearGradient
+	// 											start={{
+	// 												x: 0.5,
+	// 												y: 0.77,
+	// 											}}
+	// 											end={{
+	// 												x: 0.5,
+	// 												y: 1,
+	// 											}}
+	// 											locations={[0, 1]}
+	// 											colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
+	// 											style={styles.rectangle3FiveImageLinearGradient}>
+	// 											<Image
+	// 												source={require("../../../assets/images/rectangle-3-18.png")}
+	// 												style={styles.rectangle3FiveImage}/>
+	// 										</LinearGradient>
+	// 										<View
+	// 											pointerEvents="box-none"
+	// 											style={{
+	// 												position: "absolute",
+	// 												width: "100%",
+	// 												height: "100%",
+	// 											}}>
+	// 											<View
+	// 												pointerEvents="box-none"
+	// 												style={{
+	// 													flexDirection: "row",
+	// 													alignSelf: "stretch",
+	// 												}}>
+	// 												<Text
+	// 													style={styles.corneliaGilbertText}>Cornelia Gilbert</Text>
+	// 												<View
+	// 													pointerEvents="box-none"
+	// 													style={{
+	// 														flexDirection: "row",
+	// 														flex: 1,
+	// 														justifyContent: "flex-end",
+	// 													}}>
+	// 													<LinearGradient
+	// 														start={{
+	// 															x: 1.07,
+	// 															y: 0.39,
+	// 														}}
+	// 														end={{
+	// 															x: -0.07,
+	// 															y: 0.61,
+	// 														}}
+	// 														locations={[0, 1]}
+	// 														colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
+	// 														style={styles.genderAgeSmallFiveViewLinearGradient}>
+	// 														<View
+	// 															pointerEvents="box-none"
+	// 															style={styles.genderAgeSmallFiveView}>
+	// 															<Image
+	// 																source={require("../../../assets/images/oval-2-2.png")}
+	// 																style={styles.oval2FourImage}/>
+	// 															<View
+	// 																pointerEvents="box-none"
+	// 																style={{
+	// 																	position: "absolute",
+	// 																	width: "100%",
+	// 																	height: "100%",
+	// 																}}>
+	// 																<View
+	// 																	pointerEvents="box-none"
+	// 																	style={styles.rectangle3View}>
+	// 																	<View
+	// 																		pointerEvents="box-none"
+	// 																		style={{
+	// 																			flex: 1,
+	// 																			flexDirection: "column",
+	// 																			justifyContent: "flex-end",
+	// 																		}}/>
+	// 																</View>
+	// 															</View>
+	// 															<View
+	// 																pointerEvents="box-none"
+	// 																style={{
+	// 																	position: "absolute",
+	// 																	width: "100%",
+	// 																	height: "100%",
+	// 																}}>
+	// 																<View
+	// 																	pointerEvents="box-none"
+	// 																	style={{
+	// 																		flexDirection: "row",
+	// 																		alignSelf: "stretch",
+	// 																	}}>
+	// 																	<View
+	// 																		pointerEvents="box-none"
+	// 																		style={styles.rectangle3TwoView}>
+	// 																		<View
+	// 																			pointerEvents="box-none"
+	// 																			style={{
+	// 																				flex: 1,
+	// 																				flexDirection: "column",
+	// 																				justifyContent: "flex-end",
+	// 																			}}/>
+	// 																	</View>
+	// 																	<Text
+	// 																		style={styles.textFiveText}>23</Text>
+	// 																</View>
+	// 															</View>
+	// 														</View>
+	// 													</LinearGradient>
+	// 												</View>
+	// 											</View>
+	// 										</View>
+	// 									</View>
+	// 								</View>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={{
+	// 										position: "absolute",
+	// 										width: "100%",
+	// 										height: "100%",
+	// 									}}>
+	// 									<View
+	// 										pointerEvents="box-none"
+	// 										style={styles.items3TwoView}>
+	// 										<LinearGradient
+	// 											start={{
+	// 												x: 0.5,
+	// 												y: 0.77,
+	// 											}}
+	// 											end={{
+	// 												x: 0.5,
+	// 												y: 1,
+	// 											}}
+	// 											locations={[0, 1]}
+	// 											colors={['rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)']}
+	// 											style={styles.rectangle3SixImageLinearGradient}>
+	// 											<Image
+	// 												source={require("../../../assets/images/rectangle-3-3.png")}
+	// 												style={styles.rectangle3SixImage}/>
+	// 										</LinearGradient>
+	// 										<View
+	// 											pointerEvents="box-none"
+	// 											style={{
+	// 												position: "absolute",
+	// 												width: "100%",
+	// 												height: "100%",
+	// 											}}>
+	// 											<View
+	// 												pointerEvents="box-none"
+	// 												style={{
+	// 													flexDirection: "row",
+	// 													alignSelf: "stretch",
+	// 												}}>
+	// 												<Text
+	// 													style={styles.claraMatthewsText}>Clara Matthews</Text>
+	// 												<View
+	// 													pointerEvents="box-none"
+	// 													style={{
+	// 														flexDirection: "row",
+	// 														flex: 1,
+	// 														justifyContent: "flex-end",
+	// 													}}>
+	// 													<LinearGradient
+	// 														start={{
+	// 															x: 1.07,
+	// 															y: 0.39,
+	// 														}}
+	// 														end={{
+	// 															x: -0.07,
+	// 															y: 0.61,
+	// 														}}
+	// 														locations={[0, 1]}
+	// 														colors={['rgb(255, 137, 96)', 'rgb(255, 98, 165)']}
+	// 														style={styles.genderAgeSmallSixViewLinearGradient}>
+	// 														<View
+	// 															pointerEvents="box-none"
+	// 															style={styles.genderAgeSmallSixView}>
+	// 															<Text
+	// 																style={styles.textSixText}/>
+	// 															<View
+	// 																pointerEvents="box-none"
+	// 																style={{
+	// 																	position: "absolute",
+	// 																	width: "100%",
+	// 																	height: "100%",
+	// 																}}>
+	// 																<Image
+	// 																	source={require("../../../assets/images/oval-2.png")}
+	// 																	style={styles.oval2FiveImage}/>
+	// 															</View>
+	// 														</View>
+	// 													</LinearGradient>
+	// 												</View>
+	// 											</View>
+	// 										</View>
+	// 									</View>
+	// 								</View>
+	// 							</View>
+	// 						</View>
+	// 					</View>
+	// 				</View>
+	// 			</View>
+	// 			<View
+	// 				pointerEvents="box-none"
+	// 				style={{
+	// 					flex: 1,
+	// 					flexDirection: "column",
+	// 					justifyContent: "flex-end",
+	// 				}}>
+	// 				<View
+	// 					pointerEvents="box-none"
+	// 					style={styles.iphoneXBarsTabBar5ItemsView}>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={{
+	// 							flexDirection: "row",
+	// 							alignSelf: "stretch",
+	// 						}}>
+	// 						<Image
+	// 							source={require("../../../assets/images/discover.png")}
+	// 							style={styles.discoverImage}/>
+	// 						<Image
+	// 							source={require("../../../assets/images/neaby-2.png")}
+	// 							style={styles.neabyImage}/>
+	// 					</View>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={{
+	// 							flex: 1,
+	// 							flexDirection: "column",
+	// 							justifyContent: "flex-end",
+	// 						}}>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={styles.homeIndicatorOnLightView}>
+	// 							<View
+	// 								pointerEvents="box-none"
+	// 								style={styles.rectangle24View}>
+	// 								<View
+	// 									pointerEvents="box-none"
+	// 									style={{
+	// 										flex: 1,
+	// 										flexDirection: "column",
+	// 										justifyContent: "flex-end",
+	// 									}}/>
+	// 							</View>
+	// 						</View>
+	// 					</View>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={{
+	// 							position: "absolute",
+	// 							width: "100%",
+	// 							height: "100%",
+	// 						}}>
+	// 						<Image
+	// 							source={require("../../../assets/images/favorite.png")}
+	// 							style={styles.favoriteImage}/>
+	// 					</View>
+	// 					<View
+	// 						pointerEvents="box-none"
+	// 						style={{
+	// 							position: "absolute",
+	// 							width: "100%",
+	// 							height: "100%",
+	// 						}}>
+	// 						<View
+	// 							pointerEvents="box-none"
+	// 							style={{
+	// 								flexDirection: "row",
+	// 								justifyContent: "center",
+	// 								alignSelf: "stretch",
+	// 							}}/>
+	// 					</View>
+	// 				</View>
+	// 			</View>
+	// 		</View>
+	// 		</ScrollView>
+//	}
+//}
 
 const styles = StyleSheet.create({
+	gridView: {
+		paddingTop: 25,
+		flex: 1,
+	  },
+	  itemContainer: {
+		justifyContent: 'flex-end',
+		borderRadius: 5,
+		padding: 10,
+		height: 150,
+	  },
+	  itemName: {
+		fontSize: 16,
+		color: '#fff',
+		fontWeight: '600',
+	  },
+	  itemCode: {
+		fontWeight: '600',
+		fontSize: 12,
+		color: '#fff',
+	  },
 	nearbyAllUserView: {
 		backgroundColor: 'rgb(255, 255, 255)',
 		flex: 1,

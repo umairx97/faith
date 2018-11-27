@@ -11,6 +11,9 @@ import NearbyAllUser from "./App/components/NearbyAllUser/NearbyAllUser"
 import NearbyFilters from "./App/components/NearbyFilters/NearbyFilters"
 import Tabular from "./App/components/Tabular/Tabular"
 import NearByTab from "./App/components/NearbyAllUser/NearByTab"
+import UniversalTabView from "./App/components/TopScrollTabBarNavigator/UniversalTabView"
+
+
 const PushRouteOne = createStackNavigator({
 	Login: {
 		screen: Login,
@@ -30,6 +33,16 @@ const PushRouteOne = createStackNavigator({
 	Profile:{
 		screen:Profile,
 	},
+	NearbyFilters:{
+		screen:NearbyFilters,
+	},
+	UniversalTabView:{
+		screen:UniversalTabView,
+	},
+	UserProfile:{
+		screen:UserProfile,
+	},
+
 }, {
 	initialRouteName: "Login",
 })
