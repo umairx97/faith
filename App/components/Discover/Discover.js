@@ -1,21 +1,21 @@
-//
-//  Discover.js
-//  Project
-//
-//  Created by Boffin Coders.
-//  Copyright © 2018 Boffin Coders. All rights reserved.
-//
-
-import { Text, StyleSheet, View, Image,TouchableHighlight } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  TouchableHighlight
+} from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
-import BottomTabBar from "../BottomTabNavigation/BottomTabNavigation"
-import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
-import UnderlineTabBarExample from "../BottomTabNavigation/BottomTab"
-import TabBarNavigator from "../BottomTabNavigation/TabBarNavigator"
-import TabberBottom from '../TopScrollTabBarNavigator/SlideTabBarNavigator'
-import MyBottomTab from '../BottomTabNavigation/BottomTabNavigationPaper'
+import BottomTabBar from "../BottomTabNavigation/BottomTabNavigation";
+import ScrollableTabView, {
+  ScrollableTabBar
+} from "react-native-scrollable-tab-view";
+import UnderlineTabBarExample from "../BottomTabNavigation/BottomTab";
+import TabBarNavigator from "../BottomTabNavigation/TabBarNavigator";
+import TabberBottom from "../TopScrollTabBarNavigator/SlideTabBarNavigator";
+import MyBottomTab from "../BottomTabNavigation/BottomTabNavigationPaper";
 export default class Discover extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -38,160 +38,64 @@ export default class Discover extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
-       <View style={{flex: .9}}>
-      <ScrollView>
-        <View pointerEvents="box-none" style={styles.discoverView}>
-          <LinearGradient
-            start={{
-              x: 0.51,
-              y: 0.17
-            }}
-            end={{
-              x: 0.24,
-              y: 0.87
-            }}
-            locations={[0, 1]}
-            colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-            style={styles.colorPrimaryViewLinearGradient}
-          >
-            <View pointerEvents="box-none" style={styles.colorPrimaryView}>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              />
-            </View>
-          </LinearGradient>
-          <View
-            pointerEvents="box-none"
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-end"
-            }}
-          >
-            <View pointerEvents="box-none" style={styles.barsTabBar5ItemsView}>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/discover-2.png")}
-                  style={styles.discoverImage}
-                />
-
-                <TouchableHighlight onPress={this.onNearByPressed}>
-                  <Image
-                    source={require("../../../assets/images/neaby.png")}
-                    style={styles.neabyImage}
-                  />
-                </TouchableHighlight>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              >
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <View pointerEvents="box-none" style={styles.discoverView}>
+            <LinearGradient
+              start={{
+                x: 0.51,
+                y: 0.17
+              }}
+              end={{
+                x: 0.24,
+                y: 0.87
+              }}
+              locations={[0, 1]}
+              colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+              style={styles.colorPrimaryViewLinearGradient}
+            >
+              <View pointerEvents="box-none" style={styles.colorPrimaryView}>
                 <View
                   pointerEvents="box-none"
-                  style={styles.homeIndicatorOnLightView}
-                >
-                  <View pointerEvents="box-none" style={styles.rectangle24View}>
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "flex-end"
-                      }}
-                    />
-                  </View>
-                </View>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/favorite.png")}
-                  style={styles.favoriteImage}
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "flex-end"
+                  }}
                 />
               </View>
+            </LinearGradient>
+            <View
+              pointerEvents="box-none"
+              style={{
+                flex: 1,
+                flexDirection: "column",
+                justifyContent: "flex-end"
+              }}
+            >
               <View
                 pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
+                style={styles.barsTabBar5ItemsView}
               >
                 <View
                   pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
-                    justifyContent: "center",
                     alignSelf: "stretch"
                   }}
-                />
-              </View>
-            </View>
-          </View>
-          <View
-            pointerEvents="box-none"
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%"
-            }}
-          >
-            <View
-              pointerEvents="box-none"
-              style={{
-                flexDirection: "row",
-                alignSelf: "stretch"
-              }}
-            >
-              <Text style={styles.discoverText}>Discover</Text>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flexDirection: "row",
-                  flex: 1,
-                  justifyContent: "flex-end"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/filters-btn-2.png")}
-                  style={styles.btnFilterImage}
-                />
-              </View>
-            </View>
-            <View
-              pointerEvents="box-none"
-              style={{
-                flexDirection: "row",
-                alignSelf: "stretch"
-              }}
-            >
-              <View pointerEvents="box-none" style={styles.cardMainView}>
-                <Image
-                  source={require("../../../assets/images/photos.png")}
-                  style={styles.photosImage}
-                />
+                >
+                  <Image
+                    source={require("../../../assets/images/discover-2.png")}
+                    style={styles.discoverImage}
+                  />
+
+                  <TouchableHighlight onPress={this.onNearByPressed}>
+                    <Image
+                      source={require("../../../assets/images/neaby.png")}
+                      style={styles.neabyImage}
+                    />
+                  </TouchableHighlight>
+                </View>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -200,90 +104,13 @@ export default class Discover extends React.Component {
                     justifyContent: "flex-end"
                   }}
                 >
-                  <Text style={styles.maryBurgessText}>Mary Burgess</Text>
-                  <Text style={styles.seattleUsaText}>Seattle, USA </Text>
-                </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
-                  }}
-                >
                   <View
                     pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <LinearGradient
-                      start={{
-                        x: 1.07,
-                        y: 0.39
-                      }}
-                      end={{
-                        x: -0.07,
-                        y: 0.61
-                      }}
-                      locations={[0, 1]}
-                      colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-                      style={styles.rectangleViewLinearGradient}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </LinearGradient> 
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flexDirection: "row",
-                        flex: 1,
-                        justifyContent: "flex-end"
-                      }}
-                    >
-                      <Image
-                        source={require("../../../assets/images/slides-2.png")}
-                        style={styles.slidesImage}
-                      />
-                    </View>
-                  </View>
-                </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
-                  }}
-                >
-                  <LinearGradient
-                    start={{
-                      x: 0.77,
-                      y: 0.47
-                    }}
-                    end={{
-                      x: -0.03,
-                      y: 0.57
-                    }}
-                    locations={[0, 1]}
-                    colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-                    style={styles.colorPrimaryTwoViewLinearGradient}
+                    style={styles.homeIndicatorOnLightView}
                   >
                     <View
                       pointerEvents="box-none"
-                      style={styles.colorPrimaryTwoView}
+                      style={styles.rectangle24View}
                     >
                       <View
                         pointerEvents="box-none"
@@ -294,7 +121,20 @@ export default class Discover extends React.Component {
                         }}
                       />
                     </View>
-                  </LinearGradient>
+                  </View>
+                </View>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/favorite.png")}
+                    style={styles.favoriteImage}
+                  />
                 </View>
                 <View
                   pointerEvents="box-none"
@@ -308,118 +148,147 @@ export default class Discover extends React.Component {
                     pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
+                      justifyContent: "center",
                       alignSelf: "stretch"
                     }}
-                  >
-                    <Image
-                      source={require("../../../assets/images/oval-2.png")}
-                      style={styles.oval2Image}
-                    />
-                    <Text style={styles.textText}>23</Text>
-                  </View>
+                  />
                 </View>
+              </View>
+            </View>
+            <View
+              pointerEvents="box-none"
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%"
+              }}
+            >
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <Text style={styles.discoverText}>Discover</Text>
                 <View
                   pointerEvents="box-none"
                   style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/superlike.png")}
-                    style={styles.superlikeImage}
+                    source={require("../../../assets/images/filters-btn-2.png")}
+                    style={styles.btnFilterImage}
                   />
                 </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
-                  }}
-                >
-                  <View pointerEvents="box-none" style={styles.superlikeView}>
-                    <View pointerEvents="box-none" style={styles.iconsStarView}>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleTwoView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          position: "absolute",
-                          width: "100%",
-                          height: "100%"
-                        }}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorTitleTextLightGrayView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          position: "absolute",
-                          width: "100%",
-                          height: "100%"
-                        }}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorTitleTextLightGrayTwoView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
-                  }}
-                >
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View pointerEvents="box-none" style={styles.cardMainView}>
+                  <Image
+                    source={require("../../../assets/images/photos.png")}
+                    style={styles.photosImage}
+                  />
                   <View
                     pointerEvents="box-none"
-                    style={styles.superlikeTwoView}
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  >
+                    <Text style={styles.maryBurgessText}>Mary Burgess</Text>
+                    <Text style={styles.seattleUsaText}>Seattle, USA </Text>
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
                   >
                     <View
                       pointerEvents="box-none"
-                      style={styles.iconsStarTwoView}
+                      style={{
+                        flexDirection: "row",
+                        alignSelf: "stretch"
+                      }}
+                    >
+                      <LinearGradient
+                        start={{
+                          x: 1.07,
+                          y: 0.39
+                        }}
+                        end={{
+                          x: -0.07,
+                          y: 0.61
+                        }}
+                        locations={[0, 1]}
+                        colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+                        style={styles.rectangleViewLinearGradient}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={styles.rectangleView}
+                        >
+                          <View
+                            pointerEvents="box-none"
+                            style={{
+                              flex: 1,
+                              flexDirection: "column",
+                              justifyContent: "flex-end"
+                            }}
+                          />
+                        </View>
+                      </LinearGradient>
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flexDirection: "row",
+                          flex: 1,
+                          justifyContent: "flex-end"
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/images/slides-2.png")}
+                          style={styles.slidesImage}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  >
+                    <LinearGradient
+                      start={{
+                        x: 0.77,
+                        y: 0.47
+                      }}
+                      end={{
+                        x: -0.03,
+                        y: 0.57
+                      }}
+                      locations={[0, 1]}
+                      colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+                      style={styles.colorPrimaryTwoViewLinearGradient}
                     >
                       <View
                         pointerEvents="box-none"
-                        style={styles.rectangleThreeView}
+                        style={styles.colorPrimaryTwoView}
                       >
                         <View
                           pointerEvents="box-none"
@@ -430,30 +299,80 @@ export default class Discover extends React.Component {
                           }}
                         />
                       </View>
+                    </LinearGradient>
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={{
+                        flexDirection: "row",
+                        alignSelf: "stretch"
+                      }}
+                    >
+                      <Image
+                        source={require("../../../assets/images/oval-2.png")}
+                        style={styles.oval2Image}
+                      />
+                      <Text style={styles.textText}>23</Text>
+                    </View>
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/images/superlike.png")}
+                      style={styles.superlikeImage}
+                    />
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  >
+                    <View pointerEvents="box-none" style={styles.superlikeView}>
                       <View
                         pointerEvents="box-none"
-                        style={{
-                          position: "absolute",
-                          width: "100%",
-                          height: "100%"
-                        }}
+                        style={styles.iconsStarView}
                       >
-                        <LinearGradient
-                          start={{
-                            x: 0,
-                            y: 0
-                          }}
-                          end={{
-                            x: 0,
-                            y: 0
-                          }}
-                          locations={[0, 1]}
-                          colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-                          style={styles.colorPrimaryThreeViewLinearGradient}
+                        <View
+                          pointerEvents="box-none"
+                          style={styles.rectangleTwoView}
                         >
                           <View
                             pointerEvents="box-none"
-                            style={styles.colorPrimaryThreeView}
+                            style={{
+                              flex: 1,
+                              flexDirection: "column",
+                              justifyContent: "flex-end"
+                            }}
+                          />
+                        </View>
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            position: "absolute",
+                            width: "100%",
+                            height: "100%"
+                          }}
+                        >
+                          <View
+                            pointerEvents="box-none"
+                            style={styles.colorTitleTextLightGrayView}
                           >
                             <View
                               pointerEvents="box-none"
@@ -464,42 +383,126 @@ export default class Discover extends React.Component {
                               }}
                             />
                           </View>
-                        </LinearGradient>
+                        </View>
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            position: "absolute",
+                            width: "100%",
+                            height: "100%"
+                          }}
+                        >
+                          <View
+                            pointerEvents="box-none"
+                            style={styles.colorTitleTextLightGrayTwoView}
+                          >
+                            <View
+                              pointerEvents="box-none"
+                              style={{
+                                flex: 1,
+                                flexDirection: "column",
+                                justifyContent: "flex-end"
+                              }}
+                            />
+                          </View>
+                        </View>
                       </View>
                     </View>
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.superlikeTwoView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.iconsStarTwoView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={styles.rectangleThreeView}
+                        >
+                          <View
+                            pointerEvents="box-none"
+                            style={{
+                              flex: 1,
+                              flexDirection: "column",
+                              justifyContent: "flex-end"
+                            }}
+                          />
+                        </View>
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            position: "absolute",
+                            width: "100%",
+                            height: "100%"
+                          }}
+                        >
+                          <LinearGradient
+                            start={{
+                              x: 0,
+                              y: 0
+                            }}
+                            end={{
+                              x: 0,
+                              y: 0
+                            }}
+                            locations={[0, 1]}
+                            colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+                            style={styles.colorPrimaryThreeViewLinearGradient}
+                          >
+                            <View
+                              pointerEvents="box-none"
+                              style={styles.colorPrimaryThreeView}
+                            >
+                              <View
+                                pointerEvents="box-none"
+                                style={{
+                                  flex: 1,
+                                  flexDirection: "column",
+                                  justifyContent: "flex-end"
+                                }}
+                              />
+                            </View>
+                          </LinearGradient>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/images/superlike-2.png")}
+                      style={styles.superlikeTwoImage}
+                    />
                   </View>
                 </View>
                 <View
                   pointerEvents="box-none"
                   style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
                   }}
-                >
-                  <Image
-                    source={require("../../../assets/images/superlike-2.png")}
-                    style={styles.superlikeTwoImage}
-                  />
-                </View>
+                />
               </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flexDirection: "row",
-                  flex: 1,
-                  justifyContent: "flex-end"
-                }}
-              />
             </View>
           </View>
-        </View>
-  
-      </ScrollView>
-      </View>
-      {/* <View style={{flex: .1}}><MyBottomTab/></View> */}
-      
-      
+        </ScrollView>
       </View>
     );
   }

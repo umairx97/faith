@@ -3,6 +3,8 @@ package com.faithmeetslove;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+// import com.reactnativecomponent.splashscreen.RCTSplashScreenPackage;
+// import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -25,13 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RNI18nPackage(),
-            new VectorIconsPackage(),
-            new RNGestureHandlerPackage(),
-            new LinearGradientPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+          // new RCTSplashScreenPackage(),
+          // new SplashScreenReactPackage(),
+          new RNI18nPackage(), new VectorIconsPackage(), new RNGestureHandlerPackage(), new LinearGradientPackage());
     }
 
     @Override
