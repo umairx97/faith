@@ -1,22 +1,22 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTBorderStyle.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTComponent.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTPointerEvents.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/UIView+React.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/ScrollView/RCTScrollView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTAutoInsetsProtocol.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTEventDispatcher.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridge.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTInvalidating.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/ScrollView/RCTScrollableProtocol.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTComponent.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/UIView+React.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/ScrollView/RCTScrollView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTAutoInsetsProtocol.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridge.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/ScrollView/RCTScrollableProtocol.h

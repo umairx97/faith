@@ -21,6 +21,9 @@ import { StackNavigator, SwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation";
 import Discover from "../Discover/Discover";
 import { Actions } from "react-native-router-flux";
+import {
+  RkButton
+} from 'react-native-ui-kitten'
 export default class Login extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -46,35 +49,59 @@ export default class Login extends React.Component {
   // }
 
   render() {
-    return (
+    return ( 
       <ImageBackground
         source={require("../../../assets/images/bg-plainwhite.png")}
         style={styles.MainContainer}
       >
+      < ScrollView >
         <Image
           source={require("../../../assets/images/logo.png")}
           style={styles.migoLogoImage}
         />
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             Actions.signUp();
           }}
           style={styles.facebookButton}
         >
           <Text style={{ color: "white" }}>SIGN UP</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => {
             Actions.signIn();
           }}
           style={styles.googleButton}
         >
           <Text style={{ color: "white" }}>Login</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View>
+ < RkButton rkType = 'rounded'
+ style = {
+   styles.facebookButton
+ }
+ onPress = {
+     () => {
+                   Actions.signUp();
+                 }}
+ > Sign Up </RkButton>
+        </View>
+       <View>
+        < RkButton rkType = 'rounded'
+        style = {
+          styles.googleButton
+        }
+        onPress = {
+          () => {
+            Actions.signIn();
+          }
+        }
+        > Login </RkButton></View >
         <Text style={styles.byClickingStartYText}>
           By clicking start, you agree to our Terms and Conditions{" "}
         </Text>
+        </ScrollView>
       </ImageBackground>
 
       // <ImageBackground
@@ -174,12 +201,12 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
-
-    width: null,
-    height: null
+resizeMode:"stretch",
+    width: "100%",
+      height: "100%",
   },
   container: {
-    flex: 1,
+    
     width: undefined,
     height: undefined,
     backgroundColor: "transparent",
@@ -202,20 +229,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-  facebookButtonImage: {
-    resizeMode: "contain"
-  },
-  facebookButtonText: {
-    color: "rgb(255, 255, 255)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    lineHeight: 0,
-    letterSpacing: 0
-  },
+  
   facebookButton: {
-    flex: 1,
+    
     backgroundColor: "rgb(38, 114, 203)",
     borderRadius: 24,
     flexDirection: "row",
@@ -240,7 +256,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   googleButton: {
-    flex: 1,
+ 
     backgroundColor: "rgb(252, 56, 80)",
     borderRadius: 24,
     flexDirection: "row",
@@ -273,12 +289,12 @@ const styles = StyleSheet.create({
     height: 34
   },
   migoLogoImage: {
-    flex: 1,
-    resizeMode: "center",
+    
+    resizeMode: "contain",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 156,
-    height: 43,
-    marginTop: 75,
+    width: "25%",
+    height: "15%",
+    marginTop: "45%",
     alignSelf: "center"
   }
 });

@@ -1,32 +1,32 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Profiler/RCTPerfMonitor.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridge.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTInvalidating.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTDevSettings.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Profiler/RCTFPSGraph.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTJavaScriptExecutor.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTPerformanceLogger.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTRootView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTUIManager.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTViewManager.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTConvert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTAnimationType.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTBorderStyle.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTLog.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTUtils.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTPointerEvents.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTEventDispatcher.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/UIView+React.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTComponent.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridge+Private.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/DevSupport/RCTDevMenu.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Profiler/RCTPerfMonitor.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridge.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Profiler/RCTFPSGraph.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTJavaScriptExecutor.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTPerformanceLogger.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTRootView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTUIManager.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTViewManager.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTConvert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTLog.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTUtils.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/UIView+React.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTComponent.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/DevSupport/RCTDevMenu.h

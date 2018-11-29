@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegateAdapter.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegateAdapter.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputViewProtocol.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegate.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegateAdapter.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegateAdapter.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputViewProtocol.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegate.h

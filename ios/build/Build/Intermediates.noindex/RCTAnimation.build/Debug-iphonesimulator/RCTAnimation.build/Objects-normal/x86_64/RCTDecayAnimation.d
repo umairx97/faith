@@ -1,19 +1,19 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTDecayAnimation.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTDecayAnimation.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTAnimationDriver.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTDecayAnimation.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTDecayAnimation.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTAnimationDriver.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/fishhook/fishhook.c \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/fishhook/fishhook.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/fishhook/fishhook.c \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/fishhook/fishhook.h

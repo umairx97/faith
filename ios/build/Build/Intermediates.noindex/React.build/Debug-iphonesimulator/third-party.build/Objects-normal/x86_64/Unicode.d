@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/third-party/folly-2016.10.31.00/folly/Unicode.cpp \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/third-party/folly-2016.10.31.00/folly/Unicode.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/third-party/folly-2016.10.31.00/folly/Unicode.cpp \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/third-party/folly-2016.10.31.00/folly/Unicode.h

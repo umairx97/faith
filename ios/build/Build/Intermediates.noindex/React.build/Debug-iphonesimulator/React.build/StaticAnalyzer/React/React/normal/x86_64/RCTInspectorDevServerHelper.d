@@ -1,9 +1,9 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.mm \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTLog.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTUtils.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.mm \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTLog.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTUtils.h

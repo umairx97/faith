@@ -1,7 +1,7 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/WebSocket/RCTSRWebSocket.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/Libraries/WebSocket/RCTSRWebSocket.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/WebSocket/RCTSRWebSocket.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/Libraries/WebSocket/RCTSRWebSocket.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h

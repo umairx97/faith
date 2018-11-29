@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native-linear-gradient/BVLinearGradient/BVLinearGradientLayer.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native-linear-gradient/BVLinearGradient/BVLinearGradientLayer.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/BVLinearGradient/BVLinearGradientLayer.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/BVLinearGradient/BVLinearGradientLayer.h

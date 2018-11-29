@@ -1,42 +1,42 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurface.mm \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurface.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceStage.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceView+Internal.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridge+Private.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridge.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTInvalidating.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTShadowView+Layout.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTShadowView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTComponent.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTLayout.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTRootView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceDelegate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceRootShadowView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceRootShadowViewDelegate.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/Surface/RCTSurfaceRootView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTBorderStyle.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTPointerEvents.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTTouchHandler.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTUIManager.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTViewManager.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTConvert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTAnimationType.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTLog.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTUtils.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTEventDispatcher.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/UIView+React.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTUIManagerObserverCoordinator.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTUIManagerUtils.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurface.mm \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurface.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceStage.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceView+Internal.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridge.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTShadowView+Layout.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTShadowView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTComponent.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTLayout.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTRootView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceDelegate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceRootShadowView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceRootShadowViewDelegate.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/Surface/RCTSurfaceRootView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTTouchHandler.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTUIManager.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTViewManager.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTConvert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTLog.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTUtils.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/UIView+React.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTUIManagerObserverCoordinator.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTUIManagerUtils.h

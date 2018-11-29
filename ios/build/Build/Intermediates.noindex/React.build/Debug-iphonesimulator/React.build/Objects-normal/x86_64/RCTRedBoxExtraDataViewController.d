@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTRedBoxExtraDataViewController.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTRedBoxExtraDataViewController.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTRedBoxExtraDataViewController.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTRedBoxExtraDataViewController.h

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTActivityIndicatorView.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTActivityIndicatorView.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTActivityIndicatorView.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTActivityIndicatorView.h

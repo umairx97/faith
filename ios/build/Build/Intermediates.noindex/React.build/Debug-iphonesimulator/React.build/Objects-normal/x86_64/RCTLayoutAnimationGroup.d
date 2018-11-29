@@ -1,17 +1,17 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTLayoutAnimationGroup.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTLayoutAnimationGroup.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Modules/RCTLayoutAnimation.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTAnimationType.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTConvert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTBorderStyle.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTLog.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Base/RCTUtils.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTPointerEvents.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTLayoutAnimationGroup.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTLayoutAnimationGroup.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTDefines.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Modules/RCTLayoutAnimation.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTConvert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTLog.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTAssert.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Base/RCTUtils.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h

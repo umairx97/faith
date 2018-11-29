@@ -44,7 +44,7 @@ export default class Route extends Component {
           <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
-          <Scene key="home" tabs={true} hideNavBar={true}>
+          <Scene  key="home" tabs={true} hideNavBar={true}>
             <Scene
               key="Discover"
               icon={this.getIcon}

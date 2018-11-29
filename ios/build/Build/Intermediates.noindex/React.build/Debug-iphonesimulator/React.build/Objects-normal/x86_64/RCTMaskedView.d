@@ -1,10 +1,10 @@
 dependencies: \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTMaskedView.m \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTMaskedView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTView.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTBorderStyle.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTComponent.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/RCTPointerEvents.h \
-  /Users/Tech/faithmeetsloveapp/node_modules/react-native/React/Views/UIView+React.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/Tech/faithmeetsloveapp/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTMaskedView.m \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTMaskedView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTView.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTComponent.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/node_modules/react-native/React/Views/UIView+React.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Boffin\ Coders/Projects/FaithMeetsLove/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h

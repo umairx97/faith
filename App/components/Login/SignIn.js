@@ -26,6 +26,9 @@ import {
   Button,
   TextInput
 } from "react-native-paper";
+import {
+  RkButton
+} from 'react-native-ui-kitten'
 export default class SignIn extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
