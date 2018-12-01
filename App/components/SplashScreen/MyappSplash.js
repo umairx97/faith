@@ -70,8 +70,8 @@ export default class MyappSplash extends Component
                 <View style={styles.SplashScreen_ChildView}>
 
                     {/* Put all your components Image and Text here inside Child view which you want to show in Splash Screen. */}
-                    <Animated.Image source={require("../../../assets/images/SplashLogo.gif")}
-                    style={{width:'100%', height: '100%', resizeMode: 'contain', transform: [{rotate: RotateData}] }} />
+                    <Animated.Image source={require("../../../assets/images/logo.png")}
+                    style={{width:'50%', height: '50%', resizeMode: 'contain', transform: [{rotate: RotateData}] }} />
                     
 
                 </View>
