@@ -21,9 +21,7 @@ import { StackNavigator, SwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation";
 import Discover from "../Discover/Discover";
 import { Actions } from "react-native-router-flux";
-import {
-  RkButton
-} from 'react-native-ui-kitten'
+import { RkButton } from "react-native-ui-kitten";
 export default class Login extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -54,13 +52,13 @@ export default class Login extends React.Component {
         source={require("../../../assets/images/bg-plainwhite.png")}
         style={styles.MainContainer}
       >
-      < ScrollView >
-        <Image
-          source={require("../../../assets/images/logo.png")}
-          style={styles.migoLogoImage}
-        />
+        <View>
+          <Image
+            source={require("../../../assets/images/logo.png")}
+            style={styles.migoLogoImage}
+          />
 
-        {/* <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={() => {
             Actions.signUp();
           }}
@@ -68,7 +66,7 @@ export default class Login extends React.Component {
         >
           <Text style={{ color: "white" }}>SIGN UP</Text>
         </TouchableOpacity> */}
-        {/* <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={() => {
             Actions.signIn();
           }}
@@ -76,32 +74,32 @@ export default class Login extends React.Component {
         >
           <Text style={{ color: "white" }}>Login</Text>
         </TouchableOpacity> */}
-        <View>
- < RkButton rkType = 'rounded'
- style = {
-   styles.facebookButton
- }
- onPress = {
-     () => {
-                   Actions.signUp();
-                 }}
- > Sign Up </RkButton>
+          <View>
+            <RkButton
+              rkType="rounded"
+              style={styles.facebookButton}
+              onPress={() => {
+                Actions.signUp();
+              }}
+            >
+              Sign Up
+            </RkButton>
+          </View>
+          <View>
+            <RkButton
+              rkType="rounded"
+              style={styles.googleButton}
+              onPress={() => {
+                Actions.signIn();
+              }}
+            >
+              Login
+            </RkButton>
+          </View>
+          <Text style={styles.byClickingStartYText}>
+            By clicking start, you agree to our Terms and Conditions{" "}
+          </Text>
         </View>
-       <View>
-        < RkButton rkType = 'rounded'
-        style = {
-          styles.googleButton
-        }
-        onPress = {
-          () => {
-            Actions.signIn();
-          }
-        }
-        > Login </RkButton></View >
-        <Text style={styles.byClickingStartYText}>
-          By clicking start, you agree to our Terms and Conditions{" "}
-        </Text>
-        </ScrollView>
       </ImageBackground>
 
       // <ImageBackground
@@ -201,12 +199,11 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
-resizeMode:"stretch",
+    resizeMode: "stretch",
     width: "100%",
-      height: "100%",
+    height: "100%"
   },
   container: {
-    
     width: undefined,
     height: undefined,
     backgroundColor: "transparent",
@@ -229,19 +226,19 @@ resizeMode:"stretch",
     width: "100%",
     height: "100%"
   },
-  
+
   facebookButton: {
-    
     backgroundColor: "rgb(38, 114, 203)",
     borderRadius: 24,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 316,
+    width: 200,
     height: 48,
     marginBottom: 33,
-    marginTop: 200,
-    alignSelf: "center"
+    marginTop: 100,
+    alignSelf: "center",
+    textAlign: "center"
   },
   googleButtonText: {
     color: "rgb(255, 255, 255)",
@@ -256,13 +253,12 @@ resizeMode:"stretch",
     resizeMode: "contain"
   },
   googleButton: {
- 
     backgroundColor: "rgb(252, 56, 80)",
     borderRadius: 24,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 316,
+    width: 200,
     height: 48,
     marginBottom: 40,
     alignSelf: "center"
@@ -276,10 +272,8 @@ resizeMode:"stretch",
     lineHeight: 22,
     letterSpacing: -0.36,
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 243,
-    flex: 1,
+    width: "70%",
     alignSelf: "center",
-    justifyContent: "flex-end",
     marginBottom: 3
   },
   iphoneXHomeIndicatorHomeIndicatorOnLightImage: {
@@ -289,12 +283,11 @@ resizeMode:"stretch",
     height: 34
   },
   migoLogoImage: {
-    
     resizeMode: "contain",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: "25%",
     height: "15%",
-    marginTop: "45%",
+    marginTop: "35%",
     alignSelf: "center"
   }
 });

@@ -11,6 +11,8 @@ import AppSlider from "../Slider/Slider";
 import SignIn from "../Login/SignIn";
 import SignUp from "../Login/SignUp";
 
+import MyappSplash from "../SplashScreen/MyappSplash";
+
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -40,8 +42,19 @@ export default class Route extends Component {
     return (
       <Router>
         <Stack key="root">
-          <Scene key="slide" hideNavBar={true} component={AppSlider} />
-          <Scene key="login" component={Login} hideNavBar={true} />
+          <Scene key="myappSplash" hideNavBar={true} component={MyappSplash} />
+          <Scene
+            key="slide"
+            replace={true}
+            hideNavBar={true}
+            component={AppSlider}
+          />
+          <Scene
+            key="login"
+            replace={true}
+            component={Login}
+            hideNavBar={true}
+          />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
           <Scene  key="home" tabs={true} hideNavBar={true}>

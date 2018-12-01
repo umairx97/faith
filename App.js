@@ -14,7 +14,13 @@ import UniversalTabView from "./App/components/TopScrollTabBarNavigator/Universa
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import Route from "./App/components/routes/Routes";
+import SignUp from "./App/components/Login/SignUp";
+
+import MyappSplash from "./App/components/SplashScreen/MyappSplash";
 export default class App extends Component {
+  // componentDidMount() {
+  //   SplashScreen.hide();
+  // }
   render() {
     return <Route />;
   }

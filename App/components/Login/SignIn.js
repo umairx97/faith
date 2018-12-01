@@ -1,327 +1,254 @@
-//
-//  Login.js
-//  Project
-//
-//  Created by Boffin Coders.
-//  Copyright © 2018 Boffin Coders. All rights reserved.
-//
-
+import React, { Component } from "react";
 import {
-  TouchableOpacity,
-  View,
-  Image,
   StyleSheet,
-  ImageBackground,
-  ScrollView
-} from "react-native";
-import React from "react";
-import LinearGradient from "react-native-linear-gradient";
-import { StackNavigator, SwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation";
-import Discover from "../Discover/Discover";
-import { Actions } from "react-native-router-flux";
-import {
-  Provider as PaperProvider,
   Text,
+  View,
+  TextInput,
   Button,
-  TextInput
-} from "react-native-paper";
-import {
-  RkButton
-} from 'react-native-ui-kitten'
-export default class SignIn extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      header: null,
-      headerLeft: null,
-      headerRight: null
-    };
-  };
+  TouchableHighlight,
+  Image,
+  Alert
+} from "react-native";
+import { RkButton, RkText } from "react-native-ui-kitten";
+import { ScrollView } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { Actions } from "react-native-router-flux";
 
+export default class SignIn extends Component {
   constructor(props) {
     super(props);
+    state = {
+      email: "",
+      password: ""
+    };
   }
 
-  componentDidMount() {}
-
-  onFacebookPressed = () => {
-    this.props.navigation.navigate("UniversalTabView");
+  onClickListener = viewId => {
+    Alert.alert("Alert", "Button pressed " + viewId);
   };
-
-  // onGooglePressed = () => {
-
-  // }
 
   render() {
     return (
-      <PaperProvider>
-        <ImageBackground
-          source={require("../../../assets/images/bg-plainwhite.png")}
-          style={styles.MainContainer}
-        >
+      <View style={styles.container}>
+        <View style={styles.innerView1}>
           <Image
             source={require("../../../assets/images/logo.png")}
             style={styles.migoLogoImage}
           />
-
-          <View>
-            <TextInput
-              style={[styles.input, styles.inputText]}
-              label="Username"
-              keyboardType={"email-address"}
-            />
-            <TextInput
-              style={[styles.input, styles.inputText]}
-              label="Password"
-              Type="outlined"
-              secureTextEntry={true}
-            />
-            <View style={styles.signupText}>
-              <TouchableOpacity>
-                <Text style={styles.signupButton}>Forget Password</Text>
-              </TouchableOpacity>
+          <View style={styles.loginForm}>
+            <View style={styles.formInput}>
+              <Text>Username</Text>
+              <TextInput style={styles.textInput} />
             </View>
-            <Button
-              mode="contained"
-              style={styles.input}
-              onPress={() => {
-                Actions.home();
-              }}
-            >
-              Login
-            </Button>
+            <View style={styles.formInput}>
+              <Text>Password</Text>
+              <TextInput secureTextEntry={true} style={styles.textInput} />
+            </View>
+            <Text style={styles.forgetPwd}>Forgot Password</Text>
+            <View style={{ marginTop: "4%" }}>
+              <RkButton
+                rkType="rounded"
+                style={styles.googleButton}
+                onPress={() => {
+                  Actions.home();
+                }}
+              >
+                Login
+              </RkButton>
+              <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{
+                    backgroundColor: "black",
+                    height: 2,
+                    flex: 1,
+                    alignSelf: "center",
+                    marginLeft: "12%",
+                    marginTop: "4%"
+                  }}
+                />
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    paddingHorizontal: 5,
+                    fontSize: 14,
+                    marginTop: "4%"
+                  }}
+                >
+                  Or Login With
+                </Text>
+                <View
+                  style={{
+                    backgroundColor: "black",
+                    height: 2,
+                    flex: 1,
+                    alignSelf: "center",
+                    marginRight: "12%",
+                    marginTop: "4%"
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+
+                  marginTop: "5%"
+                }}
+              >
+                <View style={{ flex: 1 }}>
+                  <RkButton
+                    rkType="rounded"
+                    style={[
+                      {
+                        width: "100%",
+                        marginRight: "2%",
+                        marginVertical: 8
+                      }
+                    ]}
+                  >
+                    <Icon
+                      style={[
+                        styles.icon,
+                        { marginHorizontal: 16, fontSize: 21 }
+                      ]}
+                      name="facebook"
+                    />
+                    <RkText rkType="caption">Facebook</RkText>
+                  </RkButton>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <RkButton
+                    rkType="rounded"
+                    style={[
+                      {
+                        width: "100%",
+                        marginLeft: "2%",
+                        marginVertical: 8
+                      }
+                    ]}
+                  >
+                    <Icon
+                      style={[
+                        styles.icon,
+                        { marginHorizontal: 16, fontSize: 21 }
+                      ]}
+                      name="google"
+                    />
+                    <RkText rkType="caption">Google</RkText>
+                  </RkButton>
+                </View>
+              </View>
+            </View>
           </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginRight: 5,
-              marginLeft: 5,
-              marginTop: 10,
-              paddingTop: 10
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                Actions.home();
-              }}
-              style={styles.facebookButton}
-            >
-              <Image source={require("../../../assets/images/path.png")} />
-              <Text style={{ color: "white" }}> Facebook</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.onGooglePressed}
-              style={styles.googleButton}
-            >
-              <Image source={require("../../../assets/images/path-2.png")} />
-              <Text style={{ color: "white" }}> Google</Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </PaperProvider>
+        </View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  MainContainer: {
-    flex: 1,
-
-    width: null,
-    height: null
+  container: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    backgroundColor: "#D5C3C0"
   },
-
-  heading: {
-    fontSize: 24,
-    textAlign: "center",
+  innerView1: {
+    flex: 1,
+    padding: "10%",
+    width: "100%",
+    height: "100%",
+    marginTop: "5%",
+    flexDirection: "column"
+  },
+  forgetPwd: {
+    width: "100%",
+    textAlign: "right",
+    marginTop: "3%",
+    color: "#000"
+  },
+  icon: {
     color: "white"
   },
-  signupText: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginVertical: 12,
-    color: "#ff00"
-  },
-
-  signupButton: {
-    color: "#ffffff",
-    fontSize: 12,
-    fontWeight: "400",
-    marginTop: 15
-  },
-  signupButtonLeft: {
-    color: "#ffffff",
-    fontSize: 12,
-    fontWeight: "400",
-    marginTop: 10,
-    marginLeft: 8
-  },
-  signupTextStyle: {
-    color: "rgba(255,255,255,0.7)",
-    fontSize: 16
-  },
-  label: {
-    color: "white",
-    fontSize: 20
-  },
-  alignRight: {
-    alignSelf: "flex-end"
-  },
-  input: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10
-  },
-  inputText: {
-    color: "white",
-    tintColor: "white",
-    textDecorationColor: "white",
-    borderColor: "white"
-  },
-  parent: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 10,
-    backgroundColor: "black"
-  },
-  img: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  imgIcon: {
-    width: 150,
-    height: 150,
-    resizeMode: "stretch",
-    alignSelf: "center",
-    marginBottom: 10,
-    marginTop: 10
-  },
-  bottom: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  buttonStyle: {
-    flex: 1
-  },
-
-  container: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  loginView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    flex: 1
-  },
-  bgWhiteImageLinearGradient: {
-    width: 726,
-    height: 834,
-    marginLeft: -107,
-    marginTop: -18,
-    marginRight: -244
-  },
-  bgWhiteImage: {
+  migoLogoImage: {
     resizeMode: "contain",
-    width: "100%",
-    height: "100%"
-  },
-  facebookButtonImage: {
-    resizeMode: "contain"
-  },
-  facebookButtonText: {
-    color: "rgb(255, 255, 255)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    lineHeight: 0,
-    letterSpacing: 0
-  },
-  facebookButton: {
-    flex: 1,
-    backgroundColor: "rgb(38, 114, 203)",
-    borderRadius: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 70,
-    height: 40,
-    paddingLeft: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+    width: "25%",
+    height: "15%",
+
     alignSelf: "center"
   },
-  googleButtonText: {
-    color: "rgb(255, 255, 255)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    lineHeight: 0,
-    letterSpacing: 0
+  loginForm: {
+    width: "100%",
+    marginTop: "14%"
   },
-  googleButtonImage: {
-    resizeMode: "contain"
+  textInput: {
+    width: "100%",
+    color: "#ffffff",
+    borderColor: "red",
+    borderBottomWidth: 1
+  },
+  formInput: {
+    width: "100%",
+    marginTop: "4%"
   },
   googleButton: {
-    flex: 1,
     backgroundColor: "rgb(252, 56, 80)",
-    borderRadius: 12,
+    borderRadius: 24,
+
+    width: 200,
+    height: 48,
+
+    alignSelf: "center"
+  },
+  facebookButton: {
+    backgroundColor: "rgb(38, 114, 203)",
+    borderRadius: 24,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 70,
-    height: 40,
-    marginRight: 5,
-    paddingRight: 10,
-    alignSelf: "center"
-  },
-  byClickingStartYText: {
-    color: "rgb(0,0,0)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    lineHeight: 22,
-    letterSpacing: -0.36,
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 243,
-    flex: 1,
+    width: 100,
+    height: 48,
+    marginBottom: 33,
+    marginTop: 100,
     alignSelf: "center",
-    justifyContent: "flex-end",
-    marginBottom: 3
+    textAlign: "center"
   },
-  iphoneXHomeIndicatorHomeIndicatorOnLightImage: {
-    resizeMode: "stretch",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 375,
-    height: 34
+  inputContainer: {
+    borderBottomColor: "#F5FCFF",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 30,
+    borderBottomWidth: 1,
+    width: 250,
+    height: 45,
+    marginBottom: 20,
+    flexDirection: "row",
+    alignItems: "center"
   },
-  migoLogoImage: {
-    flex: 1,
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 90,
-    height: 43,
-    marginTop: 25,
-    alignSelf: "center"
+  inputs: {
+    height: 45,
+    marginLeft: 16,
+    borderBottomColor: "#FFFFFF",
+    flex: 1
+  },
+  inputIcon: {
+    width: 30,
+    height: 30,
+    marginLeft: 15,
+    justifyContent: "center"
+  },
+  buttonContainer: {
+    height: 45,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec"
+  },
+  loginText: {
+    color: "white"
   }
 });
-
-// export default createStackNavigator({
-// 	Login: Login,
-// 	Discover: Discover
-//   });
