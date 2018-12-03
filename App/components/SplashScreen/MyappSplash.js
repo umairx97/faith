@@ -2,6 +2,9 @@ import { Platform, StyleSheet, View, Text, Image, TouchableOpacity, Alert ,Anima
 import React, { Component } from "react";
 import { Actions } from 'react-native-router-flux';
 import AppSlider from '../Slider/Slider';
+import {
+  StatusBar
+} from 'react-native';
 export default class MyappSplash extends Component
 {
 
@@ -44,7 +47,7 @@ export default class MyappSplash extends Component
   }
 
   componentDidMount(){
-
+    StatusBar.setHidden(true);
     var that = this;
     this.StartImageRotateFunction();
 

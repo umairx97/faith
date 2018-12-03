@@ -7,7 +7,8 @@ import {
   Button,
   TouchableHighlight,
   Image,
-  Alert
+  Alert,
+  Platform,
 } from "react-native";
 import { RkButton, RkText } from "react-native-ui-kitten";
 import { ScrollView } from "react-native-gesture-handler";
@@ -26,6 +27,11 @@ export default class SignIn extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
+  _onSubmit() {
+    //const { email, password } = this.state;
+    Alert.alert("Alert", "Button pressed " + this.email);
+   Actions.home();
+  }
 
   render() {
     return (
@@ -38,11 +44,15 @@ export default class SignIn extends Component {
           <View style={styles.loginForm}>
             <View style={styles.formInput}>
               <Text>Username</Text>
-              <TextInput style={styles.textInput} />
+              <TextInput onChangeText={value => this.setState({ email: value })}
+              returnKeyLabel = {"next"}
+              onChangeText={(text) => this.setState({email:text})}
+               style={styles.textInput} />
             </View>
             <View style={styles.formInput}>
               <Text>Password</Text>
-              <TextInput secureTextEntry={true} style={styles.textInput} />
+              <TextInput onChangeText={value => this.setState({ password: value })}
+               style={styles.textInput} />
             </View>
             <Text style={styles.forgetPwd}>Forgot Password</Text>
             <View style={{ marginTop: "4%" }}>
@@ -50,7 +60,7 @@ export default class SignIn extends Component {
                 rkType="rounded"
                 style={styles.googleButton}
                 onPress={() => {
-                  Actions.home();
+                  this._onSubmit();
                 }}
               >
                 Login
@@ -122,7 +132,8 @@ export default class SignIn extends Component {
                       {
                         width: "100%",
                         marginLeft: "2%",
-                        marginVertical: 8
+                        marginVertical: 8,
+                        backgroundColor: '#dd4b39'
                       }
                     ]}
                   >
@@ -133,7 +144,7 @@ export default class SignIn extends Component {
                       ]}
                       name="google"
                     />
-                    <RkText rkType="caption">Google</RkText>
+                    <RkText rkType="caption" >Google</RkText>
                   </RkButton>
                 </View>
               </View>
@@ -150,7 +161,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     flexDirection: "column",
-    backgroundColor: "#D5C3C0"
+    backgroundColor: "#FFFFFF"
   },
   innerView1: {
     flex: 1,
@@ -183,8 +194,9 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: "100%",
-    color: "#ffffff",
+    color: "#000000",
     borderColor: "red",
+    marginTop: Platform.OS === 'ios' ? 10+"%" : 0,
     borderBottomWidth: 1
   },
   formInput: {

@@ -21,7 +21,12 @@ import { StackNavigator, SwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation";
 import Discover from "../Discover/Discover";
 import { Actions } from "react-native-router-flux";
-import { RkButton } from "react-native-ui-kitten";
+import {
+  RkButton
+} from "react-native-ui-kitten";
+import {
+  StatusBar
+} from 'react-native';
 export default class Login extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -36,7 +41,9 @@ export default class Login extends React.Component {
     super(props);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+     StatusBar.setHidden(true);
+  }
 
   onFacebookPressed = () => {
     this.props.navigation.navigate("UniversalTabView");
@@ -47,6 +54,7 @@ export default class Login extends React.Component {
   // }
 
   render() {
+    
     return ( 
       <ImageBackground
         source={require("../../../assets/images/bg-plainwhite.png")}

@@ -9,7 +9,8 @@ import {
   Button,
   TouchableHighlight,
   Image,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import {
   RkButton,
@@ -72,7 +73,7 @@ export default class SignUp extends Component {
           flex: 1,
           flexDirection: "column",
           justifyContent: "center",
-          backgroundColor: "#D5C3C0",
+          backgroundColor: "#FFFFFF",
           width: "100%"
         }
       }>
@@ -134,7 +135,7 @@ export default class SignUp extends Component {
               justifyContent: "center"
             }
           }>
-            <Text>Username</Text>
+            <Text style={styles.formInput}> Username</Text>
             <TextInput placeholder="Please enter your username"
               style={
                 styles.textInput
@@ -147,7 +148,7 @@ export default class SignUp extends Component {
               justifyContent: "center"
             }
           }>
-            <Text>Email</Text>
+            <Text style={styles.formInput}>Email</Text>
             <TextInput placeholder="Please enter your emailID"
               style={
                 styles.textInput
@@ -160,7 +161,7 @@ export default class SignUp extends Component {
               justifyContent: "center"
             }
           }>
-            <Text>Password</Text>
+            <Text style={styles.formInput}>Password</Text>
             <TextInput secureTextEntry={
               true
             }
@@ -177,9 +178,7 @@ export default class SignUp extends Component {
               marginTop: 10
             }
           }>
-            <Text style={
-              styles.formInput
-            }>Date of Birth</Text>
+            <Text >Date of Birth</Text>
             <TextInput style={
               {
                 color: "#000000"
@@ -275,61 +274,7 @@ export default class SignUp extends Component {
       </View>
     </ScrollView>
 
-      // <ScrollView style={styles.mainContainer}>
-      //   {/* <View contentContainerStyle={styles.mainContainer}> */}
-      //   <View style={styles.innerView1}>
-      //     {/* <Image
-      //       source={require("../../../assets/images/logo.png")}
-      //       style={styles.migoLogoImage}
-      //     /> */}
-      //     <View style={styles.loginForm}>
-      //       <View style={styles.formInput}>
-      //         <Text>Full Name</Text>
-      //         <TextInput style={styles.textInput} />
-      //       </View>
-      //       <View style={styles.formInput}>
-      //         <Text>Username</Text>
-      //         <TextInput style={styles.textInput} />
-      //       </View>
-      //       <View style={styles.formInput}>
-      //         <Text>Email</Text>
-      //         <TextInput style={styles.textInput} />
-      //       </View>
-      //       <View style={styles.formInput}>
-      //         <Text>Password</Text>
-      //         <TextInput style={styles.textInput} />
-      //       </View>
-      //       <View>
-      //         <Text>Date of Birth</Text>
-      //         <View style={styles.textInput} />
-      //       </View>
-      //     </View>
-      //     <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
-      //       <Text style={{ marginTop: 8, marginRight: 8 }}>Gender</Text>
-      //       <RadioForm
-      //         radio_props={radio_props}
-      //         initial={0}
-      //         formHorizontal={true}
-      //         labelHorizontal={true}
-      //         buttonColor={"#2196f3"}
-      //         animation={true}
-      //         onPress={value => {
-      //           this.setState({ value: value });
-      //         }}
-      //       />
-      //     </View>
-      //     <View style={{ marginTop: "4%" }}>
-      //       <RkButton
-      //         rkType="rounded"
-      //         style={styles.googleButton}
-      //         onPress={() => {}}
-      //       >
-      //         Register
-      //       </RkButton>
-      //     </View>
-      //   </View>
-      //   {/* </View> */}
-      // </ScrollView>
+      
     );
   }
 }
@@ -339,7 +284,7 @@ const styles = StyleSheet.create({
     width: "100%",
 
     flexDirection: "column",
-    backgroundColor: "#D5C3C0"
+    backgroundColor: "#FFFFFF"
   },
   mainContainer: {
     flex: 1,
@@ -377,8 +322,9 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: "100%",
-    color: "#ffffff",
+    color: "#000000",
     borderColor: "red",
+    marginTop: Platform.OS === 'ios' ? 10+"%" : 0,
     borderBottomWidth: 1
   },
   formInput: {
