@@ -10,9 +10,8 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
-import TopScrollTabBarNavigator from "../TopScrollTabBarNavigator/TopScrollTabBarNavigator";
+
 import GridView from "react-native-super-grid";
-import SlidableTabBarNavigator from "../TopScrollTabBarNavigator/SlideTabBarNavigator";
 
 const items = [
   { name: "TURQUOISE", code: "#1abc9c" },

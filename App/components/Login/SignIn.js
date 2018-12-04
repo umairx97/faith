@@ -36,7 +36,7 @@ export default class SignIn extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.innerView1}>
+       
           <Image
             source={require("../../../assets/images/logo.png")}
             style={styles.migoLogoImage}
@@ -150,7 +150,7 @@ export default class SignIn extends Component {
               </View>
             </View>
           </View>
-        </View>
+        
       </View>
     );
   }
@@ -160,7 +160,10 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
+    padding: "10%",
     flexDirection: "column",
+        justifyContent: "center",
+
     backgroundColor: "#FFFFFF"
   },
   innerView1: {

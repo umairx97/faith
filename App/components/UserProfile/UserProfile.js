@@ -61,17 +61,7 @@ export default class UserProfile extends React.Component {
 						<Image
 							source={require("../../../assets/images/photos-2.png")}
 							style={styles.photosImage}/>
-						{/* <View
-							pointerEvents="box-none"
-							style={{
-								flexDirection: "row",
-								flex: 1,
-								justifyContent: "flex-end",
-							}}>
-							<Image
-								source={require("../../../assets/images/slides.png")}
-								style={styles.slidesImage}/>
-						</View> */}
+						
 					</View>
 					<View
 						pointerEvents="box-none"
@@ -137,18 +127,7 @@ export default class UserProfile extends React.Component {
 						style={styles.aboutView}>
 						<Text
 							style={styles.aboutText}>About</Text>
-						{/* <View
-							pointerEvents="box-none"
-							style={{
-								flex: 1,
-								flexDirection: "column",
-								justifyContent: "flex-end",
-							}}>
-							<Text
-								style={styles.myNameIsMaryBurgText}>My name is Mary Burgess and I enjoy meeting new people and finding ways to help them have an uplifting experience. I enjoy reading, and the knowledge ...
-and perspective that my reading gives me has strengthened my teaching skills and presentation abilities.opportunities, through which I was able to have fewer returned products and increased repeat customers, when compared with co-workers.</Text>
-						</View> */}
-
+						
 
      <ViewMoreText 
           numberOfLines={3}
@@ -172,16 +151,7 @@ and perspective that my reading gives me has strengthened my teaching skills and
 
 
 
-						{/* <View
-							pointerEvents="box-none"
-							style={{
-								position: "absolute",
-								width: "100%",
-								height: "100%",
-							}}>
-							<Text
-								style={styles.showMoreText}>Show more</Text>
-						</View> */}
+						
 					</View>
 					<View
 						
@@ -580,9 +550,6 @@ and perspective that my reading gives me has strengthened my teaching skills and
 						</View>
 					</View>
 				</View>
-				{/* <Image
-					source={require("../../../assets/images/home-indicator---on-light.png")}
-					style={styles.iphoneXHomeIndicatorHomeIndicatorOnLightImage}/> */}
 			</View>
 			</ScrollView>
 		

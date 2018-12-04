@@ -21,12 +21,9 @@ import { StackNavigator, SwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation";
 import Discover from "../Discover/Discover";
 import { Actions } from "react-native-router-flux";
-import {
-  RkButton
-} from "react-native-ui-kitten";
-import {
-  StatusBar
-} from 'react-native';
+import { RkButton } from "react-native-ui-kitten";
+import { StatusBar } from "react-native";
+console.disableYellowBox = true;
 export default class Login extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -42,7 +39,7 @@ export default class Login extends React.Component {
   }
 
   componentDidMount() {
-     StatusBar.setHidden(true);
+    StatusBar.setHidden(true);
   }
 
   onFacebookPressed = () => {
@@ -54,34 +51,19 @@ export default class Login extends React.Component {
   // }
 
   render() {
-    
-    return ( 
-      <ImageBackground
-        source={require("../../../assets/images/bg-plainwhite.png")}
-        style={styles.MainContainer}
-      >
-        <View>
-          <Image
-            source={require("../../../assets/images/logo.png")}
-            style={styles.migoLogoImage}
-          />
-
-          {/* <TouchableOpacity
-          onPress={() => {
-            Actions.signUp();
+    return (
+      <View style={styles.MainContainer}>
+        <Image
+          source={require("../../../assets/images/logo.png")}
+          style={styles.migoLogoImage}
+        />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+            marginBottom: 36
           }}
-          style={styles.facebookButton}
         >
-          <Text style={{ color: "white" }}>SIGN UP</Text>
-        </TouchableOpacity> */}
-          {/* <TouchableOpacity
-          onPress={() => {
-            Actions.signIn();
-          }}
-          style={styles.googleButton}
-        >
-          <Text style={{ color: "white" }}>Login</Text>
-        </TouchableOpacity> */}
           <View>
             <RkButton
               rkType="rounded"
@@ -108,98 +90,7 @@ export default class Login extends React.Component {
             By clicking start, you agree to our Terms and Conditions{" "}
           </Text>
         </View>
-      </ImageBackground>
-
-      // <ImageBackground
-      //         source={require("../../../assets/images/bg-plainwhite.png")}
-      //         style={styles.MainContainer}
-      //       >
-      //         <Image
-      //           source={require("../../../assets/images/logo.png")}
-      //           style={styles.migoLogoImage}
-      //         />
-
-      //         <TouchableOpacity
-      //           onPress={() => {
-      //             Actions.home();
-      //           }}
-      //           style={styles.facebookButton}
-      //         >
-      //           <Image source={require("../../../assets/images/path.png")} />
-      //           <Text style={{ color: "white" }}> Connect with Facebook</Text>
-      //         </TouchableOpacity>
-      //         <TouchableOpacity
-      //           onPress={this.onGooglePressed}
-      //           style={styles.googleButton}
-      //         >
-      //           <Image source={require("../../../assets/images/path-2.png")} />
-      //           <Text style={{ color: "white" }}> Connect with Google</Text>
-      //         </TouchableOpacity>
-      //         <Text style={styles.byClickingStartYText}>
-      //           By clicking start, you agree to our Terms and Conditions{" "}
-      //         </Text>
-      //       </ImageBackground>
-
-      // <ScrollView>
-      // <View
-      // 		pointerEvents="box-none"
-      // 		style={styles.loginView}>
-      // 		<LinearGradient
-      // 			start={{
-      // 				x: 0.5,
-      // 				y: 0.55,
-      // 			}}
-      // 			end={{
-      // 				x: 0.5,
-      // 				y: 1,
-      // 			}}
-      // 			locations={[0, 1]}
-      // 			colors={['rgba(0, 0, 0, 0.07)', 'rgba(0, 0, 0, 0.67)']}
-      // 			style={styles.bgWhiteImageLinearGradient}>
-      // 			<Image
-      // 				source={require("../../../assets/images/bg-white.png")}
-      // 				style={styles.bgWhiteImage}/>
-      // 		</LinearGradient>
-      // 		<View
-      // 			pointerEvents="box-none"
-      // 			style={{
-      // 				flex: 1,
-      // 				flexDirection: "column",
-      // 				justifyContent: "flex-end",
-      // 			}}>
-      // 			<TouchableOpacity
-      // 				onPress={this.onFacebookPressed}
-      // 				style={styles.facebookButton}>
-      // 				<Image
-      // 					source={require("../../../assets/images/path.png")}/>
-      // 				<Text>Connect with Facebook</Text>
-      // 			</TouchableOpacity>
-      // 			<TouchableOpacity
-      // 				onPress={this.onGooglePressed}
-      // 				style={styles.googleButton}>
-      // 				<Image
-      // 					source={require("../../../assets/images/path-2.png")}/>
-      // 				<Text>Connect with Google</Text>
-      // 			</TouchableOpacity>
-      // 			<Text
-      // 				style={styles.byClickingStartYText}>By clicking start, you agree to our Terms and Conditions </Text>
-      // 			<Image
-      // 				source={require("../../../assets/images/iphone-x-home-indicator-home-indicator---on-light.png")}
-      // 				style={styles.iphoneXHomeIndicatorHomeIndicatorOnLightImage}/>
-      // 		</View>
-      // 		<View
-      // 			pointerEvents="box-none"
-      // 			style={{
-      // 				position: "absolute",
-      // 				width: "100%",
-      // 				height: "100%",
-      // 			}}>
-      // 			<Image
-      // 				source={require("../../../assets/images/migo-logo.png")}
-      // 				style={styles.migoLogoImage}/>
-      // 		</View>
-      // 	</View>
-      // 	</ScrollView>)
+      </View>
     );
   }
 }
@@ -207,9 +98,7 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
-    resizeMode: "stretch",
-    width: "100%",
-    height: "100%"
+    backgroundColor: "#FFFFFF"
   },
   container: {
     width: undefined,
@@ -239,12 +128,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(38, 114, 203)",
     borderRadius: 24,
     flexDirection: "row",
-    alignItems: "center",
+
     justifyContent: "center",
     width: 200,
     height: 48,
-    marginBottom: 33,
-    marginTop: 100,
+    marginBottom: 40,
     alignSelf: "center",
     textAlign: "center"
   },
@@ -300,7 +188,3 @@ const styles = StyleSheet.create({
   }
 });
 
-// export default createStackNavigator({
-// 	Login: Login,
-// 	Discover: Discover
-//   });

@@ -8,14 +8,10 @@ import {
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
-import BottomTabBar from "../BottomTabNavigation/BottomTabNavigation";
+
 import ScrollableTabView, {
   ScrollableTabBar
 } from "react-native-scrollable-tab-view";
-import UnderlineTabBarExample from "../BottomTabNavigation/BottomTab";
-import TabBarNavigator from "../BottomTabNavigation/TabBarNavigator";
-import TabberBottom from "../TopScrollTabBarNavigator/SlideTabBarNavigator";
-import MyBottomTab from "../BottomTabNavigation/BottomTabNavigationPaper";
 export default class Discover extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;

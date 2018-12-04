@@ -8,6 +8,7 @@ import {
   TextInput,
   Button,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
   Alert,
   Platform
@@ -67,16 +68,15 @@ export default class SignUp extends Component {
   };
 
   render() {
-    return (<ScrollView>
-      <View style={
-        {
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "center",
-          backgroundColor: "#FFFFFF",
-          width: "100%"
+    return ( < ScrollView contentContainerStyle = {
+          {
+            flexGrow: 1,
+            justifyContent: 'center',
+            backgroundColor: "#FFFFFF",
+          }
         }
-      }>
+     >
+      <View>
         <View style={
           {
             flex: 1,
@@ -179,13 +179,17 @@ export default class SignUp extends Component {
             }
           }>
             <Text >Date of Birth</Text>
+             <TouchableOpacity
+             onPress = {
+               this.onFacebookPressed
+             } >
             <TextInput style={
               {
                 color: "#000000"
               }
             }
               placeholder="Please select your DOB"
-              placeholderTextColor="#767575"
+            
               value={
                 this.state.dob
               }
@@ -202,7 +206,7 @@ export default class SignUp extends Component {
               }
               style={
                 styles.textInput
-              } />
+              } /></TouchableOpacity>
             <DateTimePicker isVisible={
               this.state.isDateTimePickerVisible
             }
@@ -288,7 +292,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    flexDirection: "column"
+    
     // backgroundColor: 'yellow'
   },
   innerView1: {

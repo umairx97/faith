@@ -5,6 +5,7 @@ import AppSlider from '../Slider/Slider';
 import {
   StatusBar
 } from 'react-native';
+console.disableYellowBox = true;
 export default class MyappSplash extends Component
 {
 
@@ -104,8 +105,7 @@ const styles = StyleSheet.create(
     {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0
+        alignItems: 'center'
     },
 
     SplashScreen_RootView:
