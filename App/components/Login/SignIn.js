@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Image,
   Alert,
+  TouchableOpacity,
   Platform,
 } from "react-native";
 import { RkButton, RkText } from "react-native-ui-kitten";
@@ -54,7 +55,13 @@ export default class SignIn extends Component {
               <TextInput onChangeText={value => this.setState({ password: value })}
                style={styles.textInput} />
             </View>
-            <Text style={styles.forgetPwd}>Forgot Password</Text>
+             < TouchableOpacity
+onPress = {
+  () => {
+    Actions.forgetPass();
+  }
+} >
+            <Text style={styles.forgetPwd}>Forgot Password</Text></TouchableOpacity>
             <View style={{ marginTop: "4%" }}>
               <RkButton
                 rkType="rounded"

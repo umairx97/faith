@@ -1,4 +1,4 @@
-#Tue Dec 04 02:10:53 PST 2018
-base.0=/Users/Tech/faithmeetslove-app copy/android/app/build/intermediates/transforms/dexMerger/debug/0
+#Tue Dec 04 17:45:34 IST 2018
+base.0=/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

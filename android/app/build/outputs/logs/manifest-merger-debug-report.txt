@@ -1,165 +1,183 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-MERGED from [:react-native-vector-icons] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-linear-gradient] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-linear-gradient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-i18n] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-i18n/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-gesture-handler] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:2:1-15:12
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/32d9aba2564565ca484241dae334b7b2/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/664aa423e083e72d5861f78423e02e25/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/28c71e98e401d19e5be7b040af4e9d15/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7a30f6e7956d7990f5cb0793fd5f7454/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/fc9f0ac03753b00be0deb65ac29d9af3/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/c86540437d1235b935656a48d12b8a18/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/23606ba490407e2eaf818b64d66f4ba4/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/3f481f2401fd9ff69c56429d76d59d60/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/c3bb332c74abc78c8ea1c2f02905b0c4/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/22e06fa5d29284444a382cd1893670f5/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/6de8154074355f1fe5f8b52e73c72887/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/f8ae8e5ab0066b48730265ab478b293f/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/0a7e1422e9912d90f0f6eb17ada2fa6d/AndroidManifest.xml:2:1-13:12
-MERGED from [org.webkit:android-jsc:r174650] /Users/Tech/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/7c85c7b93f6600b312fd543713123b0b/AndroidManifest.xml:1:1-3:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/8a8b1970f6e3e31224fe1c7d6d597db9/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/af4d6a4510958058177065899bfba67e/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/f808f740454156d4ac149728ce23465b/AndroidManifest.xml:2:1-9:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/97de0af11a528002299691f997612671/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/b181b0e65305dfcaf80afd878d5e1f04/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-snackbar] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-snackbar/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-vector-icons] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-linear-gradient] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-i18n] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-gesture-handler] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:2:1-15:12
+MERGED from [com.android.support:design:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/f4f88bbbbc81dbc53dfe9b6585cf5539/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/cd2959e36daacf6bc488c7638cb1c65e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/801893f7dc1f6cb7c536a0a8d441c90a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/39ab0c7f578228cc7d749b63d8e5aea7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/883736be62a00b688ada2608bfc94cb8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/498a5922feed1fde4b7e34423e6ab54a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/8152e7152903ee33bcd42bbcb0f3d50c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/f1c6c66243651f9e3a1b598fef0d8934/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/00480a45f54f09e5bd5c433489e5f6c5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/2366f1aa44c8b332b55f371404fce08b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/b3b76b1d702cdca6d466c44d900082aa/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/d9dfc74305e81313befe0b40ef13d304/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/99149ecbcd1d8b3ef082bf761aafab0d/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/4719f74e9c82a7f7974d89bc4b5ab849/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/89f51a377102864ae38937959a4db14d/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/98fd3777674307e5e34c73b6e77a910a/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/08df2121ef2f7089312d5881c767be51/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/bd4d93a866e8516725f6082ff982b887/AndroidManifest.xml:2:1-13:12
+MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/fbdc139b55783cd6db3eb5edcd9e4227/AndroidManifest.xml:1:1-3:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/7a12ac186f366f5b693a47df6a97b500/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/eebbbb8b2b642c4445d8f62595ca3475/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/cafbf26683c5692e5ddf437206927dcf/AndroidManifest.xml:2:1-9:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/86ff08d39e16c894c09ba35920ef7644/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/e844d6800f8f0c8ff1d6c351eec6476d/AndroidManifest.xml:17:1-22:12
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
 	package
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:2:5-33
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:2:5-33
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:4:5-67
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:4:5-67
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:4:22-64
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:5:5-77
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:11:5-78
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:5:5-77
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:11:5-78
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:5:22-75
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:5:22-75
 application
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:7:5-24:19
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:13:5-20
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:13:5-20
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/0a7e1422e9912d90f0f6eb17ada2fa6d/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/0a7e1422e9912d90f0f6eb17ada2fa6d/AndroidManifest.xml:11:5-20
-MERGED from [org.webkit:android-jsc:r174650] /Users/Tech/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/7c85c7b93f6600b312fd543713123b0b/AndroidManifest.xml:2:3-17
-MERGED from [org.webkit:android-jsc:r174650] /Users/Tech/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/7c85c7b93f6600b312fd543713123b0b/AndroidManifest.xml:2:3-17
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:7:5-24:19
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/bd4d93a866e8516725f6082ff982b887/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/bd4d93a866e8516725f6082ff982b887/AndroidManifest.xml:11:5-20
+MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/fbdc139b55783cd6db3eb5edcd9e4227/AndroidManifest.xml:2:3-17
+MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/fbdc139b55783cd6db3eb5edcd9e4227/AndroidManifest.xml:2:3-17
 	android:label
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:9:7-39
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:9:7-39
 	android:icon
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:10:7-34
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:10:7-41
 	android:allowBackup
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:11:7-34
 	android:theme
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:12:7-38
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:8:7-38
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:8:7-38
 activity#com.faithmeetslove.MainActivity
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:13:7-22:18
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:13:7-22:18
 	android:label
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:15:9-41
 	android:windowSoftInputMode
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:17:9-51
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:17:9-51
 	android:configChanges
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:16:9-79
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:16:9-79
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:14:9-37
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:14:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:18:9-21:25
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:18:9-21:25
 action#android.intent.action.MAIN
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:19:13-65
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:19:13-65
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:19:21-62
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:19:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:20:13-73
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:20:13-73
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:20:23-70
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:20:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:23:7-84
+ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:23:7-84
 	android:name
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:23:17-81
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:23:17-81
 uses-sdk
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-MERGED from [:react-native-vector-icons] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-linear-gradient] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-linear-gradient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-linear-gradient] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-linear-gradient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-i18n] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-i18n/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-i18n] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-i18n/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-gesture-handler] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /Users/Tech/faithmeetslove-app copy/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/37fb7e09f8b1680dacd5710b579222f5/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/32d9aba2564565ca484241dae334b7b2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/32d9aba2564565ca484241dae334b7b2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/664aa423e083e72d5861f78423e02e25/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/664aa423e083e72d5861f78423e02e25/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/28c71e98e401d19e5be7b040af4e9d15/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/28c71e98e401d19e5be7b040af4e9d15/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7a30f6e7956d7990f5cb0793fd5f7454/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7a30f6e7956d7990f5cb0793fd5f7454/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/fc9f0ac03753b00be0deb65ac29d9af3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/fc9f0ac03753b00be0deb65ac29d9af3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/c86540437d1235b935656a48d12b8a18/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/c86540437d1235b935656a48d12b8a18/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/23606ba490407e2eaf818b64d66f4ba4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/23606ba490407e2eaf818b64d66f4ba4/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/3f481f2401fd9ff69c56429d76d59d60/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/3f481f2401fd9ff69c56429d76d59d60/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/c3bb332c74abc78c8ea1c2f02905b0c4/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/c3bb332c74abc78c8ea1c2f02905b0c4/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/22e06fa5d29284444a382cd1893670f5/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/22e06fa5d29284444a382cd1893670f5/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/6de8154074355f1fe5f8b52e73c72887/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/6de8154074355f1fe5f8b52e73c72887/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/f8ae8e5ab0066b48730265ab478b293f/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/f8ae8e5ab0066b48730265ab478b293f/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/0a7e1422e9912d90f0f6eb17ada2fa6d/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/Tech/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/0a7e1422e9912d90f0f6eb17ada2fa6d/AndroidManifest.xml:7:5-9:41
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/8a8b1970f6e3e31224fe1c7d6d597db9/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/8a8b1970f6e3e31224fe1c7d6d597db9/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/af4d6a4510958058177065899bfba67e/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/af4d6a4510958058177065899bfba67e/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/f808f740454156d4ac149728ce23465b/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/f808f740454156d4ac149728ce23465b/AndroidManifest.xml:5:5-7:41
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/97de0af11a528002299691f997612671/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/97de0af11a528002299691f997612671/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/b181b0e65305dfcaf80afd878d5e1f04/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /Users/Tech/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/b181b0e65305dfcaf80afd878d5e1f04/AndroidManifest.xml:20:5-44
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-snackbar] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-snackbar/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-snackbar] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-snackbar/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-i18n] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-i18n] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-gesture-handler] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/cf19b7bf3aaae7fa512149b39921dd3b/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:design:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/f4f88bbbbc81dbc53dfe9b6585cf5539/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/f4f88bbbbc81dbc53dfe9b6585cf5539/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/cd2959e36daacf6bc488c7638cb1c65e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/cd2959e36daacf6bc488c7638cb1c65e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/801893f7dc1f6cb7c536a0a8d441c90a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/801893f7dc1f6cb7c536a0a8d441c90a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/39ab0c7f578228cc7d749b63d8e5aea7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/39ab0c7f578228cc7d749b63d8e5aea7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/883736be62a00b688ada2608bfc94cb8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/883736be62a00b688ada2608bfc94cb8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/498a5922feed1fde4b7e34423e6ab54a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/498a5922feed1fde4b7e34423e6ab54a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/8152e7152903ee33bcd42bbcb0f3d50c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/8152e7152903ee33bcd42bbcb0f3d50c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/f1c6c66243651f9e3a1b598fef0d8934/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/f1c6c66243651f9e3a1b598fef0d8934/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/00480a45f54f09e5bd5c433489e5f6c5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/00480a45f54f09e5bd5c433489e5f6c5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/2366f1aa44c8b332b55f371404fce08b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/2366f1aa44c8b332b55f371404fce08b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/b3b76b1d702cdca6d466c44d900082aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/b3b76b1d702cdca6d466c44d900082aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/d9dfc74305e81313befe0b40ef13d304/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/d9dfc74305e81313befe0b40ef13d304/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/99149ecbcd1d8b3ef082bf761aafab0d/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/99149ecbcd1d8b3ef082bf761aafab0d/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/4719f74e9c82a7f7974d89bc4b5ab849/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/4719f74e9c82a7f7974d89bc4b5ab849/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/89f51a377102864ae38937959a4db14d/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/89f51a377102864ae38937959a4db14d/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/98fd3777674307e5e34c73b6e77a910a/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/98fd3777674307e5e34c73b6e77a910a/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/08df2121ef2f7089312d5881c767be51/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/08df2121ef2f7089312d5881c767be51/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/bd4d93a866e8516725f6082ff982b887/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/bd4d93a866e8516725f6082ff982b887/AndroidManifest.xml:7:5-9:41
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/7a12ac186f366f5b693a47df6a97b500/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/7a12ac186f366f5b693a47df6a97b500/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/eebbbb8b2b642c4445d8f62595ca3475/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/eebbbb8b2b642c4445d8f62595ca3475/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/cafbf26683c5692e5ddf437206927dcf/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/cafbf26683c5692e5ddf437206927dcf/AndroidManifest.xml:5:5-7:41
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/86ff08d39e16c894c09ba35920ef7644/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/86ff08d39e16c894c09ba35920ef7644/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/e844d6800f8f0c8ff1d6c351eec6476d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/e844d6800f8f0c8ff1d6c351eec6476d/AndroidManifest.xml:20:5-44
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/Tech/faithmeetslove-app copy/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE

@@ -57,7 +57,7 @@ export default class AppSlider extends React.Component {
       return <AppSlider />;
     } else {
       return (
-        <AppIntroSlider
+        <AppIntroSlider 
           slides={slides}
           showSkipButton={true}
           onSkip={() => {
