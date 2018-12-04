@@ -86,9 +86,6 @@ export default class Login extends React.Component {
               Login
             </RkButton>
           </View>
-          <Text style={styles.byClickingStartYText}>
-            By clicking start, you agree to our Terms and Conditions{" "}
-          </Text>
         </View>
       </View>
     );
@@ -130,7 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
     justifyContent: "center",
-    width: 200,
+    width: 300,
     height: 48,
     marginBottom: 40,
     alignSelf: "center",
@@ -154,7 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 200,
+    width: 300,
     height: 48,
     marginBottom: 40,
     alignSelf: "center"

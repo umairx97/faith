@@ -149,7 +149,7 @@ export default class SignUp extends Component {
             }
           }>
             <Text style={styles.formInput}>Email</Text>
-            <TextInput placeholder="Please enter your emailID"
+            <TextInput placeholder="Please enter your email"
               style={
                 styles.textInput
               } />
