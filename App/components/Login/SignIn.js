@@ -45,14 +45,16 @@ export default class SignIn extends Component {
           <View style={styles.loginForm}>
             <View style={styles.formInput}>
               <Text>Username</Text>
-              <TextInput onChangeText={value => this.setState({ email: value })}
+              <TextInput placeholder="Please enter your email"
+              onChangeText={value => this.setState({ email: value })}
               returnKeyLabel = {"next"}
               onChangeText={(text) => this.setState({email:text})}
                style={styles.textInput} />
             </View>
             <View style={styles.formInput}>
               <Text>Password</Text>
-              <TextInput onChangeText={value => this.setState({ password: value })}
+              <TextInput placeholder="Please enter your password"
+              onChangeText={value => this.setState({ password: value })}
                style={styles.textInput} />
             </View>
              < TouchableOpacity
