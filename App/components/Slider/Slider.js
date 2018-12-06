@@ -1,5 +1,8 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import {
+  StyleSheet,
+  View
+} from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { Actions } from "react-native-router-flux";
 const styles = StyleSheet.create({
@@ -56,7 +59,12 @@ export default class AppSlider extends React.Component {
     if (this.state.showRealApp) {
       return <AppSlider />;
     } else {
-      return (
+      return ( <View style = {
+            {
+              flex: 1,
+              backgroundColor: "#22bcb5"
+            }
+          }>
         <AppIntroSlider 
           slides={slides}
           showSkipButton={true}
@@ -67,6 +75,7 @@ export default class AppSlider extends React.Component {
             Actions.login();
           }}
         />
+        </View>
       );
     }
   }
