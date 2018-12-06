@@ -107,6 +107,7 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    
     splits {
         abi {
             reset()
@@ -115,10 +116,21 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -137,6 +149,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-immersive')
     compile project(':react-native-snackbar')
     compile project(':react-native-vector-icons')
     compile project(':react-native-linear-gradient')

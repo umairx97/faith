@@ -16,7 +16,7 @@ const slides = [
     text: "Description.\nSay something cool",
     image: require("../../../assets/images/1.png"),
     imageStyle: styles.image,
-    backgroundColor: "#59b2ab"
+    backgroundColor: "#22bcb5"
   },
   {
     key: "somethun-dos",
@@ -24,7 +24,7 @@ const slides = [
     text: "Other cool stuff",
     image: require("../../../assets/images/2.jpg"),
     imageStyle: styles.image,
-    backgroundColor: "#febe29"
+    backgroundColor: "#22bcb5"
   },
   {
     key: "somethun1",

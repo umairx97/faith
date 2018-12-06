@@ -68,7 +68,8 @@ export default class SignUp extends Component {
   };
 
   render() {
-    return ( < ScrollView contentContainerStyle = {
+    return ( 
+    < ScrollView contentContainerStyle = {
           {
             flexGrow: 1,
             justifyContent: 'center',
@@ -83,14 +84,14 @@ export default class SignUp extends Component {
             padding: "10%"
           }
         }>
-          <View style={
+          {/* <View style={
             {
               flex: 1,
               flexDirection: "column",
               justifyContent: "center",
               width: "100%"
             }
-          } />
+          } /> */}
           <View style={
             {
               flex: 1,
@@ -274,7 +275,92 @@ export default class SignUp extends Component {
                 () => { }
               }>Register</RkButton>
           </View>
+          <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{
+                    backgroundColor: "black",
+                    height: 2,
+                    flex: 1,
+                    alignSelf: "center",
+                    marginLeft: "12%",
+                    marginTop: "4%"
+                  }}
+                />
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    paddingHorizontal: 5,
+                    fontSize: 14,
+                    marginTop: "4%"
+                  }}
+                >
+                  Or SignUp With
+                </Text>
+                <View
+                  style={{
+                    backgroundColor: "black",
+                    height: 2,
+                    flex: 1,
+                    alignSelf: "center",
+                    marginRight: "12%",
+                    marginTop: "4%"
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+marginBottom:"15%",
+                  marginTop: "5%"
+                }}
+              >
+                <View style={{ flex: 1 }}>
+                  <RkButton
+                    rkType="rounded"
+                    style={[
+                      {
+                        width: "100%",
+                        marginRight: "2%",
+                        marginVertical: 8
+                      }
+                    ]}
+                  >
+                    <Icon
+                      style={[
+                        styles.icon,
+                        { marginHorizontal: 16, fontSize: 21 }
+                      ]}
+                      name="facebook"
+                    />
+                    <RkText rkType="caption">Facebook</RkText>
+                  </RkButton>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <RkButton
+                    rkType="rounded"
+                    style={[
+                      {
+                        width: "100%",
+                        marginLeft: "2%",
+                        marginVertical: 8,
+                        backgroundColor: '#dd4b39'
+                      }
+                    ]}
+                  >
+                    <Icon
+                      style={[
+                        styles.icon,
+                        { marginHorizontal: 16, fontSize: 21 }
+                      ]}
+                      name="google"
+                    />
+                    <RkText rkType="caption" >Google</RkText>
+                  </RkButton>
+                </View>
+              </View>
+            
         </View>
+
       </View>
     </ScrollView>
 
