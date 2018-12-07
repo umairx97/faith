@@ -7,8 +7,9 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import { Actions } from "react-native-router-flux";
 const styles = StyleSheet.create({
   image: {
-    width: 320,
-    height: 320
+    width: 350,
+    height: 350,
+    borderRadius: 150/1
   }
 });
 
