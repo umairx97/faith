@@ -10,8 +10,8 @@ import MyappSplash from "./App/components/SplashScreen/MyappSplash";
 export default class App extends Component {
   constructor(){
     super();
-    Immersive.on();
-    Immersive.setImmersive(true);
+    // Immersive.on();
+    // Immersive.setImmersive(true);
   }
   render() {
     return <Route />;
