@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Tech/Desktop/faithmeetsloveapp copy/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-vi/values-vi.xml",
+            "outputFile": "/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-vi/values-vi.xml",
             "map": [
                 {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8703765da980bb92503e70c6ee2a54b5/res/values-vi/values-vi.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,219,327,436,520,623,742,819,896,980,1084,1193,1294,1399,1513,1618,1775,1874",
-                        "endColumns": "113,107,108,83,102,118,76,76,83,103,108,100,104,113,104,156,98,83",
-                        "endOffsets": "214,322,431,515,618,737,814,891,975,1079,1188,1289,1394,1508,1613,1770,1869,1953"
-                    }
-                },
-                {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/250f25c695e7adde478eaa083e64f387/res/values-vi/values-vi.xml",
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2a33e4db3bd925bdbd1056289c7a8f06/res/values-vi/values-vi.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -28,6 +18,16 @@
                         "startOffsets": "1958",
                         "endColumns": "100",
                         "endOffsets": "2054"
+                    }
+                },
+                {
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8a4d3023b09165692947cbe7a3532afb/res/values-vi/values-vi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,219,327,436,520,623,742,819,896,980,1084,1193,1294,1399,1513,1618,1775,1874",
+                        "endColumns": "113,107,108,83,102,118,76,76,83,103,108,100,104,113,104,156,98,83",
+                        "endOffsets": "214,322,431,515,618,737,814,891,975,1079,1188,1289,1394,1508,1613,1770,1869,1953"
                     }
                 }
             ]

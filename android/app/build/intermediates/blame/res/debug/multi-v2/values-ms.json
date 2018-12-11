@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Tech/Desktop/faithmeetsloveapp copy/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ms/values-ms.xml",
+            "outputFile": "/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ms/values-ms.xml",
             "map": [
                 {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8703765da980bb92503e70c6ee2a54b5/res/values-ms/values-ms.xml",
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8a4d3023b09165692947cbe7a3532afb/res/values-ms/values-ms.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/250f25c695e7adde478eaa083e64f387/res/values-ms/values-ms.xml",
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2a33e4db3bd925bdbd1056289c7a8f06/res/values-ms/values-ms.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

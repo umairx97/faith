@@ -27,8 +27,10 @@ import RadioForm, {
   RadioButtonLabel
 } from "react-native-simple-radio-button";
 
+import firebase from "../FirebaseConfig/FirebaseConfig";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Moment from "moment";
+import { Actions } from "react-native-router-flux";
 
 var radio_props = [{
   label: "Male  ",
@@ -46,9 +48,91 @@ export default class SignUp extends Component {
       email: "",
       password: "",
       isDateTimePickerVisible: false,
-      dob: ""
+      dob: "",
+      _email: "",
+      _username: "",
+      _password: "",
+      _fullName: "",
+      _gender: "",
+      _dob: ""
     };
-  }
+  } 
+
+  _sendEmailVerification(){
+    firebase.auth().currentUser.sendEmailVerification().then(function() {
+    // Email sent.
+    Alert.alert(
+    'Success',
+    'Your account created successfully! Please check your email for verification',
+    [
+    {text: 'OK', onPress: () => {Actions.signIn()}},
+    ]
+    )
+    }, function(error) {
+    // An error happened.
+    });
+    }
+
+  _handleSignUp() {
+    const {
+    _fullName,
+    _username,
+    _email,
+    _password,
+    _dob,
+    _gender
+    } = this.state;
+    
+    firebase
+    .auth()
+    .signInWithEmailAndPassword(_email, _password)
+    .then(userData => {
+    //Alert.alert(userData.user.uid);
+    })
+    .catch(() => {
+    //Login was not successful, let's create a new account
+    firebase
+    .auth()
+    .createUserWithEmailAndPassword(_email, _password)
+    .then(userData => {
+    this._updateUserProfile(
+    userData.user.uid,
+    userData.user.email,
+    _username,
+    _fullName,
+    _gender,
+    _dob
+    );
+    })
+    .catch(error => {
+    Alert.alert("Authentication failed." + error.toString());
+    });
+    });
+    }
+    _updateUserProfile(the_uid, _email, _username, _fullName, _gender, _dob) {
+    firebase
+    .firestore()
+    .collection("Users")
+    .doc("faithInLove")
+    .collection("Registered")
+    .doc(the_uid)
+    .set({
+    uid: the_uid,
+    email: _email,
+    userName: _username,
+    fullName: _fullName,
+    gender: _gender,
+    user_Dob: _dob
+    })
+    .then(ref => {
+    // console.log(ref);
+    this._sendEmailVerification();
+    })
+    .catch(error => {
+    Alert.alert("fail" + error.toString());
+    });
+    }
+
   _showDateTimePicker = () => this.setState({
     isDateTimePickerVisible: true
   });
@@ -60,7 +144,8 @@ export default class SignUp extends Component {
     const NewDate = Moment(date).format("DD-MM-YYYY");
     this._hideDateTimePicker();
     this.setState({
-      dob: NewDate
+      dob: NewDate,
+      _dob: NewDate,
     });
   };
   onClickListener = viewId => {
@@ -123,7 +208,7 @@ export default class SignUp extends Component {
             }
           }>
             <Text>Full Name</Text>
-            <TextInput placeholder="Please enter your name"
+            <TextInput onChangeText={text => this.setState({ _fullName: text })} placeholder="Please enter your name"
               style={
                 styles.textInput
               }
@@ -137,7 +222,7 @@ export default class SignUp extends Component {
             }
           }>
             <Text style={styles.formInput}> Username</Text>
-            <TextInput placeholder="Please enter your username"
+            <TextInput onChangeText={text => this.setState({ _username: text })} placeholder="Please enter your username"
               style={
                 styles.textInput
               } />
@@ -150,7 +235,8 @@ export default class SignUp extends Component {
             }
           }>
             <Text style={styles.formInput}>Email</Text>
-            <TextInput placeholder="Please enter your email"
+            <TextInput onChangeText={text => this.setState({ _email: text })} 
+            placeholder="Please enter your email"
               style={
                 styles.textInput
               } />
@@ -163,7 +249,7 @@ export default class SignUp extends Component {
             }
           }>
             <Text style={styles.formInput}>Password</Text>
-            <TextInput secureTextEntry={
+            <TextInput onChangeText={text => this.setState({ _password: text })} secureTextEntry={
               true
             }
               placeholder="Please enter your Password"
@@ -194,12 +280,10 @@ export default class SignUp extends Component {
               value={
                 this.state.dob
               }
-              onChangeText={
-                value => this.saveKey(value)
-              }
+            
               onChangeText={
                 value => this.setState({
-                  value
+                  _dob:value
                 })
               }
               onFocus={
@@ -254,7 +338,7 @@ export default class SignUp extends Component {
               onPress={
                 value => {
                   this.setState({
-                    value: value
+                    _gender: value
                   });
                 }
               } />
@@ -272,7 +356,7 @@ export default class SignUp extends Component {
                 styles.googleButton
               }
               onPress={
-                () => { }
+                () => {this._handleSignUp();}
               }>Register</RkButton>
           </View>
           <View style={{ flexDirection: "row" }}>

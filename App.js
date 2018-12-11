@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import Route from "./App/components/routes/Routes";
-import {
-  Immersive
-} from "react-native-immersive";
+
 
 
 import MyappSplash from "./App/components/SplashScreen/MyappSplash";

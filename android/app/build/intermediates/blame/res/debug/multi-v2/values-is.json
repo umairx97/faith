@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Tech/Desktop/faithmeetsloveapp copy/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-is/values-is.xml",
+            "outputFile": "/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-is/values-is.xml",
             "map": [
                 {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8703765da980bb92503e70c6ee2a54b5/res/values-is/values-is.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,205,302,414,499,600,714,794,874,955,1065,1173,1271,1380,1479,1582,1737,1835",
-                        "endColumns": "99,96,111,84,100,113,79,79,80,109,107,97,108,98,102,154,97,80",
-                        "endOffsets": "200,297,409,494,595,709,789,869,950,1060,1168,1266,1375,1474,1577,1732,1830,1911"
-                    }
-                },
-                {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/250f25c695e7adde478eaa083e64f387/res/values-is/values-is.xml",
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2a33e4db3bd925bdbd1056289c7a8f06/res/values-is/values-is.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -28,6 +18,16 @@
                         "startOffsets": "1916",
                         "endColumns": "100",
                         "endOffsets": "2012"
+                    }
+                },
+                {
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8a4d3023b09165692947cbe7a3532afb/res/values-is/values-is.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,205,302,414,499,600,714,794,874,955,1065,1173,1271,1380,1479,1582,1737,1835",
+                        "endColumns": "99,96,111,84,100,113,79,79,80,109,107,97,108,98,102,154,97,80",
+                        "endOffsets": "200,297,409,494,595,709,789,869,950,1060,1168,1266,1375,1474,1577,1732,1830,1911"
                     }
                 }
             ]

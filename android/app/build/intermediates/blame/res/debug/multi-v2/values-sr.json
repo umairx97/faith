@@ -1,10 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Tech/Desktop/faithmeetsloveapp copy/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sr/values-sr.xml",
+            "outputFile": "/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sr/values-sr.xml",
             "map": [
                 {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/250f25c695e7adde478eaa083e64f387/res/values-sr/values-sr.xml",
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8a4d3023b09165692947cbe7a3532afb/res/values-sr/values-sr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,214,317,423,509,613,731,812,892,980,1085,1193,1294,1398,1506,1607,1774,1871",
+                        "endColumns": "108,102,105,85,103,117,80,79,87,104,107,100,103,107,100,166,96,83",
+                        "endOffsets": "209,312,418,504,608,726,807,887,975,1080,1188,1289,1393,1501,1602,1769,1866,1950"
+                    }
+                },
+                {
+                    "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2a33e4db3bd925bdbd1056289c7a8f06/res/values-sr/values-sr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -18,16 +28,6 @@
                         "startOffsets": "1955",
                         "endColumns": "100",
                         "endOffsets": "2051"
-                    }
-                },
-                {
-                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8703765da980bb92503e70c6ee2a54b5/res/values-sr/values-sr.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,214,317,423,509,613,731,812,892,980,1085,1193,1294,1398,1506,1607,1774,1871",
-                        "endColumns": "108,102,105,85,103,117,80,79,87,104,107,100,103,107,100,166,96,83",
-                        "endOffsets": "209,312,418,504,608,726,807,887,975,1080,1188,1289,1393,1501,1602,1769,1866,1950"
                     }
                 }
             ]

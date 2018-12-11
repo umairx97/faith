@@ -149,8 +149,7 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-immersive')
-    compile project(':react-native-snackbar')
+   
     compile project(':react-native-vector-icons')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-i18n')
