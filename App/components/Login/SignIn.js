@@ -23,6 +23,11 @@ import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
 import { RkButton, RkText } from "react-native-ui-kitten";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes
+} from "react-native-google-signin";
 
 const MyInput = compose(
   makeInputGreatAgain,
@@ -45,8 +50,35 @@ export default class SignIn extends Component {
       email: "",
       password: ""
     };
+    GoogleSignin.configure({
+      androidClientId:
+      "314942341001-hnab3nmuooc67mrbkfkef5551eekfps8.apps.googleusercontent.com",
+      iosClientId:
+      "314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb.apps.googleusercontent.com"
+      });
   }
-
+  async _onGoogleLogin() {
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    GoogleSignin.signIn()
+    .then(data => {
+    //Alert.alert("token " + data.user.idToken);
+    // Create a new Firebase credential with the token
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+    data.idToken,
+    data.accessToken
+    );
+    // Login with the credential
+    return firebase.auth().signInWithCredential(credential);
+    })
+    .then(user => {
+    Actions.home();
+    })
+    .catch(error => {
+    const { code, message } = error;
+   // Alert.alert(message + " Errorcode " + code);
+    });
+  
+    }
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
@@ -65,7 +97,7 @@ export default class SignIn extends Component {
         {
        Actions.home();
          }
-        // Alert.alert(userData.user.uid);
+        Alert.alert(userData.user.uid);
       })
       .catch(error => {
         //Login was not successful, let's create a new account
@@ -80,7 +112,7 @@ export default class SignIn extends Component {
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
         render={props => (
-          <ScrollView contentContainerStyle={styles.container}>
+          <ScrollView keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag' contentContainerStyle={styles.container}>
             <Form>
               <View>
                 <Image
@@ -190,6 +222,9 @@ export default class SignIn extends Component {
                       </View>
                       <View style={{ flex: 1 }}>
                         <RkButton
+                        onPress={() => {
+                        this._onGoogleLogin();
+                      }}
                           rkType="rounded"
                           style={[
                             {
@@ -207,7 +242,7 @@ export default class SignIn extends Component {
                             ]}
                             name="google"
                           />
-                          <RkText rkType="caption">Google</RkText>
+                          <RkText  rkType="caption">Google</RkText>
                         </RkButton>
                       </View>
                     </View>

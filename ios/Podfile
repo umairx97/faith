@@ -1,0 +1,9 @@
+target 'FaithMeetsLove' do
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+
+pod 'GoogleSignIn'
+pod 'Firebase/Core'
+
+end

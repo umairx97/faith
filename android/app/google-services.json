@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "314942341001",
+    "firebase_url": "https://faith-meets.firebaseio.com",
+    "project_id": "faith-meets",
+    "storage_bucket": "faith-meets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314942341001:android:7d14d1bd0e067f92",
+        "android_client_info": {
+          "package_name": "com.faithmeetslove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314942341001-hnab3nmuooc67mrbkfkef5551eekfps8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetslove",
+            "certificate_hash": "f97079d1ca6f00a458f39567309897f57b9a7cb1"
+          }
+        },
+        {
+          "client_id": "314942341001-2ns5pirau67kc1sjm7cau4geusoskejf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetslove",
+            "certificate_hash": "bdf99421e8cf9d430e26bb70d6fbf15944256a8f"
+          }
+        },
+        {
+          "client_id": "314942341001-g6uhf85uvnm0qf8msvep0fjrvad5h8dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs7Ar6PsmlJv8fw-Df_tnAfdQ8Is4B-Is"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314942341001-g6uhf85uvnm0qf8msvep0fjrvad5h8dd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FaithMeetsLove"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

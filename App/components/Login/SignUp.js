@@ -154,7 +154,7 @@ export default class SignUp extends Component {
 
   render() {
     return ( 
-    < ScrollView contentContainerStyle = {
+    < ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='always' contentContainerStyle = {
           {
             flexGrow: 1,
             justifyContent: 'center',

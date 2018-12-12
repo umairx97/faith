@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
 #import <React/RCTRootView.h>
 
 @implementation AppDelegate

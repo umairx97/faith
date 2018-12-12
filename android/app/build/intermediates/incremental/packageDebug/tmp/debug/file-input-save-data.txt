@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Dec 07 10:17:27 IST 2018
+#Tue Dec 11 16:19:36 IST 2018
 5.base=/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/merged_assets/debug/mergeDebugAssets/out
 22.path=fonts/Entypo.ttf
