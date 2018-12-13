@@ -9,6 +9,7 @@ import {
   Button,
   TouchableHighlight,
   TouchableOpacity,
+  KeyboardAvoidingView,
   Image,
   Alert,
   Platform
@@ -36,7 +37,14 @@ import firebase from "../FirebaseConfig/FirebaseConfig";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Moment from "moment";
 import { Actions } from "react-native-router-flux";
-
+import makeInputGreatAgain, {
+  withNextInputAutoFocusForm,
+  withNextInputAutoFocusInput
+} from "react-native-formik";
+import MaterialTextInput from "../OwnComponents/MaterialTextInput";
+import { compose } from "recompose";
+import * as Yup from "yup";
+import { Formik } from "formik";
 var radio_props = [{
   label: "Male  ",
   value: 0
@@ -46,6 +54,20 @@ var radio_props = [{
   value: 1
 }
 ];
+const MyInput = compose(
+  makeInputGreatAgain,
+  withNextInputAutoFocusInput
+)(MaterialTextInput);
+const Form = withNextInputAutoFocusForm(View);
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("please! email?")
+    .email("well that's not an email"),
+  password: Yup.string()
+    .required()
+    .min(2, "pretty sure this will be hacked")
+});
+
 export default class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -217,7 +239,11 @@ export default class SignUp extends Component {
 
 
   render() {
-    return ( 
+    return ( <KeyboardAvoidingView>
+    <Formik
+       onSubmit={values => console.log(values)}
+       validationSchema={validationSchema}
+       render={props => (
     < ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='always' contentContainerStyle = {
           {
             flexGrow: 1,
@@ -226,6 +252,7 @@ export default class SignUp extends Component {
           }
         }
      >
+      <Form>
       <View>
         <View style={
           {
@@ -458,7 +485,7 @@ export default class SignUp extends Component {
               <View
                 style={{
                   flexDirection: "row",
-marginBottom:"15%",
+                  marginBottom:"15%",
                   marginTop: "5%"
                 }}
               >
@@ -513,9 +540,11 @@ marginBottom:"15%",
         </View>
 
       </View>
+      </Form>
     </ScrollView>
-
-      
+ )}
+ />
+ </KeyboardAvoidingView>  
     );
   }
 }

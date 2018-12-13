@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Platform,
   Image,
+  KeyboardAvoidingView,
   Alert,
   ScrollView
 } from "react-native";
@@ -108,7 +109,8 @@ export default class SignIn extends Component {
 
   render() {
     return (
-      <Formik
+      <KeyboardAvoidingView behavior="padding">
+     <Formik
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
         render={props => (
@@ -121,11 +123,10 @@ export default class SignIn extends Component {
                 />
                 <View style={styles.loginForm}>
                   <View style={styles.formInput}>
-                    <Text>Username</Text>
-                    <MyInput
-                      name="email"
+                    <Text>Email</Text>
+                    <TextInput
+                      
                       placeholder="Please enter your email"
-                      type="email"
                       onChangeText={value => this.setState({ email: value })}
                       returnKeyLabel={"next"}
                       onChangeText={text => this.setState({ email: text })}
@@ -134,9 +135,7 @@ export default class SignIn extends Component {
                   </View>
                   <View style={styles.formInput}>
                     <Text>Password</Text>
-                    <MyInput
-                      name="password"
-                      type="password"
+                    <TextInput
                       placeholder="Please enter your password"
                       onChangeText={value => this.setState({ password: value })}
                       style={styles.textInput}
@@ -253,6 +252,7 @@ export default class SignIn extends Component {
           </ScrollView>
         )}
       />
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -298,7 +298,10 @@ const styles = StyleSheet.create({
   textInput: {
     width: "100%",
     color: "#000000",
-
+    borderColor: "red",
+    marginTop: Platform.OS === 'ios' ? 10+"%" : 0,
+    borderBottomWidth: 1
+ 
     // marginTop: Platform.OS === "ios" ? 10 + "%" : 0
   },
   formInput: {
