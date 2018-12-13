@@ -2,12 +2,12 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 
 const config = {
-  apiKey: "AIzaSyCICR1Xph4oS4Rk0Ew0-XkYrkK_F-yzIPo",
-  authDomain: "faith-meets.firebaseapp.com",
-  databaseURL: "https://faith-meets.firebaseio.com",
-  projectId: "faith-meets",
-  storageBucket: "faith-meets.appspot.com",
-  messagingSenderId: "314942341001"
+  apiKey: "AIzaSyC9c5anTI82-EuBeHFuVWXE2zpIsht-DgE",
+    authDomain: "faithmeetslove-d4d6a.firebaseapp.com",
+    databaseURL: "https://faithmeetslove-d4d6a.firebaseio.com",
+    projectId: "faithmeetslove-d4d6a",
+    storageBucket: "faithmeetslove-d4d6a.appspot.com",
+    messagingSenderId: "390674890211"
 };
 const settings = { timestampsInSnapshots: true };
 firebase.initializeApp(config);

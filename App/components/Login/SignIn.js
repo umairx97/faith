@@ -52,9 +52,9 @@ export default class SignIn extends Component {
     };
     GoogleSignin.configure({
       androidClientId:
-      "314942341001-hnab3nmuooc67mrbkfkef5551eekfps8.apps.googleusercontent.com",
+      "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
       iosClientId:
-      "314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb.apps.googleusercontent.com"
+      "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
       });
   }
   async _onGoogleLogin() {
@@ -97,11 +97,11 @@ export default class SignIn extends Component {
         {
        Actions.home();
          }
-        Alert.alert(userData.user.uid);
+        //Alert.alert(userData.user.uid);
       })
       .catch(error => {
         //Login was not successful, let's create a new account
-        Alert.alert("failed " + error.toString());
+        Alert.alert("Invalid credentials");
       });
     
   }

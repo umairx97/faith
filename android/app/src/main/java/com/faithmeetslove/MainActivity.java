@@ -1,4 +1,4 @@
-package com.faithmeetslove;
+package com.faithmeetsloves;
 
 import com.facebook.react.ReactActivity;
 

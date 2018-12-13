@@ -208,7 +208,7 @@ export default class Discover extends React.Component {
           onSwipedLeft={() => console.log('onSwipedLeft')}
         >
           <Card style={[styles.card, styles.card1]}><Text style={styles.label}>A</Text></Card>
-          <Card style={[styles.card, styles.card2]} onSwipedLeft={() => alert('onSwipedLeft')}><Text style={styles.label}>B</Text></Card>
+          <Card style={[styles.card, styles.card2]}><Text style={styles.label}>B</Text></Card>
           <Card style={[styles.card, styles.card1]}><Image source={require('../../../assets/images/photos.png')} resizeMode={'contain'} /></Card>
           <Card style={[styles.card, styles.card2]}><Image source={require('../../../assets/images/rectangle-3.png')} resizeMode={'contain'} /></Card>
           <Card style={[styles.card, styles.card1]}><Text style={styles.label}>E</Text></Card>

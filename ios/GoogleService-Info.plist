@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb.apps.googleusercontent.com</string>
+	<string>390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb</string>
+	<string>com.googleusercontent.apps.390674890211-kj16bik8bkkjemv872v9o2fi57irs95m</string>
 	<key>API_KEY</key>
-	<string>AIzaSyApPYdNGiPuZqey9i4KQd4HHl4JlVpqiyY</string>
+	<string>AIzaSyC-roQZVmdwRpHCfhvscVseNZnuGA46hmM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>314942341001</string>
+	<string>390674890211</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.FaithMeetsLove</string>
+	<string>org.reactjs.native.example.FaithMeetsLoves</string>
 	<key>PROJECT_ID</key>
-	<string>faith-meets</string>
+	<string>faithmeetslove-d4d6a</string>
 	<key>STORAGE_BUCKET</key>
-	<string>faith-meets.appspot.com</string>
+	<string>faithmeetslove-d4d6a.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:314942341001:ios:47eb564d65d01721</string>
+	<string>1:390674890211:ios:64eb1dd63119e022</string>
 	<key>DATABASE_URL</key>
-	<string>https://faith-meets.firebaseio.com</string>
+	<string>https://faithmeetslove-d4d6a.firebaseio.com</string>
 </dict>
 </plist>

@@ -41,7 +41,7 @@ INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/Androi
 INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
 	package
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:2:5-33
+		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:2:5-34
 		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -94,7 +94,7 @@ MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/t
 		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:12:7-38
 	android:name
 		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:8:7-38
-activity#com.faithmeetslove.MainActivity
+activity#com.faithmeetsloves.MainActivity
 ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:13:7-23:18
 	android:screenOrientation
 		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:17:9-45

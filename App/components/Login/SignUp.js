@@ -26,6 +26,11 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes
+} from "react-native-google-signin";
 
 import firebase from "../FirebaseConfig/FirebaseConfig";
 import DateTimePicker from "react-native-modal-datetime-picker";
@@ -56,6 +61,13 @@ export default class SignUp extends Component {
       _gender: "",
       _dob: ""
     };
+    GoogleSignin.configure({
+      androidClientId:
+      "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
+      iosClientId:
+      "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
+      });
+
   } 
 
   _sendEmailVerification(){
@@ -126,6 +138,7 @@ export default class SignUp extends Component {
     })
     .then(ref => {
     // console.log(ref);
+    //Alert.alert("firebase data save")
     this._sendEmailVerification();
     })
     .catch(error => {
@@ -151,6 +164,57 @@ export default class SignUp extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
+
+  async _onGoogleLogin() {
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    GoogleSignin.signIn()
+    .then(data => {
+    //Alert.alert("token " + data.user.idToken);
+    // Create a new Firebase credential with the token
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+    data.idToken,
+    data.accessToken
+    );
+    // Login with the credential
+    return firebase.auth().signInWithCredential(credential);
+    })
+    .then(user => {
+    Actions.home();
+    })
+    .catch(error => {
+    const { code, message } = error;
+   // Alert.alert(message + " Errorcode " + code);
+    });
+  
+    }
+  onClickListener = viewId => {
+    Alert.alert("Alert", "Button pressed " + viewId);
+  };
+  _onSubmit() {
+    const { email, password } = this.state;
+    
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(userData => {
+        if(userData.user.emailVerified==false)
+        {
+       Alert.alert("Please verify your email for login.");
+        }
+        else
+        {
+       Actions.home();
+         }
+        //Alert.alert(userData.user.uid);
+      })
+      .catch(error => {
+        //Login was not successful, let's create a new account
+        Alert.alert("Invalid credentials");
+      });
+    
+  }
+
+
 
   render() {
     return ( 
@@ -421,6 +485,9 @@ marginBottom:"15%",
                 </View>
                 <View style={{ flex: 1 }}>
                   <RkButton
+                   onPress={() => {
+                    this._onGoogleLogin();
+                  }}
                     rkType="rounded"
                     style={[
                       {

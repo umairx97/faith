@@ -26,20 +26,20 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.googleusercontent.apps.314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb</string>
+			<string>com.googleusercontent.apps.390674890211-kj16bik8bkkjemv872v9o2fi57irs95m</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.314942341001-7ljjecf1k5otickgf2ma24tgu83bqveb</string>
+				<string>com.googleusercontent.apps.390674890211-kj16bik8bkkjemv872v9o2fi57irs95m</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>org.reactjs.native.example.FaithMeetsLove</string>
+			<string>org.reactjs.native.example.FaithMeetsLoves</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>org.reactjs.native.example.FaithMeetsLove</string>
+				<string>org.reactjs.native.example.FaithMeetsLoves</string>
 			</array>
 		</dict>
 	</array>
