@@ -1,250 +1,250 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-MERGED from [:react-native-google-signin] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-vector-icons] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-linear-gradient] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-i18n] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-gesture-handler] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:17:1-39:12
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:2:1-15:12
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/3a4aab6aa8c6d85893acc0ad7c0c3640/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/33951695e0d2d536fe8da339da498446/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/ff9b1a2df572af95bc0e6f1dbd4cd59f/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/e74be9359c20ceeb79455791a1301a2b/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/422d66f0adda3c60f1338b6aaa0152fe/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/c1e7dcf9848211d523a4b64365940cf3/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/ea7646f0885c833adde0116d8fbd739b/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7ff0b877a27fa354fa39f7f6da2b664d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/e9e56c271f24ba93852594682cd93264/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e51a48f95ea9f82291d2d513b8fc2b9/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/9cde99f5a240312137dbefd7e820d2a3/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/e55d4823bd8acf6027c7bd1029ca2a0f/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/c678054f22b4d20f6c57d79d1b92a98c/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/79a1d6d0c84acb259ef9a49d8ba5b5ce/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/7aaf3a458b7979933dd6700e3c26a586/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db00cd169d30085af5becad4f9d4cabb/AndroidManifest.xml:2:1-13:12
-MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/8af08a48135b04436da270424b9126d7/AndroidManifest.xml:1:1-3:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/fc2b2d337d75468f9595f97b859d0e87/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/d04b0592b652cdd362ada4aa14508a95/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/57c325d918c8c20168252a6cb72f7885/AndroidManifest.xml:2:1-9:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c9714ff6a2de4872662f4a2e8145ee20/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/27b42bcc7eb86f00fea7a6199e12fc68/AndroidManifest.xml:17:1-22:12
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+MERGED from [:react-native-google-signin] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-google-signin\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-vector-icons] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-linear-gradient] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-linear-gradient\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-i18n] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-i18n\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-gesture-handler] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:17:1-39:12
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:2:1-15:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\959aa94b830452f0be13ebed83b19457\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-api-phone-16.0.0.aar\effb3e3bb6f1da6e17033e61380bb2b0\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-16.0.0.aar\009fff344978b8fd50dc5c633c546825\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\cadcaed4d76b947cfd1dab2b47bde0c7\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\976168aed7a8b656f2d506c700baa24d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\1848bc44ed4dc34fbc968df0ca224c49\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\94c2cb474c754ad33c7e23c94ba245c0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\0e9d8a5df3efb03172a510f57fed475b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\39d8cbd8a4c6b64fb29ad52ef8e31f76\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\d309164831ad6b571ec28484371a9aa8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\992a7db3aa3f301fabb953e2075d8018\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\a2a5dfa18d1f3cc27e5646f283867d7a\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\846ce9e5cbea23bd0844b179068b3ab7\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\4181cce68ccd01958790ebba050503d0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\e87b09192458128f03250c04d1174c2e\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.5.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\soloader-0.5.1.aar\4c3d5af71bc3deb1923f7aa813b98526\AndroidManifest.xml:2:1-13:12
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\android-jsc-r174650.aar\f950011f564b97d9b37791b49be56847\AndroidManifest.xml:1:1-3:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\6c547183a6adf1d9aa80133865f5d924\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\070f4d42c5ccb5b44537c87a4a8d5f3d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\98a1c62093eeca899a1cc9558ebd8ef6\AndroidManifest.xml:2:1-9:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\06d92f27566788e3b0c795e9f36bf344\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\565c83c79195ae9953ecd7b7dec2b11b\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
 	package
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:2:5-34
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:2:5-34
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:4:5-67
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:4:5-67
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:4:22-64
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:5:5-77
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:11:5-78
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:5:5-77
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:11:5-78
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:5:22-75
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:5:22-75
 application
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:7:5-27:19
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:22:5-37:19
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:22:5-37:19
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:13:5-20
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:13:5-20
-MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/e74be9359c20ceeb79455791a1301a2b/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/e74be9359c20ceeb79455791a1301a2b/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:25:5-29:19
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db00cd169d30085af5becad4f9d4cabb/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db00cd169d30085af5becad4f9d4cabb/AndroidManifest.xml:11:5-20
-MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/8af08a48135b04436da270424b9126d7/AndroidManifest.xml:2:3-17
-MERGED from [org.webkit:android-jsc:r174650] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/8af08a48135b04436da270424b9126d7/AndroidManifest.xml:2:3-17
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:7:5-27:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:22:5-37:19
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:13:5-20
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\cadcaed4d76b947cfd1dab2b47bde0c7\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\cadcaed4d76b947cfd1dab2b47bde0c7\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:25:5-29:19
+MERGED from [com.facebook.soloader:soloader:0.5.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\soloader-0.5.1.aar\4c3d5af71bc3deb1923f7aa813b98526\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.5.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\soloader-0.5.1.aar\4c3d5af71bc3deb1923f7aa813b98526\AndroidManifest.xml:11:5-20
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\android-jsc-r174650.aar\f950011f564b97d9b37791b49be56847\AndroidManifest.xml:2:3-17
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\android-jsc-r174650.aar\f950011f564b97d9b37791b49be56847\AndroidManifest.xml:2:3-17
 	android:label
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:9:7-39
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:9:7-39
 	android:icon
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:10:7-41
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:10:7-41
 	android:allowBackup
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:11:7-34
 	android:theme
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:12:7-38
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:8:7-38
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:8:7-38
 activity#com.faithmeetsloves.MainActivity
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:13:7-23:18
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:13:7-23:18
 	android:screenOrientation
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:17:9-45
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:17:9-45
 	android:label
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:15:9-41
 	android:windowSoftInputMode
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:18:9-51
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:18:9-51
 	android:configChanges
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:16:9-79
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:16:9-79
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:14:9-37
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:14:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:19:9-22:25
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:19:9-22:25
 action#android.intent.action.MAIN
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:20:13-65
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:20:13-65
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:20:21-62
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:20:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:21:13-73
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:21:13-73
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:21:23-70
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:21:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:24:7-26:69
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:24:7-26:69
 	android:screenOrientation
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:25:8-44
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:25:8-44
 	android:name
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:26:2-66
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:26:2-66
 uses-sdk
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-MERGED from [:react-native-google-signin] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-google-signin] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-linear-gradient] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-linear-gradient] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-i18n] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-i18n] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-gesture-handler] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /Boffin Coders/Projects/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/c5e703d127b7c1b529d227b772109bba/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/3a4aab6aa8c6d85893acc0ad7c0c3640/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/3a4aab6aa8c6d85893acc0ad7c0c3640/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/33951695e0d2d536fe8da339da498446/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/33951695e0d2d536fe8da339da498446/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/ff9b1a2df572af95bc0e6f1dbd4cd59f/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/ff9b1a2df572af95bc0e6f1dbd4cd59f/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/e74be9359c20ceeb79455791a1301a2b/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/e74be9359c20ceeb79455791a1301a2b/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/422d66f0adda3c60f1338b6aaa0152fe/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/422d66f0adda3c60f1338b6aaa0152fe/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/c1e7dcf9848211d523a4b64365940cf3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/c1e7dcf9848211d523a4b64365940cf3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/ea7646f0885c833adde0116d8fbd739b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/ea7646f0885c833adde0116d8fbd739b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7ff0b877a27fa354fa39f7f6da2b664d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7ff0b877a27fa354fa39f7f6da2b664d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/e9e56c271f24ba93852594682cd93264/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/e9e56c271f24ba93852594682cd93264/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e51a48f95ea9f82291d2d513b8fc2b9/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/4e51a48f95ea9f82291d2d513b8fc2b9/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/9cde99f5a240312137dbefd7e820d2a3/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/9cde99f5a240312137dbefd7e820d2a3/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/e55d4823bd8acf6027c7bd1029ca2a0f/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/e55d4823bd8acf6027c7bd1029ca2a0f/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/c678054f22b4d20f6c57d79d1b92a98c/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/drawee-1.10.0.aar/c678054f22b4d20f6c57d79d1b92a98c/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/79a1d6d0c84acb259ef9a49d8ba5b5ce/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.10.0.aar/79a1d6d0c84acb259ef9a49d8ba5b5ce/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/7aaf3a458b7979933dd6700e3c26a586/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/7aaf3a458b7979933dd6700e3c26a586/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db00cd169d30085af5becad4f9d4cabb/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db00cd169d30085af5becad4f9d4cabb/AndroidManifest.xml:7:5-9:41
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/fc2b2d337d75468f9595f97b859d0e87/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/fc2b2d337d75468f9595f97b859d0e87/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/d04b0592b652cdd362ada4aa14508a95/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/d04b0592b652cdd362ada4aa14508a95/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/57c325d918c8c20168252a6cb72f7885/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/57c325d918c8c20168252a6cb72f7885/AndroidManifest.xml:5:5-7:41
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c9714ff6a2de4872662f4a2e8145ee20/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/c9714ff6a2de4872662f4a2e8145ee20/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/27b42bcc7eb86f00fea7a6199e12fc68/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/27b42bcc7eb86f00fea7a6199e12fc68/AndroidManifest.xml:20:5-44
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+MERGED from [:react-native-google-signin] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-google-signin\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-google-signin] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-google-signin\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-linear-gradient\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-linear-gradient\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-i18n] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-i18n\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-i18n] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-i18n\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-gesture-handler] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] D:\Narender\DatingProjects\FaithMeetsLove\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\959aa94b830452f0be13ebed83b19457\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\959aa94b830452f0be13ebed83b19457\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-api-phone-16.0.0.aar\effb3e3bb6f1da6e17033e61380bb2b0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-api-phone-16.0.0.aar\effb3e3bb6f1da6e17033e61380bb2b0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-16.0.0.aar\009fff344978b8fd50dc5c633c546825\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-16.0.0.aar\009fff344978b8fd50dc5c633c546825\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\cadcaed4d76b947cfd1dab2b47bde0c7\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\cadcaed4d76b947cfd1dab2b47bde0c7\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\976168aed7a8b656f2d506c700baa24d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\976168aed7a8b656f2d506c700baa24d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\1848bc44ed4dc34fbc968df0ca224c49\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\1848bc44ed4dc34fbc968df0ca224c49\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\94c2cb474c754ad33c7e23c94ba245c0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\94c2cb474c754ad33c7e23c94ba245c0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\0e9d8a5df3efb03172a510f57fed475b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\0e9d8a5df3efb03172a510f57fed475b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\39d8cbd8a4c6b64fb29ad52ef8e31f76\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\39d8cbd8a4c6b64fb29ad52ef8e31f76\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\d309164831ad6b571ec28484371a9aa8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\d309164831ad6b571ec28484371a9aa8\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\992a7db3aa3f301fabb953e2075d8018\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\992a7db3aa3f301fabb953e2075d8018\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\a2a5dfa18d1f3cc27e5646f283867d7a\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\a2a5dfa18d1f3cc27e5646f283867d7a\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\846ce9e5cbea23bd0844b179068b3ab7\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\846ce9e5cbea23bd0844b179068b3ab7\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\4181cce68ccd01958790ebba050503d0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\4181cce68ccd01958790ebba050503d0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\e87b09192458128f03250c04d1174c2e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\e87b09192458128f03250c04d1174c2e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.5.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\soloader-0.5.1.aar\4c3d5af71bc3deb1923f7aa813b98526\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.5.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\soloader-0.5.1.aar\4c3d5af71bc3deb1923f7aa813b98526\AndroidManifest.xml:7:5-9:41
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\6c547183a6adf1d9aa80133865f5d924\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\6c547183a6adf1d9aa80133865f5d924\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\070f4d42c5ccb5b44537c87a4a8d5f3d\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\070f4d42c5ccb5b44537c87a4a8d5f3d\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\98a1c62093eeca899a1cc9558ebd8ef6\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\98a1c62093eeca899a1cc9558ebd8ef6\AndroidManifest.xml:5:5-7:41
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\06d92f27566788e3b0c795e9f36bf344\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\06d92f27566788e3b0c795e9f36bf344\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\565c83c79195ae9953ecd7b7dec2b11b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\565c83c79195ae9953ecd7b7dec2b11b\AndroidManifest.xml:20:5-44
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
-ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:23:9-27:75
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:25:13-46
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:25:13-46
 	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:26:13-37
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:26:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:27:13-72
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:27:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:24:13-93
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:24:13-93
 service#com.google.android.gms.auth.api.signin.RevocationBoundService
-ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:33:9-36:110
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:33:9-36:110
 	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:35:13-36
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:35:13-36
 	android:permission
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:36:13-107
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:36:13-107
 	android:name
-		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/283ce80a5178c24b566f43516eae6458/AndroidManifest.xml:34:13-89
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:34:13-89
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:23:9-26:75
+ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:23:9-26:75
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:25:13-37
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:25:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:26:13-72
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:26:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/b41f8e735a9a74c0f52b5944ea9009de/AndroidManifest.xml:24:13-79
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\f2cfe67d3a542b0e367a77647f4567cc\AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:25:13-66
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:25:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/df90e1749f093cf09caa14ace9769a21/AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\1a8edb7850f5bda1947bd4e648f4d6de\AndroidManifest.xml:24:13-58
 meta-data#android.support.VERSION
-ADDED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/AndroidManifest.xml:26:9-28:38
+ADDED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\41f5db80656e6567f20f624d163c9757\AndroidManifest.xml:26:9-28:38
 	android:value
-		ADDED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:28:13-35
+		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:28:13-35
 	android:name
-		ADDED from [com.android.support:support-v4:26.1.0] /Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/25ec035eede3e2587e7415ec63a73efc/AndroidManifest.xml:27:13-51
+		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\a5e1a3def6881ef80f57197b81ac8d84\AndroidManifest.xml:27:13-51
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Boffin Coders/Projects/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE

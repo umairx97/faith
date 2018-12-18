@@ -192,7 +192,7 @@ export default class Profile extends React.Component {
                   }}
                 >
                   <Text style={styles.landonGibsonText}>Landon Gibson</Text>
-                  < TouchableOpacity
+                  <TouchableOpacity
                   onPress = {
                       this.onFacebookPressed
                     }
@@ -201,7 +201,7 @@ export default class Profile extends React.Component {
                   <Image
                     source={require("../../../assets/images/icons-edit.png")}
                     style={styles.iconsEditImage}
-                  /></ TouchableOpacity>
+                  /></TouchableOpacity>
                 </View>
               </View>
               <View

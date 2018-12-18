@@ -10,7 +10,7 @@ import Profile from "../Profile/Profile";
 import AppSlider from "../Slider/Slider";
 import SignIn from "../Login/SignIn";
 import SignUp from "../Login/SignUp";
-import ForgetPassword from "../Login/forget_pass"
+import ForgetPassword from "../Login/forget_pass";
 import MyappSplash from "../SplashScreen/MyappSplash";
 
 export default class Route extends Component {
@@ -57,13 +57,12 @@ export default class Route extends Component {
           />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
-          < Scene key = "forgetPass"
-          component = {ForgetPassword}
-          hideNavBar = {
-            true
-          }
+          <Scene
+            key="forgetPass"
+            component={ForgetPassword}
+            hideNavBar={true}
           />
-          <Scene  key="home" tabs={true} hideNavBar={true}>
+          <Scene key="home" tabs={true} hideNavBar={true}>
             <Scene
               key="Discover"
               icon={this.getIcon}

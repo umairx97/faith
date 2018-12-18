@@ -11,7 +11,8 @@ import {
   Image,
   KeyboardAvoidingView,
   Alert,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Actions } from "react-native-router-flux";
@@ -19,21 +20,23 @@ import makeInputGreatAgain, {
   withNextInputAutoFocusForm,
   withNextInputAutoFocusInput
 } from "react-native-formik";
-import firebase from "../FirebaseConfig/FirebaseConfig"
+import firebase from "../FirebaseConfig/FirebaseConfig";
 import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
 import { RkButton, RkText } from "react-native-ui-kitten";
+import LoadingButton from "react-native-loading-button";
+import AnimateLoadingButton from "react-native-animate-loading-button";
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes
 } from "react-native-google-signin";
-
 const MyInput = compose(
   makeInputGreatAgain,
   withNextInputAutoFocusInput
 )(MaterialTextInput);
+
 const Form = withNextInputAutoFocusForm(View);
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -47,211 +50,261 @@ const validationSchema = Yup.object().shape({
 export default class SignIn extends Component {
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       email: "",
-      password: ""
+      password: "",
+      isLoading: false,
+      logintext: "Login"
     };
+
     GoogleSignin.configure({
       androidClientId:
-      "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
+        "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
       iosClientId:
-      "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
-      });
+        "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
+    });
   }
+  showLoading() {
+    this.setState({ loading: true });
+  }
+
+  hideLoading() {
+    this.setState({ loading: false });
+  }
+
+  _onPressHandler() {
+    this.loadingButton.showLoading(true);
+
+    // mock
+    setTimeout(() => {
+      this.loadingButton.showLoading(false);
+    }, 2000);
+  }
+
   async _onGoogleLogin() {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
-    .then(data => {
-    //Alert.alert("token " + data.user.idToken);
-    // Create a new Firebase credential with the token
-    const credential = firebase.auth.GoogleAuthProvider.credential(
-    data.idToken,
-    data.accessToken
-    );
-    // Login with the credential
-    return firebase.auth().signInWithCredential(credential);
-    })
-    .then(user => {
-    Actions.home();
-    })
-    .catch(error => {
-    const { code, message } = error;
-   // Alert.alert(message + " Errorcode " + code);
-    });
-  
-    }
+      .then(data => {
+        //Alert.alert("token " + data.user.idToken);
+        // Create a new Firebase credential with the token
+        const credential = firebase.auth.GoogleAuthProvider.credential(
+          data.idToken,
+          data.accessToken
+        );
+        // Login with the credential
+        return firebase.auth().signInWithCredential(credential);
+      })
+      .then(user => {
+        Actions.home();
+      })
+      .catch(error => {
+        const { code, message } = error;
+        // Alert.alert(message + " Errorcode " + code);
+      });
+  }
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
   _onSubmit() {
+    this.setState({ isLoadingVisible: true });
+    // setTimeout(() => {
+    //   this.setState({ logintext: "Loading..." });
+    // }, 100);
     const { email, password } = this.state;
-    
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(userData => {
-        if(userData.user.emailVerified==false)
-        {
-       Alert.alert("Please verify your email for login.");
-        }
-        else
-        {
-       Actions.home();
-         }
-        //Alert.alert(userData.user.uid);
-      })
-      .catch(error => {
-        //Login was not successful, let's create a new account
-        Alert.alert("Invalid credentials");
-      });
-    
+    if (email != "" && password != "") {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(userData => {
+          if (userData.user.emailVerified == false) {
+            this.loadingButton.showLoading(false);
+            Alert.alert("Please verify your email for login.");
+            //  this.setState({ logintext: "Login" });
+          } else {
+            this.loadingButton.showLoading(true);
+            Actions.home();
+            setTimeout(() => {
+              this.loadingButton.showLoading(false);
+            }, 1000);
+            // this.setState({ logintext: "Login" });
+          }
+          //Alert.alert(userData.user.uid);
+        })
+        .catch(error => {
+          //Login was not successful, let's create a new account
+          Alert.alert("Invalid credentials");
+        });
+    } else {
+      Alert.alert("Please enter email & Password");
+    }
   }
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
-     <Formik
-        onSubmit={values => console.log(values)}
-        validationSchema={validationSchema}
-        render={props => (
-          <ScrollView keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag' contentContainerStyle={styles.container}>
-            <Form>
-              <View>
-                <Image
-                  source={require("../../../assets/images/logo.png")}
-                  style={styles.migoLogoImage}
-                />
-                <View style={styles.loginForm}>
-                  <View style={styles.formInput}>
-                    <Text>Email</Text>
-                    <TextInput
-                      
-                      placeholder="Please enter your email"
-                      onChangeText={value => this.setState({ email: value })}
-                      returnKeyLabel={"next"}
-                      onChangeText={text => this.setState({ email: text })}
-                      style={styles.textInput}
-                    />
-                  </View>
-                  <View style={styles.formInput}>
-                    <Text>Password</Text>
-                    <TextInput
-                      placeholder="Please enter your password"
-                      onChangeText={value => this.setState({ password: value })}
-                      style={styles.textInput}
-                    />
-                  </View>
-                  <TouchableOpacity
-                    onPress={() => {
-                      Actions.forgetPass();
-                    }}
-                  >
-                    <Text style={styles.forgetPwd}>Forgot Password</Text>
-                  </TouchableOpacity>
-                  <View style={{ marginTop: "4%" }}>
-                    <RkButton
-                      rkType="rounded"
-                      style={styles.googleButton}
-                      // onPress={props.handleSubmit}
-                      onPress={() => {
-                        this._onSubmit();
-                      }}
-                    >
-                      Login
-                    </RkButton>
-                    <View style={{ flexDirection: "row" }}>
-                      <View
-                        style={{
-                          backgroundColor: "black",
-                          height: 2,
-                          flex: 1,
-                          alignSelf: "center",
-                          marginLeft: "12%",
-                          marginTop: "4%"
-                        }}
-                      />
-                      <Text
-                        style={{
-                          alignSelf: "center",
-                          paddingHorizontal: 5,
-                          fontSize: 14,
-                          marginTop: "4%"
-                        }}
-                      >
-                        Or Login With
-                      </Text>
-                      <View
-                        style={{
-                          backgroundColor: "black",
-                          height: 2,
-                          flex: 1,
-                          alignSelf: "center",
-                          marginRight: "12%",
-                          marginTop: "4%"
-                        }}
+        <Formik
+          onSubmit={values => console.log(values)}
+          validationSchema={validationSchema}
+          render={props => (
+            <ScrollView
+              keyboardShouldPersistTaps="always"
+              keyboardDismissMode="on-drag"
+              contentContainerStyle={styles.container}
+            >
+              <Form>
+                <View>
+                  <Image
+                    source={require("../../../assets/images/logo.png")}
+                    style={styles.migoLogoImage}
+                  />
+                  <View style={styles.loginForm}>
+                    <View style={styles.formInput}>
+                      <Text>Email</Text>
+                      <MyInput
+                        name="email"
+                        type="email"
+                        placeholder="Please enter your email"
+                        returnKeyLabel={"next"}
+                        onChangeText={text => this.setState({ email: text })}
+                        style={styles.textInput}
                       />
                     </View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-
-                        marginTop: "5%"
+                    <View style={styles.formInput}>
+                      <Text>Password</Text>
+                      <MyInput
+                        name="password"
+                        type="password"
+                        placeholder="Please enter your password"
+                        returnKeyType="next"
+                        onChangeText={value =>
+                          this.setState({ password: value })
+                        }
+                        style={styles.textInput}
+                      />
+                    </View>
+                    <TouchableOpacity
+                      onPress={() => {
+                        Actions.forgetPass();
                       }}
                     >
-                      <View style={{ flex: 1 }}>
-                        <RkButton
-                          rkType="rounded"
-                          style={[
-                            {
-                              width: "100%",
-                              marginRight: "2%",
-                              marginVertical: 8
-                            }
-                          ]}
-                        >
-                          <Icon
-                            style={[
-                              styles.icon,
-                              { marginHorizontal: 16, fontSize: 21 }
-                            ]}
-                            name="facebook"
-                          />
-                          <RkText rkType="caption">Facebook</RkText>
-                        </RkButton>
-                      </View>
-                      <View style={{ flex: 1 }}>
-                        <RkButton
+                      <Text style={styles.forgetPwd}>Forgot Password</Text>
+                    </TouchableOpacity>
+                    <View style={{ marginTop: "4%" }}>
+                      {/* <RkButton
+                        rkType="rounded"
+                        style={styles.googleButton}
+                        // onPress={props.handleSubmit}
                         onPress={() => {
-                        this._onGoogleLogin();
-                      }}
-                          rkType="rounded"
-                          style={[
-                            {
-                              width: "100%",
-                              marginLeft: "2%",
-                              marginVertical: 8,
-                              backgroundColor: "#dd4b39"
-                            }
-                          ]}
+                          this._onSubmit();
+                        }}
+                      >
+                        Login
+                      </RkButton> */}
+                      <AnimateLoadingButton
+                        ref={c => (this.loadingButton = c)}
+                        width={200}
+                        height={48}
+                        title="Login"
+                        titleFontSize={16}
+                        titleColor="rgb(255,255,255)"
+                        backgroundColor="rgb(252, 56, 80)"
+                        borderRadius={24}
+                        onPress={this._onSubmit.bind(this)}
+                      />
+
+                      <View style={{ flexDirection: "row" }}>
+                        <View
+                          style={{
+                            backgroundColor: "black",
+                            height: 2,
+                            flex: 1,
+                            alignSelf: "center",
+                            marginLeft: "12%",
+                            marginTop: "4%"
+                          }}
+                        />
+                        <Text
+                          style={{
+                            alignSelf: "center",
+                            paddingHorizontal: 5,
+                            fontSize: 14,
+                            marginTop: "4%"
+                          }}
                         >
-                          <Icon
+                          Or Login With
+                        </Text>
+                        <View
+                          style={{
+                            backgroundColor: "black",
+                            height: 2,
+                            flex: 1,
+                            alignSelf: "center",
+                            marginRight: "12%",
+                            marginTop: "4%"
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+
+                          marginTop: "5%"
+                        }}
+                      >
+                        <View style={{ flex: 1 }}>
+                          <RkButton
+                            rkType="rounded"
                             style={[
-                              styles.icon,
-                              { marginHorizontal: 16, fontSize: 21 }
+                              {
+                                width: "100%",
+                                marginRight: "2%",
+                                marginVertical: 8
+                              }
                             ]}
-                            name="google"
-                          />
-                          <RkText  rkType="caption">Google</RkText>
-                        </RkButton>
+                          >
+                            <Icon
+                              style={[
+                                styles.icon,
+                                { marginHorizontal: 16, fontSize: 21 }
+                              ]}
+                              name="facebook"
+                            />
+                            <RkText rkType="caption">Facebook</RkText>
+                          </RkButton>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <RkButton
+                            onPress={() => {
+                              this._onGoogleLogin();
+                            }}
+                            rkType="rounded"
+                            style={[
+                              {
+                                width: "100%",
+                                marginLeft: "2%",
+                                marginVertical: 8,
+                                backgroundColor: "#dd4b39"
+                              }
+                            ]}
+                          >
+                            <Icon
+                              style={[
+                                styles.icon,
+                                { marginHorizontal: 16, fontSize: 21 }
+                              ]}
+                              name="google"
+                            />
+                            <RkText rkType="caption">Google</RkText>
+                          </RkButton>
+                        </View>
                       </View>
                     </View>
                   </View>
                 </View>
-              </View>
-            </Form>
-          </ScrollView>
-        )}
-      />
+              </Form>
+            </ScrollView>
+          )}
+        />
       </KeyboardAvoidingView>
     );
   }
@@ -265,6 +318,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     backgroundColor: "#FFFFFF"
+  },
+  loading: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    opacity: 0.5,
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center"
   },
   innerView1: {
     flex: 1,
@@ -297,11 +361,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: "100%",
-    color: "#000000",
-    borderColor: "red",
-    marginTop: Platform.OS === 'ios' ? 10+"%" : 0,
-    borderBottomWidth: 1
- 
+    color: "#000000"
+    // borderColor: "red",
+    // marginTop: Platform.OS === "ios" ? 10 + "%" : 0,
+    // borderBottomWidth: 1
+
     // marginTop: Platform.OS === "ios" ? 10 + "%" : 0
   },
   formInput: {
@@ -370,7 +434,6 @@ const styles = StyleSheet.create({
   }
 });
 
-
 // import React, { Component } from "react";
 // import {
 //   StyleSheet,
@@ -410,7 +473,7 @@ const styles = StyleSheet.create({
 //   render() {
 //     return (
 //       <View style={styles.container}>
-       
+
 //           <Image
 //             source={require("../../../assets/images/logo.png")}
 //             style={styles.migoLogoImage}
@@ -532,7 +595,7 @@ const styles = StyleSheet.create({
 //               </View>
 //             </View>
 //           </View>
-        
+
 //       </View>
 //     );
 //   }

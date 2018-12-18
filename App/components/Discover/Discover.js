@@ -179,11 +179,11 @@ export default class Discover extends React.Component {
                     justifyContent: "flex-end"
                   }}
                 >
-              < TouchableOpacity onPress = {() => {Actions.Nearby();}} >
+              <TouchableOpacity onPress = {() => {Actions.Nearby();}} >
                   <Image
                     source={require("../../../assets/images/filters-btn-2.png")}
                     style={styles.btnFilterImage}
-                  /></ TouchableOpacity>
+                  /></TouchableOpacity>
                 </View>
               </View>
               {/* <View
