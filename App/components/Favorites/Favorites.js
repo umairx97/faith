@@ -36,7 +36,7 @@ const items = [
   { name: "ASBESTOS", code: "#7f8c8d" }
 ];
 
-export default class Spotlight extends React.Component {
+export default class Favorites extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {

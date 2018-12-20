@@ -10,8 +10,9 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
+import { Actions } from "react-native-router-flux";
 
-export default class Profile extends React.Component {
+export default class DrawerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
@@ -24,7 +25,9 @@ export default class Profile extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  //   onVipCenterPressed() {
+  //     Actions.vipCenter();
+  //   }
   componentDidMount() {}
 
   render() {
@@ -33,7 +36,7 @@ export default class Profile extends React.Component {
         <View pointerEvents="box-none" style={styles.profileView}>
           <LinearGradient
             start={{
-              x: 0.79,
+              x: 0.9,
               y: 0.41
             }}
             end={{
@@ -175,7 +178,7 @@ export default class Profile extends React.Component {
               <View
                 pointerEvents="box-none"
                 style={{
-                  flexDirection: "row",
+                  flexDirection: "column",
                   alignSelf: "stretch"
                 }}
               >
@@ -184,24 +187,13 @@ export default class Profile extends React.Component {
                   style={styles.ovalImage}
                 />
                 <View
-                  pointerEvents="box-none"
                   style={{
-                    flexDirection: "row",
+                    flexDirection: "column",
                     flex: 1,
-                    justifyContent: "flex-end"
+                    justifyContent: "center"
                   }}
                 >
                   <Text style={styles.landonGibsonText}>Landon Gibson</Text>
-                  <TouchableOpacity
-                  onPress = {
-                      this.onFacebookPressed
-                    }
-
-                    >
-                  <Image
-                    source={require("../../../assets/images/icons-edit.png")}
-                    style={styles.iconsEditImage}
-                  /></TouchableOpacity>
                 </View>
               </View>
               <View
@@ -211,83 +203,7 @@ export default class Profile extends React.Component {
                   flexDirection: "column",
                   justifyContent: "flex-end"
                 }}
-              >
-                <View pointerEvents="box-none" style={styles.followTabView}>
-                
-                  <Text style={styles.visitorsText}>VISITORS</Text>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%"
-                    }}
-                  >
-                    <Text style={styles.likesTwoText}>LIKES</Text>
-                  </View>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flexDirection: "row",
-                        alignSelf: "stretch"
-                      }}
-                    >
-                      <Text style={styles.textText}>2318</Text>
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flexDirection: "row",
-                          flex: 1,
-                          justifyContent: "flex-end"
-                        }}
-                      >
-                        <Text style={styles.matchedText}>MATCHED</Text>
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%"
-                    }}
-                  >
-                    <Text style={styles.textTwoText}>364</Text>
-                  </View>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%"
-                    }}
-                  >
-                    <Text style={styles.textThreeText}>15</Text>
-                  </View>
-                </View>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/vip-level.png")}
-                  style={styles.vipLevelImage}
-                />
-              </View>
+              />
             </View>
           </View>
           <View style={styles.panel1View}>
@@ -309,13 +225,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.likesText}>Likes</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.likesText}>Likes</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -421,13 +333,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.visitsText}>Visits</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.visitsText}>Visits</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -556,13 +464,9 @@ export default class Profile extends React.Component {
                       }}
                     />
                   </View>
-                   <TouchableOpacity
-                   onPress = {
-                       this.onFacebookPressed
-                     }
-
-                     >
-                  <Text style={styles.groupsText}>Groups</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={this.onFacebookPressed}>
+                    <Text style={styles.groupsText}>Groups</Text>
+                  </TouchableOpacity>
                   <View
                     pointerEvents="box-none"
                     style={{
@@ -664,7 +568,7 @@ export default class Profile extends React.Component {
               </View>
             </View>
           </View>
-          <View pointerEvents="box-none" style={styles.panel2View}>
+          {/* <View pointerEvents="box-none" style={styles.panel2View}>
             <View pointerEvents="box-none" style={styles.walletView}>
               <View
                 pointerEvents="box-none"
@@ -686,10 +590,7 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                  onPress={this.onFacebookPressed}
-                  
-                >
+                <TouchableOpacity onPress={this.onFacebookPressed}>
                   <Text style={styles.myWalletText}>My wallet</Text>
                 </TouchableOpacity>
 
@@ -811,11 +712,13 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                < TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }>
-                <Text style={styles.vipCenterText}>VIP center</Text></TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    Actions.vipCenter();
+                  }}
+                >
+                  <Text style={styles.vipCenterText}>VIP center</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -931,13 +834,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                < TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.findFriendsText}>Find friends</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.findFriendsText}>Find friends</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -1056,13 +955,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                < TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.blacklistText}>Blacklist</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.blacklistText}>Blacklist</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -1160,6 +1055,859 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
+            <View pointerEvents="box-none" style={styles.settingsView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.rectangle2EightView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.settingsText}>Settings</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeTenImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopySevenView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleEightView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/settings.png")}
+                      style={styles.settingsImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleEightView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteFifteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteSixteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            <View pointerEvents="box-none" style={styles.blacklistView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.rectangle2SevenView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.blacklistText}>LogOut</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeNineImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopySixView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleSevenView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/blacklist.png")}
+                      style={styles.blacklistImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleSevenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteThirteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteFourteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View> */}
+          <View pointerEvents="box-none" style={styles.panel2View}>
+            <View pointerEvents="box-none" style={styles.walletView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.rectangle2FourView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.myWalletText}>My wallet</Text>
+                </TouchableOpacity>
+
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeFiveImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopyThreeView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleFourView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/wallet.png")}
+                      style={styles.walletImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleFourView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteSevenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteEightView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View pointerEvents="box-none" style={styles.levelView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.rectangle2FiveView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    Actions.vipCenter();
+                  }}
+                >
+                  <Text style={styles.vipCenterText}>VIP center</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeSixImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopyFourView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleFiveView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/shape-5.png")}
+                      style={styles.shapeSevenImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleFiveView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteNineView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteTenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View pointerEvents="box-none" style={styles.friendsView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View pointerEvents="box-none" style={styles.rectangle2SixView}>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.findFriendsText}>Find friends</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeEightImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopyFiveView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleSixView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/friends.png")}
+                      style={styles.friendsImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleSixView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteElevenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteTwelveView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View pointerEvents="box-none" style={styles.blacklistView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.rectangle2SevenView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.blacklistText}>Blacklist</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeNineImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopySixView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleSevenView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/blacklist.png")}
+                      style={styles.blacklistImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleSevenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteThirteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteFourteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View pointerEvents="box-none" style={styles.blacklistView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.rectangle2SevenView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      justifyContent: "flex-end"
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.blacklistText}>Settings</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/shape-2.png")}
+                    style={styles.shapeNineImage}
+                  />
+                </View>
+              </View>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View
+                  pointerEvents="box-none"
+                  style={styles.iconsLikeCopySixView}
+                >
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleSevenView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={require("../../../assets/images/blacklist.png")}
+                      style={styles.blacklistImage}
+                    />
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.rectangleSevenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                    <View pointerEvents="box-none">
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteThirteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                      <View
+                        pointerEvents="box-none"
+                        style={styles.colorWhiteFourteenView}
+                      >
+                        <View
+                          pointerEvents="box-none"
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "flex-end"
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+
             <View
               pointerEvents="box-none"
               style={{
@@ -1189,13 +1937,9 @@ export default class Profile extends React.Component {
                       }}
                     />
                   </View>
-                  < TouchableOpacity
-                  onPress = {
-                      this.onFacebookPressed
-                    }
-
-                    >
-                  <Text style={styles.settingsText}>Settings</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={this.onFacebookPressed}>
+                    <Text style={styles.LogText}>LogOut</Text>
+                  </TouchableOpacity>
                   <View
                     pointerEvents="box-none"
                     style={{
@@ -1203,12 +1947,7 @@ export default class Profile extends React.Component {
                       flex: 1,
                       justifyContent: "flex-end"
                     }}
-                  >
-                    <Image
-                      source={require("../../../assets/images/shape-2.png")}
-                      style={styles.shapeTenImage}
-                    />
-                  </View>
+                  />
                 </View>
                 <View
                   pointerEvents="box-none"
@@ -1243,7 +1982,7 @@ export default class Profile extends React.Component {
                         />
                       </View>
                       <Image
-                        source={require("../../../assets/images/settings.png")}
+                        source={require("../../../assets/images/shuticon.png")}
                         style={styles.settingsImage}
                       />
                       <View pointerEvents="box-none">
@@ -1294,7 +2033,6 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
-            
           </View>
         </View>
       </ScrollView>
@@ -1307,21 +2045,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(249, 249, 249)",
     flex: 1
   },
-  facebookButton: {
-    flex: 1,
-    backgroundColor: "rgb(38, 114, 203)",
-    borderRadius: 24,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 316,
-    height: 48,
-    marginBottom: 33,
-    marginTop: 200,
-    alignSelf: "center"
-  },
+
   navBarViewLinearGradient: {
-    height: 231
+    height: 140
   },
   navBarView: {
     width: "100%",
@@ -1337,9 +2063,9 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 212,
+    height: 180,
     marginLeft: 18,
-    marginTop: 86,
+    marginTop: 40,
     marginRight: 16
   },
   panel1View: {
@@ -1359,7 +2085,7 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 256,
+
     marginLeft: 17,
     marginTop: 15,
     marginRight: 16
@@ -1514,20 +2240,20 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 36,
     marginLeft: 1,
-    marginTop: 14,
+    marginTop: 13,
     marginRight: 1
   },
   levelView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 36,
     marginLeft: 1,
-    marginTop: 15,
+    marginTop: 13,
     marginRight: 1
   },
   friendsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 38,
-    marginTop: 15,
+    marginTop: 13,
     marginRight: 1
   },
   blacklistView: {
@@ -1539,7 +2265,8 @@ const styles = StyleSheet.create({
   settingsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 38,
-    marginRight: 1
+    marginRight: 1,
+    marginTop: 13
   },
   rectangle2FourView: {
     backgroundColor: "rgb(240, 85, 34)",
@@ -1720,7 +2447,7 @@ const styles = StyleSheet.create({
     height: 22,
     marginLeft: 16
   },
-  settingsText: {
+  LogText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(38, 38, 40)",
     fontSize: 15,
@@ -1729,7 +2456,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     letterSpacing: 0,
     marginLeft: 11,
-    marginTop: 3
+    marginTop: 3,
+    marginBottom: 13
   },
   shapeTenImage: {
     resizeMode: "center",
@@ -1758,6 +2486,7 @@ const styles = StyleSheet.create({
   },
   ovalImage: {
     resizeMode: "center",
+    alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 94,
     height: 94,
@@ -1776,6 +2505,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(74, 74, 74)",
     fontSize: 24,
+    alignSelf: "center",
     fontStyle: "normal",
     fontWeight: "normal",
     textAlign: "left",

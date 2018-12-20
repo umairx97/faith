@@ -18,7 +18,8 @@ import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ButtonGroup } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { Actions } from "react-native-router-flux";
+import MultiSlider from "@ptomasroos/react-native-multi-slider";
 export default class NearbyFilters extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -33,7 +34,8 @@ export default class NearbyFilters extends React.Component {
     super(props);
     this.state = {
       selectedIndex: 2,
-      Km: 18
+      Km: 18,
+      values: [18, 75]
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -44,24 +46,24 @@ export default class NearbyFilters extends React.Component {
     this.setState({ selectedIndex });
   }
   componentDidMount() {}
-
+  multiSliderValuesChange = values => {
+    this.setState({
+      values
+    });
+  };
   render() {
     const buttons = ["Guys", "Girls", "Both"];
     const { selectedIndex } = this.state;
     return (
       <ScrollView>
         <View style={styles.nearbyFiltersView}>
-          <View
-            pointerEvents="box-none"
-            style={styles.barsNavigationFilterView}
-          >
+          <View style={styles.barsNavigationFilterView}>
             <View style={styles.toplineView}>
               <TouchableOpacity onPress={this.onDonePressed}>
                 <Text style={styles.doneText}>Done</Text>
               </TouchableOpacity>
             </View>
             <View
-              pointerEvents="box-none"
               style={{
                 position: "absolute",
                 width: "100%",
@@ -70,16 +72,14 @@ export default class NearbyFilters extends React.Component {
             >
               <Text style={styles.filterText}>Filter</Text>
               <View
-                pointerEvents="box-none"
                 style={{
                   flex: 1,
                   flexDirection: "column",
                   justifyContent: "flex-end"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.filtersView}>
+                <View style={styles.filtersView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -101,31 +101,35 @@ export default class NearbyFilters extends React.Component {
                 containerStyle={{ height: 50, marginTop: 15 }}
               />
             </View>
-
-            <View pointerEvents="box-none" style={styles.locationsView}>
+            <View style={styles.locationsView}>
               <View
-                pointerEvents="box-none"
-                style={{ flex: 1, alignSelf: "stretch" }}
+                style={{
+                  flex: 1,
+                  flexDirection: "column",
+                  alignSelf: "stretch"
+                }}
               >
                 <Text style={styles.locationText}>Location</Text>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    flex: 1,
-                    flexDirection: "column",
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  {/* <Text style={styles.currentLocationText}>Current</Text> */}
-                  <Text style={styles.sanFranciscoText}>(San Francisco)</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  height: 30,
+                  backgroundColor: "#F5F5F5"
+                }}
+              >
+                <Text style={styles.currentLocationText}>Current Location</Text>
 
-                  <Image
-                    source={require("../../../assets/images/locations.png")}
-                    style={styles.locationsImage}
-                  />
-                </View>
+                <Text style={styles.sanFranciscoText}>(San Francisco)</Text>
+                <Image
+                  source={require("../../../assets/images/locations.png")}
+                  style={styles.locationsImage}
+                />
               </View>
             </View>
+
             <View style={styles.distanceView}>
               <View
                 style={{
@@ -137,7 +141,7 @@ export default class NearbyFilters extends React.Component {
                 <Text style={styles.distanceText}>Distance</Text>
                 <View style={{ flex: 1, flexDirection: "row" }}>
                   <Slider
-                    style={{ width: "80%" }}
+                    style={{ width: "85%", alignSelf: "center" }}
                     step={1}
                     minimumValue={0}
                     maximumValue={100}
@@ -148,65 +152,9 @@ export default class NearbyFilters extends React.Component {
                   <Text style={styles.kmText}>{this.state.Km} Km</Text>
                 </View>
               </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              >
-                <View pointerEvents="box-none" style={styles.rectangle6View}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
-                  />
-                </View>
-              </View>
-              {/* <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <LinearGradient
-                  start={{
-                    x: 1,
-                    y: 0.5
-                  }}
-                  end={{
-                    x: -0,
-                    y: 0.5
-                  }}
-                  locations={[0, 1]}
-                  colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-                  style={styles.rectangle6CopyViewLinearGradient}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.rectangle6CopyView}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "flex-end"
-                      }}
-                    />
-                  </View>
-                </LinearGradient>
-              </View> */}
             </View>
-            <View pointerEvents="box-none" style={styles.ageView}>
+            <View style={styles.ageView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
@@ -214,18 +162,18 @@ export default class NearbyFilters extends React.Component {
               >
                 <Text style={styles.ageRangeText}>Age range</Text>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
                     justifyContent: "flex-end"
                   }}
                 >
-                  <Text style={styles.textText}>18-25</Text>
+                  <Text style={styles.textText}>
+                    {this.state.values[0]}-{this.state.values[1]}
+                  </Text>
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   flex: 1,
                   flexDirection: "column",
@@ -233,170 +181,20 @@ export default class NearbyFilters extends React.Component {
                 }}
               >
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     alignSelf: "stretch"
                   }}
                 >
-                  <LinearGradient
-                    start={{
-                      x: 1,
-                      y: 0.5
-                    }}
-                    end={{
-                      x: -0,
-                      y: 0.5
-                    }}
-                    locations={[0, 1]}
-                    colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-                    style={styles.rectangle6CopyTwoViewLinearGradient}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangle6CopyTwoView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                  </LinearGradient>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      flex: 1,
-                      justifyContent: "flex-end"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangle6TwoView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View
-            pointerEvents="box-none"
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-end"
-            }}
-          >
-            <View
-              pointerEvents="box-none"
-              style={styles.iphoneXBarsTabBar5ItemsView}
-            >
-              <View pointerEvents="box-none" style={styles.barView}>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    flex: 1,
-                    flexDirection: "column",
-                    justifyContent: "flex-end"
-                  }}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/home-indicator---on-light.png")}
-                  style={styles.homeIndicatorOnLightImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/discover.png")}
-                  style={styles.discoverImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/neaby-2.png")}
-                  style={styles.neabyImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View pointerEvents="box-none" style={styles.favoriteView}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
+                  <MultiSlider
+                    values={[this.state.values[0], this.state.values[1]]}
+                    sliderLength={270}
+                    onValuesChange={this.multiSliderValuesChange}
+                    min={0}
+                    max={100}
+                    step={1}
                   />
                 </View>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/message-2.png")}
-                  style={styles.messageImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/profile-2.png")}
-                  style={styles.profileImage}
-                />
               </View>
             </View>
           </View>
@@ -439,16 +237,16 @@ const styles = StyleSheet.create({
   },
   distanceView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 92,
+    height: 60,
     marginLeft: 16,
-    marginTop: 45,
+    marginTop: 30,
     marginRight: 16
   },
   ageView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 91,
     marginLeft: 16,
-    marginTop: 40,
+    marginTop: 30,
     marginRight: 16
   },
   showMeText: {
@@ -522,19 +320,17 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 20,
     height: 20,
-    marginTop: 47,
-    marginRight: 17
+    paddingTop: 7,
+    alignSelf: "center"
   },
   sanFranciscoText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(155, 155, 155)",
+    color: "#BEBEBE",
     fontSize: 17,
     fontStyle: "normal",
     fontWeight: "normal",
-    textAlign: "right",
+    textAlign: "center",
     letterSpacing: -0.41,
-    marginTop: 47,
-    marginRight: 39
+    paddingTop: 7
   },
   currentLocationText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -545,7 +341,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     lineHeight: 22,
     letterSpacing: -0.41,
-    marginLeft: 5
+    marginLeft: 5,
+    paddingTop: 7
   },
   distanceText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",

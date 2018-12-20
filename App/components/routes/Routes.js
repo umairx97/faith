@@ -12,7 +12,10 @@ import SignIn from "../Login/SignIn";
 import SignUp from "../Login/SignUp";
 import ForgetPassword from "../Login/forget_pass";
 import MyappSplash from "../SplashScreen/MyappSplash";
-
+import DrawerScreen from "../DrawerScreen/DrawerScreen";
+import VIPCenter from "../VIPCenter/VIPCenter";
+import Favorites from "../Favorites/Favorites";
+import Chat from "../Chat/Chat";
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -41,7 +44,7 @@ export default class Route extends Component {
   render() {
     return (
       <Router>
-        <Stack key="root">
+        <Scene key="root">
           <Scene key="myappSplash" hideNavBar={true} component={MyappSplash} />
           <Scene
             key="slide"
@@ -49,12 +52,7 @@ export default class Route extends Component {
             hideNavBar={true}
             component={AppSlider}
           />
-          <Scene
-            key="login"
-            replace={true}
-            component={Login}
-            hideNavBar={true}
-          />
+          <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
           <Scene
@@ -62,36 +60,68 @@ export default class Route extends Component {
             component={ForgetPassword}
             hideNavBar={true}
           />
-          <Scene key="home" tabs={true} hideNavBar={true}>
-            <Scene
-              key="Discover"
-              icon={this.getIcon}
-              hideNavBar={true}
-              component={Discover}
-            />
-            <Scene
-              key="Nearbyuser"
-              hideNavBar={true}
-              icon={this.getIconNear}
-              tabs={true}
-              tabBarPosition="top"
-            >
-              <Scene
-                key="alluser"
-                hideNavBar={true}
-                component={NearbyAllUser}
-              />
-              <Scene key="spotlight" hideNavBar={true} component={Spotlight} />
-              <Scene key="Nearby" hideNavBar={true} component={NearbyFilters} />
+          <Scene
+            key="drawer"
+            drawer={true}
+            contentComponent={DrawerScreen}
+            hideNavBar={true}
+          >
+            <Scene key="home" hideNavBar={true} replace={true}>
+              <Scene key="homeTAB" tabs={true} hideNavBar={true}>
+                <Scene
+                  key="Discover"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={Discover}
+                />
+                <Scene
+                  key="favorites"
+                  title="Favorites"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={Favorites}
+                />
+                <Scene
+                  key="Nearbyuser"
+                  title="NearBy"
+                  hideNavBar={true}
+                  icon={this.getIconNear}
+                  tabs={true}
+                  tabBarPosition="top"
+                >
+                  <Scene
+                    key="alluser"
+                    hideNavBar={true}
+                    component={NearbyAllUser}
+                  />
+                  <Scene
+                    key="spotlight"
+                    hideNavBar={true}
+                    component={Spotlight}
+                  />
+                  <Scene
+                    key="Nearby"
+                    hideNavBar={true}
+                    component={NearbyFilters}
+                  />
+                </Scene>
+                <Scene
+                  key="Chat"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={Chat}
+                />
+                <Scene
+                  icon={this.getIconPro}
+                  key="Profile"
+                  hideNavBar={true}
+                  component={Profile}
+                />
+              </Scene>
             </Scene>
-            <Scene
-              icon={this.getIconPro}
-              key="Profile"
-              hideNavBar={true}
-              component={Profile}
-            />
+            <Scene key="vipCenter" component={VIPCenter} hideNavBar={true} />
           </Scene>
-        </Stack>
+        </Scene>
       </Router>
     );
   }

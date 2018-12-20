@@ -122,7 +122,8 @@ export default class SignIn extends Component {
             //  this.setState({ logintext: "Login" });
           } else {
             this.loadingButton.showLoading(true);
-            Actions.home();
+            // Actions.drawerOpen("drawer");
+            Actions.drawer();
             setTimeout(() => {
               this.loadingButton.showLoading(false);
             }, 1000);
