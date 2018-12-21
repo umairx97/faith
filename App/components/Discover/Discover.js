@@ -4,7 +4,8 @@ import {
   View,
   Image,
   TouchableHighlight,
-  TouchableOpacity
+  TouchableOpacity,
+  BackAndroid
 } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
@@ -14,6 +15,8 @@ import ScrollableTabView, {
   ScrollableTabBar
 } from "react-native-scrollable-tab-view";
 import { Actions } from "react-native-router-flux";
+import OfflineNotice from "../OfflineNotice/OfflineNotice";
+
 export default class Discover extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -29,7 +32,12 @@ export default class Discover extends React.Component {
   }
 
   componentDidMount() {}
-
+  componentWillMount() {
+    // Disable back button by just returning true instead of Action.pop()
+    BackAndroid.addEventListener("hardwareBackPress", () => {
+      return true;
+    });
+  }
   onNearByPressed = () => {
     // this.props.navigation.navigate("NearByTab");
   };
@@ -168,6 +176,7 @@ export default class Discover extends React.Component {
                   alignSelf: "stretch"
                 }}
               >
+                <OfflineNotice />
                 <Text style={styles.discoverText}>Discover</Text>
                 <View
                   pointerEvents="box-none"

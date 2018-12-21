@@ -18,6 +18,8 @@
     "react-native-animate-loading-button": "^1.0.3",
     "react-native-app-intro-slider": "^1.0.1",
     "react-native-card-stack-swiper": "^1.1.0",
+    "react-native-connection-info": "^1.1.0",
+    "react-native-dialog": "^5.5.0",
     "react-native-elements": "^0.19.1",
     "react-native-formik": "^1.5.5",
     "react-native-gesture-handler": "^1.0.10",

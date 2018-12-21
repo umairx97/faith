@@ -27,6 +27,7 @@ import * as Yup from "yup";
 import { RkButton, RkText } from "react-native-ui-kitten";
 import LoadingButton from "react-native-loading-button";
 import AnimateLoadingButton from "react-native-animate-loading-button";
+import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -80,7 +81,13 @@ export default class SignIn extends Component {
       this.loadingButton.showLoading(false);
     }, 2000);
   }
+  // componentDidMount() {
+  //   const dispatchConnected = isConnected => this.props.dispatch(setIsConnected(isConnected));
 
+  //   NetInfo.isConnected.fetch().then().done(() => {
+  //     NetInfo.isConnected.addEventListener('change', dispatchConnected);
+  //   });
+  // }
   async _onGoogleLogin() {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
@@ -95,7 +102,7 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        Actions.home();
+        Actions.reset("home");
       })
       .catch(error => {
         const { code, message } = error;
@@ -158,6 +165,7 @@ export default class SignIn extends Component {
                     source={require("../../../assets/images/logo.png")}
                     style={styles.migoLogoImage}
                   />
+
                   <View style={styles.loginForm}>
                     <View style={styles.formInput}>
                       <Text>Email</Text>
@@ -303,6 +311,7 @@ export default class SignIn extends Component {
                   </View>
                 </View>
               </Form>
+              <OfflineNotice />
             </ScrollView>
           )}
         />

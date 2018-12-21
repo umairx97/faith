@@ -64,6 +64,10 @@ MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gr
 MERGED from [com.facebook.react:react-native:0.57.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\react-native-0.57.1.aar\440b02b7227c297cfb8fd2167c0b5653\AndroidManifest.xml:11:5-78
 	android:name
 		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:5:22-75
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:6:22-76
 application
 ADDED from D:\Narender\DatingProjects\FaithMeetsLove\android\app\src\main\AndroidManifest.xml:7:5-27:19
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Boffin - Admin\.gradle\caches\transforms-1\files-1.1\play-services-auth-16.0.1.aar\857ce99218613632ae89611c93bf9887\AndroidManifest.xml:22:5-37:19

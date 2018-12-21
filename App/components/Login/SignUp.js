@@ -38,6 +38,7 @@ import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import OfflineNotice from "../OfflineNotice/OfflineNotice";
 var radio_props = [
   {
     label: "Male  ",
@@ -280,6 +281,7 @@ export default class SignUp extends Component {
             >
               <Form>
                 <View>
+                  <OfflineNotice />
                   <View
                     style={{
                       flex: 1,

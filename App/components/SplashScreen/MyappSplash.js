@@ -103,14 +103,6 @@ export default class MyappSplash extends Component {
         </View>
       );
     }
-
-    return (
-      <View style={styles.MainContainer}>
-        <AppSlider />
-
-        {this.state.isVisible === true ? Splash_Screen : null}
-      </View>
-    );
   }
 }
 

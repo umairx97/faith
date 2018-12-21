@@ -6,11 +6,19 @@
 //  Copyright © 2018 Boffin Coders. All rights reserved.
 //
 
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Alert,
+  TouchableOpacity
+} from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
+import firebase from "../FirebaseConfig/FirebaseConfig";
 
 export default class DrawerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -29,7 +37,29 @@ export default class DrawerScreen extends React.Component {
   //     Actions.vipCenter();
   //   }
   componentDidMount() {}
-
+  _SignoutPress() {
+    Alert.alert("Alert!", "Are you sure?", [
+      {
+        text: "Cancel",
+        onPress: () => Actions.drawerClose(),
+        style: "cancel"
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          this.signOut();
+        }
+      }
+    ]);
+  }
+  signOut = async () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(res => {
+        Actions.reset("signIn");
+      });
+  };
   render() {
     return (
       <ScrollView>
@@ -1937,7 +1967,11 @@ export default class DrawerScreen extends React.Component {
                       }}
                     />
                   </View>
-                  <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this._SignoutPress();
+                    }}
+                  >
                     <Text style={styles.LogText}>LogOut</Text>
                   </TouchableOpacity>
                   <View

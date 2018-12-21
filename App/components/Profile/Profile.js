@@ -10,7 +10,7 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { Actions } from "react-native-router-flux";
 export default class Profile extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -26,7 +26,9 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount() {}
-
+  onEditPressed() {
+    Actions.userProfile();
+  }
   render() {
     return (
       <ScrollView>
@@ -192,16 +194,12 @@ export default class Profile extends React.Component {
                   }}
                 >
                   <Text style={styles.landonGibsonText}>Landon Gibson</Text>
-                  <TouchableOpacity
-                  onPress = {
-                      this.onFacebookPressed
-                    }
-
-                    >
-                  <Image
-                    source={require("../../../assets/images/icons-edit.png")}
-                    style={styles.iconsEditImage}
-                  /></TouchableOpacity>
+                  <TouchableOpacity onPress={this.onEditPressed}>
+                    <Image
+                      source={require("../../../assets/images/icons-edit.png")}
+                      style={styles.iconsEditImage}
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
               <View
@@ -213,7 +211,6 @@ export default class Profile extends React.Component {
                 }}
               >
                 <View pointerEvents="box-none" style={styles.followTabView}>
-                
                   <Text style={styles.visitorsText}>VISITORS</Text>
                   <View
                     pointerEvents="box-none"
@@ -309,13 +306,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.likesText}>Likes</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.likesText}>Likes</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -421,13 +414,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.visitsText}>Visits</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.visitsText}>Visits</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -556,13 +545,9 @@ export default class Profile extends React.Component {
                       }}
                     />
                   </View>
-                   <TouchableOpacity
-                   onPress = {
-                       this.onFacebookPressed
-                     }
-
-                     >
-                  <Text style={styles.groupsText}>Groups</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={this.onFacebookPressed}>
+                    <Text style={styles.groupsText}>Groups</Text>
+                  </TouchableOpacity>
                   <View
                     pointerEvents="box-none"
                     style={{
@@ -686,10 +671,7 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                <TouchableOpacity
-                  onPress={this.onFacebookPressed}
-                  
-                >
+                <TouchableOpacity onPress={this.onFacebookPressed}>
                   <Text style={styles.myWalletText}>My wallet</Text>
                 </TouchableOpacity>
 
@@ -811,11 +793,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                < TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }>
-                <Text style={styles.vipCenterText}>VIP center</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.vipCenterText}>VIP center</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -931,13 +911,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                < TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.findFriendsText}>Find friends</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.findFriendsText}>Find friends</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -1056,13 +1032,9 @@ export default class Profile extends React.Component {
                     }}
                   />
                 </View>
-                < TouchableOpacity
-                onPress = {
-                    this.onFacebookPressed
-                  }
-
-                  >
-                <Text style={styles.blacklistText}>Blacklist</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.blacklistText}>Blacklist</Text>
+                </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
                   style={{
@@ -1189,13 +1161,9 @@ export default class Profile extends React.Component {
                       }}
                     />
                   </View>
-                  < TouchableOpacity
-                  onPress = {
-                      this.onFacebookPressed
-                    }
-
-                    >
-                  <Text style={styles.settingsText}>Settings</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={this.onFacebookPressed}>
+                    <Text style={styles.settingsText}>Settings</Text>
+                  </TouchableOpacity>
                   <View
                     pointerEvents="box-none"
                     style={{
@@ -1294,7 +1262,6 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
-            
           </View>
         </View>
       </ScrollView>

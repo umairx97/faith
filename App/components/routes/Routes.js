@@ -14,6 +14,7 @@ import ForgetPassword from "../Login/forget_pass";
 import MyappSplash from "../SplashScreen/MyappSplash";
 import DrawerScreen from "../DrawerScreen/DrawerScreen";
 import VIPCenter from "../VIPCenter/VIPCenter";
+import UserProfile from "../UserProfile/UserProfile";
 import Favorites from "../Favorites/Favorites";
 import Chat from "../Chat/Chat";
 export default class Route extends Component {
@@ -46,12 +47,7 @@ export default class Route extends Component {
       <Router>
         <Scene key="root">
           <Scene key="myappSplash" hideNavBar={true} component={MyappSplash} />
-          <Scene
-            key="slide"
-            replace={true}
-            hideNavBar={true}
-            component={AppSlider}
-          />
+          <Scene key="slide" hideNavBar={true} component={AppSlider} />
           <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
@@ -120,6 +116,11 @@ export default class Route extends Component {
               </Scene>
             </Scene>
             <Scene key="vipCenter" component={VIPCenter} hideNavBar={true} />
+            <Scene
+              key="userProfile"
+              component={UserProfile}
+              hideNavBar={true}
+            />
           </Scene>
         </Scene>
       </Router>
