@@ -102,7 +102,7 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        Actions.reset("home");
+        Actions.home();
       })
       .catch(error => {
         const { code, message } = error;

@@ -78,7 +78,7 @@ export default class SignUp extends Component {
       _username: "",
       _password: "",
       _fullName: "",
-      _gender: "",
+      _gender: 0,
       _dob: ""
     };
     GoogleSignin.configure({
@@ -206,7 +206,7 @@ export default class SignUp extends Component {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
 
-  async _onGoogleLogin() {
+   _onGoogleLogin=async()=> {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
@@ -230,38 +230,38 @@ export default class SignUp extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
-  // _onSubmit() {
-  //   const { email, password } = this.state;
-  //   if (
-  //     email != "" &&
-  //     password != "" &&
-  //     _fullName != "" &&
-  //     _username != null &&
-  //     _dob != null
-  //   ) {
-  //     firebase
-  //       .auth()
-  //       .signInWithEmailAndPassword(email, password)
-  //       .then(userData => {
-  //         if (userData.user.emailVerified == false) {
-  //           Alert.alert("Please verify your email for login.");
-  //         } else {
-  //           this.loadingButton.showLoading(true);
-  //           Actions.signIn();
-  //           setTimeout(() => {
-  //             this.loadingButton.showLoading(false);
-  //           }, 1000);
-  //         }
-  //         //Alert.alert(userData.user.uid);
-  //       })
-  //       .catch(error => {
-  //         //Login was not successful, let's create a new account
-  //         Alert.alert("Invalid credentials");
-  //       });
-  //   } else {
-  //     Alert.alert("Please fill fields");
-  //   }
-  // }
+  _onSubmit() {
+    const { email, password } = this.state;
+    if (
+      email != "" &&
+      password != "" &&
+      _fullName != "" &&
+      _username != null &&
+      _dob != null
+    ) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(userData => {
+          if (userData.user.emailVerified == false) {
+            Alert.alert("Please verify your email for login.");
+          } else {
+            this.loadingButton.showLoading(true);
+            Actions.signIn();
+            setTimeout(() => {
+              this.loadingButton.showLoading(false);
+            }, 1000);
+          }
+          //Alert.alert(userData.user.uid);
+        })
+        .catch(error => {
+          //Login was not successful, let's create a new account
+          Alert.alert("Invalid credentials");
+        });
+    } else {
+      Alert.alert("Please fill fields");
+    }
+  }
 
   render() {
     return (

@@ -65,9 +65,9 @@
 		DDA109624B1B47D19C918119 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4050B7DA953458C86110F6E /* Foundation.ttf */; };
 		E7BEB693687E488CA1329C7A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1F08F7F2B5C49BF93C104A7 /* MaterialCommunityIcons.ttf */; };
 		ECA83B6DF2624ACE816112A0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD54ADF6195B4B88BEA10F9E /* libRNVectorIcons.a */; };
-		B8FC1B803AE647A880B2841A /* libRangeSlider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CDACC49315475485A56DD5 /* libRangeSlider.a */; };
-		9E6D95AEB3F24DE89154608B /* Slider.app in Resources */ = {isa = PBXBuildFile; fileRef = ABC124815309426F908F84AC /* Slider.app */; };
-		94DE718AC8F34EF0A67966BC /* SliderTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = 03B9D5E2CA794BEFB43446A0 /* SliderTests.xctest */; };
+		10FF3E0542FF48DAAC8725E0 /* Slider.app in Resources */ = {isa = PBXBuildFile; fileRef = AFCFF689523846A893614655 /* Slider.app */; };
+		71F736B3F38B4121B10FEA68 /* SliderTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = D1DAB41BF0A34F83B24C9A42 /* SliderTests.xctest */; };
+		33B34EBB678747E5B4F50120 /* libRangeSlider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C7A70BCDB945498830146E /* libRangeSlider.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -464,11 +464,11 @@
 		F46B7CDFAD64476DBDE140BC /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		F7CF2C5567694D0787F41305 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		FD796392838CE31EDB65C564 /* libPods-FaithMeetsLove.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaithMeetsLove.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C062D8C3CEF94D12AF1EB3AF /* RangeSlider.xcodeproj */ = {isa = PBXFileReference; name = "RangeSlider.xcodeproj"; path = "../node_modules/react-native-range-slider/ios/RangeSlider.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		36CDACC49315475485A56DD5 /* libRangeSlider.a */ = {isa = PBXFileReference; name = "libRangeSlider.a"; path = "libRangeSlider.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		D8758AA9520D45DCB799C4B4 /* Slider.xcodeproj */ = {isa = PBXFileReference; name = "Slider.xcodeproj"; path = "../node_modules/react-native-multi-slider/iOS/Slider.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		ABC124815309426F908F84AC /* Slider.app */ = {isa = PBXFileReference; name = "Slider.app"; path = "Slider.app"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.application; explicitFileType = undefined; includeInIndex = 0; };
-		03B9D5E2CA794BEFB43446A0 /* SliderTests.xctest */ = {isa = PBXFileReference; name = "SliderTests.xctest"; path = "SliderTests.xctest"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.cfbundle; explicitFileType = undefined; includeInIndex = 0; };
+		C170A4520A8C4F37BFB4A6CE /* Slider.xcodeproj */ = {isa = PBXFileReference; name = "Slider.xcodeproj"; path = "../node_modules/react-native-multi-slider/iOS/Slider.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AFCFF689523846A893614655 /* Slider.app */ = {isa = PBXFileReference; name = "Slider.app"; path = "Slider.app"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.application; explicitFileType = undefined; includeInIndex = 0; };
+		D1DAB41BF0A34F83B24C9A42 /* SliderTests.xctest */ = {isa = PBXFileReference; name = "SliderTests.xctest"; path = "SliderTests.xctest"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.cfbundle; explicitFileType = undefined; includeInIndex = 0; };
+		727D3CC2E42D4EEDB050441E /* RangeSlider.xcodeproj */ = {isa = PBXFileReference; name = "RangeSlider.xcodeproj"; path = "../node_modules/react-native-range-slider/ios/RangeSlider.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		54C7A70BCDB945498830146E /* libRangeSlider.a */ = {isa = PBXFileReference; name = "libRangeSlider.a"; path = "libRangeSlider.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -503,9 +503,9 @@
 				ECA83B6DF2624ACE816112A0 /* libRNVectorIcons.a in Frameworks */,
 				88A3F3B0F4754638AFBDBA52 /* libRNGoogleSignin.a in Frameworks */,
 				6FDE0841011C5C3DE8FAFC14 /* libPods-FaithMeetsLove.a in Frameworks */,
-				B8FC1B803AE647A880B2841A /* libRangeSlider.a in Frameworks */,
-				9E6D95AEB3F24DE89154608B /* Slider.app in Resources */,
-				94DE718AC8F34EF0A67966BC /* SliderTests.xctest in Resources */,
+				10FF3E0542FF48DAAC8725E0 /* Slider.app in Resources */,
+				71F736B3F38B4121B10FEA68 /* SliderTests.xctest in Resources */,
+				33B34EBB678747E5B4F50120 /* libRangeSlider.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,8 +783,8 @@
 				F7CF2C5567694D0787F41305 /* BVLinearGradient.xcodeproj */,
 				660FBA44ED6A4ADFB5F0ADA7 /* RNVectorIcons.xcodeproj */,
 				5735B661C4DA4B4098CD299D /* RNGoogleSignin.xcodeproj */,
-				C062D8C3CEF94D12AF1EB3AF /* RangeSlider.xcodeproj */,
-				D8758AA9520D45DCB799C4B4 /* Slider.xcodeproj */,
+				C170A4520A8C4F37BFB4A6CE /* Slider.xcodeproj */,
+				727D3CC2E42D4EEDB050441E /* RangeSlider.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1556,8 +1556,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = FaithMeetsLoveTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1592,8 +1592,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = FaithMeetsLoveTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1642,8 +1642,8 @@
 					ode_modules,
 					"eact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = FaithMeetsLove/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1686,8 +1686,8 @@
 					ode_modules,
 					"eact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = FaithMeetsLove/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1723,8 +1723,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = "FaithMeetsLove-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1766,8 +1766,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = "FaithMeetsLove-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1808,8 +1808,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = "FaithMeetsLove-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1850,8 +1850,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin",
-					"$(SRCROOT)\..\node_modules\react-native-range-slider\ios/**",
-					"$(SRCROOT)\..\node_modules\react-native-multi-slider\iOS\Slider",
+					"$(SRCROOT)/../node_modules/react-native-multi-slider/iOS/Slider",
+					"$(SRCROOT)/../node_modules/react-native-range-slider/ios/**",
 				);
 				INFOPLIST_FILE = "FaithMeetsLove-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

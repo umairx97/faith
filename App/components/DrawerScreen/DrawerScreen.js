@@ -19,6 +19,11 @@ import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import firebase from "../FirebaseConfig/FirebaseConfig";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes
+} from "react-native-google-signin";
 
 export default class DrawerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -47,17 +52,36 @@ export default class DrawerScreen extends React.Component {
       {
         text: "OK",
         onPress: () => {
-          this.signOut();
+         //this.signOut();
+          this.signOutGoogle();
         }
       }
     ]);
   }
   signOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      this.setState({ user: null }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  revokeAccess = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      console.log('deleted');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  signOutGoogle = async () => {
     firebase
       .auth()
       .signOut()
       .then(res => {
-        Actions.reset("signIn");
+        Actions.reset("login");
       });
   };
   render() {
