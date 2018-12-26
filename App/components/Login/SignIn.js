@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   Alert,
   ScrollView,
+  AsyncStorage,
   ActivityIndicator
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -55,6 +56,7 @@ export default class SignIn extends Component {
       email: "",
       password: "",
       isLoading: false,
+      userStatus: "",
       logintext: "Login"
     };
 
@@ -102,7 +104,7 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        Actions.home();
+        this.openDrawerPage("googleLoggedin")
       })
       .catch(error => {
         const { code, message } = error;
@@ -129,22 +131,26 @@ export default class SignIn extends Component {
             //  this.setState({ logintext: "Login" });
           } else {
             this.loadingButton.showLoading(true);
-            // Actions.drawerOpen("drawer");
-            Actions.drawer();
+                     
+            this.openDrawerPage("firebaseLoggedin");
             setTimeout(() => {
               this.loadingButton.showLoading(false);
-            }, 1000);
-            // this.setState({ logintext: "Login" });
+            }, 100);
           }
-          //Alert.alert(userData.user.uid);
         })
         .catch(error => {
           //Login was not successful, let's create a new account
           Alert.alert("Invalid credentials");
         });
     } else {
+      
       Alert.alert("Please enter email & Password");
     }
+  }
+ async openDrawerPage(_val){
+  AsyncStorage.setItem('checkLoggedType', _val)
+    Actions.home();
+
   }
 
   render() {
