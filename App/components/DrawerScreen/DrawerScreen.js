@@ -16,6 +16,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import React from "react";
+import { Images } from "../../../assets/imageAll";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
@@ -38,20 +39,39 @@ export default class DrawerScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      user_name: ""
+    };
+    // this.getData();
+    this.getUid();
+    // this.ref=firebase.firestore().collection("Users")
+    // .doc("FaithMeetsLove")
+    // .collection("Registered")
   }
-  async logout(){
-    var v=await AsyncStorage.getItem('checkLoggedType');
-    if(v=="firebaseLoggedin"){
+  //    getData(){
+  // this.allData=this.ref.onSnapshot()
+  //   }
+  async logout() {
+    var v = await AsyncStorage.getItem("checkLoggedType");
+    if (v == "firebaseLoggedin") {
       this.signOutGoogle();
-    }else{
+    } else {
       this.signOut();
-      
     }
   }
   //   onVipCenterPressed() {
   //     Actions.vipCenter();
   //   }
   componentDidMount() {}
+  async getUid() {
+    var uname = "hello";
+    //await firebase.auth().currentUser.uid;
+    Alert.alert(uname);
+    // Alert.alert(x);
+    this.setState({
+      user_name: uname.toUpperCase()
+    });
+  }
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
       {
@@ -80,12 +100,12 @@ export default class DrawerScreen extends React.Component {
   revokeAccess = async () => {
     try {
       await GoogleSignin.revokeAccess();
-      console.log('deleted');
+      console.log("deleted");
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   signOutGoogle = async () => {
     firebase
       .auth()
@@ -134,87 +154,6 @@ export default class DrawerScreen extends React.Component {
               pointerEvents="box-none"
               style={styles.iphoneXBarsTabBar5ItemsView}
             >
-              <View pointerEvents="box-none" style={styles.barView}>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    flex: 1,
-                    flexDirection: "column",
-                    justifyContent: "flex-end"
-                  }}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/home-indicator---on-light.png")}
-                  style={styles.homeIndicatorOnLightImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/discover.png")}
-                  style={styles.discoverImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/neaby.png")}
-                  style={styles.neabyImage}
-                />
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View pointerEvents="box-none" style={styles.favoriteView}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
-                  />
-                </View>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/message-2.png")}
-                  style={styles.messageImage}
-                />
-              </View>
               <View
                 pointerEvents="box-none"
                 style={{
@@ -257,7 +196,11 @@ export default class DrawerScreen extends React.Component {
                     justifyContent: "center"
                   }}
                 >
-                  <Text style={styles.landonGibsonText}>Landon Gibson</Text>
+                  <Text style={styles.landonGibsonText}>
+                    {this.state.user_name.length > 18
+                      ? this.state.user_name.substring(0, 18) + "..."
+                      : this.state.user_name}
+                  </Text>
                 </View>
               </View>
               <View
@@ -280,17 +223,13 @@ export default class DrawerScreen extends React.Component {
                 }}
               >
                 <View pointerEvents="box-none" style={styles.rectangle2View}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
+                  <Image
+                    source={Images.findFriendList}
+                    style={styles.logoutImage}
                   />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.likesText}>Likes</Text>
+                  <Text style={styles.likesText}>Home</Text>
                 </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
@@ -300,82 +239,7 @@ export default class DrawerScreen extends React.Component {
                     justifyContent: "flex-end"
                   }}
                 >
-                  <Image
-                    source={require("../../../assets/images/shape-2.png")}
-                    style={styles.shapeImage}
-                  />
-                </View>
-              </View>
-
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View pointerEvents="box-none" style={styles.iconsLikeView}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View pointerEvents="box-none" style={styles.rectangleView}>
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.colorWhiteView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.colorWhiteTwoView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                  </View>
+                  <Image source={Images.shapeArrow} style={styles.shapeImage} />
                 </View>
               </View>
             </View>
@@ -388,17 +252,13 @@ export default class DrawerScreen extends React.Component {
                 }}
               >
                 <View pointerEvents="box-none" style={styles.rectangle2TwoView}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
+                  <Image
+                    source={Images.matchMaking}
+                    style={styles.logoutImage}
                   />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.visitsText}>Visits</Text>
+                  <Text style={styles.visitsText}>Matches</Text>
                 </TouchableOpacity>
                 <View
                   pointerEvents="box-none"
@@ -409,7 +269,7 @@ export default class DrawerScreen extends React.Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/shape-2.png")}
+                    source={Images.shapeArrow}
                     style={styles.shapeTwoImage}
                   />
                 </View>
@@ -445,54 +305,148 @@ export default class DrawerScreen extends React.Component {
                       />
                     </View>
                     <Image
-                      source={require("../../../assets/images/shape-3.png")}
+                      source={Images.shapeArrow}
                       style={styles.shapeThreeImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleTwoView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View pointerEvents="box-none" style={styles.visitorsView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View pointerEvents="box-none" style={styles.rectangle2TwoView}>
+                  <Image
+                    source={Images.informationCenter}
+                    style={styles.logoutImage}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.visitsText}>Information center</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={Images.shapeArrow}
+                    style={styles.shapeTwoImage}
+                  />
+                </View>
+              </View>
 
-                    <View pointerEvents="box-none">
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View pointerEvents="box-none" style={styles.iconsLikeCopyView}>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleTwoView}
+                    >
                       <View
                         pointerEvents="box-none"
-                        style={styles.colorWhiteThreeView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteFourView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
                     </View>
+                    <Image
+                      source={Images.shapeArrow}
+                      style={styles.shapeThreeImage}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            <View pointerEvents="box-none" style={styles.visitorsView}>
+              <View
+                pointerEvents="box-none"
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View pointerEvents="box-none" style={styles.rectangle2TwoView}>
+                  <Image
+                    source={Images.visitProfile}
+                    style={styles.logoutImage}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.visitsText}>Visits</Text>
+                </TouchableOpacity>
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={Images.shapeArrow}
+                    style={styles.shapeTwoImage}
+                  />
+                </View>
+              </View>
+
+              <View
+                pointerEvents="box-none"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View pointerEvents="box-none" style={styles.iconsLikeCopyView}>
+                  <View
+                    pointerEvents="box-none"
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View
+                      pointerEvents="box-none"
+                      style={styles.rectangleTwoView}
+                    >
+                      <View
+                        pointerEvents="box-none"
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={Images.shapeArrow}
+                      style={styles.shapeThreeImage}
+                    />
                   </View>
                 </View>
               </View>
@@ -519,13 +473,9 @@ export default class DrawerScreen extends React.Component {
                     pointerEvents="box-none"
                     style={styles.rectangle2ThreeView}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "flex-end"
-                      }}
+                    <Image
+                      source={Images.userGroups}
+                      style={styles.logoutImage}
                     />
                   </View>
                   <TouchableOpacity onPress={this.onFacebookPressed}>
@@ -541,98 +491,15 @@ export default class DrawerScreen extends React.Component {
                     }}
                   >
                     <Image
-                      source={require("../../../assets/images/shape-2.png")}
+                      source={Images.shapeArrow}
                       style={styles.shapeFourImage}
                     />
-                  </View>
-                </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    justifyContent: "center"
-                  }}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.iconsLikeCopyTwoView}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flexDirection: "row",
-                        alignSelf: "stretch"
-                      }}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleThreeView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <Image
-                        source={require("../../../assets/images/groups.png")}
-                        style={styles.groupsImage}
-                      />
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.rectangleThreeView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                      </View>
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteFiveView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteSixView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                      </View>
-                    </View>
                   </View>
                 </View>
               </View>
             </View>
           </View>
-         
+
           <View pointerEvents="box-none" style={styles.panel2View}>
             <View pointerEvents="box-none" style={styles.walletView}>
               <View
@@ -646,13 +513,9 @@ export default class DrawerScreen extends React.Component {
                   pointerEvents="box-none"
                   style={styles.rectangle2FourView}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
+                  <Image
+                    source={Images.walletIcon}
+                    style={styles.logoutImage}
                   />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
@@ -668,91 +531,9 @@ export default class DrawerScreen extends React.Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/shape-2.png")}
+                    source={Images.shapeArrow}
                     style={styles.shapeFiveImage}
                   />
-                </View>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopyThreeView}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleFourView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={require("../../../assets/images/wallet.png")}
-                      style={styles.walletImage}
-                    />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleFourView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteSevenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteEightView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
                 </View>
               </View>
             </View>
@@ -768,14 +549,7 @@ export default class DrawerScreen extends React.Component {
                   pointerEvents="box-none"
                   style={styles.rectangle2FiveView}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
-                  />
+                  <Image source={Images.vipCenter} style={styles.logoutImage} />
                 </View>
                 <TouchableOpacity
                   onPress={() => {
@@ -793,7 +567,7 @@ export default class DrawerScreen extends React.Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/shape-2.png")}
+                    source={Images.shapeArrow}
                     style={styles.shapeSixImage}
                   />
                 </View>
@@ -831,52 +605,9 @@ export default class DrawerScreen extends React.Component {
                       />
                     </View>
                     <Image
-                      source={require("../../../assets/images/shape-5.png")}
+                      source={Images.shapeArrow}
                       style={styles.shapeSevenImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleFiveView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteNineView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteTenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
                   </View>
                 </View>
               </View>
@@ -890,13 +621,9 @@ export default class DrawerScreen extends React.Component {
                 }}
               >
                 <View pointerEvents="box-none" style={styles.rectangle2SixView}>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
+                  <Image
+                    source={Images.findFriendList}
+                    style={styles.logoutImage}
                   />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
@@ -911,91 +638,9 @@ export default class DrawerScreen extends React.Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/shape-2.png")}
-                    style={styles.shapeEightImage}
+                    source={Images.shapeArrow}
+                    style={styles.shapeNineImage}
                   />
-                </View>
-              </View>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopyFiveView}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleSixView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={require("../../../assets/images/friends.png")}
-                      style={styles.friendsImage}
-                    />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleSixView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteElevenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteTwelveView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
                 </View>
               </View>
             </View>
@@ -1011,14 +656,7 @@ export default class DrawerScreen extends React.Component {
                   pointerEvents="box-none"
                   style={styles.rectangle2SevenView}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
-                  />
+                  <Image source={Images.blacklist} style={styles.logoutImage} />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
                   <Text style={styles.blacklistText}>Blacklist</Text>
@@ -1032,7 +670,7 @@ export default class DrawerScreen extends React.Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/shape-2.png")}
+                    source={Images.shapeArrow}
                     style={styles.shapeNineImage}
                   />
                 </View>
@@ -1044,81 +682,7 @@ export default class DrawerScreen extends React.Component {
                   width: "100%",
                   height: "100%"
                 }}
-              >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopySixView}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleSevenView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={require("../../../assets/images/blacklist.png")}
-                      style={styles.blacklistImage}
-                    />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleSevenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteThirteenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteFourteenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </View>
+              />
             </View>
             <View pointerEvents="box-none" style={styles.blacklistView}>
               <View
@@ -1132,16 +696,12 @@ export default class DrawerScreen extends React.Component {
                   pointerEvents="box-none"
                   style={styles.rectangle2SevenView}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
+                  <Image
+                    source={Images.settingsApp}
+                    style={styles.logoutImage}
                   />
                 </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
+                <TouchableOpacity onPress={this.onSettingPressed}>
                   <Text style={styles.blacklistText}>Settings</Text>
                 </TouchableOpacity>
                 <View
@@ -1153,7 +713,7 @@ export default class DrawerScreen extends React.Component {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/images/shape-2.png")}
+                    source={Images.shapeArrow}
                     style={styles.shapeNineImage}
                   />
                 </View>
@@ -1176,68 +736,7 @@ export default class DrawerScreen extends React.Component {
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleSevenView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={require("../../../assets/images/blacklist.png")}
-                      style={styles.blacklistImage}
-                    />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleSevenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteThirteenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteFourteenView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
+                  />
                 </View>
               </View>
             </View>
@@ -1262,13 +761,9 @@ export default class DrawerScreen extends React.Component {
                     pointerEvents="box-none"
                     style={styles.rectangle2EightView}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "flex-end"
-                      }}
+                    <Image
+                      source={Images.shuticon}
+                      style={styles.logoutImage}
                     />
                   </View>
                   <TouchableOpacity
@@ -1278,96 +773,6 @@ export default class DrawerScreen extends React.Component {
                   >
                     <Text style={styles.LogText}>LogOut</Text>
                   </TouchableOpacity>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      flex: 1,
-                      justifyContent: "flex-end"
-                    }}
-                  />
-                </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
-                  }}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.iconsLikeCopySevenView}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flexDirection: "row",
-                        alignSelf: "stretch"
-                      }}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleEightView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "flex-end"
-                          }}
-                        />
-                      </View>
-                      <Image
-                        source={require("../../../assets/images/shuticon.png")}
-                        style={styles.settingsImage}
-                      />
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.rectangleEightView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                      </View>
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteFifteenView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteSixteenView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              flex: 1,
-                              flexDirection: "column",
-                              justifyContent: "flex-end"
-                            }}
-                          />
-                        </View>
-                      </View>
-                    </View>
-                  </View>
                 </View>
               </View>
             </View>
@@ -1412,7 +817,7 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 152,
+    height: 250,
     marginLeft: 19,
     marginTop: 15,
     marginRight: 15
@@ -1449,7 +854,6 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   rectangle2View: {
-    backgroundColor: "rgb(237, 74, 71)",
     borderRadius: 8,
     width: 22,
     height: 22,
@@ -1494,7 +898,6 @@ const styles = StyleSheet.create({
     height: 0
   },
   rectangle2TwoView: {
-    backgroundColor: "rgb(80, 227, 194)",
     borderRadius: 8,
     width: 22,
     height: 22,
@@ -1537,7 +940,6 @@ const styles = StyleSheet.create({
     height: 0
   },
   rectangle2ThreeView: {
-    backgroundColor: "rgba(144, 19, 254, 0.92)",
     borderRadius: 8,
     width: 22,
     height: 22
@@ -1574,6 +976,14 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0
   },
+  logoutImage: {
+    resizeMode: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+    alignSelf: "center",
+    width: 15,
+
+    height: 15
+  },
   walletView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 36,
@@ -1607,7 +1017,6 @@ const styles = StyleSheet.create({
     marginTop: 13
   },
   rectangle2FourView: {
-    backgroundColor: "rgb(240, 85, 34)",
     borderRadius: 8,
     width: 22,
     height: 22,
@@ -1650,7 +1059,6 @@ const styles = StyleSheet.create({
     height: 0
   },
   rectangle2FiveView: {
-    backgroundColor: "rgb(74, 144, 226)",
     borderRadius: 8,
     width: 22,
     height: 22,
@@ -1693,7 +1101,6 @@ const styles = StyleSheet.create({
     height: 0
   },
   rectangle2SixView: {
-    backgroundColor: "rgba(126, 211, 33, 0.84)",
     borderRadius: 8,
     width: 22,
     height: 22,
@@ -1736,7 +1143,6 @@ const styles = StyleSheet.create({
     height: 0
   },
   rectangle2SevenView: {
-    backgroundColor: "rgb(74, 74, 74)",
     borderRadius: 8,
     width: 22,
     height: 22,
@@ -1779,9 +1185,9 @@ const styles = StyleSheet.create({
     height: 0
   },
   rectangle2EightView: {
-    backgroundColor: "rgb(218, 217, 226)",
     borderRadius: 8,
     width: 22,
+    alignItems: "center",
     height: 22,
     marginLeft: 16
   },
@@ -1956,6 +1362,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 0,
     height: 0
+  },
+  logoutImage: {
+    resizeMode: "stretch",
+    width: 20,
+    height: 20
   },
   favoriteView: {
     backgroundColor: "rgb(193, 192, 201)",

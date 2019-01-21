@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Boffin Coders/Projects/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/BoffinCoders/Projects/FaithMeetsLoves/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
                     "source": "/Users/shrikrishna/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/4d6b7c4660b4b04ac0e25ae5a720def2/res/values-v24/values-v24.xml",

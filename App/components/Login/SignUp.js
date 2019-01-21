@@ -28,6 +28,7 @@ import {
 import AnimateLoadingButton from "react-native-animate-loading-button";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 import DateTimePicker from "react-native-modal-datetime-picker";
+import { ProgressDialog } from "react-native-simple-dialogs";
 import Moment from "moment";
 import { Actions } from "react-native-router-flux";
 import makeInputGreatAgain, {
@@ -79,7 +80,8 @@ export default class SignUp extends Component {
       _password: "",
       _fullName: "",
       _gender: 0,
-      _dob: ""
+      _dob: "",
+      progressVisible: false
     };
     GoogleSignin.configure({
       androidClientId:
@@ -90,11 +92,14 @@ export default class SignUp extends Component {
   }
 
   _sendEmailVerification() {
+    instance = this;
+    // instance.setState({ ...this.state, progressVisible: false });
     firebase
       .auth()
       .currentUser.sendEmailVerification()
       .then(
         function() {
+          instance.setState({ ...this.state, progressVisible: false });
           // Email sent.
           Alert.alert(
             "Success",
@@ -116,6 +121,8 @@ export default class SignUp extends Component {
   }
 
   _handleSignUp() {
+    instance = this;
+    instance.setState({ ...this.state, progressVisible: true });
     const {
       _fullName,
       _username,
@@ -153,20 +160,20 @@ export default class SignUp extends Component {
               );
             })
             .catch(error => {
+              instance.setState({ ...this.state, progressVisible: false });
               Alert.alert("Authentication failed." + error.toString());
             });
         });
     } else {
+      instance.setState({ ...this.state, progressVisible: false });
       Alert.alert("Please fill all fields");
     }
   }
   _updateUserProfile(the_uid, _email, _username, _fullName, _gender, _dob) {
+    instance = this;
     firebase
-      .firestore()
-      .collection("Users")
-      .doc("FaithMeetsLove")
-      .collection("Registered")
-      .doc(the_uid)
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + the_uid)
       .set({
         uid: the_uid,
         email: _email,
@@ -176,11 +183,13 @@ export default class SignUp extends Component {
         user_Dob: _dob
       })
       .then(ref => {
+        instance.setState({ ...this.state, progressVisible: false });
         // console.log(ref);
         //Alert.alert("firebase data save")
         this._sendEmailVerification();
       })
       .catch(error => {
+        instance.setState({ ...this.state, progressVisible: false });
         Alert.alert("fail" + error.toString());
       });
   }
@@ -206,7 +215,9 @@ export default class SignUp extends Component {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
 
-   _onGoogleLogin=async()=> {
+  _onGoogleLogin = async () => {
+    instance = this;
+    instance.setState({ ...this.state, progressVisible: true });
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
@@ -220,13 +231,15 @@ export default class SignUp extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
+        instance.setState({ ...this.state, progressVisible: false });
         Actions.home();
       })
       .catch(error => {
+        instance.setState({ ...this.state, progressVisible: false });
         const { code, message } = error;
         // Alert.alert(message + " Errorcode " + code);
       });
-  }
+  };
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
@@ -266,6 +279,11 @@ export default class SignUp extends Component {
   render() {
     return (
       <KeyboardAvoidingView>
+        <ProgressDialog
+          visible={this.state.progressVisible}
+          title="Progress Dialog"
+          message="Please, wait..."
+        />
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
@@ -460,7 +478,7 @@ export default class SignUp extends Component {
                         marginTop: 20
                       }}
                     >
-                      {/* <RkButton
+                      <RkButton
                         rkType="rounded"
                         style={styles.googleButton}
                         onPress={() => {
@@ -468,8 +486,8 @@ export default class SignUp extends Component {
                         }}
                       >
                         Register
-                      </RkButton> */}
-                      <AnimateLoadingButton
+                      </RkButton>
+                      {/* <AnimateLoadingButton
                         ref={c => (this.loadingButton = c)}
                         width={200}
                         height={48}
@@ -479,7 +497,7 @@ export default class SignUp extends Component {
                         backgroundColor="rgb(252, 56, 80)"
                         borderRadius={24}
                         onPress={this._handleSignUp.bind(this)}
-                      />
+                      /> */}
                     </View>
                     <View style={{ flexDirection: "row" }}>
                       <View

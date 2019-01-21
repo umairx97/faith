@@ -25,10 +25,11 @@ import firebase from "../FirebaseConfig/FirebaseConfig";
 import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
-import { RkButton, RkText } from "react-native-ui-kitten";
+import { RkButton, RkText,RkTextInput  } from "react-native-ui-kitten";
 import LoadingButton from "react-native-loading-button";
 import AnimateLoadingButton from "react-native-animate-loading-button";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
+import { ProgressDialog } from "react-native-simple-dialogs";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -57,12 +58,14 @@ export default class SignIn extends Component {
       password: "",
       isLoading: false,
       userStatus: "",
-      logintext: "Login"
+      logintext: "Login",
+      progressVisible: false
     };
 
     GoogleSignin.configure({
       androidClientId:
         "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
+
       iosClientId:
         "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
     });
@@ -91,9 +94,12 @@ export default class SignIn extends Component {
   //   });
   // }
   async _onGoogleLogin() {
+    // instance = this;
+    // instance.setState({ ...this.state, progressVisible: true });
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
+        // instance.setState({ ...this.state, progressVisible: false });
         //Alert.alert("token " + data.user.idToken);
         // Create a new Firebase credential with the token
         const credential = firebase.auth.GoogleAuthProvider.credential(
@@ -104,9 +110,10 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        this.openDrawerPage("googleLoggedin")
+        this.openDrawerPage("googleLoggedin");
       })
       .catch(error => {
+        //  instance.setState({ ...this.state, progressVisible: false });
         const { code, message } = error;
         // Alert.alert(message + " Errorcode " + code);
       });
@@ -115,7 +122,9 @@ export default class SignIn extends Component {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
   _onSubmit() {
-    this.setState({ isLoadingVisible: true });
+    instance = this;
+    //this.setState({ isLoadingVisible: true });
+    // instance.setState({ ...this.state, progressVisible: true });
     // setTimeout(() => {
     //   this.setState({ logintext: "Loading..." });
     // }, 100);
@@ -126,36 +135,39 @@ export default class SignIn extends Component {
         .signInWithEmailAndPassword(email, password)
         .then(userData => {
           if (userData.user.emailVerified == false) {
-            this.loadingButton.showLoading(false);
+            // this.loadingButton.showLoading(false);
+            // instance.setState({ ...this.state, progressVisible: false });
             Alert.alert("Please verify your email for login.");
             //  this.setState({ logintext: "Login" });
           } else {
-            this.loadingButton.showLoading(true);
-                     
+            // this.loadingButton.showLoading(true);
+            // instance.setState({ ...this.state, progressVisible: false });
             this.openDrawerPage("firebaseLoggedin");
-            setTimeout(() => {
-              this.loadingButton.showLoading(false);
-            }, 100);
+         
           }
         })
         .catch(error => {
+          //  instance.setState({ ...this.state, progressVisible: false });
           //Login was not successful, let's create a new account
           Alert.alert("Invalid credentials");
         });
     } else {
-      
       Alert.alert("Please enter email & Password");
     }
   }
- async openDrawerPage(_val){
-  AsyncStorage.setItem('checkLoggedType', _val)
+  async openDrawerPage(_val) {
+    AsyncStorage.setItem("checkLoggedType", _val);
     Actions.home();
-
   }
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
+        <ProgressDialog
+          visible={this.state.progressVisible}
+          title="Progress Dialog"
+          message="Please, wait..."
+        />
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
@@ -204,8 +216,9 @@ export default class SignIn extends Component {
                     >
                       <Text style={styles.forgetPwd}>Forgot Password</Text>
                     </TouchableOpacity>
+
                     <View style={{ marginTop: "4%" }}>
-                      {/* <RkButton
+                      <RkButton
                         rkType="rounded"
                         style={styles.googleButton}
                         // onPress={props.handleSubmit}
@@ -214,8 +227,8 @@ export default class SignIn extends Component {
                         }}
                       >
                         Login
-                      </RkButton> */}
-                      <AnimateLoadingButton
+                      </RkButton>
+                      {/* <AnimateLoadingButton
                         ref={c => (this.loadingButton = c)}
                         width={200}
                         height={48}
@@ -225,7 +238,7 @@ export default class SignIn extends Component {
                         backgroundColor="rgb(252, 56, 80)"
                         borderRadius={24}
                         onPress={this._onSubmit.bind(this)}
-                      />
+                      /> */}
 
                       <View style={{ flexDirection: "row" }}>
                         <View
