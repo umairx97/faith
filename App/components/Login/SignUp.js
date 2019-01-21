@@ -314,26 +314,7 @@ export default class SignUp extends Component {
               width: "100%"
             }
           } /> */}
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "center"
-                      }}
-                    >
-                      <Image
-                        source={require("../../../assets/images/logo.png")}
-                        style={{
-                          flex: 1,
-                          justifyContent: "center",
-                          alignSelf: "center",
-                          width: 90,
-                          height: 90,
-                          resizeMode: "contain",
-                          marginBottom: 30
-                        }}
-                      />
-                    </View>
+
                     <View
                       style={{
                         flex: 1,
@@ -507,7 +488,7 @@ export default class SignUp extends Component {
                           flex: 1,
                           alignSelf: "center",
                           marginLeft: "12%",
-                          marginTop: "4%"
+                          marginTop: "10%"
                         }}
                       />
                       <Text
@@ -515,7 +496,7 @@ export default class SignUp extends Component {
                           alignSelf: "center",
                           paddingHorizontal: 5,
                           fontSize: 14,
-                          marginTop: "4%"
+                          marginTop: "10%"
                         }}
                       >
                         Or SignUp With
@@ -527,7 +508,7 @@ export default class SignUp extends Component {
                           flex: 1,
                           alignSelf: "center",
                           marginRight: "12%",
-                          marginTop: "4%"
+                          marginTop: "10%"
                         }}
                       />
                     </View>
@@ -535,7 +516,7 @@ export default class SignUp extends Component {
                       style={{
                         flexDirection: "row",
                         marginBottom: "15%",
-                        marginTop: "5%"
+                        marginTop: "10%"
                       }}
                     >
                       <View style={{ flex: 1 }}>
