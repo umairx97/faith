@@ -10,11 +10,13 @@ import {
   KeyboardAvoidingView,
   Image,
   Alert,
-  Platform
+  Platform,
+  Dimensions
 } from "react-native";
 import { RkButton, RkText } from "react-native-ui-kitten";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { ifIphoneX } from "react-native-iphone-x-helper";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -66,7 +68,10 @@ const validationSchema = Yup.object().shape({
     .min(8, "Please enter 8 digit password"),
   dateOfBirth: Yup.string().required(" Date of birth is required")
 });
-
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
 export default class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -81,7 +86,8 @@ export default class SignUp extends Component {
       _fullName: "",
       _gender: 0,
       _dob: "",
-      progressVisible: false
+      progressVisible: false,
+      dob_color: "#C1C1C1"
     };
     GoogleSignin.configure({
       androidClientId:
@@ -275,15 +281,18 @@ export default class SignUp extends Component {
       Alert.alert("Please fill fields");
     }
   }
-
   render() {
     return (
-      <KeyboardAvoidingView>
-        <ProgressDialog
+      <KeyboardAvoidingView
+        style={{
+          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" })
+        }}
+      >
+        {/* <ProgressDialog
           visible={this.state.progressVisible}
           title="Progress Dialog"
           message="Please, wait..."
-        />
+        /> */}
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
@@ -292,35 +301,24 @@ export default class SignUp extends Component {
               keyboardDismissMode="on-drag"
               keyboardShouldPersistTaps="always"
               contentContainerStyle={{
-                flexGrow: 1,
                 justifyContent: "center",
                 backgroundColor: "#FFFFFF"
               }}
             >
               <Form>
-                <View>
+                <View style={{ flex: 1, marginTop: 30, marginBottom: 30 }}>
                   <OfflineNotice />
                   <View
                     style={{
-                      flex: 1,
-                      padding: "10%"
+                      paddingLeft: 10 + "%",
+                      paddingRight: 10 + "%"
                     }}
                   >
-                    {/* <View style={
-            {
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "center",
-              width: "100%"
-            }
-          } /> */}
-
                     <View
                       style={{
-                        flex: 1,
                         flexDirection: "column",
-                        justifyContent: "center",
-                        marginTop: 20
+
+                        paddingTop: 30
                       }}
                     >
                       <Text>Full Name</Text>
@@ -336,12 +334,10 @@ export default class SignUp extends Component {
                     </View>
                     <View
                       style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "center"
+                        flexDirection: "column"
                       }}
                     >
-                      <Text style={styles.formInput}> Username</Text>
+                      <Text style={styles.formInput}>Username</Text>
                       <MyInput
                         name="username"
                         type="name"
@@ -354,9 +350,7 @@ export default class SignUp extends Component {
                     </View>
                     <View
                       style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "center"
+                        flexDirection: "column"
                       }}
                     >
                       <Text style={styles.formInput}>Email</Text>
@@ -370,9 +364,7 @@ export default class SignUp extends Component {
                     </View>
                     <View
                       style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "center"
+                        flexDirection: "column"
                       }}
                     >
                       <Text style={styles.formInput}>Password</Text>
@@ -388,15 +380,22 @@ export default class SignUp extends Component {
                     </View>
                     <View
                       style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        marginTop: 10
+                        flexDirection: "column"
                       }}
                     >
                       <Text>Date of Birth</Text>
-                      <TouchableOpacity onPress={this.onFacebookPressed}>
-                        <MyInput
+                      <TouchableOpacity onPress={this._showDateTimePicker}>
+                        <Text
+                          style={{
+                            color: this.state.dob_color,
+                            marginTop: 20,
+                            marginBottom: 2,
+                            paddingBottom: 10
+                          }}
+                        >
+                          {this.state.dob}
+                        </Text>
+                        {/* <MyInput
                           style={{
                             color: "#000000"
                           }}
@@ -412,8 +411,15 @@ export default class SignUp extends Component {
                           }
                           onFocus={this._showDateTimePicker}
                           style={styles.textInput}
-                        />
+                        /> */}
                       </TouchableOpacity>
+                      <View
+                        style={{
+                          backgroundColor: "#3090C7",
+                          height: 1.2,
+                          marginBottom: "4%"
+                        }}
+                      />
                       <DateTimePicker
                         isVisible={this.state.isDateTimePickerVisible}
                         onConfirm={this._handleDatePicked}
@@ -622,12 +628,11 @@ const styles = StyleSheet.create({
     width: "100%",
     color: "#000000"
     // borderColor: "red",
-    // marginTop: Platform.OS === "ios" ? 10 + "%" : 0,
+    //marginTop: Platform.OS === "ios" ? 10 + "%" : 0
     // borderBottomWidth: 1
   },
   formInput: {
-    width: "100%",
-    marginTop: "4%"
+    width: "100%"
   },
   googleButton: {
     backgroundColor: "rgb(252, 56, 80)",

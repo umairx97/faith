@@ -19,5 +19,7 @@ export const Images = {
   homePage: require("./images/homePage.png"),
   informationCenter: require("./images/informationCenter.png"),
   matchMaking: require("./images/matchMaking.png"),
-  visitProfile: require("./images/visitProfile.png")
+  visitProfile: require("./images/visitProfile.png"),
+  chatIcons: require("./images/chatIcons.png"),
+  shareIcons: require("./images/shareIcons.png")
 };

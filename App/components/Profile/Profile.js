@@ -32,7 +32,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <ScrollView>
-        <View pointerEvents="box-none" style={styles.profileView}>
+        <View style={styles.profileView}>
           <LinearGradient
             start={{
               x: 0.79,
@@ -46,9 +46,8 @@ export default class Profile extends React.Component {
             colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
             style={styles.navBarViewLinearGradient}
           >
-            <View pointerEvents="box-none" style={styles.navBarView}>
+            <View style={styles.navBarView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flex: 1,
                   flexDirection: "column",
@@ -58,20 +57,15 @@ export default class Profile extends React.Component {
             </View>
           </LinearGradient>
           <View
-            pointerEvents="box-none"
             style={{
               flex: 1,
               flexDirection: "column",
               justifyContent: "flex-end"
             }}
           >
-            <View
-              pointerEvents="box-none"
-              style={styles.iphoneXBarsTabBar5ItemsView}
-            >
-              <View pointerEvents="box-none" style={styles.barView}>
+            <View style={styles.iphoneXBarsTabBar5ItemsView}>
+              <View style={styles.barView}>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flex: 1,
                     flexDirection: "column",
@@ -80,7 +74,6 @@ export default class Profile extends React.Component {
                 />
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -93,7 +86,6 @@ export default class Profile extends React.Component {
                 />
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -106,7 +98,6 @@ export default class Profile extends React.Component {
                 />
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -119,16 +110,14 @@ export default class Profile extends React.Component {
                 />
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.favoriteView}>
+                <View style={styles.favoriteView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -138,7 +127,6 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -151,7 +139,6 @@ export default class Profile extends React.Component {
                 />
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -166,16 +153,14 @@ export default class Profile extends React.Component {
             </View>
           </View>
           <View
-            pointerEvents="box-none"
             style={{
               position: "absolute",
               width: "100%",
               height: "100%"
             }}
           >
-            <View pointerEvents="box-none" style={styles.accountInforView}>
+            <View style={styles.accountInforView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
@@ -186,7 +171,6 @@ export default class Profile extends React.Component {
                   style={styles.ovalImage}
                 />
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -203,17 +187,15 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   flex: 1,
                   flexDirection: "column",
                   justifyContent: "flex-end"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.followTabView}>
+                <View style={styles.followTabView}>
                   <Text style={styles.visitorsText}>VISITORS</Text>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       position: "absolute",
                       width: "100%",
@@ -223,7 +205,6 @@ export default class Profile extends React.Component {
                     <Text style={styles.likesTwoText}>LIKES</Text>
                   </View>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       position: "absolute",
                       width: "100%",
@@ -231,7 +212,6 @@ export default class Profile extends React.Component {
                     }}
                   >
                     <View
-                      pointerEvents="box-none"
                       style={{
                         flexDirection: "row",
                         alignSelf: "stretch"
@@ -239,7 +219,6 @@ export default class Profile extends React.Component {
                     >
                       <Text style={styles.textText}>2318</Text>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flexDirection: "row",
                           flex: 1,
@@ -251,7 +230,6 @@ export default class Profile extends React.Component {
                     </View>
                   </View>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       position: "absolute",
                       width: "100%",
@@ -261,7 +239,6 @@ export default class Profile extends React.Component {
                     <Text style={styles.textTwoText}>364</Text>
                   </View>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       position: "absolute",
                       width: "100%",
@@ -273,7 +250,6 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -290,15 +266,13 @@ export default class Profile extends React.Component {
           <View style={styles.panel1View}>
             <View style={styles.likesView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.rectangle2View}>
+                <View style={styles.rectangle2View}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -310,7 +284,6 @@ export default class Profile extends React.Component {
                   <Text style={styles.likesText}>Likes</Text>
                 </TouchableOpacity>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -325,24 +298,21 @@ export default class Profile extends React.Component {
               </View>
 
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.iconsLikeView}>
+                <View style={styles.iconsLikeView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
                   >
-                    <View pointerEvents="box-none" style={styles.rectangleView}>
+                    <View style={styles.rectangleView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -351,12 +321,8 @@ export default class Profile extends React.Component {
                       />
                     </View>
 
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.colorWhiteView}
-                    >
+                    <View style={styles.colorWhiteView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -364,13 +330,9 @@ export default class Profile extends React.Component {
                         }}
                       />
                     </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleView}
-                      >
+                    <View>
+                      <View style={styles.rectangleView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -379,12 +341,8 @@ export default class Profile extends React.Component {
                         />
                       </View>
                     </View>
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.colorWhiteTwoView}
-                    >
+                    <View style={styles.colorWhiteTwoView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -396,17 +354,15 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
-            <View pointerEvents="box-none" style={styles.visitorsView}>
+            <View style={styles.visitorsView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.rectangle2TwoView}>
+                <View style={styles.rectangle2TwoView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -418,7 +374,6 @@ export default class Profile extends React.Component {
                   <Text style={styles.visitsText}>Visits</Text>
                 </TouchableOpacity>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -433,27 +388,21 @@ export default class Profile extends React.Component {
               </View>
 
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.iconsLikeCopyView}>
+                <View style={styles.iconsLikeCopyView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleTwoView}
-                    >
+                    <View style={styles.rectangleTwoView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -465,13 +414,9 @@ export default class Profile extends React.Component {
                       source={require("../../../assets/images/shape-3.png")}
                       style={styles.shapeThreeImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleTwoView}
-                      >
+                    <View>
+                      <View style={styles.rectangleTwoView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -481,13 +426,9 @@ export default class Profile extends React.Component {
                       </View>
                     </View>
 
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteThreeView}
-                      >
+                    <View>
+                      <View style={styles.colorWhiteThreeView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -496,12 +437,8 @@ export default class Profile extends React.Component {
                         />
                       </View>
 
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteFourView}
-                      >
+                      <View style={styles.colorWhiteFourView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -516,28 +453,22 @@ export default class Profile extends React.Component {
             </View>
 
             <View
-              pointerEvents="box-none"
               style={{
                 flex: 1,
                 flexDirection: "column",
                 justifyContent: "flex-end"
               }}
             >
-              <View pointerEvents="box-none" style={styles.groupsView}>
+              <View style={styles.groupsView}>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     alignSelf: "stretch",
                     alignItems: "center"
                   }}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.rectangle2ThreeView}
-                  >
+                  <View style={styles.rectangle2ThreeView}>
                     <View
-                      pointerEvents="box-none"
                       style={{
                         flex: 1,
                         flexDirection: "column",
@@ -549,7 +480,6 @@ export default class Profile extends React.Component {
                     <Text style={styles.groupsText}>Groups</Text>
                   </TouchableOpacity>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       flex: 1,
@@ -564,7 +494,6 @@ export default class Profile extends React.Component {
                   </View>
                 </View>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     position: "absolute",
                     width: "100%",
@@ -572,23 +501,15 @@ export default class Profile extends React.Component {
                     justifyContent: "center"
                   }}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.iconsLikeCopyTwoView}
-                  >
+                  <View style={styles.iconsLikeCopyTwoView}>
                     <View
-                      pointerEvents="box-none"
                       style={{
                         flexDirection: "row",
                         alignSelf: "stretch"
                       }}
                     >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleThreeView}
-                      >
+                      <View style={styles.rectangleThreeView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -600,13 +521,9 @@ export default class Profile extends React.Component {
                         source={require("../../../assets/images/groups.png")}
                         style={styles.groupsImage}
                       />
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.rectangleThreeView}
-                        >
+                      <View>
+                        <View style={styles.rectangleThreeView}>
                           <View
-                            pointerEvents="box-none"
                             style={{
                               flex: 1,
                               flexDirection: "column",
@@ -615,13 +532,9 @@ export default class Profile extends React.Component {
                           />
                         </View>
                       </View>
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteFiveView}
-                        >
+                      <View>
+                        <View style={styles.colorWhiteFiveView}>
                           <View
-                            pointerEvents="box-none"
                             style={{
                               flex: 1,
                               flexDirection: "column",
@@ -629,12 +542,8 @@ export default class Profile extends React.Component {
                             }}
                           />
                         </View>
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteSixView}
-                        >
+                        <View style={styles.colorWhiteSixView}>
                           <View
-                            pointerEvents="box-none"
                             style={{
                               flex: 1,
                               flexDirection: "column",
@@ -649,21 +558,16 @@ export default class Profile extends React.Component {
               </View>
             </View>
           </View>
-          <View pointerEvents="box-none" style={styles.panel2View}>
-            <View pointerEvents="box-none" style={styles.walletView}>
+          <View style={styles.panel2View}>
+            <View style={styles.walletView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.rectangle2FourView}
-                >
+                <View style={styles.rectangle2FourView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -676,7 +580,6 @@ export default class Profile extends React.Component {
                 </TouchableOpacity>
 
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -690,30 +593,21 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopyThreeView}
-                >
+                <View style={styles.iconsLikeCopyThreeView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleFourView}
-                    >
+                    <View style={styles.rectangleFourView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -725,13 +619,9 @@ export default class Profile extends React.Component {
                       source={require("../../../assets/images/wallet.png")}
                       style={styles.walletImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleFourView}
-                      >
+                    <View>
+                      <View style={styles.rectangleFourView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -740,13 +630,9 @@ export default class Profile extends React.Component {
                         />
                       </View>
                     </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteSevenView}
-                      >
+                    <View>
+                      <View style={styles.colorWhiteSevenView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -754,12 +640,8 @@ export default class Profile extends React.Component {
                           }}
                         />
                       </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteEightView}
-                      >
+                      <View style={styles.colorWhiteEightView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -772,20 +654,15 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
-            <View pointerEvents="box-none" style={styles.levelView}>
+            <View style={styles.levelView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.rectangle2FiveView}
-                >
+                <View style={styles.rectangle2FiveView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -797,7 +674,6 @@ export default class Profile extends React.Component {
                   <Text style={styles.vipCenterText}>VIP center</Text>
                 </TouchableOpacity>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -811,30 +687,21 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopyFourView}
-                >
+                <View style={styles.iconsLikeCopyFourView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleFiveView}
-                    >
+                    <View style={styles.rectangleFiveView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -846,13 +713,9 @@ export default class Profile extends React.Component {
                       source={require("../../../assets/images/shape-5.png")}
                       style={styles.shapeSevenImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleFiveView}
-                      >
+                    <View>
+                      <View style={styles.rectangleFiveView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -861,13 +724,9 @@ export default class Profile extends React.Component {
                         />
                       </View>
                     </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteNineView}
-                      >
+                    <View>
+                      <View style={styles.colorWhiteNineView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -875,12 +734,8 @@ export default class Profile extends React.Component {
                           }}
                         />
                       </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteTenView}
-                      >
+                      <View style={styles.colorWhiteTenView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -893,17 +748,15 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
-            <View pointerEvents="box-none" style={styles.friendsView}>
+            <View style={styles.friendsView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View pointerEvents="box-none" style={styles.rectangle2SixView}>
+                <View style={styles.rectangle2SixView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -915,7 +768,6 @@ export default class Profile extends React.Component {
                   <Text style={styles.findFriendsText}>Find friends</Text>
                 </TouchableOpacity>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -929,30 +781,21 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopyFiveView}
-                >
+                <View style={styles.iconsLikeCopyFiveView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleSixView}
-                    >
+                    <View style={styles.rectangleSixView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -964,13 +807,9 @@ export default class Profile extends React.Component {
                       source={require("../../../assets/images/friends.png")}
                       style={styles.friendsImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleSixView}
-                      >
+                    <View>
+                      <View style={styles.rectangleSixView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -979,13 +818,9 @@ export default class Profile extends React.Component {
                         />
                       </View>
                     </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteElevenView}
-                      >
+                    <View>
+                      <View style={styles.colorWhiteElevenView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -993,12 +828,8 @@ export default class Profile extends React.Component {
                           }}
                         />
                       </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteTwelveView}
-                      >
+                      <View style={styles.colorWhiteTwelveView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -1011,20 +842,15 @@ export default class Profile extends React.Component {
                 </View>
               </View>
             </View>
-            <View pointerEvents="box-none" style={styles.blacklistView}>
+            <View style={styles.blacklistView}>
               <View
-                pointerEvents="box-none"
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.rectangle2SevenView}
-                >
+                <View style={styles.rectangle2SevenView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flex: 1,
                       flexDirection: "column",
@@ -1036,7 +862,6 @@ export default class Profile extends React.Component {
                   <Text style={styles.blacklistText}>Blacklist</Text>
                 </TouchableOpacity>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     flex: 1,
@@ -1050,30 +875,21 @@ export default class Profile extends React.Component {
                 </View>
               </View>
               <View
-                pointerEvents="box-none"
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%"
                 }}
               >
-                <View
-                  pointerEvents="box-none"
-                  style={styles.iconsLikeCopySixView}
-                >
+                <View style={styles.iconsLikeCopySixView}>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       alignSelf: "stretch"
                     }}
                   >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.rectangleSevenView}
-                    >
+                    <View style={styles.rectangleSevenView}>
                       <View
-                        pointerEvents="box-none"
                         style={{
                           flex: 1,
                           flexDirection: "column",
@@ -1085,13 +901,9 @@ export default class Profile extends React.Component {
                       source={require("../../../assets/images/blacklist.png")}
                       style={styles.blacklistImage}
                     />
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleSevenView}
-                      >
+                    <View>
+                      <View style={styles.rectangleSevenView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -1100,13 +912,9 @@ export default class Profile extends React.Component {
                         />
                       </View>
                     </View>
-                    <View pointerEvents="box-none">
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteThirteenView}
-                      >
+                    <View>
+                      <View style={styles.colorWhiteThirteenView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -1114,12 +922,8 @@ export default class Profile extends React.Component {
                           }}
                         />
                       </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.colorWhiteFourteenView}
-                      >
+                      <View style={styles.colorWhiteFourteenView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -1133,27 +937,21 @@ export default class Profile extends React.Component {
               </View>
             </View>
             <View
-              pointerEvents="box-none"
               style={{
                 flex: 1,
                 flexDirection: "column",
                 justifyContent: "flex-end"
               }}
             >
-              <View pointerEvents="box-none" style={styles.settingsView}>
+              <View style={styles.settingsView}>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     flexDirection: "row",
                     alignSelf: "stretch"
                   }}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.rectangle2EightView}
-                  >
+                  <View style={styles.rectangle2EightView}>
                     <View
-                      pointerEvents="box-none"
                       style={{
                         flex: 1,
                         flexDirection: "column",
@@ -1165,7 +963,6 @@ export default class Profile extends React.Component {
                     <Text style={styles.settingsText}>Settings</Text>
                   </TouchableOpacity>
                   <View
-                    pointerEvents="box-none"
                     style={{
                       flexDirection: "row",
                       flex: 1,
@@ -1179,30 +976,21 @@ export default class Profile extends React.Component {
                   </View>
                 </View>
                 <View
-                  pointerEvents="box-none"
                   style={{
                     position: "absolute",
                     width: "100%",
                     height: "100%"
                   }}
                 >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.iconsLikeCopySevenView}
-                  >
+                  <View style={styles.iconsLikeCopySevenView}>
                     <View
-                      pointerEvents="box-none"
                       style={{
                         flexDirection: "row",
                         alignSelf: "stretch"
                       }}
                     >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.rectangleEightView}
-                      >
+                      <View style={styles.rectangleEightView}>
                         <View
-                          pointerEvents="box-none"
                           style={{
                             flex: 1,
                             flexDirection: "column",
@@ -1214,13 +1002,9 @@ export default class Profile extends React.Component {
                         source={require("../../../assets/images/settings.png")}
                         style={styles.settingsImage}
                       />
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.rectangleEightView}
-                        >
+                      <View>
+                        <View style={styles.rectangleEightView}>
                           <View
-                            pointerEvents="box-none"
                             style={{
                               flex: 1,
                               flexDirection: "column",
@@ -1229,13 +1013,9 @@ export default class Profile extends React.Component {
                           />
                         </View>
                       </View>
-                      <View pointerEvents="box-none">
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteFifteenView}
-                        >
+                      <View>
+                        <View style={styles.colorWhiteFifteenView}>
                           <View
-                            pointerEvents="box-none"
                             style={{
                               flex: 1,
                               flexDirection: "column",
@@ -1243,12 +1023,8 @@ export default class Profile extends React.Component {
                             }}
                           />
                         </View>
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.colorWhiteSixteenView}
-                        >
+                        <View style={styles.colorWhiteSixteenView}>
                           <View
-                            pointerEvents="box-none"
                             style={{
                               flex: 1,
                               flexDirection: "column",
