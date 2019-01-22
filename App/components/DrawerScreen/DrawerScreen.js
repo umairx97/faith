@@ -479,7 +479,7 @@ export default class DrawerScreen extends React.Component {
                     />
                   </View>
                   <TouchableOpacity onPress={this.onFacebookPressed}>
-                    <Text style={styles.groupsText}>Groups</Text>
+                    <Text style={styles.groupsText}>Events</Text>
                   </TouchableOpacity>
                   <View
                     pointerEvents="box-none"
@@ -627,7 +627,7 @@ export default class DrawerScreen extends React.Component {
                   />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.findFriendsText}>Find friends</Text>
+                  <Text style={styles.findFriendsText}>Expert Help</Text>
                 </TouchableOpacity>
                 <View
                   pointerEvents="box-none"

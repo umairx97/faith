@@ -16,7 +16,6 @@
 		04E41C8121BFD7E200C4F831 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 04E41C8021BFD7E200C4F831 /* Podfile */; };
 		04E41CC121BFDAFD00C4F831 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C9321BFDAFD00C4F831 /* GoogleSignIn.framework */; };
 		04E41CC321BFDD0400C4F831 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E41CC221BFDD0400C4F831 /* GoogleService-Info.plist */; };
-		0CDB35E2858C414F91B554F0 /* Slider.app in Frameworks */ = {isa = PBXBuildFile; fileRef = 28971DC412A74D31A8F6D8AA /* Slider.app */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -197,20 +196,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
 			remoteInfo = "RNVectorIcons-tvOS";
-		};
-		1849F6CB21F60C5500B00D0D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9DBEF23968E24BFAB7CCDD7B /* Slider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 13B07F961A680F5B00A75B9A;
-			remoteInfo = Slider;
-		};
-		1849F6CD21F60C5500B00D0D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9DBEF23968E24BFAB7CCDD7B /* Slider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 00E356EE1AD99517003FC87E;
-			remoteInfo = SliderTests;
 		};
 		1849F6CF21F60DA900B00D0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -441,7 +426,7 @@
 		00E356EE1AD99517003FC87E /* FaithMeetsLoveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaithMeetsLoveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FaithMeetsLoveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaithMeetsLoveTests.m; sourceTree = "<group>"; };
-		04E41C8021BFD7E200C4F831 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		04E41C8021BFD7E200C4F831 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		04E41C9321BFDAFD00C4F831 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		04E41CC221BFDD0400C4F831 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -480,7 +465,6 @@
 		92A2107E375C4B9E929BD198 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		92F9C41CE64B4C9296A7A042 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
 		9891D2E7018C4DB28B88F38F /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		9DBEF23968E24BFAB7CCDD7B /* Slider.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Slider.xcodeproj; path = "../node_modules/react-native-multi-slider/iOS/Slider.xcodeproj"; sourceTree = "<group>"; };
 		A74ED3B4BB11454E8C44018B /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C0D42F4C67FD4BC0AA505643 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -534,7 +518,6 @@
 				6FDE0841011C5C3DE8FAFC14 /* libPods-FaithMeetsLove.a in Frameworks */,
 				71F736B3F38B4121B10FEA68 /* SliderTests.xctest in Frameworks */,
 				33B34EBB678747E5B4F50120 /* libRangeSlider.a in Frameworks */,
-				0CDB35E2858C414F91B554F0 /* Slider.app in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,15 +733,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1849F6C721F60C5500B00D0D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1849F6CC21F60C5500B00D0D /* Slider.app */,
-				1849F6CE21F60C5500B00D0D /* SliderTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		1EC619FDF91240878466C038 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,7 +807,6 @@
 				660FBA44ED6A4ADFB5F0ADA7 /* RNVectorIcons.xcodeproj */,
 				5735B661C4DA4B4098CD299D /* RNGoogleSignin.xcodeproj */,
 				727D3CC2E42D4EEDB050441E /* RangeSlider.xcodeproj */,
-				9DBEF23968E24BFAB7CCDD7B /* Slider.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1085,10 +1058,6 @@
 					ProductGroup = 183559C421B68150009564CC /* Products */;
 					ProjectRef = 660FBA44ED6A4ADFB5F0ADA7 /* RNVectorIcons.xcodeproj */;
 				},
-				{
-					ProductGroup = 1849F6C721F60C5500B00D0D /* Products */;
-					ProjectRef = 9DBEF23968E24BFAB7CCDD7B /* Slider.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1218,20 +1187,6 @@
 			fileType = archive.ar;
 			path = "libRNVectorIcons-tvOS.a";
 			remoteRef = 183559DD21B68151009564CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1849F6CC21F60C5500B00D0D /* Slider.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = Slider.app;
-			remoteRef = 1849F6CB21F60C5500B00D0D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1849F6CE21F60C5500B00D0D /* SliderTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SliderTests.xctest;
-			remoteRef = 1849F6CD21F60C5500B00D0D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {
