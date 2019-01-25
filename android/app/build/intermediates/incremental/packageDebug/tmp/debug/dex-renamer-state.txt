@@ -1,4 +1,4 @@
-#Tue Jan 22 13:57:00 IST 2019
-base.0=/BoffinCoders/Projects/FaithMeetsLoves/android/app/build/intermediates/transforms/dexMerger/debug/0
+#Thu Jan 24 10:43:40 IST 2019
+base.0=/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

@@ -17,6 +17,7 @@ import VIPCenter from "../VIPCenter/VIPCenter";
 import UserProfile from "../UserProfile/UserProfile";
 import Favorites from "../Favorites/Favorites";
 import Chat from "../Chat/Chat";
+import { ifIphoneX } from "react-native-iphone-x-helper";
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -83,6 +84,7 @@ export default class Route extends Component {
                   hideNavBar={true}
                   icon={this.getIconNear}
                   tabs={true}
+                  tabBarStyle={{...ifIphoneX({ marginTop: 30 })}}
                   tabBarPosition="top"
                 >
                   <Scene
@@ -101,12 +103,7 @@ export default class Route extends Component {
                     component={NearbyFilters}
                   />
                 </Scene>
-                <Scene
-                  key="Chat"
-                  icon={this.getIcon}
-                  hideNavBar={true}
-                  component={Chat}
-                />
+               
                 <Scene
                   icon={this.getIconPro}
                   key="Profile"
@@ -115,6 +112,12 @@ export default class Route extends Component {
                 />
               </Scene>
             </Scene>
+            <Scene
+                  key="Chat"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={Chat}
+                />
             <Scene key="vipCenter" component={VIPCenter} hideNavBar={true} />
             <Scene
               key="userProfile"

@@ -8,6 +8,7 @@
 
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
+
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 

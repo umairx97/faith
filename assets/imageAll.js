@@ -21,5 +21,6 @@ export const Images = {
   matchMaking: require("./images/matchMaking.png"),
   visitProfile: require("./images/visitProfile.png"),
   chatIcons: require("./images/chatIcons.png"),
-  shareIcons: require("./images/shareIcons.png")
+  shareIcons: require("./images/shareIcons.png"),
+  addIcon:require("./images/addIcon.png")
 };

@@ -27,6 +27,7 @@
     "react-native-i18n": "^2.0.15",
     "react-native-indicators": "^0.13.0",
     "react-native-iphone-x-helper": "^1.2.0",
+    "react-native-keyboard-aware-scrollview": "^2.0.0",
     "react-native-linear-gradient": "^2.4.4",
     "react-native-loading": "^0.1.0",
     "react-native-loading-button": "^1.0.2",

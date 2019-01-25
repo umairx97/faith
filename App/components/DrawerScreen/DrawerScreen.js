@@ -51,6 +51,7 @@ export default class DrawerScreen extends React.Component {
   //    getData(){
   // this.allData=this.ref.onSnapshot()
   //   }
+
   async logout() {
     var v = await AsyncStorage.getItem("checkLoggedType");
     if (v == "firebaseLoggedin") {
@@ -105,6 +106,10 @@ export default class DrawerScreen extends React.Component {
       console.error(error);
     }
   };
+  onHomePressed=()=>{
+    Actions.Discover();
+    Actions.drawerClose();
+  }
   onChatPressed = () => {
     Actions.Chat();
   };
@@ -223,7 +228,7 @@ export default class DrawerScreen extends React.Component {
                     style={styles.logoutImage}
                   />
                 </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
+                <TouchableOpacity onPress={this.onHomePressed}>
                   <Text style={styles.likesText}>Home</Text>
                 </TouchableOpacity>
                 <View
@@ -298,65 +303,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={styles.visitorsView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <View style={styles.rectangle2TwoView}>
-                  <Image source={Images.chatIcons} style={styles.logoutImage} />
-                </View>
-                <TouchableOpacity onPress={this.onChatPressed}>
-                  <Text style={styles.visitsText}>Chat</Text>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <Image
-                    source={Images.shapeArrow}
-                    style={styles.shapeTwoImage}
-                  />
-                </View>
-              </View>
-
-              <View
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View style={styles.iconsLikeCopyView}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View style={styles.rectangleTwoView}>
-                      <View
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={Images.shapeArrow}
-                      style={styles.shapeThreeImage}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-
+           
             <View style={styles.visitorsView}>
               <View
                 style={{
@@ -521,6 +468,34 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
+            <View style={styles.likesView}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View style={styles.rectangle2View}>
+                  <Image
+                    source={Images.chatIcons}
+                    style={styles.logoutImage}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onChatPressed}>
+                  <Text style={styles.likesText}>Chat</Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image source={Images.shapeArrow} style={styles.shapeImage} />
+                </View>
+              </View>
+            </View>
+            
           </View>
 
           <View style={styles.panel2View}>
@@ -809,7 +784,7 @@ const styles = StyleSheet.create({
   },
 
   navBarViewLinearGradient: {
-    height: 140
+    height: 100
   },
   navBarView: {
     width: "100%",
@@ -817,7 +792,7 @@ const styles = StyleSheet.create({
   },
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 83
+    height: 75
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -825,9 +800,9 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 180,
+    height: 140,
     marginLeft: 18,
-    marginTop: 40,
+    marginTop: 20,
     marginRight: 16
   },
   panel1View: {
@@ -838,7 +813,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     height: 300,
     marginLeft: 19,
-    marginTop: 15,
+    marginTop: 1,
     marginRight: 15
   },
   panel2View: {
@@ -1252,10 +1227,10 @@ const styles = StyleSheet.create({
     resizeMode: "center",
     alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 94,
-    height: 94,
+    width: 90,
+    height: 90,
     marginLeft: 19,
-    marginTop: 22
+    marginTop: 14
   },
   iconsEditImage: {
     resizeMode: "center",
@@ -1275,7 +1250,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "left",
     letterSpacing: 0.23,
-    marginTop: 42,
+    marginTop: 10,
     marginRight: 4
   },
   followTabView: {

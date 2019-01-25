@@ -86,8 +86,8 @@ export default class Discover extends Component {
                     fontSize: 18,
                     color: "gray",
                     position: "absolute",
-                    left: 60,
-                    top: 150,
+                    left: 80,
+                    top: 180,
                     right: 60
                   }}
                 >
@@ -104,8 +104,8 @@ export default class Discover extends Component {
                 <Image
                   source={require("../../../assets/images/photos.png")}
                   style={{
-                    height: Screen.height - 260,
-                    width: Screen.width - 100,
+                    height: Screen.height - 230,
+                    width: Screen.width - 80,
                     resizeMode: "contain"
                   }}
                 />
@@ -115,7 +115,7 @@ export default class Discover extends Component {
                   source={require("../../../assets/images/photos.png")}
                   style={{
                     height: Screen.height - 260,
-                    width: Screen.width - 100,
+                    width: Screen.width - 80,
                     resizeMode: "contain"
                   }}
                 />
@@ -124,8 +124,8 @@ export default class Discover extends Component {
                 <Image
                   source={require("../../../assets/images/photos.png")}
                   style={{
-                    height: Screen.height - 260,
-                    width: Screen.width - 100,
+                    height: Screen.height - 230,
+                    width: Screen.width - 80,
                     resizeMode: "contain"
                   }}
                 />
@@ -134,8 +134,8 @@ export default class Discover extends Component {
                 <Image
                   source={require("../../../assets/images/rectangle-3.png")}
                   style={{
-                    height: Screen.height - 260,
-                    width: Screen.width - 100,
+                    height: Screen.height - 230,
+                    width: Screen.width - 80,
                     resizeMode: "contain"
                   }}
                 />
@@ -144,8 +144,8 @@ export default class Discover extends Component {
                 <Image
                   source={require("../../../assets/images/photos.png")}
                   style={{
-                    height: Screen.height - 260,
-                    width: Screen.width - 100,
+                    height: Screen.height - 230,
+                    width: Screen.width - 80,
                     resizeMode: "contain"
                   }}
                 />

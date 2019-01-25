@@ -31,7 +31,7 @@ export default class Profile extends React.Component {
   }
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: "rgb(249, 249, 249)"}}>
         <View style={styles.profileView}>
           <LinearGradient
             start={{
