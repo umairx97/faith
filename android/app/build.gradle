@@ -98,7 +98,7 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "com.faithmeetsloves"
+        applicationId "com.faithmeetslove"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -149,6 +149,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fbsdk')
+    implementation 'com.facebook.android:facebook-android-sdk:4.40.0'
     implementation project(':react-native-google-signin')
    
     implementation project(':react-native-vector-icons')

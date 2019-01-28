@@ -22,10 +22,11 @@ import makeInputGreatAgain, {
   withNextInputAutoFocusInput
 } from "react-native-formik";
 import firebase from "../FirebaseConfig/FirebaseConfig";
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
-import { RkButton, RkText,RkTextInput  } from "react-native-ui-kitten";
+import { RkButton, RkText, RkTextInput } from "react-native-ui-kitten";
 import LoadingButton from "react-native-loading-button";
 import AnimateLoadingButton from "react-native-animate-loading-button";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
@@ -69,6 +70,7 @@ export default class SignIn extends Component {
       iosClientId:
         "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
     });
+
   }
   showLoading() {
     this.setState({ loading: true });
@@ -143,7 +145,7 @@ export default class SignIn extends Component {
             // this.loadingButton.showLoading(true);
             // instance.setState({ ...this.state, progressVisible: false });
             this.openDrawerPage("firebaseLoggedin");
-         
+
           }
         })
         .catch(error => {
@@ -158,6 +160,41 @@ export default class SignIn extends Component {
   async openDrawerPage(_val) {
     AsyncStorage.setItem("checkLoggedType", _val);
     Actions.home();
+  }
+
+  loginWithFacebook = async () => {
+    try {
+      const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+  
+      if (result.isCancelled) {
+        // handle this however suites the flow of your app
+        alert('Facebook login request canceled')
+        return;
+        //throw new Error('User cancelled request'); 
+      }
+  
+  
+      // get the access token
+      const data = await AccessToken.getCurrentAccessToken();
+  
+      if (!data) {
+        // handle this however suites the flow of your app
+        alert('Invalid user data')
+        return;
+        //throw new Error('Something went wrong obtaining the users access token');
+      }
+  
+      // create a new firebase credential with the token
+      const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+     
+  
+      // login with credential
+      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+      
+    } catch (e) {
+      console.error(e);
+      alert(JSON.stringify('catch'+e))
+    }
   }
 
   render() {
@@ -297,7 +334,7 @@ export default class SignIn extends Component {
                               ]}
                               name="facebook"
                             />
-                            <RkText rkType="caption">Facebook</RkText>
+                            <RkText onPress={() => { this.loginWithFacebook() }} rkType="caption">Facebook</RkText>
                           </RkButton>
                         </View>
                         <View style={{ flex: 1 }}>

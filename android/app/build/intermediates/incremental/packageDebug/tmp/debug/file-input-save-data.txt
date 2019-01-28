@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jan 24 10:43:41 IST 2019
+#Mon Jan 28 11:52:06 IST 2019
 5.base=/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=lib/x86/libjsc.so
