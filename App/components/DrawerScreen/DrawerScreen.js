@@ -13,14 +13,17 @@ import {
   Image,
   Alert,
   AsyncStorage,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
 import React from "react";
 import { Images } from "../../../assets/imageAll";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
+import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase from "../FirebaseConfig/FirebaseConfig";
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -56,7 +59,13 @@ export default class DrawerScreen extends React.Component {
     var v = await AsyncStorage.getItem("checkLoggedType");
     if (v == "firebaseLoggedin") {
       this.signOutGoogle();
-    } else {
+    }
+    else if(v=="facebookloggedin"){
+      this.signOutFacebook();
+        //LoginManager.logOut();
+        Actions.reset("login");
+    }
+     else {
       this.signOut();
     }
   }
@@ -120,6 +129,9 @@ export default class DrawerScreen extends React.Component {
       .then(res => {
         Actions.reset("login");
       });
+  };
+  signOutFacebook = async () => {
+    
   };
   onProfileImagerPressed = () => {
     Actions.Profile();
@@ -784,7 +796,8 @@ const styles = StyleSheet.create({
   },
 
   navBarViewLinearGradient: {
-    height: 100
+    height: 100,
+    ...ifIphoneX({ height: 110 }),
   },
   navBarView: {
     width: "100%",
@@ -792,7 +805,8 @@ const styles = StyleSheet.create({
   },
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 75
+    height: 75,
+    ...ifIphoneX({ height: 85 }),
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -801,8 +815,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     height: 140,
+    ...ifIphoneX({ height: 150 }),
     marginLeft: 18,
     marginTop: 20,
+    ...ifIphoneX({ marginTop: 30 }),
     marginRight: 16
   },
   panel1View: {
@@ -831,6 +847,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 36,
     marginTop: 14,
+    marginTop: Platform.OS === "ios" ? 14 : 10,
     marginRight: 1
   },
   visitorsView: {

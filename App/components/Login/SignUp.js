@@ -14,6 +14,7 @@ import {
   Dimensions
 } from "react-native";
 import { RkButton, RkText } from "react-native-ui-kitten";
+import { BackHandler } from 'react-native'
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ifIphoneX } from "react-native-iphone-x-helper";
@@ -96,7 +97,18 @@ export default class SignUp extends Component {
         "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
     });
   }
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
+  }
 
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
+  }
+
+  backAndroid () {
+    Actions.pop() // Return to previous screen
+    return true // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+  }
   _sendEmailVerification() {
     instance = this;
     // instance.setState({ ...this.state, progressVisible: false });
@@ -114,7 +126,7 @@ export default class SignUp extends Component {
               {
                 text: "OK",
                 onPress: () => {
-                  Actions.signIn();
+                  Actions.login();
                 }
               }
             ]
@@ -249,38 +261,38 @@ export default class SignUp extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
-  _onSubmit() {
-    const { email, password } = this.state;
-    if (
-      email != "" &&
-      password != "" &&
-      _fullName != "" &&
-      _username != null &&
-      _dob != null
-    ) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(userData => {
-          if (userData.user.emailVerified == false) {
-            Alert.alert("Please verify your email for login.");
-          } else {
-            this.loadingButton.showLoading(true);
-            Actions.signIn();
-            setTimeout(() => {
-              this.loadingButton.showLoading(false);
-            }, 1000);
-          }
-          //Alert.alert(userData.user.uid);
-        })
-        .catch(error => {
-          //Login was not successful, let's create a new account
-          Alert.alert("Invalid credentials");
-        });
-    } else {
-      Alert.alert("Please fill fields");
-    }
-  }
+  // _onSubmit() {
+  //   const { email, password } = this.state;
+  //   if (
+  //     email != "" &&
+  //     password != "" &&
+  //     _fullName != "" &&
+  //     _username != null &&
+  //     _dob != null
+  //   ) {
+  //     firebase
+  //       .auth()
+  //       .signInWithEmailAndPassword(email, password)
+  //       .then(userData => {
+  //         if (userData.user.emailVerified == false) {
+  //           Alert.alert("Please verify your email for login.");
+  //         } else {
+  //           this.loadingButton.showLoading(true);
+  //           Actions.signIn();
+  //           setTimeout(() => {
+  //             this.loadingButton.showLoading(false);
+  //           }, 1000);
+  //         }
+  //         //Alert.alert(userData.user.uid);
+  //       })
+  //       .catch(error => {
+  //         //Login was not successful, let's create a new account
+  //         Alert.alert("Invalid credentials");
+  //       });
+  //   } else {
+  //     Alert.alert("Please fill fields");
+  //   }
+  // }
   render() {
     return (
       <KeyboardAvoidingView

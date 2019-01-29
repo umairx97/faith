@@ -35,6 +35,14 @@ export default class Route extends Component {
       />
     );
   };
+  getFavrouiteIcon=()=>{
+    return (
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        source={require("../../../assets/images/neaby.png")}
+      />
+    );
+  };
   getIconPro = () => {
     return (
       <Image
@@ -71,13 +79,7 @@ export default class Route extends Component {
                   hideNavBar={true}
                   component={Discover}
                 />
-                <Scene
-                  key="favorites"
-                  title="Favorites"
-                  icon={this.getIcon}
-                  hideNavBar={true}
-                  component={Favorites}
-                />
+               
                 <Scene
                   key="Nearbyuser"
                   title="NearBy"
@@ -105,10 +107,10 @@ export default class Route extends Component {
                 </Scene>
                
                 <Scene
-                  icon={this.getIconPro}
-                  key="Profile"
+                  key="Favorite"
+                  icon={this.getFavrouiteIcon}
                   hideNavBar={true}
-                  component={Profile}
+                  component={Favorites}
                 />
               </Scene>
             </Scene>
@@ -124,6 +126,12 @@ export default class Route extends Component {
               component={UserProfile}
               hideNavBar={true}
             />
+              <Scene
+                  icon={this.getIconPro}
+                  key="Profile"
+                  hideNavBar={true}
+                  component={Profile}
+                />
           </Scene>
         </Scene>
       </Router>

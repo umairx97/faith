@@ -22,6 +22,7 @@ import makeInputGreatAgain, {
   withNextInputAutoFocusInput
 } from "react-native-formik";
 import firebase from "../FirebaseConfig/FirebaseConfig";
+import { BackHandler } from 'react-native'
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
@@ -75,7 +76,18 @@ export default class SignIn extends Component {
   showLoading() {
     this.setState({ loading: true });
   }
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
+  }
 
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
+  }
+
+  backAndroid () {
+    Actions.pop() // Return to previous screen
+    return true // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+  }
   hideLoading() {
     this.setState({ loading: false });
   }
@@ -165,35 +177,41 @@ export default class SignIn extends Component {
   loginWithFacebook = async () => {
     try {
       const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
-  
+
       if (result.isCancelled) {
         // handle this however suites the flow of your app
         alert('Facebook login request canceled')
         return;
         //throw new Error('User cancelled request'); 
       }
-  
-  
+
+
       // get the access token
       const data = await AccessToken.getCurrentAccessToken();
-  
+
       if (!data) {
         // handle this however suites the flow of your app
         alert('Invalid user data')
         return;
         //throw new Error('Something went wrong obtaining the users access token');
       }
-  
+
       // create a new firebase credential with the token
       const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-     
-  
+
+
       // login with credential
-      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
-      
+      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential).then(user => {
+        this.openDrawerPage("facebookloggedin");
+      })
+        .catch(error => {
+          //  instance.setState({ ...this.state, progressVisible: false });
+          const { code, message } = error;
+          // Alert.alert(message + " Errorcode " + code);
+        });
     } catch (e) {
       console.error(e);
-      alert(JSON.stringify('catch'+e))
+      alert(JSON.stringify('catch' + e))
     }
   }
 
