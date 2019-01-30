@@ -15,9 +15,11 @@ import MyappSplash from "../SplashScreen/MyappSplash";
 import DrawerScreen from "../DrawerScreen/DrawerScreen";
 import VIPCenter from "../VIPCenter/VIPCenter";
 import UserProfile from "../UserProfile/UserProfile";
-import Favorites from "../Favorites/Favorites";
+import FavoritesScreen from "../Favorites/FavoritesScreen";
 import Chat from "../Chat/Chat";
 import { ifIphoneX } from "react-native-iphone-x-helper";
+import Favorite from "../Favorites/Favorite";
+
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -35,11 +37,11 @@ export default class Route extends Component {
       />
     );
   };
-  getFavrouiteIcon=()=>{
+  getFavrouiteIcon = () => { 
     return (
       <Image
         style={{ height: 20, width: 20, resizeMode: "contain" }}
-        source={require("../../../assets/images/neaby.png")}
+        source={require("../../../assets/images/favoriteIcon.png")}
       />
     );
   };
@@ -105,13 +107,25 @@ export default class Route extends Component {
                     component={NearbyFilters}
                   />
                 </Scene>
-               
                 <Scene
                   key="Favorite"
                   icon={this.getFavrouiteIcon}
                   hideNavBar={true}
-                  component={Favorites}
+                  component={Favorite}
                 />
+               
+                {/* <Scene
+                  key="Favorite"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={FavoritesScreen}
+                /> */}
+                {/* <Scene
+                  key="Favorite"
+                  icon={this.getFavrouiteIcon}
+                  hideNavBar={true}
+                  component={Favorites}
+                /> */}
               </Scene>
             </Scene>
             <Scene

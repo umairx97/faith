@@ -41,7 +41,7 @@ export default class NearbyAllUser extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      headerTitle: "Nearby"
+      header: null,
     };
   };
 

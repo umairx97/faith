@@ -176,9 +176,11 @@ export default class SignIn extends Component {
 
   loginWithFacebook = async () => {
     try {
+     // LoginManager.setLoginBehavior("web");
       const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
 
-      if (result.isCancelled) {
+      if (result.isCancelled) 
+      {
         // handle this however suites the flow of your app
         alert('Facebook login request canceled')
         return;
@@ -189,7 +191,8 @@ export default class SignIn extends Component {
       // get the access token
       const data = await AccessToken.getCurrentAccessToken();
 
-      if (!data) {
+      if (!data) 
+      {
         // handle this however suites the flow of your app
         alert('Invalid user data')
         return;
@@ -198,7 +201,7 @@ export default class SignIn extends Component {
 
       // create a new firebase credential with the token
       const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-
+      var x=JSON.stringify(credential)
 
       // login with credential
       const firebaseUserCredential = await firebase.auth().signInWithCredential(credential).then(user => {

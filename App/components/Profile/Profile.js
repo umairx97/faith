@@ -6,7 +6,7 @@
 //  Copyright © 2018 Boffin Coders. All rights reserved.
 //
 
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity , BackHandler} from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
@@ -25,7 +25,18 @@ export default class Profile extends React.Component {
     super(props);
   }
 
-  componentDidMount() {}
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
+  }
+
+  backAndroid () {
+    Actions.pop() // Return to previous screen
+    return true // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+  }
   onEditPressed() {
     Actions.userProfile();
   }

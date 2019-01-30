@@ -63,7 +63,7 @@ export default class DrawerScreen extends React.Component {
     else if(v=="facebookloggedin"){
       this.signOutFacebook();
         //LoginManager.logOut();
-        Actions.reset("login");
+        //Actions.reset("login");
     }
      else {
       this.signOut();
@@ -73,14 +73,33 @@ export default class DrawerScreen extends React.Component {
   //     Actions.vipCenter();
   //   }
   componentDidMount() {}
+  
   async getUid() {
+    instance=this;
     var uname = await firebase.auth().currentUser.displayName;
+    var uidUser=await firebase.auth().currentUser.uid;
+    if(uname==null)
+    { var displayUserName=firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    displayUserName.once('value', function(snapshot){
+      var usrName=snapshot.val().fullName;
+      
+      instance.setState({
+        user_name: usrName
+      });
+    })
+   
+      
+    }
+    else
+{
+  this.setState({
+    user_name: uname.toUpperCase()
+  });
+}
     //await firebase.auth().currentUser.uid;
     //Alert.alert(uname);
     // Alert.alert(x);
-    this.setState({
-      user_name: uname.toUpperCase()
-    });
+  
   }
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
@@ -107,14 +126,14 @@ export default class DrawerScreen extends React.Component {
       console.error(error);
     }
   };
-  revokeAccess = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      console.log("deleted");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // revokeAccess = async () => {
+  //   try {
+  //     await GoogleSignin.revokeAccess();
+  //     console.log("deleted");
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   onHomePressed=()=>{
     Actions.Discover();
     Actions.drawerClose();
@@ -131,7 +150,18 @@ export default class DrawerScreen extends React.Component {
       });
   };
   signOutFacebook = async () => {
-    
+    await LoginManager.logOut();
+  await firebase
+    .auth()
+    .signOut()
+    .then(res => {
+     
+      Actions.reset("login");
+    });
+   // const data=await AccessToken.setCurrentAccessToken("akjkshk")
+  //  var credential = firebase.auth.FacebookAuthProvider.credential(data.accesToken)
+    // const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+  //  const firebaseUserCredential = await firebase.auth().signOut();
   };
   onProfileImagerPressed = () => {
     Actions.Profile();
@@ -439,8 +469,69 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
+            <View style={styles.visitorsView}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View style={styles.rectangle2TwoView}>
+                  <Image
+                    source={Images.userGroups}
+                    style={styles.logoutImage}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.visitsText}>Events</Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={Images.shapeArrow}
+                    style={styles.shapeTwoImage}
+                  />
+                </View>
+              </View>
 
-            <View
+              <View
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%"
+                }}
+              >
+                <View style={styles.iconsLikeCopyView}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <View style={styles.rectangleTwoView}>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          justifyContent: "flex-end"
+                        }}
+                      />
+                    </View>
+                    <Image
+                      source={Images.shapeArrow}
+                      style={styles.shapeThreeImage}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* <View
               style={{
                 flex: 1,
                 flexDirection: "column",
@@ -479,7 +570,7 @@ export default class DrawerScreen extends React.Component {
                   </View>
                 </View>
               </View>
-            </View>
+            </View> */}
             <View style={styles.likesView}>
               <View
                 style={{
@@ -827,7 +918,7 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 300,
+    height: 270,
     marginLeft: 19,
     marginTop: 1,
     marginRight: 15
@@ -845,15 +936,16 @@ const styles = StyleSheet.create({
   },
   likesView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginTop: 14,
-    marginTop: Platform.OS === "ios" ? 14 : 10,
+    height: 35,
+  
+    marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
   },
   visitorsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginTop: 15,
+    height: 35,
+    
+    marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
   },
   groupsView: {
@@ -862,6 +954,7 @@ const styles = StyleSheet.create({
     marginLeft: 14,
     marginRight: 18,
     marginBottom: 14,
+    marginTop: Platform.OS === "ios" ? 10 : 10,
     justifyContent: "center"
   },
   rectangle2View: {
@@ -997,35 +1090,35 @@ const styles = StyleSheet.create({
   },
   walletView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
+    height: 35,
     marginLeft: 1,
-    marginTop: 13,
+    marginTop: 9,
     marginRight: 1
   },
   levelView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
+    height: 35,
     marginLeft: 1,
-    marginTop: 13,
+    marginTop: 9,
     marginRight: 1
   },
   friendsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 38,
-    marginTop: 13,
+    height: 35,
+    marginTop: 9,
     marginRight: 1
   },
   blacklistView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 38,
-    marginTop: 13,
+    height: 36,
+    marginTop: 10,
     marginRight: 1
   },
   settingsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 38,
+    height: 35,
     marginRight: 1,
-    marginTop: 13
+    marginTop: 9
   },
   rectangle2FourView: {
     borderRadius: 8,

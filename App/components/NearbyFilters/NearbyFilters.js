@@ -55,7 +55,7 @@ export default class NearbyFilters extends React.Component {
     const buttons = ["Guys", "Girls", "Both"];
     const { selectedIndex } = this.state;
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: "rgb(255, 255, 255)"}}>
         <View style={styles.nearbyFiltersView}>
           <View style={styles.barsNavigationFilterView}>
             <View style={styles.toplineView}>
