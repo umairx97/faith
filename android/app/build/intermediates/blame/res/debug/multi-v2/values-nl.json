@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
+            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
             "map": [
+                {
+                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/res/values-nl/values-nl.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,120,179",
+                        "endColumns": "64,58,54",
+                        "endOffsets": "115,174,229"
+                    },
+                    "to": {
+                        "startLines": "62,63,64",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "7414,7479,7538",
+                        "endColumns": "64,58,54",
+                        "endOffsets": "7474,7533,7588"
+                    }
+                },
                 {
                     "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/res/values-nl/values.xml",
                     "from": {

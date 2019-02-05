@@ -24,6 +24,7 @@ import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import { RNCamera } from 'react-native-camera';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -164,7 +165,7 @@ export default class DrawerScreen extends React.Component {
   //  const firebaseUserCredential = await firebase.auth().signOut();
   };
   onProfileImagerPressed = () => {
-    Actions.Profile();
+    Actions.ProfileCopy();
   };
   render() {
     return (

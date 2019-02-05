@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sk/values-sk.xml",
+            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sk/values-sk.xml",
             "map": [
+                {
+                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/res/values-sk/values-sk.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,125,182",
+                        "endColumns": "69,56,50",
+                        "endOffsets": "120,177,228"
+                    },
+                    "to": {
+                        "startLines": "62,63,64",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "7431,7501,7558",
+                        "endColumns": "69,56,50",
+                        "endOffsets": "7496,7553,7604"
+                    }
+                },
                 {
                     "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/879d12b6ad380d1b3f7a18119d05f614/res/values-sk/values-sk.xml",
                     "from": {

@@ -82,6 +82,14 @@ PODS:
   - nanopb/encode (0.3.8)
   - React (0.57.1):
     - React/Core (= 0.57.1)
+  - react-native-camera (1.10.1):
+    - React
+    - react-native-camera/RCT (= 1.10.1)
+    - react-native-camera/RN (= 1.10.1)
+  - react-native-camera/RCT (1.10.1):
+    - React
+  - react-native-camera/RN (1.10.1):
+    - React
   - react-native-fbsdk (0.8.0):
     - React
     - react-native-fbsdk/Core (= 0.8.0)
@@ -105,6 +113,7 @@ DEPENDENCIES:
   - Firebase/Core
   - GoogleSignIn
   - React (from `../node_modules/react-native`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -129,6 +138,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   React:
     :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   yoga:
@@ -151,9 +162,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-camera: a8d04ef12749def72cae86b0b8d28c2de891a392
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 5149ac9250157780e1bc18995f5c5328897d1123
+PODFILE CHECKSUM: f5f641ab4eea24acb3b820e64da124ef63adca91
 
 COCOAPODS: 1.5.3

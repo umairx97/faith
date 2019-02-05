@@ -19,7 +19,9 @@ import FavoritesScreen from "../Favorites/FavoritesScreen";
 import Chat from "../Chat/Chat";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import Favorite from "../Favorites/Favorite";
-
+import ProfileCopy from "../Profile/ProfileCopy";
+import CaptureImage from "../CameraView/CaptureImage";
+import RecordVideo from "../CameraView/RecordVideo";
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -140,6 +142,21 @@ export default class Route extends Component {
               component={UserProfile}
               hideNavBar={true}
             />
+               <Scene
+              key="ProfileCopy"
+              component={ProfileCopy}
+              hideNavBar={true}
+            />
+            <Scene
+            key="recordVideo"
+            component={RecordVideo}
+            hideNavBar={true}
+          />
+          <Scene
+            key="captureImage"
+            component={CaptureImage}
+            hideNavBar={true}
+          />
               <Scene
                   icon={this.getIconPro}
                   key="Profile"

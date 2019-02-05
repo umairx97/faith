@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-de/values-de.xml",
+            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-de/values-de.xml",
             "map": [
                 {
                     "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/res/values-de/values.xml",
@@ -86,6 +86,23 @@
                         "startOffsets": "1852,2015,2155,2297,2418,2506,2598,2681,2773,2869,2980,3089,3181,3273,3375,3492,3574,3657,3864,3960,4069,4180,4290",
                         "endColumns": "162,139,141,120,87,91,82,91,95,110,108,91,91,101,116,81,82,206,95,108,110,109,137",
                         "endOffsets": "2010,2150,2292,2413,2501,2593,2676,2768,2864,2975,3084,3176,3268,3370,3487,3569,3652,3859,3955,4064,4175,4285,4423"
+                    }
+                },
+                {
+                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/res/values-de/values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,121,179",
+                        "endColumns": "65,57,55",
+                        "endOffsets": "116,174,230"
+                    },
+                    "to": {
+                        "startLines": "62,63,64",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "7451,7517,7575",
+                        "endColumns": "65,57,55",
+                        "endOffsets": "7512,7570,7626"
                     }
                 }
             ]

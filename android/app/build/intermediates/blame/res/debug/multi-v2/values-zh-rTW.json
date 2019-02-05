@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a0a331022226d1dfd364ff17b2094c3/res/values-zh-rTW/values-zh-rTW.xml",
@@ -69,6 +69,23 @@
                         "startOffsets": "1733,1869,1970,2081,2190,2270,2352,2428,2513,2598,2705,2809,2895,2981,3072,3181,3259,3338,3461,3554,3649,3755,3849",
                         "endColumns": "135,100,110,108,79,81,75,84,84,106,103,85,85,90,108,77,78,122,92,94,105,93,99",
                         "endOffsets": "1864,1965,2076,2185,2265,2347,2423,2508,2593,2700,2804,2890,2976,3067,3176,3254,3333,3456,3549,3644,3750,3844,3944"
+                    }
+                },
+                {
+                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/res/values-zh-rTW/values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,132,186,240,287",
+                        "endColumns": "76,53,53,46,116",
+                        "endOffsets": "127,181,235,282,399"
+                    },
+                    "to": {
+                        "startLines": "62,63,64,65,66",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "6436,6513,6567,6621,6668",
+                        "endColumns": "76,53,53,46,116",
+                        "endOffsets": "6508,6562,6616,6663,6780"
                     }
                 },
                 {

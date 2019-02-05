@@ -56,8 +56,7 @@ export default class Profile extends React.Component {
             locations={[0, 1]}
             colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
             style={styles.navBarViewLinearGradient}
-          >
-            <View style={styles.navBarView}>
+          ><View style={styles.navBarView}>
               <View
                 style={{
                   flex: 1,
@@ -73,8 +72,7 @@ export default class Profile extends React.Component {
               flexDirection: "column",
               justifyContent: "flex-end"
             }}
-          >
-            <View style={styles.iphoneXBarsTabBar5ItemsView}>
+          ><View style={styles.iphoneXBarsTabBar5ItemsView}>
               <View style={styles.barView}>
                 <View
                   style={{
@@ -177,10 +175,11 @@ export default class Profile extends React.Component {
                   alignSelf: "stretch"
                 }}
               >
-                <Image
-                  source={require("../../../assets/images/oval.png")}
+              <TouchableOpacity onPress={()=>{alert("hello m h")}}>
+                <Image source={require("../../../assets/images/oval.png")}
                   style={styles.ovalImage}
                 />
+                </TouchableOpacity>
                 <View
                   style={{
                     flexDirection: "row",

@@ -1,27 +1,36 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:21:1-30:12
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+MERGED from [:react-native-fetch-blob] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fetch-blob/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-14:12
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-28:12
+MERGED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-18:12
+MERGED from [com.android.support:exifinterface:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.1.aar/8360587bad8897506c527d122ca6c5ce/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-vision:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-12.0.1.aar/fbd9a32da7fd7bbc0f5fb9b33deaa653/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:21:1-30:12
 MERGED from [com.facebook.android:facebook-android-sdk:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.40.0.aar/967ec13c84e0d8b94eae6583431aba19/AndroidManifest.xml:21:1-31:12
-MERGED from [:react-native-google-signin] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-vector-icons] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-linear-gradient] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-i18n] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-gesture-handler] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-google-signin] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-vector-icons] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-linear-gradient] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-i18n] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-gesture-handler] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/87b32fde3ff501652adcf9fb62f41c36/AndroidManifest.xml:17:1-39:12
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:2:1-15:12
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:2:1-15:12
+MERGED from [com.github.yalantis:ucrop:2.2.2-native] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.android:facebook-login:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/879d12b6ad380d1b3f7a18119d05f614/AndroidManifest.xml:21:1-31:12
 MERGED from [com.facebook.android:facebook-share:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-share-4.40.0.aar/f6ce417a01e59bd6db81512865e718de/AndroidManifest.xml:21:1-31:12
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:21:1-37:12
 MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8cdb50380dcbb484a18b411814cf6f35/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/aec93ea1ec0c738c667de6b759a606f8/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/2612d77af0c3141884a85e3230843e16/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-vision-common:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-12.0.1.aar/03304a031f1a6c80ce0ab620cb6da0d7/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/AndroidManifest.xml:17:1-29:12
 MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/6159b0da76c3436aae7e364a3c665d1d/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/7ba458ebd6c38519a89990286f58cd99/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/c6c047c5034501dbb78fdbbeea2ec115/AndroidManifest.xml:17:1-22:12
+MERGED from [id.zelory:compressor:2.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/compressor-2.1.0.aar/1ce9e5f9a2dfa2a1cbefd83eeb791433/AndroidManifest.xml:2:1-12:12
 MERGED from [com.facebook.android:facebook-places:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-places-4.40.0.aar/8e5ebd3dd156ee80f55872bf5e6d5267/AndroidManifest.xml:21:1-31:12
 MERGED from [com.facebook.android:facebook-applinks:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.40.0.aar/a21795be41a97c8edf62dc3590c11f32/AndroidManifest.xml:21:1-31:12
 MERGED from [com.facebook.android:facebook-messenger:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/b3fbe0346d8d623da42e5d335bba606b/AndroidManifest.xml:21:1-31:12
@@ -29,13 +38,12 @@ MERGED from [com.facebook.android:facebook-marketing:4.40.0] /Users/boffincoders
 MERGED from [com.facebook.android:facebook-core:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-core-4.40.0.aar/477e38feacd0ccefe633add2f3d79f70/AndroidManifest.xml:21:1-53:12
 MERGED from [com.android.support:cardview-v7:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.0.2.aar/2af17f63dea2f6961594519807ca18c6/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:customtabs:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/bac80c58674cdf5bcd1fadeab063d23d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-v4:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.2.aar/81487c8884780cca6d8b0d197be9c8b3/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/da7475299b165bdaa93d8cbaba7e81b9/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/1dd0b7114dcadacdb39a77cc876bec72/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/cec7711b93cd82bc8dcd61597a8a6ee2/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/eddedde3f25e399956bf895531aa73e2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/da7475299b165bdaa93d8cbaba7e81b9/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/cc01481cf05cc86446470349d61696fb/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/283f753c92e1198a30bea7ecd8145be0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/cec7711b93cd82bc8dcd61597a8a6ee2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/990f8d42a006f1271f70961004e37b21/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/eddedde3f25e399956bf895531aa73e2/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a0a331022226d1dfd364ff17b2094c3/AndroidManifest.xml:17:1-22:12
 MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/e1249a7825e773294a4a3e0775157d26/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.10.0.aar/f37ee869860921d2d0d9be8189acebd5/AndroidManifest.xml:2:1-9:12
@@ -44,58 +52,88 @@ MERGED from [com.facebook.fresco:imagepipeline:1.10.0] /Users/boffincoders/.grad
 MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/1a304463bc37a632825d7da71456f0ba/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db652c46077964226fe154d8022ea6ad/AndroidManifest.xml:2:1-13:12
 MERGED from [org.webkit:android-jsc:r174650] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/28a1ec24e162d702995e964aa8b70e08/AndroidManifest.xml:1:1-3:12
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/9e892b887fcc97707b8eb83e47ea2462/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/789bac3166f3495ebd5b0e42f6f78851/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-license-12.0.1.aar/bdc6622492882562ff4367de71706ca0/AndroidManifest.xml:17:1-24:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/95f02dcda010dff440c5da5df29668f6/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/bca793fd310ff46f7feb771f0f5bc363/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/9e892b887fcc97707b8eb83e47ea2462/AndroidManifest.xml:2:1-9:12
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/7c157867afe3b4b5672503f41e4fd004/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/78e9d4252f490b7ad16621e25c77c96d/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
 	package
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:2:5-33
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:2:5-33
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:4:5-67
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:4:5-67
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:4:22-64
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:5:5-77
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:11:5-78
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:5:5-77
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:11:5-78
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:5:22-75
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:5:22-75
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:6:5-79
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:6:5-79
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:6:22-76
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:7:7-82
+	android:name
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:7:24-79
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:8:5-81
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-81
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:8:22-78
+uses-permission#android.permission.CAMERA
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:9:4-64
+MERGED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:9:5-65
+MERGED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:9:5-65
+	android:name
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:9:21-61
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:10:5-70
+	android:name
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:10:22-68
 application
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:7:5-44:19
-MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:28:5-20
-MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:28:5-20
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:11:5-48:19
+MERGED from [:react-native-fetch-blob] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fetch-blob/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-12:19
+MERGED from [:react-native-fetch-blob] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fetch-blob/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-12:19
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:12:5-26:19
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:12:5-26:19
+MERGED from [com.google.android.gms:play-services-vision:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-12.0.1.aar/fbd9a32da7fd7bbc0f5fb9b33deaa653/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-vision:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-12.0.1.aar/fbd9a32da7fd7bbc0f5fb9b33deaa653/AndroidManifest.xml:7:5-20
+MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:28:5-20
+MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:28:5-20
 MERGED from [com.facebook.android:facebook-android-sdk:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.40.0.aar/967ec13c84e0d8b94eae6583431aba19/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-android-sdk:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.40.0.aar/967ec13c84e0d8b94eae6583431aba19/AndroidManifest.xml:28:5-29:19
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/87b32fde3ff501652adcf9fb62f41c36/AndroidManifest.xml:22:5-37:19
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/87b32fde3ff501652adcf9fb62f41c36/AndroidManifest.xml:22:5-37:19
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:13:5-20
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.android:facebook-login:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/879d12b6ad380d1b3f7a18119d05f614/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-login:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/879d12b6ad380d1b3f7a18119d05f614/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-share:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-share-4.40.0.aar/f6ce417a01e59bd6db81512865e718de/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-share:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-share-4.40.0.aar/f6ce417a01e59bd6db81512865e718de/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:28:5-35:19
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:28:5-35:19
+MERGED from [com.google.android.gms:play-services-vision-common:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-12.0.1.aar/03304a031f1a6c80ce0ab620cb6da0d7/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-vision-common:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-12.0.1.aar/03304a031f1a6c80ce0ab620cb6da0d7/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/6159b0da76c3436aae7e364a3c665d1d/AndroidManifest.xml:7:5-20
@@ -116,112 +154,128 @@ MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/boffincoders/.gradle/c
 MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db652c46077964226fe154d8022ea6ad/AndroidManifest.xml:11:5-20
 MERGED from [org.webkit:android-jsc:r174650] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/28a1ec24e162d702995e964aa8b70e08/AndroidManifest.xml:2:3-17
 MERGED from [org.webkit:android-jsc:r174650] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/28a1ec24e162d702995e964aa8b70e08/AndroidManifest.xml:2:3-17
+MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/789bac3166f3495ebd5b0e42f6f78851/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/789bac3166f3495ebd5b0e42f6f78851/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-license-12.0.1.aar/bdc6622492882562ff4367de71706ca0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-license-12.0.1.aar/bdc6622492882562ff4367de71706ca0/AndroidManifest.xml:22:5-20
 	android:supportsRtl
 		ADDED from [com.facebook.android:facebook-android-sdk:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.40.0.aar/967ec13c84e0d8b94eae6583431aba19/AndroidManifest.xml:28:18-44
 	android:label
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:9:7-39
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:13:7-39
 	android:icon
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:10:7-41
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:14:7-41
 	android:allowBackup
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:15:7-34
 	android:theme
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:16:7-38
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:8:7-38
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:12:7-38
 meta-data#com.facebook.sdk.ApplicationId
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:13:7-105
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:17:7-105
 	android:value
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:13:64-103
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:17:64-103
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:13:18-63
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:17:18-63
 activity#com.facebook.FacebookActivity
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:15:1-18:44
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:19:1-22:44
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:29:9-32:66
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:29:9-32:66
 	android:label
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:18:9-41
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:22:9-41
 	android:configChanges
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:16:9-109
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:20:9-109
 	android:theme
 		ADDED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:32:13-63
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:15:11-55
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:19:11-55
 activity#com.facebook.CustomTabActivity
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:19:5-28:16
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:23:5-32:16
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:34:9-67
 MERGED from [com.facebook.android:facebook-common:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/05caddf7977e267feda14bdb8c3c3638/AndroidManifest.xml:34:9-67
 	android:exported
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:21:9-32
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:25:9-32
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:20:9-54
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:24:9-54
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:@string/fb_login_protocol_scheme
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:22:9-27:25
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:26:9-31:25
 action#android.intent.action.VIEW
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:23:13-65
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:27:13-65
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:23:21-62
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:27:21-62
 category#android.intent.category.DEFAULT
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:24:13-72
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:28:13-72
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:24:23-69
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:28:23-69
 category#android.intent.category.BROWSABLE
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:25:13-74
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:29:13-74
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:25:23-71
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:29:23-71
 data
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:26:13-71
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:30:13-71
 	android:scheme
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:26:19-68
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:30:19-68
 activity#com.faithmeetslove.MainActivity
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:30:7-40:18
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:34:7-44:18
 	android:screenOrientation
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:34:9-45
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:38:9-45
 	android:label
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:32:9-41
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:36:9-41
 	android:windowSoftInputMode
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:35:9-51
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:39:9-51
 	android:configChanges
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:33:9-79
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:37:9-79
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:31:9-37
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:35:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:36:9-39:25
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:40:9-43:25
 action#android.intent.action.MAIN
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:37:13-65
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:41:13-65
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:37:21-62
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:41:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:38:13-73
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:42:13-73
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:38:23-70
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:42:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:41:7-43:69
+ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:45:7-47:69
 	android:screenOrientation
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:42:8-44
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:46:8-44
 	android:name
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:43:2-66
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:47:2-66
 uses-sdk
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:24:5-26:41
-MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:24:5-26:41
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-fetch-blob] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fetch-blob/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fetch-blob] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fetch-blob/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:6:5-8:41
+MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:6:5-8:41
+MERGED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:exifinterface:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.1.aar/8360587bad8897506c527d122ca6c5ce/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.1.aar/8360587bad8897506c527d122ca6c5ce/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-vision:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-12.0.1.aar/fbd9a32da7fd7bbc0f5fb9b33deaa653/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-vision:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-12.0.1.aar/fbd9a32da7fd7bbc0f5fb9b33deaa653/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:24:5-26:41
+MERGED from [:react-native-fbsdk] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fbsdk/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:24:5-26:41
 MERGED from [com.facebook.android:facebook-android-sdk:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.40.0.aar/967ec13c84e0d8b94eae6583431aba19/AndroidManifest.xml:24:5-26:41
 MERGED from [com.facebook.android:facebook-android-sdk:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.40.0.aar/967ec13c84e0d8b94eae6583431aba19/AndroidManifest.xml:24:5-26:41
-MERGED from [:react-native-google-signin] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-google-signin] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-linear-gradient] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-linear-gradient] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-i18n] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-i18n] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-gesture-handler] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-google-signin] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-google-signin] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-google-signin/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-vector-icons/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-i18n] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-i18n] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-i18n/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-gesture-handler] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/87b32fde3ff501652adcf9fb62f41c36/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/87b32fde3ff501652adcf9fb62f41c36/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/7652b88471b55ffa8424164b12e0c680/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.57.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/react-native-0.57.1.aar/6c6361a4353462c345b50dcb679c0cd0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.yalantis:ucrop:2.2.2-native] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.yalantis:ucrop:2.2.2-native] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/b68c5920fc11b4b6e37fb2dc7d7d2c2a/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.android:facebook-login:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/879d12b6ad380d1b3f7a18119d05f614/AndroidManifest.xml:24:5-26:41
 MERGED from [com.facebook.android:facebook-login:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/879d12b6ad380d1b3f7a18119d05f614/AndroidManifest.xml:24:5-26:41
 MERGED from [com.facebook.android:facebook-share:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-share-4.40.0.aar/f6ce417a01e59bd6db81512865e718de/AndroidManifest.xml:24:5-26:41
@@ -234,12 +288,18 @@ MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/aec93ea1ec0c738c667de6b759a606f8/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/2612d77af0c3141884a85e3230843e16/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/2612d77af0c3141884a85e3230843e16/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-vision-common:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-12.0.1.aar/03304a031f1a6c80ce0ab620cb6da0d7/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-vision-common:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-12.0.1.aar/03304a031f1a6c80ce0ab620cb6da0d7/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/91b55686603be4eee135ddf0fe453c98/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/6159b0da76c3436aae7e364a3c665d1d/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/6159b0da76c3436aae7e364a3c665d1d/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/7ba458ebd6c38519a89990286f58cd99/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/7ba458ebd6c38519a89990286f58cd99/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/c6c047c5034501dbb78fdbbeea2ec115/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/c6c047c5034501dbb78fdbbeea2ec115/AndroidManifest.xml:20:5-44
+MERGED from [id.zelory:compressor:2.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/compressor-2.1.0.aar/1ce9e5f9a2dfa2a1cbefd83eeb791433/AndroidManifest.xml:8:5-10:41
+MERGED from [id.zelory:compressor:2.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/compressor-2.1.0.aar/1ce9e5f9a2dfa2a1cbefd83eeb791433/AndroidManifest.xml:8:5-10:41
 MERGED from [com.facebook.android:facebook-places:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-places-4.40.0.aar/8e5ebd3dd156ee80f55872bf5e6d5267/AndroidManifest.xml:24:5-26:41
 MERGED from [com.facebook.android:facebook-places:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-places-4.40.0.aar/8e5ebd3dd156ee80f55872bf5e6d5267/AndroidManifest.xml:24:5-26:41
 MERGED from [com.facebook.android:facebook-applinks:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.40.0.aar/a21795be41a97c8edf62dc3590c11f32/AndroidManifest.xml:24:5-26:41
@@ -254,20 +314,18 @@ MERGED from [com.android.support:cardview-v7:27.0.2] /Users/boffincoders/.gradle
 MERGED from [com.android.support:cardview-v7:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.0.2.aar/2af17f63dea2f6961594519807ca18c6/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:customtabs:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/bac80c58674cdf5bcd1fadeab063d23d/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:customtabs:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/bac80c58674cdf5bcd1fadeab063d23d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.2.aar/81487c8884780cca6d8b0d197be9c8b3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.2.aar/81487c8884780cca6d8b0d197be9c8b3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/da7475299b165bdaa93d8cbaba7e81b9/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/da7475299b165bdaa93d8cbaba7e81b9/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/1dd0b7114dcadacdb39a77cc876bec72/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/1dd0b7114dcadacdb39a77cc876bec72/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/cec7711b93cd82bc8dcd61597a8a6ee2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/cec7711b93cd82bc8dcd61597a8a6ee2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/eddedde3f25e399956bf895531aa73e2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/eddedde3f25e399956bf895531aa73e2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/da7475299b165bdaa93d8cbaba7e81b9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/da7475299b165bdaa93d8cbaba7e81b9/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/cc01481cf05cc86446470349d61696fb/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/cc01481cf05cc86446470349d61696fb/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/283f753c92e1198a30bea7ecd8145be0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/283f753c92e1198a30bea7ecd8145be0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/cec7711b93cd82bc8dcd61597a8a6ee2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/cec7711b93cd82bc8dcd61597a8a6ee2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/990f8d42a006f1271f70961004e37b21/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/990f8d42a006f1271f70961004e37b21/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/eddedde3f25e399956bf895531aa73e2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/eddedde3f25e399956bf895531aa73e2/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a0a331022226d1dfd364ff17b2094c3/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:27.1.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a0a331022226d1dfd364ff17b2094c3/AndroidManifest.xml:20:5-44
 MERGED from [com.facebook.fresco:fresco:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fresco-1.10.0.aar/e1249a7825e773294a4a3e0775157d26/AndroidManifest.xml:5:5-7:41
@@ -282,26 +340,64 @@ MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/boffincoders/
 MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.10.0.aar/1a304463bc37a632825d7da71456f0ba/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db652c46077964226fe154d8022ea6ad/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.soloader:soloader:0.5.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/soloader-0.5.1.aar/db652c46077964226fe154d8022ea6ad/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/9e892b887fcc97707b8eb83e47ea2462/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/9e892b887fcc97707b8eb83e47ea2462/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/789bac3166f3495ebd5b0e42f6f78851/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/789bac3166f3495ebd5b0e42f6f78851/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-license-12.0.1.aar/bdc6622492882562ff4367de71706ca0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-license-12.0.1.aar/bdc6622492882562ff4367de71706ca0/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/95f02dcda010dff440c5da5df29668f6/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/95f02dcda010dff440c5da5df29668f6/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/bca793fd310ff46f7feb771f0f5bc363/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/bca793fd310ff46f7feb771f0f5bc363/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/9e892b887fcc97707b8eb83e47ea2462/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/fbcore-1.10.0.aar/9e892b887fcc97707b8eb83e47ea2462/AndroidManifest.xml:5:5-7:41
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/7c157867afe3b4b5672503f41e4fd004/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/7c157867afe3b4b5672503f41e4fd004/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/78e9d4252f490b7ad16621e25c77c96d/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/78e9d4252f490b7ad16621e25c77c96d/AndroidManifest.xml:20:5-44
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+provider#android.support.v4.content.FileProvider
+ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:13:9-21:20
+	android:grantUriPermissions
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:17:13-47
+	android:authorities
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:15:13-60
+	android:exported
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:16:13-37
+	android:name
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:14:13-67
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:18:13-20:58
+	android:resource
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:20:17-55
+	android:name
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:19:17-67
+activity#com.yalantis.ucrop.UCropActivity
+ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:23:9-25:72
+	android:theme
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:25:13-69
+	android:name
+		ADDED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:24:13-60
+uses-feature#android.hardware.camera
+ADDED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-13:36
+	android:required
+		ADDED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:13:9-33
+	android:name
+		ADDED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:12:9-47
+uses-feature#android.hardware.camera.autofocus
+ADDED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:14:5-16:36
+	android:required
+		ADDED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:16:9-33
+	android:name
+		ADDED from [:react-native-camera] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-camera/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:15:9-57
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/87b32fde3ff501652adcf9fb62f41c36/AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents
@@ -366,9 +462,5 @@ action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
 ADDED from [com.facebook.android:facebook-core:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-core-4.40.0.aar/477e38feacd0ccefe633add2f3d79f70/AndroidManifest.xml:48:17-95
 	android:name
 		ADDED from [com.facebook.android:facebook-core:4.40.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/facebook-core-4.40.0.aar/477e38feacd0ccefe633add2f3d79f70/AndroidManifest.xml:48:25-92
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/boffincoders/Desktop/Projects/Narender/ReactNative/FaithMeetsLove/android/app/src/main/AndroidManifest.xml:1:1-46:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
