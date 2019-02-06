@@ -22,5 +22,8 @@ export const Images = {
   visitProfile: require("./images/visitProfile.png"),
   chatIcons: require("./images/chatIcons.png"),
   shareIcons: require("./images/shareIcons.png"),
-  addIcon:require("./images/addIcon.png")
+  addIcon:require("./images/addIcon.png"),
+  camIcon:require("./images/camIcon.png"),
+  camRotate:require("./images/camRotate.png"),
+  arrowBackIcon:require("./images/arrowBackIcon.png")
 };

@@ -6,7 +6,7 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-  BackAndroid,
+  BackHandler,
   Platform
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
@@ -21,7 +21,7 @@ const Screen = {
 export default class Discover extends Component {
   componentWillMount() {
     // Disable back button by just returning true instead of Action.pop()
-    BackAndroid.addEventListener("hardwareBackPress", () => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
       return true;
     });
   }

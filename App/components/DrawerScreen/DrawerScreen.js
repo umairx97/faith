@@ -44,7 +44,8 @@ export default class DrawerScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_name: ""
+      user_name: "",
+      profileImageUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
     };
     // this.getData();
     this.getUid();
@@ -73,9 +74,31 @@ export default class DrawerScreen extends React.Component {
   //   onVipCenterPressed() {
   //     Actions.vipCenter();
   //   }
-  componentDidMount() {}
-  
-  async getUid() {
+  componentDidMount() {
+    this.getUid();
+    //this.openProfileImage();
+  }
+  componentWillMount(){
+    this.getUid();
+  }
+  componentWillReceiveProps(){
+    //Actions.refresh("drawer")
+    this.getUid();
+  }
+  // openProfileImage=async()=>{
+  //   instance=this;
+  //   var _name = await firebase.auth().currentUser.uid;
+  //   var imgUserId=firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name);
+  //   imgUserId.once('value', function(snapshot){
+  //       var ImageUrl=snapshot.val().profileImageURL;
+  //       var userName=snapshot.val().fullName;
+  //       instance.setState({
+  //         profileImageUrl: ImageUrl,
+                 
+  //              });
+  //   })
+  // }
+   getUid=async()=> {
     instance=this;
     var uname = await firebase.auth().currentUser.displayName;
     var uidUser=await firebase.auth().currentUser.uid;
@@ -83,9 +106,10 @@ export default class DrawerScreen extends React.Component {
     { var displayUserName=firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser);
     displayUserName.once('value', function(snapshot){
       var usrName=snapshot.val().fullName;
-      
+      var ImageUrl=snapshot.val().profileImageURL;
       instance.setState({
-        user_name: usrName
+        user_name: usrName,
+        profileImageUrl: ImageUrl
       });
     })
    
@@ -231,10 +255,9 @@ export default class DrawerScreen extends React.Component {
                 }}
               >
                 <TouchableOpacity onPress={this.onProfileImagerPressed}>
-                  <Image
-                    source={require("../../../assets/images/oval.png")}
-                    style={styles.ovalImage}
-                  />
+                <Image source={{uri:this.state.profileImageUrl}}
+                                    style={styles.ovalImage}
+                                /> 
                 </TouchableOpacity>
                 <View
                   style={{
@@ -1335,11 +1358,12 @@ const styles = StyleSheet.create({
     height: 0
   },
   ovalImage: {
-    resizeMode: "center",
+    resizeMode: "cover",
     alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 90,
     height: 90,
+    borderRadius:45,
     marginLeft: 19,
     marginTop: 14
   },

@@ -50,6 +50,10 @@ export default class CaptureImage extends Component {
           }
        
         />
+        <View style={{position:'absolute', top:10,left:10}}>
+        <TouchableOpacity onPress={()=>{Actions.ProfileCopy()}}>
+        <Image style={styles.btnBackArrow} source={Images.arrowBackIcon} /></TouchableOpacity>
+        </View>
         <View
           style={{ flex: 0, flexDirection: "row", justifyContent: "flex-start", marginLeft:"30%",marginRight:"10%"}}
         >
@@ -57,7 +61,7 @@ export default class CaptureImage extends Component {
             onPress={this.takePicture.bind(this)}
             style={styles.capture}
           >
-            <Image style={styles.btnImage} source={Images.red} />
+            <Image style={styles.btnImage} source={Images.camIcon} />
           </TouchableOpacity>
         </View>
         <View
@@ -67,7 +71,7 @@ export default class CaptureImage extends Component {
             onPress={this.changeCamera.bind(this)}
             style={styles.cameraChange}
           >
-            <Image style={styles.btnImageRotate} source={Images.red} />
+            <Image style={styles.btnImageRotate} source={Images.camRotate} />
           </TouchableOpacity>
         </View>
       </View>
@@ -103,7 +107,9 @@ export default class CaptureImage extends Component {
         .then(url => {
           alert("uploaded");
           this.setState({ image_uri: url });
-          firebase.database().ref("Users/FaithMeetsLove/Registered/ProfileImages"+_name).set({profileImageURL:url});
+          // firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).set({profileImageURL:url});
+          firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).update({profileImageURL:url})
+          Actions.refresh("drawer");
         })
        
         .catch(error => console.log(error));
@@ -170,11 +176,18 @@ const styles = StyleSheet.create({
     
   },
   btnImage: {
-    width: 60,
-    height: 60
+    width: 50,
+    height: 50,
+    tintColor:'red'
   },
   btnImageRotate: {
     width: 40,
-    height: 40
+    height: 40,
+    tintColor:'red'
+  },
+  btnBackArrow:{
+    width: 30,
+    height: 30,
+    tintColor:'red'
   }
 });

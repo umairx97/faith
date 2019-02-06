@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView,Platform } from 'react-native'
 import { Actions } from "react-native-router-flux";
 import ImagePicker from 'react-native-image-crop-picker';
 import Dialog from "react-native-dialog";
 import firebase from "../FirebaseConfig/FirebaseConfig";
-
+import RNFetchBlob from "react-native-fetch-blob";
 import { BackHandler,Dimensions,PermissionsAndroid} from "react-native";
+// Prepare Blob support
+const Blob = RNFetchBlob.polyfill.Blob;
+const fs = RNFetchBlob.fs;
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+window.Blob = Blob;
 
 
 var type = "image/jpg";
@@ -44,16 +49,27 @@ export default class ProfileCopy extends Component {
           video_url: "",
           image_url: "",
           file_url: "",
+          nameFull:'',
+          dateOfBirth:'',
+          totalAge:"",
+          imageProfileUrl:"http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
         }
       }
 
   componentDidMount () {
+    this.openProfileImage();
+   
     BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
   }
-
+componentWillMount(){
+    this.openProfileImage();
+}
   componentWillUnmount () {
     BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
   }
+//   componentWillReceiveProps(){
+//     Actions.refresh("drawer")
+//   }
 
   backAndroid () {
     Actions.pop() 
@@ -63,15 +79,20 @@ export default class ProfileCopy extends Component {
     this.setState({ dialogVisible: true });
   }
   openProfileImage=async()=>{
+    instance=this;
     var _name = await firebase.auth().currentUser.uid;
-    const ref = firebase.storage().ref('ProfileImages/'+_name+".jpg");
-    const url = await ref.getDownloadUrl();
-    console.log(ref);
-    return(  <Image
-      source={require("../../../assets/images/profile.png")}
-      style={styles.profileImage}
-    />);
-  
+    var imgUserId=firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name);
+    imgUserId.once('value', function(snapshot){
+        var ImageUrl=snapshot.val().profileImageURL;
+        var userName=snapshot.val().fullName;
+        var dob=snapshot.val().user_Dob;
+        instance.setState({
+                  imageProfileUrl: ImageUrl,
+                  nameFull:userName,
+                  dateOfBirth:dob
+               });
+               instance.age();
+    })
   }
   requestCameraPermission = async val => {
     try {
@@ -113,7 +134,16 @@ export default class ProfileCopy extends Component {
       console.warn(err);
     }
   };
-
+//   function getAge(dateString) {
+//     var today = new Date();
+//     var birthDate = new Date(dateString);
+//     var age = today.getFullYear() - birthDate.getFullYear();
+//     var m = today.getMonth() - birthDate.getMonth();
+//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     return age;
+// }
   handleCancel() {
     this.setState({ dialogVisible: false });
   }
@@ -125,6 +155,40 @@ export default class ProfileCopy extends Component {
       Actions.recordVideo();
     }
   }
+
+  async uploadImage(uri, uid, mime = "image/jpg") {
+    return new Promise((resolve, reject) => {
+      const uploadUri =
+        Platform.OS === "ios" ? uri.replace("file://", "") : uri;
+      let uploadBlob = null;
+      var milliseconds = new Date().getTime();
+      const imageRef = firebase
+        .storage()
+        .ref("ProfileImages/" + uid)
+        .child(milliseconds + ".jpg");
+
+      fs.readFile(uploadUri, "base64")
+        .then(data => {
+          return Blob.build(data, { type: `${mime};BASE64` });
+        })
+        .then(blob => {
+          uploadBlob = blob;
+          return imageRef.put(blob, { contentType: mime });
+        })
+        .then(() => {
+          uploadBlob.close();
+          return imageRef.getDownloadURL();
+        })
+        .then(url => {
+          resolve(url);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+
   async handleLibrary() {
     this.setState({ dialogVisible: false });
     var _name = await firebase.auth().currentUser.uid;
@@ -141,13 +205,25 @@ export default class ProfileCopy extends Component {
           includeBase64: true
         })
           .then(image => {
-            this.setState({
-              filePath: image.path,
-              fileData: image.data,
-              imagePath: image.path,
-              videoPath: "",
-              imagedata: image.data
-            });
+            this.uploadImage(image.path,_name)
+            .then(url => {
+                alert("uploaded");
+                this.setState({ imageProfileUrl: url });
+                // firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).set({profileImageURL:url});
+                firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).update({profileImageURL:url})
+                
+              }
+              )
+              .catch(error => {
+                  alert(error)
+                });
+            // this.setState({
+            //   filePath: image.path,
+            //   fileData: image.data,
+            //   imagePath: image.path,
+            //   videoPath: "",
+            //   imagedata: image.data
+            // });
           })
           .catch(error => {
             this.setState({ ...this.state, progressVisible: false });
@@ -179,6 +255,39 @@ export default class ProfileCopy extends Component {
       }, 500);
     }
   }
+  age=()=>{
+var userAge=this.state.dateOfBirth;
+//alert(userAge)
+var date=userAge.split('-')[0]
+var month=userAge.split('-')[1]
+var year=userAge.split('-')[2]
+//alert(userAge.split('-')[0])
+var ageFull=this.calculate_age(month,date,year);
+//alert(ageFull);
+//alert(userAge);
+this.setState({
+totalAge:ageFull
+})
+  }
+
+  calculate_age=(birth_month,birth_day,birth_year)=>{
+      today_date = new Date();
+      today_year = today_date.getFullYear();
+      today_month = today_date.getMonth();
+      today_day = today_date.getDate();
+      age = today_year - birth_year;
+  
+      if ( today_month < (birth_month - 1))
+      {
+          age--;
+      }
+      if (((birth_month - 1) == today_month) && (today_day < birth_day))
+      {
+          age--;
+      }
+      return age;
+  }
+
     render() {
         return (
             <ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -194,14 +303,14 @@ export default class ProfileCopy extends Component {
                         shadowOpacity: 1,
                     }}><View>
                             <TouchableOpacity onPress={() => {this.onProfileImagePressed()}}>
-                                <Image source={require("../../../assets/images/1.png")}
+                            <Image source={{uri:this.state.imageProfileUrl}}
                                     style={styles.ovalImage}
-                                />
+                                /> 
                             </TouchableOpacity>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ fontSize: 22, marginTop:10, fontWeight: 'bold' }}>Name</Text><Text style={{ fontWeight: 'bold',marginTop:10, fontSize: 22 }}>,</Text>
-                            <Text style={{ fontSize: 22, marginTop:10,fontWeight: 'bold',marginLeft:10 }}>27</Text>
+                            <Text style={{ fontSize: 22, marginTop:10, fontWeight: 'bold' }}>{this.state.nameFull}</Text><Text style={{ fontWeight: 'bold',marginTop:10, fontSize: 22 }}>,</Text>
+                            <Text style={{ fontSize: 22, marginTop:10,fontWeight: 'bold',marginLeft:10 }}>{this.state.totalAge}</Text>
                         </View>
                         <View>
                             <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text>
@@ -693,7 +802,7 @@ const styles = StyleSheet.create({
         height: 0
     },
     ovalImage: {
-        resizeMode: "center",
+        resizeMode:'cover',
         backgroundColor: "rgba(0, 0, 0, 0.0)",
         width: 130,
         height: 130,
