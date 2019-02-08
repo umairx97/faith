@@ -1,6 +1,10 @@
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+// import "firebase/firestore";
 import "firebase/firestore";
-
+import firebase from '@firebase/app'
+import '@firebase/auth'
+import "@firebase/storage";
+import "@firebase/database";
 const config = {
   apiKey: "AIzaSyC9c5anTI82-EuBeHFuVWXE2zpIsht-DgE",
     authDomain: "faithmeetslove-d4d6a.firebaseapp.com",

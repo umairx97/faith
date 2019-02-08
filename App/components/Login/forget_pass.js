@@ -10,6 +10,7 @@ import {
   Alert,
   Platform,
 } from "react-native";
+import firebase from "../FirebaseConfig/FirebaseConfig";
 import { RkButton, RkText } from "react-native-ui-kitten";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -27,42 +28,62 @@ export default class ForgetPassword extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
+  // _onSubmit() {
+  //   //const { email, password } = this.state;
+  //   Alert.alert("Alert", "Button pressed " + this.email);
+  //   Actions.home();
+  // }
   _onSubmit() {
-    //const { email, password } = this.state;
-    Alert.alert("Alert", "Button pressed " + this.email);
-   Actions.home();
-  }
+    if (this.state.email == "") return;
+    const { email } = this.state;
 
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(msg => {
+        Alert.alert("Success", "Password reset link sent to your email id", [
+          {
+            text: "OK",
+            onPress: () => {
+              Actions.login();
+            }
+          }
+        ]);
+      })
+      .catch(error => {
+        Alert.alert("Authentication failed." + error.toString());
+      });
+  }
   render() {
     return (
       <View style={styles.container}>
-       
-          <Image
-            source={require("../../../assets/images/logo.png")}
-            style={styles.migoLogoImage}
-          />
-          <View style={styles.loginForm}>
-            <View style={styles.formInput}>
-              <Text>Email</Text>
-              <TextInput placeholder="Please enter your email" onChangeText={value => this.setState({ email: value })}
-              returnKeyLabel = {"next"}
-              onChangeText={(text) => this.setState({email:text})}
-               style={styles.textInput} />
-            </View>
-            
-            <View style={{ marginTop: "4%" }}>
-              <RkButton
-                rkType="rounded"
-                style={styles.googleButton}
-                onPress={() => {
-                  this._onSubmit();
-                }}
-              >
-                Reset Password
-              </RkButton>
-                          </View>
+
+        <Image
+          source={require("../../../assets/images/logo.png")}
+          style={styles.migoLogoImage}
+        />
+        <View style={styles.loginForm}>
+          <View style={styles.formInput}>
+            <Text>Email</Text>
+            <TextInput placeholder="Please enter your email" onChangeText={value => this.setState({ email: value })}
+              returnKeyLabel={"next"} autoCapitalize='none'
+              onChangeText={(text) => this.setState({ email: text })}
+              style={styles.textInput} />
           </View>
-        
+
+          <View style={{ marginTop: "4%" }}>
+            <RkButton
+              rkType="rounded"
+              style={styles.googleButton}
+              onPress={() => {
+                this._onSubmit();
+              }}
+            >
+              Reset Password
+              </RkButton>
+          </View>
+        </View>
+
       </View>
     );
   }
@@ -74,7 +95,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: "10%",
     flexDirection: "column",
-        justifyContent: "center",
+    justifyContent: "center",
 
     backgroundColor: "#FFFFFF"
   },
@@ -111,7 +132,7 @@ const styles = StyleSheet.create({
     width: "100%",
     color: "#000000",
     borderColor: "red",
-    marginTop: Platform.OS === 'ios' ? 10+"%" : 0,
+    marginTop: Platform.OS === 'ios' ? 10 + "%" : 0,
     borderBottomWidth: 1
   },
   formInput: {

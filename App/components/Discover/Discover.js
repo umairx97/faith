@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   BackHandler,
+  FlatList,
   Platform
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
@@ -14,17 +15,111 @@ import CardStack, { Card } from "react-native-card-stack-swiper";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
+import firebase from "../FirebaseConfig/FirebaseConfig";
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
 };
+var arr = [];
 export default class Discover extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showArr: [],
+      showUrl: [],
+      showAll:[],
+      xData:[],
+      xInfo:[],
+      nName: 'hello',
+      nUrl: ''
+    }
+    this.getAllUser();
+  }
   componentWillMount() {
+    //this.getAllUser();
     // Disable back button by just returning true instead of Action.pop()
     BackHandler.addEventListener("hardwareBackPress", () => {
       return true;
     });
   }
+
+  componentDidMount(){
+    
+  }
+  getAllUser = async () => {
+    instance = this;
+    var allUserProfile = firebase.database().ref("Users/FaithMeetsLove/Registered");
+    allUserProfile
+      .endAt()
+      .limitToLast(4)
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+
+          var key = childSnapshot.key;
+          var userProfileId = childSnapshot.key;
+          var childData = childSnapshot.val().profileImageURL;
+          var userName = childSnapshot.val().fullName;
+          childSnapshot.usr = userName;
+          childSnapshot.urlProfile = childData;
+          var c = childSnapshot.usr;
+          var e = childSnapshot.urlProfile;
+       
+          arr.push({ pName: c, pUrl: e });
+     
+          instance.setState({ showArr: arr });
+          var x = instance.state.showArr;
+
+        });
+this.setState({showAll:instance.state.showArr})
+var getF=this.state.showAll;
+this.setState({xData:getF})
+
+var x=instance.state.showAll;
+      }).catch(error => {
+        console.log(JSON.stringify(error));
+      });
+
+  }
+  
+  renderAllAccount=(items)=>{
+    var x=items;
+    return(items.map((item)=>{
+      var uriProfile=item.pUrl;
+      return(
+          <Card style={{backgroundColor:'grey', 
+          height: Screen.height - 220,
+          width: Screen.width - 80,borderRadius:10}}>
+          <View style={{flexDirection:'column'}}><Image
+        source={{uri:uriProfile}}
+        style={{
+          height: Screen.height - 260,
+          width: Screen.width - 80,
+          borderRadius:10,
+          resizeMode: "cover"
+        }}
+      />
+      <Text style={{fontSize:25,fontWeight:'bold'}}>{item.pName}</Text></View>
+      
+    </Card>
+      )
+    }))
+    // for (let i = 0; i < items.length; i++) {
+    //   var urlProfilePic=items[i].pUrl;
+    // return(
+    //   <Card>
+    //   <Image
+    //     source={{uri:urlProfilePic}}
+    //     style={{
+    //       height: Screen.height - 260,
+    //       width: Screen.width - 100,
+    //       resizeMode: "contain"
+    //     }}
+    //   />
+    // </Card>)}
+    
+  }
+
   render() {
     return (
       <View>
@@ -77,6 +172,7 @@ export default class Discover extends Component {
             </View>
           </View>
           <View style={{ position: "absolute", left: 40, top: 80, right: 40 }}>
+         
             <CardStack
               style={styles.content}
               renderNoMoreCards={() => (
@@ -90,67 +186,14 @@ export default class Discover extends Component {
                     top: 180,
                     right: 60
                   }}
-                >
-                  No more cards :(
-                </Text>
+                >No more cards :(</Text>
               )}
               ref={swiper => {
                 this.swiper = swiper;
               }}
               onSwiped={() => console.log("onSwiped")}
               onSwipedLeft={() => console.log("onSwipedLeft")}
-            >
-              <Card>
-                <Image
-                  source={require("../../../assets/images/photos.png")}
-                  style={{
-                    height: Screen.height - 230,
-                    width: Screen.width - 80,
-                    resizeMode: "contain"
-                  }}
-                />
-              </Card>
-              <Card>
-                <Image
-                  source={require("../../../assets/images/photos.png")}
-                  style={{
-                    height: Screen.height - 260,
-                    width: Screen.width - 80,
-                    resizeMode: "contain"
-                  }}
-                />
-              </Card>
-              <Card>
-                <Image
-                  source={require("../../../assets/images/photos.png")}
-                  style={{
-                    height: Screen.height - 230,
-                    width: Screen.width - 80,
-                    resizeMode: "contain"
-                  }}
-                />
-              </Card>
-              <Card>
-                <Image
-                  source={require("../../../assets/images/rectangle-3.png")}
-                  style={{
-                    height: Screen.height - 230,
-                    width: Screen.width - 80,
-                    resizeMode: "contain"
-                  }}
-                />
-              </Card>
-              <Card>
-                <Image
-                  source={require("../../../assets/images/photos.png")}
-                  style={{
-                    height: Screen.height - 230,
-                    width: Screen.width - 80,
-                    resizeMode: "contain"
-                  }}
-                />
-              </Card>
-            </CardStack>
+            >{this.renderAllAccount(this.state.xData)}</CardStack>
           </View>
           <View
             style={{
