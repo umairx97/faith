@@ -60,7 +60,10 @@ export default class DrawerScreen extends React.Component {
   async logout() {
     var v = await AsyncStorage.getItem("checkLoggedType");
     if (v == "firebaseLoggedin") {
+
       this.signOutGoogle();
+      var uidUser=await firebase.auth().currentUser.uid;
+      firebase.database().ref("Users/FaithMeetsLove/Registered/"+uidUser).update({isLogin:false})
     }
     else if(v=="facebookloggedin"){
       this.signOutFacebook();
@@ -104,6 +107,7 @@ export default class DrawerScreen extends React.Component {
     var uidUser=await firebase.auth().currentUser.uid;
     if(uname==null)
     { var displayUserName=firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    firebase.database().ref("Users/FaithMeetsLove/Registered/"+uidUser).update({isVarified:true,isLogin:true})
     displayUserName.once('value', function(snapshot){
       var usrName=snapshot.val().fullName;
       var ImageUrl=snapshot.val().profileImageURL;
@@ -136,6 +140,7 @@ export default class DrawerScreen extends React.Component {
       {
         text: "OK",
         onPress: () => {
+
           this.logout();
         }
       }

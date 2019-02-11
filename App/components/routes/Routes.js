@@ -22,6 +22,7 @@ import Favorite from "../Favorites/Favorite";
 import ProfileCopy from "../Profile/ProfileCopy";
 import CaptureImage from "../CameraView/CaptureImage";
 import RecordVideo from "../CameraView/RecordVideo";
+import ActivityLoader from "../ActivityLoader/ActivityLoader";
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -64,6 +65,7 @@ export default class Route extends Component {
           <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
+          <Scene key="activityLoader" component={ActivityLoader} hideNavBar={true}/>
           <Scene
             key="forgetPass"
             component={ForgetPassword}
@@ -72,6 +74,7 @@ export default class Route extends Component {
           <Scene
             key="drawer"
             drawer={true}
+            gesturesEnabled={false}
             contentComponent={DrawerScreen}
             hideNavBar={true}
           >

@@ -36,6 +36,7 @@
     "react-native-loading": "^0.1.0",
     "react-native-loading-button": "^1.0.2",
     "react-native-loading-spinner-overlay": "^1.0.1",
+    "react-native-mask-loader": "0.0.3",
     "react-native-material-textfield": "^0.12.0",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-multi-slider": "^0.3.6",

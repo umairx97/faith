@@ -88,7 +88,7 @@ export default class SignUp extends Component {
       _gender: 0,
       _dob: "",
       progressVisible: false,
-      dob_color: "#C1C1C1"
+      dob_color: "black"
     };
     GoogleSignin.configure({
       androidClientId:
@@ -126,6 +126,7 @@ export default class SignUp extends Component {
               {
                 text: "OK",
                 onPress: () => {
+                 
                   Actions.login();
                 }
               }
@@ -139,6 +140,7 @@ export default class SignUp extends Component {
   }
 
   _handleSignUp() {
+    Actions.activityLoader();
     instance = this;
     instance.setState({ ...this.state, progressVisible: true });
     const {
@@ -198,7 +200,9 @@ export default class SignUp extends Component {
         userName: _username,
         fullName: _fullName,
         gender: _gender,
-        user_Dob: _dob
+        user_Dob: _dob,
+        isVarified: false,
+        isLogin:false
       })
       .then(ref => {
         instance.setState({ ...this.state, progressVisible: false });
@@ -235,6 +239,7 @@ export default class SignUp extends Component {
 
   _onGoogleLogin = async () => {
     instance = this;
+    Actions.activityLoader();
     instance.setState({ ...this.state, progressVisible: true });
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
@@ -397,7 +402,7 @@ export default class SignUp extends Component {
                     >
                       <Text>Date of Birth</Text>
                       <TouchableOpacity onPress={this._showDateTimePicker}>
-                        <Text
+                        <Text placeholder='Plz, Select your date of birth'
                           style={{
                             color: this.state.dob_color,
                             marginTop: 20,

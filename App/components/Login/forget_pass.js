@@ -35,6 +35,7 @@ export default class ForgetPassword extends Component {
   // }
   _onSubmit() {
     if (this.state.email == "") return;
+    Actions.activityLoader();
     const { email } = this.state;
 
     firebase

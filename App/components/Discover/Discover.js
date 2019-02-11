@@ -27,11 +27,12 @@ export default class Discover extends Component {
     this.state = {
       showArr: [],
       showUrl: [],
-      showAll:[],
-      xData:[],
-      xInfo:[],
+      showAll: [],
+      xData: [],
+      xInfo: [],
       nName: 'hello',
-      nUrl: ''
+      nUrl: '',
+      userId: ''
     }
     this.getAllUser();
   }
@@ -43,10 +44,18 @@ export default class Discover extends Component {
     });
   }
 
-  componentDidMount(){
-    
+  componentDidMount() {
+
   }
+
+  rightSwipe=()=>{
+alert("right swipe")
+//var uidUser=await firebase.auth().currentUser.uid;
+//firebase.database().ref("Users/FaithMeetsLove/Registered/"+uidUser).update({profileLiked:})
+  }
+
   getAllUser = async () => {
+    arr = [];
     instance = this;
     var allUserProfile = firebase.database().ref("Users/FaithMeetsLove/Registered");
     allUserProfile
@@ -57,67 +66,54 @@ export default class Discover extends Component {
         snapshot.forEach(childSnapshot => {
 
           var key = childSnapshot.key;
+          this.setState({ userId: key })
           var userProfileId = childSnapshot.key;
           var childData = childSnapshot.val().profileImageURL;
           var userName = childSnapshot.val().fullName;
+          var varifiedUser = childSnapshot.val().isVarified;
+          var loginUser = childSnapshot.val().isLogin;
           childSnapshot.usr = userName;
           childSnapshot.urlProfile = childData;
           var c = childSnapshot.usr;
           var e = childSnapshot.urlProfile;
-       
-          arr.push({ pName: c, pUrl: e });
-     
+          if (varifiedUser == true && loginUser == false) {
+            arr.push({ pName: c, pUrl: e, id: userProfileId });
+          }
           instance.setState({ showArr: arr });
-          var x = instance.state.showArr;
-
         });
-this.setState({showAll:instance.state.showArr})
-var getF=this.state.showAll;
-this.setState({xData:getF})
+        this.setState({ showAll: instance.state.showArr })
+        var getF = this.state.showAll;
+        this.setState({ xData: getF })
 
-var x=instance.state.showAll;
+       // var x = instance.state.showAll;
       }).catch(error => {
         console.log(JSON.stringify(error));
       });
-
   }
-  
-  renderAllAccount=(items)=>{
-    var x=items;
-    return(items.map((item)=>{
-      var uriProfile=item.pUrl;
-      return(
-          <Card style={{backgroundColor:'grey', 
-          height: Screen.height - 220,
-          width: Screen.width - 80,borderRadius:10}}>
-          <View style={{flexDirection:'column'}}><Image
-        source={{uri:uriProfile}}
-        style={{
-          height: Screen.height - 260,
-          width: Screen.width - 80,
-          borderRadius:10,
-          resizeMode: "cover"
-        }}
-      />
-      <Text style={{fontSize:25,fontWeight:'bold'}}>{item.pName}</Text></View>
-      
-    </Card>
+
+  renderAllAccount = (items) => {
+    var x = items;
+    return (items.map((item) => {
+      var uriProfile = item.pUrl;
+      return (
+        <Card style={{
+          backgroundColor: 'white',
+          height: Screen.height - ((Screen.height / 2) - 60),
+          width: Screen.width - 80, borderRadius: 10,
+        }}>
+          <View style={{ flexDirection: 'column' }}><Image
+            source={{ uri: uriProfile }}
+            style={{
+              height: Screen.height - ((Screen.height / 2) - 20),
+              width: Screen.width - 80,
+              borderRadius: 10,
+              resizeMode: "cover"
+            }}
+          />
+            <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{item.pName}</Text></View>
+        </Card>
       )
     }))
-    // for (let i = 0; i < items.length; i++) {
-    //   var urlProfilePic=items[i].pUrl;
-    // return(
-    //   <Card>
-    //   <Image
-    //     source={{uri:urlProfilePic}}
-    //     style={{
-    //       height: Screen.height - 260,
-    //       width: Screen.width - 100,
-    //       resizeMode: "contain"
-    //     }}
-    //   />
-    // </Card>)}
-    
   }
 
   render() {
@@ -171,8 +167,8 @@ var x=instance.state.showAll;
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ position: "absolute", left: 40, top: 80, right: 40 }}>
-         
+          <View style={{ position: "absolute", left: 40, top: 80, ...ifIphoneX({ top: 100 }), right: 40 }}>
+
             <CardStack
               style={styles.content}
               renderNoMoreCards={() => (
@@ -184,6 +180,7 @@ var x=instance.state.showAll;
                     position: "absolute",
                     left: 80,
                     top: 180,
+                    ...ifIphoneX({ top: 220 }),
                     right: 60
                   }}
                 >No more cards :(</Text>
@@ -209,6 +206,7 @@ var x=instance.state.showAll;
                 style={[styles.button, styles.red]}
                 onPress={() => {
                   this.swiper.swipeLeft();
+                  
                 }}
               >
                 <Image
@@ -240,6 +238,7 @@ var x=instance.state.showAll;
                 style={[styles.button, styles.green]}
                 onPress={() => {
                   this.swiper.swipeRight();
+                  this.rightSwipe();
                 }}
               >
                 <Image
@@ -270,6 +269,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     width: 220,
+
     flexDirection: "row",
     justifyContent: "space-between"
   }

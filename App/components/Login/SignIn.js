@@ -110,6 +110,7 @@ export default class SignIn extends Component {
   async _onGoogleLogin() {
     // instance = this;
     // instance.setState({ ...this.state, progressVisible: true });
+   // Actions.activityLoader();
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
@@ -135,8 +136,9 @@ export default class SignIn extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
-  _onSubmit() {
+  _onSubmit=()=> {
     instance = this;
+    
     //this.setState({ isLoadingVisible: true });
     // instance.setState({ ...this.state, progressVisible: true });
     // setTimeout(() => {
@@ -144,16 +146,19 @@ export default class SignIn extends Component {
     // }, 100);
     const { email, password } = this.state;
     if (email != "" && password != "") {
+      Actions.activityLoader();
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(userData => {
           if (userData.user.emailVerified == false) {
+           // Actions.
             // this.loadingButton.showLoading(false);
             // instance.setState({ ...this.state, progressVisible: false });
             Alert.alert("Please verify your email for login.");
             //  this.setState({ logintext: "Login" });
           } else {
+           
             // this.loadingButton.showLoading(true);
             // instance.setState({ ...this.state, progressVisible: false });
             this.openDrawerPage("firebaseLoggedin");
@@ -164,6 +169,7 @@ export default class SignIn extends Component {
           //  instance.setState({ ...this.state, progressVisible: false });
           //Login was not successful, let's create a new account
           Alert.alert("Invalid credentials");
+          Actions.signIn();
         });
     } else {
       Alert.alert("Please enter email & Password");
@@ -176,11 +182,13 @@ export default class SignIn extends Component {
 
   loginWithFacebook = async () => {
     try {
+      Actions.activityLoader();
      // LoginManager.setLoginBehavior("web");
       const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
 
       if (result.isCancelled) 
-      {
+      { 
+        Actions.signIn();
         // handle this however suites the flow of your app
         alert('Facebook login request canceled')
         return;
@@ -221,11 +229,11 @@ export default class SignIn extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
-        <ProgressDialog
+        {/* <ProgressDialog
           visible={this.state.progressVisible}
           title="Progress Dialog"
           message="Please, wait..."
-        />
+        /> */}
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
