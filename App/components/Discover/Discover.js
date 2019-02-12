@@ -15,6 +15,7 @@ import CardStack, { Card } from "react-native-card-stack-swiper";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
+
 import firebase from "../FirebaseConfig/FirebaseConfig";
 const Screen = {
   width: Dimensions.get("window").width,
@@ -32,9 +33,11 @@ export default class Discover extends Component {
       xInfo: [],
       nName: 'hello',
       nUrl: '',
-      userId: ''
+      userId: '',
+      loginUserId: ''
     }
     this.getAllUser();
+    this.getCurrentUserId();
   }
   componentWillMount() {
     //this.getAllUser();
@@ -43,64 +46,155 @@ export default class Discover extends Component {
       return true;
     });
   }
+  getCurrentUserId = async () => {
+    var uidUser = await firebase.auth().currentUser.uid;
+    this.setState({
+      loginUserId: uidUser
+    })
+  }
 
   componentDidMount() {
 
   }
 
-  rightSwipe=()=>{
-alert("right swipe")
-//var uidUser=await firebase.auth().currentUser.uid;
-//firebase.database().ref("Users/FaithMeetsLove/Registered/"+uidUser).update({profileLiked:})
+  // rightSwipe() {
+  //   alert("right swipe")
+  //   firebase
+  //     .database()
+  //     .ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId)
+  //     .set({
+  //       uid: this.state.loginUserId,
+
+  //     })
+  //     .then(ref => {
+
+  //     })
+  //     .catch(error => {
+
+  //       Alert.alert("fail" + error.toString());
+  //     });
+  // // }
+  getProfileId = (id) => {
+
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id)
+      .set({
+        isLike: true
+      })
+      .then(ref => {
+
+      })
+      .catch(error => {
+
+        Alert.alert("fail" + error.toString());
+      });
   }
 
   getAllUser = async () => {
     arr = [];
     instance = this;
     var allUserProfile = firebase.database().ref("Users/FaithMeetsLove/Registered");
+
+    var varifiedUser;
+    var key
+    var userProfileId
+    var c
+    var e
+    var loginUser
+
     allUserProfile
-      .endAt()
-      .limitToLast(4)
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
 
-          var key = childSnapshot.key;
+          key = childSnapshot.key;
           this.setState({ userId: key })
-          var userProfileId = childSnapshot.key;
+          userProfileId = childSnapshot.key;
           var childData = childSnapshot.val().profileImageURL;
           var userName = childSnapshot.val().fullName;
-          var varifiedUser = childSnapshot.val().isVarified;
-          var loginUser = childSnapshot.val().isLogin;
-          childSnapshot.usr = userName;
-          childSnapshot.urlProfile = childData;
-          var c = childSnapshot.usr;
-          var e = childSnapshot.urlProfile;
-          if (varifiedUser == true && loginUser == false) {
-            arr.push({ pName: c, pUrl: e, id: userProfileId });
-          }
-          instance.setState({ showArr: arr });
-        });
-        this.setState({ showAll: instance.state.showArr })
-        var getF = this.state.showAll;
-        this.setState({ xData: getF })
+          varifiedUser = childSnapshot.val().isVarified;
+          loginUser = childSnapshot.val().isLogin;
+         // childSnapshot.usr = userName;
+          //childSnapshot.urlProfile = childData;
+          //c = childSnapshot.usr;
+          //e = childSnapshot.urlProfile;
+          var isliked = this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser)
+          // if (this.state.loginUserId != key)
+          //   if (varifiedUser == true) {
+          //     arr.push({ pName: c, pUrl: e, id: userProfileId });
+          //   }
+          // this.setState({ showArr: arr });
 
-       // var x = instance.state.showAll;
+        });
+        // this.setState({ showAll: this.state.showArr })
+        // var getF = this.state.showAll;
+        // this.setState({ xData: getF })
+
+        // var x = instance.state.showAll;
       }).catch(error => {
         console.log(JSON.stringify(error));
       });
-  }
 
+  }
+  async getAlreadyLikedUser(id, c, e, userProfileId, varifiedUser) {
+    var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
+    await alreadyLikedUser.once('value').then(snapshot => {
+      if (snapshot.exists()) {
+        //alert('yes')
+      }
+      else {
+        if (this.state.loginUserId != id)
+          if (varifiedUser == true) {
+            arr.push({ pName: c, pUrl: e, id: userProfileId });
+          }
+        this.setState({ showArr: arr });
+
+       
+      }
+    }).catch(error => {
+      alert(JSON.stringify(error))
+    })
+    this.setState({ showAll: this.state.showArr })
+    var getF = this.state.showAll;
+    this.setState({ xData: getF })
+
+  }
+  showProfile = () => {
+    alert("top")
+
+  }
+  getFavouriteProfileId = (id) => {
+    // alert('add favourite')
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId)
+      .push({
+        uid: id
+      })
+      .then(ref => {
+      })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+  }
+  viewUserProfile = (id) => {
+    alert('user Profile')
+  }
   renderAllAccount = (items) => {
     var x = items;
     return (items.map((item) => {
       var uriProfile = item.pUrl;
+      var userProfileId = item.id;
       return (
         <Card style={{
           backgroundColor: 'white',
           height: Screen.height - ((Screen.height / 2) - 60),
           width: Screen.width - 80, borderRadius: 10,
-        }}>
+        }}
+          onSwipedRight={() => { this.getProfileId(userProfileId) }}
+          onSwipedBottom={() => { this.getFavouriteProfileId(userProfileId) }}
+          onSwipedTop={() => { this.viewUserProfile(userProfileId) }}>
           <View style={{ flexDirection: 'column' }}><Image
             source={{ uri: uriProfile }}
             style={{
@@ -190,6 +284,8 @@ alert("right swipe")
               }}
               onSwiped={() => console.log("onSwiped")}
               onSwipedLeft={() => console.log("onSwipedLeft")}
+              onSwipedTop={() => console.log("onSwipedtop")}
+              onSwipedBottom={() => console.log("onSwipedbottom")}
             >{this.renderAllAccount(this.state.xData)}</CardStack>
           </View>
           <View
@@ -206,7 +302,7 @@ alert("right swipe")
                 style={[styles.button, styles.red]}
                 onPress={() => {
                   this.swiper.swipeLeft();
-                  
+
                 }}
               >
                 <Image
@@ -238,7 +334,7 @@ alert("right swipe")
                 style={[styles.button, styles.green]}
                 onPress={() => {
                   this.swiper.swipeRight();
-                  this.rightSwipe();
+
                 }}
               >
                 <Image

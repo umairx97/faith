@@ -25,5 +25,6 @@ export const Images = {
   addIcon:require("./images/addIcon.png"),
   camIcon:require("./images/camIcon.png"),
   camRotate:require("./images/camRotate.png"),
-  arrowBackIcon:require("./images/arrowBackIcon.png")
+  arrowBackIcon:require("./images/arrowBackIcon.png"),
+  filterIcon:require("./images/filterIcon.png")
 };

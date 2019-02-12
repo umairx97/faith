@@ -56,6 +56,14 @@ export default class Route extends Component {
       />
     );
   };
+  getFilterIcon=()=>{
+    return (
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        source={require("../../../assets/images/filterIcon.png")}
+      />
+    );
+  };
   render() {
     return (
       <Router>
@@ -87,7 +95,7 @@ export default class Route extends Component {
                   component={Discover}
                 />
                
-                <Scene
+                {/* <Scene
                   key="Nearbyuser"
                   title="NearBy"
                   hideNavBar={true}
@@ -95,30 +103,33 @@ export default class Route extends Component {
                   tabs={true}
                   tabBarStyle={{...ifIphoneX({ marginTop: 30 })}}
                   tabBarPosition="top"
-                >
+                > */}
                   <Scene
-                    key="alluser"
+                    key="Nearby"
+                    title="NearBy"
+                    icon={this.getIconNear}
                     hideNavBar={true}
                     component={NearbyAllUser}
                   />
-                  <Scene
+                  {/* <Scene
                     key="spotlight"
                     hideNavBar={true}
                     component={Spotlight}
-                  />
-                  <Scene
-                    key="Nearby"
-                    hideNavBar={true}
-                    component={NearbyFilters}
-                  />
-                </Scene>
+                  /> 
+                
+                </Scene>*/}
                 <Scene
                   key="Favorite"
                   icon={this.getFavrouiteIcon}
                   hideNavBar={true}
                   component={Favorite}
                 />
-               
+                 <Scene
+                    key="Filter"
+                    hideNavBar={true}
+                    icon={this.getFavrouiteIcon}
+                    component={NearbyFilters}
+                  />
                 {/* <Scene
                   key="Favorite"
                   icon={this.getIcon}

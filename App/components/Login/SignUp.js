@@ -117,7 +117,7 @@ export default class SignUp extends Component {
       .currentUser.sendEmailVerification()
       .then(
         function() {
-          instance.setState({ ...this.state, progressVisible: false });
+          //instance.setState({ ...this.state, progressVisible: false });
           // Email sent.
           Alert.alert(
             "Success",
@@ -142,7 +142,7 @@ export default class SignUp extends Component {
   _handleSignUp() {
     Actions.activityLoader();
     instance = this;
-    instance.setState({ ...this.state, progressVisible: true });
+   // instance.setState({ ...this.state, progressVisible: true });
     const {
       _fullName,
       _username,
@@ -180,12 +180,12 @@ export default class SignUp extends Component {
               );
             })
             .catch(error => {
-              instance.setState({ ...this.state, progressVisible: false });
+             // instance.setState({ ...this.state, progressVisible: false });
               Alert.alert("Authentication failed." + error.toString());
             });
         });
     } else {
-      instance.setState({ ...this.state, progressVisible: false });
+     // instance.setState({ ...this.state, progressVisible: false });
       Alert.alert("Please fill all fields");
     }
   }
@@ -205,13 +205,13 @@ export default class SignUp extends Component {
         isLogin:false
       })
       .then(ref => {
-        instance.setState({ ...this.state, progressVisible: false });
+       // instance.setState({ ...this.state, progressVisible: false });
         // console.log(ref);
         //Alert.alert("firebase data save")
         this._sendEmailVerification();
       })
       .catch(error => {
-        instance.setState({ ...this.state, progressVisible: false });
+       // instance.setState({ ...this.state, progressVisible: false });
         Alert.alert("fail" + error.toString());
       });
   }
@@ -266,38 +266,7 @@ export default class SignUp extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
-  // _onSubmit() {
-  //   const { email, password } = this.state;
-  //   if (
-  //     email != "" &&
-  //     password != "" &&
-  //     _fullName != "" &&
-  //     _username != null &&
-  //     _dob != null
-  //   ) {
-  //     firebase
-  //       .auth()
-  //       .signInWithEmailAndPassword(email, password)
-  //       .then(userData => {
-  //         if (userData.user.emailVerified == false) {
-  //           Alert.alert("Please verify your email for login.");
-  //         } else {
-  //           this.loadingButton.showLoading(true);
-  //           Actions.signIn();
-  //           setTimeout(() => {
-  //             this.loadingButton.showLoading(false);
-  //           }, 1000);
-  //         }
-  //         //Alert.alert(userData.user.uid);
-  //       })
-  //       .catch(error => {
-  //         //Login was not successful, let's create a new account
-  //         Alert.alert("Invalid credentials");
-  //       });
-  //   } else {
-  //     Alert.alert("Please fill fields");
-  //   }
-  // }
+
   render() {
     return (
       <KeyboardAvoidingView
@@ -305,11 +274,7 @@ export default class SignUp extends Component {
           ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" })
         }}
       >
-        {/* <ProgressDialog
-          visible={this.state.progressVisible}
-          title="Progress Dialog"
-          message="Please, wait..."
-        /> */}
+      
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
