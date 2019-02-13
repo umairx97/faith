@@ -13,7 +13,8 @@ import {
   Alert,
   ScrollView,
   AsyncStorage,
-  ActivityIndicator
+  ActivityIndicator,
+  PermissionsAndroid
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Actions } from "react-native-router-flux";
@@ -22,8 +23,8 @@ import makeInputGreatAgain, {
   withNextInputAutoFocusInput
 } from "react-native-formik";
 import firebase from "../FirebaseConfig/FirebaseConfig";
-import { BackHandler } from 'react-native'
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import { BackHandler } from "react-native";
+import { AccessToken, LoginManager } from "react-native-fbsdk";
 import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
@@ -32,6 +33,8 @@ import LoadingButton from "react-native-loading-button";
 import AnimateLoadingButton from "react-native-animate-loading-button";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import { ProgressDialog } from "react-native-simple-dialogs";
+import DeviceInfo from "react-native-device-info";
+let apiVersion;
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -63,6 +66,9 @@ export default class SignIn extends Component {
       logintext: "Login",
       progressVisible: false
     };
+    if (Platform.OS === "android") {
+      apiVersion = DeviceInfo.getAPILevel();
+    }
 
     GoogleSignin.configure({
       androidClientId:
@@ -71,22 +77,23 @@ export default class SignIn extends Component {
       iosClientId:
         "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
     });
-
   }
   showLoading() {
     this.setState({ loading: true });
   }
-  componentDidMount () {
-    BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
   }
 
-  componentWillUnmount () {
-    BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", () =>
+      this.backAndroid()
+    ); // Remove listener
   }
 
-  backAndroid () {
-    Actions.pop() // Return to previous screen
-    return true // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+  backAndroid() {
+    Actions.pop(); // Return to previous screen
+    return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
   hideLoading() {
     this.setState({ loading: false });
@@ -110,7 +117,6 @@ export default class SignIn extends Component {
   async _onGoogleLogin() {
     // instance = this;
     // instance.setState({ ...this.state, progressVisible: true });
-   // Actions.activityLoader();
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
@@ -136,9 +142,8 @@ export default class SignIn extends Component {
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
-  _onSubmit=()=> {
+  _onSubmit() {
     instance = this;
-    
     //this.setState({ isLoadingVisible: true });
     // instance.setState({ ...this.state, progressVisible: true });
     // setTimeout(() => {
@@ -146,75 +151,98 @@ export default class SignIn extends Component {
     // }, 100);
     const { email, password } = this.state;
     if (email != "" && password != "") {
-      Actions.activityLoader();
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(userData => {
           if (userData.user.emailVerified == false) {
-           // Actions.
             // this.loadingButton.showLoading(false);
             // instance.setState({ ...this.state, progressVisible: false });
             Alert.alert("Please verify your email for login.");
             //  this.setState({ logintext: "Login" });
           } else {
-           
             // this.loadingButton.showLoading(true);
             // instance.setState({ ...this.state, progressVisible: false });
             this.openDrawerPage("firebaseLoggedin");
-
           }
         })
         .catch(error => {
           //  instance.setState({ ...this.state, progressVisible: false });
           //Login was not successful, let's create a new account
           Alert.alert("Invalid credentials");
-          Actions.signIn();
         });
     } else {
       Alert.alert("Please enter email & Password");
     }
   }
   async openDrawerPage(_val) {
-    AsyncStorage.setItem("checkLoggedType", _val);
-    Actions.home();
+    if (Platform.OS === "android") {
+      if (apiVersion >= 23) {
+        this.requestLocationPermission();
+      } else {
+        AsyncStorage.setItem("checkLoggedType", _val);
+        Actions.home();
+      }
+    } else {
+      AsyncStorage.setItem("checkLoggedType", _val);
+      Actions.home();
+    }
   }
+
+  requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        AsyncStorage.setItem("checkLoggedType", _val);
+        Actions.home();
+      } else {
+        // Actions.reset("signIn");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
 
   loginWithFacebook = async () => {
     try {
-      Actions.activityLoader();
-     // LoginManager.setLoginBehavior("web");
-      const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+      // LoginManager.setLoginBehavior("web");
+      const result = await LoginManager.logInWithReadPermissions([
+        "public_profile",
+        "email"
+      ]);
 
-      if (result.isCancelled) 
-      { 
-        Actions.signIn();
+      if (result.isCancelled) {
         // handle this however suites the flow of your app
-        alert('Facebook login request canceled')
+        alert("Facebook login request canceled");
         return;
-        //throw new Error('User cancelled request'); 
+        //throw new Error('User cancelled request');
       }
-
 
       // get the access token
       const data = await AccessToken.getCurrentAccessToken();
 
-      if (!data) 
-      {
+      if (!data) {
         // handle this however suites the flow of your app
-        alert('Invalid user data')
+        alert("Invalid user data");
         return;
         //throw new Error('Something went wrong obtaining the users access token');
       }
 
       // create a new firebase credential with the token
-      const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-      var x=JSON.stringify(credential)
+      const credential = firebase.auth.FacebookAuthProvider.credential(
+        data.accessToken
+      );
+      var x = JSON.stringify(credential);
 
       // login with credential
-      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential).then(user => {
-        this.openDrawerPage("facebookloggedin");
-      })
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential)
+        .then(user => {
+          this.openDrawerPage("facebookloggedin");
+        })
         .catch(error => {
           //  instance.setState({ ...this.state, progressVisible: false });
           const { code, message } = error;
@@ -222,18 +250,18 @@ export default class SignIn extends Component {
         });
     } catch (e) {
       console.error(e);
-      alert(JSON.stringify('catch' + e))
+      alert(JSON.stringify("catch" + e));
     }
-  }
+  };
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
-        {/* <ProgressDialog
+        <ProgressDialog
           visible={this.state.progressVisible}
           title="Progress Dialog"
           message="Please, wait..."
-        /> */}
+        />
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
@@ -363,7 +391,14 @@ export default class SignIn extends Component {
                               ]}
                               name="facebook"
                             />
-                            <RkText onPress={() => { this.loginWithFacebook() }} rkType="caption">Facebook</RkText>
+                            <RkText
+                              onPress={() => {
+                                this.loginWithFacebook();
+                              }}
+                              rkType="caption"
+                            >
+                              Facebook
+                            </RkText>
                           </RkButton>
                         </View>
                         <View style={{ flex: 1 }}>

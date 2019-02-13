@@ -19,4 +19,6 @@ pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
 end

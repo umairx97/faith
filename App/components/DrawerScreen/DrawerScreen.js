@@ -14,7 +14,8 @@ import {
   Alert,
   AsyncStorage,
   TouchableOpacity,
-  Platform
+  Platform,
+  Dimensions
 } from "react-native";
 import React from "react";
 import { Images } from "../../../assets/imageAll";
@@ -23,13 +24,23 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase from "../FirebaseConfig/FirebaseConfig";
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
-import { RNCamera } from 'react-native-camera';
+import { AccessToken, LoginManager } from "react-native-fbsdk";
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+import { RNCamera } from "react-native-camera";
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes
 } from "react-native-google-signin";
+
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
+const ASPECT_RATIO = Screen.width / Screen.height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
+var count = 0;
 
 export default class DrawerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -45,7 +56,18 @@ export default class DrawerScreen extends React.Component {
     super(props);
     this.state = {
       user_name: "",
-      profileImageUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
+      profileImageUrl:
+        "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+      initialPosition: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0
+      },
+      markerPosition: {
+        latitude: 0,
+        longitude: 0
+      }
     };
     // this.getData();
     this.getUid();
@@ -60,31 +82,77 @@ export default class DrawerScreen extends React.Component {
   async logout() {
     var v = await AsyncStorage.getItem("checkLoggedType");
     if (v == "firebaseLoggedin") {
-
       this.signOutGoogle();
-      var uidUser=await firebase.auth().currentUser.uid;
-      firebase.database().ref("Users/FaithMeetsLove/Registered/"+uidUser).update({isLogin:false})
-    }
-    else if(v=="facebookloggedin"){
+    } else if (v == "facebookloggedin") {
       this.signOutFacebook();
-        //LoginManager.logOut();
-        //Actions.reset("login");
-    }
-     else {
+      //LoginManager.logOut();
+      //Actions.reset("login");
+    } else {
       this.signOut();
     }
   }
   //   onVipCenterPressed() {
   //     Actions.vipCenter();
   //   }
-  componentDidMount() {
+  watchID = null;
+  async componentDidMount() {
     this.getUid();
-    //this.openProfileImage();
+    var uidUser = await firebase.auth().currentUser.uid;
+
+    if (Platform.OS === "android") {
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message:
+          "<h2>Use Location?</h2> \
+                            This app wants to change your device settings:<br/><br/>\
+                            Use GPS for location<br/><br/>",
+        ok: "YES",
+        cancel: "NO"
+      }).then(() => {
+        locationTracking(dispatch, getState, geolocationSettings);
+      });
+    }
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var initialRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: initialRegion });
+        this.setState({ markerPosition: initialRegion });
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser).update({ latitude: lat, longitude: long })
+
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: lastRegion });
+        this.setState({ markerPosition: lastRegion });
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
   }
-  componentWillMount(){
+  componentWillMount() {
+    navigator.geolocation.clearWatch(this.watchID);
     this.getUid();
   }
-  componentWillReceiveProps(){
+  componentWillReceiveProps() {
     //Actions.refresh("drawer")
     this.getUid();
   }
@@ -97,39 +165,35 @@ export default class DrawerScreen extends React.Component {
   //       var userName=snapshot.val().fullName;
   //       instance.setState({
   //         profileImageUrl: ImageUrl,
-                 
+
   //              });
   //   })
   // }
-   getUid=async()=> {
-    instance=this;
+  getUid = async () => {
+    instance = this;
     var uname = await firebase.auth().currentUser.displayName;
-    var uidUser=await firebase.auth().currentUser.uid;
-    if(uname==null)
-    { var displayUserName=firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser);
-    firebase.database().ref("Users/FaithMeetsLove/Registered/"+uidUser).update({isVarified:true,isLogin:true})
-    displayUserName.once('value', function(snapshot){
-      var usrName=snapshot.val().fullName;
-      var ImageUrl=snapshot.val().profileImageURL;
-      instance.setState({
-        user_name: usrName,
-        profileImageUrl: ImageUrl
+    var uidUser = await firebase.auth().currentUser.uid;
+    if (uname == null) {
+      var displayUserName = firebase
+        .database()
+        .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+      displayUserName.once("value", function (snapshot) {
+        var usrName = snapshot.val().fullName;
+        var ImageUrl = snapshot.val().profileImageURL;
+        instance.setState({
+          user_name: usrName,
+          profileImageUrl: ImageUrl
+        });
       });
-    })
-   
-      
+    } else {
+      this.setState({
+        user_name: uname.toUpperCase()
+      });
     }
-    else
-{
-  this.setState({
-    user_name: uname.toUpperCase()
-  });
-}
     //await firebase.auth().currentUser.uid;
     //Alert.alert(uname);
     // Alert.alert(x);
-  
-  }
+  };
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
       {
@@ -140,7 +204,6 @@ export default class DrawerScreen extends React.Component {
       {
         text: "OK",
         onPress: () => {
-
           this.logout();
         }
       }
@@ -164,10 +227,10 @@ export default class DrawerScreen extends React.Component {
   //     console.error(error);
   //   }
   // };
-  onHomePressed=()=>{
+  onHomePressed = () => {
     Actions.Discover();
     Actions.drawerClose();
-  }
+  };
   onChatPressed = () => {
     Actions.Chat();
   };
@@ -181,17 +244,16 @@ export default class DrawerScreen extends React.Component {
   };
   signOutFacebook = async () => {
     await LoginManager.logOut();
-  await firebase
-    .auth()
-    .signOut()
-    .then(res => {
-     
-      Actions.reset("login");
-    });
-   // const data=await AccessToken.setCurrentAccessToken("akjkshk")
-  //  var credential = firebase.auth.FacebookAuthProvider.credential(data.accesToken)
+    await firebase
+      .auth()
+      .signOut()
+      .then(res => {
+        Actions.reset("login");
+      });
+    // const data=await AccessToken.setCurrentAccessToken("akjkshk")
+    //  var credential = firebase.auth.FacebookAuthProvider.credential(data.accesToken)
     // const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-  //  const firebaseUserCredential = await firebase.auth().signOut();
+    //  const firebaseUserCredential = await firebase.auth().signOut();
   };
   onProfileImagerPressed = () => {
     Actions.ProfileCopy();
@@ -260,9 +322,10 @@ export default class DrawerScreen extends React.Component {
                 }}
               >
                 <TouchableOpacity onPress={this.onProfileImagerPressed}>
-                <Image source={{uri:this.state.profileImageUrl}}
-                                    style={styles.ovalImage}
-                                /> 
+                  <Image
+                    source={{ uri: this.state.profileImageUrl }}
+                    style={styles.ovalImage}
+                  />
                 </TouchableOpacity>
                 <View
                   style={{
@@ -374,7 +437,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-           
+
             <View style={styles.visitorsView}>
               <View
                 style={{
@@ -608,10 +671,7 @@ export default class DrawerScreen extends React.Component {
                 }}
               >
                 <View style={styles.rectangle2View}>
-                  <Image
-                    source={Images.chatIcons}
-                    style={styles.logoutImage}
-                  />
+                  <Image source={Images.chatIcons} style={styles.logoutImage} />
                 </View>
                 <TouchableOpacity onPress={this.onChatPressed}>
                   <Text style={styles.likesText}>Chat</Text>
@@ -627,7 +687,6 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-            
           </View>
 
           <View style={styles.panel2View}>
@@ -917,7 +976,7 @@ const styles = StyleSheet.create({
 
   navBarViewLinearGradient: {
     height: 100,
-    ...ifIphoneX({ height: 110 }),
+    ...ifIphoneX({ height: 110 })
   },
   navBarView: {
     width: "100%",
@@ -926,7 +985,7 @@ const styles = StyleSheet.create({
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 75,
-    ...ifIphoneX({ height: 85 }),
+    ...ifIphoneX({ height: 85 })
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -966,14 +1025,14 @@ const styles = StyleSheet.create({
   likesView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 35,
-  
+
     marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
   },
   visitorsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 35,
-    
+
     marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
   },
@@ -1368,7 +1427,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 90,
     height: 90,
-    borderRadius:45,
+    borderRadius: 45,
     marginLeft: 19,
     marginTop: 14
   },

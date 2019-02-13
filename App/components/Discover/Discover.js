@@ -34,18 +34,18 @@ export default class Discover extends Component {
       nName: 'hello',
       nUrl: '',
       userId: '',
-      loginUserId: ''
+      loginUserId: '',
+      isFavouriteUser:false
     }
     this.getAllUser();
     this.getCurrentUserId();
   }
   componentWillMount() {
-    //this.getAllUser();
-    // Disable back button by just returning true instead of Action.pop()
     BackHandler.addEventListener("hardwareBackPress", () => {
       return true;
     });
   }
+  
   getCurrentUserId = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
@@ -57,57 +57,19 @@ export default class Discover extends Component {
 
   }
 
-  // rightSwipe() {
-  //   alert("right swipe")
-  //   firebase
-  //     .database()
-  //     .ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId)
-  //     .set({
-  //       uid: this.state.loginUserId,
-
-  //     })
-  //     .then(ref => {
-
-  //     })
-  //     .catch(error => {
-
-  //       Alert.alert("fail" + error.toString());
-  //     });
-  // // }
-  getProfileId = (id) => {
-
-    firebase
-      .database()
-      .ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id)
-      .set({
-        isLike: true
-      })
-      .then(ref => {
-
-      })
-      .catch(error => {
-
-        Alert.alert("fail" + error.toString());
-      });
-  }
-
   getAllUser = async () => {
     arr = [];
     instance = this;
     var allUserProfile = firebase.database().ref("Users/FaithMeetsLove/Registered");
-
     var varifiedUser;
     var key
     var userProfileId
-    var c
-    var e
     var loginUser
 
     allUserProfile
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
-
           key = childSnapshot.key;
           this.setState({ userId: key })
           userProfileId = childSnapshot.key;
@@ -115,42 +77,39 @@ export default class Discover extends Component {
           var userName = childSnapshot.val().fullName;
           varifiedUser = childSnapshot.val().isVarified;
           loginUser = childSnapshot.val().isLogin;
-         // childSnapshot.usr = userName;
-          //childSnapshot.urlProfile = childData;
-          //c = childSnapshot.usr;
-          //e = childSnapshot.urlProfile;
           var isliked = this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser)
-          // if (this.state.loginUserId != key)
-          //   if (varifiedUser == true) {
-          //     arr.push({ pName: c, pUrl: e, id: userProfileId });
-          //   }
-          // this.setState({ showArr: arr });
-
-        });
-        // this.setState({ showAll: this.state.showArr })
-        // var getF = this.state.showAll;
-        // this.setState({ xData: getF })
-
-        // var x = instance.state.showAll;
+       });
       }).catch(error => {
         console.log(JSON.stringify(error));
       });
-
   }
-  async getAlreadyLikedUser(id, c, e, userProfileId, varifiedUser) {
-    var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
-    await alreadyLikedUser.once('value').then(snapshot => {
+  async getAlreadyLikedUser(id, userName, childData, userProfileId, varifiedUser) {
+    arr = [];
+     var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
+    
+     await alreadyLikedUser.once('value').then(snapshot => {
       if (snapshot.exists()) {
         //alert('yes')
       }
       else {
+        this.getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser);
+      }
+    }).catch(error => {
+      alert(JSON.stringify(error))
+    })
+  }
+  async getAlreadyFavouriteUser(id, userName,childData, userProfileId, varifiedUser){
+    var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id);
+    await alreadyFavouriteUser.once('value').then(snapshot => {
+      if(snapshot.exists()){
+      //return;
+      }
+      else {
         if (this.state.loginUserId != id)
           if (varifiedUser == true) {
-            arr.push({ pName: c, pUrl: e, id: userProfileId });
+            arr.push({ pName: userName, pUrl: childData, id: userProfileId });
           }
         this.setState({ showArr: arr });
-
-       
       }
     }).catch(error => {
       alert(JSON.stringify(error))
@@ -158,19 +117,29 @@ export default class Discover extends Component {
     this.setState({ showAll: this.state.showArr })
     var getF = this.state.showAll;
     this.setState({ xData: getF })
-
   }
   showProfile = () => {
     alert("top")
-
   }
-  getFavouriteProfileId = (id) => {
-    // alert('add favourite')
+  getProfileId = (id) => {
     firebase
       .database()
-      .ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId)
-      .push({
-        uid: id
+      .ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id)
+      .set({
+        isLike: true
+      })
+      .then(ref => {
+      })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+  }
+  getFavouriteProfileId = (id) => {
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id)
+      .set({
+        isLike: true
       })
       .then(ref => {
       })
