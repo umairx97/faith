@@ -15,6 +15,7 @@ import {
   AsyncStorage,
   TouchableOpacity,
   Platform,
+  
   Dimensions
 } from "react-native";
 import React from "react";
@@ -124,8 +125,9 @@ export default class DrawerScreen extends React.Component {
         };
         this.setState({ initialPosition: initialRegion });
         this.setState({ markerPosition: initialRegion });
-        firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser).update({ latitude: lat, longitude: long })
-
+       firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser).update({ latitude: lat, longitude: long }).then(msg=>{
+        this.getUid();
+       })
       },
       error => console.log(error),
       { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
@@ -171,20 +173,42 @@ export default class DrawerScreen extends React.Component {
   // }
   getUid = async () => {
     instance = this;
+    var fullName;
+    var gender;
+    var latitude;
+    var longitude;
+    var email;
+    var user_Dob;
+    var profileImageURL;
     var uname = await firebase.auth().currentUser.displayName;
     var uidUser = await firebase.auth().currentUser.uid;
     if (uname == null) {
       var displayUserName = firebase
         .database()
         .ref("Users/FaithMeetsLove/Registered/" + uidUser);
-      displayUserName.once("value", function (snapshot) {
+    await  displayUserName.once("value", function (snapshot) {
         var usrName = snapshot.val().fullName;
         var ImageUrl = snapshot.val().profileImageURL;
+        fullName = snapshot.val().fullName;
+        gender = snapshot.val().gender;
+        latitude = snapshot.val().latitude;
+        longitude = snapshot.val().longitude;
+        email = snapshot.val().email;
+        user_Dob = snapshot.val().user_Dob;
+        profileImageURL = snapshot.val().profileImageURL;
+
         instance.setState({
           user_name: usrName,
           profileImageUrl: ImageUrl
         });
       });
+    AsyncStorage.setItem("reg_user_name", fullName);
+    AsyncStorage.setItem("reg_user_gender", "" + gender);
+    AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+    AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+    AsyncStorage.setItem("reg_user_email", email);
+    AsyncStorage.setItem("reg_user_dob",  user_Dob);
+    AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
     } else {
       this.setState({
         user_name: uname.toUpperCase()

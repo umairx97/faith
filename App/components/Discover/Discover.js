@@ -8,20 +8,23 @@ import {
   Dimensions,
   BackHandler,
   FlatList,
-  Platform
+  Platform,
+  AsyncStorage,
+  Alert
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import CardStack, { Card } from "react-native-card-stack-swiper";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
-
+import Modal from "react-native-modal";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
 };
 var arr = [];
+
 export default class Discover extends Component {
   constructor() {
     super();
@@ -35,7 +38,13 @@ export default class Discover extends Component {
       nUrl: '',
       userId: '',
       loginUserId: '',
-      isFavouriteUser:false
+      isFavouriteUser: false,
+      nameFull: '',
+      dateOfBirth: '',
+      imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+      isModalVisible: false,
+      transparent: false,
+      viewFullProfileId: ''
     }
     this.getAllUser();
     this.getCurrentUserId();
@@ -45,7 +54,12 @@ export default class Discover extends Component {
       return true;
     });
   }
-  
+  toggleModal = () => {
+    this.swiper.goBackFromTop();
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  }
+
+
   getCurrentUserId = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
@@ -77,17 +91,17 @@ export default class Discover extends Component {
           var userName = childSnapshot.val().fullName;
           varifiedUser = childSnapshot.val().isVarified;
           loginUser = childSnapshot.val().isLogin;
-          var isliked = this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser)
-       });
+          this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser)
+        });
       }).catch(error => {
         console.log(JSON.stringify(error));
       });
   }
   async getAlreadyLikedUser(id, userName, childData, userProfileId, varifiedUser) {
     arr = [];
-     var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
-    
-     await alreadyLikedUser.once('value').then(snapshot => {
+    var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
+
+    await alreadyLikedUser.once('value').then(snapshot => {
       if (snapshot.exists()) {
         //alert('yes')
       }
@@ -98,11 +112,26 @@ export default class Discover extends Component {
       alert(JSON.stringify(error))
     })
   }
-  async getAlreadyFavouriteUser(id, userName,childData, userProfileId, varifiedUser){
+  async getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser) {
     var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id);
     await alreadyFavouriteUser.once('value').then(snapshot => {
-      if(snapshot.exists()){
-      //return;
+      if (snapshot.exists()) {
+        //return;
+      }
+      else {
+        this.getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser);
+      }
+    }).catch(error => {
+      alert(JSON.stringify(error))
+    })
+  }
+
+
+  async getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser) {
+    var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/RejectedProfile/" + this.state.loginUserId + "/" + id);
+    await alreadyFavouriteUser.once('value').then(snapshot => {
+      if (snapshot.exists()) {
+        //return;
       }
       else {
         if (this.state.loginUserId != id)
@@ -117,9 +146,6 @@ export default class Discover extends Component {
     this.setState({ showAll: this.state.showArr })
     var getF = this.state.showAll;
     this.setState({ xData: getF })
-  }
-  showProfile = () => {
-    alert("top")
   }
   getProfileId = (id) => {
     firebase
@@ -147,8 +173,69 @@ export default class Discover extends Component {
         Alert.alert("fail" + error.toString());
       });
   }
-  viewUserProfile = (id) => {
-    alert('user Profile')
+  rejectUserProfile = async (id) => {
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/RejectedProfile/" + this.state.loginUserId + "/" + id)
+      .set({
+        isLike: true
+      })
+      .then(ref => {
+      })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+  }
+
+  viewUserProfile = async (id) => {
+
+    this.toggleModal();
+    instance = this;
+
+    var displayUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + id);
+    displayUserProfile.once("value", function (snapshot) {
+      var usrName = snapshot.val().fullName;
+      var ImageUrl = snapshot.val().profileImageURL;
+      var dob = snapshot.val().user_Dob;
+      instance.setState({
+        imageProfileUrl: ImageUrl,
+        nameFull: usrName,
+        dateOfBirth: dob,
+        viewFullProfileId: id
+      });
+      instance.age();
+    });
+  }
+  age = () => {
+    var userAge = this.state.dateOfBirth;
+    //alert(userAge)
+    var date = userAge.split('-')[0]
+    var month = userAge.split('-')[1]
+    var year = userAge.split('-')[2]
+
+    var ageFull = this.calculate_age(month, date, year);
+
+    this.setState({
+      totalAge: ageFull
+    })
+  }
+
+  calculate_age = (birth_month, birth_day, birth_year) => {
+    today_date = new Date();
+    today_year = today_date.getFullYear();
+    today_month = today_date.getMonth();
+    today_day = today_date.getDate();
+    age = today_year - birth_year;
+
+    if (today_month < (birth_month - 1)) {
+      age--;
+    }
+    if (((birth_month - 1) == today_month) && (today_day < birth_day)) {
+      age--;
+    }
+    return age;
   }
   renderAllAccount = (items) => {
     var x = items;
@@ -163,7 +250,9 @@ export default class Discover extends Component {
         }}
           onSwipedRight={() => { this.getProfileId(userProfileId) }}
           onSwipedBottom={() => { this.getFavouriteProfileId(userProfileId) }}
-          onSwipedTop={() => { this.viewUserProfile(userProfileId) }}>
+          onSwipedTop={() => { this.viewUserProfile(userProfileId) }}
+          onSwipedLeft={() => { this.rejectUserProfile(userProfileId) }}
+        >
           <View style={{ flexDirection: 'column' }}><Image
             source={{ uri: uriProfile }}
             style={{
@@ -178,7 +267,19 @@ export default class Discover extends Component {
       )
     }))
   }
+ async viewFullProfile(id) {
+    //alert(id);
+    //this.toggleModal();
 
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+    this.swiper.goBackFromTop();
+    //this.setState({ isModalVisible: false})
+    AsyncStorage.setItem("userProfileKeys", id);
+    setTimeout(() => Actions.userProfile(), 500);
+
+
+
+  }
   render() {
     return (
       <View>
@@ -318,6 +419,36 @@ export default class Discover extends Component {
             </View>
           </View>
         </LinearGradient>
+        <Modal isVisible={this.state.isModalVisible} animationType="slide"
+          transparent={true} onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={{ backgroundColor: 'white', justifyContent: 'center', padding: 10, borderRadius: 10, }}>
+            <Image source={{ uri: this.state.imageProfileUrl }}
+              style={styles.ovalImage}
+            />
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text><Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text>
+              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{this.state.totalAge}</Text>
+            </View>
+            <View>
+              <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
+              <View>
+                <TouchableOpacity onPress={this.toggleModal}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Cancel</Text>
+                </TouchableOpacity></View>
+              <View>
+                <TouchableOpacity onPress={() => { this.viewFullProfile(this.state.viewFullProfileId) }}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 20 }}>View Profile</Text>
+                </TouchableOpacity>
+              </View>
+
+            </View>
+
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -337,5 +468,15 @@ const styles = StyleSheet.create({
 
     flexDirection: "row",
     justifyContent: "space-between"
-  }
+  },
+  ovalImage: {
+    resizeMode: 'cover',
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+    width: 130,
+    height: 130,
+
+
+    borderRadius: 65,
+    alignSelf: 'center'
+  },
 });

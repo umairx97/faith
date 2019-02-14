@@ -143,6 +143,7 @@ export default class SignIn extends Component {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
   _onSubmit() {
+    Actions.activityLoader();
     instance = this;
     //this.setState({ isLoadingVisible: true });
     // instance.setState({ ...this.state, progressVisible: true });
@@ -156,13 +157,11 @@ export default class SignIn extends Component {
         .signInWithEmailAndPassword(email, password)
         .then(userData => {
           if (userData.user.emailVerified == false) {
-            // this.loadingButton.showLoading(false);
-            // instance.setState({ ...this.state, progressVisible: false });
+         Actions.signIn();
             Alert.alert("Please verify your email for login.");
-            //  this.setState({ logintext: "Login" });
+          
           } else {
-            // this.loadingButton.showLoading(true);
-            // instance.setState({ ...this.state, progressVisible: false });
+         
             this.openDrawerPage("firebaseLoggedin");
           }
         })
@@ -176,6 +175,35 @@ export default class SignIn extends Component {
     }
   }
   async openDrawerPage(_val) {
+    var fullName;
+    var gender;
+    var latitude;
+    var longitude;
+    var email;
+    var user_Dob;
+    var profileImageURL;
+    var uidUser = await firebase.auth().currentUser.uid;
+    var displayUserInfo = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    await displayUserInfo.once("value").then(snapshot => {
+      fullName = snapshot.val().fullName;
+      gender = snapshot.val().gender;
+      latitude = snapshot.val().latitude;
+      longitude = snapshot.val().longitude;
+      email = snapshot.val().email;
+      user_Dob = snapshot.val().user_Dob;
+      profileImageURL = snapshot.val().profileImageURL;
+    });
+
+    AsyncStorage.setItem("reg_user_name", fullName);
+    AsyncStorage.setItem("reg_user_gender", "" + gender);
+    AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+    AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+    AsyncStorage.setItem("reg_user_email", email);
+    AsyncStorage.setItem("reg_user_dob",  user_Dob);
+    AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+
     if (Platform.OS === "android") {
       if (apiVersion >= 23) {
         this.requestLocationPermission();
@@ -206,6 +234,7 @@ export default class SignIn extends Component {
   };
 
   loginWithFacebook = async () => {
+    Actions.activityLoader();
     try {
       // LoginManager.setLoginBehavior("web");
       const result = await LoginManager.logInWithReadPermissions([

@@ -6,21 +6,27 @@
 //  Copyright © 2018 Boffin Coders. All rights reserved.
 //
 
-import { Text, StyleSheet, View, Image,BackHandler } from "react-native";
+import { Text, StyleSheet, View, Image,BackHandler,AsyncStorage } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import ViewMoreText from "react-native-view-more-text";
 import { Actions } from "react-native-router-flux";
 export default class UserProfile extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      header: null,
-      headerLeft: null,
-      headerRight: null
+  constructor(props){
+    super(props);
+    this.state={
+
     };
-  };
+  }
+  // static navigationOptions = ({ navigation }) => {
+  //   const { params = {} } = navigation.state;
+  //   return {
+  //     header: null,
+  //     headerLeft: null,
+  //     headerRight: null
+  //   };
+  // };
 
   renderViewMore(onPress) {
     return <Text onPress={onPress}>View more</Text>;
@@ -29,11 +35,11 @@ export default class UserProfile extends React.Component {
     return <Text onPress={onPress}>View less</Text>;
   }
 
-  constructor(props) {
-    super(props);
-  }
+  
 
-  componentDidMount () {
+ async componentDidMount () {
+    var jeck =await  AsyncStorage.getItem("userProfileKeys");
+    alert(jeck)
     BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
   }
 

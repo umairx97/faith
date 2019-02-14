@@ -12,7 +12,11 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Slider
+  TouchableHighlight,
+  Slider,
+  Platform,
+  Dimensions,
+  AsyncStorage
 } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
@@ -20,6 +24,19 @@ import { ButtonGroup } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import firebase from "../FirebaseConfig/FirebaseConfig";
+
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
+const ASPECT_RATIO = Screen.width / Screen.height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
+var count = 0;
+
 export default class NearbyFilters extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -35,9 +52,39 @@ export default class NearbyFilters extends React.Component {
     this.state = {
       selectedIndex: 2,
       Km: 18,
-      values: [18, 75]
+      values: [18, 75],
+      place: "Searching...",
+      initialPosition: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0
+      },
+      markerPosition: {
+        latitude: 0,
+        longitude: 0
+      }
     };
     this.updateIndex = this.updateIndex.bind(this);
+    this.getUserInfo();
+  }
+  async getUserInfo() {
+    var fullName;
+    var gender = await AsyncStorage.getItem("reg_user_gender");
+    var latitude = await AsyncStorage.getItem("reg_user_latitude");
+    var longitude = await AsyncStorage.getItem("reg_user_longitude");
+    var email;
+    var user_Dob = await AsyncStorage.getItem("reg_user_dob");
+    var profileImageURL;
+    if (gender == "0") {
+      this.setState({ selectedIndex: 1 });
+    } else {
+      this.setState({ selectedIndex: 1 });
+    }
+    this.getLocationAddress(
+      latitude.replace(",", ""),
+      longitude.replace(",", "")
+    );
   }
   getVal(val) {
     console.warn(val);
@@ -45,161 +92,234 @@ export default class NearbyFilters extends React.Component {
   updateIndex(selectedIndex) {
     this.setState({ selectedIndex });
   }
-  componentDidMount() {}
+  watchID = null;
+  componentDidMount() {
+    if (Platform.OS === "android") {
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message:
+          "<h2>Use Location?</h2> \
+                            This app wants to change your device settings:<br/><br/>\
+                            Use GPS for location<br/><br/>",
+        ok: "YES",
+        cancel: "NO"
+      }).then(() => {
+        locationTracking(dispatch, getState, geolocationSettings);
+      });
+    }
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var initialRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: initialRegion });
+        this.setState({ markerPosition: initialRegion });
+        this.getLocationAddress(lat, long);
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: lastRegion });
+        this.setState({ markerPosition: lastRegion });
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+  }
+  componentWillMount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+  async getLocationAddress(the_lat, the_long) {
+    try {
+      let response = await fetch(
+        "http://dev.virtualearth.net/REST/v1/Locations/" +
+          the_lat +
+          "," +
+          the_long +
+          "?includeEntityTypes=PopulatedPlace&includeNeighborhood=1&include=ciso2&key=AhSM34xkpIXcF5kfykYYeo7ilzzdU24XlF1MOl8CEu7OOL2eHd77WY45T-OdkQ7j"
+      );
+      let responseJson = await response.json();
+
+      var name = responseJson.resourceSets[0].resources[0].name;
+      this.setState({
+        place: name
+      });
+    } catch (error) {
+      Alert.alert(error.toString());
+    }
+  }
   multiSliderValuesChange = values => {
+    //alert(values)
     this.setState({
-      values
+      values: values
     });
   };
+  async onDonePressed() {
+    var uidUser = await firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser)
+      .update({
+        show_me: this.state.selectedIndex,
+        distance: this.state.Km,
+        age_to: this.state.values[1],
+        age_from: this.state.values[0]
+      })
+      .then(msg => {
+        //alert("Update Successfully");
+      });
+  }
   render() {
     const buttons = ["Guys", "Girls", "Both"];
     const { selectedIndex } = this.state;
     return (
-      <ScrollView style={{backgroundColor: "rgb(255, 255, 255)"}}>
-        <View style={styles.nearbyFiltersView}>
-          <View style={styles.barsNavigationFilterView}>
-            <View style={styles.toplineView}>
-              <TouchableOpacity onPress={this.onDonePressed}>
-                <Text style={styles.doneText}>Done</Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%"
-              }}
-            >
-              <Text style={styles.filterText}>Filter</Text>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              >
-                <View style={styles.filtersView}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.contentsView}>
-            <View style={styles.showMeView}>
-              <Text style={styles.showMeText}>Show me</Text>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "column"
+        }}
+      >
+        <View style={styles.toplineView}>
+          <Text style={styles.filterText}>Filter</Text>
+          <TouchableOpacity
+            onPress={() => {
+              this.onDonePressed();
+            }}
+          >
+            <Text style={styles.doneText}>Done</Text>
+          </TouchableOpacity>
+        </View>
+        <ScrollView style={{ backgroundColor: "rgb(255, 255, 255)" }}>
+          <View style={styles.nearbyFiltersView}>
+            <View style={styles.contentsView}>
+              <View style={styles.showMeView}>
+                <Text style={styles.showMeText}>Show me</Text>
 
-              <ButtonGroup
-                onPress={this.updateIndex}
-                selectedIndex={selectedIndex}
-                buttons={buttons}
-                containerStyle={{ height: 50, marginTop: 15 }}
-              />
-            </View>
-            <View style={styles.locationsView}>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  alignSelf: "stretch"
-                }}
-              >
-                <Text style={styles.locationText}>Location</Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  height: 30,
-                  backgroundColor: "#F5F5F5"
-                }}
-              >
-                <Text style={styles.currentLocationText}>Current Location</Text>
-
-                <Text style={styles.sanFranciscoText}>(San Francisco)</Text>
-                <Image
-                  source={require("../../../assets/images/locations.png")}
-                  style={styles.locationsImage}
+                <ButtonGroup
+                  onPress={this.updateIndex}
+                  selectedIndex={selectedIndex}
+                  buttons={buttons}
+                  containerStyle={{ height: 50, marginTop: 15 }}
                 />
               </View>
-            </View>
-
-            <View style={styles.distanceView}>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  alignSelf: "stretch"
-                }}
-              >
-                <Text style={styles.distanceText}>Distance</Text>
-                <View style={{ flex: 1, flexDirection: "row" }}>
-                  <Slider
-                    style={{ width: "85%", alignSelf: "center" }}
-                    step={1}
-                    minimumValue={0}
-                    maximumValue={100}
-                    value={this.state.Km}
-                    onSlidingComplete={val => this.getVal(val)}
-                    onValueChange={val => this.setState({ Km: val })}
-                  />
-                  <Text style={styles.kmText}>{this.state.Km} Km</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.ageView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <Text style={styles.ageRangeText}>Age range</Text>
+              <View style={styles.locationsView}>
                 <View
                   style={{
-                    flexDirection: "row",
                     flex: 1,
-                    justifyContent: "flex-end"
+                    flexDirection: "column",
+                    alignSelf: "stretch"
                   }}
                 >
-                  <Text style={styles.textText}>
-                    {this.state.values[0]}-{this.state.values[1]}
+                  <Text style={styles.locationText}>Location</Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    height: 30,
+                    backgroundColor: "#fff"
+                  }}
+                >
+                  {/* <Text style={styles.currentLocationText}>Current Location</Text> */}
+
+                  <Text style={styles.sanFranciscoText}>
+                    {this.state.place}
                   </Text>
+                  <Image
+                    source={require("../../../assets/images/locations.png")}
+                    style={styles.locationsImage}
+                  />
                 </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              >
+
+              <View style={styles.distanceView}>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    alignSelf: "stretch"
+                  }}
+                >
+                  <Text style={styles.distanceText}>Distance</Text>
+                  <View style={{ flex: 1, flexDirection: "row" }}>
+                    <Slider
+                      style={{ width: "85%", alignSelf: "center" }}
+                      step={2}
+                      minimumValue={2}
+                      maximumValue={200}
+                      value={this.state.Km}
+                      onSlidingComplete={val => this.getVal(val)}
+                      onValueChange={val => this.setState({ Km: val })}
+                    />
+                    <Text style={styles.kmText}>{this.state.Km} Km</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.ageView}>
                 <View
                   style={{
                     flexDirection: "row",
                     alignSelf: "stretch"
                   }}
                 >
-                  <MultiSlider
-                    values={[this.state.values[0], this.state.values[1]]}
-                    sliderLength={270}
-                    onValuesChange={this.multiSliderValuesChange}
-                    min={0}
-                    max={100}
-                    step={1}
-                  />
+                  <Text style={styles.ageRangeText}>Age range</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      flex: 1,
+                      justifyContent: "flex-end"
+                    }}
+                  >
+                    <Text style={styles.textText}>
+                      {this.state.values[0]}-{this.state.values[1]}
+                    </Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignSelf: "stretch"
+                    }}
+                  >
+                    <MultiSlider
+                      values={[this.state.values[0], this.state.values[1]]}
+                      sliderLength={270}
+                      onValuesChange={this.multiSliderValuesChange}
+                      min={16}
+                      max={100}
+                      step={1}
+                    />
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -324,12 +444,12 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   sanFranciscoText: {
-    color: "#BEBEBE",
-    fontSize: 17,
+    color: "black",
+    fontSize: 15,
     fontStyle: "normal",
     fontWeight: "normal",
     textAlign: "center",
-    letterSpacing: -0.41,
+    letterSpacing: 1.5,
     paddingTop: 7
   },
   currentLocationText: {
@@ -463,19 +583,21 @@ const styles = StyleSheet.create({
     height: 0
   },
   toplineView: {
+    flexDirection: "row",
     backgroundColor: "rgb(248, 248, 248)",
-    height: 116
+    height: 50,
+
+    justifyContent: "space-between"
   },
   filterText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(38, 38, 40)",
-    fontSize: 34,
+    fontSize: 25,
     fontStyle: "normal",
     fontWeight: "normal",
     textAlign: "left",
-    letterSpacing: 0.32,
-    marginLeft: 15,
-    marginTop: 20
+    marginLeft: 16,
+    marginTop: 10
   },
   filtersView: {
     backgroundColor: "rgb(218, 217, 226)",
@@ -484,13 +606,11 @@ const styles = StyleSheet.create({
   doneText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(255, 104, 154)",
-    fontSize: 17,
+    fontSize: 25,
     fontStyle: "normal",
     fontWeight: "normal",
     textAlign: "right",
-    lineHeight: 22,
-    letterSpacing: -0.41,
-    marginTop: 66,
+    marginTop: 10,
     marginRight: 16,
     alignSelf: "flex-end"
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View,  ActivityIndicator ,StyleSheet,Image} from 'react-native'
-import Loader from 'react-native-mask-loader';
+
 
 import { Images } from "../../../assets/imageAll";
 export default class ActivityLoader extends Component {
