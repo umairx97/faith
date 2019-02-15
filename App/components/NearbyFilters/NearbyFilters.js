@@ -26,6 +26,7 @@ import { Actions } from "react-native-router-flux";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 
+import { ifIphoneX } from "react-native-iphone-x-helper";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 
 const Screen = {
@@ -192,7 +193,8 @@ export default class NearbyFilters extends React.Component {
       <View
         style={{
           flex: 1,
-          flexDirection: "column"
+          flexDirection: "column",
+          ...ifIphoneX({ marginTop: 30 })
         }}
       >
         <View style={styles.toplineView}>
@@ -327,6 +329,7 @@ export default class NearbyFilters extends React.Component {
 const styles = StyleSheet.create({
   nearbyFiltersView: {
     backgroundColor: "rgb(255, 255, 255)",
+    
     flex: 1
   },
   barsNavigationFilterView: {

@@ -1,97 +1,141 @@
 
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, ImageBackground,Platform } from "react-native";
 import React from "react";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 import GridView from "react-native-super-grid";
-const items = [
-  { name: "TURQUOISE", code: "#1abc9c" },
-  { name: "EMERALD", code: "#2ecc71" },
-  { name: "PETER RIVER", code: "#3498db" },
-  { name: "AMETHYST", code: "#9b59b6" },
-  { name: "WET ASPHALT", code: "#34495e" },
-  { name: "GREEN SEA", code: "#16a085" },
-  { name: "NEPHRITIS", code: "#27ae60" },
-  { name: "BELIZE HOLE", code: "#2980b9" },
-  { name: "WISTERIA", code: "#8e44ad" },
-  { name: "MIDNIGHT BLUE", code: "#2c3e50" },
-  { name: "SUN FLOWER", code: "#f1c40f" },
-  { name: "CARROT", code: "#e67e22" },
-  { name: "ALIZARIN", code: "#e74c3c" },
-  { name: "CLOUDS", code: "#ecf0f1" },
-  { name: "CONCRETE", code: "#95a5a6" },
-  { name: "ORANGE", code: "#f39c12" },
-  { name: "PUMPKIN", code: "#d35400" },
-  { name: "POMEGRANATE", code: "#c0392b" },
-  { name: "SILVER", code: "#bdc3c7" },
-  { name: "ASBESTOS", code: "#7f8c8d" }
-];
+
+import { ifIphoneX } from "react-native-iphone-x-helper";
+var arrayKey = [];
 
 export default class Favorite extends React.Component {
   constructor() {
     super();
     this.state = {
       loginUserId: '',
-      userKey: ''
+      userKey: '',
+      allArr: [],
+      dateOfBirth:'',
     };
 
 
   }
-  async getCurrentUserId() {
-    var uidUser = await firebase.auth().currentUser.uid;
-    //alert(uidUser)
-    this.setState({
-      loginUserId: uidUser
-    })
-  }
+
   componentDidMount() {
     this.getCurrentUserId();
     this.getAllFavouriteUser();
   }
   async getAllFavouriteUser() {
-    var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId);
+    var uidUser = await firebase.auth().currentUser.uid;
+    var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + uidUser);
+    arrayKey = [];
     await alreadyFavouriteUser.once('value').then(snapshot => {
       snapshot.forEach(childSnapshot => {
-        childSnapshot.forEach(childS => {
-          key = childS.key;
-          this.setState({
-            userKey: key
-          })
-          alert(key)
-        })
+
+        key = childSnapshot.key;
+
+        this.getUserFavorite(key)
       })
+
     })
   }
+  getUserFavorite = async (id) => {
+    var displayUserName = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + id);
+    await displayUserName.once("value").then (snapshot=> {
+      var usrName = snapshot.val().fullName;
+      var imageUrl = snapshot.val().profileImageURL;
+      var userID = snapshot.val().uid;
+      var dob=snapshot.val().user_Dob;
+      var personAge=this.age(dob);
+
+      arrayKey.push({ id: userID, UserName: usrName, ImageURL: imageUrl, fullAge:personAge})
+    })
+    this.setState({
+      allArr: arrayKey
+    })
+  }
+  age(dob){
+  
+  var userAge=dob;
+
+    var date=userAge.split('-')[0]
+    var month=userAge.split('-')[1]
+    var year=userAge.split('-')[2]
+    
+    var ageFull=this.calculate_age(month,date,year);
+ 
+    return ageFull;
+      }
+    
+      calculate_age(birth_month,birth_day,birth_year){
+          today_date = new Date();
+          today_year = today_date.getFullYear();
+          today_month = today_date.getMonth();
+          today_day = today_date.getDate();
+          age = today_year - birth_year;
+      
+          if ( today_month < (birth_month - 1))
+          {
+              age--;
+          }
+          if (((birth_month - 1) == today_month) && (today_day < birth_day))
+          {
+              age--;
+          }
+          return age;
+      }
+      openClickedProfile=(usrId)=>{
+        alert(usrId);
+      }
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} >
         <View style={{ flex: 1 }}>
           <ScrollView>
             <GridView
               itemDimension={130}
-              items={items}
+              items={this.state.allArr}
               style={styles.gridView}
               renderItem={item => (
                 <View
-                  style={[styles.itemContainer, { backgroundColor: item.code }]}
-                >
-                  <Text style={styles.itemName}>{item.name}</Text>
-                  <Text style={styles.itemCode}>{item.code}</Text>
+                  style={[styles.itemContainer]}
+                ><TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
+                  <Image source={{ uri: item.ImageURL }}
+                    style={[styles.imageContainer]}
+                  ></Image>
+                  <View style={{ flexDirection: 'row', justifyContent:'center' }}>
+                            <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold' }}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15 }}>,</Text>
+                            <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold'}}>{item.fullAge}</Text>
+                        </View> 
+                 
+                        </TouchableOpacity>
+
                 </View>
               )}
             />
           </ScrollView>
         </View>
-      </View>
+      </View >
     );
   }
 }
 
 const styles = StyleSheet.create({
   gridView: {
-    paddingTop: 5,
+    paddingTop: Platform.OS === "ios" ? 30 : 20,
+
+    ...ifIphoneX({ paddingTop: 65 }),
     flex: 1
   },
   itemContainer: {
+    justifyContent: "flex-end",
+    borderRadius: 5,
+    padding: 10,
+    height: 175,
+
+  },
+  imageContainer: {
     justifyContent: "flex-end",
     borderRadius: 5,
     padding: 10,

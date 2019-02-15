@@ -19,6 +19,7 @@ import { Actions } from "react-native-router-flux";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Modal from "react-native-modal";
 import firebase from "../FirebaseConfig/FirebaseConfig";
+
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
@@ -44,12 +45,16 @@ export default class Discover extends Component {
       imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
       isModalVisible: false,
       transparent: false,
-      viewFullProfileId: ''
+      viewFullProfileId: '',
+      ageFromShow: 16,
+      ageToShow: 100,
+      userDistanceShow: 0,
+      userGenderShow: 0,
     }
-    this.getAllUser();
     this.getCurrentUserId();
   }
-  componentWillMount() {
+  async componentWillMount() {
+    await this.getSearchFilter();
     BackHandler.addEventListener("hardwareBackPress", () => {
       return true;
     });
@@ -79,7 +84,8 @@ export default class Discover extends Component {
     var key
     var userProfileId
     var loginUser
-
+    var userGender
+    var userAge
     allUserProfile
       .once("value")
       .then(snapshot => {
@@ -91,13 +97,16 @@ export default class Discover extends Component {
           var userName = childSnapshot.val().fullName;
           varifiedUser = childSnapshot.val().isVarified;
           loginUser = childSnapshot.val().isLogin;
-          this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser)
+          userAge = childSnapshot.val().user_Dob;
+          userGender = childSnapshot.val().gender;
+          var getAge = this.userAgeShow(userAge);
+          this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser, getAge, userGender)
         });
       }).catch(error => {
         console.log(JSON.stringify(error));
       });
   }
-  async getAlreadyLikedUser(id, userName, childData, userProfileId, varifiedUser) {
+  async getAlreadyLikedUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender) {
     arr = [];
     var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
 
@@ -106,20 +115,20 @@ export default class Discover extends Component {
         //alert('yes')
       }
       else {
-        this.getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser);
+        this.getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender);
       }
     }).catch(error => {
       alert(JSON.stringify(error))
     })
   }
-  async getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser) {
+  async getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender) {
     var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id);
     await alreadyFavouriteUser.once('value').then(snapshot => {
       if (snapshot.exists()) {
         //return;
       }
       else {
-        this.getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser);
+        this.getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender);
       }
     }).catch(error => {
       alert(JSON.stringify(error))
@@ -127,7 +136,7 @@ export default class Discover extends Component {
   }
 
 
-  async getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser) {
+  async getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender) {
     var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/RejectedProfile/" + this.state.loginUserId + "/" + id);
     await alreadyFavouriteUser.once('value').then(snapshot => {
       if (snapshot.exists()) {
@@ -135,9 +144,13 @@ export default class Discover extends Component {
       }
       else {
         if (this.state.loginUserId != id)
-          if (varifiedUser == true) {
+
+          if (varifiedUser == true && getAge >= this.state.ageFromShow && getAge <= this.state.ageToShow) {
             arr.push({ pName: userName, pUrl: childData, id: userProfileId });
           }
+        // alert(this.state.ageFromShow)
+        // alert(this.state.ageFromShow)
+
         this.setState({ showArr: arr });
       }
     }).catch(error => {
@@ -186,7 +199,38 @@ export default class Discover extends Component {
         Alert.alert("fail" + error.toString());
       });
   }
+  getSearchFilter = async () => {
+    var uidUser = await firebase.auth().currentUser.uid;
+    instance = this;
+    var ageFrom;
+    var ageTo;
+    var searchDistance;
+    var genderShow;
+    let snapExist = false
+    var displayUserName = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser);
+    await displayUserName.once("value", function (snapshot) {
+      ageFrom = snapshot.val().age_from;
+      ageTo = snapshot.val().age_to;
+      searchDistance = snapshot.val().distance;
+      genderShow = snapshot.val().show_me;
+      snapExist = true;
+      //alert(this.state.ageFromShow)
+    })
+    if (snapExist)
+      this.setState({
+        ...this.state,
+        ageFromShow: ageFrom,
+        ageToShow: ageTo,
+        userDistanceShow: searchDistance,
+        userGenderShow: genderShow
+      })
 
+    this.getAllUser();
+
+
+  }
   viewUserProfile = async (id) => {
 
     this.toggleModal();
@@ -221,7 +265,19 @@ export default class Discover extends Component {
       totalAge: ageFull
     })
   }
+  userAgeShow = (dob) => {
+    var userAge = dob;
+    //alert(userAge)
+    var date = userAge.split('-')[0]
+    var month = userAge.split('-')[1]
+    var year = userAge.split('-')[2]
 
+    var ageFull = this.calculate_age(month, date, year);
+    return ageFull;
+    // this.setState({
+    //   totalAge: ageFull
+    // })
+  }
   calculate_age = (birth_month, birth_day, birth_year) => {
     today_date = new Date();
     today_year = today_date.getFullYear();
@@ -267,13 +323,12 @@ export default class Discover extends Component {
       )
     }))
   }
- async viewFullProfile(id) {
-    //alert(id);
-    //this.toggleModal();
+  async viewFullProfile(id) {
+
 
     this.setState({ isModalVisible: !this.state.isModalVisible });
     this.swiper.goBackFromTop();
-    //this.setState({ isModalVisible: false})
+
     AsyncStorage.setItem("userProfileKeys", id);
     setTimeout(() => Actions.userProfile(), 500);
 
