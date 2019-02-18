@@ -49,7 +49,7 @@ export default class Discover extends Component {
       ageFromShow: 16,
       ageToShow: 100,
       userDistanceShow: 0,
-      userGenderShow: 0,
+      userGenderShow: 2,
     }
     this.getCurrentUserId();
   }
@@ -63,17 +63,13 @@ export default class Discover extends Component {
     this.swiper.goBackFromTop();
     this.setState({ isModalVisible: !this.state.isModalVisible });
   }
-
-
   getCurrentUserId = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
       loginUserId: uidUser
     })
   }
-
   componentDidMount() {
-
   }
 
   getAllUser = async () => {
@@ -146,10 +142,17 @@ export default class Discover extends Component {
         if (this.state.loginUserId != id)
 
           if (varifiedUser == true && getAge >= this.state.ageFromShow && getAge <= this.state.ageToShow) {
-            arr.push({ pName: userName, pUrl: childData, id: userProfileId });
+            if (this.state.userGenderShow == 0 && userGender == 0) {
+              arr.push({ pName: userName, pUrl: childData, id: userProfileId });
+            }
+            else if (this.state.userGenderShow == 1 && userGender == 1) {
+              arr.push({ pName: userName, pUrl: childData, id: userProfileId });
+            }
+            else if (this.state.userGenderShow == 2) {
+              arr.push({ pName: userName, pUrl: childData, id: userProfileId });
+            }
           }
-        // alert(this.state.ageFromShow)
-        // alert(this.state.ageFromShow)
+
 
         this.setState({ showArr: arr });
       }
@@ -172,6 +175,19 @@ export default class Discover extends Component {
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
+
+      firebase
+      .database()
+      .ref("Users/FaithMeetsLove/ProfileLikedBy/" + id + "/" + this.state.loginUserId)
+      .set({
+        isLike: true
+      })
+      .then(ref => {
+      })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+
   }
   getFavouriteProfileId = (id) => {
     firebase
@@ -211,12 +227,13 @@ export default class Discover extends Component {
       .database()
       .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser);
     await displayUserName.once("value", function (snapshot) {
-      ageFrom = snapshot.val().age_from;
-      ageTo = snapshot.val().age_to;
-      searchDistance = snapshot.val().distance;
-      genderShow = snapshot.val().show_me;
-      snapExist = true;
-      //alert(this.state.ageFromShow)
+      if (snapshot.exists()) {
+        ageFrom = snapshot.val().age_from;
+        ageTo = snapshot.val().age_to;
+        searchDistance = snapshot.val().distance;
+        genderShow = snapshot.val().show_me;
+        snapExist = true;
+      }
     })
     if (snapExist)
       this.setState({
@@ -226,10 +243,7 @@ export default class Discover extends Component {
         userDistanceShow: searchDistance,
         userGenderShow: genderShow
       })
-
     this.getAllUser();
-
-
   }
   viewUserProfile = async (id) => {
 
@@ -254,7 +268,6 @@ export default class Discover extends Component {
   }
   age = () => {
     var userAge = this.state.dateOfBirth;
-    //alert(userAge)
     var date = userAge.split('-')[0]
     var month = userAge.split('-')[1]
     var year = userAge.split('-')[2]

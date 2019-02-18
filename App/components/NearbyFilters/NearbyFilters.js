@@ -68,6 +68,7 @@ export default class NearbyFilters extends React.Component {
     };
     this.updateIndex = this.updateIndex.bind(this);
     this.getUserInfo();
+
   }
   async getUserInfo() {
     var fullName;
@@ -86,6 +87,23 @@ export default class NearbyFilters extends React.Component {
       latitude.replace(",", ""),
       longitude.replace(",", "")
     );
+    var uidUser = await firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser).once('value').then(snapshot => {
+        var show_me = snapshot.val().show_me
+        var distance = snapshot.val().distance
+        var age_to = snapshot.val().age_to
+        var age_from = snapshot.val().age_from
+
+        this.setState({
+          selectedIndex: show_me,
+          Km: distance,
+          values: [age_from , age_to]
+        })
+      })
+
+
   }
   getVal(val) {
     console.warn(val);
@@ -150,10 +168,10 @@ export default class NearbyFilters extends React.Component {
     try {
       let response = await fetch(
         "http://dev.virtualearth.net/REST/v1/Locations/" +
-          the_lat +
-          "," +
-          the_long +
-          "?includeEntityTypes=PopulatedPlace&includeNeighborhood=1&include=ciso2&key=AhSM34xkpIXcF5kfykYYeo7ilzzdU24XlF1MOl8CEu7OOL2eHd77WY45T-OdkQ7j"
+        the_lat +
+        "," +
+        the_long +
+        "?includeEntityTypes=PopulatedPlace&includeNeighborhood=1&include=ciso2&key=AhSM34xkpIXcF5kfykYYeo7ilzzdU24XlF1MOl8CEu7OOL2eHd77WY45T-OdkQ7j"
       );
       let responseJson = await response.json();
 
@@ -329,7 +347,7 @@ export default class NearbyFilters extends React.Component {
 const styles = StyleSheet.create({
   nearbyFiltersView: {
     backgroundColor: "rgb(255, 255, 255)",
-    
+
     flex: 1
   },
   barsNavigationFilterView: {

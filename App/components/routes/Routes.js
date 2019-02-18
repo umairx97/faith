@@ -23,6 +23,7 @@ import ProfileCopy from "../Profile/ProfileCopy";
 import CaptureImage from "../CameraView/CaptureImage";
 import RecordVideo from "../CameraView/RecordVideo";
 import ActivityLoader from "../ActivityLoader/ActivityLoader";
+import Matches from "../Matches/Matches";
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -154,6 +155,11 @@ export default class Route extends Component {
             <Scene
               key="userProfile"
               component={UserProfile}
+              hideNavBar={true}
+            />
+             <Scene
+              key="matchProfile"
+              component={Matches}
               hideNavBar={true}
             />
                <Scene

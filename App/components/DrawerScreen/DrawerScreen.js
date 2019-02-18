@@ -282,6 +282,9 @@ export default class DrawerScreen extends React.Component {
   onProfileImagerPressed = () => {
     Actions.ProfileCopy();
   };
+  onMatchPressed=()=>{
+    Actions.matchProfile();
+  }
   render() {
     return (
       <ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -413,7 +416,7 @@ export default class DrawerScreen extends React.Component {
                     style={styles.logoutImage}
                   />
                 </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
+                <TouchableOpacity onPress={this.onMatchPressed}>
                   <Text style={styles.visitsText}>Matches</Text>
                 </TouchableOpacity>
                 <View

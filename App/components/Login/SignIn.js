@@ -166,6 +166,7 @@ export default class SignIn extends Component {
           }
         })
         .catch(error => {
+          Actions.signIn();
           //  instance.setState({ ...this.state, progressVisible: false });
           //Login was not successful, let's create a new account
           Alert.alert("Invalid credentials");
