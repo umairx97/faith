@@ -24,8 +24,6 @@ pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
-
-
   pod 'react-native-keep-awake', :path => '../node_modules/react-native-keep-awake'
 
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'

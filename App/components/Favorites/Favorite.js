@@ -21,7 +21,7 @@ export default class Favorite extends React.Component {
   }
 
   componentDidMount() {
-    this.getCurrentUserId();
+    //this.getCurrentUserId();
     this.getAllFavouriteUser();
   }
   async getAllFavouriteUser() {

@@ -15,7 +15,7 @@ import {
   AsyncStorage,
   TouchableOpacity,
   Platform,
-  
+  TouchableHighlight,
   Dimensions
 } from "react-native";
 import React from "react";
@@ -283,7 +283,8 @@ export default class DrawerScreen extends React.Component {
     Actions.ProfileCopy();
   };
   onMatchPressed=()=>{
-    Actions.matchProfile();
+    alert('hi')
+   // Actions.matchProfile();
   }
   render() {
     return (
@@ -416,9 +417,9 @@ export default class DrawerScreen extends React.Component {
                     style={styles.logoutImage}
                   />
                 </View>
-                <TouchableOpacity onPress={this.onMatchPressed}>
+                <TouchableHighlight onPress={()=>{this.onMatchPressed()}}>
                   <Text style={styles.visitsText}>Matches</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
                 <View
                   style={{
                     flexDirection: "row",
