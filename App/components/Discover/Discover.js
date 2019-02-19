@@ -35,22 +35,23 @@ export default class Discover extends Component {
       showAll: [],
       xData: [],
       xInfo: [],
-      nName: 'hello',
-      nUrl: '',
-      userId: '',
-      loginUserId: '',
+      nName: "hello",
+      nUrl: "",
+      userId: "",
+      loginUserId: "",
       isFavouriteUser: false,
-      nameFull: '',
-      dateOfBirth: '',
-      imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+      nameFull: "",
+      dateOfBirth: "",
+      imageProfileUrl:
+        "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
       isModalVisible: false,
       transparent: false,
-      viewFullProfileId: '',
+      viewFullProfileId: "",
       ageFromShow: 16,
       ageToShow: 100,
       userDistanceShow: 0,
-      userGenderShow: 2,
-    }
+      userGenderShow: 2
+    };
     this.getCurrentUserId();
   }
   async componentWillMount() {
@@ -62,32 +63,33 @@ export default class Discover extends Component {
   toggleModal = () => {
     this.swiper.goBackFromTop();
     this.setState({ isModalVisible: !this.state.isModalVisible });
-  }
+  };
   getCurrentUserId = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
       loginUserId: uidUser
-    })
-  }
-  componentDidMount() {
-  }
+    });
+  };
+  componentDidMount() {}
 
   getAllUser = async () => {
     arr = [];
     instance = this;
-    var allUserProfile = firebase.database().ref("Users/FaithMeetsLove/Registered");
+    var allUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered");
     var varifiedUser;
-    var key
-    var userProfileId
-    var loginUser
-    var userGender
-    var userAge
+    var key;
+    var userProfileId;
+    var loginUser;
+    var userGender;
+    var userAge;
     allUserProfile
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
           key = childSnapshot.key;
-          this.setState({ userId: key })
+          this.setState({ userId: key });
           userProfileId = childSnapshot.key;
           var childData = childSnapshot.val().profileImageURL;
           var userName = childSnapshot.val().fullName;
@@ -96,125 +98,241 @@ export default class Discover extends Component {
           userAge = childSnapshot.val().user_Dob;
           userGender = childSnapshot.val().gender;
           var getAge = this.userAgeShow(userAge);
-          this.getAlreadyLikedUser(key, userName, childData, userProfileId, varifiedUser, getAge, userGender)
+          this.getAlreadyLikedUser(
+            key,
+            userName,
+            childData,
+            userProfileId,
+            varifiedUser,
+            getAge,
+            userGender
+          );
         });
-      }).catch(error => {
+      })
+      .catch(error => {
         console.log(JSON.stringify(error));
       });
-  }
-  async getAlreadyLikedUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender) {
+  };
+  async getAlreadyLikedUser(
+    id,
+    userName,
+    childData,
+    userProfileId,
+    varifiedUser,
+    getAge,
+    userGender
+  ) {
     arr = [];
-    var alreadyLikedUser = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id);
+    var alreadyLikedUser = firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id
+      );
 
-    await alreadyLikedUser.once('value').then(snapshot => {
-      if (snapshot.exists()) {
-        //alert('yes')
-      }
-      else {
-        this.getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender);
-      }
-    }).catch(error => {
-      alert(JSON.stringify(error))
-    })
+    await alreadyLikedUser
+      .once("value")
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          //alert('yes')
+        } else {
+          this.getAlreadyFavouriteUser(
+            id,
+            userName,
+            childData,
+            userProfileId,
+            varifiedUser,
+            getAge,
+            userGender
+          );
+        }
+      })
+      .catch(error => {
+        alert(JSON.stringify(error));
+      });
   }
-  async getAlreadyFavouriteUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender) {
-    var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id);
-    await alreadyFavouriteUser.once('value').then(snapshot => {
-      if (snapshot.exists()) {
-        //return;
-      }
-      else {
-        this.getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender);
-      }
-    }).catch(error => {
-      alert(JSON.stringify(error))
-    })
+  async getAlreadyFavouriteUser(
+    id,
+    userName,
+    childData,
+    userProfileId,
+    varifiedUser,
+    getAge,
+    userGender
+  ) {
+    var alreadyFavouriteUser = firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/FavouriteProfile/" +
+          this.state.loginUserId +
+          "/" +
+          id
+      );
+    await alreadyFavouriteUser
+      .once("value")
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          //return;
+        } else {
+          this.getAlreadyRejectedUser(
+            id,
+            userName,
+            childData,
+            userProfileId,
+            varifiedUser,
+            getAge,
+            userGender
+          );
+        }
+      })
+      .catch(error => {
+        alert(JSON.stringify(error));
+      });
   }
 
-
-  async getAlreadyRejectedUser(id, userName, childData, userProfileId, varifiedUser, getAge, userGender) {
-    var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/RejectedProfile/" + this.state.loginUserId + "/" + id);
-    await alreadyFavouriteUser.once('value').then(snapshot => {
-      if (snapshot.exists()) {
-        //return;
-      }
-      else {
-        if (this.state.loginUserId != id)
-
-          if (varifiedUser == true && getAge >= this.state.ageFromShow && getAge <= this.state.ageToShow) {
-            if (this.state.userGenderShow == 0 && userGender == 0) {
-              arr.push({ pName: userName, pUrl: childData, id: userProfileId });
+  async getAlreadyRejectedUser(
+    id,
+    userName,
+    childData,
+    userProfileId,
+    varifiedUser,
+    getAge,
+    userGender
+  ) {
+    var alreadyFavouriteUser = firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/RejectedProfile/" +
+          this.state.loginUserId +
+          "/" +
+          id
+      );
+    await alreadyFavouriteUser
+      .once("value")
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          //return;
+        } else {
+          if (this.state.loginUserId != id)
+            if (
+              varifiedUser == true &&
+              getAge >= this.state.ageFromShow &&
+              getAge <= this.state.ageToShow
+            ) {
+              if (this.state.userGenderShow == 0 && userGender == 0) {
+                arr.push({
+                  pName: userName,
+                  pUrl: childData,
+                  id: userProfileId
+                });
+              } else if (this.state.userGenderShow == 1 && userGender == 1) {
+                arr.push({
+                  pName: userName,
+                  pUrl: childData,
+                  id: userProfileId
+                });
+              } else if (this.state.userGenderShow == 2) {
+                arr.push({
+                  pName: userName,
+                  pUrl: childData,
+                  id: userProfileId
+                });
+              }
             }
-            else if (this.state.userGenderShow == 1 && userGender == 1) {
-              arr.push({ pName: userName, pUrl: childData, id: userProfileId });
-            }
-            else if (this.state.userGenderShow == 2) {
-              arr.push({ pName: userName, pUrl: childData, id: userProfileId });
-            }
-          }
 
-
-        this.setState({ showArr: arr });
-      }
-    }).catch(error => {
-      alert(JSON.stringify(error))
-    })
-    this.setState({ showAll: this.state.showArr })
+          this.setState({ showArr: arr });
+        }
+      })
+      .catch(error => {
+        alert(JSON.stringify(error));
+      });
+    this.setState({ showAll: this.state.showArr });
     var getF = this.state.showAll;
-    this.setState({ xData: getF })
+    this.setState({ xData: getF });
   }
-  getProfileId = (id) => {
+  getProfileId = id => {
     firebase
       .database()
-      .ref("Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id)
+      .ref(
+        "Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id
+      )
       .set({
         isLike: true
       })
       .then(ref => {
+        this.getAlsoLiked(this.state.loginUserId, id);
       })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+  };
+  getAlsoLiked(myId, frndId) {
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/ProfileLiked/" + frndId + "/" + myId)
+      .once("value", snapshot => {
+        if (snapshot.exists()) {
+          this.profileMatchWithMe(frndId, myId);
+        } else {
+        }
+      });
+  }
+  profileMatchWithMe(frndId, myId) {
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/MatchedProfiles/" + myId)
+      .push({
+        friendUid: frndId
+      })
+      .then(ref => {})
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
 
-      firebase
-      .database()
-      .ref("Users/FaithMeetsLove/ProfileLikedBy/" + id + "/" + this.state.loginUserId)
-      .set({
-        isLike: true
-      })
-      .then(ref => {
-      })
-      .catch(error => {
-        Alert.alert("fail" + error.toString());
-      });
-
-  }
-  getFavouriteProfileId = (id) => {
     firebase
       .database()
-      .ref("Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id)
-      .set({
-        isLike: true
+      .ref("Users/FaithMeetsLove/MatchedProfiles/" + frndId)
+      .push({
+        friendUid: myId
       })
-      .then(ref => {
-      })
+      .then(ref => {})
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
   }
-  rejectUserProfile = async (id) => {
+  getFavouriteProfileId = id => {
     firebase
       .database()
-      .ref("Users/FaithMeetsLove/RejectedProfile/" + this.state.loginUserId + "/" + id)
+      .ref(
+        "Users/FaithMeetsLove/FavouriteProfile/" +
+          this.state.loginUserId +
+          "/" +
+          id
+      )
       .set({
         isLike: true
       })
-      .then(ref => {
-      })
+      .then(ref => {})
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
-  }
+  };
+  rejectUserProfile = async id => {
+    firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/RejectedProfile/" +
+          this.state.loginUserId +
+          "/" +
+          id
+      )
+      .set({
+        isLike: true
+      })
+      .then(ref => {})
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+  };
   getSearchFilter = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     instance = this;
@@ -222,11 +340,11 @@ export default class Discover extends Component {
     var ageTo;
     var searchDistance;
     var genderShow;
-    let snapExist = false
+    let snapExist = false;
     var displayUserName = firebase
       .database()
       .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser);
-    await displayUserName.once("value", function (snapshot) {
+    await displayUserName.once("value", function(snapshot) {
       if (snapshot.exists()) {
         ageFrom = snapshot.val().age_from;
         ageTo = snapshot.val().age_to;
@@ -234,7 +352,7 @@ export default class Discover extends Component {
         genderShow = snapshot.val().show_me;
         snapExist = true;
       }
-    })
+    });
     if (snapExist)
       this.setState({
         ...this.state,
@@ -242,18 +360,17 @@ export default class Discover extends Component {
         ageToShow: ageTo,
         userDistanceShow: searchDistance,
         userGenderShow: genderShow
-      })
+      });
     this.getAllUser();
-  }
-  viewUserProfile = async (id) => {
-
+  };
+  viewUserProfile = async id => {
     this.toggleModal();
     instance = this;
 
     var displayUserProfile = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + id);
-    displayUserProfile.once("value", function (snapshot) {
+    displayUserProfile.once("value", function(snapshot) {
       var usrName = snapshot.val().fullName;
       var ImageUrl = snapshot.val().profileImageURL;
       var dob = snapshot.val().user_Dob;
@@ -265,32 +382,32 @@ export default class Discover extends Component {
       });
       instance.age();
     });
-  }
+  };
   age = () => {
     var userAge = this.state.dateOfBirth;
-    var date = userAge.split('-')[0]
-    var month = userAge.split('-')[1]
-    var year = userAge.split('-')[2]
+    var date = userAge.split("-")[0];
+    var month = userAge.split("-")[1];
+    var year = userAge.split("-")[2];
 
     var ageFull = this.calculate_age(month, date, year);
 
     this.setState({
       totalAge: ageFull
-    })
-  }
-  userAgeShow = (dob) => {
+    });
+  };
+  userAgeShow = dob => {
     var userAge = dob;
     //alert(userAge)
-    var date = userAge.split('-')[0]
-    var month = userAge.split('-')[1]
-    var year = userAge.split('-')[2]
+    var date = userAge.split("-")[0];
+    var month = userAge.split("-")[1];
+    var year = userAge.split("-")[2];
 
     var ageFull = this.calculate_age(month, date, year);
     return ageFull;
     // this.setState({
     //   totalAge: ageFull
     // })
-  }
+  };
   calculate_age = (birth_month, birth_day, birth_year) => {
     today_date = new Date();
     today_year = today_date.getFullYear();
@@ -298,55 +415,64 @@ export default class Discover extends Component {
     today_day = today_date.getDate();
     age = today_year - birth_year;
 
-    if (today_month < (birth_month - 1)) {
+    if (today_month < birth_month - 1) {
       age--;
     }
-    if (((birth_month - 1) == today_month) && (today_day < birth_day)) {
+    if (birth_month - 1 == today_month && today_day < birth_day) {
       age--;
     }
     return age;
-  }
-  renderAllAccount = (items) => {
+  };
+  renderAllAccount = items => {
     var x = items;
-    return (items.map((item) => {
+    return items.map(item => {
       var uriProfile = item.pUrl;
       var userProfileId = item.id;
       return (
-        <Card style={{
-          backgroundColor: 'white',
-          height: Screen.height - ((Screen.height / 2) - 60),
-          width: Screen.width - 80, borderRadius: 10,
-        }}
-          onSwipedRight={() => { this.getProfileId(userProfileId) }}
-          onSwipedBottom={() => { this.getFavouriteProfileId(userProfileId) }}
-          onSwipedTop={() => { this.viewUserProfile(userProfileId) }}
-          onSwipedLeft={() => { this.rejectUserProfile(userProfileId) }}
+        <Card
+          style={{
+            backgroundColor: "white",
+            height: Screen.height - (Screen.height / 2 - 60),
+            width: Screen.width - 80,
+            borderRadius: 10
+          }}
+          onSwipedRight={() => {
+            this.getProfileId(userProfileId);
+          }}
+          onSwipedBottom={() => {
+            this.getFavouriteProfileId(userProfileId);
+          }}
+          onSwipedTop={() => {
+            this.viewUserProfile(userProfileId);
+          }}
+          onSwipedLeft={() => {
+            this.rejectUserProfile(userProfileId);
+          }}
         >
-          <View style={{ flexDirection: 'column' }}><Image
-            source={{ uri: uriProfile }}
-            style={{
-              height: Screen.height - ((Screen.height / 2) - 20),
-              width: Screen.width - 80,
-              borderRadius: 10,
-              resizeMode: "cover"
-            }}
-          />
-            <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{item.pName}</Text></View>
+          <View style={{ flexDirection: "column" }}>
+            <Image
+              source={{ uri: uriProfile }}
+              style={{
+                height: Screen.height - (Screen.height / 2 - 20),
+                width: Screen.width - 80,
+                borderRadius: 10,
+                resizeMode: "cover"
+              }}
+            />
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+              {item.pName}
+            </Text>
+          </View>
         </Card>
-      )
-    }))
-  }
+      );
+    });
+  };
   async viewFullProfile(id) {
-
-
     this.setState({ isModalVisible: !this.state.isModalVisible });
     this.swiper.goBackFromTop();
 
     AsyncStorage.setItem("userProfileKeys", id);
     setTimeout(() => Actions.userProfile(), 500);
-
-
-
   }
   render() {
     return (
@@ -399,8 +525,15 @@ export default class Discover extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ position: "absolute", left: 40, top: 80, ...ifIphoneX({ top: 100 }), right: 40 }}>
-
+          <View
+            style={{
+              position: "absolute",
+              left: 40,
+              top: 80,
+              ...ifIphoneX({ top: 100 }),
+              right: 40
+            }}
+          >
             <CardStack
               style={styles.content}
               renderNoMoreCards={() => (
@@ -415,7 +548,9 @@ export default class Discover extends Component {
                     ...ifIphoneX({ top: 220 }),
                     right: 60
                   }}
-                >No more cards :(</Text>
+                >
+                  No more cards :(
+                </Text>
               )}
               ref={swiper => {
                 this.swiper = swiper;
@@ -424,7 +559,9 @@ export default class Discover extends Component {
               onSwipedLeft={() => console.log("onSwipedLeft")}
               onSwipedTop={() => console.log("onSwipedtop")}
               onSwipedBottom={() => console.log("onSwipedbottom")}
-            >{this.renderAllAccount(this.state.xData)}</CardStack>
+            >
+              {this.renderAllAccount(this.state.xData)}
+            </CardStack>
           </View>
           <View
             style={{
@@ -440,7 +577,6 @@ export default class Discover extends Component {
                 style={[styles.button, styles.red]}
                 onPress={() => {
                   this.swiper.swipeLeft();
-
                 }}
               >
                 <Image
@@ -472,7 +608,6 @@ export default class Discover extends Component {
                 style={[styles.button, styles.green]}
                 onPress={() => {
                   this.swiper.swipeRight();
-
                 }}
               >
                 <Image
@@ -487,34 +622,75 @@ export default class Discover extends Component {
             </View>
           </View>
         </LinearGradient>
-        <Modal isVisible={this.state.isModalVisible} animationType="slide"
-          transparent={true} onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{ backgroundColor: 'white', justifyContent: 'center', padding: 10, borderRadius: 10, }}>
-            <Image source={{ uri: this.state.imageProfileUrl }}
+        <Modal
+          isVisible={this.state.isModalVisible}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              justifyContent: "center",
+              padding: 10,
+              borderRadius: 10
+            }}
+          >
+            <Image
+              source={{ uri: this.state.imageProfileUrl }}
               style={styles.ovalImage}
             />
-            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text><Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text>
-              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{this.state.totalAge}</Text>
+            <View style={{ flexDirection: "row", alignSelf: "center" }}>
+              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: "bold" }}>
+                {this.state.nameFull}
+              </Text>
+              <Text style={{ fontWeight: "bold", marginTop: 10, fontSize: 22 }}>
+                ,
+              </Text>
+              <Text
+                style={{
+                  fontSize: 22,
+                  marginTop: 10,
+                  fontWeight: "bold",
+                  marginLeft: 10
+                }}
+              >
+                {this.state.totalAge}
+              </Text>
             </View>
             <View>
-              <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text>
+              <Text style={{ margin: 10 }}>
+                ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj
+              </Text>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                margin: 10
+              }}
+            >
               <View>
                 <TouchableOpacity onPress={this.toggleModal}>
-                  <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Cancel</Text>
-                </TouchableOpacity></View>
-              <View>
-                <TouchableOpacity onPress={() => { this.viewFullProfile(this.state.viewFullProfileId) }}>
-                  <Text style={{ fontWeight: 'bold', fontSize: 20 }}>View Profile</Text>
+                  <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                    Cancel
+                  </Text>
                 </TouchableOpacity>
               </View>
-
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.viewFullProfile(this.state.viewFullProfileId);
+                  }}
+                >
+                  <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                    View Profile
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-
           </View>
         </Modal>
       </View>
@@ -538,13 +714,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   ovalImage: {
-    resizeMode: 'cover',
+    resizeMode: "cover",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 130,
     height: 130,
 
-
     borderRadius: 65,
-    alignSelf: 'center'
-  },
+    alignSelf: "center"
+  }
 });

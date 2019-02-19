@@ -15,7 +15,7 @@ import {
   AsyncStorage,
   TouchableOpacity,
   Platform,
-  TouchableHighlight,
+  
   Dimensions
 } from "react-native";
 import React from "react";
@@ -283,8 +283,7 @@ export default class DrawerScreen extends React.Component {
     Actions.ProfileCopy();
   };
   onMatchPressed=()=>{
-    alert('hi')
-   // Actions.matchProfile();
+    Actions.matchProfile();
   }
   render() {
     return (
@@ -404,22 +403,22 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={styles.visitorsView}>
+            <View style={styles.likesView}>
               <View
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View style={styles.rectangle2TwoView}>
+                <View style={styles.rectangle2View}>
                   <Image
-                    source={Images.matchMaking}
+                    source={Images.findFriendList}
                     style={styles.logoutImage}
                   />
                 </View>
-                <TouchableHighlight onPress={()=>{this.onMatchPressed()}}>
-                  <Text style={styles.visitsText}>Matches</Text>
-                </TouchableHighlight>
+                <TouchableOpacity onPress={()=>{this.onMatchPressed()}}>
+                  <Text style={styles.likesText}>Matches</Text>
+                </TouchableOpacity>
                 <View
                   style={{
                     flexDirection: "row",
@@ -427,45 +426,12 @@ export default class DrawerScreen extends React.Component {
                     justifyContent: "flex-end"
                   }}
                 >
-                  <Image
-                    source={Images.shapeArrow}
-                    style={styles.shapeTwoImage}
-                  />
-                </View>
-              </View>
-
-              <View
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View style={styles.iconsLikeCopyView}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View style={styles.rectangleTwoView}>
-                      <View
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={Images.shapeArrow}
-                      style={styles.shapeThreeImage}
-                    />
-                  </View>
+                  <Image source={Images.shapeArrow} style={styles.shapeImage} />
                 </View>
               </View>
             </View>
-
+           
+           
             <View style={styles.visitorsView}>
               <View
                 style={{
