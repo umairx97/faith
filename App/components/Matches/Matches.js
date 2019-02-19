@@ -22,7 +22,7 @@ export default class Matches extends Component {
     };
     this.getCurrentUserId();
     // this.getLikedProfile();
-    this.getAllUser();
+
   }
 
   async componentDidMount() {
@@ -47,7 +47,7 @@ export default class Matches extends Component {
     instance = this;
     var allUserProfile = firebase
       .database()
-      .ref("Users/FaithMeetsLove/Registered");
+      .ref("Users/FaithMeetsLove/MatchedProfiles/" + this.state.loginUserId);
     var varifiedUser;
     var key;
     var userProfileId;
@@ -59,38 +59,85 @@ export default class Matches extends Component {
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
-          key = childSnapshot.key;
+          key = childSnapshot.val().friendUid;
           alert(key)
-        //   userProfileId = childSnapshot.key;
-        //   var childData = childSnapshot.val().profileImageURL;
-        //   var userName = childSnapshot.val().fullName;
-        //   varifiedUser = childSnapshot.val().isVarified;
-        //   loginUser = childSnapshot.val().isLogin;
-        //   userGender = childSnapshot.val().gender;
-        //   if (userGender == 0) {
-        //     genderName = "Men";
-        //   } else {
-        //     genderName = "Women";
-        //   }
-        //   userAge = childSnapshot.val().user_Dob;
-        //   var getAge = this.userAgeShow(userAge);
-        //   if (this.state.loginUserId != key) {
-        //     arr.push({
-        //       pName: userName,
-        //       pUrl: childData,
-        //       ids: userProfileId,
-        //       age: getAge,
-        //       gender: genderName
-        //     });
-        //   }
+          this.getUserDetail(key);
+          //   userProfileId = childSnapshot.key;
+          //   var childData = childSnapshot.val().profileImageURL;
+          //   var userName = childSnapshot.val().fullName;
+          //   varifiedUser = childSnapshot.val().isVarified;
+          //   loginUser = childSnapshot.val().isLogin;
+          //   userGender = childSnapshot.val().gender;
+          //   if (userGender == 0) {
+          //     genderName = "Men";
+          //   } else {
+          //     genderName = "Women";
+          //   }
+          //   userAge = childSnapshot.val().user_Dob;
+          //   var getAge = this.userAgeShow(userAge);
+          //   if (this.state.loginUserId != key) {
+          //     arr.push({
+          //       pName: userName,
+          //       pUrl: childData,
+          //       ids: userProfileId,
+          //       age: getAge,
+          //       gender: genderName
+          //     });
+          //   }
         });
-       // this.setState({ showArr: arr });
+        // this.setState({ showArr: arr });
       })
       .catch(error => {
         console.log(JSON.stringify(error));
       });
     // this.setState({ allData: this.state.showArr});
   };
+  getUserDetail = async (key) => {
+    arr = [];
+    instance = this;
+    var allUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + key);
+    var varifiedUser;
+    var key;
+    var userProfileId;
+    var loginUser;
+    var userGender;
+    var userAge;
+    var genderName;
+    allUserProfile
+      .once("value")
+      .then(childSnapshot => {
+
+        userProfileId = key;
+        var childData = childSnapshot.val().profileImageURL;
+        var userName = childSnapshot.val().fullName;
+        varifiedUser = childSnapshot.val().isVarified;
+        loginUser = childSnapshot.val().isLogin;
+        userGender = childSnapshot.val().gender;
+        if (userGender == 0) {
+          genderName = "Men";
+        } else {
+          genderName = "Women";
+        }
+        userAge = childSnapshot.val().user_Dob;
+        var getAge = this.userAgeShow(userAge);
+        if (this.state.loginUserId != key) {
+          arr.push({
+            pName: userName,
+            pUrl: childData,
+            ids: userProfileId,
+            age: getAge,
+            gender: genderName
+          });
+        }
+
+        this.setState({ showArr: arr });
+      })
+      .catch(error => {
+        console.log(JSON.stringify(error));
+      });
+  }
   userAgeShow = dob => {
     var userAge = dob;
     //alert(userAge)
@@ -124,6 +171,8 @@ export default class Matches extends Component {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
       loginUserId: uidUser
+    }, () => {
+      this.getAllUser();
     });
   };
   render() {
