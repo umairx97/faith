@@ -15,10 +15,19 @@ pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
+
+
+  pod 'react-native-keep-awake', :path => '../node_modules/react-native-keep-awake'
+
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
 end

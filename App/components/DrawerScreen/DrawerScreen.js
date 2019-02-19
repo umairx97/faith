@@ -256,7 +256,7 @@ export default class DrawerScreen extends React.Component {
     Actions.drawerClose();
   };
   onChatPressed = () => {
-    Actions.Chat();
+    Actions.chat();
   };
   signOutGoogle = async () => {
     firebase

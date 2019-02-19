@@ -4,6 +4,23 @@
             "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
             "map": [
                 {
+                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/e366eceab10830b64e5e32d8046e5bd0/res/values-es/values-es.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,170,274,370,469,576,683,788,893,993,1110",
+                        "endColumns": "114,103,95,98,106,106,104,104,99,116,94",
+                        "endOffsets": "165,269,365,464,571,678,783,888,988,1105,1200"
+                    },
+                    "to": {
+                        "startLines": "60,61,62,63,64,65,66,67,68,69,70",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "7284,7399,7503,7599,7698,7805,7912,8017,8122,8222,8339",
+                        "endColumns": "114,103,95,98,106,106,104,104,99,116,94",
+                        "endOffsets": "7394,7498,7594,7693,7800,7907,8012,8117,8217,8334,8429"
+                    }
+                },
+                {
                     "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8cdb50380dcbb484a18b411814cf6f35/res/values-es/values-es.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
@@ -13,11 +30,11 @@
                         "endOffsets": "217,330,438,523,624,752,837,919,1001,1108,1208,1307,1415,1522,1629,1788,1888,1970"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,61",
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,72",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,222,335,443,528,629,757,842,924,1006,1113,1213,1312,1420,1527,1634,1793,7386",
+                        "startOffsets": "105,222,335,443,528,629,757,842,924,1006,1113,1213,1312,1420,1527,1634,1793,8536",
                         "endColumns": "116,112,107,84,100,127,84,81,81,106,99,98,107,106,106,158,99,81",
-                        "endOffsets": "217,330,438,523,624,752,837,919,1001,1108,1208,1307,1415,1522,1629,1788,1888,7463"
+                        "endOffsets": "217,330,438,523,624,752,837,919,1001,1108,1208,1307,1415,1522,1629,1788,1888,8613"
                     }
                 },
                 {
@@ -47,11 +64,11 @@
                         "endOffsets": "287"
                     },
                     "to": {
-                        "startLines": "60",
+                        "startLines": "71",
                         "startColumns": "4",
-                        "startOffsets": "7284",
+                        "startOffsets": "8434",
                         "endColumns": "101",
-                        "endOffsets": "7381"
+                        "endOffsets": "8531"
                     }
                 },
                 {
@@ -98,11 +115,11 @@
                         "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "62",
+                        "startLines": "73",
                         "startColumns": "4",
-                        "startOffsets": "7468",
+                        "startOffsets": "8618",
                         "endColumns": "100",
-                        "endOffsets": "7564"
+                        "endOffsets": "8714"
                     }
                 }
             ]

@@ -24,6 +24,7 @@ import CaptureImage from "../CameraView/CaptureImage";
 import RecordVideo from "../CameraView/RecordVideo";
 import ActivityLoader from "../ActivityLoader/ActivityLoader";
 import Matches from "../Matches/Matches";
+import ChatList from "../Chat/ChatList";
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -146,7 +147,7 @@ export default class Route extends Component {
               </Scene>
             </Scene>
             <Scene
-                  key="Chat"
+                  key="chat"
                   icon={this.getIcon}
                   hideNavBar={true}
                   component={Chat}
@@ -160,6 +161,11 @@ export default class Route extends Component {
              <Scene
               key="matchProfile"
               component={Matches}
+              hideNavBar={true}
+            />
+                <Scene
+              key="chatList"
+              component={ChatList}
               hideNavBar={true}
             />
                <Scene

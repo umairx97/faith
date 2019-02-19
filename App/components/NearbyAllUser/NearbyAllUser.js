@@ -6,7 +6,7 @@ import firebase from "../FirebaseConfig/FirebaseConfig";
 import GridView from "react-native-super-grid";
 
 import { ifIphoneX } from "react-native-iphone-x-helper";
-var arrayKey = [];
+var arr = [];
 
 export default class NearbyAllUser extends React.Component {
   constructor() {

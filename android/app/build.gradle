@@ -106,6 +106,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     
     splits {
@@ -149,12 +151,17 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-android-location-services-dialog-box')
-    compile project(':react-native-device-info')
-    compile project(':react-native-fetch-blob')
-    compile project(':react-native-image-crop-picker')
-    compile project(':react-native-camera')
-        compile (project(':react-native-camera')) {
+    compile project(':react-native-orientation')
+    compile project(':react-native-keep-awake')
+    compile project(':react-native-video')
+    implementation project(':react-native-orientation')
+    implementation project(':react-native-keep-awake')
+    implementation project(':react-native-video')
+    implementation project(':react-native-image-crop-picker')
+    implementation project(':react-native-android-location-services-dialog-box')
+    implementation project(':react-native-device-info')
+    implementation project(':react-native-fetch-blob')
+    implementation (project(':react-native-camera')) {
     exclude group: "com.google.android.gms"
     compile 'com.android.support:exifinterface:27.+'
     compile ('com.google.android.gms:play-services-vision:12.0.1') {

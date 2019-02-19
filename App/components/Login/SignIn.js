@@ -161,7 +161,6 @@ export default class SignIn extends Component {
             Alert.alert("Please verify your email for login.");
           
           } else {
-         
             this.openDrawerPage("firebaseLoggedin");
           }
         })
@@ -176,6 +175,7 @@ export default class SignIn extends Component {
     }
   }
   async openDrawerPage(_val) {
+    AsyncStorage.setItem("checkLoggedType", _val);
     var fullName;
     var gender;
     var latitude;
@@ -207,26 +207,29 @@ export default class SignIn extends Component {
 
     if (Platform.OS === "android") {
       if (apiVersion >= 23) {
-        this.requestLocationPermission();
-      } else {
-        AsyncStorage.setItem("checkLoggedType", _val);
+        this.requestLocationPermission(_val);
+      } else 
+      {
+        //AsyncStorage.setItem("checkLoggedType", _val);
         Actions.home();
       }
-    } else {
-      AsyncStorage.setItem("checkLoggedType", _val);
+    } else 
+    {
+      //AsyncStorage.setItem("checkLoggedType", _val);
       Actions.home();
     }
   }
 
-  requestLocationPermission = async () => {
+  requestLocationPermission = async (_val) => {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        AsyncStorage.setItem("checkLoggedType", _val);
+       // AsyncStorage.setItem("checkLoggedType", _val);
         Actions.home();
-      } else {
+      } else 
+      {
         // Actions.reset("signIn");
       }
     } catch (err) {
