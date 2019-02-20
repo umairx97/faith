@@ -55,26 +55,26 @@ export default class Chat extends Component {
       videoPath: "",
       imagedata: ""
     };
-
     this.user = firebase.auth().currentUser;
-    //get friend Uis, email and name from props here    QBO1EBBXMGVcrUSy5zHJj9EtsaC2  //vMIndR3M35M2ZWL8jGEyHOoUqOv1
-    friendUid = "vMIndR3M35M2ZWL8jGEyHOoUqOv1";
+    
+    setTimeout(() => {
+      this.chatRef = this.getRef().child(
+        "Users/FaithMeetsLove/chat/" + this.generateChatId()
+      );
+      this.chatRefData = this.chatRef.orderByChild("order");
+      this.onSend = this.onSend.bind(this);
 
-    this.chatRef = this.getRef().child(
-      "Users/FaithMeetsLove/chat/" + this.generateChatId()
-    );
-    this.chatRefData = this.chatRef.orderByChild("order");
-    this.onSend = this.onSend.bind(this);
-
-    firebase
-      .database()
-      .ref("Users/FaithMeetsLove/Registered/" + friendUid)
-      .once("value")
-      .then(snapshot => {
-        friendAvatar = snapshot.val().profileImageURL;
-        friendName = snapshot.val().fullName;
-      });
+      firebase
+        .database()
+        .ref("Users/FaithMeetsLove/Registered/" + friendUid)
+        .once("value")
+        .then(snapshot => {
+          friendAvatar = snapshot.val().profileImageURL;
+          friendName = snapshot.val().fullName;
+        });
+    }, 500);
   }
+
   generateChatId() {
     if (this.user.uid > friendUid) return `${this.user.uid}-${friendUid}`;
     else return `${friendUid}-${this.user.uid}`;
@@ -82,12 +82,17 @@ export default class Chat extends Component {
   getRef() {
     return firebase.database().ref();
   }
+  async componentWillMount() {
+    friendUid = await AsyncStorage.getItem("friendsUid");
+  }
   async componentDidMount() {
     if (Platform.OS === "android") {
       apiVersion = DeviceInfo.getAPILevel();
     }
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
-    this.listenForItems(this.chatRefData);
+    setTimeout(() => {
+      this.listenForItems(this.chatRefData);
+    }, 550);
   }
 
   componentWillUnmount() {
@@ -186,6 +191,7 @@ export default class Chat extends Component {
                     createdAt: now,
                     uid: this.user.uid,
                     fuid: friendUid,
+                    fName:friendName,
                     order: -1 * now
                   });
                 });
@@ -235,6 +241,7 @@ export default class Chat extends Component {
                     createdAt: now,
                     uid: this.user.uid,
                     fuid: friendUid,
+                    fName:friendName,
                     order: -1 * now
                   });
                 });
@@ -258,6 +265,7 @@ export default class Chat extends Component {
           createdAt: now,
           uid: this.user.uid,
           fuid: friendUid,
+          fName:friendName,
           order: -1 * now
         });
       });

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/Users/apple/Desktop/Projects/ReactNativeProjects/FaithMeetsLove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a0a331022226d1dfd364ff17b2094c3/res/values-v16/values-v16.xml",
+                    "source": "/Users/apple/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/94e68ba992614a839843d0a590afce30/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/boffincoders/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8cdb50380dcbb484a18b411814cf6f35/res/values-v16/values-v16.xml",
+                    "source": "/Users/apple/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/62ff1d6f6622741cfaa578d7bc384424/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

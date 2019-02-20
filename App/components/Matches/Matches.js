@@ -5,10 +5,14 @@ import {
   ListItem,
   FlatList,
   BackHandler,
-  Image
+  Image,
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 import { Actions } from "react-native-router-flux";
+import { ifIphoneX } from "react-native-iphone-x-helper";
+
 var arr = [];
 export default class Matches extends Component {
   constructor() {
@@ -22,7 +26,6 @@ export default class Matches extends Component {
     };
     this.getCurrentUserId();
     // this.getLikedProfile();
-
   }
 
   async componentDidMount() {
@@ -60,39 +63,15 @@ export default class Matches extends Component {
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
           key = childSnapshot.val().friendUid;
-          alert(key)
           this.getUserDetail(key);
-          //   userProfileId = childSnapshot.key;
-          //   var childData = childSnapshot.val().profileImageURL;
-          //   var userName = childSnapshot.val().fullName;
-          //   varifiedUser = childSnapshot.val().isVarified;
-          //   loginUser = childSnapshot.val().isLogin;
-          //   userGender = childSnapshot.val().gender;
-          //   if (userGender == 0) {
-          //     genderName = "Men";
-          //   } else {
-          //     genderName = "Women";
-          //   }
-          //   userAge = childSnapshot.val().user_Dob;
-          //   var getAge = this.userAgeShow(userAge);
-          //   if (this.state.loginUserId != key) {
-          //     arr.push({
-          //       pName: userName,
-          //       pUrl: childData,
-          //       ids: userProfileId,
-          //       age: getAge,
-          //       gender: genderName
-          //     });
-          //   }
         });
-        // this.setState({ showArr: arr });
       })
       .catch(error => {
         console.log(JSON.stringify(error));
       });
     // this.setState({ allData: this.state.showArr});
   };
-  getUserDetail = async (key) => {
+  getUserDetail = async key => {
     arr = [];
     instance = this;
     var allUserProfile = firebase
@@ -108,7 +87,6 @@ export default class Matches extends Component {
     allUserProfile
       .once("value")
       .then(childSnapshot => {
-
         userProfileId = key;
         var childData = childSnapshot.val().profileImageURL;
         var userName = childSnapshot.val().fullName;
@@ -137,7 +115,7 @@ export default class Matches extends Component {
       .catch(error => {
         console.log(JSON.stringify(error));
       });
-  }
+  };
   userAgeShow = dob => {
     var userAge = dob;
     //alert(userAge)
@@ -169,61 +147,80 @@ export default class Matches extends Component {
   }
   getCurrentUserId = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
-    this.setState({
-      loginUserId: uidUser
-    }, () => {
-      this.getAllUser();
-    });
+    this.setState(
+      {
+        loginUserId: uidUser
+      },
+      () => {
+        this.getAllUser();
+      }
+    );
   };
+  openChatScreen(id, name) {
+    AsyncStorage.setItem("friendsUid", ''+id);
+    AsyncStorage.setItem("friendName", name);
+    Actions.chat();
+  }
   render() {
     return (
-      <View>
-        <FlatList
-          data={this.state.showArr}
-          renderItem={({ item }) => (
-            <View style={{ margin: 5 }}>
-              <View style={{ flexDirection: "row" }}>
-                <View>
-                  <Image
-                    style={{
-                      height: 80,
-                      width: 80,
-                      margin: 3,
-                      resizeMode: "cover",
-                      borderRadius: 40
-                    }}
-                    source={{ uri: item.pUrl }}
-                  />
-                </View>
-                <View style={{ flexDirection: "column", marginTop: 15 }}>
-                  <View>
-                    <Text style={{ fontSize: 15, marginLeft: 10 }}>
-                      {item.pName}
-                    </Text>
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            ...ifIphoneX({ marginTop: 25 }, { marginTop: 0 }),
+            ...ifIphoneX({ marginBottom: 25 }, { marginBottom: 0 })
+          }}
+        >
+          <FlatList
+            data={this.state.showArr}
+            renderItem={({ item }) => (
+              <View style={{ margin: 5 }}>
+                <TouchableOpacity
+                  onPress={() => {this.openChatScreen(item.ids, item.pName)}}
+                >
+                  <View style={{ flexDirection: "row" }}>
+                    <View>
+                      <Image
+                        style={{
+                          height: 80,
+                          width: 80,
+                          margin: 3,
+                          resizeMode: "cover",
+                          borderRadius: 40
+                        }}
+                        source={{ uri: item.pUrl }}
+                      />
+                    </View>
+                    <View style={{ flexDirection: "column", marginTop: 15 }}>
+                      <View>
+                        <Text style={{ fontSize: 15, marginLeft: 10 }}>
+                          {item.pName}
+                        </Text>
+                      </View>
+                      <View>
+                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
+                          {item.gender}
+                        </Text>
+                      </View>
+                      <View>
+                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
+                          {item.age}
+                        </Text>
+                      </View>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                      {item.gender}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                      {item.age}
-                    </Text>
-                  </View>
-                </View>
+                </TouchableOpacity>
               </View>
-            </View>
 
-            //     <ListItem
-            //     roundAvatar
-            //     title={item.pName}
+              //     <ListItem
+              //     roundAvatar
+              //     title={item.pName}
 
-            //     containerStyle={{ borderBottomWidth: 0 }}
-            //    />
-          )}
-          keyExtractor={item => item.ids}
-        />
+              //     containerStyle={{ borderBottomWidth: 0 }}
+              //    />
+            )}
+            keyExtractor={item => item.ids}
+          />
+        </View>
       </View>
     );
   }
