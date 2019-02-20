@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import { RNCamera, FaceDetector } from "react-native-camera";
 import RNFetchBlob from "react-native-fetch-blob";
-import firebase from '../FirebaseConfig/FirebaseConfig'
-import { Images } from "../../../assets/imageAll"
+import firebase from "../FirebaseConfig/FirebaseConfig";
+import { Images } from "../../../assets/imageAll";
 import { Actions } from "react-native-router-flux";
 // Prepare Blob support
 const Blob = RNFetchBlob.polyfill.Blob;
@@ -28,7 +28,7 @@ export default class CaptureImage extends Component {
       recording: false,
       processing: "",
       image_uri: "",
-      cameraType: 'back',
+      cameraType: "back",
       mirrorMode: false
     };
   }
@@ -48,14 +48,24 @@ export default class CaptureImage extends Component {
           permissionDialogMessage={
             "We need your permission to use your camera phone"
           }
-       
         />
-        <View style={{position:'absolute', top:10,left:10}}>
-        <TouchableOpacity onPress={()=>{Actions.ProfileCopy()}}>
-        <Image style={styles.btnBackArrow} source={Images.arrowBackIcon} /></TouchableOpacity>
+        <View style={{ position: "absolute", top: 10, left: 10 }}>
+          <TouchableOpacity
+            onPress={() => {
+              Actions.ProfileCopy();
+            }}
+          >
+            <Image style={styles.btnBackArrow} source={Images.arrowBackIcon} />
+          </TouchableOpacity>
         </View>
         <View
-          style={{ flex: 0, flexDirection: "row", justifyContent: "flex-start", marginLeft:"30%",marginRight:"10%"}}
+          style={{
+            flex: 0,
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            marginLeft: "30%",
+            marginRight: "10%"
+          }}
         >
           <TouchableOpacity
             onPress={this.takePicture.bind(this)}
@@ -65,7 +75,12 @@ export default class CaptureImage extends Component {
           </TouchableOpacity>
         </View>
         <View
-          style={{ flex: 0, flexDirection: "row", justifyContent: "flex-end" ,marginRight:"30%"}}
+          style={{
+            flex: 0,
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            marginRight: "30%"
+          }}
         >
           <TouchableOpacity
             onPress={this.changeCamera.bind(this)}
@@ -77,19 +92,18 @@ export default class CaptureImage extends Component {
       </View>
     );
   }
-  changeCamera(){
-    if (this.state.cameraType === 'back') {
+  changeCamera() {
+    if (this.state.cameraType === "back") {
       this.setState({
-        cameraType: 'front',
+        cameraType: "front",
         mirrorMode: true
       });
     } else {
       this.setState({
-        cameraType: 'back',
+        cameraType: "back",
         mirrorMode: false
       });
     }
-
   }
 
   async takePicture() {
@@ -100,18 +114,21 @@ export default class CaptureImage extends Component {
       var _name = await firebase.auth().currentUser.uid;
       await AsyncStorage.setItem("file_path", data.uri);
       await AsyncStorage.setItem("media_type", "image");
-     Actions.pop();
-     setTimeout(() => Actions.refresh(), 500);
+      Actions.pop();
+      setTimeout(() => Actions.refresh(), 500);
       // Actions.askPage();
-      this.uploadImage(data.uri,_name)
+      this.uploadImage(data.uri, _name)
         .then(url => {
           alert("uploaded");
           this.setState({ image_uri: url });
           // firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).set({profileImageURL:url});
-          firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).update({profileImageURL:url})
+          firebase
+            .database()
+            .ref("Users/FaithMeetsLove/Registered/" + _name)
+            .update({ profileImageURL: url });
           Actions.refresh("drawer");
         })
-       
+
         .catch(error => console.log(error));
     }
   }
@@ -165,29 +182,27 @@ const styles = StyleSheet.create({
     position: "absolute",
     flex: 0,
     bottom: 30,
-    backgroundColor: "transparent",
-  
+    backgroundColor: "transparent"
   },
   cameraChange: {
     position: "absolute",
     flex: 0,
     bottom: 30,
-    backgroundColor: "transparent",
-    
+    backgroundColor: "transparent"
   },
   btnImage: {
     width: 50,
     height: 50,
-    tintColor:'red'
+    tintColor: "red"
   },
   btnImageRotate: {
     width: 40,
     height: 40,
-    tintColor:'red'
+    tintColor: "red"
   },
-  btnBackArrow:{
+  btnBackArrow: {
     width: 30,
     height: 30,
-    tintColor:'red'
+    tintColor: "red"
   }
 });

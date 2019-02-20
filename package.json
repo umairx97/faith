@@ -15,7 +15,6 @@
     "native-base": "^2.11.0",
     "react": "^16.6.1",
     "react-native": "0.57.1",
-    "react-native-af-video-player": "^0.2.1",
     "react-native-android-location-services-dialog-box": "^2.7.0",
     "react-native-animate-loading-button": "^1.0.3",
     "react-native-app-intro-slider": "^1.0.1",

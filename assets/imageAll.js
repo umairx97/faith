@@ -29,5 +29,7 @@ export const Images = {
   filterIcon: require("./images/filterIcon.png"),
   IconImage: require("./images/iconImage.png"),
   IconCamera: require("./images/iconCamera.png"),
-  IconVideo: require("./images/iconVideo.png")
+  IconVideo: require("./images/iconVideo.png"),
+  tickIcon: require("./images/iconTick.png"),
+  closeIcon: require("./images/iconClose.png")
 };

@@ -25,6 +25,9 @@ import RecordVideo from "../CameraView/RecordVideo";
 import ActivityLoader from "../ActivityLoader/ActivityLoader";
 import Matches from "../Matches/Matches";
 import ChatList from "../Chat/ChatList";
+import FullScreenVideo from "../Chat/FullScreenVideo";
+import FullScreenCamera from "../Chat/FullScreenCamera";
+
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -42,7 +45,7 @@ export default class Route extends Component {
       />
     );
   };
-  getFavrouiteIcon = () => { 
+  getFavrouiteIcon = () => {
     return (
       <Image
         style={{ height: 20, width: 20, resizeMode: "contain" }}
@@ -58,7 +61,7 @@ export default class Route extends Component {
       />
     );
   };
-  getFilterIcon=()=>{
+  getFilterIcon = () => {
     return (
       <Image
         style={{ height: 20, width: 20, resizeMode: "contain" }}
@@ -75,7 +78,11 @@ export default class Route extends Component {
           <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
           <Scene key="signUp" component={SignUp} hideNavBar={true} />
-          <Scene key="activityLoader" component={ActivityLoader} hideNavBar={true}/>
+          <Scene
+            key="activityLoader"
+            component={ActivityLoader}
+            hideNavBar={true}
+          />
           <Scene
             key="forgetPass"
             component={ForgetPassword}
@@ -96,7 +103,7 @@ export default class Route extends Component {
                   hideNavBar={true}
                   component={Discover}
                 />
-               
+
                 {/* <Scene
                   key="Nearbyuser"
                   title="NearBy"
@@ -106,14 +113,14 @@ export default class Route extends Component {
                   tabBarStyle={{...ifIphoneX({ marginTop: 30 })}}
                   tabBarPosition="top"
                 > */}
-                  <Scene
-                    key="Nearby"
-                    title="NearBy"
-                    icon={this.getIconNear}
-                    hideNavBar={true}
-                    component={NearbyAllUser}
-                  />
-                  {/* <Scene
+                <Scene
+                  key="Nearby"
+                  title="NearBy"
+                  icon={this.getIconNear}
+                  hideNavBar={true}
+                  component={NearbyAllUser}
+                />
+                {/* <Scene
                     key="spotlight"
                     hideNavBar={true}
                     component={Spotlight}
@@ -126,12 +133,12 @@ export default class Route extends Component {
                   hideNavBar={true}
                   component={Favorite}
                 />
-                 <Scene
-                    key="Filter"
-                    hideNavBar={true}
-                    icon={this.getFavrouiteIcon}
-                    component={NearbyFilters}
-                  />
+                <Scene
+                  key="Filter"
+                  hideNavBar={true}
+                  icon={this.getFavrouiteIcon}
+                  component={NearbyFilters}
+                />
                 {/* <Scene
                   key="Favorite"
                   icon={this.getIcon}
@@ -147,48 +154,50 @@ export default class Route extends Component {
               </Scene>
             </Scene>
             <Scene
-                  key="chat"
-                  icon={this.getIcon}
-                  hideNavBar={true}
-                  component={Chat}
-                />
+              key="chat"
+              icon={this.getIcon}
+              hideNavBar={true}
+              component={Chat}
+            />
             <Scene key="vipCenter" component={VIPCenter} hideNavBar={true} />
             <Scene
               key="userProfile"
               component={UserProfile}
               hideNavBar={true}
             />
-             <Scene
-              key="matchProfile"
-              component={Matches}
+            <Scene key="matchProfile" component={Matches} hideNavBar={true} />
+            <Scene
+              key="fullScreenVideo"
+              component={FullScreenVideo}
               hideNavBar={true}
             />
-                <Scene
-              key="chatList"
-              component={ChatList}
+            <Scene
+              key="fullScreenCamera"
+              component={FullScreenCamera}
               hideNavBar={true}
             />
-               <Scene
+            <Scene key="chatList" component={ChatList} hideNavBar={true} />
+            <Scene
               key="ProfileCopy"
               component={ProfileCopy}
               hideNavBar={true}
             />
             <Scene
-            key="recordVideo"
-            component={RecordVideo}
-            hideNavBar={true}
-          />
-          <Scene
-            key="captureImage"
-            component={CaptureImage}
-            hideNavBar={true}
-          />
-              <Scene
-                  icon={this.getIconPro}
-                  key="Profile"
-                  hideNavBar={true}
-                  component={Profile}
-                />
+              key="recordVideo"
+              component={RecordVideo}
+              hideNavBar={true}
+            />
+            <Scene
+              key="captureImage"
+              component={CaptureImage}
+              hideNavBar={true}
+            />
+            <Scene
+              icon={this.getIconPro}
+              key="Profile"
+              hideNavBar={true}
+              component={Profile}
+            />
           </Scene>
         </Scene>
       </Router>

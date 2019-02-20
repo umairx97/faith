@@ -20,11 +20,12 @@ import { Actions, Scene } from "react-native-router-flux";
 import { Images } from "../../../assets/imageAll";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase from "../FirebaseConfig/FirebaseConfig";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
 import RNFetchBlob from "react-native-fetch-blob";
+import Dialog from "react-native-dialog";
 
 const Screen = {
   width: Dimensions.get("window").width,
@@ -48,15 +49,19 @@ export default class Chat extends Component {
       messages: [],
       chatMessage: "",
       receiverUid: "",
+      messageKey: "",
+      messageVideoUrl: "",
       isImage: true,
       filePath: "",
       fileData: "",
       imagePath: "",
       videoPath: "",
-      imagedata: ""
+      imagedata: "",
+      dialogVisible: false,
+      dialogPlayVisible: false
     };
     this.user = firebase.auth().currentUser;
-    
+
     setTimeout(() => {
       this.chatRef = this.getRef().child(
         "Users/FaithMeetsLove/chat/" + this.generateChatId()
@@ -86,6 +91,8 @@ export default class Chat extends Component {
     friendUid = await AsyncStorage.getItem("friendsUid");
   }
   async componentDidMount() {
+    var path = await AsyncStorage.getItem("file_path");
+    if (path != null && path != "") this.setState({ imagePath: path });
     if (Platform.OS === "android") {
       apiVersion = DeviceInfo.getAPILevel();
     }
@@ -96,6 +103,7 @@ export default class Chat extends Component {
   }
 
   componentWillUnmount() {
+    this.setState({ imagePath: "" });
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     ); // Remove listener
@@ -155,7 +163,8 @@ export default class Chat extends Component {
       if (isImageUpload) {
         this.setState(
           {
-            filePath: this.state.imagePath
+            filePath: this.state.imagePath,
+            imagePath: ""
           },
           () => {
             this.uploadMedia(
@@ -191,7 +200,7 @@ export default class Chat extends Component {
                     createdAt: now,
                     uid: this.user.uid,
                     fuid: friendUid,
-                    fName:friendName,
+                    fName: friendName,
                     order: -1 * now
                   });
                 });
@@ -241,7 +250,7 @@ export default class Chat extends Component {
                     createdAt: now,
                     uid: this.user.uid,
                     fuid: friendUid,
-                    fName:friendName,
+                    fName: friendName,
                     order: -1 * now
                   });
                 });
@@ -265,7 +274,7 @@ export default class Chat extends Component {
           createdAt: now,
           uid: this.user.uid,
           fuid: friendUid,
-          fName:friendName,
+          fName: friendName,
           order: -1 * now
         });
       });
@@ -303,30 +312,20 @@ export default class Chat extends Component {
         });
     });
   }
-  onChatMessagePressed(context, message) {
-    // alert(message.key);
-
-    Alert.alert("Delete!", "Are you sure?", [
-      {
-        text: "Cancel",
-        //        onPress: () => Actions.drawerClose(),
-        style: "cancel"
-      },
-      {
-        text: "Yes",
-        onPress: () => {
-          firebase
-            .database()
-            .ref(
-              "Users/FaithMeetsLove/chat/" +
-                this.generateChatId() +
-                "/" +
-                message.key
-            )
-            .remove();
-        }
-      }
-    ]);
+  onChatMessageLongPressed(context, message) {
+    if (message.video.includes("http"))
+      this.setState({
+        dialogPlayVisible: true,
+        dialogVisible: false,
+        messageKey: message.key,
+        messageVideoUrl: message.video
+      });
+    else
+      this.setState({
+        dialogVisible: true,
+        dialogPlayVisible: false,
+        messageKey: message.key
+      });
   }
   showFriendProfile(message) {
     //alert(friendUid)
@@ -386,7 +385,13 @@ export default class Chat extends Component {
             });
         }, 500);
       }
+    } else if (val === "cam") {
+      Actions.fullScreenCamera();
     }
+  }
+
+  renderBubble(props) {
+    return <Bubble {...props} videoProps={{ muted: true }} />;
   }
   render() {
     return (
@@ -409,13 +414,64 @@ export default class Chat extends Component {
             showAvatarForEveryMessage
             renderAvatarOnTop={true}
             onLongPress={(context, message) => {
-              this.onChatMessagePressed(context, message);
+              this.onChatMessageLongPressed(context, message);
             }}
+            renderBubble={this.renderBubble}
             onPressAvatar={message => {
               this.showFriendProfile(message);
             }}
           />
         </View>
+        <Dialog.Container visible={this.state.dialogVisible}>
+          <Dialog.Title>Select Option</Dialog.Title>
+          <Dialog.Description>Select Action</Dialog.Description>
+          <Dialog.Button
+            label="Cancel"
+            onPress={() => {
+              this.handleCancel();
+            }}
+          />
+          <Dialog.Button
+            label="Block"
+            onPress={() => {
+              //this.handleBlock();
+            }}
+          />
+          <Dialog.Button
+            label="Delete"
+            onPress={() => {
+              this.handleDeleteMessage();
+            }}
+          />
+        </Dialog.Container>
+        <Dialog.Container visible={this.state.dialogPlayVisible}>
+          <Dialog.Title>Select Option</Dialog.Title>
+          <Dialog.Description>Select Action</Dialog.Description>
+          <Dialog.Button
+            label="Cancel"
+            onPress={() => {
+              this.handleCancel();
+            }}
+          />
+          <Dialog.Button
+            label="Block"
+            onPress={() => {
+              //this.handleBlock();
+            }}
+          />
+          <Dialog.Button
+            label="Delete"
+            onPress={() => {
+              this.handleDeleteMessage();
+            }}
+          />
+          <Dialog.Button
+            label="Play Video"
+            onPress={() => {
+              this.handleVideo();
+            }}
+          />
+        </Dialog.Container>
         <View
           style={{
             ...ifIphoneX({ bottom: 60 }, { bottom: 40 }),
@@ -434,7 +490,7 @@ export default class Chat extends Component {
           </TouchableHighlight>
           <TouchableHighlight
             onPress={() => {
-              //this.openAction("cam");
+              this.openAction("cam");
             }}
           >
             <Image style={styles.btnImage} source={Images.IconCamera} />
@@ -449,6 +505,28 @@ export default class Chat extends Component {
         </View>
       </View>
     );
+  }
+  handleVideo() {
+    this.setState({ dialogVisible: false, dialogPlayVisible: false });
+    setTimeout(() => {
+      AsyncStorage.setItem("videoUrl", this.state.messageVideoUrl);
+      Actions.fullScreenVideo();
+    }, 400);
+  }
+  handleDeleteMessage() {
+    this.setState({ dialogVisible: false, dialogPlayVisible: false });
+    firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/chat/" +
+          this.generateChatId() +
+          "/" +
+          this.state.messageKey
+      )
+      .remove();
+  }
+  handleCancel() {
+    this.setState({ dialogVisible: false, dialogPlayVisible: false });
   }
 
   requestCameraPermission = async val => {

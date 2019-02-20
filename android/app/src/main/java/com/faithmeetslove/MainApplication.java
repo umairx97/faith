@@ -3,11 +3,7 @@ package com.faithmeetslove;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.github.yamill.orientation.OrientationPackage;
-import com.corbt.keepawake.KCKeepAwakePackage;
 import com.brentvatne.react.ReactVideoPackage;
-import com.github.yamill.orientation.OrientationPackage;
-import com.corbt.keepawake.KCKeepAwakePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
@@ -53,8 +49,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new OrientationPackage(),
-            new KCKeepAwakePackage(),
             new ReactVideoPackage(),
             new PickerPackage(),
             new LocationServicesDialogBoxPackage(),
