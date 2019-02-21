@@ -73,11 +73,11 @@ export default class Route extends Component {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="myappSplash" hideNavBar={true} component={MyappSplash} />
-          <Scene key="slide" hideNavBar={true} component={AppSlider} />
+          <Scene key="myappSplash"  replace={true} hideNavBar={true} component={MyappSplash} />
+          <Scene key="slide"  replace={true} hideNavBar={true} component={AppSlider} />
           <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
-          <Scene key="signUp" component={SignUp} hideNavBar={true} />
+          <Scene key="signUp"  replace={true} component={SignUp} hideNavBar={true} />
           <Scene
             key="activityLoader"
             component={ActivityLoader}

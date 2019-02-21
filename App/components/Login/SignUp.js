@@ -11,13 +11,16 @@ import {
   Image,
   Alert,
   Platform,
+  ActivityIndicator,
   Dimensions
 } from "react-native";
 import { RkButton, RkText } from "react-native-ui-kitten";
-import { BackHandler } from 'react-native'
+import { BackHandler } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ifIphoneX } from "react-native-iphone-x-helper";
+import { Images } from "../../../assets/imageAll";
+
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -43,6 +46,8 @@ import { compose } from "recompose";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
+import Dialog from "react-native-dialog";
+
 var radio_props = [
   {
     label: "Male  ",
@@ -88,6 +93,7 @@ export default class SignUp extends Component {
       _gender: 0,
       _dob: "",
       progressVisible: false,
+      dialogVisible: false,
       dob_color: "black"
     };
     GoogleSignin.configure({
@@ -97,52 +103,41 @@ export default class SignUp extends Component {
         "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
     });
   }
-  componentDidMount () {
-    BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
   }
 
-  componentWillUnmount () {
-    BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", () =>
+      this.backAndroid()
+    ); // Remove listener
   }
 
-  backAndroid () {
-    Actions.pop() // Return to previous screen
-    return true // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+  backAndroid() {
+    Actions.pop(); // Return to previous screen
+    return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
   _sendEmailVerification() {
-    instance = this;
-    // instance.setState({ ...this.state, progressVisible: false });
     firebase
       .auth()
       .currentUser.sendEmailVerification()
-      .then(
-        function() {
-          //instance.setState({ ...this.state, progressVisible: false });
-          // Email sent.
-          Alert.alert(
-            "Success",
-            "Your account created successfully! Please check your email for verification",
-            [
-              {
-                text: "OK",
-                onPress: () => {
-                 
-                  Actions.login();
-                }
-              }
-            ]
-          );
-        },
-        function(error) {
-          // An error happened.
-        }
-      );
+      .then(() => {
+        firebase.auth().signOut();
+        this.setState({
+          ...this.state,
+          progressVisible: false,
+          dialogVisible: true
+        });
+      })
+      .catch(err => {
+        this.setState({ ...this.state, progressVisible: false });
+      });
   }
 
   _handleSignUp() {
-    Actions.activityLoader();
+    // Actions.activityLoader();
+    this.setState({ ...this.state, progressVisible: true });
     instance = this;
-   // instance.setState({ ...this.state, progressVisible: true });
     const {
       _fullName,
       _username,
@@ -161,11 +156,8 @@ export default class SignUp extends Component {
       firebase
         .auth()
         .signInWithEmailAndPassword(_email, _password)
-        .then(userData => {
-          //Alert.alert(userData.user.uid);
-        })
+        .then(userData => {})
         .catch(() => {
-          //Login was not successful, let's create a new account
           firebase
             .auth()
             .createUserWithEmailAndPassword(_email, _password)
@@ -180,17 +172,14 @@ export default class SignUp extends Component {
               );
             })
             .catch(error => {
-             // instance.setState({ ...this.state, progressVisible: false });
-              Alert.alert("Authentication failed." + error.toString());
+              alert("Authentication failed." + error.toString());
             });
         });
     } else {
-     // instance.setState({ ...this.state, progressVisible: false });
-      Alert.alert("Please fill all fields");
+      alert("Please fill all fields");
     }
   }
   _updateUserProfile(the_uid, _email, _username, _fullName, _gender, _dob) {
-    instance = this;
     firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + the_uid)
@@ -202,17 +191,14 @@ export default class SignUp extends Component {
         gender: _gender,
         user_Dob: _dob,
         isVarified: false,
-        isLogin:false
+        isLogin: false
       })
       .then(ref => {
-       // instance.setState({ ...this.state, progressVisible: false });
-        // console.log(ref);
-        //Alert.alert("firebase data save")
         this._sendEmailVerification();
       })
       .catch(error => {
-       // instance.setState({ ...this.state, progressVisible: false });
-        Alert.alert("fail" + error.toString());
+        this.setState({ ...this.state, progressVisible: false });
+        alert("fail" + error.toString());
       });
   }
 
@@ -234,13 +220,11 @@ export default class SignUp extends Component {
     });
   };
   onClickListener = viewId => {
-    Alert.alert("Alert", "Button pressed " + viewId);
+    alert("Alert", "Button pressed " + viewId);
   };
 
   _onGoogleLogin = async () => {
-    instance = this;
     Actions.activityLoader();
-    instance.setState({ ...this.state, progressVisible: true });
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
@@ -254,27 +238,40 @@ export default class SignUp extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        instance.setState({ ...this.state, progressVisible: false });
+        this.setState({ ...this.state, progressVisible: false });
         Actions.home();
       })
       .catch(error => {
-        instance.setState({ ...this.state, progressVisible: false });
+        this.setState({ ...this.state, progressVisible: false });
         const { code, message } = error;
         // Alert.alert(message + " Errorcode " + code);
       });
   };
   onClickListener = viewId => {
-    Alert.alert("Alert", "Button pressed " + viewId);
+    alert("Alert", "Button pressed " + viewId);
   };
+  handleSuccess() {
+    this.setState({ ...this.state, dialogVisible: false });
+    setTimeout(() => {
+      Actions.login();
+    }, 400);
+  }
 
   render() {
+    if (this.state.progressVisible) {
+      return (
+        <View style={[styles.containerLoader, styles.horizontal]}>
+          <Image source={Images.loginLogo} style={styles.logoStyle} />
+          <ActivityIndicator size="large" color="grey" />
+        </View>
+      );
+    }
     return (
       <KeyboardAvoidingView
         style={{
           ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" })
         }}
       >
-      
         <Formik
           onSubmit={values => console.log(values)}
           validationSchema={validationSchema}
@@ -367,7 +364,8 @@ export default class SignUp extends Component {
                     >
                       <Text>Date of Birth</Text>
                       <TouchableOpacity onPress={this._showDateTimePicker}>
-                        <Text placeholder='Plz, Select your date of birth'
+                        <Text
+                          placeholder="Plz, Select your date of birth"
                           style={{
                             color: this.state.dob_color,
                             marginTop: 20,
@@ -377,23 +375,6 @@ export default class SignUp extends Component {
                         >
                           {this.state.dob}
                         </Text>
-                        {/* <MyInput
-                          style={{
-                            color: "#000000"
-                          }}
-                          name="dateOfBirth"
-                          type="string"
-                          returnKeyType="done"
-                          placeholder="Please select your DOB"
-                          value={this.state.dob}
-                          onChangeText={value =>
-                            this.setState({
-                              _dob: value
-                            })
-                          }
-                          onFocus={this._showDateTimePicker}
-                          style={styles.textInput}
-                        /> */}
                       </TouchableOpacity>
                       <View
                         style={{
@@ -439,6 +420,19 @@ export default class SignUp extends Component {
                         }}
                       />
                     </View>
+                    <Dialog.Container visible={this.state.dialogVisible}>
+                      <Dialog.Title>Success</Dialog.Title>
+                      <Dialog.Description>
+                        Your account created successfully! Please check your
+                        email for verification
+                      </Dialog.Description>
+                      <Dialog.Button
+                        label="Ok"
+                        onPress={() => {
+                          this.handleSuccess();
+                        }}
+                      />
+                    </Dialog.Container>
                     <View
                       style={{
                         flex: 1,
@@ -456,17 +450,6 @@ export default class SignUp extends Component {
                       >
                         Register
                       </RkButton>
-                      {/* <AnimateLoadingButton
-                        ref={c => (this.loadingButton = c)}
-                        width={200}
-                        height={48}
-                        title="Register"
-                        titleFontSize={16}
-                        titleColor="rgb(255,255,255)"
-                        backgroundColor="rgb(252, 56, 80)"
-                        borderRadius={24}
-                        onPress={this._handleSignUp.bind(this)}
-                      /> */}
                     </View>
                     <View style={{ flexDirection: "row" }}>
                       <View
@@ -568,14 +551,11 @@ export default class SignUp extends Component {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-
     flexDirection: "column",
     backgroundColor: "#FFFFFF"
   },
   mainContainer: {
     flex: 1
-
-    // backgroundColor: 'yellow'
   },
   innerView1: {
     flex: 1,
@@ -609,9 +589,6 @@ const styles = StyleSheet.create({
   textInput: {
     width: "100%",
     color: "#000000"
-    // borderColor: "red",
-    //marginTop: Platform.OS === "ios" ? 10 + "%" : 0
-    // borderBottomWidth: 1
   },
   formInput: {
     width: "100%"
@@ -675,5 +652,20 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white"
+  },
+  containerLoader: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30
+  },
+  logoStyle: {
+    height: 100,
+    width: 100,
+    resizeMode: "contain"
   }
 });

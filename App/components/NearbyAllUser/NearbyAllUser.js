@@ -42,6 +42,8 @@ export default class NearbyAllUser extends React.Component {
   }
   async getAllNearbyUser() {
     var uidUser = await firebase.auth().currentUser.uid;
+    arrayKey = [];
+
     var myLat;
     var myLong;
     var myProfileRef = firebase
@@ -52,7 +54,7 @@ export default class NearbyAllUser extends React.Component {
       myLong = snapshot.val().longitude;
       this.setState({ myLatitude: myLat, myLongitude: myLong });
     });
-  //  alert(this.state.myLatitude)
+    //  alert(this.state.myLatitude)
     var varifiedUser;
     var key;
     var userProfileId;
@@ -66,7 +68,6 @@ export default class NearbyAllUser extends React.Component {
     var allNearbyUser = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered");
-    arrayKey = [];
 
     allNearbyUser.once("value").then(snapshot => {
       snapshot.forEach(childSnapshot => {
@@ -82,23 +83,29 @@ export default class NearbyAllUser extends React.Component {
         friendLatitude = childSnapshot.val().latitude;
         friendLongitude = childSnapshot.val().longitude;
         var getAge = this.userAgeShow(userAge);
-        if (uidUser != key) {
-         // var userDistance = this.calculateUserDistance();
-        // alert(userGender)
 
+        if (uidUser != key) {
+          let distanceBetweenFriends = geolib.getDistance(
+            {
+              lat: this.state.myLatitude,
+              lon: this.state.myLongitude
+            },
+            { lat: friendLatitude, lon: friendLongitude }
+          );
           if (
             varifiedUser == true &&
             getAge >= this.state.ageFromShow &&
-            getAge <= this.state.ageToShow
+            getAge <= this.state.ageToShow &&
+            distanceBetweenFriends <= this.state.userDistanceShow
           ) {
-            if (this.state.userGenderShow == userGender) {
+            if (this.state.userGenderShow == 2) {
               arrayKey.push({
                 id: userProfileId,
                 UserName: userName,
                 ImageURL: childData,
                 fullAge: getAge
               });
-            } else if (this.state.userGenderShow == 2) {
+            } else if (this.state.userGenderShow == userGender) {
               arrayKey.push({
                 id: userProfileId,
                 UserName: userName,
@@ -108,9 +115,9 @@ export default class NearbyAllUser extends React.Component {
             }
           }
         }
-      });
-      this.setState({
-        allArr: arrayKey
+        this.setState({
+          allArr: arrayKey
+        });
       });
     });
   }
@@ -143,17 +150,7 @@ export default class NearbyAllUser extends React.Component {
         userGenderShow: genderShow
       });
   };
-  async calculateUserDistance() {
-    let result = await geolib.getDistance(
-      {
-        lat: 30.7046,
-        lon: 76.7179
-      },
-      { lat: 31.5143, lon: 75.9115 }
-    );
 
-    return result;
-  }
   userAgeShow = dob => {
     var userAge = dob;
     var date = userAge.split("-")[0];

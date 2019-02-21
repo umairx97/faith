@@ -54,12 +54,16 @@ export default class MyappSplash extends Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        //Alert.alert(user.email);
-        this.setState({
-          isLoggedIn: true
-        });
+        if (user.emailVerified == true) {
+          this.setState({
+            isLoggedIn: true
+          });
+        } else {
+          this.setState({
+            isLoggedIn: false
+          });
+        }
       } else {
-        //Alert.alert("Not loggedin");
         this.setState({
           isLoggedIn: false
         });

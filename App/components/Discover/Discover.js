@@ -535,12 +535,11 @@ export default class Discover extends Component {
             }}
           >
             <CardStack
-              style={styles.content}
               renderNoMoreCards={() => (
                 <Text
                   style={{
                     fontWeight: "700",
-                    fontSize: 18,
+                    fontSize: 22,
                     color: "gray",
                     position: "absolute",
                     left: 80,
@@ -549,7 +548,7 @@ export default class Discover extends Component {
                     right: 60
                   }}
                 >
-                  No more cards :(
+                  No more cards
                 </Text>
               )}
               ref={swiper => {

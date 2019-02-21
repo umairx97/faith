@@ -434,7 +434,7 @@ export default class Chat extends Component {
           <Dialog.Button
             label="Block"
             onPress={() => {
-              //this.handleBlock();
+              this.handleBlock();
             }}
           />
           <Dialog.Button
@@ -456,7 +456,7 @@ export default class Chat extends Component {
           <Dialog.Button
             label="Block"
             onPress={() => {
-              //this.handleBlock();
+              this.handleBlock();
             }}
           />
           <Dialog.Button
@@ -505,6 +505,29 @@ export default class Chat extends Component {
         </View>
       </View>
     );
+  }
+  handleBlock() {
+    this.setState({ dialogVisible: false, dialogPlayVisible: false });
+    setTimeout(() => {
+    Alert.alert("Block!", "Are you sure you want to block "+friendName+" ?", [
+      {
+        text: "Cancel",
+        style: "cancel"
+      },
+      {
+        text: "Yes",
+        onPress: () => {
+          this.blockFriend();
+        }
+      }
+    ]);
+  }, 400);
+  }
+  blockFriend(){
+    firebase.database().ref('Users/FaithMeetsLove/BlockedFriends/'+this.user.uid+'/'+friendUid).set({
+      blockedFromChat:true
+    }).then()
+
   }
   handleVideo() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
