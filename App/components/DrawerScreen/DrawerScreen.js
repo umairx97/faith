@@ -158,19 +158,6 @@ export default class DrawerScreen extends React.Component {
     //Actions.refresh("drawer")
     this.getUid();
   }
-  // openProfileImage=async()=>{
-  //   instance=this;
-  //   var _name = await firebase.auth().currentUser.uid;
-  //   var imgUserId=firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name);
-  //   imgUserId.once('value', function(snapshot){
-  //       var ImageUrl=snapshot.val().profileImageURL;
-  //       var userName=snapshot.val().fullName;
-  //       instance.setState({
-  //         profileImageUrl: ImageUrl,
-
-  //              });
-  //   })
-  // }
   getUid = async () => {
     instance = this;
     var fullName;
@@ -214,9 +201,7 @@ export default class DrawerScreen extends React.Component {
         user_name: uname.toUpperCase()
       });
     }
-    //await firebase.auth().currentUser.uid;
-    //Alert.alert(uname);
-    // Alert.alert(x);
+  
   };
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
@@ -243,14 +228,7 @@ export default class DrawerScreen extends React.Component {
       console.error(error);
     }
   };
-  // revokeAccess = async () => {
-  //   try {
-  //     await GoogleSignin.revokeAccess();
-  //     console.log("deleted");
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+ 
   onHomePressed = () => {
     Actions.Discover();
     Actions.drawerClose();

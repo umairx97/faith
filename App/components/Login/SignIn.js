@@ -210,12 +210,10 @@ export default class SignIn extends Component {
         this.requestLocationPermission(_val);
       } else 
       {
-        //AsyncStorage.setItem("checkLoggedType", _val);
         Actions.home();
       }
     } else 
     {
-      //AsyncStorage.setItem("checkLoggedType", _val);
       Actions.home();
     }
   }

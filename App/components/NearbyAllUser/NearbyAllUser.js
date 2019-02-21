@@ -1,10 +1,19 @@
 //NearbyAllUser
 
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, ImageBackground, Platform } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  ImageBackground,
+  Platform
+} from "react-native";
 import React from "react";
 import firebase from "../FirebaseConfig/FirebaseConfig";
 import GridView from "react-native-super-grid";
-
+import geolib from "geolib";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 var arr = [];
 
@@ -12,71 +21,98 @@ export default class NearbyAllUser extends React.Component {
   constructor() {
     super();
     this.state = {
-      loginUserId: '',
-      userKey: '',
+      loginUserId: "",
+      userKey: "",
       allArr: [],
-      userId: '',
-      dateOfBirth: '',
+      userId: "",
+      dateOfBirth: "",
       ageFromShow: 18,
       ageToShow: 75,
       userDistanceShow: 100,
-      userGenderShow: 2
+      userGenderShow: 2,
+      myLatitude: 0,
+      myLongitude: 0
     };
-
-
   }
   async componentWillMount() {
     await this.getSearchFilter();
-
   }
-  componentDidMount() {
-
+  async componentDidMount() {
     this.getAllNearbyUser();
   }
   async getAllNearbyUser() {
+    var uidUser = await firebase.auth().currentUser.uid;
+    var myLat;
+    var myLong;
+    var myProfileRef = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    await myProfileRef.once("value").then(snapshot => {
+      myLat = snapshot.val().latitude;
+      myLong = snapshot.val().longitude;
+      this.setState({ myLatitude: myLat, myLongitude: myLong });
+    });
+  //  alert(this.state.myLatitude)
     var varifiedUser;
-    var key
-    var userProfileId
+    var key;
+    var userProfileId;
     var loginUser;
     var userName;
     var childData;
     var userGender;
     var userAge;
-    var uidUser = await firebase.auth().currentUser.uid;
-    var allNearbyUser = firebase.database().ref("Users/FaithMeetsLove/Registered");
+    var friendLatitude;
+    var friendLongitude;
+    var allNearbyUser = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered");
     arrayKey = [];
-    allNearbyUser
-      .once("value")
-      .then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          key = childSnapshot.key;
-          this.setState({ userId: key })
-          userProfileId = childSnapshot.key;
-          childData = childSnapshot.val().profileImageURL;
-          userName = childSnapshot.val().fullName;
-          varifiedUser = childSnapshot.val().isVarified;
-          loginUser = childSnapshot.val().isLogin;
-          userAge = childSnapshot.val().user_Dob;
-          userGender = childSnapshot.val().gender;
-          var getAge = this.userAgeShow(userAge);
-          if (uidUser != key) {
-            if (varifiedUser == true && getAge >= this.state.ageFromShow && getAge <= this.state.ageToShow) {
-             // arrayKey.push({ id: userProfileId, UserName: userName, ImageURL: childData, fullAge: getAge })
-              if (this.state.userGenderShow == userGender) {
-                arrayKey.push({ id: userProfileId, UserName: userName, ImageURL: childData, fullAge: getAge })
-              }
-              else if (this.state.userGenderShow == 2) {
-                arrayKey.push({ id: userProfileId, UserName: userName, ImageURL: childData, fullAge: getAge })
-              }
 
+    allNearbyUser.once("value").then(snapshot => {
+      snapshot.forEach(childSnapshot => {
+        key = childSnapshot.key;
+        this.setState({ userId: key });
+        userProfileId = childSnapshot.key;
+        childData = childSnapshot.val().profileImageURL;
+        userName = childSnapshot.val().fullName;
+        varifiedUser = childSnapshot.val().isVarified;
+        loginUser = childSnapshot.val().isLogin;
+        userAge = childSnapshot.val().user_Dob;
+        userGender = childSnapshot.val().gender;
+        friendLatitude = childSnapshot.val().latitude;
+        friendLongitude = childSnapshot.val().longitude;
+        var getAge = this.userAgeShow(userAge);
+        if (uidUser != key) {
+         // var userDistance = this.calculateUserDistance();
+        // alert(userGender)
+
+          if (
+            varifiedUser == true &&
+            getAge >= this.state.ageFromShow &&
+            getAge <= this.state.ageToShow
+          ) {
+            if (this.state.userGenderShow == userGender) {
+              arrayKey.push({
+                id: userProfileId,
+                UserName: userName,
+                ImageURL: childData,
+                fullAge: getAge
+              });
+            } else if (this.state.userGenderShow == 2) {
+              arrayKey.push({
+                id: userProfileId,
+                UserName: userName,
+                ImageURL: childData,
+                fullAge: getAge
+              });
             }
-
           }
-        })
-        this.setState({
-          allArr: arrayKey
-        })
-      })
+        }
+      });
+      this.setState({
+        allArr: arrayKey
+      });
+    });
   }
   getSearchFilter = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
@@ -85,11 +121,11 @@ export default class NearbyAllUser extends React.Component {
     var ageTo;
     var searchDistance;
     var genderShow;
-    let snapExist = false
+    let snapExist = false;
     var displayUserName = firebase
       .database()
       .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser);
-    await displayUserName.once("value", function (snapshot) {
+    await displayUserName.once("value", function(snapshot) {
       if (snapshot.exists()) {
         ageFrom = snapshot.val().age_from;
         ageTo = snapshot.val().age_to;
@@ -97,7 +133,7 @@ export default class NearbyAllUser extends React.Component {
         genderShow = snapshot.val().show_me;
         snapExist = true;
       }
-    })
+    });
     if (snapExist)
       this.setState({
         ...this.state,
@@ -105,39 +141,28 @@ export default class NearbyAllUser extends React.Component {
         ageToShow: ageTo,
         userDistanceShow: searchDistance,
         userGenderShow: genderShow
-      })
-    this.getAllUser();
-  }
-  // getUserFavorite = async (id) => {
-  //   var displayUserName = firebase
-  //     .database()
-  //     .ref("Users/FaithMeetsLove/Registered/" + id);
-  //   await displayUserName.once("value").then(snapshot => {
-  //     var usrName = snapshot.val().fullName;
-  //     var imageUrl = snapshot.val().profileImageURL;
-  //     var userID = snapshot.val().uid;
-  //     var dob = snapshot.val().user_Dob;
-  //     var personAge = this.age(dob);
+      });
+  };
+  async calculateUserDistance() {
+    let result = await geolib.getDistance(
+      {
+        lat: 30.7046,
+        lon: 76.7179
+      },
+      { lat: 31.5143, lon: 75.9115 }
+    );
 
-  //     arrayKey.push({ id: userID, UserName: usrName, ImageURL: imageUrl, fullAge: personAge })
-  //   })
-  //   this.setState({
-  //     allArr: arrayKey
-  //   })
-  // }
-  userAgeShow = (dob) => {
+    return result;
+  }
+  userAgeShow = dob => {
     var userAge = dob;
-    //alert(userAge)
-    var date = userAge.split('-')[0]
-    var month = userAge.split('-')[1]
-    var year = userAge.split('-')[2]
+    var date = userAge.split("-")[0];
+    var month = userAge.split("-")[1];
+    var year = userAge.split("-")[2];
 
     var ageFull = this.calculate_age(month, date, year);
     return ageFull;
-    // this.setState({
-    //   totalAge: ageFull
-    // })
-  }
+  };
 
   calculate_age(birth_month, birth_day, birth_year) {
     today_date = new Date();
@@ -146,20 +171,20 @@ export default class NearbyAllUser extends React.Component {
     today_day = today_date.getDate();
     age = today_year - birth_year;
 
-    if (today_month < (birth_month - 1)) {
+    if (today_month < birth_month - 1) {
       age--;
     }
-    if (((birth_month - 1) == today_month) && (today_day < birth_day)) {
+    if (birth_month - 1 == today_month && today_day < birth_day) {
       age--;
     }
     return age;
   }
-  openClickedProfile = (usrId) => {
+  openClickedProfile = usrId => {
     alert(usrId);
-  }
+  };
   render() {
     return (
-      <View style={{ flex: 1 }} >
+      <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           <ScrollView>
             <GridView
@@ -167,25 +192,54 @@ export default class NearbyAllUser extends React.Component {
               items={this.state.allArr}
               style={styles.gridView}
               renderItem={item => (
-                <View
-                  style={[styles.itemContainer]}
-                ><TouchableOpacity onPress={() => { this.openClickedProfile(item.id) }}>
-                    <Image source={{ uri: item.ImageURL }}
+                <View style={[styles.itemContainer]}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.openClickedProfile(item.id);
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.ImageURL }}
                       style={[styles.imageContainer]}
-                    ></Image>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 15, marginTop: 5, fontWeight: 'bold' }}>{item.UserName}</Text><Text style={{ fontWeight: 'bold', marginTop: 5, fontSize: 15 }}>,</Text>
-                      <Text style={{ fontSize: 15, marginTop: 5, fontWeight: 'bold' }}>{item.fullAge}</Text>
+                    />
+                    <View
+                      style={{ flexDirection: "row", justifyContent: "center" }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          marginTop: 5,
+                          fontWeight: "bold"
+                        }}
+                      >
+                        {item.UserName}
+                      </Text>
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          marginTop: 5,
+                          fontSize: 15
+                        }}
+                      >
+                        ,
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          marginTop: 5,
+                          fontWeight: "bold"
+                        }}
+                      >
+                        {item.fullAge}
+                      </Text>
                     </View>
-
                   </TouchableOpacity>
-
                 </View>
               )}
             />
           </ScrollView>
         </View>
-      </View >
+      </View>
     );
   }
 }
@@ -201,8 +255,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     borderRadius: 5,
     padding: 10,
-    height: 175,
-
+    height: 175
   },
   imageContainer: {
     justifyContent: "flex-end",
