@@ -30,6 +30,5 @@ export const Images = {
   IconImage: require("./images/iconImage.png"),
   IconCamera: require("./images/iconCamera.png"),
   IconVideo: require("./images/iconVideo.png"),
-  tickIcon: require("./images/iconTick.png"),
-  closeIcon: require("./images/iconClose.png")
+  iconThreeDots : require("./images/iconThreeDots.png")
 };

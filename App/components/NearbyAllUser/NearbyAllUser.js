@@ -96,7 +96,7 @@ export default class NearbyAllUser extends React.Component {
             varifiedUser == true &&
             getAge >= this.state.ageFromShow &&
             getAge <= this.state.ageToShow &&
-            distanceBetweenFriends <= this.state.userDistanceShow
+            distanceBetweenFriends/1000 <= this.state.userDistanceShow
           ) {
             if (this.state.userGenderShow == 2) {
               arrayKey.push({

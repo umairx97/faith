@@ -12,7 +12,9 @@ import {
   Alert,
   Platform,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  AsyncStorage,
+  PermissionsAndroid
 } from "react-native";
 import { RkButton, RkText } from "react-native-ui-kitten";
 import { BackHandler } from "react-native";
@@ -20,6 +22,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Images } from "../../../assets/imageAll";
+import { AccessToken, LoginManager } from "react-native-fbsdk";
+
 
 import RadioForm, {
   RadioButton,
@@ -100,7 +104,7 @@ export default class SignUp extends Component {
       androidClientId:
         "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
       iosClientId:
-        "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
+        "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com"
     });
   }
   componentDidMount() {
@@ -224,28 +228,115 @@ export default class SignUp extends Component {
   };
 
   _onGoogleLogin = async () => {
-    Actions.activityLoader();
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
-        //Alert.alert("token " + data.user.idToken);
-        // Create a new Firebase credential with the token
         const credential = firebase.auth.GoogleAuthProvider.credential(
           data.idToken,
           data.accessToken
         );
-        // Login with the credential
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
         this.setState({ ...this.state, progressVisible: false });
-        Actions.home();
+        this.updateUserProfile(user.uid, user.displayName, user.email,"g+");
       })
       .catch(error => {
         this.setState({ ...this.state, progressVisible: false });
         const { code, message } = error;
         // Alert.alert(message + " Errorcode " + code);
       });
+  };
+  updateUserProfile(uid, name, email,loginWith) {
+    var userName = name.split(" ").join("_");
+    var userRef = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uid);
+    userRef.once("value").then(snapshot => {
+      if (snapshot.exists()) {
+        if (loginWith === "FB") {
+          this.openDrawerPage("facebookloggedin");
+        }
+        {
+          this.openDrawerPage("googleLoggedin");
+        }
+      } else {
+        userRef
+          .set({
+            uid: uid,
+            email: email,
+            userName: name,
+            fullName: name,
+            gender: "0",
+            latitude: 0,
+            user_Dob: "0",
+            longitude: 0,
+            isVarified: true,
+            isLogin: true,
+            profileImageURL: ""
+          })
+          .then(ref => {
+            this.openDrawerPage("googleLoggedin");
+          });
+      }
+    });
+  }
+  async openDrawerPage(_val) {
+    AsyncStorage.setItem("checkLoggedType", _val);
+    var fullName;
+    var gender;
+    var latitude;
+    var longitude;
+    var email;
+    var user_Dob;
+    var profileImageURL;
+    var uidUser = await firebase.auth().currentUser.uid;
+    var displayUserInfo = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    await displayUserInfo.once("value").then(snapshot => {
+      fullName = snapshot.val().fullName;
+      gender = snapshot.val().gender;
+      latitude = snapshot.val().latitude;
+      longitude = snapshot.val().longitude;
+      email = snapshot.val().email;
+      user_Dob = snapshot.val().user_Dob;
+      profileImageURL = snapshot.val().profileImageURL;
+    });
+
+    AsyncStorage.setItem("reg_user_name", fullName);
+    AsyncStorage.setItem("reg_user_gender", "" + gender);
+    AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+    AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+    AsyncStorage.setItem("reg_user_email", email);
+    AsyncStorage.setItem("reg_user_dob", user_Dob);
+    AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+
+    if (Platform.OS === "android") {
+      if (apiVersion >= 23) {
+        this.requestLocationPermission(_val);
+      } else {
+        Actions.home();
+      }
+    } else {
+      Actions.home();
+    }
+  }
+
+  requestLocationPermission = async _val => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // AsyncStorage.setItem("checkLoggedType", _val);
+        Actions.home();
+      } else {
+        // Actions.reset("signIn");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
   };
   onClickListener = viewId => {
     alert("Alert", "Button pressed " + viewId);
@@ -256,6 +347,54 @@ export default class SignUp extends Component {
       Actions.login();
     }, 400);
   }
+  loginWithFacebook = async () => {
+    //Actions.activityLoader();
+    try {
+      // LoginManager.setLoginBehavior("web");
+      const result = await LoginManager.logInWithReadPermissions([
+        "public_profile",
+        "email"
+      ]);
+
+      if (result.isCancelled) {
+        // handle this however suites the flow of your app
+        alert("Facebook login request canceled");
+        return;
+        //throw new Error('User cancelled request');
+      }
+
+      // get the access token
+      const data = await AccessToken.getCurrentAccessToken();
+
+      if (!data) {
+        // handle this however suites the flow of your app
+        alert("Invalid user data");
+        return;
+        //throw new Error('Something went wrong obtaining the users access token');
+      }
+
+      // create a new firebase credential with the token
+      const credential = firebase.auth.FacebookAuthProvider.credential(
+        data.accessToken
+      );
+      var x = JSON.stringify(credential);
+
+      // login with credential
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential)
+        .then(user => {
+          this.updateUserProfile(user.uid, user.displayName, user.email, "FB");
+          
+        })
+        .catch(error => {
+          const { code, message } = error;
+        });
+    } catch (e) {
+      console.error(e);
+      alert(JSON.stringify("catch" + e));
+    }
+  };
 
   render() {
     if (this.state.progressVisible) {
@@ -508,7 +647,14 @@ export default class SignUp extends Component {
                             ]}
                             name="facebook"
                           />
-                          <RkText rkType="caption">Facebook</RkText>
+                          <RkText
+                            onPress={() => {
+                              this.loginWithFacebook();
+                            }}
+                            rkType="caption"
+                          >
+                            Facebook
+                          </RkText>
                         </RkButton>
                       </View>
                       <View style={{ flex: 1 }}>

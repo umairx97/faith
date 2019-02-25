@@ -64,13 +64,32 @@ export default class Matches extends Component {
         snapshot.forEach(childSnapshot => {
           key = childSnapshot.val().friendUid;
           this.getUserDetail(key);
+         // this.frndList(key);
         });
       })
       .catch(error => {
         console.log(JSON.stringify(error));
       });
-    // this.setState({ allData: this.state.showArr});
+   
   };
+  frndList=(key)=>{
+    firebase
+    .database()
+    .ref(
+      "Users/FaithMeetsLove/ChatUserList/" +
+        this.state.loginUserId +
+        "/" +
+        key
+    )
+    .set({
+      _show:true
+    })
+    .then(ref => {})
+    .catch(error => {
+      Alert.alert("fail" + error.toString());
+    });
+   
+  }
   getUserDetail = async key => {
     arr = [];
     instance = this;
@@ -157,6 +176,7 @@ export default class Matches extends Component {
     );
   };
   openChatScreen(id, name) {
+    this.frndList(id);
     AsyncStorage.setItem("friendsUid", ''+id);
     AsyncStorage.setItem("friendName", name);
     Actions.chat();

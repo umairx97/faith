@@ -33,6 +33,8 @@ import LoadingButton from "react-native-loading-button";
 import AnimateLoadingButton from "react-native-animate-loading-button";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import { ProgressDialog } from "react-native-simple-dialogs";
+import { Images } from "../../../assets/imageAll";
+
 import DeviceInfo from "react-native-device-info";
 let apiVersion;
 import {
@@ -75,7 +77,7 @@ export default class SignIn extends Component {
         "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
 
       iosClientId:
-        "390674890211-kj16bik8bkkjemv872v9o2fi57irs95m.apps.googleusercontent.com"
+        "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com"
     });
   }
   showLoading() {
@@ -102,54 +104,77 @@ export default class SignIn extends Component {
   _onPressHandler() {
     this.loadingButton.showLoading(true);
 
-    // mock
     setTimeout(() => {
       this.loadingButton.showLoading(false);
     }, 2000);
   }
-  // componentDidMount() {
-  //   const dispatchConnected = isConnected => this.props.dispatch(setIsConnected(isConnected));
 
-  //   NetInfo.isConnected.fetch().then().done(() => {
-  //     NetInfo.isConnected.addEventListener('change', dispatchConnected);
-  //   });
-  // }
   async _onGoogleLogin() {
-    // instance = this;
-    // instance.setState({ ...this.state, progressVisible: true });
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     GoogleSignin.signIn()
       .then(data => {
-        // instance.setState({ ...this.state, progressVisible: false });
-        //Alert.alert("token " + data.user.idToken);
-        // Create a new Firebase credential with the token
         const credential = firebase.auth.GoogleAuthProvider.credential(
           data.idToken,
           data.accessToken
         );
-        // Login with the credential
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        this.openDrawerPage("googleLoggedin");
+        this.updateUserProfile(user.uid, user.displayName, user.email,"g+");
       })
       .catch(error => {
-        //  instance.setState({ ...this.state, progressVisible: false });
         const { code, message } = error;
-        // Alert.alert(message + " Errorcode " + code);
       });
+  }
+  updateUserProfile(uid, name, email, loginWith) {
+    var userName = name.split(" ").join("_");
+    var userRef = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uid);
+    userRef.once("value").then(snapshot => {
+      if (snapshot.exists()) {
+        if (loginWith === "FB") {
+          this.openDrawerPage("facebookloggedin");
+        }
+        {
+          this.openDrawerPage("googleLoggedin");
+        }
+      } else {
+        userRef
+          .set({
+            uid: uid,
+            email: email,
+            userName: userName,
+            fullName: name,
+            gender: "0",
+            latitude: 0,
+            user_Dob: "0",
+            longitude: 0,
+            isVarified: true,
+            isLogin: true,
+            profileImageURL: ""
+          })
+          .then(ref => {
+            if (loginWith === "FB") {
+              this.openDrawerPage("facebookloggedin");
+            }
+            {
+              this.openDrawerPage("googleLoggedin");
+            }
+          })
+          .catch(error => {
+            alert(error);
+          });
+      }
+    });
   }
   onClickListener = viewId => {
     Alert.alert("Alert", "Button pressed " + viewId);
   };
   _onSubmit() {
-    Actions.activityLoader();
+    this.setState({ ...this.state, progressVisible: true });
     instance = this;
-    //this.setState({ isLoadingVisible: true });
-    // instance.setState({ ...this.state, progressVisible: true });
-    // setTimeout(() => {
-    //   this.setState({ logintext: "Loading..." });
-    // }, 100);
+
     const { email, password } = this.state;
     if (email != "" && password != "") {
       firebase
@@ -157,17 +182,13 @@ export default class SignIn extends Component {
         .signInWithEmailAndPassword(email, password)
         .then(userData => {
           if (userData.user.emailVerified == false) {
-         Actions.signIn();
             Alert.alert("Please verify your email for login.");
-          
           } else {
             this.openDrawerPage("firebaseLoggedin");
           }
         })
         .catch(error => {
-          Actions.signIn();
-          //  instance.setState({ ...this.state, progressVisible: false });
-          //Login was not successful, let's create a new account
+          this.setState({ ...this.state, progressVisible: false });
           Alert.alert("Invalid credentials");
         });
     } else {
@@ -202,32 +223,29 @@ export default class SignIn extends Component {
     AsyncStorage.setItem("reg_user_latitude", "" + latitude);
     AsyncStorage.setItem("reg_user_longitude", "" + longitude);
     AsyncStorage.setItem("reg_user_email", email);
-    AsyncStorage.setItem("reg_user_dob",  user_Dob);
+    AsyncStorage.setItem("reg_user_dob", user_Dob);
     AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
 
     if (Platform.OS === "android") {
       if (apiVersion >= 23) {
         this.requestLocationPermission(_val);
-      } else 
-      {
+      } else {
         Actions.home();
       }
-    } else 
-    {
+    } else {
       Actions.home();
     }
   }
 
-  requestLocationPermission = async (_val) => {
+  requestLocationPermission = async _val => {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-       // AsyncStorage.setItem("checkLoggedType", _val);
+        // AsyncStorage.setItem("checkLoggedType", _val);
         Actions.home();
-      } else 
-      {
+      } else {
         // Actions.reset("signIn");
       }
     } catch (err) {
@@ -236,7 +254,7 @@ export default class SignIn extends Component {
   };
 
   loginWithFacebook = async () => {
-    Actions.activityLoader();
+    //Actions.activityLoader();
     try {
       // LoginManager.setLoginBehavior("web");
       const result = await LoginManager.logInWithReadPermissions([
@@ -272,12 +290,12 @@ export default class SignIn extends Component {
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-          this.openDrawerPage("facebookloggedin");
+          this.updateUserProfile(user.uid, user.displayName, user.email, "FB");
+        
         })
         .catch(error => {
-          //  instance.setState({ ...this.state, progressVisible: false });
-          const { code, message } = error;
-          // Alert.alert(message + " Errorcode " + code);
+        
+           Alert.alert('An account already exists with the same email address.');
         });
     } catch (e) {
       console.error(e);
@@ -286,74 +304,77 @@ export default class SignIn extends Component {
   };
 
   render() {
-    return (
-      <KeyboardAvoidingView behavior="padding">
-        <ProgressDialog
-          visible={this.state.progressVisible}
-          title="Progress Dialog"
-          message="Please, wait..."
-        />
-        <Formik
-          onSubmit={values => console.log(values)}
-          validationSchema={validationSchema}
-          render={props => (
-            <ScrollView
-              keyboardShouldPersistTaps="always"
-              keyboardDismissMode="on-drag"
-              contentContainerStyle={styles.container}
-            >
-              <Form>
-                <View>
-                  <Image
-                    source={require("../../../assets/images/logo.png")}
-                    style={styles.migoLogoImage}
-                  />
+    if (this.state.progressVisible) {
+      return (
+        <View style={[styles.containerLoader, styles.horizontal]}>
+          <Image source={Images.loginLogo} style={styles.logoStyle} />
+          <ActivityIndicator size="large" color="grey" />
+        </View>
+      );
+    } else
+      return (
+        <KeyboardAvoidingView behavior="padding">
+          <Formik
+            onSubmit={values => console.log(values)}
+            validationSchema={validationSchema}
+            render={props => (
+              <ScrollView
+                keyboardShouldPersistTaps="always"
+                keyboardDismissMode="on-drag"
+                contentContainerStyle={styles.container}
+              >
+                <Form>
+                  <View>
+                    <Image
+                      source={require("../../../assets/images/logo.png")}
+                      style={styles.migoLogoImage}
+                    />
 
-                  <View style={styles.loginForm}>
-                    <View style={styles.formInput}>
-                      <Text>Email</Text>
-                      <MyInput
-                        name="email"
-                        type="email"
-                        placeholder="Please enter your email"
-                        returnKeyLabel={"next"}
-                        onChangeText={text => this.setState({ email: text })}
-                        style={styles.textInput}
-                      />
-                    </View>
-                    <View style={styles.formInput}>
-                      <Text>Password</Text>
-                      <MyInput
-                        name="password"
-                        type="password"
-                        placeholder="Please enter your password"
-                        returnKeyType="next"
-                        onChangeText={value =>
-                          this.setState({ password: value })
-                        }
-                        style={styles.textInput}
-                      />
-                    </View>
-                    <TouchableOpacity
-                      onPress={() => {
-                        Actions.forgetPass();
-                      }}
-                    >
-                      <Text style={styles.forgetPwd}>Forgot Password</Text>
-                    </TouchableOpacity>
-
-                    <View style={{ marginTop: "4%" }}>
-                      <RkButton
-                        rkType="rounded"
-                        style={styles.googleButton}
-                        // onPress={props.handleSubmit}
+                    <View style={styles.loginForm}>
+                      <View style={styles.formInput}>
+                        <Text>Email</Text>
+                        <MyInput
+                          name="email"
+                          type="email"
+                          placeholder="Please enter your email"
+                          returnKeyLabel={"next"}
+                          onChangeText={text => this.setState({ email: text })}
+                          style={styles.textInput}
+                        />
+                      </View>
+                      <View style={styles.formInput}>
+                        <Text>Password</Text>
+                        <MyInput
+                          name="password"
+                          type="password"
+                          placeholder="Please enter your password"
+                          returnKeyType="next"
+                          onChangeText={value =>
+                            this.setState({ password: value })
+                          }
+                          style={styles.textInput}
+                        />
+                      </View>
+                      <TouchableOpacity
                         onPress={() => {
-                          this._onSubmit();
+                          Actions.forgetPass();
                         }}
                       >
-                        Login
-                      </RkButton>
-                      {/* <AnimateLoadingButton
+                        <Text style={styles.forgetPwd}>Forgot Password</Text>
+                      </TouchableOpacity>
+
+                      <View style={{ marginTop: "4%" }}>
+                        <RkButton
+                          rkType="rounded"
+                          style={styles.googleButton}
+                          // onPress={props.handleSubmit}
+                          onPress={() => {
+                            this._onSubmit();
+                          }}
+                        >
+                          Login
+                        </RkButton>
+                        {/* <AnimateLoadingButton
                         ref={c => (this.loadingButton = c)}
                         width={200}
                         height={48}
@@ -365,109 +386,109 @@ export default class SignIn extends Component {
                         onPress={this._onSubmit.bind(this)}
                       /> */}
 
-                      <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row" }}>
+                          <View
+                            style={{
+                              backgroundColor: "black",
+                              height: 2,
+                              flex: 1,
+                              alignSelf: "center",
+                              marginLeft: "12%",
+                              marginTop: "4%"
+                            }}
+                          />
+                          <Text
+                            style={{
+                              alignSelf: "center",
+                              paddingHorizontal: 5,
+                              fontSize: 14,
+                              marginTop: "4%"
+                            }}
+                          >
+                            Or Login With
+                          </Text>
+                          <View
+                            style={{
+                              backgroundColor: "black",
+                              height: 2,
+                              flex: 1,
+                              alignSelf: "center",
+                              marginRight: "12%",
+                              marginTop: "4%"
+                            }}
+                          />
+                        </View>
                         <View
                           style={{
-                            backgroundColor: "black",
-                            height: 2,
-                            flex: 1,
-                            alignSelf: "center",
-                            marginLeft: "12%",
-                            marginTop: "4%"
-                          }}
-                        />
-                        <Text
-                          style={{
-                            alignSelf: "center",
-                            paddingHorizontal: 5,
-                            fontSize: 14,
-                            marginTop: "4%"
+                            flexDirection: "row",
+
+                            marginTop: "5%"
                           }}
                         >
-                          Or Login With
-                        </Text>
-                        <View
-                          style={{
-                            backgroundColor: "black",
-                            height: 2,
-                            flex: 1,
-                            alignSelf: "center",
-                            marginRight: "12%",
-                            marginTop: "4%"
-                          }}
-                        />
-                      </View>
-                      <View
-                        style={{
-                          flexDirection: "row",
-
-                          marginTop: "5%"
-                        }}
-                      >
-                        <View style={{ flex: 1 }}>
-                          <RkButton
-                            rkType="rounded"
-                            style={[
-                              {
-                                width: "100%",
-                                marginRight: "2%",
-                                marginVertical: 8
-                              }
-                            ]}
-                          >
-                            <Icon
+                          <View style={{ flex: 1 }}>
+                            <RkButton
+                              rkType="rounded"
                               style={[
-                                styles.icon,
-                                { marginHorizontal: 16, fontSize: 21 }
+                                {
+                                  width: "100%",
+                                  marginRight: "2%",
+                                  marginVertical: 8
+                                }
                               ]}
-                              name="facebook"
-                            />
-                            <RkText
-                              onPress={() => {
-                                this.loginWithFacebook();
-                              }}
-                              rkType="caption"
                             >
-                              Facebook
-                            </RkText>
-                          </RkButton>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <RkButton
-                            onPress={() => {
-                              this._onGoogleLogin();
-                            }}
-                            rkType="rounded"
-                            style={[
-                              {
-                                width: "100%",
-                                marginLeft: "2%",
-                                marginVertical: 8,
-                                backgroundColor: "#dd4b39"
-                              }
-                            ]}
-                          >
-                            <Icon
+                              <Icon
+                                style={[
+                                  styles.icon,
+                                  { marginHorizontal: 16, fontSize: 21 }
+                                ]}
+                                name="facebook"
+                              />
+                              <RkText
+                                onPress={() => {
+                                  this.loginWithFacebook();
+                                }}
+                                rkType="caption"
+                              >
+                                Facebook
+                              </RkText>
+                            </RkButton>
+                          </View>
+                          <View style={{ flex: 1 }}>
+                            <RkButton
+                              onPress={() => {
+                                this._onGoogleLogin();
+                              }}
+                              rkType="rounded"
                               style={[
-                                styles.icon,
-                                { marginHorizontal: 16, fontSize: 21 }
+                                {
+                                  width: "100%",
+                                  marginLeft: "2%",
+                                  marginVertical: 8,
+                                  backgroundColor: "#dd4b39"
+                                }
                               ]}
-                              name="google"
-                            />
-                            <RkText rkType="caption">Google</RkText>
-                          </RkButton>
+                            >
+                              <Icon
+                                style={[
+                                  styles.icon,
+                                  { marginHorizontal: 16, fontSize: 21 }
+                                ]}
+                                name="google"
+                              />
+                              <RkText rkType="caption">Google</RkText>
+                            </RkButton>
+                          </View>
                         </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              </Form>
-              <OfflineNotice />
-            </ScrollView>
-          )}
-        />
-      </KeyboardAvoidingView>
-    );
+                </Form>
+                <OfflineNotice />
+              </ScrollView>
+            )}
+          />
+        </KeyboardAvoidingView>
+      );
   }
 }
 const styles = StyleSheet.create({
@@ -592,284 +613,20 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white"
+  },
+  containerLoader: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30
+  },
+  logoStyle: {
+    height: 100,
+    width: 100,
+    resizeMode: "contain"
   }
 });
-
-// import React, { Component } from "react";
-// import {
-//   StyleSheet,
-//   Text,
-//   View,
-//   TextInput,
-//   Button,
-//   TouchableHighlight,
-//   Image,
-//   Alert,
-//   TouchableOpacity,
-//   Platform,
-// } from "react-native";
-// import { RkButton, RkText } from "react-native-ui-kitten";
-// import { ScrollView } from "react-native-gesture-handler";
-// import Icon from "react-native-vector-icons/FontAwesome";
-// import { Actions } from "react-native-router-flux";
-
-// export default class SignIn extends Component {
-//   constructor(props) {
-//     super(props);
-//     state = {
-//       email: "",
-//       password: ""
-//     };
-//   }
-
-//   onClickListener = viewId => {
-//     Alert.alert("Alert", "Button pressed " + viewId);
-//   };
-//   _onSubmit() {
-//     //const { email, password } = this.state;
-//     Alert.alert("Alert", "Button pressed " + this.email);
-//    Actions.home();
-//   }
-
-//   render() {
-//     return (
-//       <View style={styles.container}>
-
-//           <Image
-//             source={require("../../../assets/images/logo.png")}
-//             style={styles.migoLogoImage}
-//           />
-//           <View style={styles.loginForm}>
-//             <View style={styles.formInput}>
-//               <Text>Username</Text>
-//               <TextInput placeholder="Please enter your email"
-//               onChangeText={value => this.setState({ email: value })}
-//               returnKeyLabel = {"next"}
-//               onChangeText={(text) => this.setState({email:text})}
-//                style={styles.textInput} />
-//             </View>
-//             <View style={styles.formInput}>
-//               <Text>Password</Text>
-//               <TextInput placeholder="Please enter your password"
-//               onChangeText={value => this.setState({ password: value })}
-//                style={styles.textInput} />
-//             </View>
-//              < TouchableOpacity
-// onPress = {
-//   () => {
-//     Actions.forgetPass();
-//   }
-// } >
-//             <Text style={styles.forgetPwd}>Forgot Password</Text></TouchableOpacity>
-//             <View style={{ marginTop: "4%" }}>
-//               <RkButton
-//                 rkType="rounded"
-//                 style={styles.googleButton}
-//                 onPress={() => {
-//                   this._onSubmit();
-//                 }}
-//               >
-//                 Login
-//               </RkButton>
-//               <View style={{ flexDirection: "row" }}>
-//                 <View
-//                   style={{
-//                     backgroundColor: "black",
-//                     height: 2,
-//                     flex: 1,
-//                     alignSelf: "center",
-//                     marginLeft: "12%",
-//                     marginTop: "4%"
-//                   }}
-//                 />
-//                 <Text
-//                   style={{
-//                     alignSelf: "center",
-//                     paddingHorizontal: 5,
-//                     fontSize: 14,
-//                     marginTop: "4%"
-//                   }}
-//                 >
-//                   Or Login With
-//                 </Text>
-//                 <View
-//                   style={{
-//                     backgroundColor: "black",
-//                     height: 2,
-//                     flex: 1,
-//                     alignSelf: "center",
-//                     marginRight: "12%",
-//                     marginTop: "4%"
-//                   }}
-//                 />
-//               </View>
-//               <View
-//                 style={{
-//                   flexDirection: "row",
-
-//                   marginTop: "5%"
-//                 }}
-//               >
-//                 <View style={{ flex: 1 }}>
-//                   <RkButton
-//                     rkType="rounded"
-//                     style={[
-//                       {
-//                         width: "100%",
-//                         marginRight: "2%",
-//                         marginVertical: 8
-//                       }
-//                     ]}
-//                   >
-//                     <Icon
-//                       style={[
-//                         styles.icon,
-//                         { marginHorizontal: 16, fontSize: 21 }
-//                       ]}
-//                       name="facebook"
-//                     />
-//                     <RkText rkType="caption">Facebook</RkText>
-//                   </RkButton>
-//                 </View>
-//                 <View style={{ flex: 1 }}>
-//                   <RkButton
-//                     rkType="rounded"
-//                     style={[
-//                       {
-//                         width: "100%",
-//                         marginLeft: "2%",
-//                         marginVertical: 8,
-//                         backgroundColor: '#dd4b39'
-//                       }
-//                     ]}
-//                   >
-//                     <Icon
-//                       style={[
-//                         styles.icon,
-//                         { marginHorizontal: 16, fontSize: 21 }
-//                       ]}
-//                       name="google"
-//                     />
-//                     <RkText rkType="caption" >Google</RkText>
-//                   </RkButton>
-//                 </View>
-//               </View>
-//             </View>
-//           </View>
-
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     width: "100%",
-//     height: "100%",
-//     padding: "10%",
-//     flexDirection: "column",
-//         justifyContent: "center",
-
-//     backgroundColor: "#FFFFFF"
-//   },
-//   innerView1: {
-//     flex: 1,
-//     padding: "10%",
-//     width: "100%",
-//     height: "100%",
-//     marginTop: "5%",
-//     flexDirection: "column"
-//   },
-//   forgetPwd: {
-//     width: "100%",
-//     textAlign: "right",
-//     marginTop: "3%",
-//     color: "#000"
-//   },
-//   icon: {
-//     color: "white"
-//   },
-//   migoLogoImage: {
-//     resizeMode: "contain",
-//     backgroundColor: "rgba(0, 0, 0, 0.0)",
-//     width: "25%",
-//     height: "15%",
-
-//     alignSelf: "center"
-//   },
-//   loginForm: {
-//     width: "100%",
-//     marginTop: "14%"
-//   },
-//   textInput: {
-//     width: "100%",
-//     color: "#000000",
-//     borderColor: "red",
-//     marginTop: Platform.OS === 'ios' ? 10+"%" : 0,
-//     borderBottomWidth: 1
-//   },
-//   formInput: {
-//     width: "100%",
-//     marginTop: "4%"
-//   },
-//   googleButton: {
-//     backgroundColor: "rgb(252, 56, 80)",
-//     borderRadius: 24,
-
-//     width: 200,
-//     height: 48,
-
-//     alignSelf: "center"
-//   },
-//   facebookButton: {
-//     backgroundColor: "rgb(38, 114, 203)",
-//     borderRadius: 24,
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     width: 100,
-//     height: 48,
-//     marginBottom: 33,
-//     marginTop: 100,
-//     alignSelf: "center",
-//     textAlign: "center"
-//   },
-//   inputContainer: {
-//     borderBottomColor: "#F5FCFF",
-//     backgroundColor: "#FFFFFF",
-//     borderRadius: 30,
-//     borderBottomWidth: 1,
-//     width: 250,
-//     height: 45,
-//     marginBottom: 20,
-//     flexDirection: "row",
-//     alignItems: "center"
-//   },
-//   inputs: {
-//     height: 45,
-//     marginLeft: 16,
-//     borderBottomColor: "#FFFFFF",
-//     flex: 1
-//   },
-//   inputIcon: {
-//     width: 30,
-//     height: 30,
-//     marginLeft: 15,
-//     justifyContent: "center"
-//   },
-//   buttonContainer: {
-//     height: 45,
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginBottom: 20,
-//     width: 250,
-//     borderRadius: 30
-//   },
-//   loginButton: {
-//     backgroundColor: "#00b5ec"
-//   },
-//   loginText: {
-//     color: "white"
-//   }
-// });

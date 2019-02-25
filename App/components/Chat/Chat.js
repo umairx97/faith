@@ -58,12 +58,13 @@ export default class Chat extends Component {
       videoPath: "",
       imagedata: "",
       dialogVisible: false,
-      dialogPlayVisible: false
+      dialogPlayVisible: false,
+      userChatTime: 0
     };
     this.user = firebase.auth().currentUser;
 
     setTimeout(() => {
-      this.chatRef = this.getRef().child(
+      this.chatRef = firebase.database().ref().child(
         "Users/FaithMeetsLove/chat/" + this.generateChatId()
       );
       this.chatRefData = this.chatRef.orderByChild("order");
@@ -84,9 +85,7 @@ export default class Chat extends Component {
     if (this.user.uid > friendUid) return `${this.user.uid}-${friendUid}`;
     else return `${friendUid}-${this.user.uid}`;
   }
-  getRef() {
-    return firebase.database().ref();
-  }
+
   async componentWillMount() {
     friendUid = await AsyncStorage.getItem("friendsUid");
   }
@@ -106,52 +105,72 @@ export default class Chat extends Component {
     this.setState({ imagePath: "" });
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
-    ); // Remove listener
+    ); 
   }
-
   listenForItems(chatRef) {
+    var keys;
+    var allUsersChat = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/ChatUser/" + this.user.uid);
+    allUsersChat
+      .once("value")
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          snapshot.forEach(childSnapshot => {
+            keys = childSnapshot.val().CreatedAt;
+          })
+        }
+        else {
+          keys = 0
+        }
+      })
     chatRef.on("value", snap => {
-      // get children as an array
       var items = [];
       snap.forEach(child => {
-        // alert(child.val().text);
-        //var name = child.val().uid == this.user.uid ? this.user.name : name1;
-        items.push({
-          key: child.key,
-          _id: child.val().createdAt,
-          text: child.val().text,
-          createdAt: new Date(child.val().createdAt),
-          user: {
-            _id: child.val().uid,
-            name: friendName,
-            avatar: friendAvatar
-          },
-          // You can also add a image prop:
-          image: child.val().image,
-          // You can also add a video prop:
-          video: child.val().video
-          // Any additional custom parameters are passed through
-        });
+        lastChat = child.val().createdAt;
+        if (lastChat > keys) {
+          items.push({
+            key: child.key,
+            _id: child.val().createdAt,
+            text: child.val().text,
+            createdAt: new Date(child.val().createdAt),
+            user: {
+              _id: child.val().uid,
+              name: friendName,
+              avatar: friendAvatar
+            },
+            image: child.val().image,
+            video: child.val().video
+          });
+        }
       });
-
       this.setState({
         loading: false,
         messages: items
       });
     });
   }
+
+ 
   componentWillUnmount() {
     this.chatRefData.off();
   }
   backAndroid() {
-    Actions.pop(); // Return to previous screen
-    return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+    Actions.pop(); 
+    return true; 
   }
 
-  updateMessageState(text) {
-    this.setState({ chatMessage: text });
-  }
   async onSend(messages = []) {
+    // var uidUser = await firebase.auth().currentUser.uid;
+    // var alreadyBlokedUser = firebase.database().ref("Users/FaithMeetsLove/BlockedFriends/" + uidUser);
+   
+    // await alreadyBlokedUser.once('value').then(snapshot => {
+    //   snapshot.forEach(childSnapshot => {
+    //     key = childSnapshot.key;
+    //     var blocked = childSnapshot.val().blockedFromChat;
+        
+    //   })
+    // })
     if (this.state.imagePath != "" || this.state.videoPath != "") {
       milliseconds = new Date().getTime();
       // Prepare Blob support
@@ -280,7 +299,7 @@ export default class Chat extends Component {
       });
     }
   }
-  sendMessage(messages = []) {}
+  // sendMessage(messages = []) { }
   async uploadMedia(uri, uid, mime, format, dirName, fs) {
     this.setState({ ...this.state, progressVisible: true });
     return new Promise((resolve, reject) => {
@@ -509,23 +528,23 @@ export default class Chat extends Component {
   handleBlock() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
-    Alert.alert("Block!", "Are you sure you want to block "+friendName+" ?", [
-      {
-        text: "Cancel",
-        style: "cancel"
-      },
-      {
-        text: "Yes",
-        onPress: () => {
-          this.blockFriend();
+      Alert.alert("Block!", "Are you sure you want to block " + friendName + " ?", [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            this.blockFriend();
+          }
         }
-      }
-    ]);
-  }, 400);
+      ]);
+    }, 400);
   }
-  blockFriend(){
-    firebase.database().ref('Users/FaithMeetsLove/BlockedFriends/'+this.user.uid+'/'+friendUid).set({
-      blockedFromChat:true
+  blockFriend() {
+    firebase.database().ref('Users/FaithMeetsLove/BlockedFriends/' + this.user.uid + '/' + friendUid).set({
+      blockedFromChat: true
     }).then()
 
   }
@@ -542,9 +561,9 @@ export default class Chat extends Component {
       .database()
       .ref(
         "Users/FaithMeetsLove/chat/" +
-          this.generateChatId() +
-          "/" +
-          this.state.messageKey
+        this.generateChatId() +
+        "/" +
+        this.state.messageKey
       )
       .remove();
   }
@@ -561,11 +580,11 @@ export default class Chat extends Component {
       ]);
       if (
         results[PermissionsAndroid.PERMISSIONS.CAMERA] ===
-          PermissionsAndroid.RESULTS.GRANTED &&
+        PermissionsAndroid.RESULTS.GRANTED &&
         results[PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE] ===
-          PermissionsAndroid.RESULTS.GRANTED &&
+        PermissionsAndroid.RESULTS.GRANTED &&
         results[PermissionsAndroid.PERMISSIONS.RECORD_AUDIO] ===
-          PermissionsAndroid.RESULTS.GRANTED
+        PermissionsAndroid.RESULTS.GRANTED
       ) {
         if (val == "img") {
           this.setState({

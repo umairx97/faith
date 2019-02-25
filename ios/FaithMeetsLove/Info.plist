@@ -23,28 +23,45 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-      <string>com.googleusercontent.apps.390674890211-kj16bik8bkkjemv872v9o2fi57irs95m</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.390674890211-kj16bik8bkkjemv872v9o2fi57irs95m</string>
+				<string>fb2261313954115934</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>org.reactjs.native.example.FaithMeetsLoves</string>
+			<string>com.FaithMeetsLove.FaithMeetsLove</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>org.reactjs.native.example.FaithMeetsLoves</string>
+				<string>com.FaithMeetsLove.FaithMeetsLove</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.googleusercontent.apps.390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>2261313954115934</string>
+	<key>FacebookDisplayName</key>
+	<string>FathMeetsLove</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -60,8 +77,22 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Your message to user when the camera is accessed for the first time</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>need location access to find things nearby</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>need location access to find things nearby</string>
+	<key>NSLocationUsageDescription</key>
+	<string>need location access to find things nearby</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>need location access to find things nearby</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your message to user when the microphone is accessed for the first time</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -103,47 +134,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-  <key>CFBundleURLSchemes</key>
-  <array>
-    <string>fb2261313954115934</string>
-  </array>
-  </dict>
-</array>
-<key>FacebookAppID</key>
-<string>2261313954115934</string>
-<key>FacebookDisplayName</key>
-<string>FathMeetsLove</string>
-
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>fbapi</string>
-  <string>fb-messenger-share-api</string>
-  <string>fbauth2</string>
-  <string>fbshareextension</string>
-</array>
-	<key>NSCameraUsageDescription</key>
-<string>Your message to user when the camera is accessed for the first time</string>
-
-<!-- Include this only if you are planning to use the camera roll -->
-<key>NSPhotoLibraryUsageDescription</key>
-<string>Your message to user when the photo library is accessed for the first time</string>
-
-<!-- Include this only if you are planning to use the microphone for video recording -->
-<key>NSMicrophoneUsageDescription</key>
-<string>Your message to user when the microphone is accessed for the first time</string>
-<key>NSPhotoLibraryAddUsageDescription</key>
-<string>Your message to user when the photo library is accessed for the first time</string>
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>need location access to find things nearby</string>
-<key>NSLocationAlwaysUsageDescription</key>
-<string>need location access to find things nearby</string>
-<key>NSLocationUsageDescription</key>
-<string>need location access to find things nearby</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>need location access to find things nearby</string>
 </dict>
 </plist>

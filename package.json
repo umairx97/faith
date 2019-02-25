@@ -45,6 +45,7 @@
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-multi-slider": "^0.3.6",
     "react-native-paper": "^2.2.8",
+    "react-native-popup-menu": "^0.15.0",
     "react-native-radio-buttons-group": "^1.0.7",
     "react-native-range-slider": "^0.1.1",
     "react-native-router-flux": "^4.0.6",

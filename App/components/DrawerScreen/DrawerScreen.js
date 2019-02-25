@@ -15,7 +15,6 @@ import {
   AsyncStorage,
   TouchableOpacity,
   Platform,
-  
   Dimensions
 } from "react-native";
 import React from "react";
@@ -70,15 +69,8 @@ export default class DrawerScreen extends React.Component {
         longitude: 0
       }
     };
-    // this.getData();
     this.getUid();
-    // this.ref=firebase.firestore().collection("Users")
-    // .doc("FaithMeetsLove")
-    // .collection("Registered")
   }
-  //    getData(){
-  // this.allData=this.ref.onSnapshot()
-  //   }
 
   async logout() {
     var v = await AsyncStorage.getItem("checkLoggedType");
@@ -86,15 +78,11 @@ export default class DrawerScreen extends React.Component {
       this.signOutGoogle();
     } else if (v == "facebookloggedin") {
       this.signOutFacebook();
-      //LoginManager.logOut();
-      //Actions.reset("login");
     } else {
       this.signOut();
     }
   }
-  //   onVipCenterPressed() {
-  //     Actions.vipCenter();
-  //   }
+
   watchID = null;
   async componentDidMount() {
     this.getUid();
@@ -125,9 +113,18 @@ export default class DrawerScreen extends React.Component {
         };
         this.setState({ initialPosition: initialRegion });
         this.setState({ markerPosition: initialRegion });
-       firebase.database().ref("Users/FaithMeetsLove/Registered/" + uidUser).update({ latitude: lat, longitude: long }).then(msg=>{
-        this.getUid();
-       })
+        setTimeout(() => {
+          var userRef = firebase
+            .database()
+            .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+          userRef.once("value").then(snapshot => {
+            if (snapshot.exists()) {
+              userRef.update({ latitude: lat, longitude: long }).then(msg => {
+                this.getUid();
+              });
+            }
+          });
+        }, 200);
       },
       error => console.log(error),
       { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
@@ -173,7 +170,7 @@ export default class DrawerScreen extends React.Component {
       var displayUserName = firebase
         .database()
         .ref("Users/FaithMeetsLove/Registered/" + uidUser);
-    await  displayUserName.once("value", function (snapshot) {
+      await displayUserName.once("value", function(snapshot) {
         var usrName = snapshot.val().fullName;
         var ImageUrl = snapshot.val().profileImageURL;
         fullName = snapshot.val().fullName;
@@ -189,19 +186,18 @@ export default class DrawerScreen extends React.Component {
           profileImageUrl: ImageUrl
         });
       });
-    AsyncStorage.setItem("reg_user_name", fullName);
-    AsyncStorage.setItem("reg_user_gender", "" + gender);
-    AsyncStorage.setItem("reg_user_latitude", "" + latitude);
-    AsyncStorage.setItem("reg_user_longitude", "" + longitude);
-    AsyncStorage.setItem("reg_user_email", email);
-    AsyncStorage.setItem("reg_user_dob",  user_Dob);
-    AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+      AsyncStorage.setItem("reg_user_name", fullName);
+      AsyncStorage.setItem("reg_user_gender", "" + gender);
+      AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+      AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+      AsyncStorage.setItem("reg_user_email", email);
+      AsyncStorage.setItem("reg_user_dob", user_Dob);
+      AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
     } else {
       this.setState({
         user_name: uname.toUpperCase()
       });
     }
-  
   };
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
@@ -222,13 +218,13 @@ export default class DrawerScreen extends React.Component {
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
-      this.setState({ user: null }); // Remember to remove the user from your app's state as well
+      await firebase.auth().signOut();
       Actions.login();
     } catch (error) {
       console.error(error);
     }
   };
- 
+
   onHomePressed = () => {
     Actions.Discover();
     Actions.drawerClose();
@@ -252,17 +248,13 @@ export default class DrawerScreen extends React.Component {
       .then(res => {
         Actions.reset("login");
       });
-    // const data=await AccessToken.setCurrentAccessToken("akjkshk")
-    //  var credential = firebase.auth.FacebookAuthProvider.credential(data.accesToken)
-    // const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
-    //  const firebaseUserCredential = await firebase.auth().signOut();
   };
   onProfileImagerPressed = () => {
     Actions.ProfileCopy();
   };
-  onMatchPressed=()=>{
+  onMatchPressed = () => {
     Actions.matchProfile();
-  }
+  };
   render() {
     return (
       <ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -394,7 +386,11 @@ export default class DrawerScreen extends React.Component {
                     style={styles.logoutImage}
                   />
                 </View>
-                <TouchableOpacity onPress={()=>{this.onMatchPressed()}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.onMatchPressed();
+                  }}
+                >
                   <Text style={styles.likesText}>Matches</Text>
                 </TouchableOpacity>
                 <View
@@ -408,8 +404,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-           
-           
+
             <View style={styles.visitorsView}>
               <View
                 style={{
