@@ -30,5 +30,6 @@ export const Images = {
   IconImage: require("./images/iconImage.png"),
   IconCamera: require("./images/iconCamera.png"),
   IconVideo: require("./images/iconVideo.png"),
-  iconThreeDots : require("./images/iconThreeDots.png")
+  iconThreeDots : require("./images/iconThreeDots.png"),
+  viewGallery : require('./images/androidGallery.png')
 };

@@ -120,7 +120,7 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        this.updateUserProfile(user.uid, user.displayName, user.email,"g+");
+        this.updateUserProfile(user.uid, user.displayName, user.email, "g+");
       })
       .catch(error => {
         const { code, message } = error;
@@ -184,6 +184,10 @@ export default class SignIn extends Component {
           if (userData.user.emailVerified == false) {
             Alert.alert("Please verify your email for login.");
           } else {
+            firebase.database().ref("Users/FaithMeetsLove/Registered/" + userData.user.uid).update({
+              isVarified: true,
+              isLogin: true,
+            })
             this.openDrawerPage("firebaseLoggedin");
           }
         })
@@ -291,11 +295,11 @@ export default class SignIn extends Component {
         .signInWithCredential(credential)
         .then(user => {
           this.updateUserProfile(user.uid, user.displayName, user.email, "FB");
-        
+
         })
         .catch(error => {
-        
-           Alert.alert('An account already exists with the same email address.');
+
+          Alert.alert('An account already exists with the same email address.');
         });
     } catch (e) {
       console.error(e);

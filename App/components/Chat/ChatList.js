@@ -14,13 +14,14 @@ import firebase from "../FirebaseConfig/FirebaseConfig";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import { MenuProvider } from 'react-native-popup-menu';
-import Dialog from "react-native-dialog";
+
 import {
   Menu,
   MenuOptions,
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import Dialog from "react-native-dialog";
 import { Images } from "../../../assets/imageAll";
 
 var arr = [];
@@ -238,8 +239,8 @@ export default class ChatList extends Component {
           uid = childSnapshot.val().uid;
           fuid = childSnapshot.val().fuid;
           createdAt = childSnapshot.val().createdAt;
-          this.saveChat(key, uid, fuid, createdAt, frndId);
         });
+        this.saveChat(key, uid, fuid, createdAt, frndId);
       })
       .catch(error => {
         console.log(JSON.stringify(error));
@@ -247,17 +248,6 @@ export default class ChatList extends Component {
 
   }
   saveChat = (key, uid, fuid, createdAt, frndId) => {
-  
-      // var uidUser = await firebase.auth().currentUser.uid;
-      // var alreadyBlokedUser = firebase.database().ref("Users/FaithMeetsLove/BlockedFriends/" + uidUser);
-     
-      // await alreadyBlokedUser.once('value').then(snapshot => {
-      //   snapshot.forEach(childSnapshot => {
-      //     key = childSnapshot.key;
-      //     var x = childSnapshot.val().blockedFromChat;
-          
-      //   })
-      // })
   
     firebase
       .database()
@@ -285,12 +275,54 @@ export default class ChatList extends Component {
         {
           text: "Yes",
           onPress: () => {
+            this.getBlockChatHistory(id); 
             this.blockFriend(id);
           }
         }
       ]);
     }, 400);
   }
+  getBlockChatHistory = (id) => {
+    var key;
+    var uid;
+    var fuid;
+    var createdAt;
+    var frndId = id;
+    var chatRef = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/chat/" + this.generateChatId(id));
+    chatRef
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          key = childSnapshot.val()._id;
+          uid = childSnapshot.val().uid;
+          fuid = childSnapshot.val().fuid;
+          createdAt = childSnapshot.val().createdAt;
+      
+        });
+        this.saveBlockChat(key, uid, fuid, createdAt, frndId);
+      })
+      .catch(error => {
+        console.log(JSON.stringify(error));
+      });
+
+  }
+  saveBlockChat = (key, uid, fuid, createdAt, frndId) => {
+  firebase
+    .database()
+    .ref("Users/FaithMeetsLove/BlockChatUser/" + this.state.loginUserId)
+    .push({
+      _id: frndId,
+      fUid: fuid,
+      Uid: uid,
+      CreatedAt: createdAt,
+    })
+    .then(ref => { })
+    .catch(error => {
+      Alert.alert("fail" + error.toString());
+    });
+}
   blockFriend(friendId) {
     firebase.database().ref('Users/FaithMeetsLove/BlockedFriends/' + this.state.loginUserId + '/' + friendId).set({
       blockedFromChat: true

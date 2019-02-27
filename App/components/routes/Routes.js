@@ -27,6 +27,8 @@ import Matches from "../Matches/Matches";
 import ChatList from "../Chat/ChatList";
 import FullScreenVideo from "../Chat/FullScreenVideo";
 import FullScreenCamera from "../Chat/FullScreenCamera";
+import GalleryView from "../Chat/GalleryView";
+
 
 export default class Route extends Component {
   getIcon = () => {
@@ -174,6 +176,11 @@ export default class Route extends Component {
             <Scene
               key="fullScreenCamera"
               component={FullScreenCamera}
+              hideNavBar={true}
+            />
+             <Scene
+              key="galleryView"
+              component={GalleryView}
               hideNavBar={true}
             />
             <Scene key="chatList" component={ChatList} hideNavBar={true} />

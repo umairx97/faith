@@ -23,6 +23,30 @@
           }
         },
         {
+          "client_id": "390674890211-eh1ef2nl8jd2j67uti9bc51gekdqerta.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetsloves",
+            "certificate_hash": "bdf99421e8cf9d430e26bb70d6fbf15944256a8f"
+          }
+        },
+        {
+          "client_id": "390674890211-nluh423islevdgernaljp4lld67evn7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetsloves",
+            "certificate_hash": "b8882160400c0b5c35f7df72fec181f841cb1300"
+          }
+        },
+        {
+          "client_id": "390674890211-ep087nhde3b6aqb8v018a160om51poi5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetsloves",
+            "certificate_hash": "d7f4905d81be2fbd37405b3ab6a3d7f84290029f"
+          }
+        },
+        {
           "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -42,6 +66,13 @@
             {
               "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FaithMeetsLove.FaithMeetsLove"
+              }
             }
           ]
         },
