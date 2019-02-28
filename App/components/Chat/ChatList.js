@@ -25,6 +25,7 @@ import Dialog from "react-native-dialog";
 import { Images } from "../../../assets/imageAll";
 
 var arr = [];
+var chatOpen;
 export default class ChatList extends Component {
   constructor() {
     super();
@@ -42,10 +43,11 @@ export default class ChatList extends Component {
     };
 
     this.getCurrentUserId();
-
+   
   }
 
   async componentDidMount() {
+    chatOpen=await AsyncStorage.getItem("newChatMessage");
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());
   }
 
@@ -196,6 +198,7 @@ export default class ChatList extends Component {
   onClickUser = (id, name) => {
     AsyncStorage.setItem("friendsUid", "" + id);
     AsyncStorage.setItem("friendName", name);
+    AsyncStorage.setItem("openChatFrom", chatOpen)
     Actions.chat();
   };
 

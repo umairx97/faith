@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   imageThumbnail: {
     justifyContent: "center",
     alignItems: "center",
-    height: 100
+    height: 150
   },
 
   mainImage: {

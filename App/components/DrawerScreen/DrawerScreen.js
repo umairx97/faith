@@ -230,6 +230,7 @@ export default class DrawerScreen extends React.Component {
     Actions.drawerClose();
   };
   onChatPressed = () => {
+    AsyncStorage.setItem("newChatMessage","true")
     Actions.chatList();
   };
   signOutGoogle = async () => {

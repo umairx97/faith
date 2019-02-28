@@ -60,6 +60,8 @@ export default class Chat extends Component {
       receiverUid: "",
       messageKey: "",
       messageVideoUrl: "",
+      messageImageUrl: '',
+      messageText: '',
       isImage: true,
       filePath: "",
       fileData: "",
@@ -111,7 +113,16 @@ export default class Chat extends Component {
   async componentDidMount() {
 
     friendUid = await AsyncStorage.getItem("friendsUid");
-
+    var isForward = await AsyncStorage.getItem("openChatFrom");
+    var isForwardText = await AsyncStorage.getItem("messageText");
+    var isForwardImage = await AsyncStorage.getItem("messageImage");
+    var isForwardVideo = await AsyncStorage.getItem("messageVideo");
+    if (isForwardImage == null) {
+      isForwardImage = ''
+    }
+    if (isForwardVideo == null) {
+      isForwardVideo = ''
+    }
     this.getBlokedUser();
     var path = await AsyncStorage.getItem("file_path");
     if (path != null && path != "") this.setState({ imagePath: path });
@@ -121,7 +132,28 @@ export default class Chat extends Component {
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
     setTimeout(() => {
       this.listenForItems(this.chatRefData);
-    }, 550);
+
+      if (isForward == 'false') {
+        AsyncStorage.setItem("openChatFrom", "true")
+        AsyncStorage.setItem("newChatMessage", "true")
+
+        var now = new Date().getTime();
+        this.chatRef.push({
+          _id: now,
+          text: isForwardText,
+          image: isForwardImage,
+          video: isForwardVideo,
+          createdAt: now,
+          uid: this.user.uid,
+          fuid: friendUid,
+          blockedByMe: this.state.blockedByMe,
+          blockedByFriend: this.state.blockedByFriend,
+          fName: friendName,
+          order: -1 * now
+        });
+
+      }
+    }, 600);
   }
   getBlokedUser = async () => {
     var keyID;
@@ -168,13 +200,12 @@ export default class Chat extends Component {
     allUsersChat.once("value").then(snapshot => {
       if (snapshot.exists()) {
         snapshot.forEach(childSnapshot => {
-         
-          frndID=childSnapshot.val()._id;
-          if(frndID==friendUid)
-          {
+
+          frndID = childSnapshot.val()._id;
+          if (frndID == friendUid) {
             keys = childSnapshot.val().CreatedAt;
           }
-         
+
         });
       } else {
         keys = 0;
@@ -408,13 +439,18 @@ export default class Chat extends Component {
         dialogPlayVisible: true,
         dialogVisible: false,
         messageKey: message.key,
-        messageVideoUrl: message.video
+        messageVideoUrl: message.video,
+        messageImageUrl: message.image,
+        messageText: message.text
       });
     else
       this.setState({
         dialogVisible: true,
         dialogPlayVisible: false,
-        messageKey: message.key
+        messageKey: message.key,
+        messageVideoUrl: message.video,
+        messageImageUrl: message.image,
+        messageText: message.text
       });
   }
   showFriendProfile(message) {
@@ -535,6 +571,23 @@ export default class Chat extends Component {
       )
       .remove();
   }
+  handleForward() {
+    this.setState({ dialogVisible: false, dialogPlayVisible: false });
+    AsyncStorage.setItem("newChatMessage", "false");
+    AsyncStorage.setItem("messageText", this.state.messageText);
+    AsyncStorage.setItem("messageImage", this.state.messageImageUrl);
+    AsyncStorage.setItem("messageVideo", this.state.messageVideoUrl);
+    Actions.chatList();
+    // firebase
+    //   .database()
+    //   .ref(
+    //     "Users/FaithMeetsLove/chat/" +
+    //     this.generateChatId() +
+    //     "/" +
+    //     this.state.messageKey
+    //   )
+
+  }
   handleCancel() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
   }
@@ -573,41 +626,41 @@ export default class Chat extends Component {
     }
   };
 
-onDeleteConversation=()=>{
-  setTimeout(() => {
-    Alert.alert("Delete Chat!", "Are you sure you want to Delete conversation with " + friendName + " ?", [
-      {
-        text: "Cancel",
-        style: "cancel"
-      },
-      {
-        text: "Yes",
-        onPress: () => {
-          this.onDeleteUserChat(friendUid); 
-         
+  onDeleteConversation = () => {
+    setTimeout(() => {
+      Alert.alert("Delete Chat!", "Are you sure you want to Delete conversation with " + friendName + " ?", [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            this.onDeleteUserChat(friendUid);
+
+          }
         }
-      }
-    ]);
-  }, 400);
-}
-// onClickBlock = () => {
- 
-//   setTimeout(() => {
-//     Alert.alert("Block!", "Are you sure you want to block " + friendName + " ?", [
-//       {
-//         text: "Cancel",
-//         style: "cancel"
-//       },
-//       {
-//         text: "Yes",
-//         onPress: () => {
-//          // this.getBlockChatHistory(friendUid); 
-//           this.blockFriend();
-//         }
-//       }
-//     ]);
-//   }, 400);
-// }
+      ]);
+    }, 400);
+  }
+  // onClickBlock = () => {
+
+  //   setTimeout(() => {
+  //     Alert.alert("Block!", "Are you sure you want to block " + friendName + " ?", [
+  //       {
+  //         text: "Cancel",
+  //         style: "cancel"
+  //       },
+  //       {
+  //         text: "Yes",
+  //         onPress: () => {
+  //          // this.getBlockChatHistory(friendUid); 
+  //           this.blockFriend();
+  //         }
+  //       }
+  //     ]);
+  //   }, 400);
+  // }
 
   onDeleteUserChat = (friendUid) => {
     var key;
@@ -643,7 +696,7 @@ onDeleteConversation=()=>{
         Uid: uid,
         CreatedAt: createdAt,
       })
-      .then(ref => {this.componentDidMount()})
+      .then(ref => { this.componentDidMount() })
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
@@ -665,20 +718,20 @@ onDeleteConversation=()=>{
       <View style={styles.container}>
         <View style={{
           height: 50,
-          width:Screen.width,
+          width: Screen.width,
           ...ifIphoneX({ height: 82 }),
           backgroundColor: 'red',
         }}>
-        <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between',...ifIphoneX({ marginTop: 30 }) }}>
+          <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', ...ifIphoneX({ marginTop: 30 }) }}>
             <View style={{ flexDirection: 'row', }}>
               <View>
                 <TouchableOpacity onPress={() => { Actions.chatList() }}>
-                  <Image source={Images.arrowBackIcon} style={{ height: 30, width: 30, marginTop: 10, marginLeft: 5, tintColor:'white' }}>
+                  <Image source={Images.arrowBackIcon} style={{ height: 30, width: 30, marginTop: 10, marginLeft: 5, tintColor: 'white' }}>
                   </Image>
                 </TouchableOpacity>
               </View>
               <View>
-                <Text style={{ fontSize: 20, fontWeight: '600', marginTop: 12, marginLeft: 8, color:'white' }}>{this.state.friendProfileName}</Text>
+                <Text style={{ fontSize: 20, fontWeight: '600', marginTop: 12, marginLeft: 8, color: 'white' }}>{this.state.friendProfileName}</Text>
               </View>
             </View>
 
@@ -686,7 +739,7 @@ onDeleteConversation=()=>{
 
               <Menu>
                 <MenuTrigger>
-                  <Image source={Images.iconThreeDots} style={{ height: 30, width: 30, marginTop: 8 ,tintColor:'white'}}>
+                  <Image source={Images.iconThreeDots} style={{ height: 30, width: 30, marginTop: 8, tintColor: 'white' }}>
                   </Image>
                 </MenuTrigger>
                 <MenuOptions>
@@ -698,7 +751,7 @@ onDeleteConversation=()=>{
                   }}>
                     <Text style={{ color: 'black' }}>View gallery</Text>
                   </MenuOption>
-                  <MenuOption onSelect={() => {}}>
+                  <MenuOption onSelect={() => { }}>
                     <Text style={{ color: 'black' }}>Block</Text>
                   </MenuOption>
                   <MenuOption onSelect={() => { }}>
@@ -717,8 +770,8 @@ onDeleteConversation=()=>{
             ...ifIphoneX({ top: 85 }, { top: 51 }),
             position: "absolute",
             width: Screen.width,
-            ...ifIphoneX({ height: Screen.height - 135 }, { height: Screen.height - 85}),
-           
+            ...ifIphoneX({ height: Screen.height - 135 }, { height: Screen.height - 85 }),
+
           }}
         >
           <GiftedChat
@@ -737,10 +790,10 @@ onDeleteConversation=()=>{
             onPressAvatar={message => {
               this.showFriendProfile(message);
             }}
-            
+
           />
         </View>
-       
+
         <Dialog.Container visible={this.state.dialogVisible}>
           <Dialog.Title>Select Option</Dialog.Title>
           <Dialog.Description>Select Action</Dialog.Description>
@@ -751,15 +804,15 @@ onDeleteConversation=()=>{
             }}
           />
           <Dialog.Button
-            label="Block"
-            onPress={() => {
-              this.handleBlock();
-            }}
-          />
-          <Dialog.Button
             label="Delete"
             onPress={() => {
               this.handleDeleteMessage();
+            }}
+          />
+          <Dialog.Button
+            label="Forward"
+            onPress={() => {
+              this.handleForward();
             }}
           />
         </Dialog.Container>
@@ -773,17 +826,18 @@ onDeleteConversation=()=>{
             }}
           />
           <Dialog.Button
-            label="Block"
-            onPress={() => {
-              this.handleBlock();
-            }}
-          />
-          <Dialog.Button
             label="Delete"
             onPress={() => {
               this.handleDeleteMessage();
             }}
           />
+          <Dialog.Button
+            label="Forward"
+            onPress={() => {
+              this.handleForward();
+            }}
+          />
+
           <Dialog.Button
             label="Play Video"
             onPress={() => {
