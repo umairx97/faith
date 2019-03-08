@@ -18,7 +18,7 @@ import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Modal from "react-native-modal";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 
 const Screen = {
   width: Dimensions.get("window").width,

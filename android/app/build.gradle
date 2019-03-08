@@ -98,7 +98,7 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "com.faithmeetslove"
+        applicationId "com.faithmeetsloves"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -151,7 +151,14 @@ android {
 }
 
 dependencies {
-   
+    implementation project(':react-native-firebase')
+    implementation "com.google.android.gms:play-services-base:16.1.0"
+    implementation "com.google.firebase:firebase-core:16.0.6"
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'com.google.firebase:firebase-database:16.0.6'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation "com.google.firebase:firebase-storage:16.0.5"
+    
     implementation project(':react-native-video')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-android-location-services-dialog-box')
@@ -185,3 +192,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+apply plugin: 'com.google.gms.google-services'
+

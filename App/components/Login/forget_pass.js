@@ -10,7 +10,7 @@ import {
   Alert,
   Platform,
 } from "react-native";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import { RkButton, RkText } from "react-native-ui-kitten";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";

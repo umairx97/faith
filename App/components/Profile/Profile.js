@@ -258,6 +258,7 @@ export default class Profile extends React.Component {
                     <Text style={styles.textThreeText}>15</Text>
                   </View>
                 </View>
+             
               </View>
               <View
                 style={{

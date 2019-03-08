@@ -127,7 +127,7 @@ export default class GalleryView extends Component {
                   onLoadStart={this.onLoadStart}
                   onError={this.videoError}
                   onLoad={this.onLoad}
-                  style={{ height: 100 }}
+                  style={{ height: 150 }}
                 />
               )}
             </View>

@@ -10,11 +10,12 @@ import {
   AsyncStorage,
   Alert
 } from "react-native";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import { MenuProvider } from 'react-native-popup-menu';
 
+import Moment from "moment";
 import {
   Menu,
   MenuOptions,
@@ -41,13 +42,15 @@ export default class ChatList extends Component {
       showOut: false,
       isVisible: false
     };
-
+    
     this.getCurrentUserId();
-   
+
   }
 
   async componentDidMount() {
-    chatOpen=await AsyncStorage.getItem("newChatMessage");
+    chatOpen = await AsyncStorage.getItem("newChatMessage");
+   // setInterval(() => this.getCurrentUserId(), 2000);
+   //setTimeout(  this.getCurrentUserId(), 500);
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());
   }
 
@@ -68,7 +71,7 @@ export default class ChatList extends Component {
       .ref("Users/FaithMeetsLove/chat/" + this.generateChatId(frndKey));
     chatRef.once("value").then(snapshot => {
       if (snapshot.exists()) {
-        this.getFriendsChatList(frndKey);
+        this.getLastChatHistory(frndKey);
       }
     });
   }
@@ -77,9 +80,9 @@ export default class ChatList extends Component {
       return `${this.state.loginUserId}-${frndKey}`;
     else return `${frndKey}-${this.state.loginUserId}`;
   }
-  getFriendsChatList(key) {
+  getFriendsChatList(key, msgText, msgTime) {
     arr = [];
-
+ var msgTrunkated;
     instance = this;
     var friendsProfile = firebase
       .database()
@@ -106,26 +109,35 @@ export default class ChatList extends Component {
         }
         userAge = childSnapshot.val().user_Dob;
         var getAge = this.userAgeShow(userAge);
+        var stillUtc = Moment.utc(msgTime).toDate();
+        var actualTime = Moment(stillUtc)
+          .local()
+          .format("DD MMM YYYY h:mm:ss A");
+       // var cd = actualTime;
+        if (msgText.length > 20) {
+          msgTrunkated= msgText.substring(0, 19) + '...';
+        }
+
+        else {
+          msgTrunkated=msgText;
+        }
+
         if (this.state.loginUserId != key) {
 
           arr.push({
             pName: userName,
             pUrl: childData,
             ids: key,
-            age: getAge,
-            gender: genderName
+            time: actualTime,
+            messageText: msgTrunkated
           });
-
-
         }
-
         this.setState({ showArr: arr });
         if (this.state.showArr === undefined || this.state.showArr.length == 0) {
           this.setState({
             isVisible: true
           })
         }
-
       })
       .catch(error => {
         console.log(JSON.stringify(error));
@@ -146,22 +158,6 @@ export default class ChatList extends Component {
     })
     return count;
   }
-  
-  // getChatList = () => {
-  //   var allUserProfile = firebase
-  //     .database()
-  //     .ref("Users/FaithMeetsLove/MatchedProfiles/" + this.state.loginUserId);
-  //   allUserProfile
-  //     .once("value")
-  //     .then(snapshot => {
-  //       snapshot.forEach(childSnapshot => {
-  //         key = childSnapshot.val().friendUid;
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(JSON.stringify(error));
-  //     });
-  // }
 
   userAgeShow = dob => {
     var userAge = dob;
@@ -215,15 +211,16 @@ export default class ChatList extends Component {
         _show: false
       })
       .then(ref => {
-        arr.splice(index,1)
+        arr.splice(index, 1)
         this.setState({
-          showArr:arr
+          showArr: arr
         })
-       })
+      })
       .catch(error => {
         Alert.alert("fail" + error.toString());
-      });   
-    this.getChatHistory(id);    
+      });
+    this.getChatHistory(id);
+
   }
   getChatHistory = (id) => {
     var key;
@@ -251,7 +248,7 @@ export default class ChatList extends Component {
 
   }
   saveChat = (key, uid, fuid, createdAt, frndId) => {
-  
+
     firebase
       .database()
       .ref("Users/FaithMeetsLove/ChatUser/" + this.state.loginUserId)
@@ -268,7 +265,7 @@ export default class ChatList extends Component {
   }
   onClickBlock = (id, name) => {
     //alert(id)
-   // this.setState({ dialogVisible: false, dialogPlayVisible: false });
+    // this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
       Alert.alert("Block!", "Are you sure you want to block " + name + " ?", [
         {
@@ -278,7 +275,7 @@ export default class ChatList extends Component {
         {
           text: "Yes",
           onPress: () => {
-            this.getBlockChatHistory(id); 
+            this.getBlockChatHistory(id);
             this.blockFriend(id);
           }
         }
@@ -302,7 +299,7 @@ export default class ChatList extends Component {
           uid = childSnapshot.val().uid;
           fuid = childSnapshot.val().fuid;
           createdAt = childSnapshot.val().createdAt;
-      
+
         });
         this.saveBlockChat(key, uid, fuid, createdAt, frndId);
       })
@@ -311,21 +308,52 @@ export default class ChatList extends Component {
       });
 
   }
+
+  getLastChatHistory = (id) => {
+    var key;
+    var uid;
+    var fuid;
+    var createdAt;
+    var frndId = id;
+    var chatRef = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/chat/" + this.generateChatId(id));
+    chatRef
+      .orderByChild('_id')
+      .limitToLast(1)
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(element => {
+          key = element.key;
+          msgText = element.val().text;
+          msgTime = element.val().createdAt;
+          this.getFriendsChatList(id, msgText, msgTime);
+
+        });
+
+
+      })
+      .catch(error => {
+        console.log(JSON.stringify(error));
+      });
+
+  }
+
   saveBlockChat = (key, uid, fuid, createdAt, frndId) => {
-  firebase
-    .database()
-    .ref("Users/FaithMeetsLove/BlockChatUser/" + this.state.loginUserId)
-    .push({
-      _id: frndId,
-      fUid: fuid,
-      Uid: uid,
-      CreatedAt: createdAt,
-    })
-    .then(ref => { })
-    .catch(error => {
-      Alert.alert("fail" + error.toString());
-    });
-}
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/BlockChatUser/" + this.state.loginUserId)
+      .push({
+        _id: frndId,
+        fUid: fuid,
+        Uid: uid,
+        CreatedAt: createdAt,
+      })
+      .then(ref => { })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+  }
   blockFriend(friendId) {
     firebase.database().ref('Users/FaithMeetsLove/BlockedFriends/' + this.state.loginUserId + '/' + friendId).set({
       blockedFromChat: true
@@ -336,7 +364,7 @@ export default class ChatList extends Component {
     alert(id)
   }
   render() {
-    if (this.state.showArr === undefined || this.state.showArr.length == 0 ) {
+    if (this.state.showArr === undefined || this.state.showArr.length == 0) {
       return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 18, fontWeight: 'bold' }}>Please select user from match list</Text></View>)
 
     }
@@ -352,7 +380,7 @@ export default class ChatList extends Component {
 
             <FlatList
               data={this.state.showArr}
-              renderItem={({ item,index }) => (
+              renderItem={({ item, index }) => (
 
                 <MenuProvider>
                   <View style={{ margin: 5, flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
@@ -378,18 +406,18 @@ export default class ChatList extends Component {
                         </View>
                         <View >
                           <View>
-                            <Text style={{ fontSize: 15, marginLeft: 10, marginTop: 10 }}>
+                            <Text style={{ fontSize: 16, marginLeft: 10, marginTop: 10, fontWeight: '700' }}>
                               {item.pName}
                             </Text>
                           </View>
                           <View>
-                            <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                              {item.gender}
+                            <Text style={{ fontSize: 14, marginLeft: 10, fontWeight: '300' }}>
+                              {item.messageText}
                             </Text>
                           </View>
                           <View>
-                            <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                              {item.age}
+                            <Text style={{ fontSize: 10, marginLeft: 10 }}>
+                              {item.time}
                             </Text>
                           </View>
                         </View>
@@ -427,3 +455,5 @@ export default class ChatList extends Component {
     }
   }
 }
+
+

@@ -24,7 +24,7 @@ import { ButtonGroup } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";

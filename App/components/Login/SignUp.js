@@ -36,7 +36,7 @@ import {
   statusCodes
 } from "react-native-google-signin";
 import AnimateLoadingButton from "react-native-animate-loading-button";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { ProgressDialog } from "react-native-simple-dialogs";
 import Moment from "moment";

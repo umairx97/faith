@@ -14,7 +14,7 @@ import { Actions } from "react-native-router-flux";
 import AppSlider from "../Slider/Slider";
 import { StatusBar } from "react-native";
 console.disableYellowBox = true;
-import firebase from "../../../App/components/FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 export default class MyappSplash extends Component {
   constructor() {
     super();

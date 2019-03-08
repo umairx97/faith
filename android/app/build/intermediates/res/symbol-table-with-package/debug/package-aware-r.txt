@@ -1,4 +1,4 @@
-com.faithmeetslove
+com.faithmeetsloves
 anim abc_fade_in
 anim abc_fade_out
 anim abc_grow_fade_in_from_bottom
@@ -1338,6 +1338,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string default_web_client_id
 string error_instantiating_decoder
 string error_no_decoder
 string error_no_secure_decoder
@@ -1355,11 +1356,19 @@ string exo_controls_shuffle_description
 string exo_controls_stop_description
 string facebook_app_id
 string fb_login_protocol_scheme
+string fcm_fallback_notification_channel_label
+string firebase_database_url
+string gcm_defaultSenderId
 string gcm_fallback_notification_channel_label
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
 string image_button_description
 string image_description
 string link_description
 string messenger_send_button_text
+string project_id
 string search_description
 string search_menu_title
 string status_bar_notification_info_overflow

@@ -23,7 +23,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import { RNCamera } from "react-native-camera";
@@ -41,6 +41,15 @@ const ASPECT_RATIO = Screen.width / Screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
 var count = 0;
+var isOfflineForDatabase = {
+  state: 'offline',
+  last_changed: firebase.database.ServerValue.TIMESTAMP,
+};
+
+var isOnlineForDatabase = {
+  state: 'online',
+  last_changed: firebase.database.ServerValue.TIMESTAMP,
+};
 
 export default class DrawerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -70,9 +79,37 @@ export default class DrawerScreen extends React.Component {
       }
     };
     this.getUid();
+    this.getUserLoginInfo();
   }
+getUserLoginInfo=async()=>{
+  var uidUser = await firebase.auth().currentUser.uid;
+  var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
+ 
+firebase.database().ref('.info/connected').on('value', function(snapshot) 
+{   
+  if (snapshot.val() == false) {
+    userStatusDatabaseRef.set(isOfflineForDatabase);
+      return;
+  };
+  userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+  userStatusDatabaseRef.set(isOnlineForDatabase);
+  });
+});
 
+}
   async logout() {
+    var uidUser = await firebase.auth().currentUser.uid;
+    var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
+    firebase.database().ref('.info/connected').on('value', function(snapshot) 
+{   
+  if (snapshot.val() == false) {
+      return;
+  };
+  userStatusDatabaseRef.onDisconnect().set(isOnlineForDatabase).then(function() {
+  userStatusDatabaseRef.set(isOfflineForDatabase);
+  });
+});
+
     var v = await AsyncStorage.getItem("checkLoggedType");
     if (v == "firebaseLoggedin") {
       this.signOutGoogle();
@@ -86,6 +123,7 @@ export default class DrawerScreen extends React.Component {
   watchID = null;
   async componentDidMount() {
     this.getUid();
+
     var uidUser = await firebase.auth().currentUser.uid;
 
     if (Platform.OS === "android") {
@@ -156,6 +194,8 @@ export default class DrawerScreen extends React.Component {
     this.getUid();
   }
   getUid = async () => {
+
+    var FCM = firebase.messaging();
     instance = this;
     var fullName;
     var gender;
@@ -166,6 +206,7 @@ export default class DrawerScreen extends React.Component {
     var profileImageURL;
     var uname = await firebase.auth().currentUser.displayName;
     var uidUser = await firebase.auth().currentUser.uid;
+    
     if (uname == null) {
       var displayUserName = firebase
         .database()
@@ -194,10 +235,61 @@ export default class DrawerScreen extends React.Component {
       AsyncStorage.setItem("reg_user_dob", user_Dob);
       AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
     } else {
-      this.setState({
-        user_name: uname.toUpperCase()
+      var displayUserName = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    await displayUserName.once("value", function(snapshot) {
+      var usrName = snapshot.val().fullName;
+      var ImageUrl = snapshot.val().profileImageURL;
+      fullName = snapshot.val().fullName;
+      gender = snapshot.val().gender;
+      latitude = snapshot.val().latitude;
+      longitude = snapshot.val().longitude;
+      email = snapshot.val().email;
+      user_Dob = snapshot.val().user_Dob;
+      profileImageURL = snapshot.val().profileImageURL;
+
+      instance.setState({
+        user_name: uname.toUpperCase(),
+        profileImageUrl: ImageUrl
       });
+    });
+    AsyncStorage.setItem("reg_user_name", fullName);
+    AsyncStorage.setItem("reg_user_gender", "" + gender);
+    AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+    AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+    AsyncStorage.setItem("reg_user_email", email);
+    AsyncStorage.setItem("reg_user_dob", user_Dob);
+    AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+
+
+      // this.setState({
+      //   user_name: uname.toUpperCase()
+      // });
     }
+    var fcmToken;
+    var ref = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+    await FCM.getToken()
+      .then(token => {
+        // stores the token in the user's document
+        fcmToken = token;
+        ref
+          .update({
+            pushToken: token
+          })
+          .then(data => {
+            //alert("done");
+          })
+          .catch(error => {
+            alert(error);
+          });
+      })
+      .catch(error => {
+        alert(error);
+      });
+    await AsyncStorage.setItem("fcmToken", fcmToken);
   };
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
@@ -230,7 +322,7 @@ export default class DrawerScreen extends React.Component {
     Actions.drawerClose();
   };
   onChatPressed = () => {
-    AsyncStorage.setItem("newChatMessage","true")
+    AsyncStorage.setItem("newChatMessage", "true");
     Actions.chatList();
   };
   signOutGoogle = async () => {

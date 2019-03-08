@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { RNCamera, FaceDetector } from "react-native-camera";
 import RNFetchBlob from "react-native-fetch-blob";
-import firebase from '../FirebaseConfig/FirebaseConfig'
+import firebase from 'react-native-firebase'
 import { Images } from "../../../assets/imageAll"
 import { Actions } from "react-native-router-flux";
 // Prepare Blob support

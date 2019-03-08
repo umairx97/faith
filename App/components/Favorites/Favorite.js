@@ -1,7 +1,7 @@
 
 import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, ImageBackground,Platform } from "react-native";
 import React from "react";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
 
 import { ifIphoneX } from "react-native-iphone-x-helper";

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from "react-native";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 

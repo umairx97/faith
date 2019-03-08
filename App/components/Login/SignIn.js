@@ -22,7 +22,7 @@ import makeInputGreatAgain, {
   withNextInputAutoFocusForm,
   withNextInputAutoFocusInput
 } from "react-native-formik";
-import firebase from "../FirebaseConfig/FirebaseConfig";
+import firebase from "react-native-firebase";
 import { BackHandler } from "react-native";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
 import MaterialTextInput from "../OwnComponents/MaterialTextInput";
@@ -184,10 +184,12 @@ export default class SignIn extends Component {
           if (userData.user.emailVerified == false) {
             Alert.alert("Please verify your email for login.");
           } else {
+          //  this.getOnlineInfo();
             firebase.database().ref("Users/FaithMeetsLove/Registered/" + userData.user.uid).update({
               isVarified: true,
               isLogin: true,
             })
+
             this.openDrawerPage("firebaseLoggedin");
           }
         })
@@ -199,6 +201,22 @@ export default class SignIn extends Component {
       Alert.alert("Please enter email & Password");
     }
   }
+//   getOnlineInfo=async()=>{
+//     var uidUser = await firebase.auth().currentUser.uid;
+//   var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
+ 
+// firebase.database().ref('.info/connected').on('value', function(snapshot) 
+// {   
+//   if (snapshot.val() == false) {
+//     userStatusDatabaseRef.set(isOfflineForDatabase);
+//       return;
+//   };
+//   userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+//   userStatusDatabaseRef.set(isOnlineForDatabase);
+//   });
+// });
+
+//   }
   async openDrawerPage(_val) {
     AsyncStorage.setItem("checkLoggedType", _val);
     var fullName;

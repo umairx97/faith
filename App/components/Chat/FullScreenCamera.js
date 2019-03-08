@@ -11,14 +11,14 @@ import {
 } from "react-native";
 import { RNCamera, FaceDetector } from "react-native-camera";
 import RNFetchBlob from "react-native-fetch-blob";
-import firebase from '../FirebaseConfig/FirebaseConfig'
+import firebase from 'react-native-firebase'
 import { Images } from "../../../assets/imageAll"
 import { Actions } from "react-native-router-flux";
 // Prepare Blob support
-const Blob = RNFetchBlob.polyfill.Blob;
-const fs = RNFetchBlob.fs;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-window.Blob = Blob;
+//const Blob = RNFetchBlob.polyfill.Blob;
+// const fs = RNFetchBlob.fs;
+// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+// window.Blob = Blob;
 
 export default class FullScreenCamera extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ export default class FullScreenCamera extends Component {
               onPress={this.rejectImage.bind(this)}
               style={styles.capture}
             >
-              <Image style={styles.btnImage} source={Images.closeIcon} />
+              <Image style={styles.btnImage} source={Images.iconClose} />
             </TouchableOpacity>
           </View>
           <View
@@ -157,37 +157,7 @@ export default class FullScreenCamera extends Component {
       this.setState({ image_uri: data.uri });
     }
   }
-  async uploadImage(uri, uid, mime = "image/jpg") {
-    return new Promise((resolve, reject) => {
-      const uploadUri =
-        Platform.OS === "ios" ? uri.replace("file://", "") : uri;
-      let uploadBlob = null;
-      var milliseconds = new Date().getTime();
-      const imageRef = firebase
-        .storage()
-        .ref("PostImages/" + uid)
-        .child(milliseconds + ".jpg");
-
-      fs.readFile(uploadUri, "base64")
-        .then(data => {
-          return Blob.build(data, { type: `${mime};BASE64` });
-        })
-        .then(blob => {
-          uploadBlob = blob;
-          return imageRef.put(blob, { contentType: mime });
-        })
-        .then(() => {
-          uploadBlob.close();
-          return imageRef.getDownloadURL();
-        })
-        .then(url => {
-          resolve(url);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
-  }
+ 
 }
 
 const styles = StyleSheet.create({
