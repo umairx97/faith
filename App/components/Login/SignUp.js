@@ -408,7 +408,8 @@ export default class SignUp extends Component {
     return (
       <KeyboardAvoidingView
         style={{
-          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" })
+          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" }),
+          backgroundColor: "#FFFFFF"
         }}
       >
         <Formik
@@ -528,6 +529,7 @@ export default class SignUp extends Component {
                         onCancel={this._hideDateTimePicker}
                       />
                     </View>
+                    
                     <View
                       style={{
                         flex: 1,

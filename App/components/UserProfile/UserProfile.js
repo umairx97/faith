@@ -12,6 +12,8 @@ import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import ViewMoreText from "react-native-view-more-text";
 import { Actions } from "react-native-router-flux";
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+
 export default class UserProfile extends React.Component {
   constructor(props){
     super(props);
@@ -19,14 +21,7 @@ export default class UserProfile extends React.Component {
 
     };
   }
-  // static navigationOptions = ({ navigation }) => {
-  //   const { params = {} } = navigation.state;
-  //   return {
-  //     header: null,
-  //     headerLeft: null,
-  //     headerRight: null
-  //   };
-  // };
+
 
   renderViewMore(onPress) {
     return <Text onPress={onPress}>View more</Text>;
@@ -54,538 +49,552 @@ export default class UserProfile extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <View pointerEvents="box-none" style={styles.userProfileView}>
-          <View pointerEvents="box-none" style={styles.contentsView}>
-            <View
-              pointerEvents="box-none"
-              style={{
-                flexDirection: "row",
-                alignSelf: "stretch"
-              }}
-            >
-              <Image
-                source={require("../../../assets/images/photos-2.png")}
-                style={styles.photosImage}
-              />
-            </View>
-            <View pointerEvents="box-none" style={styles.nameView}>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <Text style={styles.maryBurgessText}>Mary Burgess</Text>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <LinearGradient
-                    start={{
-                      x: 1.07,
-                      y: 0.39
-                    }}
-                    end={{
-                      x: -0.07,
-                      y: 0.61
-                    }}
-                    locations={[0, 1]}
-                    colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
-                    style={styles.buttonsGenderViewLinearGradient}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.buttonsGenderView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flexDirection: "row",
-                          alignSelf: "stretch"
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/images/oval-2.png")}
-                          style={styles.oval2Image}
-                        />
-                        <Text style={styles.textText}>23</Text>
-                      </View>
-                    </View>
-                  </LinearGradient>
-                  <View pointerEvents="box-none" style={styles.filtersView}>
-                    <Image
-                      source={require("../../../assets/images/shape-4.png")}
-                      style={styles.shapeImage}
-                    />
-                  </View>
-                </View>
-              </View>
-              <Text style={styles.seattleUsaText}>Seattle, USA </Text>
-            </View>
-            <View style={styles.aboutView}>
-              <Text style={styles.aboutText}>About</Text>
-
-              <ViewMoreText
-                numberOfLines={3}
-                renderViewMore={this.renderViewMore}
-                renderViewLess={this.renderViewLess}
-                textStyle={{
-                  marginLeft: 10,
-                  marginRight: 10,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              >
-                <Text style={styles.myNameIsMaryBurgText}>
-                  My name is Mary Burgess and I enjoy meeting new people and
-                  finding ways to help them have an uplifting experience. I
-                  enjoy reading, and the knowledge ... and perspective that my
-                  reading gives me has strengthened my teaching skills and
-                  presentation abilities.opportunities, through which I was able
-                  to have fewer returned products and increased repeat
-                  customers, when compared with co-workers.
-                </Text>
-              </ViewMoreText>
-            </View>
-            <View style={styles.friendsView}>
-              <Text style={styles.friendsText}>Friends</Text>
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/user-1.png")}
-                  style={styles.user1Image}
-                />
-                <Image
-                  source={require("../../../assets/images/user-3.png")}
-                  style={styles.user3Image}
-                />
-              </View>
-              <View
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <Image
-                  source={require("../../../assets/images/user-2.png")}
-                  style={styles.user2Image}
-                />
-              </View>
-              <View
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignSelf: "stretch"
-                  }}
-                />
-              </View>
-            </View>
-            <View style={styles.basicProfileView}>
-              <Text style={styles.basicProfileText}>Basic profile</Text>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  marginTop: 10
-                }}
-              >
-                <Text style={{ fontWeight: "bold" }}>Height : </Text>
-                <Text>160cm</Text>
-              </View>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row"
-                }}
-              >
-                <Text style={{ fontWeight: "bold" }}>Weight:</Text>
-                <Text>65kg</Text>
-              </View>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row"
-                }}
-              >
-                <Text style={{ fontWeight: "bold" }}>
-                  Relationship Status :{" "}
-                </Text>
-                <Text>Single</Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row"
-                }}
-              >
-                <Text style={{ fontWeight: "bold" }}>Joined Date : </Text>
-                <Text>Dec 25, 2017</Text>
-              </View>
-            </View>
-            <View
-              pointerEvents="box-none"
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                justifyContent: "flex-end"
-              }}
-            >
-              <View pointerEvents="box-none" style={styles.interestingView}>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    flexDirection: "row",
-                    alignSelf: "stretch",
-                    alignItems: "center"
-                  }}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.buttonsInterestingView}
-                  >
-                    <View pointerEvents="box-none" style={styles.items1View}>
-                      <Text style={styles.guitarText}>Guitar</Text>
-                    </View>
-                  </View>
-                  <View
-                    pointerEvents="box-none"
-                    style={styles.buttonsInterestingCopyView}
-                  >
-                    <View pointerEvents="box-none" style={styles.items1TwoView}>
-                      <Text style={styles.guitarTwoText} />
-                    </View>
-                  </View>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      flex: 1,
-                      justifyContent: "flex-end",
-                      alignItems: "center"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.buttonsInterestingCopy2View}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.items1ThreeView}
-                      >
-                        <Text style={styles.guitarThreeText} />
-                      </View>
-                    </View>
-                  </View>
-                </View>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%"
-                  }}
-                >
-                  <Text style={styles.interestingText}>Interesting</Text>
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      justifyContent: "flex-end"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flexDirection: "row",
-                        alignSelf: "stretch"
-                      }}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.buttonsInterestingCopy3View}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.items1FourView}
-                        >
-                          <Text style={styles.guitarFourText} />
-                        </View>
-                      </View>
-                      <View
-                        pointerEvents="box-none"
-                        style={{
-                          flexDirection: "row",
-                          flex: 1,
-                          justifyContent: "flex-end"
-                        }}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.buttonsInterestingCopy4View}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={styles.items1FiveView}
-                          >
-                            <Text style={styles.guitarFiveText} />
-                          </View>
-                        </View>
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.buttonsInterestingCopy5View}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={styles.items1SixView}
-                          >
-                            <Text style={styles.guitarSixText} />
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </View>
-              <View pointerEvents="box-none" style={styles.lookingForView}>
-                <Text style={styles.lookingForText}>Looking for</Text>
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    flex: 1,
-                    flexDirection: "column",
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.buttonsInterestingTwoView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.items1SevenView}
-                      >
-                        <Text style={styles.guitarSevenText} />
-                      </View>
-                    </View>
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.buttonsInterestingCopyTwoView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.items1EightView}
-                      >
-                        <Text style={styles.guitarEightText} />
-                      </View>
-                    </View>
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flexDirection: "row",
-                        flex: 1,
-                        justifyContent: "flex-end"
-                      }}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.buttonsInterestingCopy2TwoView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.items1NineView}
-                        >
-                          <Text style={styles.guitarNineText} />
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <View
-              pointerEvents="box-none"
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%"
-              }}
-            >
-              <Image
-                source={require("../../../assets/images/btn-close.png")}
-                style={styles.btnCloseImage}
-              />
-              <View
-                pointerEvents="box-none"
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "flex-end"
-                }}
-              >
-                <LinearGradient
-                  start={{
-                    x: 0.5,
-                    y: 0.17
-                  }}
-                  end={{
-                    x: 0.5,
-                    y: 1.05
-                  }}
-                  locations={[0, 1]}
-                  colors={["rgb(255, 255, 255)", "rgba(216, 216, 216, 0.0)"]}
-                  style={styles.blurViewLinearGradient}
-                >
-                  <View pointerEvents="box-none" style={styles.blurView}>
-                    <View
-                      pointerEvents="box-none"
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "flex-end"
-                      }}
-                    />
-                  </View>
-                </LinearGradient>
-              </View>
-            </View>
-            <View
-              pointerEvents="box-none"
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%"
-              }}
-            >
-              <View pointerEvents="box-none" style={styles.buttonBottomView}>
-                <Image
-                  source={require("../../../assets/images/buttons-superlike.png")}
-                  style={styles.buttonsSuperlikeImage}
-                />
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    justifyContent: "center"
-                  }}
-                >
-                  <View
-                    pointerEvents="box-none"
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch",
-                      alignItems: "center"
-                    }}
-                  >
-                    <View
-                      pointerEvents="box-none"
-                      style={styles.buttonsLikeView}
-                    >
-                      <View
-                        pointerEvents="box-none"
-                        style={styles.superlikeView}
-                      >
-                        <View
-                          pointerEvents="box-none"
-                          style={styles.iconsStarView}
-                        >
-                          <View
-                            pointerEvents="box-none"
-                            style={styles.rectangleView}
-                          >
-                            <View
-                              pointerEvents="box-none"
-                              style={{
-                                flex: 1,
-                                flexDirection: "column",
-                                justifyContent: "flex-end"
-                              }}
-                            />
-                          </View>
-                          <View
-                            pointerEvents="box-none"
-                            style={{
-                              position: "absolute",
-                              width: "100%",
-                              height: "100%"
-                            }}
-                          >
-                            <LinearGradient
-                              start={{
-                                x: 0,
-                                y: 0
-                              }}
-                              end={{
-                                x: 0,
-                                y: 0
-                              }}
-                              locations={[0, 1]}
-                              colors={[
-                                "rgb(255, 137, 96)",
-                                "rgb(255, 98, 165)"
-                              ]}
-                              style={styles.colorPrimaryViewLinearGradient}
-                            >
-                              <View
-                                pointerEvents="box-none"
-                                style={styles.colorPrimaryView}
-                              >
-                                <View
-                                  pointerEvents="box-none"
-                                  style={{
-                                    flex: 1,
-                                    flexDirection: "column",
-                                    justifyContent: "flex-end"
-                                  }}
-                                />
-                              </View>
-                            </LinearGradient>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                    <Image
-                      source={require("../../../assets/images/buttons-message.png")}
-                      style={styles.buttonsMessageImage}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
+      <ParallaxScrollView
+      backgroundColor="blue"
+      contentBackgroundColor="pink"
+      parallaxHeaderHeight={300}
+      renderFixedHeader={() => <Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>Hello</Text>}
+      renderForeground={() => (
+       <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center',  }}>
+          <Text>Hello World!</Text>
         </View>
-      </ScrollView>
+      )}>
+      <View style={{ height: 500 }}>
+        <Text>Scroll me</Text>
+      </View>
+    </ParallaxScrollView>
+      // <ScrollView>
+      //   <View pointerEvents="box-none" style={styles.userProfileView}>
+      //     <View pointerEvents="box-none" style={styles.contentsView}>
+      //       <View
+      //         pointerEvents="box-none"
+      //         style={{
+      //           flexDirection: "row",
+      //           alignSelf: "stretch"
+      //         }}
+      //       >
+      //         <Image
+      //           source={require("../../../assets/images/photos-2.png")}
+      //           style={styles.photosImage}
+      //         />
+      //       </View>
+      //       <View pointerEvents="box-none" style={styles.nameView}>
+      //         <View
+      //           pointerEvents="box-none"
+      //           style={{
+      //             flexDirection: "row",
+      //             alignSelf: "stretch"
+      //           }}
+      //         >
+      //           <Text style={styles.maryBurgessText}>Mary Burgess</Text>
+      //           <View
+      //             pointerEvents="box-none"
+      //             style={{
+      //               flexDirection: "row",
+      //               flex: 1,
+      //               justifyContent: "flex-end"
+      //             }}
+      //           >
+      //             <LinearGradient
+      //               start={{
+      //                 x: 1.07,
+      //                 y: 0.39
+      //               }}
+      //               end={{
+      //                 x: -0.07,
+      //                 y: 0.61
+      //               }}
+      //               locations={[0, 1]}
+      //               colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+      //               style={styles.buttonsGenderViewLinearGradient}
+      //             >
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={styles.buttonsGenderView}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={{
+      //                     flexDirection: "row",
+      //                     alignSelf: "stretch"
+      //                   }}
+      //                 >
+      //                   <Image
+      //                     source={require("../../../assets/images/oval-2.png")}
+      //                     style={styles.oval2Image}
+      //                   />
+      //                   <Text style={styles.textText}>23</Text>
+      //                 </View>
+      //               </View>
+      //             </LinearGradient>
+      //             <View pointerEvents="box-none" style={styles.filtersView}>
+      //               <Image
+      //                 source={require("../../../assets/images/shape-4.png")}
+      //                 style={styles.shapeImage}
+      //               />
+      //             </View>
+      //           </View>
+      //         </View>
+      //         <Text style={styles.seattleUsaText}>Seattle, USA </Text>
+      //       </View>
+      //       <View style={styles.aboutView}>
+      //         <Text style={styles.aboutText}>About</Text>
+
+      //         <ViewMoreText
+      //           numberOfLines={3}
+      //           renderViewMore={this.renderViewMore}
+      //           renderViewLess={this.renderViewLess}
+      //           textStyle={{
+      //             marginLeft: 10,
+      //             marginRight: 10,
+      //             flexDirection: "column",
+      //             justifyContent: "flex-end"
+      //           }}
+      //         >
+      //           <Text style={styles.myNameIsMaryBurgText}>
+      //             My name is Mary Burgess and I enjoy meeting new people and
+      //             finding ways to help them have an uplifting experience. I
+      //             enjoy reading, and the knowledge ... and perspective that my
+      //             reading gives me has strengthened my teaching skills and
+      //             presentation abilities.opportunities, through which I was able
+      //             to have fewer returned products and increased repeat
+      //             customers, when compared with co-workers.
+      //           </Text>
+      //         </ViewMoreText>
+      //       </View>
+      //       <View style={styles.friendsView}>
+      //         <Text style={styles.friendsText}>Friends</Text>
+      //         <View
+      //           pointerEvents="box-none"
+      //           style={{
+      //             flexDirection: "row",
+      //             alignSelf: "stretch"
+      //           }}
+      //         >
+      //           <Image
+      //             source={require("../../../assets/images/user-1.png")}
+      //             style={styles.user1Image}
+      //           />
+      //           <Image
+      //             source={require("../../../assets/images/user-3.png")}
+      //             style={styles.user3Image}
+      //           />
+      //         </View>
+      //         <View
+      //           style={{
+      //             position: "absolute",
+      //             width: "100%",
+      //             height: "100%"
+      //           }}
+      //         >
+      //           <Image
+      //             source={require("../../../assets/images/user-2.png")}
+      //             style={styles.user2Image}
+      //           />
+      //         </View>
+      //         <View
+      //           style={{
+      //             position: "absolute",
+      //             width: "100%",
+      //             height: "100%"
+      //           }}
+      //         >
+      //           <View
+      //             style={{
+      //               flexDirection: "row",
+      //               justifyContent: "center",
+      //               alignSelf: "stretch"
+      //             }}
+      //           />
+      //         </View>
+      //       </View>
+      //       <View style={styles.basicProfileView}>
+      //         <Text style={styles.basicProfileText}>Basic profile</Text>
+
+      //         <View
+      //           style={{
+      //             flex: 1,
+      //             flexDirection: "row",
+      //             marginTop: 10
+      //           }}
+      //         >
+      //           <Text style={{ fontWeight: "bold" }}>Height : </Text>
+      //           <Text>160cm</Text>
+      //         </View>
+
+      //         <View
+      //           style={{
+      //             flex: 1,
+      //             flexDirection: "row"
+      //           }}
+      //         >
+      //           <Text style={{ fontWeight: "bold" }}>Weight:</Text>
+      //           <Text>65kg</Text>
+      //         </View>
+
+      //         <View
+      //           style={{
+      //             flex: 1,
+      //             flexDirection: "row"
+      //           }}
+      //         >
+      //           <Text style={{ fontWeight: "bold" }}>
+      //             Relationship Status :{" "}
+      //           </Text>
+      //           <Text>Single</Text>
+      //         </View>
+      //         <View
+      //           style={{
+      //             flex: 1,
+      //             flexDirection: "row"
+      //           }}
+      //         >
+      //           <Text style={{ fontWeight: "bold" }}>Joined Date : </Text>
+      //           <Text>Dec 25, 2017</Text>
+      //         </View>
+      //       </View>
+      //       <View
+      //         pointerEvents="box-none"
+      //         style={{
+      //           flex: 1,
+      //           flexDirection: "column",
+      //           justifyContent: "flex-end"
+      //         }}
+      //       >
+      //         <View pointerEvents="box-none" style={styles.interestingView}>
+      //           <View
+      //             pointerEvents="box-none"
+      //             style={{
+      //               flexDirection: "row",
+      //               alignSelf: "stretch",
+      //               alignItems: "center"
+      //             }}
+      //           >
+      //             <View
+      //               pointerEvents="box-none"
+      //               style={styles.buttonsInterestingView}
+      //             >
+      //               <View pointerEvents="box-none" style={styles.items1View}>
+      //                 <Text style={styles.guitarText}>Guitar</Text>
+      //               </View>
+      //             </View>
+      //             <View
+      //               pointerEvents="box-none"
+      //               style={styles.buttonsInterestingCopyView}
+      //             >
+      //               <View pointerEvents="box-none" style={styles.items1TwoView}>
+      //                 <Text style={styles.guitarTwoText} />
+      //               </View>
+      //             </View>
+      //             <View
+      //               pointerEvents="box-none"
+      //               style={{
+      //                 flexDirection: "row",
+      //                 flex: 1,
+      //                 justifyContent: "flex-end",
+      //                 alignItems: "center"
+      //               }}
+      //             >
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={styles.buttonsInterestingCopy2View}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={styles.items1ThreeView}
+      //                 >
+      //                   <Text style={styles.guitarThreeText} />
+      //                 </View>
+      //               </View>
+      //             </View>
+      //           </View>
+      //           <View
+      //             pointerEvents="box-none"
+      //             style={{
+      //               position: "absolute",
+      //               width: "100%",
+      //               height: "100%"
+      //             }}
+      //           >
+      //             <Text style={styles.interestingText}>Interesting</Text>
+      //             <View
+      //               pointerEvents="box-none"
+      //               style={{
+      //                 flex: 1,
+      //                 flexDirection: "column",
+      //                 justifyContent: "flex-end"
+      //               }}
+      //             >
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={{
+      //                   flexDirection: "row",
+      //                   alignSelf: "stretch"
+      //                 }}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={styles.buttonsInterestingCopy3View}
+      //                 >
+      //                   <View
+      //                     pointerEvents="box-none"
+      //                     style={styles.items1FourView}
+      //                   >
+      //                     <Text style={styles.guitarFourText} />
+      //                   </View>
+      //                 </View>
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={{
+      //                     flexDirection: "row",
+      //                     flex: 1,
+      //                     justifyContent: "flex-end"
+      //                   }}
+      //                 >
+      //                   <View
+      //                     pointerEvents="box-none"
+      //                     style={styles.buttonsInterestingCopy4View}
+      //                   >
+      //                     <View
+      //                       pointerEvents="box-none"
+      //                       style={styles.items1FiveView}
+      //                     >
+      //                       <Text style={styles.guitarFiveText} />
+      //                     </View>
+      //                   </View>
+      //                   <View
+      //                     pointerEvents="box-none"
+      //                     style={styles.buttonsInterestingCopy5View}
+      //                   >
+      //                     <View
+      //                       pointerEvents="box-none"
+      //                       style={styles.items1SixView}
+      //                     >
+      //                       <Text style={styles.guitarSixText} />
+      //                     </View>
+      //                   </View>
+      //                 </View>
+      //               </View>
+      //             </View>
+      //           </View>
+      //         </View>
+      //         <View pointerEvents="box-none" style={styles.lookingForView}>
+      //           <Text style={styles.lookingForText}>Looking for</Text>
+      //           <View
+      //             pointerEvents="box-none"
+      //             style={{
+      //               flex: 1,
+      //               flexDirection: "column",
+      //               justifyContent: "flex-end"
+      //             }}
+      //           >
+      //             <View
+      //               pointerEvents="box-none"
+      //               style={{
+      //                 flexDirection: "row",
+      //                 alignSelf: "stretch"
+      //               }}
+      //             >
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={styles.buttonsInterestingTwoView}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={styles.items1SevenView}
+      //                 >
+      //                   <Text style={styles.guitarSevenText} />
+      //                 </View>
+      //               </View>
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={styles.buttonsInterestingCopyTwoView}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={styles.items1EightView}
+      //                 >
+      //                   <Text style={styles.guitarEightText} />
+      //                 </View>
+      //               </View>
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={{
+      //                   flexDirection: "row",
+      //                   flex: 1,
+      //                   justifyContent: "flex-end"
+      //                 }}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={styles.buttonsInterestingCopy2TwoView}
+      //                 >
+      //                   <View
+      //                     pointerEvents="box-none"
+      //                     style={styles.items1NineView}
+      //                   >
+      //                     <Text style={styles.guitarNineText} />
+      //                   </View>
+      //                 </View>
+      //               </View>
+      //             </View>
+      //           </View>
+      //         </View>
+      //       </View>
+      //       <View
+      //         pointerEvents="box-none"
+      //         style={{
+      //           position: "absolute",
+      //           width: "100%",
+      //           height: "100%"
+      //         }}
+      //       >
+      //         <Image
+      //           source={require("../../../assets/images/btn-close.png")}
+      //           style={styles.btnCloseImage}
+      //         />
+      //         <View
+      //           pointerEvents="box-none"
+      //           style={{
+      //             flex: 1,
+      //             flexDirection: "column",
+      //             justifyContent: "flex-end"
+      //           }}
+      //         >
+      //           <LinearGradient
+      //             start={{
+      //               x: 0.5,
+      //               y: 0.17
+      //             }}
+      //             end={{
+      //               x: 0.5,
+      //               y: 1.05
+      //             }}
+      //             locations={[0, 1]}
+      //             colors={["rgb(255, 255, 255)", "rgba(216, 216, 216, 0.0)"]}
+      //             style={styles.blurViewLinearGradient}
+      //           >
+      //             <View pointerEvents="box-none" style={styles.blurView}>
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={{
+      //                   flex: 1,
+      //                   flexDirection: "column",
+      //                   justifyContent: "flex-end"
+      //                 }}
+      //               />
+      //             </View>
+      //           </LinearGradient>
+      //         </View>
+      //       </View>
+      //       <View
+      //         pointerEvents="box-none"
+      //         style={{
+      //           position: "absolute",
+      //           width: "100%",
+      //           height: "100%"
+      //         }}
+      //       >
+      //         <View pointerEvents="box-none" style={styles.buttonBottomView}>
+      //           <Image
+      //             source={require("../../../assets/images/buttons-superlike.png")}
+      //             style={styles.buttonsSuperlikeImage}
+      //           />
+      //           <View
+      //             pointerEvents="box-none"
+      //             style={{
+      //               position: "absolute",
+      //               width: "100%",
+      //               height: "100%",
+      //               justifyContent: "center"
+      //             }}
+      //           >
+      //             <View
+      //               pointerEvents="box-none"
+      //               style={{
+      //                 flexDirection: "row",
+      //                 alignSelf: "stretch",
+      //                 alignItems: "center"
+      //               }}
+      //             >
+      //               <View
+      //                 pointerEvents="box-none"
+      //                 style={styles.buttonsLikeView}
+      //               >
+      //                 <View
+      //                   pointerEvents="box-none"
+      //                   style={styles.superlikeView}
+      //                 >
+      //                   <View
+      //                     pointerEvents="box-none"
+      //                     style={styles.iconsStarView}
+      //                   >
+      //                     <View
+      //                       pointerEvents="box-none"
+      //                       style={styles.rectangleView}
+      //                     >
+      //                       <View
+      //                         pointerEvents="box-none"
+      //                         style={{
+      //                           flex: 1,
+      //                           flexDirection: "column",
+      //                           justifyContent: "flex-end"
+      //                         }}
+      //                       />
+      //                     </View>
+      //                     <View
+      //                       pointerEvents="box-none"
+      //                       style={{
+      //                         position: "absolute",
+      //                         width: "100%",
+      //                         height: "100%"
+      //                       }}
+      //                     >
+      //                       <LinearGradient
+      //                         start={{
+      //                           x: 0,
+      //                           y: 0
+      //                         }}
+      //                         end={{
+      //                           x: 0,
+      //                           y: 0
+      //                         }}
+      //                         locations={[0, 1]}
+      //                         colors={[
+      //                           "rgb(255, 137, 96)",
+      //                           "rgb(255, 98, 165)"
+      //                         ]}
+      //                         style={styles.colorPrimaryViewLinearGradient}
+      //                       >
+      //                         <View
+      //                           pointerEvents="box-none"
+      //                           style={styles.colorPrimaryView}
+      //                         >
+      //                           <View
+      //                             pointerEvents="box-none"
+      //                             style={{
+      //                               flex: 1,
+      //                               flexDirection: "column",
+      //                               justifyContent: "flex-end"
+      //                             }}
+      //                           />
+      //                         </View>
+      //                       </LinearGradient>
+      //                     </View>
+      //                   </View>
+      //                 </View>
+      //               </View>
+      //               <Image
+      //                 source={require("../../../assets/images/buttons-message.png")}
+      //                 style={styles.buttonsMessageImage}
+      //               />
+      //             </View>
+      //           </View>
+      //         </View>
+      //       </View>
+      //     </View>
+      //   </View>
+      // </ScrollView>
     );
   }
 }

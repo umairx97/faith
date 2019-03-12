@@ -33,5 +33,8 @@ export const Images = {
   iconThreeDots : require("./images/iconThreeDots.png"),
   viewGallery : require('./images/androidGallery.png'),
   iconClose:require("./images/iconClose.png"),
-  tickIcon:require("./images/iconTick.png")
+  tickIcon:require("./images/iconTick.png"),
+  locationIcon:require("./images/locationIcon.png"),
+  ageIcon:require("./images/ageIcon.png"),
+  statusIcon:require("./images/statusIcon.png")
 };

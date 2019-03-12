@@ -89,6 +89,7 @@ getChatGenerated=async()=>{
   this.setState({
     friendChatId:friendUid
   })
+  this.getMutedbyFriend();
   this.chatRef =await firebase
   .database()
   .ref()
@@ -108,6 +109,7 @@ firebase
       friendProfileName: friendName
     });
   });
+
 }
 
   generateChatId() {
@@ -129,7 +131,7 @@ firebase
     if (isForwardVideo == null) {
       isForwardVideo = "";
     }
-    this.getMutedbyFriend();
+    
     this.getBlokedUser();
     var path = await AsyncStorage.getItem("file_path");
     if (path != null && path != "") this.setState({ imagePath: path });
@@ -279,7 +281,7 @@ firebase
       }
 
     })
-
+ 
   }
   sendNotification = (text) => {
     var key =

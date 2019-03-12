@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView,Button, Platform } from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView, Button, Platform, TextInput } from 'react-native'
 import { Actions } from "react-native-router-flux";
 import ImagePicker from 'react-native-image-crop-picker';
+import Modal from "react-native-modal";
+
+import { Images } from "../../../assets/imageAll";
 import Dialog from "react-native-dialog";
 import firebase from "react-native-firebase";
 import RNFetchBlob from "react-native-fetch-blob";
 import { TagSelect } from 'react-native-tag-select';
 import { BackHandler, Dimensions, PermissionsAndroid } from "react-native";
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+import DateTimePicker from "react-native-modal-datetime-picker";
+import Moment from "moment";
+import SlidingUpPanel from 'rn-sliding-up-panel';
+
+import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 // Prepare Blob support
 const Blob = RNFetchBlob.polyfill.Blob;
 const fs = RNFetchBlob.fs;
@@ -43,14 +52,17 @@ const data = [
   { id: 8, label: 'Travelling' },
   { id: 9, label: 'Reading Books' }
 ];
-const dataActivities=[
-  { id: 1, label: 'hkjh' },
+const dataLifeStyle = [
+  { id: 1, label: 'Smoke' },
   { id: 2, label: 'Foody' },
-  { id: 3, label: 'Hill stations' },
-  { id: 4, label: 'Playing Games' },
-  { id: 5, label: 'Singing' },
-  { id: 6, label: 'Swiming' },
+  { id: 3, label: 'Drink' },
+  { id: 4, label: 'Party' },
+  { id: 5, label: 'Love Hill Stations' },
+  { id: 6, label: 'Club' },
 ]
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
+var userId;
 export default class ProfileCopy extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +71,7 @@ export default class ProfileCopy extends Component {
       dialogVisible: false,
       isImage: true,
       progressVisible: false,
+      place: "Searching...",
       imagePath: "",
       imagedata: "",
       videoPath: "",
@@ -71,17 +84,93 @@ export default class ProfileCopy extends Component {
       nameFull: '',
       dateOfBirth: '',
       totalAge: "",
+      slidePanel: false,
+      dob: '',
+      isDateTimePickerVisible: false,
+      isModalVisible: false,
+      isModalVisibleLocation: false,
+      relationShipStatus: 'Unknown',
+      showComponmentB: '',
+      permanentLocation:'Unknown',
       imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
     }
+
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    userId = await firebase.auth().currentUser.uid;
     this.openProfileImage();
+    if (Platform.OS === "android") {
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message:
+          "<h2>Use Location?</h2> \
+                            This app wants to change your device settings:<br/><br/>\
+                            Use GPS for location<br/><br/>",
+        ok: "YES",
+        cancel: "NO"
+      }).then(() => {
+        locationTracking(dispatch, getState, geolocationSettings);
+      });
+    }
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
 
+        var initialRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: initialRegion });
+        this.setState({ markerPosition: initialRegion });
+        this.getLocationAddress(lat, long);
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: lastRegion });
+        this.setState({ markerPosition: lastRegion });
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
     BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
   }
   componentWillMount() {
     this.openProfileImage();
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+  async getLocationAddress(the_lat, the_long) {
+    try {
+      let response = await fetch(
+        "http://dev.virtualearth.net/REST/v1/Locations/" +
+        the_lat +
+        "," +
+        the_long +
+        "?includeEntityTypes=PopulatedPlace&includeNeighborhood=1&include=ciso2&key=AhSM34xkpIXcF5kfykYYeo7ilzzdU24XlF1MOl8CEu7OOL2eHd77WY45T-OdkQ7j"
+      );
+      let responseJson = await response.json();
+
+      var name = responseJson.resourceSets[0].resources[0].name;
+      this.setState({
+        place: name
+      });
+    } catch (error) {
+      Alert.alert(error.toString());
+    }
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
@@ -105,10 +194,14 @@ export default class ProfileCopy extends Component {
       var ImageUrl = snapshot.val().profileImageURL;
       var userName = snapshot.val().fullName;
       var dob = snapshot.val().user_Dob;
+      var realtionshipS = snapshot.val().relationshipStatus;
+      var permanentAdd=snapshot.val().permanentAddress;
       instance.setState({
         imageProfileUrl: ImageUrl,
         nameFull: userName,
-        dateOfBirth: dob
+        dateOfBirth: dob,
+        relationShipStatus: realtionshipS,
+        permanentLocation:permanentAdd
       });
       instance.age();
     })
@@ -175,37 +268,7 @@ export default class ProfileCopy extends Component {
     // }
   }
 
-  async uploadImage(uri, uid, mime = "image/jpg") {
-    // return new Promise((resolve, reject) => {
-    //   const uploadUri =
-    //     Platform.OS === "ios" ? uri.replace("file://", "") : uri;
-    //  // let uploadBlob = null;
-    //   var milliseconds = new Date().getTime();
-    //   const imageRef = firebase
-    //     .storage()
-    //     .ref("ProfileImages/" + uid)
-    //     .child(milliseconds + ".jpg");
 
-    //   fs.readFile(uploadUri, "base64")
-    //     .then(data => {
-    //       return Blob.build(data, { type: `${mime};BASE64` });
-    //     })
-    //     .then(blob => {
-    //       uploadBlob = blob;
-    //       return imageRef.put(blob, { contentType: mime });
-    //     })
-    //     .then(() => {
-    //       uploadBlob.close();
-    //       return imageRef.getDownloadURL();
-    //     })
-    //     .then(url => {
-    //       resolve(url);
-    //     })
-    //     .catch(error => {
-    //       reject(error);
-    //     });
-    // });
-  }
 
 
   async handleLibrary() {
@@ -243,24 +306,7 @@ export default class ProfileCopy extends Component {
               .catch(error => {
                 alert("Firebase profile upload failed: " + error)
               })
-            // .then(url => {
-            //     alert("uploaded");
-            //     this.setState({ imageProfileUrl: url });
-            //     // firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).set({profileImageURL:url});
-            //     firebase.database().ref("Users/FaithMeetsLove/Registered/"+_name).update({profileImageURL:url})
 
-            //   }
-            //   )
-            //   .catch(error => {
-            //       alert(error)
-            //     });
-            // this.setState({
-            //   filePath: image.path,
-            //   fileData: image.data,
-            //   imagePath: image.path,
-            //   videoPath: "",
-            //   imagedata: image.data
-            // });
           })
           .catch(error => {
             this.setState({ ...this.state, progressVisible: false });
@@ -268,29 +314,7 @@ export default class ProfileCopy extends Component {
           });
       }, 500);
     }
-    //  else {
-    //   type = "video/mp4";
-    //   format = ".mp4";
-    //   dirName = "PostVideos/";
-    //   isImageUpload = false;
-    //   setTimeout(() => {
-    //     ImagePicker.openPicker({
-    //       mediaType: "video"
-    //     })
-    //       .then(video => {
-    //         this.setState({
-    //           filePath: video.path,
-    //           fileData: video.data,
-    //           videoPath: video.path,
-    //           videoData: video.data,
-    //           imagePath: ""
-    //         });
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   }, 500);
-    // }
+
   }
   age = () => {
     var userAge = this.state.dateOfBirth;
@@ -305,7 +329,88 @@ export default class ProfileCopy extends Component {
       totalAge: ageFull
     })
   }
+  onSetAge = () => {
 
+    if (this.state.dateOfBirth == '') {
+      return (<Text style={{ marginTop: 5, marginLeft: 10 }}>Add your Dob</Text>)
+    }
+    else { return (<Text style={{ marginTop: 5, marginLeft: 10 }}>{this.state.dateOfBirth}</Text>) }
+
+
+  }
+  onAgePress = () => {
+    this.setState({
+      isDateTimePickerVisible: true
+    });
+
+
+  }
+
+  onLocationPress = () => {
+    alert('location')
+  }
+  onRelationshipPress = () => {
+    this._toggleModal();
+  }
+  onLocationPress = () => {
+    this._toggleModalLoaction();
+  }
+
+  _toggleModal = () =>
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+
+  _toggleModalLoaction = () =>
+    this.setState({ isModalVisibleLocation: !this.state.isModalVisibleLocation });
+
+  onSlideData = () => {
+    return (
+
+      <View style={{
+        flex: 1,
+        backgroundColor: 'white',
+
+      }}>
+        <Text style={{ fontSize: 20, fontWeight: "700", margin: 15 }}>Status</Text>
+
+        <TouchableOpacity onPress={() => { this.onRelationshipPress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20 }} source={Images.statusIcon}></Image>
+            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Relationship</Text>
+
+            {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
+          </View>
+
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { this.onLocationPress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 100 }}>From where you are</Text>
+
+            {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
+          </View>
+        </TouchableOpacity>
+
+        <Button title='Hide' onPress={() => this._panel.hide()} />
+      </View>)
+  }
+  _updateUserProfile = (the_uid, _dob) => {
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + the_uid)
+      .update({
+        user_Dob: _dob
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+
+        alert("fail" + error.toString());
+      });
+  }
+  _toggleShow = () => {
+    this.setState({ showComponmentB: !this.state.showComponmentB })
+  }
   calculate_age = (birth_month, birth_day, birth_year) => {
     today_date = new Date();
     today_year = today_date.getFullYear();
@@ -321,10 +426,80 @@ export default class ProfileCopy extends Component {
     }
     return age;
   }
+  _showDateTimePicker = () =>
+    this.setState({
+      isDateTimePickerVisible: true
+    });
+  _hideDateTimePicker = () =>
+    this.setState({
+      isDateTimePickerVisible: false
+    });
+  _handleDatePicked = date => {
+    Moment.locale("en");
+    const NewDate = Moment(date).format("DD-MM-YYYY");
+    this._hideDateTimePicker();
+    this.setState({
+      dateOfBirth: NewDate,
+      _dob: NewDate
+    });
+    var bith_Date = NewDate
 
+    this._updateUserProfile(userId, bith_Date);
+  };
+  OnAddBio = () => {
+    alert('open bio')
+  }
+  OnAddPersonalInfo = () => {
+
+    this._panel.show();
+
+  }
+
+  onSelect(index, value) {
+    this.setState({
+      text: value
+    })
+
+    this.setState({ relationShipStatus: value });
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        relationshipStatus: value
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModal();
+    this._panel.hide()
+  }
+  onSaveLocation=()=>{
+    var permanentlocation=this.state.permanentLocation;
+    firebase
+    .database()
+    .ref("Users/FaithMeetsLove/Registered/" + userId)
+    .update({
+      permanentAddress: permanentlocation
+    })
+    .then(ref => {
+      this.componentDidMount()
+    })
+    .catch(error => {
+
+      alert("fail" + error.toString());
+    });
+
+  this._toggleModalLoaction();
+  this._panel.hide()
+  }
   render() {
-    return (
-      <ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
+    return (<View>
+      <View><ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
         <View>
           <View style={{
             backgroundColor: "rgb(255, 255, 255)",
@@ -356,10 +531,86 @@ export default class ProfileCopy extends Component {
             <View>
               <Text style={{ marginBottom: 10 }}>more info</Text>
             </View>
+
+            <TouchableOpacity onPress={() => { this.onAgePress() }}><View style={{ flexDirection: 'row' }}>
+              <Image style={{ height: 25, width: 25, tintColor: 'grey' }} source={Images.ageIcon} ></Image>
+              {this.onSetAge()}
+            </View></TouchableOpacity>
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this._handleDatePicked}
+              onCancel={this._hideDateTimePicker}
+            />
           </View>
-
-
         </View>
+        <View style={{
+          backgroundColor: "rgb(255, 255, 255)",
+
+          margin: 8,
+          borderRadius: 8,
+          shadowColor: "rgba(0, 0, 0, 0.08)",
+          shadowRadius: 5,
+          shadowOpacity: 1,
+        }}>
+          <View styel={{ margin: 10 }}><TouchableOpacity onPress={() => { this.OnAddBio() }}>
+            <View style={{ backgroundColor: '#DCDCDC', borderRadius: 6, height: 50, width: Screen.width - 20, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 17, fontWeight: '700' }}> + Add Bio</Text></View>
+          </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={{
+          backgroundColor: "rgb(255, 255, 255)",
+
+          margin: 8,
+          borderRadius: 8,
+          shadowColor: "rgba(0, 0, 0, 0.08)",
+          shadowRadius: 5,
+          shadowOpacity: 1,
+        }}>
+          <View>
+            <View style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <View><Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Personal Info</Text>
+              </View>
+
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.homePage}
+                style={{ height: 25, width: 25, tintColor: 'grey' }} />
+                <Text style={{ marginLeft: 10, marginTop: 5 }}>Lives in {this.state.place}</Text></View>
+
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
+                style={{ height: 25, width: 25, tintColor: 'grey' }} />
+                <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>From : {this.state.permanentLocation}</Text></View>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.statusIcon}
+                style={{ height: 25, width: 25, tintColor: 'grey' }} />
+                <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
+            </View>
+
+          </View>
+        </View>
+        <View style={{
+          backgroundColor: "rgb(255, 255, 255)",
+
+          margin: 8,
+          borderRadius: 8,
+          shadowColor: "rgba(0, 0, 0, 0.08)",
+          shadowRadius: 5,
+          shadowOpacity: 1,
+        }}>
+          <View styel={{ margin: 10 }}><TouchableOpacity onPress={() => { this.OnAddPersonalInfo() }}>
+            <View style={{ backgroundColor: '#DCDCDC', borderRadius: 6, height: 50, width: Screen.width - 20, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 17, fontWeight: '700' }}> + Add Personal Info</Text></View>
+          </TouchableOpacity>
+          </View>
+        </View>
+
+
         <View style={{
           backgroundColor: "rgb(255, 255, 255)",
           justifyContent: 'center',
@@ -421,13 +672,13 @@ export default class ProfileCopy extends Component {
           shadowOpacity: 1,
         }}>
           <View>
-            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13 }}>Interests</Text>
+            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Interests</Text>
           </View>
-         
-          <View>
+
+          <View style={{ margin: 10 }}>
             <TagSelect
               data={data}
-              
+
               ref={(tag) => {
                 this.tag = tag;
               }}
@@ -435,29 +686,45 @@ export default class ProfileCopy extends Component {
                 alert('Ops', 'Max reached');
               }}
             />
-            <View style={styles.buttonContainer}>
-              <View style={styles.buttonInner}>
-                {/* <Button
-                  title="Get selected count"
-                  style={styles.button}
-                  onPress={() => {
-                   alert('Selected count', `Total: ${this.tag.totalSelected}`);
-                  }}
-                /> */}
+            {/* <View style={styles.buttonContainer}>
+            <View style={styles.buttonInner}> */}
+            {/* <Button
+                title="Get selected count"
+                style={styles.button}
+                onPress={() => {
+                 alert('Selected count', `Total: ${this.tag.totalSelected}`);
+                }}
+              /> */}
 
-              </View>
-              <View>
-                {/* <Button
-                  title="Get selected"
-                  onPress={() => {
-                   alert('Selected items:', JSON.stringify(this.tag.itemsSelected));
-                  }}
-                /> */}
-              </View>
-            </View>
-            <Text style={styles.labelText}>Activities:</Text>
+            {/* </View>
+            <View> */}
+            {/* <Button
+                title="Get selected"
+                onPress={() => {
+                 alert('Selected items:', JSON.stringify(this.tag.itemsSelected));
+                }}
+              /> */}
+            {/* </View>
+          </View> */}
+
+          </View>
+        </View>
+
+        <View style={{
+          backgroundColor: "rgb(255, 255, 255)",
+
+          margin: 8,
+          borderRadius: 8,
+          shadowColor: "rgba(0, 0, 0, 0.08)",
+          shadowRadius: 5,
+          shadowOpacity: 1,
+        }}>
+          <View>
+            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Lifestyle and social</Text>
+          </View>
+          <View style={{ margin: 10 }}>
             <TagSelect
-              data={dataActivities}
+              data={dataLifeStyle}
               itemStyle={styles.item}
               itemLabelStyle={styles.label}
               itemStyleSelected={styles.itemSelected}
@@ -487,14 +754,103 @@ export default class ProfileCopy extends Component {
             }}
           />
         </Dialog.Container></View>
+
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={styles.container1}>
+              {/* <Text style={styles.valueText}>
+                  Value = {selectedButton}
+              </Text> */}
+              {/* <RadioGroup radioButtons={this.state.data} onPress={(data, index) => { this.onPress(this.state.data.find(e => e.selected == true)) }} /> */}
+              <View style={{ alignContent: 'center', marginLeft: 50 }}><RadioGroup
+                onSelect={(index, value) => this.onSelect(index, value)}
+              >
+                <RadioButton value={'Single'} >
+                  <Text>Single</Text>
+                </RadioButton>
+
+                <RadioButton value={'Married'}>
+                  <Text>Married</Text>
+                </RadioButton>
+
+                <RadioButton value={'In a relationship'}>
+                  <Text>In a relationship</Text>
+                </RadioButton>
+                <RadioButton value={'Separated'}>
+                  <Text>Separated</Text>
+                </RadioButton>
+                <RadioButton value={'In an open relationship'}>
+                  <Text>In an open relationship</Text>
+                </RadioButton>
+
+                <RadioButton value={'Widowed'}>
+                  <Text>Widowed</Text>
+                </RadioButton>
+                <RadioButton value={"It's complicated"}>
+                  <Text>It's complicated</Text>
+                </RadioButton>
+
+              </RadioGroup>
+              </View>
+
+            </View>
+            <TouchableOpacity onPress={this._toggleModal}>
+              <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+        <Modal isVisible={this.state.isModalVisibleLocation}>
+          <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={styles.container1}>
+
+              <View style={{ alignContent: 'center', marginLeft: 30, marginRight:30 }}>
+                <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom:30  }}
+                  onChangeText={(text) => this.setState({permanentLocation:text })} placeholder="Enter where are you from?"
+                   />
+                  <Button title="Save your location"  onPress={()=>{this.onSaveLocation()}} />
+              </View>
+
+            </View>
+            <TouchableOpacity onPress={this._toggleModalLoaction}>
+              <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+
       </ScrollView>
-    )
+      </View>
+      <SlidingUpPanel ref={c => this._panel = c}>
+        {() => this.onSlideData()}
+      </SlidingUpPanel>
+
+    </View>)
   }
 }
 const styles = StyleSheet.create({
   profileView: {
     backgroundColor: "rgb(249, 249, 249)",
     flex: 1
+  },
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+
+  },
+  valueText: {
+    fontSize: 18,
+    marginBottom: 50,
+  },
+  buttonContainer: {
+    padding: 15,
+  },
+  buttonInner: {
+    marginBottom: 15,
+  },
+  labelText: {
+    color: '#333',
+    fontSize: 15,
+    fontWeight: '500',
+    marginBottom: 15,
   },
   buttonContainer: {
     padding: 15,

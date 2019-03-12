@@ -448,7 +448,7 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
               >
                 <View style={styles.rectangle2View}>
                   <Image
-                    source={Images.findFriendList}
+                    source={Images.homePage}
                     style={styles.logoutImage}
                   />
                 </View>
