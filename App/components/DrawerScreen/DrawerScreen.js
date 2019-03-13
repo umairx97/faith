@@ -560,7 +560,7 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
               </View>
             </View>
 
-            <View style={styles.visitorsView}>
+           {/* <View style={styles.visitorsView}>
               <View
                 style={{
                   flexDirection: "row",
@@ -620,7 +620,8 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
                   </View>
                 </View>
               </View>
-            </View>
+            </View> */}
+            
             <View style={styles.visitorsView}>
               <View
                 style={{
@@ -723,6 +724,7 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
                 </View>
               </View>
             </View> */}
+
             <View style={styles.likesView}>
               <View
                 style={{

@@ -25,6 +25,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		182DF7952238902C002FCFDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 182DF7942238902C002FCFDE /* GoogleService-Info.plist */; };
 		1860D291221C186C00EF9BB5 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1860D273221C185E00EF9BB5 /* libRCTVideo.a */; };
 		18E1BFFC221D2FD600B1D0C3 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1BFCC221D2FBB00B1D0C3 /* libimageCropPicker.a */; };
 		18E1BFFE221D300000B1D0C3 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1BFFD221D300000B1D0C3 /* RSKImageCropper.framework */; };
@@ -79,7 +80,6 @@
 		ECA83B6DF2624ACE816112A0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD54ADF6195B4B88BEA10F9E /* libRNVectorIcons.a */; };
 		F113378629604AAFBD048B8E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE38704B67664EE5B44A1B58 /* FontAwesome5_Solid.ttf */; };
 		F282CAF92209AB15002B5085 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F282CAF22209AAFB002B5085 /* libRNFetchBlob.a */; };
-		F2FCEBE7222E836D002C7531 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2FCEBE6222E836D002C7531 /* GoogleService-Info.plist */; };
 		F2FCEC3A222E85F8002C7531 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2FCEC39222E85E7002C7531 /* libRNCamera.a */; };
 /* End PBXBuildFile section */
 
@@ -507,6 +507,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FaithMeetsLove/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FaithMeetsLove/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		182DF7942238902C002FCFDE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		182ED6502229583900CABF6F /* FaithMeetsLove.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FaithMeetsLove.entitlements; path = FaithMeetsLove/FaithMeetsLove.entitlements; sourceTree = "<group>"; };
 		1860D259221C185E00EF9BB5 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		18E1BFC5221D2FBB00B1D0C3 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
@@ -561,7 +562,6 @@
 		E5B57A45B3D443D087DAE3DA /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		E629ABEDB40D4562B020FCBB /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		F282CAC52209AAFB002B5085 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
-		F2FCEBE6222E836D002C7531 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F2FCEC34222E85E6002C7531 /* RNCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
 		F46B7CDFAD64476DBDE140BC /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		F7CF2C5567694D0787F41305 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
@@ -737,7 +737,7 @@
 		13B07FAE1A68108700A75B9A /* FaithMeetsLove */ = {
 			isa = PBXGroup;
 			children = (
-				F2FCEBE6222E836D002C7531 /* GoogleService-Info.plist */,
+				182DF7942238902C002FCFDE /* GoogleService-Info.plist */,
 				182ED6502229583900CABF6F /* FaithMeetsLove.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1101,11 +1101,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = NWBJNY2J67;
+						DevelopmentTeam = RQJG6J8UK6;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = NWBJNY2J67;
+						DevelopmentTeam = RQJG6J8UK6;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -1620,7 +1620,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				664D86B958534F8E9A503EF1 /* Entypo.ttf in Resources */,
-				F2FCEBE7222E836D002C7531 /* GoogleService-Info.plist in Resources */,
+				182DF7952238902C002FCFDE /* GoogleService-Info.plist in Resources */,
 				B5D0080E49EB45009FF3A2B6 /* EvilIcons.ttf in Resources */,
 				8B39F15CBAE84429BA089C13 /* Feather.ttf in Resources */,
 				82D6E71CF8A64D198E7A3361 /* FontAwesome.ttf in Resources */,
@@ -1803,7 +1803,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = NWBJNY2J67;
+				DEVELOPMENT_TEAM = RQJG6J8UK6;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1848,7 +1848,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = NWBJNY2J67;
+				DEVELOPMENT_TEAM = RQJG6J8UK6;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
@@ -1891,7 +1891,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = NWBJNY2J67;
+				DEVELOPMENT_TEAM = RQJG6J8UK6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1938,7 +1938,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NWBJNY2J67;
+				DEVELOPMENT_TEAM = RQJG6J8UK6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
