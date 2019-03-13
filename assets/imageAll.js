@@ -36,5 +36,7 @@ export const Images = {
   tickIcon:require("./images/iconTick.png"),
   locationIcon:require("./images/locationIcon.png"),
   ageIcon:require("./images/ageIcon.png"),
-  statusIcon:require("./images/statusIcon.png")
+  statusIcon:require("./images/statusIcon.png"),
+  filterSvgIcon:require("./images/svgFilter.svg"),
+  genderIcon: require("./images/genderIcons.png")
 };

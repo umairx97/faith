@@ -1058,10 +1058,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     height: 140,
-    ...ifIphoneX({ height: 150 }),
+    ...ifIphoneX({ height: 145 }),
     marginLeft: 18,
     marginTop: 20,
-    ...ifIphoneX({ marginTop: 30 }),
+    ...ifIphoneX({ marginTop: 35 }),
     marginRight: 16
   },
   panel1View: {
@@ -1070,7 +1070,7 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 270,
+    height: 220,
     marginLeft: 19,
     marginTop: 1,
     marginRight: 15

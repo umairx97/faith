@@ -47,6 +47,14 @@
           }
         },
         {
+          "client_id": "390674890211-ebahu72gtos1b9743oa0cs36ss2sc10j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetsloves",
+            "certificate_hash": "05970704b9431da7599f3ce14ac4ca28b83d03f0"
+          }
+        },
+        {
           "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -68,10 +76,10 @@
               "client_type": 3
             },
             {
-              "client_id": "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com",
+              "client_id": "390674890211-glp92qlfvd7prj6dgh9c8pe7vmveltkb.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.FaithMeetsLove.FaithMeetsLove"
+                "bundle_id": "com.FaithMeetsLove.FaithMeetsLove6"
               }
             }
           ]

@@ -561,6 +561,8 @@ export default class SignUp extends Component {
                         }}
                       />
                     </View>
+                    
+                    
                     <Dialog.Container visible={this.state.dialogVisible}>
                       <Dialog.Title>Success</Dialog.Title>
                       <Dialog.Description>

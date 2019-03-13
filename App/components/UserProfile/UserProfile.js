@@ -6,7 +6,7 @@
 //  Copyright © 2018 Boffin Coders. All rights reserved.
 //
 
-import { Text, StyleSheet, View, Image,BackHandler,AsyncStorage } from "react-native";
+import { Text, StyleSheet, View, Image, BackHandler, AsyncStorage } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
@@ -14,10 +14,13 @@ import ViewMoreText from "react-native-view-more-text";
 import { Actions } from "react-native-router-flux";
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+import { Images } from "../../../assets/imageAll";
+//import SvgUri from 'react-native-svg-uri';
+
 export default class UserProfile extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
 
     };
   }
@@ -30,19 +33,19 @@ export default class UserProfile extends React.Component {
     return <Text onPress={onPress}>View less</Text>;
   }
 
-  
 
- async componentDidMount () {
-    var jeck =await  AsyncStorage.getItem("userProfileKeys");
+
+  async componentDidMount() {
+    var jeck = await AsyncStorage.getItem("userProfileKeys");
     alert(jeck)
     BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
   }
 
-  backAndroid () {
+  backAndroid() {
     Actions.pop() // Return to previous screen
     return true // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
@@ -50,19 +53,26 @@ export default class UserProfile extends React.Component {
   render() {
     return (
       <ParallaxScrollView
-      backgroundColor="blue"
-      contentBackgroundColor="pink"
-      parallaxHeaderHeight={300}
-      renderFixedHeader={() => <Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>Hello</Text>}
-      renderForeground={() => (
-       <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center',  }}>
-          <Text>Hello World!</Text>
+        backgroundColor="blue"
+        contentBackgroundColor="pink"
+        parallaxHeaderHeight={300}
+        renderFixedHeader={() => <Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>Hello</Text>}
+        renderForeground={() => (
+          <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+            <Text>Hello World!</Text>
+          </View>
+        )}>
+        <View style={{ height: 500 }}>
+          <Text>Scroll me</Text>
+          <Image source={Images.arrowBackIcon}></Image>
+          {/* <SvgUri
+            width="100"
+            height="100"
+
+            source={require("../../../assets/images/svgFilter.svg")}
+          /> */}
         </View>
-      )}>
-      <View style={{ height: 500 }}>
-        <Text>Scroll me</Text>
-      </View>
-    </ParallaxScrollView>
+      </ParallaxScrollView>
       // <ScrollView>
       //   <View pointerEvents="box-none" style={styles.userProfileView}>
       //     <View pointerEvents="box-none" style={styles.contentsView}>

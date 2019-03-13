@@ -16,11 +16,16 @@ import Moment from "moment";
 import SlidingUpPanel from 'rn-sliding-up-panel';
 
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
+import RadioForm, {
+ 
+  RadioButtonInput,
+  RadioButtonLabel
+} from "react-native-simple-radio-button";
 // Prepare Blob support
-const Blob = RNFetchBlob.polyfill.Blob;
-const fs = RNFetchBlob.fs;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-window.Blob = Blob;
+// const Blob = RNFetchBlob.polyfill.Blob;
+// const fs = RNFetchBlob.fs;
+// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+// window.Blob = Blob;
 
 
 var type = "image/jpg";
@@ -62,6 +67,17 @@ const dataLifeStyle = [
 ]
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
+var radio_props = [
+  {
+    label: "Male  ",
+    value: 0
+  },
+  {
+    label: "Female",
+    value: 1
+  }
+];
+
 var userId;
 export default class ProfileCopy extends Component {
   constructor(props) {
@@ -89,9 +105,12 @@ export default class ProfileCopy extends Component {
       isDateTimePickerVisible: false,
       isModalVisible: false,
       isModalVisibleLocation: false,
+      isModalVisibleGender: false,
       relationShipStatus: 'Unknown',
       showComponmentB: '',
-      permanentLocation:'Unknown',
+      permanentLocation: 'Unknown',
+      genderInfo: 'Unknown',
+      _gender: 0,
       imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
     }
 
@@ -188,6 +207,7 @@ export default class ProfileCopy extends Component {
   }
   openProfileImage = async () => {
     instance = this;
+    var convertGender;
     var _name = await firebase.auth().currentUser.uid;
     var imgUserId = firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name);
     imgUserId.once('value', function (snapshot) {
@@ -195,13 +215,26 @@ export default class ProfileCopy extends Component {
       var userName = snapshot.val().fullName;
       var dob = snapshot.val().user_Dob;
       var realtionshipS = snapshot.val().relationshipStatus;
-      var permanentAdd=snapshot.val().permanentAddress;
+      var permanentAdd = snapshot.val().permanentAddress;
+      var genderData = snapshot.val().gender;
+      if(genderData==0)
+      {
+        convertGender="Man";
+      }
+      else if(genderData==1)
+      {
+        convertGender="Woman";
+      }
+      else{
+        convertGender="Unknown"
+      }
       instance.setState({
         imageProfileUrl: ImageUrl,
         nameFull: userName,
         dateOfBirth: dob,
         relationShipStatus: realtionshipS,
-        permanentLocation:permanentAdd
+        permanentLocation: permanentAdd,
+        genderInfo: convertGender
       });
       instance.age();
     })
@@ -346,22 +379,27 @@ export default class ProfileCopy extends Component {
 
   }
 
-  onLocationPress = () => {
-    alert('location')
-  }
+  // onLocationPress = () => {
+  //   alert('location')
+  // }
   onRelationshipPress = () => {
     this._toggleModal();
   }
   onLocationPress = () => {
     this._toggleModalLoaction();
   }
-
+  onGenderPress = () => {
+    this._toggleModalGender();
+  }
   _toggleModal = () =>
     this.setState({ isModalVisible: !this.state.isModalVisible });
 
   _toggleModalLoaction = () =>
     this.setState({ isModalVisibleLocation: !this.state.isModalVisibleLocation });
 
+  _toggleModalGender = () => {
+    this.setState({ isModalVisibleGender: !this.state.isModalVisibleGender });
+  }
   onSlideData = () => {
     return (
 
@@ -384,7 +422,16 @@ export default class ProfileCopy extends Component {
         <TouchableOpacity onPress={() => { this.onLocationPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
-            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 100 }}>From where you are</Text>
+            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>From where you are</Text>
+
+            {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => { this.onGenderPress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 100 }}>Gender</Text>
 
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
           </View>
@@ -454,6 +501,28 @@ export default class ProfileCopy extends Component {
     this._panel.show();
 
   }
+  onSelectGender=(index,value)=>{
+    // this.setState({
+    //   text: value
+    // })
+    this.setState({ genderInfo: value });
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        gender: value
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalGender();
+    this._panel.hide()
+  }
 
   onSelect(index, value) {
     this.setState({
@@ -478,24 +547,28 @@ export default class ProfileCopy extends Component {
     this._toggleModal();
     this._panel.hide()
   }
-  onSaveLocation=()=>{
-    var permanentlocation=this.state.permanentLocation;
+  // onSaveGender=()=>{
+  //   alert("gender")
+  // }
+
+  onSaveLocation = () => {
+    var permanentlocation = this.state.permanentLocation;
     firebase
-    .database()
-    .ref("Users/FaithMeetsLove/Registered/" + userId)
-    .update({
-      permanentAddress: permanentlocation
-    })
-    .then(ref => {
-      this.componentDidMount()
-    })
-    .catch(error => {
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        permanentAddress: permanentlocation
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
 
-      alert("fail" + error.toString());
-    });
+        alert("fail" + error.toString());
+      });
 
-  this._toggleModalLoaction();
-  this._panel.hide()
+    this._toggleModalLoaction();
+    this._panel.hide()
   }
   render() {
     return (<View>
@@ -592,7 +665,11 @@ export default class ProfileCopy extends Component {
                 style={{ height: 25, width: 25, tintColor: 'grey' }} />
                 <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
             </View>
-
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                style={{ height: 25, width: 25, tintColor: 'grey' }} />
+                <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>Gender : {this.state.genderInfo}</Text></View>
+            </View>
           </View>
         </View>
         <View style={{
@@ -762,7 +839,8 @@ export default class ProfileCopy extends Component {
                   Value = {selectedButton}
               </Text> */}
               {/* <RadioGroup radioButtons={this.state.data} onPress={(data, index) => { this.onPress(this.state.data.find(e => e.selected == true)) }} /> */}
-              <View style={{ alignContent: 'center', marginLeft: 50 }}><RadioGroup
+              <View style={{ alignContent: 'center', marginLeft: 50 }}>
+              <RadioGroup
                 onSelect={(index, value) => this.onSelect(index, value)}
               >
                 <RadioButton value={'Single'} >
@@ -791,6 +869,7 @@ export default class ProfileCopy extends Component {
                 </RadioButton>
 
               </RadioGroup>
+             
               </View>
 
             </View>
@@ -803,15 +882,82 @@ export default class ProfileCopy extends Component {
           <View style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={styles.container1}>
 
-              <View style={{ alignContent: 'center', marginLeft: 30, marginRight:30 }}>
-                <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom:30  }}
-                  onChangeText={(text) => this.setState({permanentLocation:text })} placeholder="Enter where are you from?"
-                   />
-                  <Button title="Save your location"  onPress={()=>{this.onSaveLocation()}} />
+              <View style={{ alignContent: 'center', marginLeft: 30, marginRight: 30 }}>
+                <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 30 }}
+                  onChangeText={(text) => this.setState({ permanentLocation: text })} placeholder="Enter where are you from?"
+                />
+                <Button title="Save your location" onPress={() => { this.onSaveLocation() }} />
               </View>
 
             </View>
             <TouchableOpacity onPress={this._toggleModalLoaction}>
+              <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleGender}>
+          <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={styles.container1}>
+
+              <View style={{ alignContent: 'center', marginLeft: 50 }}>
+
+              <RadioGroup
+                onSelect={(index, value) => this.onSelectGender(index, value)}
+              >
+                <RadioButton value={0} >
+                  <Text>Man</Text>
+                </RadioButton>
+
+                <RadioButton value={1}>
+                  <Text>Woman</Text>
+                </RadioButton>
+
+            
+
+              </RadioGroup>
+             
+                {/* <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 30 }}
+                  onChangeText={(text) => this.setState({ permanentLocation: text })} placeholder="Enter where are you from?"
+                /> */}
+                 {/* <View
+                      style={{
+                        flex: 1,
+                        flexDirection: "row",
+
+                        marginBottom: 20,
+                        marginTop: 20
+                      }}
+                    >
+                      <Text
+                        style={{
+                          marginTop: 8,
+                          marginRight: 8
+                        }}
+                      >
+                        Gender
+                      </Text>
+                      <RadioForm
+                        radio_props={radio_props}
+                        initial={0}
+                        formHorizontal={true}
+                        labelHorizontal={true}
+                        buttonColor={"#2196f3"}
+                        animation={true}
+                        onPress={value => {
+                          this.setState({
+                            _gender: value
+                          });
+                        }}
+                      />
+                    </View>
+                     */}
+                    
+                {/* <Button title="Save" onPress={() => { this.onSaveGender() }} /> */}
+              </View>
+
+            </View>
+            <TouchableOpacity onPress={this._toggleModalGender}>
               <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
             </TouchableOpacity>
           </View>

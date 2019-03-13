@@ -52,7 +52,7 @@ export default class Discover extends Component {
       userDistanceShow: 0,
       userGenderShow: 2
     };
-    this.getCurrentUserId();
+
   }
   async componentWillMount() {
     await this.getSearchFilter();
@@ -64,13 +64,16 @@ export default class Discover extends Component {
     this.swiper.goBackFromTop();
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
-  getCurrentUserId = async () => {
-    var uidUser = await firebase.auth().currentUser.uid;
+  getCurrentUserId =async () => {
+    var uidUser =await firebase.auth().currentUser.uid;
     this.setState({
       loginUserId: uidUser
     });
+   // alert(this.state.loginUserId)
   };
-  componentDidMount() {}
+  componentDidMount() {
+    this.getCurrentUserId();
+  }
 
   getAllUser = async () => {
     arr = [];
@@ -84,7 +87,7 @@ export default class Discover extends Component {
     var loginUser;
     var userGender;
     var userAge;
-    allUserProfile
+    await allUserProfile
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
@@ -98,15 +101,20 @@ export default class Discover extends Component {
           userAge = childSnapshot.val().user_Dob;
           userGender = childSnapshot.val().gender;
           var getAge = this.userAgeShow(userAge);
-          this.getAlreadyLikedUser(
-            key,
-            userName,
-            childData,
-            userProfileId,
-            varifiedUser,
-            getAge,
-            userGender
-          );
+          if (varifiedUser == true && userAge!=0) {
+            
+              this.getAlreadyLikedUser(
+                key,
+                userName,
+                childData,
+                userProfileId,
+                varifiedUser,
+                getAge,
+                userGender
+              );
+           
+          }
+
         });
       })
       .catch(error => {
@@ -163,9 +171,9 @@ export default class Discover extends Component {
       .database()
       .ref(
         "Users/FaithMeetsLove/FavouriteProfile/" +
-          this.state.loginUserId +
-          "/" +
-          id
+        this.state.loginUserId +
+        "/" +
+        id
       );
     await alreadyFavouriteUser
       .once("value")
@@ -202,9 +210,9 @@ export default class Discover extends Component {
       .database()
       .ref(
         "Users/FaithMeetsLove/RejectedProfile/" +
-          this.state.loginUserId +
-          "/" +
-          id
+        this.state.loginUserId +
+        "/" +
+        id
       );
     await alreadyFavouriteUser
       .once("value")
@@ -283,7 +291,7 @@ export default class Discover extends Component {
       .push({
         friendUid: frndId
       })
-      .then(ref => {})
+      .then(ref => { })
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
@@ -294,7 +302,7 @@ export default class Discover extends Component {
       .push({
         friendUid: myId
       })
-      .then(ref => {})
+      .then(ref => { })
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
@@ -304,14 +312,14 @@ export default class Discover extends Component {
       .database()
       .ref(
         "Users/FaithMeetsLove/FavouriteProfile/" +
-          this.state.loginUserId +
-          "/" +
-          id
+        this.state.loginUserId +
+        "/" +
+        id
       )
       .set({
         isLike: true
       })
-      .then(ref => {})
+      .then(ref => { })
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
@@ -321,14 +329,14 @@ export default class Discover extends Component {
       .database()
       .ref(
         "Users/FaithMeetsLove/RejectedProfile/" +
-          this.state.loginUserId +
-          "/" +
-          id
+        this.state.loginUserId +
+        "/" +
+        id
       )
       .set({
         isLike: true
       })
-      .then(ref => {})
+      .then(ref => { })
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
@@ -344,7 +352,8 @@ export default class Discover extends Component {
     var displayUserName = firebase
       .database()
       .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser);
-    await displayUserName.once("value", function(snapshot) {
+    await displayUserName.once("value", function (snapshot) {
+
       if (snapshot.exists()) {
         ageFrom = snapshot.val().age_from;
         ageTo = snapshot.val().age_to;
@@ -370,7 +379,7 @@ export default class Discover extends Component {
     var displayUserProfile = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + id);
-    displayUserProfile.once("value", function(snapshot) {
+    displayUserProfile.once("value", function (snapshot) {
       var usrName = snapshot.val().fullName;
       var ImageUrl = snapshot.val().profileImageURL;
       var dob = snapshot.val().user_Dob;

@@ -28,7 +28,7 @@ import ChatList from "../Chat/ChatList";
 import FullScreenVideo from "../Chat/FullScreenVideo";
 import FullScreenCamera from "../Chat/FullScreenCamera";
 import GalleryView from "../Chat/GalleryView";
-
+import SvgUri from 'react-native-svg-uri';
 
 export default class Route extends Component {
   getIcon = () => {
@@ -73,9 +73,15 @@ export default class Route extends Component {
   };
   getFilterIcon = () => {
     return (
+    //   <SvgUri
+    //   width="20"
+    //   height="20"
+    
+    //   source={require("../../../assets/images/svgFilter.svg")}
+    // />
       <Image
         style={{ height: 20, width: 20, resizeMode: "contain" }}
-        source={require("../../../assets/images/filterIcon.png")}
+        source={require("../../../assets/images/svgFilter1.png")}
       />
     );
   };

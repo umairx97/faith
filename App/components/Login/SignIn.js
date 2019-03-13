@@ -120,14 +120,19 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        this.updateUserProfile(user.uid, user.displayName, user.email, "g+");
+        alert(user.user.uid)
+        alert(user.user.displayName)
+        
+        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "g+");
       })
       .catch(error => {
         const { code, message } = error;
       });
   }
   updateUserProfile(uid, name, email, loginWith) {
-    var userName = name.split(" ").join("_");
+    alert(name);
+    var userUserName = name.split(" ").join("_");
+    var userName=name;
     var userRef = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + uid);
@@ -136,6 +141,7 @@ export default class SignIn extends Component {
         if (loginWith === "FB") {
           this.openDrawerPage("facebookloggedin");
         }
+        else
         {
           this.openDrawerPage("googleLoggedin");
         }
@@ -144,7 +150,7 @@ export default class SignIn extends Component {
           .set({
             uid: uid,
             email: email,
-            userName: userName,
+            userName: userUserName,
             fullName: name,
             gender: "0",
             latitude: 0,
@@ -158,6 +164,7 @@ export default class SignIn extends Component {
             if (loginWith === "FB") {
               this.openDrawerPage("facebookloggedin");
             }
+            else
             {
               this.openDrawerPage("googleLoggedin");
             }
