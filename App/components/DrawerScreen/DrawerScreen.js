@@ -874,7 +874,8 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
                 </View>
               </View>
             </View>
-            <View style={styles.blacklistView}>
+            
+            {/*<View style={styles.blacklistView}>
               <View
                 style={{
                   flexDirection: "row",
@@ -907,7 +908,8 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
                   height: "100%"
                 }}
               />
-            </View>
+              </View>*/}
+
             <View style={styles.blacklistView}>
               <View
                 style={{

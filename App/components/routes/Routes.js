@@ -63,6 +63,14 @@ export default class Route extends Component {
       />
     );
   };
+  getIconFilter = () => {
+    return (
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        source={require("../../../assets/images/filtericon.svg")}
+      />
+    );
+  };
   getFilterIcon = () => {
     return (
       <Image
@@ -138,7 +146,7 @@ export default class Route extends Component {
                 <Scene
                   key="Filter"
                   hideNavBar={true}
-                  icon={this.getFavrouiteIcon}
+                  icon={this.getFilterIcon}
                   component={NearbyFilters}
                 />
                 {/* <Scene
