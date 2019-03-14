@@ -228,14 +228,29 @@ export default class ProfileCopy extends Component {
       else{
         convertGender="Unknown"
       }
-      instance.setState({
-        imageProfileUrl: ImageUrl,
-        nameFull: userName,
-        dateOfBirth: dob,
-        relationShipStatus: realtionshipS,
-        permanentLocation: permanentAdd,
-        genderInfo: convertGender
-      });
+      if(ImageUrl=="")
+      {
+        instance.setState({
+          imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+          nameFull: userName,
+          dateOfBirth: dob,
+          relationShipStatus: realtionshipS,
+          permanentLocation: permanentAdd,
+          genderInfo: convertGender
+        });
+      }
+      else
+      {
+        instance.setState({
+          imageProfileUrl: ImageUrl,
+          nameFull: userName,
+          dateOfBirth: dob,
+          relationShipStatus: realtionshipS,
+          permanentLocation: permanentAdd,
+          genderInfo: convertGender
+        });
+      }
+     
       instance.age();
     })
   }

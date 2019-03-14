@@ -81,34 +81,32 @@ export default class DrawerScreen extends React.Component {
     this.getUid();
     this.getUserLoginInfo();
   }
-getUserLoginInfo=async()=>{
-  var uidUser = await firebase.auth().currentUser.uid;
-  var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
- 
-firebase.database().ref('.info/connected').on('value', function(snapshot) 
-{   
-  if (snapshot.val() == false) {
-    userStatusDatabaseRef.set(isOfflineForDatabase);
-      return;
-  };
-  userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
-  userStatusDatabaseRef.set(isOnlineForDatabase);
-  });
-});
+  getUserLoginInfo = async () => {
+    var uidUser = await firebase.auth().currentUser.uid;
+    var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
 
-}
+    firebase.database().ref('.info/connected').on('value', function (snapshot) {
+      if (snapshot.val() == false) {
+        userStatusDatabaseRef.set(isOfflineForDatabase);
+        return;
+      };
+      userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function () {
+        userStatusDatabaseRef.set(isOnlineForDatabase);
+      });
+    });
+
+  }
   async logout() {
     var uidUser = await firebase.auth().currentUser.uid;
     var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
-    firebase.database().ref('.info/connected').on('value', function(snapshot) 
-{   
-  if (snapshot.val() == false) {
-      return;
-  };
-  userStatusDatabaseRef.onDisconnect().set(isOnlineForDatabase).then(function() {
-  userStatusDatabaseRef.set(isOfflineForDatabase);
-  });
-});
+    firebase.database().ref('.info/connected').on('value', function (snapshot) {
+      if (snapshot.val() == false) {
+        return;
+      };
+      userStatusDatabaseRef.onDisconnect().set(isOnlineForDatabase).then(function () {
+        userStatusDatabaseRef.set(isOfflineForDatabase);
+      });
+    });
 
     var v = await AsyncStorage.getItem("checkLoggedType");
     if (v == "firebaseLoggedin") {
@@ -206,14 +204,13 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
     var profileImageURL;
     var uname = await firebase.auth().currentUser.displayName;
     var uidUser = await firebase.auth().currentUser.uid;
-    
-    if (uname == null) {
+
       var displayUserName = firebase
         .database()
         .ref("Users/FaithMeetsLove/Registered/" + uidUser);
-      await displayUserName.once("value", function(snapshot) {
+      await displayUserName.once("value", function (snapshot) {
         var usrName = snapshot.val().fullName;
-        var ImageUrl = snapshot.val().profileImageURL;
+      
         fullName = snapshot.val().fullName;
         gender = snapshot.val().gender;
         latitude = snapshot.val().latitude;
@@ -221,11 +218,31 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
         email = snapshot.val().email;
         user_Dob = snapshot.val().user_Dob;
         profileImageURL = snapshot.val().profileImageURL;
-
-        instance.setState({
-          user_name: usrName,
-          profileImageUrl: ImageUrl
-        });
+           var dss=fullName;
+           if(fullName.length>18)
+           {
+             var x=fullName.substring(0,18)+ "...";
+            instance.setState({
+              user_name:x
+            })
+           }
+           else{
+            instance.setState({
+              user_name:fullName
+            })
+           }
+          
+        var fss=usrName;
+        if (profileImageURL == "") {
+          instance.setState({
+            profileImageUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
+          });
+        }
+        else {
+          instance.setState({
+            profileImageUrl: profileImageURL
+          });
+        }
       });
       AsyncStorage.setItem("reg_user_name", fullName);
       AsyncStorage.setItem("reg_user_gender", "" + gender);
@@ -234,39 +251,9 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
       AsyncStorage.setItem("reg_user_email", email);
       AsyncStorage.setItem("reg_user_dob", user_Dob);
       AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
-    } else {
-      var displayUserName = firebase
-      .database()
-      .ref("Users/FaithMeetsLove/Registered/" + uidUser);
-    await displayUserName.once("value", function(snapshot) {
-      var usrName = snapshot.val().fullName;
-      var ImageUrl = snapshot.val().profileImageURL;
-      fullName = snapshot.val().fullName;
-      gender = snapshot.val().gender;
-      latitude = snapshot.val().latitude;
-      longitude = snapshot.val().longitude;
-      email = snapshot.val().email;
-      user_Dob = snapshot.val().user_Dob;
-      profileImageURL = snapshot.val().profileImageURL;
-
-      instance.setState({
-        user_name: uname.toUpperCase(),
-        profileImageUrl: ImageUrl
-      });
-    });
-    AsyncStorage.setItem("reg_user_name", fullName);
-    AsyncStorage.setItem("reg_user_gender", "" + gender);
-    AsyncStorage.setItem("reg_user_latitude", "" + latitude);
-    AsyncStorage.setItem("reg_user_longitude", "" + longitude);
-    AsyncStorage.setItem("reg_user_email", email);
-    AsyncStorage.setItem("reg_user_dob", user_Dob);
-    AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
 
 
-      // this.setState({
-      //   user_name: uname.toUpperCase()
-      // });
-    }
+
     var fcmToken;
     var ref = firebase
       .database()
@@ -560,68 +547,8 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
               </View>
             </View>
 
-           {/* <View style={styles.visitorsView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <View style={styles.rectangle2TwoView}>
-                  <Image
-                    source={Images.visitProfile}
-                    style={styles.logoutImage}
-                  />
-                </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.visitsText}>Visits</Text>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <Image
-                    source={Images.shapeArrow}
-                    style={styles.shapeTwoImage}
-                  />
-                </View>
-              </View>
+          
 
-              <View
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              >
-                <View style={styles.iconsLikeCopyView}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignSelf: "stretch"
-                    }}
-                  >
-                    <View style={styles.rectangleTwoView}>
-                      <View
-                        style={{
-                          flex: 1,
-                          flexDirection: "column",
-                          justifyContent: "flex-end"
-                        }}
-                      />
-                    </View>
-                    <Image
-                      source={Images.shapeArrow}
-                      style={styles.shapeThreeImage}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View> */}
-            
             <View style={styles.visitorsView}>
               <View
                 style={{
@@ -684,46 +611,7 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
               </View>
             </View>
 
-            {/* <View
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                justifyContent: "flex-end"
-              }}
-            >
-              <View style={styles.groupsView}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignSelf: "stretch",
-                    alignItems: "center"
-                  }}
-                >
-                  <View style={styles.rectangle2ThreeView}>
-                    <Image
-                      source={Images.userGroups}
-                      style={styles.logoutImage}
-                    />
-                  </View>
-                  <TouchableOpacity onPress={this.onFacebookPressed}>
-                    <Text style={styles.groupsText}>Events</Text>
-                  </TouchableOpacity>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      flex: 1,
-                      justifyContent: "flex-end",
-                      alignItems: "center"
-                    }}
-                  >
-                    <Image
-                      source={Images.shapeArrow}
-                      style={styles.shapeFourImage}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View> */}
+        
 
             <View style={styles.likesView}>
               <View
@@ -874,41 +762,8 @@ firebase.database().ref('.info/connected').on('value', function(snapshot)
                 </View>
               </View>
             </View>
+
             
-            {/*<View style={styles.blacklistView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
-                <View style={styles.rectangle2SevenView}>
-                  <Image source={Images.blacklist} style={styles.logoutImage} />
-                </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.blacklistText}>Blacklist</Text>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <Image
-                    source={Images.shapeArrow}
-                    style={styles.shapeNineImage}
-                  />
-                </View>
-              </View>
-              <View
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%"
-                }}
-              />
-              </View>*/}
 
             <View style={styles.blacklistView}>
               <View

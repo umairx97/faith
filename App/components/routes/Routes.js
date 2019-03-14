@@ -34,7 +34,7 @@ export default class Route extends Component {
   getIcon = () => {
     return (
       <Image
-        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        style={{ height: 20, width: 20, resizeMode: "contain", tintColor:'black' }}
         source={require("../../../assets/images/discover.png")}
       />
     );
@@ -71,14 +71,20 @@ export default class Route extends Component {
       />
     );
   };
+  getImage = () => {
+    return (<Image
+      style={{ height: 20, width: 20, resizeMode: "contain" }}
+      source={require("../../../assets/images/chatIcons.png")}
+    />);
+  }
   getFilterIcon = () => {
     return (
-    //   <SvgUri
-    //   width="20"
-    //   height="20"
-    
-    //   source={require("../../../assets/images/svgFilter.svg")}
-    // />
+      //   <SvgUri
+      //   width="20"
+      //   height="20"
+
+      //   source={require("../../../assets/images/svgFilter.svg")}
+      // />
       <Image
         style={{ height: 20, width: 20, resizeMode: "contain" }}
         source={require("../../../assets/images/svgFilter1.png")}
@@ -89,11 +95,11 @@ export default class Route extends Component {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="myappSplash"  replace={true} hideNavBar={true} component={MyappSplash} />
-          <Scene key="slide"  replace={true} hideNavBar={true} component={AppSlider} />
+          <Scene key="myappSplash" replace={true} hideNavBar={true} component={MyappSplash} />
+          <Scene key="slide" replace={true} hideNavBar={true} component={AppSlider} />
           <Scene key="login" component={Login} hideNavBar={true} />
           <Scene key="signIn" component={SignIn} hideNavBar={true} />
-          <Scene key="signUp"  replace={true} component={SignUp} hideNavBar={true} />
+          <Scene key="signUp" replace={true} component={SignUp} hideNavBar={true} />
           <Scene
             key="activityLoader"
             component={ActivityLoader}
@@ -136,37 +142,21 @@ export default class Route extends Component {
                   hideNavBar={true}
                   component={NearbyAllUser}
                 />
-                {/* <Scene
-                    key="spotlight"
-                    hideNavBar={true}
-                    component={Spotlight}
-                  /> 
-                
-                </Scene>*/}
+
                 <Scene
                   key="Favorite"
                   icon={this.getFavrouiteIcon}
                   hideNavBar={true}
                   component={Favorite}
                 />
-                <Scene
-                  key="Filter"
+
+                <Scene key="Filter"
+                  title="Filter"
                   hideNavBar={true}
                   icon={this.getFilterIcon}
                   component={NearbyFilters}
                 />
-                {/* <Scene
-                  key="Favorite"
-                  icon={this.getIcon}
-                  hideNavBar={true}
-                  component={FavoritesScreen}
-                /> */}
-                {/* <Scene
-                  key="Favorite"
-                  icon={this.getFavrouiteIcon}
-                  hideNavBar={true}
-                  component={Favorites}
-                /> */}
+
               </Scene>
             </Scene>
             <Scene
@@ -192,7 +182,7 @@ export default class Route extends Component {
               component={FullScreenCamera}
               hideNavBar={true}
             />
-             <Scene
+            <Scene
               key="galleryView"
               component={GalleryView}
               hideNavBar={true}

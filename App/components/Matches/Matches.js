@@ -6,13 +6,21 @@ import {
   FlatList,
   BackHandler,
   Image,
+  ImageBackground,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  Dimensions,
+  TouchableHighlight
 } from "react-native";
 import firebase from "react-native-firebase";
 import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 
+import { Images } from "../../../assets/imageAll";
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
 var arr = [];
 export default class Matches extends Component {
   constructor() {
@@ -59,36 +67,37 @@ export default class Matches extends Component {
     var userAge;
     var genderName;
     allUserProfile
+      .orderByChild("order")
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
           key = childSnapshot.val().friendUid;
           this.getUserDetail(key);
-         // this.frndList(key);
+          // this.frndList(key);
         });
       })
       .catch(error => {
         console.log(JSON.stringify(error));
       });
-   
+
   };
-  frndList=(key)=>{
+  frndList = (key) => {
     firebase
-    .database()
-    .ref(
-      "Users/FaithMeetsLove/ChatUserList/" +
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ChatUserList/" +
         this.state.loginUserId +
         "/" +
         key
-    )
-    .set({
-      _show:true
-    })
-    .then(ref => {})
-    .catch(error => {
-      Alert.alert("fail" + error.toString());
-    });
-   
+      )
+      .set({
+        _show: true
+      })
+      .then(ref => { })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+
   }
   getUserDetail = async key => {
     arr = [];
@@ -177,9 +186,13 @@ export default class Matches extends Component {
   };
   openChatScreen(id, name) {
     this.frndList(id);
-    AsyncStorage.setItem("friendsUid", ''+id);
+    AsyncStorage.setItem("friendsUid", '' + id);
     AsyncStorage.setItem("friendName", name);
     Actions.chat();
+  }
+  openProfile = (id) => {
+    AsyncStorage.setItem("userProfileKeys", "" + id);
+    setTimeout(() => Actions.userProfile(), 200);
   }
   render() {
     return (
@@ -194,10 +207,59 @@ export default class Matches extends Component {
             data={this.state.showArr}
             renderItem={({ item }) => (
               <View style={{ margin: 5 }}>
-                <TouchableOpacity
-                  onPress={() => {this.openChatScreen(item.ids, item.pName)}}
-                >
-                  <View style={{ flexDirection: "row" }}>
+
+                <View style={{ flexDirection: 'column' }}>
+                  <View>
+                   
+                      <ImageBackground
+                        style={{
+                          height: 200,
+                          width: Screen.width - 30,
+                          margin: 10,
+                          marginLeft: 10,
+                          marginRight: 10,
+                          resizeMode: "cover",
+
+                        }}
+                        imageStyle={{ borderRadius: 10 }}
+                        source={{ uri: item.pUrl }}
+                      >
+                        <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'white', position: 'absolute', bottom: 10, left: 10, letterSpacing: 2 }}>{item.pName}, {item.age} </Text>
+                        <TouchableOpacity  style={{position:'absolute', right:80,bottom:15, height:32, width:32, backgroundColor:'red',borderRadius:16, justifyContent:'center'}}
+                      onPress={() => { this.openChatScreen(item.ids, item.pName) }}>
+                      
+                        <Image style={{height:24,backgroundColor:'red', width:24,resizeMode:'contain', alignSelf:'center',tintColor:'white'}} source={Images.chatIcons}></Image>
+                        
+                        </TouchableOpacity>
+                        <TouchableOpacity  style={{position:'absolute', right:30,bottom:15, height:32, width:32, backgroundColor:'red',borderRadius:16, justifyContent:'center'}}
+                      onPress={() => { this.openProfile(item.ids) }}>
+                      
+                        <Image style={{height:24,backgroundColor:'red', width:24,resizeMode:'contain', alignSelf:'center',tintColor:'white'}} source={Images.eyeIcon}></Image>
+                        
+                        </TouchableOpacity>
+                        </ImageBackground>
+                  
+                  </View>
+                  {/* <View style={{ flexDirection: "column", marginTop: 15 }}>
+                      <View>
+                        <Text style={{ fontSize: 15, marginLeft: 10 }}>
+                          {item.pName}
+                        </Text>
+                      </View>
+                      <View>
+                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
+                          {item.gender}
+                        </Text>
+                      </View>
+                      <View>
+                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
+                          {item.age}
+                        </Text>
+                      </View>
+                    </View>
+                   */}
+                </View>
+                {/* <View style={{ flexDirection: "row" }}>
                     <View>
                       <Image
                         style={{
@@ -228,7 +290,8 @@ export default class Matches extends Component {
                       </View>
                     </View>
                   </View>
-                </TouchableOpacity>
+                 */}
+
               </View>
 
               //     <ListItem

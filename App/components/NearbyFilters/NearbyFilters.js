@@ -39,15 +39,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
 var count = 0;
 
 export default class NearbyFilters extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      header: null,
-      headerLeft: null,
-      headerRight: null
-    };
-  };
-
+ 
   constructor(props) {
     super(props);
     this.state = {

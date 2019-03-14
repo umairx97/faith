@@ -285,11 +285,14 @@ export default class Discover extends Component {
       });
   }
   profileMatchWithMe(frndId, myId) {
+    var now = new Date().getTime();
+
     firebase
       .database()
       .ref("Users/FaithMeetsLove/MatchedProfiles/" + myId)
       .push({
-        friendUid: frndId
+        friendUid: frndId,
+        order: -1 * now
       })
       .then(ref => { })
       .catch(error => {
@@ -300,7 +303,8 @@ export default class Discover extends Component {
       .database()
       .ref("Users/FaithMeetsLove/MatchedProfiles/" + frndId)
       .push({
-        friendUid: myId
+        friendUid: myId,
+        order: -1 * now
       })
       .then(ref => { })
       .catch(error => {

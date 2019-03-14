@@ -68,7 +68,6 @@ export default class UserProfile extends React.Component {
           {/* <SvgUri
             width="100"
             height="100"
-
             source={require("../../../assets/images/svgFilter.svg")}
           /> */}
         </View>

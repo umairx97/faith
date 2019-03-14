@@ -319,7 +319,8 @@ export default class SignIn extends Component {
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-          this.updateUserProfile(user.uid, user.displayName, user.email, "FB");
+        
+          this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB");
 
         })
         .catch(error => {
