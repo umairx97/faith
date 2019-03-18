@@ -120,65 +120,7 @@ export default class CaptureImage extends Component {
           </View>
         </View>
       );
-   // return (
-      // <View style={styles.container}>
-      //   <RNCamera
-      //     ref={ref => {
-      //       this.camera = ref;
-      //     }}
-      //     style={styles.preview}
-      //     type={this.state.cameraType}
-      //     //type={RNCamera.Constants.Type.front}
-      //     flashMode={RNCamera.Constants.FlashMode.on}
-      //     autoFocus={RNCamera.Constants.AutoFocus.on}
-      //     permissionDialogTitle={"Permission to use camera"}
-      //     permissionDialogMessage={
-      //       "We need your permission to use your camera phone"
-      //     }
-      //   />
-      //   <View style={{ position: "absolute", top: 10, left: 10 }}>
-      //     <TouchableOpacity
-      //       onPress={() => {
-      //         Actions.ProfileCopy();
-      //       }}
-      //     >
-      //       <Image style={styles.btnBackArrow} source={Images.arrowBackIcon} />
-      //     </TouchableOpacity>
-      //   </View>
-      //   <View
-      //     style={{
-      //       flex: 0,
-      //       flexDirection: "row",
-      //       justifyContent: "flex-start",
-      //       marginLeft: "30%",
-      //       marginRight: "10%"
-      //     }}
-      //   >
-      //     <TouchableOpacity
-      //       onPress={this.takePicture.bind(this)}
-      //       style={styles.capture}
-      //     >
-      //       <Image style={styles.btnImage} source={Images.camIcon} />
-      //     </TouchableOpacity>
-      //   </View>
-      //   <View
-      //     style={{
-      //       flex: 0,
-      //       flexDirection: "row",
-      //       justifyContent: "flex-end",
-      //       marginRight: "30%"
-      //     }}
-      //   >
-      //     <TouchableOpacity
-      //       onPress={this.changeCamera.bind(this)}
-      //       style={styles.cameraChange}
-      //     >
-      //       <Image style={styles.btnImageRotate} source={Images.camRotate} />
-      //     </TouchableOpacity>
-      //   </View>
-      // </View>
-    
-   // );
+   
   }
   changeCamera() {
     if (this.state.cameraType === "back") {

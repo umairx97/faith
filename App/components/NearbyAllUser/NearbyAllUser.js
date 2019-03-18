@@ -203,29 +203,17 @@ export default class NearbyAllUser extends React.Component {
                       style={{ flexDirection: "row", justifyContent: "center" }}
                     >
                       <Text
-                        style={{
-                          fontSize: 15,
-                          marginTop: 5,
-                          fontWeight: "bold"
-                        }}
+                       style={styles.listDataText}
                       >
                         {item.UserName}
                       </Text>
                       <Text
-                        style={{
-                          fontWeight: "bold",
-                          marginTop: 5,
-                          fontSize: 15
-                        }}
+                       style={styles.listDataText}
                       >
                         ,
                       </Text>
                       <Text
-                        style={{
-                          fontSize: 15,
-                          marginTop: 5,
-                          fontWeight: "bold"
-                        }}
+                        style={styles.listDataText}
                       >
                         {item.fullAge}
                       </Text>
@@ -253,6 +241,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     height: 175
+  },
+  listDataText:{
+    fontSize: 15,
+    marginTop: 5,
+    fontWeight: "bold"
   },
   imageContainer: {
     justifyContent: "flex-end",

@@ -151,7 +151,9 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-svg')
+    //compile project(':react-native-maps')
+    //implementation project(':react-native-maps')
+  
     implementation project(':react-native-firebase')
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation "com.google.firebase:firebase-core:16.0.6"
@@ -160,6 +162,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation "com.google.firebase:firebase-storage:16.0.5"
     
+    implementation(project(':react-native-maps')) {
+            exclude group: 'com.google.android.gms', module: 'play-services-base'
+            exclude group: 'com.google.android.gms', module: 'play-services-maps'
+        }
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation project(':react-native-video')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-android-location-services-dialog-box')

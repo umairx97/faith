@@ -6,6 +6,7 @@ import {
   FlatList,
   BackHandler,
   Image,
+  StyleSheet,
   TouchableOpacity,
   AsyncStorage,
   Alert
@@ -42,15 +43,15 @@ export default class ChatList extends Component {
       showOut: false,
       isVisible: false
     };
-    
+
     this.getCurrentUserId();
 
   }
 
   async componentDidMount() {
     chatOpen = await AsyncStorage.getItem("newChatMessage");
-   // setInterval(() => this.getCurrentUserId(), 2000);
-   //setTimeout(  this.getCurrentUserId(), 500);
+    // setInterval(() => this.getCurrentUserId(), 2000);
+    //setTimeout(  this.getCurrentUserId(), 500);
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());
   }
 
@@ -82,7 +83,7 @@ export default class ChatList extends Component {
   }
   getFriendsChatList(key, msgText, msgTime) {
     arr = [];
- var msgTrunkated;
+    var msgTrunkated;
     instance = this;
     var friendsProfile = firebase
       .database()
@@ -113,13 +114,13 @@ export default class ChatList extends Component {
         var actualTime = Moment(stillUtc)
           .local()
           .format("DD MMM YYYY h:mm:ss A");
-       // var cd = actualTime;
+        // var cd = actualTime;
         if (msgText.length > 20) {
-          msgTrunkated= msgText.substring(0, 19) + '...';
+          msgTrunkated = msgText.substring(0, 19) + '...';
         }
 
         else {
-          msgTrunkated=msgText;
+          msgTrunkated = msgText;
         }
 
         if (this.state.loginUserId != key) {
@@ -365,17 +366,14 @@ export default class ChatList extends Component {
   }
   render() {
     if (this.state.showArr === undefined || this.state.showArr.length == 0) {
-      return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 18, fontWeight: 'bold' }}>Please select user from match list</Text></View>)
+      return (<View style={styles.emptyView}><Text style={styles.emptyText}>Please select user from match list</Text></View>)
 
     }
     else {
       return (
         <View style={{ flex: 1 }}>
           <View
-            style={{
-              ...ifIphoneX({ marginTop: 30 }, { marginTop: 0 }),
-              ...ifIphoneX({ marginBottom: 30 }, { marginBottom: 0 })
-            }}
+            style={styles.mainView}
           >
 
             <FlatList
@@ -383,7 +381,7 @@ export default class ChatList extends Component {
               renderItem={({ item, index }) => (
 
                 <MenuProvider>
-                  <View style={{ margin: 5, flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                  <View style={styles.mainProviderView}>
 
                     <TouchableOpacity
                       onPress={() => {
@@ -394,29 +392,23 @@ export default class ChatList extends Component {
                         <View>
 
                           <Image
-                            style={{
-                              height: 80,
-                              width: 80,
-                              margin: 3,
-                              resizeMode: "cover",
-                              borderRadius: 40
-                            }}
+                            style={styles.chatListImage}
                             source={{ uri: item.pUrl }}
                           />
                         </View>
                         <View >
                           <View>
-                            <Text style={{ fontSize: 16, marginLeft: 10, marginTop: 10, fontWeight: '700' }}>
+                            <Text style={styles.chatListName}>
                               {item.pName}
                             </Text>
                           </View>
                           <View>
-                            <Text style={{ fontSize: 14, marginLeft: 10, fontWeight: '300' }}>
+                            <Text style={styles.chatListMessage}>
                               {item.messageText}
                             </Text>
                           </View>
                           <View>
-                            <Text style={{ fontSize: 10, marginLeft: 10 }}>
+                            <Text style={styles.chatListTime}>
                               {item.time}
                             </Text>
                           </View>
@@ -427,7 +419,7 @@ export default class ChatList extends Component {
                     <View>
                       <Menu>
                         <MenuTrigger>
-                          <Image source={Images.iconThreeDots} styles={{ height: 80, width: 80, resizeMode: 'cover' }} />
+                          <Image source={Images.iconThreeDots} styles={styles.manupopUp} />
                         </MenuTrigger>
                         <MenuOptions>
                           <MenuOption onSelect={() => this.onClickDelete(item.ids, index)} >
@@ -457,3 +449,24 @@ export default class ChatList extends Component {
 }
 
 
+const styles = StyleSheet.create({
+  emptyView: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  emptyText: { fontSize: 18, fontWeight: 'bold' },
+  mainView: {
+    ...ifIphoneX({ marginTop: 30 }, { marginTop: 0 }),
+    ...ifIphoneX({ marginBottom: 30 }, { marginBottom: 0 })
+  },
+  mainProviderView: { margin: 5, flexDirection: 'row', flex: 1, justifyContent: 'space-between' },
+  chatListImage: {
+    height: 80,
+    width: 80,
+    margin: 3,
+    resizeMode: "cover",
+    borderRadius: 40
+  },
+  chatListName: { fontSize: 16, marginLeft: 10, marginTop: 10, fontWeight: '700' },
+  chatListMessage: { fontSize: 14, marginLeft: 10, fontWeight: '300' },
+  chatListTime: { fontSize: 10, marginLeft: 10 },
+ manupopUp:{ height: 80, width: 80, resizeMode: 'cover' },
+ 
+})

@@ -109,6 +109,15 @@ export default class MyappSplash extends Component {
     }
   }
 }
+class BaseEmpty extends Component {
+  constructor() {
+    super();
+    Actions.drawer();
+  }
+  render() {
+    return <View />;
+  }
+}
 
 const styles = StyleSheet.create({
   MainContainer: {
@@ -142,12 +151,4 @@ const styles = StyleSheet.create({
     position: "absolute"
   }
 });
-class BaseEmpty extends Component {
-  constructor() {
-    super();
-    Actions.drawer();
-  }
-  render() {
-    return <View />;
-  }
-}
+

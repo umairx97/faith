@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Dimensions,
+  StyleSheet,
   TouchableHighlight
 } from "react-native";
 import firebase from "react-native-firebase";
@@ -210,35 +211,30 @@ export default class Matches extends Component {
 
                 <View style={{ flexDirection: 'column' }}>
                   <View>
-                   
-                      <ImageBackground
-                        style={{
-                          height: 200,
-                          width: Screen.width - 30,
-                          margin: 10,
-                          marginLeft: 10,
-                          marginRight: 10,
-                          resizeMode: "cover",
 
-                        }}
-                        imageStyle={{ borderRadius: 10 }}
-                        source={{ uri: item.pUrl }}
-                      >
-                        <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'white', position: 'absolute', bottom: 10, left: 10, letterSpacing: 2 }}>{item.pName}, {item.age} </Text>
-                        <TouchableOpacity  style={{position:'absolute', right:80,bottom:15, height:32, width:32, backgroundColor:'red',borderRadius:16, justifyContent:'center'}}
-                      onPress={() => { this.openChatScreen(item.ids, item.pName) }}>
-                      
-                        <Image style={{height:24,backgroundColor:'red', width:24,resizeMode:'contain', alignSelf:'center',tintColor:'white'}} source={Images.chatIcons}></Image>
-                        
-                        </TouchableOpacity>
-                        <TouchableOpacity  style={{position:'absolute', right:30,bottom:15, height:32, width:32, backgroundColor:'red',borderRadius:16, justifyContent:'center'}}
-                      onPress={() => { this.openProfile(item.ids) }}>
-                      
-                        <Image style={{height:24,backgroundColor:'red', width:24,resizeMode:'contain', alignSelf:'center',tintColor:'white'}} source={Images.eyeIcon}></Image>
-                        
-                        </TouchableOpacity>
-                        </ImageBackground>
-                  
+                    <ImageBackground
+                      style={styles.mainImage}
+                      imageStyle={{ borderRadius: 10 }}
+                      source={{ uri: item.pUrl }}
+                    >
+                      <Text style={styles.mainTextStyle}>
+                        {item.pName.length > 10
+                          ? item.pName.substring(0, 10) + "..."
+                          : item.pName}, {item.age} </Text>
+                      <TouchableOpacity style={styles.openChatButton}
+                        onPress={() => { this.openChatScreen(item.ids, item.pName) }}>
+
+                        <Image style={styles.iconStyle} source={Images.chatIcons}></Image>
+
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.openProfileIcon}
+                        onPress={() => { this.openProfile(item.ids) }}>
+
+                        <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
+
+                      </TouchableOpacity>
+                    </ImageBackground>
+
                   </View>
                   {/* <View style={{ flexDirection: "column", marginTop: 15 }}>
                       <View>
@@ -308,3 +304,48 @@ export default class Matches extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  mainTextStyle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    position: 'absolute',
+    bottom: 10, left: 10,
+    letterSpacing: 2
+  },
+  mainImage: {
+    height: 200,
+    width: Screen.width - 30,
+    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    resizeMode: "cover",
+
+  },
+  openChatButton: {
+    position: 'absolute',
+    right: 80, bottom: 15,
+    height: 32,
+    width: 32,
+    backgroundColor: 'red',
+    borderRadius: 16,
+    justifyContent: 'center'
+  },
+  iconStyle: {
+    height: 24,
+    backgroundColor: 'red',
+    width: 24, resizeMode: 'contain',
+    alignSelf: 'center',
+    tintColor: 'white'
+  },
+  openProfileIcon: {
+    position: 'absolute',
+    right: 30,
+    bottom: 15,
+    height: 32,
+    width: 32,
+    backgroundColor: 'red',
+    borderRadius: 16,
+    justifyContent: 'center'
+  },
+})

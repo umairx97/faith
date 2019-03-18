@@ -503,7 +503,7 @@ export default class SignUp extends Component {
                       }}
                     >
                       <Text>Date of Birth</Text>
-                      <TouchableOpacity onPress={this._showDateTimePicker}>
+                       <TouchableOpacity onPress={this._showDateTimePicker}>
                         <Text
                           placeholder="Plz, Select your date of birth"
                           style={{
@@ -561,8 +561,6 @@ export default class SignUp extends Component {
                         }}
                       />
                     </View>
-                    
-                    
                     <Dialog.Container visible={this.state.dialogVisible}>
                       <Dialog.Title>Success</Dialog.Title>
                       <Dialog.Description>

@@ -14,7 +14,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <React/RCTRootView.h>
-
+@import GoogleMaps;
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,7 +23,7 @@
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
   [RNFirebaseNotifications configure];
   NSURL *jsCodeLocation;
-
+[GMSServices provideAPIKey:@"AIzaSyCWtKlK9y2eb7OKO3If8txu7OTaLpJizoo"];
  [[FBSDKApplicationDelegate sharedInstance] application:application
     didFinishLaunchingWithOptions:launchOptions];
 

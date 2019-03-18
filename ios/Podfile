@@ -2,6 +2,11 @@ target 'FaithMeetsLove' do
 
 
 pod 'GoogleSignIn'
+
+pod 'GoogleMaps'
+pod 'Google-Maps-iOS-Utils', '2.1.0'
+pod 'GoogleUtilities', '5.3.7'
+
 #pod 'Firebase/Core'
 pod 'FBSDKLoginKit'
 pod 'Firebase/Core', '~> 5.9.0'
@@ -9,16 +14,28 @@ pod 'Firebase/Auth', '~> 5.9.0'
 pod 'Firebase/Messaging', '~> 5.9.0'
 pod 'Firebase/Database', '~> 5.9.0'
 pod 'Firebase/RemoteConfig', '~> 5.9.0'
+
 pod 'GoogleAppMeasurement', '~> 5.2.0'
 pod 'Firebase/Firestore', '~> 5.9.0'
 pod 'Firebase/Storage', '~> 5.9.0'
-pod 'React', :path => '../node_modules/react-native'
+#pod 'React', :path => '../node_modules/react-native'
 pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+pod 'React', :path => '../node_modules/react-native', :subspecs => [
+  'Core',
+  'CxxBridge', # Include this for RN >= 0.47
+  'RCTImage' # <- Add this line
+]
+
+
 
 pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
 
 
-  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
 
 end

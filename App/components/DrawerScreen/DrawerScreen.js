@@ -335,6 +335,9 @@ export default class DrawerScreen extends React.Component {
   onMatchPressed = () => {
     Actions.matchProfile();
   };
+  onEventPressed=()=>{
+    Actions.DiscoverEvent();
+  }
   render() {
     return (
       <ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -485,7 +488,7 @@ export default class DrawerScreen extends React.Component {
               </View>
             </View>
 
-            <View style={styles.visitorsView}>
+            <View style={styles.likesView}>
               <View
                 style={{
                   flexDirection: "row",
@@ -499,7 +502,7 @@ export default class DrawerScreen extends React.Component {
                   />
                 </View>
                 <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.visitsText}>Information center</Text>
+                  <Text style={styles.likesText}>Information center</Text>
                 </TouchableOpacity>
                 <View
                   style={{
@@ -510,7 +513,7 @@ export default class DrawerScreen extends React.Component {
                 >
                   <Image
                     source={Images.shapeArrow}
-                    style={styles.shapeTwoImage}
+                    style={styles.shapeImage}
                   />
                 </View>
               </View>
@@ -547,9 +550,33 @@ export default class DrawerScreen extends React.Component {
               </View>
             </View>
 
+            <View style={styles.likesView}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "stretch"
+                }}
+              >
+                <View style={styles.rectangle2View}>
+                  <Image source={Images.userGroups} style={styles.logoutImage} />
+                </View>
+                <TouchableOpacity onPress={this.onEventPressed}>
+                  <Text style={styles.likesText}>Events</Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image source={Images.shapeArrow} style={styles.shapeImage} />
+                </View>
+              </View>
+            </View>
           
 
-            <View style={styles.visitorsView}>
+            {/* <View style={styles.likesView}>
               <View
                 style={{
                   flexDirection: "row",
@@ -562,8 +589,8 @@ export default class DrawerScreen extends React.Component {
                     style={styles.logoutImage}
                   />
                 </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.visitsText}>Events</Text>
+                <TouchableOpacity onPress={this.onEventPressed}>
+                  <Text style={styles.likesText}>Events</Text>
                 </TouchableOpacity>
                 <View
                   style={{
@@ -574,7 +601,7 @@ export default class DrawerScreen extends React.Component {
                 >
                   <Image
                     source={Images.shapeArrow}
-                    style={styles.shapeTwoImage}
+                    style={styles.shapeImage}
                   />
                 </View>
               </View>
@@ -609,7 +636,7 @@ export default class DrawerScreen extends React.Component {
                   </View>
                 </View>
               </View>
-            </View>
+            </View> */}
 
         
 
@@ -637,17 +664,18 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
+          
           </View>
 
           <View style={styles.panel2View}>
-            <View style={styles.walletView}>
+            <View style={styles.levelView}>
               <View
                 style={{
                   flexDirection: "row",
                   alignSelf: "stretch"
                 }}
               >
-                <View style={styles.rectangle2FourView}>
+                <View style={styles.rectangle2TwoView}>
                   <Image
                     source={Images.walletIcon}
                     style={styles.logoutImage}
@@ -697,7 +725,7 @@ export default class DrawerScreen extends React.Component {
                 >
                   <Image
                     source={Images.shapeArrow}
-                    style={styles.shapeSixImage}
+                    style={styles.shapeFiveImage}
                   />
                 </View>
               </View>
@@ -732,7 +760,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={styles.friendsView}>
+            <View style={styles.blacklistView}>
               <View
                 style={{
                   flexDirection: "row",
@@ -839,7 +867,7 @@ export default class DrawerScreen extends React.Component {
                   height: "100%"
                 }}
               >
-                <View style={styles.iconsLikeCopySixView}>
+                <View style={styles.iconsLikeCopyFourView}>
                   <View
                     style={{
                       flexDirection: "row",
@@ -857,7 +885,7 @@ export default class DrawerScreen extends React.Component {
                 justifyContent: "flex-end"
               }}
             >
-              <View style={styles.settingsView}>
+              <View style={styles.blacklistView}>
                 <View
                   style={{
                     flexDirection: "row",
@@ -944,25 +972,8 @@ const styles = StyleSheet.create({
   likesView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 35,
-
     marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
-  },
-  visitorsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 35,
-
-    marginTop: Platform.OS === "ios" ? 9 : 9,
-    marginRight: 1
-  },
-  groupsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 22,
-    marginLeft: 14,
-    marginRight: 18,
-    marginBottom: 14,
-    marginTop: Platform.OS === "ios" ? 10 : 10,
-    justifyContent: "center"
   },
   rectangle2View: {
     borderRadius: 8,
@@ -981,6 +992,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginTop: 3
   },
+  
   shapeImage: {
     resizeMode: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -989,49 +1001,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginRight: 17
   },
-  iconsLikeView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 17,
-    marginTop: 3
-  },
-  rectangleView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  colorWhiteView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    height: 0
-  },
-  colorWhiteTwoView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    height: 0
-  },
   rectangle2TwoView: {
     borderRadius: 8,
     width: 22,
     height: 22,
     marginLeft: 14
-  },
-  visitsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 12,
-    marginTop: 3
-  },
-  shapeTwoImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
   },
   iconsLikeCopyView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1050,57 +1024,12 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0
   },
-  rectangle2ThreeView: {
-    borderRadius: 8,
-    width: 22,
-    height: 22
-  },
-  groupsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 12
-  },
-  shapeFourImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12
-  },
-  iconsLikeCopyTwoView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 3
-  },
-  rectangleThreeView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  groupsImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
   logoutImage: {
     resizeMode: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     alignSelf: "center",
     width: 15,
-
     height: 15
-  },
-  walletView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 35,
-    marginLeft: 1,
-    marginTop: 9,
-    marginRight: 1
   },
   levelView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1109,30 +1038,14 @@ const styles = StyleSheet.create({
     marginTop: 9,
     marginRight: 1
   },
-  friendsView: {
+  
+  blacklistView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 35,
     marginTop: 9,
     marginRight: 1
   },
-  blacklistView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginTop: 10,
-    marginRight: 1
-  },
-  settingsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 35,
-    marginRight: 1,
-    marginTop: 9
-  },
-  rectangle2FourView: {
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 15
-  },
+  
   myWalletText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(38, 38, 40)",
@@ -1152,23 +1065,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginRight: 17
   },
-  iconsLikeCopyThreeView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 18,
-    marginTop: 3
-  },
-  rectangleFourView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  walletImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
   rectangle2FiveView: {
     borderRadius: 8,
     width: 22,
@@ -1186,14 +1082,7 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginTop: 3
   },
-  shapeSixImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
+  
   iconsLikeCopyFourView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 16,
@@ -1201,6 +1090,7 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     marginTop: 3
   },
+  
   rectangleFiveView: {
     backgroundColor: "rgba(255, 0, 0, 0.0)",
     height: 0
@@ -1228,31 +1118,6 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginTop: 3
   },
-  shapeEightImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopyFiveView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 19,
-    marginTop: 3
-  },
-  rectangleSixView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  friendsImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
   rectangle2SevenView: {
     borderRadius: 8,
     width: 22,
@@ -1278,23 +1143,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginRight: 17
   },
-  iconsLikeCopySixView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 19,
-    marginTop: 3
-  },
-  rectangleSevenView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  blacklistImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
   rectangle2EightView: {
     borderRadius: 8,
     width: 22,
@@ -1315,31 +1163,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 18
   },
-  shapeTenImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopySevenView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 19,
-    marginTop: 3
-  },
-  rectangleEightView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  settingsImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
   ovalImage: {
     resizeMode: "cover",
     alignSelf: "center",
@@ -1349,14 +1172,6 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     marginLeft: 19,
     marginTop: 14
-  },
-  iconsEditImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 24,
-    height: 24,
-    marginTop: 47,
-    marginRight: 15
   },
   landonGibsonText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1371,86 +1186,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 4
   },
-  followTabView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 265,
-    height: 44,
-    marginBottom: 8,
-    alignSelf: "center"
-  },
-  vipLevelImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 28,
-    height: 28,
-    marginLeft: 82,
-    marginTop: 89
-  },
-  visitorsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(194, 196, 202)",
-    fontSize: 10,
-    fontStyle: "normal",
-    fontWeight: "400",
-    textAlign: "center",
-    letterSpacing: 0,
-    width: 50
-  },
-  likesTwoText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(194, 196, 202)",
-    fontSize: 10,
-    fontStyle: "normal",
-    fontWeight: "400",
-    textAlign: "center",
-    letterSpacing: 0,
-    width: 31,
-    alignSelf: "center"
-  },
-  textText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 20,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    letterSpacing: 0,
-    marginLeft: 3,
-    marginTop: 20
-  },
-  matchedText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(194, 196, 202)",
-    fontSize: 10,
-    fontStyle: "normal",
-    fontWeight: "400",
-    textAlign: "center",
-    letterSpacing: 0,
-    width: 55
-  },
-  textTwoText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 20,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    letterSpacing: 0,
-    marginTop: 20,
-    alignSelf: "center"
-  },
-  textThreeText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 20,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    letterSpacing: 0,
-    marginTop: 20,
-    marginRight: 16,
-    alignSelf: "flex-end"
-  },
   barView: {
     backgroundColor: "rgb(248, 248, 248)",
     shadowColor: "rgba(0, 0, 0, 0.3)",
@@ -1459,39 +1194,10 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0
   },
-  homeIndicatorOnLightImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  discoverImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  neabyImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
   logoutImage: {
     resizeMode: "stretch",
     width: 20,
     height: 20
-  },
-  favoriteView: {
-    backgroundColor: "rgb(193, 192, 201)",
-    width: 0,
-    height: 0
-  },
-  messageImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
   },
   profileImage: {
     resizeMode: "center",

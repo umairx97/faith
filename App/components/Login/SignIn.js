@@ -397,55 +397,25 @@ export default class SignIn extends Component {
                         <RkButton
                           rkType="rounded"
                           style={styles.googleButton}
-                          // onPress={props.handleSubmit}
+                         
                           onPress={() => {
                             this._onSubmit();
                           }}
                         >
                           Login
                         </RkButton>
-                        {/* <AnimateLoadingButton
-                        ref={c => (this.loadingButton = c)}
-                        width={200}
-                        height={48}
-                        title="Login"
-                        titleFontSize={16}
-                        titleColor="rgb(255,255,255)"
-                        backgroundColor="rgb(252, 56, 80)"
-                        borderRadius={24}
-                        onPress={this._onSubmit.bind(this)}
-                      /> */}
-
+                     
                         <View style={{ flexDirection: "row" }}>
                           <View
-                            style={{
-                              backgroundColor: "black",
-                              height: 2,
-                              flex: 1,
-                              alignSelf: "center",
-                              marginLeft: "12%",
-                              marginTop: "4%"
-                            }}
+                            style={styles.orLoginView}
                           />
                           <Text
-                            style={{
-                              alignSelf: "center",
-                              paddingHorizontal: 5,
-                              fontSize: 14,
-                              marginTop: "4%"
-                            }}
+                            style={styles.orLoginText}
                           >
                             Or Login With
                           </Text>
                           <View
-                            style={{
-                              backgroundColor: "black",
-                              height: 2,
-                              flex: 1,
-                              alignSelf: "center",
-                              marginRight: "12%",
-                              marginTop: "4%"
-                            }}
+                            style={styles.socialLogin}
                           />
                         </View>
                         <View
@@ -458,13 +428,7 @@ export default class SignIn extends Component {
                           <View style={{ flex: 1 }}>
                             <RkButton
                               rkType="rounded"
-                              style={[
-                                {
-                                  width: "100%",
-                                  marginRight: "2%",
-                                  marginVertical: 8
-                                }
-                              ]}
+                              style={styles.facebookRk}
                             >
                               <Icon
                                 style={[
@@ -489,14 +453,7 @@ export default class SignIn extends Component {
                                 this._onGoogleLogin();
                               }}
                               rkType="rounded"
-                              style={[
-                                {
-                                  width: "100%",
-                                  marginLeft: "2%",
-                                  marginVertical: 8,
-                                  backgroundColor: "#dd4b39"
-                                }
-                              ]}
+                              style={styles.googleRk}
                             >
                               <Icon
                                 style={[
@@ -531,6 +488,39 @@ const styles = StyleSheet.create({
 
     backgroundColor: "#FFFFFF"
   },
+  orLoginView:{
+    backgroundColor: "black",
+    height: 2,
+    flex: 1,
+    alignSelf: "center",
+    marginLeft: "12%",
+    marginTop: "4%"
+  },
+  facebookRk:{
+    width: "100%",
+    marginRight: "2%",
+    marginVertical: 8
+  },
+  orLoginText:{
+    alignSelf: "center",
+    paddingHorizontal: 5,
+    fontSize: 14,
+    marginTop: "4%"
+  },
+  googleRk: {
+    width: "100%",
+    marginLeft: "2%",
+    marginVertical: 8,
+    backgroundColor: "#dd4b39"
+  },
+  socialLogin:{
+    backgroundColor: "black",
+    height: 2,
+    flex: 1,
+    alignSelf: "center",
+    marginRight: "12%",
+    marginTop: "4%"
+  },
   loading: {
     position: "absolute",
     left: 0,
@@ -542,14 +532,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  innerView1: {
-    flex: 1,
-    padding: "10%",
-    width: "100%",
-    height: "100%",
-    marginTop: "5%",
-    flexDirection: "column"
-  },
+ 
   forgetPwd: {
     width: "100%",
     textAlign: "right",
@@ -574,11 +557,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: "100%",
     color: "#000000"
-    // borderColor: "red",
-    // marginTop: Platform.OS === "ios" ? 10 + "%" : 0,
-    // borderBottomWidth: 1
-
-    // marginTop: Platform.OS === "ios" ? 10 + "%" : 0
+  
   },
   formInput: {
     width: "100%",
@@ -617,30 +596,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: "#FFFFFF",
-    flex: 1
-  },
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 15,
-    justifyContent: "center"
-  },
-  buttonContainer: {
-    height: 45,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30
-  },
-  loginButton: {
-    backgroundColor: "#00b5ec"
-  },
+  
   loginText: {
     color: "white"
   },

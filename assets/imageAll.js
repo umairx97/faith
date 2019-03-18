@@ -21,6 +21,7 @@ export const Images = {
   matchMaking: require("./images/matchMaking.png"),
   visitProfile: require("./images/visitProfile.png"),
   chatIcons: require("./images/chatIcons.png"),
+  //eventIcons:require("./images/eventIcon.png"),
   shareIcons: require("./images/shareIcons.png"),
   addIcon: require("./images/addIcon.png"),
   camIcon: require("./images/camIcon.png"),
@@ -39,5 +40,6 @@ export const Images = {
   statusIcon:require("./images/statusIcon.png"),
   filterSvgIcon:require("./images/svgFilter.svg"),
   genderIcon: require("./images/genderIcons.png"),
-  eyeIcon:require("./images/eyeIcon.png")
+  eyeIcon:require("./images/eyeIcon.png"),
+  addEvent:require("./images/addEventIcon.png")
 };

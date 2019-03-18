@@ -58,11 +58,7 @@ export default class Login extends React.Component {
           style={styles.migoLogoImage}
         />
         <View
-          style={{
-            flex: 1,
-            justifyContent: "flex-end",
-            marginBottom: 36
-          }}
+          style={styles.signUpView}
         >
           <View>
             <RkButton
@@ -104,21 +100,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  loginView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    flex: 1
-  },
-  bgWhiteImageLinearGradient: {
-    width: 726,
-    height: 834,
-    marginLeft: -107,
-    marginTop: -18,
-    marginRight: -244
-  },
-  bgWhiteImage: {
-    resizeMode: "contain",
-    width: "100%",
-    height: "100%"
+  signUpView:{
+    flex: 1,
+    justifyContent: "flex-end",
+    marginBottom: 36
   },
 
   facebookButton: {
@@ -133,18 +118,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     textAlign: "center"
   },
-  googleButtonText: {
-    color: "rgb(255, 255, 255)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    lineHeight: 0,
-    letterSpacing: 0
-  },
-  googleButtonImage: {
-    resizeMode: "contain"
-  },
   googleButton: {
     backgroundColor: "rgb(252, 56, 80)",
     borderRadius: 24,
@@ -155,25 +128,6 @@ const styles = StyleSheet.create({
     height: 48,
     marginBottom: 40,
     alignSelf: "center"
-  },
-  byClickingStartYText: {
-    color: "rgb(0,0,0)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    lineHeight: 22,
-    letterSpacing: -0.36,
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: "70%",
-    alignSelf: "center",
-    marginBottom: 3
-  },
-  iphoneXHomeIndicatorHomeIndicatorOnLightImage: {
-    resizeMode: "stretch",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 375,
-    height: 34
   },
   migoLogoImage: {
     resizeMode: "contain",

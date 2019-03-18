@@ -21,11 +21,7 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
-// Prepare Blob support
-// const Blob = RNFetchBlob.polyfill.Blob;
-// const fs = RNFetchBlob.fs;
-// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-// window.Blob = Blob;
+
 
 
 var type = "image/jpg";
@@ -672,30 +668,22 @@ export default class ProfileCopy extends Component {
             </View>
             <View style={{ marginTop: 10 }}>
               <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
-                style={{ height: 25, width: 25, tintColor: 'grey' }} />
-                <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>From : {this.state.permanentLocation}</Text></View>
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>From : {this.state.permanentLocation}</Text></View>
             </View>
             <View style={{ marginTop: 10 }}>
               <View style={{ flexDirection: 'row' }}><Image source={Images.statusIcon}
-                style={{ height: 25, width: 25, tintColor: 'grey' }} />
-                <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
             </View>
             <View style={{ marginTop: 10 }}>
               <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={{ height: 25, width: 25, tintColor: 'grey' }} />
-                <Text style={{ marginLeft: 10, marginTop: 5, marginBottom: 10 }}>Gender : {this.state.genderInfo}</Text></View>
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
             </View>
           </View>
         </View>
-        <View style={{
-          backgroundColor: "rgb(255, 255, 255)",
-
-          margin: 8,
-          borderRadius: 8,
-          shadowColor: "rgba(0, 0, 0, 0.08)",
-          shadowRadius: 5,
-          shadowOpacity: 1,
-        }}>
+        <View style={styles.addPersonalView}>
           <View styel={{ margin: 10 }}><TouchableOpacity onPress={() => { this.OnAddPersonalInfo() }}>
             <View style={{ backgroundColor: '#DCDCDC', borderRadius: 6, height: 50, width: Screen.width - 20, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 17, fontWeight: '700' }}> + Add Personal Info</Text></View>
           </TouchableOpacity>
@@ -897,8 +885,8 @@ export default class ProfileCopy extends Component {
           <View style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={styles.container1}>
 
-              <View style={{ alignContent: 'center', marginLeft: 30, marginRight: 30 }}>
-                <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 30 }}
+              <View style={styles.whereDataView}>
+                <TextInput style={styles.whereTextInput}
                   onChangeText={(text) => this.setState({ permanentLocation: text })} placeholder="Enter where are you from?"
                 />
                 <Button title="Save your location" onPress={() => { this.onSaveLocation() }} />
@@ -992,11 +980,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(249, 249, 249)",
     flex: 1
   },
+  whereTextInput:{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 30 },
   container1: {
     flex: 1,
     justifyContent: 'center',
 
   },
+  whereDataView:{ alignContent: 'center', marginLeft: 30, marginRight: 30 },
   valueText: {
     fontSize: 18,
     marginBottom: 50,
@@ -1019,6 +1009,16 @@ const styles = StyleSheet.create({
   buttonInner: {
     marginBottom: 15,
   },
+  addPersonalView:{
+    backgroundColor: "rgb(255, 255, 255)",
+    margin: 8,
+    borderRadius: 8,
+    shadowColor: "rgba(0, 0, 0, 0.08)",
+    shadowRadius: 5,
+    shadowOpacity: 1,
+  },
+  personalDataText:{ marginLeft: 10, marginTop: 5, marginBottom: 10 },
+  personalDataView:{ height: 25, width: 25, tintColor: 'grey' },
   labelText: {
     color: '#333',
     fontSize: 15,
@@ -1039,454 +1039,9 @@ const styles = StyleSheet.create({
   labelSelected: {
     color: '#FFF',
   },
-  facebookButton: {
-    flex: 1,
-    backgroundColor: "rgb(38, 114, 203)",
-    borderRadius: 24,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 316,
-    height: 48,
-    marginBottom: 33,
-    marginTop: 200,
-    alignSelf: "center"
-  },
-  navBarViewLinearGradient: {
-    height: 231
-  },
   navBarView: {
     width: "100%",
     height: "100%"
-  },
-  iphoneXBarsTabBar5ItemsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 83
-  },
-  accountInforView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    borderRadius: 8,
-    shadowColor: "rgba(0, 0, 0, 0.08)",
-    shadowRadius: 5,
-    shadowOpacity: 1,
-    height: 212,
-    marginLeft: 18,
-    marginTop: 86,
-    marginRight: 16
-  },
-  panel1View: {
-    backgroundColor: "rgb(255, 255, 255)",
-    borderRadius: 8,
-    shadowColor: "rgba(0, 0, 0, 0.08)",
-    shadowRadius: 5,
-    shadowOpacity: 1,
-    height: 152,
-    marginLeft: 19,
-    marginTop: 15,
-    marginRight: 15
-  },
-  panel2View: {
-    backgroundColor: "rgb(255, 255, 255)",
-    borderRadius: 8,
-    shadowColor: "rgba(0, 0, 0, 0.08)",
-    shadowRadius: 5,
-    shadowOpacity: 1,
-    height: 256,
-    marginLeft: 17,
-    marginTop: 15,
-    marginRight: 16
-  },
-  likesView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginTop: 14,
-    marginRight: 1
-  },
-  visitorsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginTop: 15,
-    marginRight: 1
-  },
-  groupsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 22,
-    marginLeft: 14,
-    marginRight: 18,
-    marginBottom: 14,
-    justifyContent: "center"
-  },
-  rectangle2View: {
-    backgroundColor: "rgb(237, 74, 71)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 14
-  },
-  likesText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 12,
-    marginTop: 3
-  },
-  shapeImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 17,
-    marginTop: 3
-  },
-  rectangleView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  colorWhiteView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    height: 0
-  },
-  colorWhiteTwoView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    height: 0
-  },
-  rectangle2TwoView: {
-    backgroundColor: "rgb(80, 227, 194)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 14
-  },
-  visitsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 12,
-    marginTop: 3
-  },
-  shapeTwoImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopyView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 17,
-    marginTop: 3
-  },
-  rectangleTwoView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  shapeThreeImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  rectangle2ThreeView: {
-    backgroundColor: "rgba(144, 19, 254, 0.92)",
-    borderRadius: 8,
-    width: 22,
-    height: 22
-  },
-  groupsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 12
-  },
-  shapeFourImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12
-  },
-  iconsLikeCopyTwoView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 3
-  },
-  rectangleThreeView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  groupsImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  walletView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginLeft: 1,
-    marginTop: 14,
-    marginRight: 1
-  },
-  levelView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 36,
-    marginLeft: 1,
-    marginTop: 15,
-    marginRight: 1
-  },
-  friendsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 38,
-    marginTop: 15,
-    marginRight: 1
-  },
-  blacklistView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 38,
-    marginTop: 13,
-    marginRight: 1
-  },
-  settingsView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 38,
-    marginRight: 1
-  },
-  rectangle2FourView: {
-    backgroundColor: "rgb(240, 85, 34)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 15
-  },
-  myWalletText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 11,
-    marginTop: 3
-  },
-  shapeFiveImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopyThreeView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 18,
-    marginTop: 3
-  },
-  rectangleFourView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  walletImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  rectangle2FiveView: {
-    backgroundColor: "rgb(74, 144, 226)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 15
-  },
-  vipCenterText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 11,
-    marginTop: 3
-  },
-  shapeSixImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopyFourView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 18,
-    marginTop: 3
-  },
-  rectangleFiveView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  shapeSevenImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  rectangle2SixView: {
-    backgroundColor: "rgba(126, 211, 33, 0.84)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 16
-  },
-  findFriendsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 11,
-    marginTop: 3
-  },
-  shapeEightImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopyFiveView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 19,
-    marginTop: 3
-  },
-  rectangleSixView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  friendsImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  rectangle2SevenView: {
-    backgroundColor: "rgb(74, 74, 74)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 16
-  },
-  blacklistText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 11,
-    marginTop: 3
-  },
-  shapeNineImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopySixView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 19,
-    marginTop: 3
-  },
-  rectangleSevenView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  blacklistImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  rectangle2EightView: {
-    backgroundColor: "rgb(218, 217, 226)",
-    borderRadius: 8,
-    width: 22,
-    height: 22,
-    marginLeft: 16
-  },
-  settingsText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 15,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0,
-    marginLeft: 11,
-    marginTop: 3
-  },
-  shapeTenImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 7,
-    height: 12,
-    marginTop: 5,
-    marginRight: 17
-  },
-  iconsLikeCopySevenView: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 16,
-    height: 16,
-    marginLeft: 19,
-    marginTop: 3
-  },
-  rectangleEightView: {
-    backgroundColor: "rgba(255, 0, 0, 0.0)",
-    height: 0
-  },
-  settingsImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
   },
   ovalImage: {
     resizeMode: 'cover',
@@ -1497,39 +1052,12 @@ const styles = StyleSheet.create({
     marginTop: 22,
     borderRadius: 65,
   },
-  iconsEditImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 24,
-    height: 24,
-    marginTop: 47,
-    marginRight: 15
-  },
-  landonGibsonText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(74, 74, 74)",
-    fontSize: 24,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
-    letterSpacing: 0.23,
-    marginTop: 42,
-    marginRight: 4
-  },
   followTabView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 265,
     height: 44,
     marginBottom: 8,
     alignSelf: "center"
-  },
-  vipLevelImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 28,
-    height: 28,
-    marginLeft: 82,
-    marginTop: 89
   },
   visitorsText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1541,17 +1069,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     width: 60,
     margin: 5
-  },
-  likesTwoText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(194, 196, 202)",
-    fontSize: 10,
-    fontStyle: "normal",
-    fontWeight: "400",
-    textAlign: "center",
-    letterSpacing: 0,
-    width: 31,
-    alignSelf: "center"
   },
   textText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1575,17 +1092,6 @@ const styles = StyleSheet.create({
     width: 70,
     margin: 5
   },
-  textTwoText: {
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    color: "rgb(38, 38, 40)",
-    fontSize: 20,
-    fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "center",
-    letterSpacing: 0,
-    marginTop: 20,
-    alignSelf: "center"
-  },
   textThreeText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(38, 38, 40)",
@@ -1603,35 +1109,6 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.3)",
     shadowRadius: 0,
     shadowOpacity: 1,
-    width: 0,
-    height: 0
-  },
-  homeIndicatorOnLightImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  discoverImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  neabyImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 0,
-    height: 0
-  },
-  favoriteView: {
-    backgroundColor: "rgb(193, 192, 201)",
-    width: 0,
-    height: 0
-  },
-  messageImage: {
-    resizeMode: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 0,
     height: 0
   },

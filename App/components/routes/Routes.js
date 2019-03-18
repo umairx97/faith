@@ -28,14 +28,34 @@ import ChatList from "../Chat/ChatList";
 import FullScreenVideo from "../Chat/FullScreenVideo";
 import FullScreenCamera from "../Chat/FullScreenCamera";
 import GalleryView from "../Chat/GalleryView";
-import SvgUri from 'react-native-svg-uri';
+
+import DiscoverEvents from "../Events/DiscoverEvents";
+import AddEvent from "../Events/AddEvent";
+import MyEvent from "../Events/MyEvent";
+import EventFilter from "../Events/EventFilter";
 
 export default class Route extends Component {
   getIcon = () => {
     return (
       <Image
-        style={{ height: 20, width: 20, resizeMode: "contain", tintColor:'black' }}
+        style={{ height: 20, width: 20, resizeMode: "contain", tintColor: 'black' }}
         source={require("../../../assets/images/discover.png")}
+      />
+    );
+  };
+  getIconEvent = () => {
+    return (
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        source={require("../../../assets/images/addEvent.png")}
+      />
+    );
+  };
+  getAddIconEvent = () => {
+    return (
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        source={require("../../../assets/images/addEventIcon.png")}
       />
     );
   };
@@ -159,6 +179,48 @@ export default class Route extends Component {
 
               </Scene>
             </Scene>
+            <Scene key="event" hideNavBar={true} replace={true}>
+              <Scene key="homeTAB" tabs={true} hideNavBar={true}>
+                {/* <Scene
+                  key="DiscoverEvent"
+                  title="Discover"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={DiscoverEvents}
+                /> */}
+
+                <Scene
+                  key="DiscoverEvent"
+                  title="Discover"
+                  icon={this.getIcon}
+                  hideNavBar={true}
+                  component={DiscoverEvents}
+                />
+                <Scene
+                  key="myEvent"
+                  title="MyEvent"
+                  icon={this.getIconEvent}
+                  hideNavBar={true}
+                  component={MyEvent}
+                />
+
+                <Scene
+                  key="AddEvent"
+                  icon={this.getAddIconEvent}
+                  hideNavBar={true}
+                  component={AddEvent}
+                />
+
+                <Scene key="Filter"
+                  title="Filter"
+                  hideNavBar={true}
+                  icon={this.getFilterIcon}
+                  component={EventFilter}
+                />
+
+              </Scene>
+            </Scene>
+
             <Scene
               key="chat"
               icon={this.getIcon}

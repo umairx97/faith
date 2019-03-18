@@ -893,24 +893,12 @@ firebase
                   >
                     <Image
                       source={Images.arrowBackIcon}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        marginTop: 10,
-                        marginLeft: 5,
-                        tintColor: "white"
-                      }}
+                      style={styles.imageArrowBack}
                     />
                   </TouchableOpacity>
                 </View>
                 <View><TouchableOpacity onPress={() => { this.showFriendProfile() }}><Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: "600",
-                    marginTop: 12,
-                    marginLeft: 8,
-                    color: "white"
-                  }}
+                  style={styles.friendProfileViewShow}
                 >{this.state.friendProfileName}</Text></TouchableOpacity>
                 </View>
               </View>
@@ -920,12 +908,7 @@ firebase
                   <MenuTrigger>
                     <Image
                       source={Images.iconThreeDots}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        marginTop: 8,
-                        tintColor: "white"
-                      }}
+                      style={styles.imageTriggerView}
                     />
                   </MenuTrigger>
                   <MenuOptions>
@@ -959,17 +942,7 @@ firebase
           </View>
 
           <View
-            style={{
-              ...ifIphoneX({ bottom: 101 }, { bottom: 41 }),
-              ...ifIphoneX({ top: 85 }, { top: 51 }),
-              position: "absolute",
-              width: Screen.width - 2,
-              marginLeft: 2,
-              ...ifIphoneX(
-                { height: Screen.height - 135 },
-                { height: Screen.height - 85 }
-              )
-            }}
+            style={styles.gifetedChatView}
           >
             <GiftedChat
               messages={this.state.messages}
@@ -1043,12 +1016,7 @@ firebase
           </Dialog.Container>
 
           <View
-            style={{
-              ...ifIphoneX({ bottom: 60 }, { bottom: 40 }),
-              position: "absolute",
-              width: Screen.width,
-              height: 1
-            }}
+            style={styles.bottomView}
           />
           <View style={styles.positionViewBottom}>
             <TouchableOpacity
@@ -1093,6 +1061,32 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     flexDirection: "column"
   },
+  imageArrowBack:{
+    height: 30,
+    width: 30,
+    marginTop: 10,
+    marginLeft: 5,
+    tintColor: "white"
+  },
+  friendProfileViewShow:{
+    fontSize: 20,
+    fontWeight: "600",
+    marginTop: 12,
+    marginLeft: 8,
+    color: "white"
+  },
+  bottomView:{
+    ...ifIphoneX({ bottom: 60 }, { bottom: 40 }),
+    position: "absolute",
+    width: Screen.width,
+    height: 1
+  },
+  imageTriggerView:{
+    height: 30,
+    width: 30,
+    marginTop: 8,
+    tintColor: "white"
+  },
   positionViewBottom: {
     position: "absolute",
     alignItems: "center",
@@ -1110,5 +1104,16 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginLeft: "15%"
+  },
+  gifetedChatView:{
+    ...ifIphoneX({ bottom: 101 }, { bottom: 41 }),
+    ...ifIphoneX({ top: 85 }, { top: 51 }),
+    position: "absolute",
+    width: Screen.width - 2,
+    marginLeft: 2,
+    ...ifIphoneX(
+      { height: Screen.height - 135 },
+      { height: Screen.height - 85 }
+    )
   }
 });

@@ -201,11 +201,7 @@ export default class NearbyFilters extends React.Component {
     const { selectedIndex } = this.state;
     return (
       <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          ...ifIphoneX({ marginTop: 30 })
-        }}
+        style={styles.mainViewContainer}
       >
         <View style={styles.toplineView}>
           <Text style={styles.filterText}>Filter</Text>
@@ -241,13 +237,7 @@ export default class NearbyFilters extends React.Component {
                   <Text style={styles.locationText}>Location</Text>
                 </View>
                 <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    height: 30,
-                    backgroundColor: "#fff"
-                  }}
+                  style={styles.locationViewText}
                 >
                   {/* <Text style={styles.currentLocationText}>Current Location</Text> */}
 
@@ -293,11 +283,7 @@ export default class NearbyFilters extends React.Component {
                 >
                   <Text style={styles.ageRangeText}>Age range</Text>
                   <View
-                    style={{
-                      flexDirection: "row",
-                      flex: 1,
-                      justifyContent: "flex-end"
-                    }}
+                    style={styles.rangeViewValue}
                   >
                     <Text style={styles.textText}>
                       {this.state.values[0]}-{this.state.values[1]}
@@ -339,16 +325,32 @@ export default class NearbyFilters extends React.Component {
 const styles = StyleSheet.create({
   nearbyFiltersView: {
     backgroundColor: "rgb(255, 255, 255)",
-
     flex: 1
+  },
+  mainViewContainer:{
+    flex: 1,
+    flexDirection: "column",
+    ...ifIphoneX({ marginTop: 30 })
   },
   barsNavigationFilterView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 70,
     justifyContent: "center"
   },
+  locationViewText:{
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 30,
+    backgroundColor: "#fff"
+  },
   contentsView: {
     backgroundColor: "rgb(255, 255, 255)"
+  },
+  rangeViewValue:{
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "flex-end"
   },
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",

@@ -710,10 +710,7 @@ export default class Discover extends Component {
   }
 }
 const styles = StyleSheet.create({
-  discoverView: {
-    backgroundColor: "rgb(255, 255, 255)",
-    flex: 1
-  },
+  
   colorPrimaryViewLinearGradient: {
     height: Screen.height
   },

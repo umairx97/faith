@@ -416,6 +416,63 @@
 
 <attr format="boolean" name="circleCrop"/>
 </declare-styleable>
+    <declare-styleable name="MapAttrs"><attr name="mapType">
+<enum name="none" value="0"/>
+
+<enum name="normal" value="1"/>
+
+<enum name="satellite" value="2"/>
+
+<enum name="terrain" value="3"/>
+
+<enum name="hybrid" value="4"/>
+
+</attr>
+
+<attr format="float" name="cameraBearing"/>
+
+<attr format="float" name="cameraTargetLat"/>
+
+<attr format="float" name="cameraTargetLng"/>
+
+<attr format="float" name="cameraTilt"/>
+
+<attr format="float" name="cameraZoom"/>
+
+<attr format="boolean" name="liteMode"/>
+
+<attr format="boolean" name="uiCompass"/>
+
+<attr format="boolean" name="uiRotateGestures"/>
+
+<attr format="boolean" name="uiScrollGestures"/>
+
+<attr format="boolean" name="uiTiltGestures"/>
+
+<attr format="boolean" name="uiZoomControls"/>
+
+<attr format="boolean" name="uiZoomGestures"/>
+
+<attr format="boolean" name="useViewLifecycle"/>
+
+<attr format="boolean" name="zOrderOnTop"/>
+
+<attr format="boolean" name="uiMapToolbar"/>
+
+<attr format="boolean" name="ambientEnabled"/>
+
+<attr format="float" name="cameraMinZoomPreference"/>
+
+<attr format="float" name="cameraMaxZoomPreference"/>
+
+<attr format="float" name="latLngBoundsSouthWestLatitude"/>
+
+<attr format="float" name="latLngBoundsSouthWestLongitude"/>
+
+<attr format="float" name="latLngBoundsNorthEastLatitude"/>
+
+<attr format="float" name="latLngBoundsNorthEastLongitude"/>
+</declare-styleable>
     <declare-styleable name="MenuGroup"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:checkableBehavior"/><attr name="android:visible"/><attr name="android:enabled"/></declare-styleable>
     <declare-styleable name="MenuItem"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:title"/><attr name="android:titleCondensed"/><attr name="android:icon"/><attr name="android:alphabeticShortcut"/><attr name="alphabeticModifiers">
             <flag name="META" value="0x10000"/>
@@ -728,6 +785,7 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="amu_text" type="id"/>
     <item name="exo_artwork" type="id"/>
     <item name="exo_content_frame" type="id"/>
     <item name="exo_controller" type="id"/>
@@ -2545,6 +2603,18 @@
     <style name="Widget.Compat.NotificationActionText" parent=""/>
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
         <item name="statusBarBackground">#000000</item>
+    </style>
+    <style name="amu_Bubble.TextAppearance.Dark" parent="android:TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ff7f7f7f</item>
+    </style>
+    <style name="amu_Bubble.TextAppearance.Light" parent="amu_Bubble.TextAppearance.Dark">
+        <item name="android:textColor">#ffeeeeee</item>
+    </style>
+    <style name="amu_ClusterIcon.TextAppearance" parent="android:TextAppearance">
+        <item name="android:textColor">#ffeeeeee</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="com_facebook_activity_theme" parent="@style/Theme.AppCompat.NoActionBar">
       <item name="android:windowIsTranslucent">true</item>
