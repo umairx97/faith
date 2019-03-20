@@ -41,5 +41,6 @@ export const Images = {
   filterSvgIcon:require("./images/svgFilter.svg"),
   genderIcon: require("./images/genderIcons.png"),
   eyeIcon:require("./images/eyeIcon.png"),
-  addEvent:require("./images/addEventIcon.png")
+  addEvent:require("./images/addEventIcon.png"),
+  currentLocation:require("./images/currentLocation.png")
 };

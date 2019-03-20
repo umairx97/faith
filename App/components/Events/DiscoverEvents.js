@@ -8,11 +8,15 @@ import {
   Animated,
   Image,
   Dimensions,
+  Platform,
   TouchableOpacity,
+  BackHandler
 } from "react-native";
 import { Actions } from "react-native-router-flux";
-import MapView from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Images } from "../../../assets/imageAll";
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+
 const ImagesData = [
   { uri: "https://i.imgur.com/sNam9iJ.jpg" },
   { uri: "https://i.imgur.com/N7rlQYt.jpg" },
@@ -25,8 +29,31 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT;
 
+const GLOBAL = require("../Constant/Globals");
+
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
+const ASPECT_RATIO = Screen.width / Screen.height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
+var count = 0;
+var clickButton;
 export default class DiscoverEvents extends Component {
   state = {
+    place: "",
+    initialPosition: {
+      latitude: 0,
+      longitude: 0,
+      latitudeDelta: 0,
+      longitudeDelta: 0
+    },
+    markerPosition: {
+      latitude: 0,
+      longitude: 0
+    },
+
     markers: [
       {
         coordinate: {
@@ -81,7 +108,10 @@ export default class DiscoverEvents extends Component {
     // Actions.drawerOpen("homeDrawer");
     Actions.drawerOpen();
   }
+ // watchID = null;
   componentDidMount() {
+    
+
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
@@ -110,6 +140,78 @@ export default class DiscoverEvents extends Component {
       }, 10);
     });
   }
+  getCurrentLocation=()=>{
+    clickButton=true;
+    if (Platform.OS === "android") {
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message:
+          "<h2>Use Location?</h2> \
+               This app wants to change your device settings:<br/><br/>\
+                 Use GPS for location<br/><br/>",
+        ok: "YES",
+        cancel: "NO"
+      }).then(() => {
+        locationTracking(dispatch, getState, geolocationSettings);
+      });
+    }
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var initialRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: initialRegion });
+        this.setState({ markerPosition: initialRegion });
+        this.getLocationAddress(lat, long);
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: lastRegion });
+        this.setState({ markerPosition: lastRegion });
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+  }
+    async getLocationAddress(the_lat, the_long) {
+    try {
+      let response = await fetch(
+        "http://dev.virtualearth.net/REST/v1/Locations/" +
+          the_lat +
+          "," +
+          the_long +
+          "?includeEntityTypes=Address&includeNeighborhood=1&include=ciso2&key=AnRJNPwenLtgDSzoyFtFVIA-JOG6O20LzI_aMtlW6RxAlikWApgR5NhKuW0cMYf9"
+      );
+      let responseJson = await response.json();
+   
+      var name = responseJson.resourceSets[0].resources[0].name;
+      this.setState({
+        place: name
+      });
+     
+    } catch (error) {
+      Alert.alert(error.toString());
+    }
+
+ 
+  }
 
   onPressEvent = () => {
     alert("event deatil can open here");
@@ -137,11 +239,16 @@ export default class DiscoverEvents extends Component {
     return (
       <View style={styles.container}>
         <MapView
+        provider={PROVIDER_GOOGLE}
+           followsUserLocation={true}
+         
           ref={map => this.map = map}
           initialRegion={this.state.region}
+          region={this.state.initialPosition}
           style={styles.container}
         >
           {this.state.markers.map((marker, index) => {
+            clickButton=false;
             const scaleStyle = {
               transform: [
                 {
@@ -152,14 +259,23 @@ export default class DiscoverEvents extends Component {
             const opacityStyle = {
               opacity: interpolations[index].opacity,
             };
-            return (
-              <MapView.Marker key={index} coordinate={marker.coordinate}>
+            if(clickButton==true)
+            {
+              return( <MapView.Marker
+                            coordinate={this.state.markerPosition}
+                            title={this.state.place}
+                          />)
+            }
+            else
+            {  return (
+              <MapView.Marker title={this.state.place} key={index} coordinate={marker.coordinate}>
                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
                   <Animated.View style={[styles.ring, scaleStyle]} />
                   <View style={styles.marker} />
                 </Animated.View>
               </MapView.Marker>
-            );
+            )}
+          
           })}
         </MapView>
         <Animated.ScrollView
@@ -199,11 +315,11 @@ export default class DiscoverEvents extends Component {
               </View></TouchableOpacity>
           ))}
         </Animated.ScrollView>
-        {/* <View style={styles.leftContainer}>
-          <TouchableOpacity onPress={() => this.onDrawerPressed()}>
-            <Image style={styles.btnDrawerImage} source={require("../../../assets/images/filters-btn-2.png")} />
+       <View style={styles.leftContainer}>
+          <TouchableOpacity onPress={() => this.getCurrentLocation()}>
+            <Image style={styles.btnDrawerImage} source={Images.currentLocation} />
           </TouchableOpacity>
-        </View> */}
+        </View> 
         <View style={styles.rightContainer}>
           <TouchableOpacity onPress={() => this.onDrawerPressed()}>
             <Image style={styles.btnNotifiImage} source={require("../../../assets/images/filters-btn-2.png")} />
@@ -226,12 +342,12 @@ const styles = StyleSheet.create({
     left: 20,
     alignItems: "center",
     justifyContent: "center",
-    height: 55,
-    width: 55,
-    borderRadius: 25
+    height: 60,
+    width: 60,
+    borderRadius: 30
   },
   rightContainer: {
-    
+
     position: "absolute",
     resizeMode: "cover",
     top: 30,
@@ -244,13 +360,13 @@ const styles = StyleSheet.create({
   },
   btnDrawerImage: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    tintColor:'black',
-    width: 30,
-    height: 30
+    tintColor: 'black',
+    width: 55,
+    height: 55
   },
   btnNotifiImage: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    tintColor:'black',
+    tintColor: 'black',
     width: 30,
     height: 30
   },
@@ -394,55 +510,55 @@ const styles = StyleSheet.create({
 //    Actions.drawerOpen();
 //   }
 //   watchID = null;
-//   componentDidMount() {
-//     if (Platform.OS === "android") {
-//       LocationServicesDialogBox.checkLocationServicesIsEnabled({
-//         message:
-//           "<h2>Use Location?</h2> \
-//                             This app wants to change your device settings:<br/><br/>\
-//                             Use GPS for location<br/><br/>",
-//         ok: "YES",
-//         cancel: "NO"
-//       }).then(() => {
-//         locationTracking(dispatch, getState, geolocationSettings);
-//       });
-//     }
-//     navigator.geolocation.getCurrentPosition(
-//       position => {
-//         var lat = parseFloat(position.coords.latitude);
-//         var long = parseFloat(position.coords.longitude);
+  // componentDidMount() {
+  //   if (Platform.OS === "android") {
+  //     LocationServicesDialogBox.checkLocationServicesIsEnabled({
+  //       message:
+  //         "<h2>Use Location?</h2> \
+  //                           This app wants to change your device settings:<br/><br/>\
+  //                           Use GPS for location<br/><br/>",
+  //       ok: "YES",
+  //       cancel: "NO"
+  //     }).then(() => {
+  //       locationTracking(dispatch, getState, geolocationSettings);
+  //     });
+  //   }
+  //   navigator.geolocation.getCurrentPosition(
+  //     position => {
+  //       var lat = parseFloat(position.coords.latitude);
+  //       var long = parseFloat(position.coords.longitude);
 
-//         var initialRegion = {
-//           latitude: lat,
-//           longitude: long,
-//           latitudeDelta: LATITUDE_DELTA,
-//           longitudeDelta: LONGITUDE_DELTA
-//         };
-//         this.setState({ initialPosition: initialRegion });
-//         this.setState({ markerPosition: initialRegion });
-//         this.getLocationAddress(lat, long);
-//       },
-//       error => console.log(error),
-//       { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
-//     );
-//     this.watchID = navigator.geolocation.watchPosition(
-//       position => {
-//         var lat = parseFloat(position.coords.latitude);
-//         var long = parseFloat(position.coords.longitude);
+  //       var initialRegion = {
+  //         latitude: lat,
+  //         longitude: long,
+  //         latitudeDelta: LATITUDE_DELTA,
+  //         longitudeDelta: LONGITUDE_DELTA
+  //       };
+  //       this.setState({ initialPosition: initialRegion });
+  //       this.setState({ markerPosition: initialRegion });
+  //       this.getLocationAddress(lat, long);
+  //     },
+  //     error => console.log(error),
+  //     { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+  //   );
+  //   this.watchID = navigator.geolocation.watchPosition(
+  //     position => {
+  //       var lat = parseFloat(position.coords.latitude);
+  //       var long = parseFloat(position.coords.longitude);
 
-//         var lastRegion = {
-//           latitude: lat,
-//           longitude: long,
-//           latitudeDelta: LATITUDE_DELTA,
-//           longitudeDelta: LONGITUDE_DELTA
-//         };
-//         this.setState({ initialPosition: lastRegion });
-//         this.setState({ markerPosition: lastRegion });
-//       },
-//       error => console.log(error),
-//       { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
-//     );
-//   }
+  //       var lastRegion = {
+  //         latitude: lat,
+  //         longitude: long,
+  //         latitudeDelta: LATITUDE_DELTA,
+  //         longitudeDelta: LONGITUDE_DELTA
+  //       };
+  //       this.setState({ initialPosition: lastRegion });
+  //       this.setState({ markerPosition: lastRegion });
+  //     },
+  //     error => console.log(error),
+  //     { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+  //   );
+  // }
 //   componentWillMount() {
 //     BackHandler.addEventListener(
 //       "hardwareBackPress",
