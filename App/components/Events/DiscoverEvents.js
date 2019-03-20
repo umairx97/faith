@@ -10,10 +10,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-
+import { Actions } from "react-native-router-flux";
 import MapView from "react-native-maps";
-
-const Images = [
+import { Images } from "../../../assets/imageAll";
+const ImagesData = [
   { uri: "https://i.imgur.com/sNam9iJ.jpg" },
   { uri: "https://i.imgur.com/N7rlQYt.jpg" },
   { uri: "https://i.imgur.com/UDrH0wm.jpg" },
@@ -35,7 +35,7 @@ export default class DiscoverEvents extends Component {
         },
         title: "Event fest",
         description: "Cocktail Event",
-        image: Images[0],
+        image: ImagesData[0],
       },
       {
         coordinate: {
@@ -44,7 +44,7 @@ export default class DiscoverEvents extends Component {
         },
         title: "NY Event",
         description: "This is Evening party",
-        image: Images[1],
+        image: ImagesData[1],
       },
       {
         coordinate: {
@@ -53,7 +53,7 @@ export default class DiscoverEvents extends Component {
         },
         title: "KK Event",
         description: "This is the Youth Event",
-        image: Images[2],
+        image: ImagesData[2],
       },
       {
         coordinate: {
@@ -62,7 +62,7 @@ export default class DiscoverEvents extends Component {
         },
         title: "Night Part Event",
         description: "This is night Party",
-        image: Images[3],
+        image: ImagesData[3],
       },
     ],
     region: {
@@ -76,6 +76,10 @@ export default class DiscoverEvents extends Component {
   componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
+  }
+  onDrawerPressed() {
+    // Actions.drawerOpen("homeDrawer");
+    Actions.drawerOpen();
   }
   componentDidMount() {
     // We should detect when scrolling has stopped then animate
@@ -107,7 +111,7 @@ export default class DiscoverEvents extends Component {
     });
   }
 
-  onPressEvent=()=>{
+  onPressEvent = () => {
     alert("event deatil can open here");
   }
   render() {
@@ -179,22 +183,33 @@ export default class DiscoverEvents extends Component {
           contentContainerStyle={styles.endPadding}
         >
           {this.state.markers.map((marker, index) => (
-            <TouchableOpacity onLongPress={()=>{this.onPressEvent()}}>
-            <View style={styles.card} key={index}>
-              <Image
-                source={marker.image}
-                style={styles.cardImage}
-                resizeMode="cover"
-              />
-              <View style={styles.textContent}>
-                <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
-                <Text numberOfLines={1} style={styles.cardDescription}>
-                  {marker.description}
-                </Text>
-              </View>
-            </View></TouchableOpacity>
+            <TouchableOpacity onLongPress={() => { this.onPressEvent() }}>
+              <View style={styles.card} key={index}>
+                <Image
+                  source={marker.image}
+                  style={styles.cardImage}
+                  resizeMode="cover"
+                />
+                <View style={styles.textContent}>
+                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
+                  <Text numberOfLines={1} style={styles.cardDescription}>
+                    {marker.description}
+                  </Text>
+                </View>
+              </View></TouchableOpacity>
           ))}
         </Animated.ScrollView>
+        {/* <View style={styles.leftContainer}>
+          <TouchableOpacity onPress={() => this.onDrawerPressed()}>
+            <Image style={styles.btnDrawerImage} source={require("../../../assets/images/filters-btn-2.png")} />
+          </TouchableOpacity>
+        </View> */}
+        <View style={styles.rightContainer}>
+          <TouchableOpacity onPress={() => this.onDrawerPressed()}>
+            <Image style={styles.btnNotifiImage} source={require("../../../assets/images/filters-btn-2.png")} />
+          </TouchableOpacity>
+        </View>
+
       </View>
     );
   }
@@ -203,6 +218,41 @@ export default class DiscoverEvents extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  leftContainer: {
+    position: "absolute",
+    resizeMode: "cover",
+    top: 20,
+    left: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 55,
+    width: 55,
+    borderRadius: 25
+  },
+  rightContainer: {
+    
+    position: "absolute",
+    resizeMode: "cover",
+    top: 30,
+    right: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 55,
+    width: 55,
+    borderRadius: 25
+  },
+  btnDrawerImage: {
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+    tintColor:'black',
+    width: 30,
+    height: 30
+  },
+  btnNotifiImage: {
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+    tintColor:'black',
+    width: 30,
+    height: 30
   },
   scrollView: {
     position: "absolute",
@@ -492,7 +542,7 @@ const styles = StyleSheet.create({
 //         <View>
 
 //         </View>
-      
+
 //         <View style={styles.leftContainer}>
 //           <TouchableOpacity onPress={() => this.onDrawerPressed()}>
 //             <Image style={styles.btnDrawerImage} source={require("../../../assets/images/filters-btn-2.png")} />

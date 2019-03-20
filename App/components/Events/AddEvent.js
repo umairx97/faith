@@ -113,6 +113,14 @@ export default class AddEvent extends Component {
       dialogVisible: false,
       dob_color: "black",
       selectedIndex: 1,
+      _eventTitle:'',
+      _eventDesc:'',
+      _eventLocation:'',
+      _eventType:'',
+      _price:'',
+      _eventOrganiser:'',
+      _eventDate:'',
+      
     };
     this.updateIndex = this.updateIndex.bind(this);
     GoogleSignin.configure({
@@ -233,9 +241,25 @@ export default class AddEvent extends Component {
       );
     });
   }
+  _addEventSave=async()=>{
+    var _id =  await firebase.auth().currentUser.uid;
+    var path=this.state.fileUri;
+    var milliseconds = new Date().getTime();
+    firebase
+      .storage()
+      .ref("Event/EventAttachments/" + _id + milliseconds)
+      .putFile(path)
+      .then(path => {
+        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/" + _id).update({ eventTitle:this.state._eventTitle,eventDesc:this.state._eventDesc,eventLocation:this.state._eventLocation,eventType:this.state._eventType,price:this.state._price,eventOrganiser:this.state._eventOrganiser,eventDate:this.state._eventDate, eventURL: path.downloadURL });
+      })
+      .catch(error => {
+        alert("Firebase profile upload failed: " + error)
+      })
 
+    alert('save');
+  }
   handleChange = async () => {
-    var _id = await firebase.auth().currentUser.uid;
+    
     //Opening Document Picker
     DocumentPicker.show(
       {
@@ -253,18 +277,7 @@ export default class AddEvent extends Component {
         }
         else {
           const path = res.uri;
-          var milliseconds = new Date().getTime();
-          firebase
-            .storage()
-            .ref("Event/EventAttachments" + _id + milliseconds)
-            .putFile(res.uri)
-            .then(path => {
-              firebase.database().ref("Users/FaithMeetsLove/Event/" + _id).update({ eventURL: path.downloadURL });
-            })
-            .catch(error => {
-              alert("Firebase profile upload failed: " + error)
-            })
-
+         
           this.setState({ fileUri: res.uri });
           this.setState({ fileType: res.type });
           this.setState({ fileName: res.fileName });
@@ -335,7 +348,7 @@ export default class AddEvent extends Component {
     alert("Alert", "Button pressed " + viewId);
   };
   updateIndex(selectedIndex) {
-    this.setState({ selectedIndex });
+    this.setState({ _price:selectedIndex });
   }
 
 
@@ -389,7 +402,7 @@ export default class AddEvent extends Component {
                         name="Title"
                         type="name"
                         onChangeText={text =>
-                          this.setState({ _fullName: text })
+                          this.setState({ _eventTitle: text })
                         }
                         placeholder="Please enter event title"
                         style={styles.textInput}
@@ -405,7 +418,7 @@ export default class AddEvent extends Component {
                         name="Description"
                         type="name"
                         onChangeText={text =>
-                          this.setState({ _username: text })
+                          this.setState({ _eventDesc: text })
                         }
                         placeholder="Please enter event description"
                         style={styles.textInput}
@@ -420,7 +433,7 @@ export default class AddEvent extends Component {
                       <MyInput
                         name="email"
                         type="email"
-                        onChangeText={text => this.setState({ _email: text })}
+                        onChangeText={text => this.setState({ _eventLocation: text })}
                         placeholder="Please enter your email"
                         style={styles.textInput}
                       />
@@ -434,7 +447,7 @@ export default class AddEvent extends Component {
                       <MyInput
                         name="EventType"
                         type="name"
-                        onChangeText={text => this.setState({ _email: text })}
+                        onChangeText={text => this.setState({ _eventType: text })}
                         placeholder="Please enter event type"
                         style={styles.textInput}
                       />
@@ -465,7 +478,7 @@ export default class AddEvent extends Component {
                         name="Organizer"
                         type="name"
 
-                        onChangeText={text => this.setState({ _email: text })}
+                        onChangeText={text => this.setState({ _eventOrganiser: text })}
                         placeholder="Please enter event organiser"
                         style={styles.textInput}
                       />
@@ -475,9 +488,25 @@ export default class AddEvent extends Component {
                         flexDirection: "column"
                       }}
                     >
-                      <Text>Event Date</Text>
+                      <Text style={{ marginBottom: 2,
+                      paddingBottom: 18}}>Event Date</Text>
                       <TouchableOpacity onPress={this._showDateTimePicker}>
-                        <Text
+                      <TextInput
+                    style={{
+                      paddingBottom:10
+                   
+                    }}
+                    placeholder="Please select event date"
+                    value={this.state.dob}
+                    onChangeText={value =>
+                      this.setState({
+                        _eventDate: value
+                      })
+                    }
+                    onFocus={this._showDateTimePicker}
+                    style={styles.textInput}
+                  />
+                        {/* <Text
                           placeholder="Plz, Select your date of event"
                           style={{
                             color: this.state.dob_color,
@@ -487,7 +516,7 @@ export default class AddEvent extends Component {
                           }}
                         >
                           {this.state.dob}
-                        </Text>
+                        </Text> */}
                       </TouchableOpacity>
                       <View
                         style={{
@@ -510,7 +539,7 @@ export default class AddEvent extends Component {
                         flexDirection: "column"
                       }}
                     >
-                      <TouchableOpacity
+                      {/* <TouchableOpacity
                         activeOpacity={0.5}
                         style={{ alignItems: 'center' }}
                         onPress={this.handleChange.bind(this)}>
@@ -522,7 +551,7 @@ export default class AddEvent extends Component {
                           style={styles.ImageIconStyle}
                         />
                         <Text style={{ marginTop: 10 }}>Add Attachment</Text>
-                      </TouchableOpacity>
+                      </TouchableOpacity> */}
                       {/* <Text style={styles.text}>
           {this.state.fileUri ? 'URI\n' + this.state.fileUri : ''}
         </Text>
@@ -543,16 +572,28 @@ export default class AddEvent extends Component {
                     <View
                       style={{
                         flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "center",
+                        flexDirection: "row",
+                        justifyContent:'space-around',
                         marginTop: 20
                       }}
-                    >
+                    ><TouchableOpacity
+                    activeOpacity={0.5}
+                    style={{ alignItems: 'center' }}
+                    onPress={this.handleChange.bind(this)}>
+                    <Image
+                      source={{
+                        uri:
+                          'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
+                      }}
+                      style={styles.ImageIconStyle}
+                    />
+                    <Text style={{ marginTop: 10 }}>Add Attachment</Text>
+                  </TouchableOpacity>
                       <RkButton
                         rkType="rounded"
                         style={styles.googleButton}
                         onPress={() => {
-                          this._addEvent();
+                          this._addEventSave();
                         }}
                       >
                         Add Event
@@ -614,7 +655,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     width: "100%",
-    color: "#000000"
+    color: "#000000",
+    fontSize:17
   },
   formInput: {
     width: "100%"
@@ -623,7 +665,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(252, 56, 80)",
     borderRadius: 24,
 
-    width: 200,
+    width: 150,
     height: 48,
 
     alignSelf: "center"
@@ -719,8 +761,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   ImageIconStyle: {
-    height: 80,
-    width: 80,
+    height: 30,
+    width: 30,
     resizeMode: 'stretch',
   },
 

@@ -79,7 +79,6 @@
 		E7BEB693687E488CA1329C7A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1F08F7F2B5C49BF93C104A7 /* MaterialCommunityIcons.ttf */; };
 		ECA83B6DF2624ACE816112A0 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD54ADF6195B4B88BEA10F9E /* libRNVectorIcons.a */; };
 		F113378629604AAFBD048B8E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE38704B67664EE5B44A1B58 /* FontAwesome5_Solid.ttf */; };
-		F21EEE762240AFB400E5C739 /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F21EEE6D2240AF4000E5C739 /* libRNDocumentPicker.a */; };
 		F282CAF92209AB15002B5085 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F282CAF22209AAFB002B5085 /* libRNFetchBlob.a */; };
 		F2FB59A1223BD18800D9C7B8 /* AIRDummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FB5977223BD18800D9C7B8 /* AIRDummyView.m */; };
 		F2FB59A2223BD18800D9C7B8 /* AIRGoogleMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FB5979223BD18800D9C7B8 /* AIRGoogleMapUrlTile.m */; };
@@ -477,13 +476,6 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
-		F21EEE6C2240AF4000E5C739 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F21EEE3C2240AF4000E5C739 /* RNDocumentPicker.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E01DD9DB1D2311A600C39062;
-			remoteInfo = RNDocumentPicker;
-		};
 		F282CAF12209AAFB002B5085 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F282CAC52209AAFB002B5085 /* RNFetchBlob.xcodeproj */;
@@ -590,7 +582,6 @@
 		E4DEAEAB7B8C46FE8FEB6D5A /* libRNI18n-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNI18n-tvOS.a"; sourceTree = "<group>"; };
 		E5B57A45B3D443D087DAE3DA /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		E629ABEDB40D4562B020FCBB /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
-		F21EEE3C2240AF4000E5C739 /* RNDocumentPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDocumentPicker.xcodeproj; path = "../node_modules/react-native-document-picker/ios/RNDocumentPicker.xcodeproj"; sourceTree = "<group>"; };
 		F282CAC52209AAFB002B5085 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		F2FB5977223BD18800D9C7B8 /* AIRDummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDummyView.m; sourceTree = "<group>"; };
 		F2FB5978223BD18800D9C7B8 /* AIRGoogleMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolyline.h; sourceTree = "<group>"; };
@@ -660,7 +651,6 @@
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				18E1BFFE221D300000B1D0C3 /* RSKImageCropper.framework in Frameworks */,
 				1860D291221C186C00EF9BB5 /* libRCTVideo.a in Frameworks */,
-				F21EEE762240AFB400E5C739 /* libRNDocumentPicker.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
@@ -983,7 +973,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				F21EEE3C2240AF4000E5C739 /* RNDocumentPicker.xcodeproj */,
 				F2FCEC34222E85E6002C7531 /* RNCamera.xcodeproj */,
 				18E1BFC5221D2FBB00B1D0C3 /* imageCropPicker.xcodeproj */,
 				F282CAC52209AAFB002B5085 /* RNFetchBlob.xcodeproj */,
@@ -1068,14 +1057,6 @@
 				3074CBB73F104D06E9AA9D3B /* Pods-FaithMeetsLove.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		F21EEE3D2240AF4000E5C739 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F21EEE6D2240AF4000E5C739 /* libRNDocumentPicker.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		F282CAC62209AAFB002B5085 /* Products */ = {
@@ -1339,10 +1320,6 @@
 				{
 					ProductGroup = F2FCEC35222E85E6002C7531 /* Products */;
 					ProjectRef = F2FCEC34222E85E6002C7531 /* RNCamera.xcodeproj */;
-				},
-				{
-					ProductGroup = F21EEE3D2240AF4000E5C739 /* Products */;
-					ProjectRef = F21EEE3C2240AF4000E5C739 /* RNDocumentPicker.xcodeproj */;
 				},
 				{
 					ProductGroup = F282CAC62209AAFB002B5085 /* Products */;
@@ -1730,13 +1707,6 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F21EEE6D2240AF4000E5C739 /* libRNDocumentPicker.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNDocumentPicker.a;
-			remoteRef = F21EEE6C2240AF4000E5C739 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		F282CAF22209AAFB002B5085 /* libRNFetchBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2116,8 +2086,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-ObjC",
 					"-lc++",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FaithMeetsLove.FaithMeetsLove;
 				PRODUCT_NAME = FaithMeetsLove;
@@ -2165,8 +2135,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
-					"-ObjC",
 					"-lc++",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FaithMeetsLove.FaithMeetsLove;
 				PRODUCT_NAME = FaithMeetsLove;

@@ -4,7 +4,6 @@ ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/m
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-54:12
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-54:12
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-54:12
-MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-firebase] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-firebase/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:multidex:1.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/114e90887d4aed907514289f0b7f94fa/AndroidManifest.xml:17:1-22:12
 MERGED from [:react-native-document-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-document-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
@@ -172,8 +171,6 @@ ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/m
 		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:7:24-79
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:8:5-81
-MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-81
-MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-81
 MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-81
 MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-81
 	android:name
@@ -384,8 +381,6 @@ uses-sdk
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
-MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-firebase/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-firebase/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:multidex:1.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/114e90887d4aed907514289f0b7f94fa/AndroidManifest.xml:20:5-43

@@ -193,6 +193,7 @@ export default class NearbyFilters extends React.Component {
         age_from: this.state.values[0]
       })
       .then(msg => {
+        Actions.Discover();
         //alert("Update Successfully");
       });
   }
