@@ -1,7 +1,7 @@
 package com.faithmeetsloves;
 
 import android.app.Application;
-
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
@@ -33,7 +33,7 @@ import java.util.List;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
-
+import com.rnfs.RNFSPackage;
 import com.facebook.appevents.AppEventsLogger;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -57,7 +57,9 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNFirebasePackage(),
             new RNFirebaseStoragePackage(),
-        new MapsPackage(),
+            new MapsPackage(),
+              new RNFSPackage(),
+          new ReactNativeDocumentPicker(),
             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage(),
             new RNFirebaseDatabasePackage(),

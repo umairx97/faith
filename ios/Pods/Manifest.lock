@@ -217,6 +217,8 @@ PODS:
   - Protobuf (3.6.1)
   - React (0.57.1):
     - React/Core (= 0.57.1)
+  - react-native-document-picker (2.3.0):
+    - React
   - react-native-fbsdk (0.8.0):
     - React
     - react-native-fbsdk/Core (= 0.8.0)
@@ -254,6 +256,8 @@ PODS:
     - React/RCTNetwork
   - React/RCTNetwork (0.57.1):
     - React/Core
+  - RNFS (2.13.3):
+    - React
   - yoga (0.57.1.React)
 
 DEPENDENCIES:
@@ -273,11 +277,13 @@ DEPENDENCIES:
   - GoogleMaps
   - GoogleSignIn
   - GoogleUtilities (= 5.3.7)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/RCTImage (from `../node_modules/react-native`)
+  - RNFS (from `../node_modules/react-native-fs`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -325,10 +331,14 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -370,10 +380,12 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  RNFS: bbb1a64eb245763daf34aea86f97c97c4e85f74c
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 93faf2ddf76c9b7956484acbba27588ddf799062
+PODFILE CHECKSUM: 51021746bde2d9208538630e639ff2d35c9ad292
 
 COCOAPODS: 1.5.3

@@ -4,8 +4,10 @@ ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/m
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-54:12
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-54:12
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:1:1-54:12
+MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-firebase] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-firebase/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:multidex:1.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/114e90887d4aed907514289f0b7f94fa/AndroidManifest.xml:17:1-22:12
+MERGED from [:react-native-document-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-document-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-database:16.0.6] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.6.aar/fb96c88760032a73875999531bb4abc7/AndroidManifest.xml:15:1-27:12
 MERGED from [com.google.firebase:firebase-auth:16.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/7f472828f96a7266c8b2c80b1344c850/AndroidManifest.xml:17:1-42:12
 MERGED from [com.google.firebase:firebase-storage:16.0.5] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.5.aar/0c427997a90922410ea976036d8ee9e9/AndroidManifest.xml:15:1-26:12
@@ -170,6 +172,8 @@ ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/m
 		ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:7:24-79
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml:8:5-81
+MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-81
+MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:5-81
 MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-81
 MERGED from [:react-native-image-crop-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-81
 	android:name
@@ -380,10 +384,14 @@ uses-sdk
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/boffincoders/Desktop/Projects/Narender/Feb05/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fs] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-fs/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-firebase/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-firebase/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:multidex:1.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/114e90887d4aed907514289f0b7f94fa/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:multidex:1.0.2] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/114e90887d4aed907514289f0b7f94fa/AndroidManifest.xml:20:5-43
+MERGED from [:react-native-document-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-document-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-document-picker] /Users/boffincoders/Desktop/Projects/Narender/Feb05/node_modules/react-native-document-picker/android/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-database:16.0.6] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.6.aar/fb96c88760032a73875999531bb4abc7/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.firebase:firebase-database:16.0.6] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.6.aar/fb96c88760032a73875999531bb4abc7/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.firebase:firebase-auth:16.1.0] /Users/boffincoders/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/7f472828f96a7266c8b2c80b1344c850/AndroidManifest.xml:21:5-44

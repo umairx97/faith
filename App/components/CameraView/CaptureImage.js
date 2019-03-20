@@ -190,37 +190,37 @@ export default class CaptureImage extends Component {
     }
     
   }
-  async uploadImage(uri, uid, mime = "image/jpg") {
-    return new Promise((resolve, reject) => {
-      const uploadUri =
-        Platform.OS === "ios" ? uri.replace("file://", "") : uri;
-      let uploadBlob = null;
-      var milliseconds = new Date().getTime();
-      const imageRef = firebase
-        .storage()
-        .ref("ProfileImages/" + uid)
-        .child(milliseconds + ".jpg");
+  // async uploadImage(uri, uid, mime = "image/jpg") {
+  //   return new Promise((resolve, reject) => {
+  //     const uploadUri =
+  //       Platform.OS === "ios" ? uri.replace("file://", "") : uri;
+  //     let uploadBlob = null;
+  //     var milliseconds = new Date().getTime();
+  //     const imageRef = firebase
+  //       .storage()
+  //       .ref("ProfileImages/" + uid)
+  //       .child(milliseconds + ".jpg");
 
-      fs.readFile(uploadUri, "base64")
-        .then(data => {
-          return Blob.build(data, { type: `${mime};BASE64` });
-        })
-        .then(blob => {
-          uploadBlob = blob;
-          return imageRef.put(blob, { contentType: mime });
-        })
-        .then(() => {
-          uploadBlob.close();
-          return imageRef.getDownloadURL();
-        })
-        .then(url => {
-          resolve(url);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
-  }
+  //     fs.readFile(uploadUri, "base64")
+  //       .then(data => {
+  //         return Blob.build(data, { type: `${mime};BASE64` });
+  //       })
+  //       .then(blob => {
+  //         uploadBlob = blob;
+  //         return imageRef.put(blob, { contentType: mime });
+  //       })
+  //       .then(() => {
+  //         uploadBlob.close();
+  //         return imageRef.getDownloadURL();
+  //       })
+  //       .then(url => {
+  //         resolve(url);
+  //       })
+  //       .catch(error => {
+  //         reject(error);
+  //       });
+  //   });
+  // }
 }
 
 const styles = StyleSheet.create({

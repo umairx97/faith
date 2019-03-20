@@ -189,6 +189,7 @@ export default class SignIn extends Component {
         .signInWithEmailAndPassword(email, password)
         .then(userData => {
           if (userData.user.emailVerified == false) {
+            this.setState({ ...this.state, progressVisible: false });
             Alert.alert("Please verify your email for login.");
           } else {
           //  this.getOnlineInfo();
@@ -205,6 +206,7 @@ export default class SignIn extends Component {
           Alert.alert("Invalid credentials");
         });
     } else {
+      this.setState({ ...this.state, progressVisible: false });
       Alert.alert("Please enter email & Password");
     }
   }

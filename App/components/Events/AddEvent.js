@@ -23,7 +23,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Images } from "../../../assets/imageAll";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
-
+import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
+var RNFS = require('react-native-fs');
 
 import RadioForm, {
   RadioButton,
@@ -52,6 +53,7 @@ import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Dialog from "react-native-dialog";
 
+import RNFetchBlob from "react-native-fetch-blob";
 var radio_props = [
   {
     label: "Male  ",
@@ -82,10 +84,21 @@ const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
 };
+var mainUri;
+const Blob = RNFetchBlob.polyfill.Blob;
+const fs = RNFetchBlob.fs;
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+window.Blob = Blob;
+
+
 export default class AddEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fileUri: '',
+      fileType: '',
+      fileName: '',
+      fileSize: '',
       email: "",
       password: "",
       isDateTimePickerVisible: false,
@@ -138,52 +151,52 @@ export default class AddEvent extends Component {
       });
   }
 
-//   _handleSignUp() {
-//     // Actions.activityLoader();
-//     this.setState({ ...this.state, progressVisible: true });
-//     instance = this;
-//     const {
-//       _fullName,
-//       _username,
-//       _email,
-//       _password,
-//       _dob,
-//       _gender
-//     } = this.state;
-//     if (
-//       _email != "" &&
-//       _password != "" &&
-//       _fullName != "" &&
-//       _username != null &&
-//       _dob != null
-//     ) {
-//       firebase
-//         .auth()
-//         .signInWithEmailAndPassword(_email, _password)
-//         .then(userData => {})
-//         .catch(() => {
-//           firebase
-//             .auth()
-//             .createUserWithEmailAndPassword(_email, _password)
-//             .then(userData => {
-//               this._updateUserProfile(
-//                 userData.user.uid,
-//                 userData.user.email,
-//                 _username,
-//                 _fullName,
-//                 _gender,
-//                 _dob
-//               );
-//             })
-//             .catch(error => {
-//               alert("Authentication failed." + error.toString());
-//             });
-//         });
-//     } else {
-//       alert("Please fill all fields");
-//     }
-//   }
-  
+  //   _handleSignUp() {
+  //     // Actions.activityLoader();
+  //     this.setState({ ...this.state, progressVisible: true });
+  //     instance = this;
+  //     const {
+  //       _fullName,
+  //       _username,
+  //       _email,
+  //       _password,
+  //       _dob,
+  //       _gender
+  //     } = this.state;
+  //     if (
+  //       _email != "" &&
+  //       _password != "" &&
+  //       _fullName != "" &&
+  //       _username != null &&
+  //       _dob != null
+  //     ) {
+  //       firebase
+  //         .auth()
+  //         .signInWithEmailAndPassword(_email, _password)
+  //         .then(userData => {})
+  //         .catch(() => {
+  //           firebase
+  //             .auth()
+  //             .createUserWithEmailAndPassword(_email, _password)
+  //             .then(userData => {
+  //               this._updateUserProfile(
+  //                 userData.user.uid,
+  //                 userData.user.email,
+  //                 _username,
+  //                 _fullName,
+  //                 _gender,
+  //                 _dob
+  //               );
+  //             })
+  //             .catch(error => {
+  //               alert("Authentication failed." + error.toString());
+  //             });
+  //         });
+  //     } else {
+  //       alert("Please fill all fields");
+  //     }
+  //   }
+
   _showDateTimePicker = () =>
     this.setState({
       isDateTimePickerVisible: true
@@ -205,49 +218,114 @@ export default class AddEvent extends Component {
     alert("Alert", "Button pressed " + viewId);
   };
 
-  
-  
-//   async openDrawerPage(_val) {
-//     AsyncStorage.setItem("checkLoggedType", _val);
-//     var fullName;
-//     var gender;
-//     var latitude;
-//     var longitude;
-//     var email;
-//     var user_Dob;
-//     var profileImageURL;
-//     var uidUser = await firebase.auth().currentUser.uid;
-//     var displayUserInfo = firebase
-//       .database()
-//       .ref("Users/FaithMeetsLove/Registered/" + uidUser);
-//     await displayUserInfo.once("value").then(snapshot => {
-//       fullName = snapshot.val().fullName;
-//       gender = snapshot.val().gender;
-//       latitude = snapshot.val().latitude;
-//       longitude = snapshot.val().longitude;
-//       email = snapshot.val().email;
-//       user_Dob = snapshot.val().user_Dob;
-//       profileImageURL = snapshot.val().profileImageURL;
-//     });
+  onClickAttachements = () => {
+    DocumentPicker.show({
+      filetype: [DocumentPickerUtil.allFiles()],
+    }, (error, res) => {
+      // Android
+      console.log(
+        res.uri,
+        res.type, // mime type
+        res.fileName,
+        res.fileSize
+      );
+    });
+  }
 
-//     AsyncStorage.setItem("reg_user_name", fullName);
-//     AsyncStorage.setItem("reg_user_gender", "" + gender);
-//     AsyncStorage.setItem("reg_user_latitude", "" + latitude);
-//     AsyncStorage.setItem("reg_user_longitude", "" + longitude);
-//     AsyncStorage.setItem("reg_user_email", email);
-//     AsyncStorage.setItem("reg_user_dob", user_Dob);
-//     AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+  handleChange = async () => {
+    var _id = await firebase.auth().currentUser.uid;
+    //Opening Document Picker
+    DocumentPicker.show(
+      {
+        filetype: [DocumentPickerUtil.allFiles()],
+        //All type of Files DocumentPickerUtil.allFiles()
+        //Only PDF DocumentPickerUtil.pdf()
+        //Audio DocumentPickerUtil.audio()
+        //Plain Text DocumentPickerUtil.plainText()
+      },
+      (error, res) => {
+      const path = res.uri;
 
-//     if (Platform.OS === "android") {
-//       if (apiVersion >= 23) {
-//         this.requestLocationPermission(_val);
-//       } else {
-//         Actions.home();
-//       }
-//     } else {
-//       Actions.home();
-//     }
-//   }
+     // const frfr = RNFetchBlob.fs.readFile(path,'base64')
+      // const frfr = RNFS.readFile(path);
+       // mainUri = "file://" + frfr + "/" + res.fileName;
+
+       let data = new FormData()
+       data.append('image', {uri: path, type: 'image/jpg', name: res.fileName})
+        var milliseconds = new Date().getTime();
+
+        firebase
+          .storage()
+          .ref("Event/EventAttachments" + _id + milliseconds)
+          .putFile(data)
+          .then(uploadedFile => {
+
+            //alert("Firebase profile photo uploaded successfully")
+           // this.setState({ imageProfileUrl: uploadedFile.downloadURL });
+            firebase.database().ref("Users/FaithMeetsLove/Event/" + _id).update({ eventURL: uploadedFile.downloadURL });
+          })
+          .catch(error => {
+            alert("Firebase profile upload failed: " + error)
+          })
+
+     //   const contents = RNFS.readFile(fds, "utf8");
+        //const contents = RNFS.stat(decodeURIComponent(fds));
+        console.log('main : ' + contents)
+        this.setState({ fileUri: res.uri });
+        this.setState({ fileType: res.type });
+        this.setState({ fileName: res.fileName });
+        this.setState({ fileSize: res.fileSize });
+
+        console.log('res : ' + JSON.stringify(res));
+        console.log('URI : ' + res.uri);
+        console.log('Type : ' + res.type);
+        console.log('File Name : ' + res.fileName);
+        console.log('File Size : ' + res.fileSize);
+      }
+    );
+  }
+
+  //   async openDrawerPage(_val) {
+  //     AsyncStorage.setItem("checkLoggedType", _val);
+  //     var fullName;
+  //     var gender;
+  //     var latitude;
+  //     var longitude;
+  //     var email;
+  //     var user_Dob;
+  //     var profileImageURL;
+  //     var uidUser = await firebase.auth().currentUser.uid;
+  //     var displayUserInfo = firebase
+  //       .database()
+  //       .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+  //     await displayUserInfo.once("value").then(snapshot => {
+  //       fullName = snapshot.val().fullName;
+  //       gender = snapshot.val().gender;
+  //       latitude = snapshot.val().latitude;
+  //       longitude = snapshot.val().longitude;
+  //       email = snapshot.val().email;
+  //       user_Dob = snapshot.val().user_Dob;
+  //       profileImageURL = snapshot.val().profileImageURL;
+  //     });
+
+  //     AsyncStorage.setItem("reg_user_name", fullName);
+  //     AsyncStorage.setItem("reg_user_gender", "" + gender);
+  //     AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+  //     AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+  //     AsyncStorage.setItem("reg_user_email", email);
+  //     AsyncStorage.setItem("reg_user_dob", user_Dob);
+  //     AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+
+  //     if (Platform.OS === "android") {
+  //       if (apiVersion >= 23) {
+  //         this.requestLocationPermission(_val);
+  //       } else {
+  //         Actions.home();
+  //       }
+  //     } else {
+  //       Actions.home();
+  //     }
+  //   }
 
   requestLocationPermission = async _val => {
     try {
@@ -268,7 +346,7 @@ export default class AddEvent extends Component {
     alert("Alert", "Button pressed " + viewId);
   };
 
- 
+
 
   render() {
     if (this.state.progressVisible) {
@@ -362,8 +440,8 @@ export default class AddEvent extends Component {
                     >
                       <Text style={styles.formInput}>Event Type</Text>
                       <MyInput
-                      name="EventType"
-                      type="name"
+                        name="EventType"
+                        type="name"
                         onChangeText={text => this.setState({ _email: text })}
                         placeholder="Please enter event type"
                         style={styles.textInput}
@@ -378,21 +456,56 @@ export default class AddEvent extends Component {
                       <MyInput
                         name="Organizer"
                         type="name"
-                        
+
                         onChangeText={text => this.setState({ _email: text })}
                         placeholder="Please enter event organiser"
                         style={styles.textInput}
                       />
                     </View>
-                    
-                    
+
+
+                    <View
+                      style={{
+                        flexDirection: "column"
+                      }}
+                    >
+                      <TouchableOpacity
+                        activeOpacity={0.5}
+                        style={{ alignItems: 'center' }}
+                        onPress={this.handleChange.bind(this)}>
+                        <Image
+                          source={{
+                            uri:
+                              'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
+                          }}
+                          style={styles.ImageIconStyle}
+                        />
+                        <Text style={{ marginTop: 10 }}>Add Attachment</Text>
+                      </TouchableOpacity>
+                      {/* <Text style={styles.text}>
+          {this.state.fileUri ? 'URI\n' + this.state.fileUri : ''}
+        </Text>
+        <Text style={styles.text}>
+          {this.state.fileType ? 'Type\n' + this.state.fileType : ''}
+        </Text> */}
+                      <Text style={styles.text}>
+                        {this.state.fileName ? 'File Name ' + this.state.fileName + ' uploaded' : ''}
+                      </Text>
+                      {/* <Text style={styles.text}>
+          {this.state.fileSize ? 'File Size\n' + this.state.fileSize : ''}
+        </Text> */}
+                      {/* <Text style={styles.formInput}>Add attachements</Text>
+                     <Button title="add" onPress={()=>{this.onClickAttachements()}}/> */}
+                    </View>
+
+
                     <View
                       style={{
                         flexDirection: "column"
                       }}
                     >
                       <Text>Event Date</Text>
-                       <TouchableOpacity onPress={this._showDateTimePicker}>
+                      <TouchableOpacity onPress={this._showDateTimePicker}>
                         <Text
                           placeholder="Plz, Select your date of event"
                           style={{
@@ -418,9 +531,9 @@ export default class AddEvent extends Component {
                         onCancel={this._hideDateTimePicker}
                       />
                     </View>
-                    
-                   
-                   
+
+
+
                     <View
                       style={{
                         flex: 1,
@@ -439,7 +552,7 @@ export default class AddEvent extends Component {
                         Add Event
                       </RkButton>
                     </View>
-               </View>
+                  </View>
 
                 </View>
               </Form>
@@ -570,5 +683,20 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     resizeMode: "contain"
-  }
+  },
+  text: {
+    backgroundColor: '#fff',
+
+
+    fontSize: 15,
+
+    marginTop: 16,
+    color: 'black',
+  },
+  ImageIconStyle: {
+    height: 80,
+    width: 80,
+    resizeMode: 'stretch',
+  },
+
 });
