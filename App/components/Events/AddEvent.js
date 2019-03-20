@@ -24,7 +24,6 @@ import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Images } from "../../../assets/imageAll";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
-var RNFS = require('react-native-fs');
 
 import RadioForm, {
   RadioButton,
@@ -53,6 +52,7 @@ import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Dialog from "react-native-dialog";
 
+import { ButtonGroup } from "react-native-elements";
 import RNFetchBlob from "react-native-fetch-blob";
 var radio_props = [
   {
@@ -111,8 +111,10 @@ export default class AddEvent extends Component {
       _dob: "",
       progressVisible: false,
       dialogVisible: false,
-      dob_color: "black"
+      dob_color: "black",
+      selectedIndex: 1,
     };
+    this.updateIndex = this.updateIndex.bind(this);
     GoogleSignin.configure({
       androidClientId:
         "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
@@ -244,43 +246,30 @@ export default class AddEvent extends Component {
         //Plain Text DocumentPickerUtil.plainText()
       },
       (error, res) => {
-      const path = res.uri;
 
-     // const frfr = RNFetchBlob.fs.readFile(path,'base64')
-      // const frfr = RNFS.readFile(path);
-       // mainUri = "file://" + frfr + "/" + res.fileName;
 
-       let data = new FormData()
-       data.append('image', {uri: path, type: 'image/jpg', name: res.fileName})
-        var milliseconds = new Date().getTime();
+        if (res == null) {
 
-        firebase
-          .storage()
-          .ref("Event/EventAttachments" + _id + milliseconds)
-          .putFile(data)
-          .then(uploadedFile => {
+        }
+        else {
+          const path = res.uri;
+          var milliseconds = new Date().getTime();
+          firebase
+            .storage()
+            .ref("Event/EventAttachments" + _id + milliseconds)
+            .putFile(res.uri)
+            .then(path => {
+              firebase.database().ref("Users/FaithMeetsLove/Event/" + _id).update({ eventURL: path.downloadURL });
+            })
+            .catch(error => {
+              alert("Firebase profile upload failed: " + error)
+            })
 
-            //alert("Firebase profile photo uploaded successfully")
-           // this.setState({ imageProfileUrl: uploadedFile.downloadURL });
-            firebase.database().ref("Users/FaithMeetsLove/Event/" + _id).update({ eventURL: uploadedFile.downloadURL });
-          })
-          .catch(error => {
-            alert("Firebase profile upload failed: " + error)
-          })
-
-     //   const contents = RNFS.readFile(fds, "utf8");
-        //const contents = RNFS.stat(decodeURIComponent(fds));
-        console.log('main : ' + contents)
-        this.setState({ fileUri: res.uri });
-        this.setState({ fileType: res.type });
-        this.setState({ fileName: res.fileName });
-        this.setState({ fileSize: res.fileSize });
-
-        console.log('res : ' + JSON.stringify(res));
-        console.log('URI : ' + res.uri);
-        console.log('Type : ' + res.type);
-        console.log('File Name : ' + res.fileName);
-        console.log('File Size : ' + res.fileSize);
+          this.setState({ fileUri: res.uri });
+          this.setState({ fileType: res.type });
+          this.setState({ fileName: res.fileName });
+          this.setState({ fileSize: res.fileSize });
+        }
       }
     );
   }
@@ -345,10 +334,13 @@ export default class AddEvent extends Component {
   onClickListener = viewId => {
     alert("Alert", "Button pressed " + viewId);
   };
+  updateIndex(selectedIndex) {
+    this.setState({ selectedIndex });
+  }
 
 
-
-  render() {
+  render() {const buttons = ["Paid", "Free"];
+  const { selectedIndex } = this.state
     if (this.state.progressVisible) {
       return (
         <View style={[styles.containerLoader, styles.horizontal]}>
@@ -452,6 +444,22 @@ export default class AddEvent extends Component {
                         flexDirection: "column"
                       }}
                     >
+                    <View style={styles.showMeView}>
+                  <Text style={styles.showMeText}>Price :</Text>
+  
+                  <ButtonGroup
+                    onPress={this.updateIndex}
+                    selectedIndex={selectedIndex}
+                    buttons={buttons}
+                    containerStyle={{ height: 50, marginTop: 15 }}
+                  />
+                </View>
+                </View>
+                    <View
+                      style={{
+                        flexDirection: "column"
+                      }}
+                    >
                       <Text style={styles.formInput}>Event Organizer</Text>
                       <MyInput
                         name="Organizer"
@@ -462,6 +470,39 @@ export default class AddEvent extends Component {
                         style={styles.textInput}
                       />
                     </View>
+                    <View
+                      style={{
+                        flexDirection: "column"
+                      }}
+                    >
+                      <Text>Event Date</Text>
+                      <TouchableOpacity onPress={this._showDateTimePicker}>
+                        <Text
+                          placeholder="Plz, Select your date of event"
+                          style={{
+                            color: this.state.dob_color,
+                            marginTop: 20,
+                            marginBottom: 2,
+                            paddingBottom: 10
+                          }}
+                        >
+                          {this.state.dob}
+                        </Text>
+                      </TouchableOpacity>
+                      <View
+                        style={{
+                          backgroundColor: "#3090C7",
+                          height: 1.2,
+                          marginBottom: "4%"
+                        }}
+                      />
+                      <DateTimePicker
+                        isVisible={this.state.isDateTimePickerVisible}
+                        onConfirm={this._handleDatePicked}
+                        onCancel={this._hideDateTimePicker}
+                      />
+                    </View>
+
 
 
                     <View
@@ -501,41 +542,6 @@ export default class AddEvent extends Component {
 
                     <View
                       style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text>Event Date</Text>
-                      <TouchableOpacity onPress={this._showDateTimePicker}>
-                        <Text
-                          placeholder="Plz, Select your date of event"
-                          style={{
-                            color: this.state.dob_color,
-                            marginTop: 20,
-                            marginBottom: 2,
-                            paddingBottom: 10
-                          }}
-                        >
-                          {this.state.dob}
-                        </Text>
-                      </TouchableOpacity>
-                      <View
-                        style={{
-                          backgroundColor: "#3090C7",
-                          height: 1.2,
-                          marginBottom: "4%"
-                        }}
-                      />
-                      <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleDatePicked}
-                        onCancel={this._hideDateTimePicker}
-                      />
-                    </View>
-
-
-
-                    <View
-                      style={{
                         flex: 1,
                         flexDirection: "column",
                         justifyContent: "center",
@@ -552,6 +558,10 @@ export default class AddEvent extends Component {
                         Add Event
                       </RkButton>
                     </View>
+
+
+
+
                   </View>
 
                 </View>
@@ -653,6 +663,21 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: 15,
     justifyContent: "center"
+  },
+  showMeText: {
+   
+    color: "black",
+    fontSize: 17,
+   
+    textAlign: "left",
+   
+  },
+  showMeView: {
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+  
+   marginBottom:15,
+    
+    marginRight: 16
   },
   buttonContainer: {
     height: 45,

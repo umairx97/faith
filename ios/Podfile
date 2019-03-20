@@ -40,6 +40,5 @@ pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
 
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
 end

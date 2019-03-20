@@ -151,7 +151,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-fs')
     implementation project(':react-native-document-picker')
     //compile project(':react-native-maps')
     //implementation project(':react-native-maps')

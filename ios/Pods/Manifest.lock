@@ -256,8 +256,6 @@ PODS:
     - React/RCTNetwork
   - React/RCTNetwork (0.57.1):
     - React/Core
-  - RNFS (2.13.3):
-    - React
   - yoga (0.57.1.React)
 
 DEPENDENCIES:
@@ -283,7 +281,6 @@ DEPENDENCIES:
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/RCTImage (from `../node_modules/react-native`)
-  - RNFS (from `../node_modules/react-native-fs`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -337,8 +334,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
-  RNFS:
-    :path: "../node_modules/react-native-fs"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -383,9 +378,8 @@ SPEC CHECKSUMS:
   react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
-  RNFS: bbb1a64eb245763daf34aea86f97c97c4e85f74c
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 51021746bde2d9208538630e639ff2d35c9ad292
+PODFILE CHECKSUM: 48012e1c58793bbca241244d2df34a3df68a813c
 
 COCOAPODS: 1.5.3

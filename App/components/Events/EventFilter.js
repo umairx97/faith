@@ -226,6 +226,7 @@ import {
                     containerStyle={{ height: 50, marginTop: 15 }}
                   />
                 </View>
+                
                 <View style={styles.locationsView}>
                   <View
                     style={{

@@ -33,7 +33,6 @@ import java.util.List;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
-import com.rnfs.RNFSPackage;
 import com.facebook.appevents.AppEventsLogger;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -58,7 +57,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebasePackage(),
             new RNFirebaseStoragePackage(),
             new MapsPackage(),
-              new RNFSPackage(),
           new ReactNativeDocumentPicker(),
             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage(),
