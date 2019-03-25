@@ -42,5 +42,7 @@ export const Images = {
   genderIcon: require("./images/genderIcons.png"),
   eyeIcon:require("./images/eyeIcon.png"),
   addEvent:require("./images/addEventIcon.png"),
-  currentLocation:require("./images/currentLocation.png")
+  currentLocation:require("./images/currentLocation.png"),
+  locationPin:require("./images/locationPin.png"),
+  iconCalenderRange:require("./images/iconCalenderRange.png")
 };
