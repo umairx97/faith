@@ -698,6 +698,7 @@ export default class DrawerScreen extends React.Component {
                   />
                 </View>
               </View>
+           
             </View>
             <View style={styles.levelView}>
               <View

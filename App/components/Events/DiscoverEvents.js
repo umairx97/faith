@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   Animated,
+  AsyncStorage,
   Image,
   Dimensions,
   TouchableOpacity,
@@ -117,8 +118,13 @@ getLoactionInfo=(coordinate,index)=>{
     alert(coordinate,index);
   }
 
-  onPressEvent = () => {
-    alert("event deatil can open here");
+  onPressEvent = (lat,long) => {
+    
+    AsyncStorage.setItem("event_lat", lat);
+    AsyncStorage.setItem("event_long", long);
+    // alert(long);
+    // alert(lat)
+   Actions.eventDetailPage();
   }
   render() {
     const interpolations = this.state.markers.map((marker, index) => {
@@ -165,7 +171,7 @@ getLoactionInfo=(coordinate,index)=>{
             //   title={'title'}
             //   description={'description'}
             // />
-              <MapView.Marker onPress={()=>{this.getLoactionInfo(JSON.stringify(marker.coordinate),index)}} key={index} coordinate={marker.coordinate}>
+              <MapView.Marker onPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude),JSON.stringify(marker.coordinate.longitude))}} key={index} coordinate={marker.coordinate}>
                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
                   <Animated.View style={[styles.ring, scaleStyle]} />
                   <View style={styles.marker} />
@@ -201,7 +207,7 @@ getLoactionInfo=(coordinate,index)=>{
           contentContainerStyle={styles.endPadding}
         >
           {this.state.markers.map((marker, index) => (
-            <TouchableOpacity onLongPress={() => { this.onPressEvent() }}>
+            <TouchableOpacity onLongPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude),JSON.stringify(marker.coordinate.longitude))}}>
               <View style={styles.card} key={index}>
                 <Image
                   source={marker.image}

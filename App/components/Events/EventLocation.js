@@ -376,6 +376,7 @@ export default class EventLocation extends Component {
       }
     };
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+   
   }
 
   onDrawerPressed() {
@@ -384,6 +385,7 @@ export default class EventLocation extends Component {
   }
   watchID = null;
   componentDidMount() {
+  
     if (Platform.OS === "android") {
       LocationServicesDialogBox.checkLocationServicesIsEnabled({
         message:
