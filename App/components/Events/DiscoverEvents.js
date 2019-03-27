@@ -10,72 +10,127 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Images } from "../../../assets/imageAll";
-
-const ImagesData = [
-  { uri: "https://i.imgur.com/sNam9iJ.jpg" },
-  { uri: "https://i.imgur.com/N7rlQYt.jpg" },
-  { uri: "https://i.imgur.com/UDrH0wm.jpg" },
-  { uri: "https://i.imgur.com/Ka8kNST.jpg" }
-]
-
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+import firebase from "react-native-firebase";
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
+const ASPECT_RATIO = Screen.width / Screen.height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
 const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT;
-
+var arr = [];
+var markers = [];
 export default class DiscoverEvents extends Component {
-  constructor(){
+  constructor() {
     super();
-   this.state = {
-    markers: [
-      {
-        coordinate: {
-          latitude: 45.524548,
-          longitude: -122.6749817,
-        },
-        title: "Event fest",
-        description: "Cocktail Event",
-        image: ImagesData[0],
+    this.state = {
+      markers: [],
+      // markers: [
+      //   {
+      //     coordinate: {
+      //       latitude: 45.524548,
+      //       longitude: -122.6749817,
+      //     },
+      //     title: "Event fest",
+      //     description: "Cocktail Event",
+      //     image: ImagesData[0],
+      //   },
+      //   {
+      //     coordinate: {
+      //       latitude: 45.524698,
+      //       longitude: -122.6655507,
+      //     },
+      //     title: "NY Event",
+      //     description: "This is Evening party",
+      //     image: ImagesData[1],
+      //   },
+      //   {
+      //     coordinate: {
+      //       latitude: 45.5230786,
+      //       longitude: -122.6701034,
+      //     },
+      //     title: "KK Event",
+      //     description: "This is the Youth Event",
+      //     image: ImagesData[2],
+      //   },
+      //   {
+      //     coordinate: {
+      //       latitude: 45.521016,
+      //       longitude: -122.6561917,
+      //     },
+      //     title: "Night Part Event",
+      //     description: "This is night Party",
+      //     image: ImagesData[3],
+      //   },
+      // ],
+      initialPosition: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0
       },
-      {
-        coordinate: {
-          latitude: 45.524698,
-          longitude: -122.6655507,
-        },
-        title: "NY Event",
-        description: "This is Evening party",
-        image: ImagesData[1],
+      region: {
+        latitude: 45.52220671242907,
+        longitude: -122.6653281029795,
+        latitudeDelta: 0.04864195044303443,
+        longitudeDelta: 0.040142817690068,
       },
-      {
-        coordinate: {
-          latitude: 45.5230786,
-          longitude: -122.6701034,
-        },
-        title: "KK Event",
-        description: "This is the Youth Event",
-        image: ImagesData[2],
-      },
-      {
-        coordinate: {
-          latitude: 45.521016,
-          longitude: -122.6561917,
-        },
-        title: "Night Part Event",
-        description: "This is night Party",
-        image: ImagesData[3],
-      },
-    ],
-    region: {
-      latitude: 45.52220671242907,
-      longitude: -122.6653281029795,
-      latitudeDelta: 0.04864195044303443,
-      longitudeDelta: 0.040142817690068,
-    },
-  };
+    };
+    this.getEventList();
+  }
+  getEventList = async () => {
+    var uidUser = await firebase.auth().currentUser.uid;
+    arr = [];
+    var displayEventName = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Event/EventList/");
+    await displayEventName
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          var eventAdmin = childSnapshot.val().eventAdmin;
+          var eventDate = childSnapshot.val().eventDate;
+          var desc = childSnapshot.val().eventDesc;
+          var userId = childSnapshot.val().eventId;
+          var eventLatitude = childSnapshot.val().eventLatitued;
+          var eventLocation = childSnapshot.val().eventLocation;
+          var eventLongitude = childSnapshot.val().eventLongituded;
+          var eventOrganiser = childSnapshot.val().eventOrganiser;
+
+          var eventTitle = childSnapshot.val().eventTitle;
+          var eventType = childSnapshot.val().eventType;
+          var eventUrl = childSnapshot.val().eventURL;
+          var price = childSnapshot.val().price;
+          if (uidUser == userId) {
+
+          }
+          else {
+            arr.push({
+              coordinate: {
+                latitude: eventLatitude,
+                longitude: eventLongitude,
+              },
+              title: eventTitle,
+              description: desc,
+              image: eventUrl,
+            })
+          }
+
+        })
+        this.setState({
+          markers: arr
+        })
+      })
   }
   componentWillMount() {
     this.index = 0;
@@ -85,7 +140,56 @@ export default class DiscoverEvents extends Component {
     // Actions.drawerOpen("homeDrawer");
     Actions.drawerOpen();
   }
-  componentDidMount() {
+async componentDidMount() {
+
+
+    if (Platform.OS === "android") {
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message:
+          "<h2>Use Location?</h2> \
+                            This app wants to change your device settings:<br/><br/>\
+                            Use GPS for location<br/><br/>",
+        ok: "YES",
+        cancel: "NO"
+      }).then(() => {
+        locationTracking(dispatch, getState, geolocationSettings);
+      });
+    }
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var initialRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: initialRegion });
+        //  this.setState({ markerPosition: initialRegion });
+        // this.getLocationAddress(lat, long);
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
+    this.watchID = navigator.geolocation.watchPosition(
+      position => {
+        var lat = parseFloat(position.coords.latitude);
+        var long = parseFloat(position.coords.longitude);
+
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
+        this.setState({ initialPosition: lastRegion });
+        // this.setState({ markerPosition: lastRegion });
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
+    );
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
@@ -113,18 +217,23 @@ export default class DiscoverEvents extends Component {
         }
       }, 10);
     });
+    var uidUser = await firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/EventSearchFilters/" + uidUser)
+
   }
-getLoactionInfo=(coordinate,index)=>{
-    alert(coordinate,index);
+  getLoactionInfo = (coordinate, index) => {
+    alert(coordinate, index);
   }
 
-  onPressEvent = (lat,long) => {
-    
+  onPressEvent = (lat, long) => {
+
     AsyncStorage.setItem("event_lat", lat);
     AsyncStorage.setItem("event_long", long);
     // alert(long);
     // alert(lat)
-   Actions.eventDetailPage();
+    Actions.eventDetailPage();
   }
   render() {
     const interpolations = this.state.markers.map((marker, index) => {
@@ -150,9 +259,16 @@ getLoactionInfo=(coordinate,index)=>{
       <View style={styles.container}>
         <MapView
           ref={map => this.map = map}
-          initialRegion={this.state.region}
+          // provider={PROVIDER_GOOGLE}
+          // followsUserLocation={true}
+
+          showsBuildings={true}
+          // minZoomLevel={14}
+          //  maxZoomLevel={20}
+          // initialRegion={this.state.region}
+          region={this.state.initialPosition}
           style={styles.container}
-          
+
         >
           {this.state.markers.map((marker, index) => {
             const scaleStyle = {
@@ -166,21 +282,21 @@ getLoactionInfo=(coordinate,index)=>{
               opacity: interpolations[index].opacity,
             };
             return (
-            //   <MapView.Marker
-            //   coordinate={{latitude: 45.5230786, longitude: -122.6701034}}
-            //   title={'title'}
-            //   description={'description'}
-            // />
-              <MapView.Marker onPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude),JSON.stringify(marker.coordinate.longitude))}} key={index} coordinate={marker.coordinate}>
+              //   <MapView.Marker
+              //   coordinate={{latitude: 45.5230786, longitude: -122.6701034}}
+              //   title={'title'}
+              //   description={'description'}
+              // />
+              <MapView.Marker onPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude), JSON.stringify(marker.coordinate.longitude)) }} key={index} coordinate={marker.coordinate}>
                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
                   <Animated.View style={[styles.ring, scaleStyle]} />
                   <View style={styles.marker} />
                 </Animated.View>
               </MapView.Marker>
-          //               <MapView.Marker
-          //   coordinate={this.state.markerPosition}
-          //   title={this.state.place}
-          // />
+              //               <MapView.Marker
+              //   coordinate={this.state.markerPosition}
+              //   title={this.state.place}
+              // />
 
 
             );
@@ -207,10 +323,10 @@ getLoactionInfo=(coordinate,index)=>{
           contentContainerStyle={styles.endPadding}
         >
           {this.state.markers.map((marker, index) => (
-            <TouchableOpacity onLongPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude),JSON.stringify(marker.coordinate.longitude))}}>
+            <TouchableOpacity onLongPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude), JSON.stringify(marker.coordinate.longitude)) }}>
               <View style={styles.card} key={index}>
                 <Image
-                  source={marker.image}
+                  source={{ uri: marker.image }}
                   style={styles.cardImage}
                   resizeMode="cover"
                 />
@@ -223,7 +339,7 @@ getLoactionInfo=(coordinate,index)=>{
               </View></TouchableOpacity>
           ))}
         </Animated.ScrollView>
-        
+
         {/* <View style={styles.leftContainer}>
           <TouchableOpacity onPress={() => this.onDrawerPressed()}>
             <Image style={styles.btnDrawerImage} source={require("../../../assets/images/filters-btn-2.png")} />
@@ -256,7 +372,7 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   rightContainer: {
-    
+
     position: "absolute",
     resizeMode: "cover",
     top: 30,
@@ -269,13 +385,13 @@ const styles = StyleSheet.create({
   },
   btnDrawerImage: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    tintColor:'black',
+    tintColor: 'black',
     width: 30,
     height: 30
   },
   btnNotifiImage: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    tintColor:'black',
+    tintColor: 'black',
     width: 30,
     height: 30
   },

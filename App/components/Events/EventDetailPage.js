@@ -42,11 +42,11 @@ export default class EventDetailPage extends Component {
         super(props);
         this.state = {
             place: "",
-            myLat:0,
-            myLong:0,
-            evlat:0,
-            evLong:0,
-            distanceMiles:0,
+            myLat: 0,
+            myLong: 0,
+            evlat: 0,
+            evLong: 0,
+            distanceMiles: 0,
             initialPosition: {
                 latitude: 0,
                 longitude: 0,
@@ -67,8 +67,8 @@ export default class EventDetailPage extends Component {
         Actions.pop();
     }
     watchID = null;
-   async componentDidMount() {
-       
+    async componentDidMount() {
+
         if (Platform.OS === "android") {
             LocationServicesDialogBox.checkLocationServicesIsEnabled({
                 message:
@@ -81,16 +81,16 @@ export default class EventDetailPage extends Component {
                 locationTracking(dispatch, getState, geolocationSettings);
             });
         }
-         var eventLati = await AsyncStorage.getItem("event_lat");
-         var eventLongi = await AsyncStorage.getItem("event_long");
-         var eventLatitude=parseFloat(eventLati)
-         var eventLongitude=parseFloat(eventLongi)
-       
-         var lat,long;
+        var eventLati = await AsyncStorage.getItem("event_lat");
+        var eventLongi = await AsyncStorage.getItem("event_long");
+        var eventLatitude = parseFloat(eventLati)
+        var eventLongitude = parseFloat(eventLongi)
+
+        var lat, long;
         navigator.geolocation.getCurrentPosition(
             position => {
-               var lat = parseFloat(position.coords.latitude);
-               var long = parseFloat(position.coords.longitude);
+                var lat = parseFloat(position.coords.latitude);
+                var long = parseFloat(position.coords.longitude);
 
                 var initialRegion = {
                     latitude: eventLatitude,
@@ -101,15 +101,15 @@ export default class EventDetailPage extends Component {
                 this.setState({ initialPosition: initialRegion });
                 this.setState({ markerPosition: initialRegion });
                 this.getLocationAddress(lat, long);
-                this.getDistance(lat,long,eventLatitude,eventLongitude);
+                this.getDistance(lat, long, eventLatitude, eventLongitude);
             },
             error => console.log(error),
             { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
         );
         this.watchID = navigator.geolocation.watchPosition(
             position => {
-               lat = parseFloat(position.coords.latitude);
-                 long = parseFloat(position.coords.longitude);
+                lat = parseFloat(position.coords.latitude);
+                long = parseFloat(position.coords.longitude);
 
                 var lastRegion = {
                     latitude: eventLatitude,
@@ -123,21 +123,21 @@ export default class EventDetailPage extends Component {
             error => console.log(error),
             { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
         );
-        
+
     }
-    getDistance(lat1,long1,eventLatitude,eventLongitude){
+    getDistance(lat1, long1, eventLatitude, eventLongitude) {
         var distanceBetweenFriends = geolib.getDistance(
             {
-              lat: lat1,
-              lon: long1
+                lat: lat1,
+                lon: long1
             },
             { lat: eventLatitude, lon: eventLongitude }
-          );
-          var distance=distanceBetweenFriends/1000;
-          this.setState({
-            distanceMiles:distance
-          })
-          //alert(distance)
+        );
+        var distance = distanceBetweenFriends / 1000;
+        this.setState({
+            distanceMiles: distance
+        })
+        //alert(distance)
     }
     async getLocationAddress(the_lat, the_long) {
         try {
@@ -184,10 +184,10 @@ export default class EventDetailPage extends Component {
                 <View><MapView
                     mapType={"standard"}
                     provider={PROVIDER_GOOGLE}
-                   // customMapStyle={GLOBAL.mapStyle}
-                   style={styles.map}
+                    // customMapStyle={GLOBAL.mapStyle}
+                    style={styles.map}
                     followsUserLocation={true}
-                   
+
                     showsBuildings={true}
                     minZoomLevel={14}
                     maxZoomLevel={20}
@@ -198,15 +198,17 @@ export default class EventDetailPage extends Component {
                         title={this.state.place}
                     />
                 </MapView>
-                
+
                 </View>
-                <View style={{flexDirection:'column'}}>
+                <View style={{ flexDirection: 'column' }}>
                     <View>
-                        <Text></Text>
+                        <Text>Event Name</Text>
                     </View>
+                    <View><Text>Event Description</Text></View>
+                    <View><Text>Event Type</Text></View>
                 </View>
-                <View style={{position:'absolute', right:15, top:Screen.height/3-30}}>
-<Text style={{fontSize:18, fontWeight:"600"}}>{this.state.distanceMiles}miles</Text>
+                <View style={{ position: 'absolute', right: 15, top: Screen.height / 3 - 30 }}>
+                    <Text style={{ fontSize: 18, fontWeight: "600" }}>{this.state.distanceMiles}miles</Text>
                 </View>
                 <View style={styles.leftContainer}>
                     <TouchableOpacity onPress={() => this.onBackPressed()}>
@@ -229,8 +231,8 @@ const styles = StyleSheet.create({
     map: {
         width: Screen.width,
         height: Screen.height / 3,
-        ...ifIphoneX({ height: Screen.height/3 - 3}),
-        
+        ...ifIphoneX({ height: Screen.height / 3 - 3 }),
+
     },
     rightContainer: {
         position: "absolute",

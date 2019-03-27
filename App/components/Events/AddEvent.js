@@ -56,8 +56,8 @@ import RNFetchBlob from "react-native-fetch-blob";
 
 
 var radio_props = [
-  {label: 'Paid', value: 0 },
-  {label: 'Free', value: 1 }
+  { label: 'Paid', value: 0 },
+  { label: 'Free', value: 1 }
 ];
 const MyInput = compose(
   makeInputGreatAgain,
@@ -117,7 +117,9 @@ export default class AddEvent extends Component {
       _eventDate: '',
       _eventFullAdd: '',
       _adminName: '',
-      _doe: ''
+      _doe: '',
+      _latitude: 0,
+      _longitude: 0
     };
     this.updateIndex = this.updateIndex.bind(this);
     GoogleSignin.configure({
@@ -137,6 +139,21 @@ export default class AddEvent extends Component {
     //   alert(this.props.myProps)
     // }
     var eventAddress = await AsyncStorage.getItem("event_Location");
+    var eventLati = await AsyncStorage.getItem("event_latitude");
+    var eventLongi = await AsyncStorage.getItem("event_longitude");
+    var eventLatitude1 = parseFloat(eventLati)
+    var eventLongitude1 = parseFloat(eventLongi)
+    if(eventLatitude1!=NaN)
+    {
+      this.setState({
+        _latitude: eventLatitude1,
+        _longitude: eventLongitude1
+      })
+    }
+    else{
+
+    }
+  
     if (eventAddress == null) {
       this.setState({
 
@@ -146,7 +163,8 @@ export default class AddEvent extends Component {
     }
     else {
       this.setState({
-        _eventFullAdd: eventAddress
+        _eventFullAdd: eventAddress,
+       
       })
     }
 
@@ -159,7 +177,7 @@ export default class AddEvent extends Component {
       this.backAndroid()
     ); // Remove listener
   }
-  getInitialState=()=> {
+  getInitialState = () => {
     return {
       value: 0,
     }
@@ -266,6 +284,7 @@ export default class AddEvent extends Component {
     });
   }
   _addEventSave = async () => {
+    this.setState({ ...this.state, progressVisible: true });
     var _id = await firebase.auth().currentUser.uid;
     var path = this.state.fileUri;
     var milliseconds = new Date().getTime();
@@ -274,13 +293,28 @@ export default class AddEvent extends Component {
       .ref("Event/EventAttachments/" + _id + milliseconds)
       .putFile(path)
       .then(path => {
-        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/" + _id).update({ eventTitle: this.state._eventTitle, eventDesc: this.state._eventDesc, eventLocation: this.state._eventFullAdd, eventType: this.state._eventType, price: this.state._price, eventOrganiser: this.state._eventOrganiser, eventDate: this.state._doe, eventURL: path.downloadURL, eventAdmin: this.state._adminName });
+        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/").push({ eventTitle: this.state._eventTitle, 
+          eventDesc: this.state._eventDesc, 
+          eventLocation: this.state._eventFullAdd, 
+          eventType: this.state._eventType, 
+          price: this.state._price, 
+          eventOrganiser: this.state._eventOrganiser,
+           eventDate: this.state._doe,
+            eventURL: path.downloadURL, 
+           eventAdmin: this.state._adminName,
+            eventId: _id,
+             eventLatitued: this.state._latitude,
+              eventLongituded: this.state._longitude });
+      }).then(ref=>{
+        this.setState({ ...this.state, progressVisible: false });
+        this.setState({...this.state, fileName : ''})
+        alert('save');
       })
       .catch(error => {
         alert("Firebase profile upload failed: " + error)
       })
 
-    alert('save');
+    
   }
   handleChange = async () => {
 
@@ -338,7 +372,7 @@ export default class AddEvent extends Component {
 
 
   render() {
-    const buttons = ["Paids","Free",];
+    const buttons = ["Paids", "Free",];
     const { selectedIndex } = this.state;
     if (this.state.progressVisible) {
       return (
@@ -351,7 +385,8 @@ export default class AddEvent extends Component {
     return (
       <KeyboardAvoidingView
         style={{
-          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" }),
+          height: Screen.height - 40,
+          ...ifIphoneX({ height: Screen.height - 70, backgroundColor: "#FFFFFF" }),
           backgroundColor: "#FFFFFF"
         }}
       >
@@ -363,6 +398,7 @@ export default class AddEvent extends Component {
               keyboardDismissMode="on-drag"
               keyboardShouldPersistTaps="always"
               contentContainerStyle={{
+                flexGrow: 1,
                 justifyContent: "center",
                 backgroundColor: "#FFFFFF"
               }}
@@ -449,10 +485,10 @@ export default class AddEvent extends Component {
                       <View style={styles.showMeView}>
                         <Text style={styles.showMeText}>Price :</Text>
                         <RadioForm
-          radio_props={radio_props}
-          initial={0}
-          onPress={(value) => {this.setState({_price:value})}}
-        />
+                          radio_props={radio_props}
+                          initial={0}
+                          onPress={(value) => { this.setState({ _price: value }) }}
+                        />
                         {/* <ButtonGroup
                           onPress={this.updateIndex}
                           selectedIndex={selectedIndex}
@@ -552,33 +588,10 @@ export default class AddEvent extends Component {
                         flexDirection: "column"
                       }}
                     >
-                      {/* <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={{ alignItems: 'center' }}
-                        onPress={this.handleChange.bind(this)}>
-                        <Image
-                          source={{
-                            uri:
-                              'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
-                          }}
-                          style={styles.ImageIconStyle}
-                        />
-                        <Text style={{ marginTop: 10 }}>Add Attachment</Text>
-                      </TouchableOpacity> */}
-                      {/* <Text style={styles.text}>
-          {this.state.fileUri ? 'URI\n' + this.state.fileUri : ''}
-        </Text>
-        <Text style={styles.text}>
-          {this.state.fileType ? 'Type\n' + this.state.fileType : ''}
-        </Text> */}
                       <Text style={styles.text}>
                         {this.state.fileName ? 'File Name ' + this.state.fileName + ' uploaded' : ''}
                       </Text>
-                      {/* <Text style={styles.text}>
-          {this.state.fileSize ? 'File Size\n' + this.state.fileSize : ''}
-        </Text> */}
-                      {/* <Text style={styles.formInput}>Add attachements</Text>
-                     <Button title="add" onPress={()=>{this.onClickAttachements()}}/> */}
+                  
                     </View>
 
 
@@ -587,7 +600,7 @@ export default class AddEvent extends Component {
                         flex: 1,
                         flexDirection: "row",
                         justifyContent: 'space-around',
-                        marginTop: 20
+
                       }}
                     ><TouchableOpacity
                       activeOpacity={0.5}
@@ -600,7 +613,7 @@ export default class AddEvent extends Component {
                           }}
                           style={styles.ImageIconStyle}
                         />
-                        <Text style={{ marginTop: 10 }}>Add Attachment</Text>
+                        <Text>Add Attachment</Text>
                       </TouchableOpacity>
                       <RkButton
                         rkType="rounded"
@@ -723,7 +736,7 @@ const styles = StyleSheet.create({
 
     color: "black",
     fontSize: 17,
- paddingBottom:15,
+    paddingBottom: 15,
     textAlign: "left",
 
   },
@@ -770,7 +783,8 @@ const styles = StyleSheet.create({
 
     fontSize: 15,
 
-    marginTop: 16,
+    marginTop: 5,
+    marginBottom:10,
     color: 'black',
   },
   ImageIconStyle: {

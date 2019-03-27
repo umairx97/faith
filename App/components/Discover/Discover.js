@@ -219,7 +219,8 @@ export default class Discover extends Component {
       .then(snapshot => {
         if (snapshot.exists()) {
           //return;
-        } else {
+        } 
+        else {
           if (this.state.loginUserId != id)
             if (
               varifiedUser == true &&
@@ -356,6 +357,7 @@ export default class Discover extends Component {
     var displayUserName = firebase
       .database()
       .ref("Users/FaithMeetsLove/SearchFilters/" + uidUser);
+      
     await displayUserName.once("value", function (snapshot) {
 
       if (snapshot.exists()) {

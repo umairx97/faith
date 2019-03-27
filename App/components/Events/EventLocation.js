@@ -466,7 +466,12 @@ export default class EventLocation extends Component {
       let responseJson = await response.json();
   
       var name = responseJson.resourceSets[0].resources[0].name;
+      var latix=the_lat.toString();
+      var lngx=the_long.toString();
       AsyncStorage.setItem("event_Location", name);
+      AsyncStorage.setItem("event_latitude", latix);
+
+      AsyncStorage.setItem("event_longitude", lngx);
      // alert(name)
       this.setState({
         place: name

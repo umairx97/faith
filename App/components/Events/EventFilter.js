@@ -25,11 +25,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import firebase from "react-native-firebase";
-
+import DateTimePicker from "react-native-modal-datetime-picker";
+import Dates from 'react-native-dates';
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import DateRangePicker from './DateRangePicker';
 
+import Moment from "moment";
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { Images } from "../../../assets/imageAll";
 const Screen = {
@@ -40,13 +42,26 @@ const ASPECT_RATIO = Screen.width / Screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
 var count = 0;
-type Props = {};
+
 export default class EventFilter extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      date: null,
+      focus: 'startDate',
+      userLat: 0,
+      userLong: 0,
       selectedIndex: 2,
+      isDateTimePickerVisible: false,
+      dateFrom: "From",
+      dateTo: "To",
+      filterDateFrom: "",
+      filterDateTo: "",
+      dateSelectFrom: 0,
+
+      startDate: "",
+      endDate: '',
       Km: 18,
       values: [18, 75],
       place: "Searching...",
@@ -102,6 +117,7 @@ export default class EventFilter extends React.Component {
 
 
   }
+
   getVal(val) {
     console.warn(val);
   }
@@ -133,6 +149,7 @@ export default class EventFilter extends React.Component {
           latitudeDelta: LATITUDE_DELTA,
           longitudeDelta: LONGITUDE_DELTA
         };
+
         this.setState({ initialPosition: initialRegion });
         this.setState({ markerPosition: initialRegion });
         this.getLocationAddress(lat, long);
@@ -174,60 +191,115 @@ export default class EventFilter extends React.Component {
 
       var name = responseJson.resourceSets[0].resources[0].name;
       this.setState({
-        place: name
+        place: name,
+        userLat: the_lat,
+        userLong: the_long
       });
     } catch (error) {
       Alert.alert(error.toString());
     }
   }
-  multiSliderValuesChange = values => {
-    //alert(values)
-    this.setState({
-      values: values
-    });
+
+  _showFromDateTimePicker = () =>
+    this.setState({ isDateTimePickerVisible: true, dateSelectFrom: 0 });
+  _showToDateTimePicker = () =>
+    this.setState({ isDateTimePickerVisible: true, dateSelectFrom: 1 });
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  _handleDatePicked = date => {
+    Moment.locale("en");
+    const NewDate = Moment(date).format("YYYY-M-DD");
+    const filterDate = Moment(date).format("YYYY-M-DD HH:mm:ss");
+    this._hideDateTimePicker();
+    if (this.state.dateSelectFrom == 0)
+      this.setState({
+        dateFrom: NewDate,
+        filterDateFrom: NewDate
+      });
+    else {
+      this.setState({
+        dateTo: NewDate,
+        filterDateTo: NewDate
+      });
+    }
   };
-  onAddDateRanger = () => {
-    this._panel.show();
-  }
+
   async onDonePressed() {
-      var uidUser = await firebase.auth().currentUser.uid;
-      firebase
-        .database()
-        .ref("Users/FaithMeetsLove/EventSearchFilters/" + uidUser)
-        .update({
-          show_me: this.state.selectedIndex,
-          distance: this.state.Km,
-          start_Date: this.state.startDate,
-          end_Date: this.state.endDate,
-        })
-        .then(msg => {
-          Actions.DiscoverEvent();
-          //alert("Update Successfully");
-        });
+    alert("save")
+    var uidUser = await firebase.auth().currentUser.uid;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/EventSearchFilters/" + uidUser)
+      .update({
+        show_me: this.state.selectedIndex,
+        distance: this.state.Km,
+        start_Date: this.state.dateFrom,
+        end_Date: this.state.dateTo,
+        userLatitude: this.state.userLat,
+        userLongitude: this.state.userLong
+
+      })
+      .then(msg => {
+        Actions.DiscoverEvent();
+        //alert("Update Successfully");
+      });
   }
   getDatesOnClick = (s, e) => {
-  
+
     this.setState({
       startDate: s,
       endDate: e
 
     })
   }
-  onSlideData = () => {
-    return (<View style={{ flex: 1, backgroundColor: "rgb(255, 255, 255)", alignItems: 'center' }}>
-      <Text style={{ color: 'black', fontSize: 18, fontWeight: '600' }}>Select Dates</Text>
-      <DateRangePicker
-        initialRange={['2018-04-01', '2018-04-10']}
-        onSuccess={(s, e) => { this.getDatesOnClick(s, e) }}
-        theme={{ markColor: 'red', markTextColor: 'white' }} />
-      <TouchableOpacity onPress={() => { this._panel.hide() }}>
-        <Text style={{ color: 'red', fontSize: 18, fontWeight: '600', marginTop: 150 }}>Close</Text>
-      </TouchableOpacity>
-    </View>)
-  }
+  //   onSlideData = () => { 
+  //     // const isDateBlocked = (date) =>
+  //     // date.format('dddd') === 'Sunday';
+
+  //   // const onDatesChange = ({ startDate, endDate, focusedInput }) =>
+  //   //   this.setState({ ...this.state, focus: focusedInput }, () =>
+  //   //     this.setState({ ...this.state, startDate, endDate })
+  //   //   );
+
+  //   // const onDateChange = ({ date }) =>
+  //   //   this.setState({ ...this.state, date });
+  //   //   const isDateBlocked = (date) =>
+  //   //   date.isBefore(moment(), 'day');
+  //     return (<View style={{ flex: 1, backgroundColor: "rgb(255, 255, 255)", }}>
+  //       <Text style={{ color: 'black', fontSize: 18, fontWeight: '600' }}>Select Dates</Text>
+  //       {/* <Dates
+  //           onDatesChange={onDatesChange}
+  //           isDateBlocked={isDateBlocked}
+  //           startDate={this.state.startDate}
+  //           endDate={this.state.endDate}
+  //           focusedInput={this.state.focus}
+  //           range
+  //         /> */}
+
+  // {/* <Dates
+  //           date={this.state.date}
+  //           onDatesChange={onDateChange}
+  //           isDateBlocked={isDateBlocked}
+  //         /> */}
+  //       {/* <DateRangePicker
+  //         initialRange={['2018-04-01', '2018-04-10']}
+  //         onSuccess={(s, e) => { this.getDatesOnClick(s, e) }}
+  //         theme={{ markColor: 'red', markTextColor: 'white' }} /> */}
+  //         {/* {this.state.date && <Text style={styles.date}>{this.state.date && this.state.date.format('LL')}</Text>}
+  //       <Text style={[styles.date, this.state.focus === 'startDate' && styles.focused]}>{this.state.startDate && this.state.startDate.format('LL')}</Text>
+  //       <Text style={[styles.date, this.state.focus === 'endDate' && styles.focused]}>{this.state.endDate && this.state.endDate.format('LL')}</Text>
+  //        */}
+  //       <TouchableOpacity onPress={() => { this._panel.hide() }}>
+  //         <Text style={{ color: 'red', fontSize: 18, fontWeight: '600', marginTop: 150 }}>Close</Text>
+  //       </TouchableOpacity>
+  //     </View>)
+  //   }
   render() {
+
     const buttons = ["Distance", "Date"];
     const { selectedIndex } = this.state;
+
     return (<View style={{ flex: 1 }}>
       <View style={styles.toplineView}>
         <Text style={styles.filterText}>Filter</Text>
@@ -283,27 +355,70 @@ export default class EventFilter extends React.Component {
                   alignSelf: "stretch"
                 }}
               >
+               <View style={styles.section}>
+          <Text style={styles.textViewHeading}>Select Event Dates</Text>
+          <Text style={styles.textViewDate}>
+            {this.state.dateFrom} to {this.state.dateTo}
+          </Text>
+        </View>
+        <View style={styles.boxSection}>
+          <View style={styles.boxView}>
+            <Text style={styles.textViewFromTo}>{this.state.dateFrom}</Text>
+            <TouchableOpacity
+              onPress={this._showFromDateTimePicker}
+              style={{ alignSelf: "center" }}
+            >
+              <Image
+                style={styles.calanderIcon}
+                source={Images.iconCalenderRange}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.boxView}>
+            <Text style={styles.textViewFromTo}>{this.state.dateTo}</Text>
+            <TouchableOpacity
+              onPress={this._showToDateTimePicker}
+              style={{ alignSelf: "center" }}
+            >
+              <Image
+                style={styles.calanderIcon}
+                source={Images.iconCalenderRange}
+              />
+            </TouchableOpacity>
+          </View>
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible}
+            onConfirm={this._handleDatePicked}
+            onCancel={this._hideDateTimePicker}
+            date={new Date()}
+          />
+        </View>
+        
                 {/* <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                   <View style={{ flex: 1 }}><Text style={styles.ageRangeText}>Date range</Text></View>
                   <View style={{ flex: 1 }}><TouchableOpacity onPress={() => { this.onAddDateRanger() }}><Image source={Images.iconCalenderRange} style={{ height: 35, width: 35 }} /></TouchableOpacity></View>
                 </View> */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                   <View ><Text style={styles.distanceText}>Event Date Range : </Text></View>
-                  <View><TouchableOpacity onPress={() => { this.onAddDateRanger() }}>
-                    <Image style={{ height: 30, width: 30 }} source={Images.iconCalenderRange} /></TouchableOpacity></View>
 
-                </View>
 
-                <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <Text>Start Date : </Text>
-                    <Text>{this.state.startDate}</Text>
+                </View> */}
+
+                {/* <View style={{ flexDirection: 'column', marginTop: 15 }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+                    <Text>Start Date : {this.state.startDate}</Text>
+                    <TouchableOpacity onPress={() => { this.onStartDate() }}>
+                      <Image style={{ height: 30, width: 30 }} source={Images.iconCalenderRange} /></TouchableOpacity>
+                    <DateTimePicker
+                      isVisible={this.state.isDateTimePickerVisible}
+                      onConfirm={this._handleDatePicked}
+                      onCancel={this._hideDateTimePicker}
+                    />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <Text>End Date : </Text><Text>{this.state.endDate}</Text></View>
+                 
 
-                </View>
+                </View> */}
 
               </View>
 
@@ -315,11 +430,11 @@ export default class EventFilter extends React.Component {
                   flex: 1,
                   flexDirection: "column",
                   alignSelf: "stretch",
-
+                 
                 }}
               >
                 <Text style={styles.distanceText}>Distance</Text>
-                <View style={{ flex: 1, flexDirection: "row" }}>
+                <View style={{ flex: 1, flexDirection: "row", marginTop: 15 }}>
                   <Slider
                     style={{ width: "85%", alignSelf: "center" }}
                     step={2}
@@ -336,9 +451,9 @@ export default class EventFilter extends React.Component {
 
           </View>
         </View>
-        <SlidingUpPanel ref={c => this._panel = c}>
+        {/* <SlidingUpPanel ref={c => this._panel = c}>
           {() => this.onSlideData()}
-        </SlidingUpPanel>
+        </SlidingUpPanel> */}
       </ScrollView>
     </View>
     );
@@ -350,6 +465,47 @@ const styles = StyleSheet.create({
   nearbyFiltersView: {
     backgroundColor: "rgb(255, 255, 255)",
     flex: 1
+  },
+  section: {
+   
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  boxSection: {
+    marginLeft: 10,
+    marginRight: 10,
+
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  textViewHeading: {
+    color: "#202020",
+    fontSize: 16
+  },
+  textViewDate: {
+    color: "red",
+    fontSize: 14
+  },
+  boxView: {
+    padding: 10,
+    borderRadius: 20,
+    height: 40,
+    flex: 1,
+    marginTop: 15,
+    justifyContent: "space-between",
+    backgroundColor: "#ffffff",
+    flexDirection: "row"
+  },
+  calanderIcon: {
+    height: 30,
+    width: 30,
+    alignSelf: "center"
+  },
+  textViewFromTo: {
+    color: "#B1B4BB",
+    fontSize: 14,
+    width: "50%",
+    textAlign: "left"
   },
   mainViewContainer: {
     flex: 1,
@@ -407,7 +563,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: 91,
     marginLeft: 16,
-    marginTop: 30,
+    marginTop: 15,
     marginRight: 16
   },
   showMeText: {
