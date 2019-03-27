@@ -96,7 +96,11 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion '28.0.3'
-
+    
+ packagingOptions {
+    pickFirst 'lib/x86_64/libjsc.so'
+    pickFirst 'lib/arm64-v8a/libjsc.so'
+  }
     defaultConfig {
         applicationId "com.faithmeetsloves"
         minSdkVersion rootProject.ext.minSdkVersion

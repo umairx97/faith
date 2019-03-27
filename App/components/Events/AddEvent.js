@@ -51,18 +51,13 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Dialog from "react-native-dialog";
-
 import { ButtonGroup } from "react-native-elements";
 import RNFetchBlob from "react-native-fetch-blob";
+
+
 var radio_props = [
-  {
-    label: "Male  ",
-    value: 0
-  },
-  {
-    label: "Female",
-    value: 1
-  }
+  {label: 'Paid', value: 0 },
+  {label: 'Free', value: 1 }
 ];
 const MyInput = compose(
   makeInputGreatAgain,
@@ -112,15 +107,17 @@ export default class AddEvent extends Component {
       progressVisible: false,
       dialogVisible: false,
       dob_color: "black",
-      selectedIndex: 1,
-      _eventTitle:'',
-      _eventDesc:'',
-      _eventLocation:'',
-      _eventType:'',
-      _price:'',
-      _eventOrganiser:'',
-      _eventDate:'',
-      
+      selectedIndex: 0,
+      _eventTitle: '',
+      _eventDesc: '',
+      _eventLocation: '',
+      _eventType: '',
+      _price: '',
+      _eventOrganiser: '',
+      _eventDate: '',
+      _eventFullAdd: '',
+      _adminName: '',
+      _doe: ''
     };
     this.updateIndex = this.updateIndex.bind(this);
     GoogleSignin.configure({
@@ -130,7 +127,30 @@ export default class AddEvent extends Component {
         "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com"
     });
   }
-  componentDidMount() {
+  async componentDidMount() {
+    // if(this.props.myProps==null)
+    // {
+    //   alert(this.props.myProps)
+    // }
+    // else
+    // {
+    //   alert(this.props.myProps)
+    // }
+    var eventAddress = await AsyncStorage.getItem("event_Location");
+    if (eventAddress == null) {
+      this.setState({
+
+        _eventFullAdd: "Please Add location by click on add Location Icon"
+
+      })
+    }
+    else {
+      this.setState({
+        _eventFullAdd: eventAddress
+      })
+    }
+
+    //   alert(eventAddress)
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
   }
 
@@ -139,7 +159,11 @@ export default class AddEvent extends Component {
       this.backAndroid()
     ); // Remove listener
   }
-
+  getInitialState=()=> {
+    return {
+      value: 0,
+    }
+  }
   backAndroid() {
     Actions.pop(); // Return to previous screen
     return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
@@ -221,7 +245,7 @@ export default class AddEvent extends Component {
     this._hideDateTimePicker();
     this.setState({
       dob: NewDate,
-      _dob: NewDate
+      _doe: NewDate
     });
   };
   onClickListener = viewId => {
@@ -241,16 +265,16 @@ export default class AddEvent extends Component {
       );
     });
   }
-  _addEventSave=async()=>{
-    var _id =  await firebase.auth().currentUser.uid;
-    var path=this.state.fileUri;
+  _addEventSave = async () => {
+    var _id = await firebase.auth().currentUser.uid;
+    var path = this.state.fileUri;
     var milliseconds = new Date().getTime();
     firebase
       .storage()
       .ref("Event/EventAttachments/" + _id + milliseconds)
       .putFile(path)
       .then(path => {
-        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/" + _id).update({ eventTitle:this.state._eventTitle,eventDesc:this.state._eventDesc,eventLocation:this.state._eventLocation,eventType:this.state._eventType,price:this.state._price,eventOrganiser:this.state._eventOrganiser,eventDate:this.state._eventDate, eventURL: path.downloadURL });
+        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/" + _id).update({ eventTitle: this.state._eventTitle, eventDesc: this.state._eventDesc, eventLocation: this.state._eventFullAdd, eventType: this.state._eventType, price: this.state._price, eventOrganiser: this.state._eventOrganiser, eventDate: this.state._doe, eventURL: path.downloadURL, eventAdmin: this.state._adminName });
       })
       .catch(error => {
         alert("Firebase profile upload failed: " + error)
@@ -259,7 +283,7 @@ export default class AddEvent extends Component {
     alert('save');
   }
   handleChange = async () => {
-    
+
     //Opening Document Picker
     DocumentPicker.show(
       {
@@ -277,7 +301,7 @@ export default class AddEvent extends Component {
         }
         else {
           const path = res.uri;
-         
+
           this.setState({ fileUri: res.uri });
           this.setState({ fileType: res.type });
           this.setState({ fileName: res.fileName });
@@ -287,47 +311,7 @@ export default class AddEvent extends Component {
     );
   }
 
-  //   async openDrawerPage(_val) {
-  //     AsyncStorage.setItem("checkLoggedType", _val);
-  //     var fullName;
-  //     var gender;
-  //     var latitude;
-  //     var longitude;
-  //     var email;
-  //     var user_Dob;
-  //     var profileImageURL;
-  //     var uidUser = await firebase.auth().currentUser.uid;
-  //     var displayUserInfo = firebase
-  //       .database()
-  //       .ref("Users/FaithMeetsLove/Registered/" + uidUser);
-  //     await displayUserInfo.once("value").then(snapshot => {
-  //       fullName = snapshot.val().fullName;
-  //       gender = snapshot.val().gender;
-  //       latitude = snapshot.val().latitude;
-  //       longitude = snapshot.val().longitude;
-  //       email = snapshot.val().email;
-  //       user_Dob = snapshot.val().user_Dob;
-  //       profileImageURL = snapshot.val().profileImageURL;
-  //     });
 
-  //     AsyncStorage.setItem("reg_user_name", fullName);
-  //     AsyncStorage.setItem("reg_user_gender", "" + gender);
-  //     AsyncStorage.setItem("reg_user_latitude", "" + latitude);
-  //     AsyncStorage.setItem("reg_user_longitude", "" + longitude);
-  //     AsyncStorage.setItem("reg_user_email", email);
-  //     AsyncStorage.setItem("reg_user_dob", user_Dob);
-  //     AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
-
-  //     if (Platform.OS === "android") {
-  //       if (apiVersion >= 23) {
-  //         this.requestLocationPermission(_val);
-  //       } else {
-  //         Actions.home();
-  //       }
-  //     } else {
-  //       Actions.home();
-  //     }
-  //   }
 
   requestLocationPermission = async _val => {
     try {
@@ -348,12 +332,14 @@ export default class AddEvent extends Component {
     alert("Alert", "Button pressed " + viewId);
   };
   updateIndex(selectedIndex) {
-    this.setState({ _price:selectedIndex });
+    alert(selectedIndex);
+    this.setState({ _price: selectedIndex });
   }
 
 
-  render() {const buttons = ["Paid", "Free"];
-  const { selectedIndex } = this.state
+  render() {
+    const buttons = ["Paids","Free",];
+    const { selectedIndex } = this.state;
     if (this.state.progressVisible) {
       return (
         <View style={[styles.containerLoader, styles.horizontal]}>
@@ -389,7 +375,23 @@ export default class AddEvent extends Component {
                       paddingLeft: 10 + "%",
                       paddingRight: 10 + "%"
                     }}
+                  ><View
+                    style={{
+                      flexDirection: "column"
+                    }}
                   >
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View ><Text style={styles.formInput}>Event Location</Text></View>
+                        <View><TouchableOpacity onPress={() => { Actions.EventLocation() }}>
+                          <Image style={{ height: 30, width: 30 }} source={Images.locationPin} /></TouchableOpacity></View>
+
+                      </View>
+
+                      <Text
+                        style={[styles.textInput, { borderBottomColor: '#007FFF', borderBottomWidth: 0.5, marginTop: 15 }]}>{this.state._eventFullAdd}</Text>
+
+                    </View>
+
                     <View
                       style={{
                         flexDirection: "column",
@@ -424,20 +426,7 @@ export default class AddEvent extends Component {
                         style={styles.textInput}
                       />
                     </View>
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={styles.formInput}>Event Location</Text>
-                      <MyInput
-                        name="email"
-                        type="email"
-                        onChangeText={text => this.setState({ _eventLocation: text })}
-                        placeholder="Please enter your email"
-                        style={styles.textInput}
-                      />
-                    </View>
+
                     <View
                       style={{
                         flexDirection: "column"
@@ -457,17 +446,21 @@ export default class AddEvent extends Component {
                         flexDirection: "column"
                       }}
                     >
-                    <View style={styles.showMeView}>
-                  <Text style={styles.showMeText}>Price :</Text>
-  
-                  <ButtonGroup
-                    onPress={this.updateIndex}
-                    selectedIndex={selectedIndex}
-                    buttons={buttons}
-                    containerStyle={{ height: 50, marginTop: 15 }}
-                  />
-                </View>
-                </View>
+                      <View style={styles.showMeView}>
+                        <Text style={styles.showMeText}>Price :</Text>
+                        <RadioForm
+          radio_props={radio_props}
+          initial={0}
+          onPress={(value) => {this.setState({_price:value})}}
+        />
+                        {/* <ButtonGroup
+                          onPress={this.updateIndex}
+                          selectedIndex={selectedIndex}
+                          buttons={buttons}
+                          containerStyle={{ height: 50, marginTop: 15 }}
+                        /> */}
+                      </View>
+                    </View>
                     <View
                       style={{
                         flexDirection: "column"
@@ -483,29 +476,32 @@ export default class AddEvent extends Component {
                         style={styles.textInput}
                       />
                     </View>
+
+
                     <View
                       style={{
                         flexDirection: "column"
                       }}
                     >
-                      <Text style={{ marginBottom: 2,
-                      paddingBottom: 18}}>Event Date</Text>
+                      <Text style={{
+                        marginBottom: 2,
+                        paddingBottom: 18
+                      }}>Event Date</Text>
                       <TouchableOpacity onPress={this._showDateTimePicker}>
-                      <TextInput
-                    style={{
-                      paddingBottom:10
-                   
-                    }}
-                    placeholder="Please select event date"
-                    value={this.state.dob}
-                    onChangeText={value =>
-                      this.setState({
-                        _eventDate: value
-                      })
-                    }
-                    onFocus={this._showDateTimePicker}
-                    style={styles.textInput}
-                  />
+                        <TextInput
+                          style={{
+                            paddingBottom: 10
+                          }}
+                          placeholder="Please select event date"
+                          value={this.state.dob}
+                          onChangeText={value =>
+                            this.setState({
+                              _eventDate: value
+                            })
+                          }
+                          onFocus={this._showDateTimePicker}
+                          style={styles.textInput}
+                        />
                         {/* <Text
                           placeholder="Plz, Select your date of event"
                           style={{
@@ -529,6 +525,23 @@ export default class AddEvent extends Component {
                         isVisible={this.state.isDateTimePickerVisible}
                         onConfirm={this._handleDatePicked}
                         onCancel={this._hideDateTimePicker}
+                      />
+                    </View>
+
+                    <View
+                      style={{
+                        flexDirection: "column",
+                        paddingTop: 15
+                      }}
+                    >
+                      <Text style={styles.formInput}>Admin Name</Text>
+                      <MyInput
+                        name="admin"
+                        type="name"
+
+                        onChangeText={text => this.setState({ _adminName: text })}
+                        placeholder="Please enter admin Name"
+                        style={styles.textInput}
                       />
                     </View>
 
@@ -573,22 +586,22 @@ export default class AddEvent extends Component {
                       style={{
                         flex: 1,
                         flexDirection: "row",
-                        justifyContent:'space-around',
+                        justifyContent: 'space-around',
                         marginTop: 20
                       }}
                     ><TouchableOpacity
-                    activeOpacity={0.5}
-                    style={{ alignItems: 'center' }}
-                    onPress={this.handleChange.bind(this)}>
-                    <Image
-                      source={{
-                        uri:
-                          'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
-                      }}
-                      style={styles.ImageIconStyle}
-                    />
-                    <Text style={{ marginTop: 10 }}>Add Attachment</Text>
-                  </TouchableOpacity>
+                      activeOpacity={0.5}
+                      style={{ alignItems: 'center' }}
+                      onPress={this.handleChange.bind(this)}>
+                        <Image
+                          source={{
+                            uri:
+                              'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
+                          }}
+                          style={styles.ImageIconStyle}
+                        />
+                        <Text style={{ marginTop: 10 }}>Add Attachment</Text>
+                      </TouchableOpacity>
                       <RkButton
                         rkType="rounded"
                         style={styles.googleButton}
@@ -656,7 +669,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: "100%",
     color: "#000000",
-    fontSize:17
+    fontSize: 17
   },
   formInput: {
     width: "100%"
@@ -707,18 +720,18 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   showMeText: {
-   
+
     color: "black",
     fontSize: 17,
-   
+ paddingBottom:15,
     textAlign: "left",
-   
+
   },
   showMeView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-  
-   marginBottom:15,
-    
+
+    marginBottom: 15,
+
     marginRight: 16
   },
   buttonContainer: {

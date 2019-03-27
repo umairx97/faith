@@ -19,6 +19,7 @@
     "react-native-android-location-services-dialog-box": "^2.7.0",
     "react-native-animate-loading-button": "^1.0.3",
     "react-native-app-intro-slider": "^1.0.1",
+    "react-native-calendars": "^1.22.0",
     "react-native-camera": "^1.10.1",
     "react-native-card-stack-swiper": "^1.1.0",
     "react-native-connection-info": "^1.1.0",

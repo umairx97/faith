@@ -42,5 +42,13 @@ export const Images = {
   genderIcon: require("./images/genderIcons.png"),
   eyeIcon:require("./images/eyeIcon.png"),
   addEvent:require("./images/addEventIcon.png"),
-  currentLocation:require("./images/currentLocation.png")
+  currentLocation:require("./images/currentLocation.png"),
+  locationPin:require("./images/locationPin.png"),
+  iconCalenderRange:require("./images/iconCalenderRange.png"),
+  hideEventIcon: require("./images/hideEventIcon.png"),
+  reviewEvent:require("./images/reviewEvent.png"),
+  likeEvent:require("./images/likeEvent.png"),
+  ShareEvent:require("./images/ShareEvent.png"),
+  listEvent:require("./images/listEvent.png"),
+  saveEvent:require("./images/saveEvent.png"),
 };

@@ -33,6 +33,9 @@ import DiscoverEvents from "../Events/DiscoverEvents";
 import AddEvent from "../Events/AddEvent";
 import MyEvent from "../Events/MyEvent";
 import EventFilter from "../Events/EventFilter";
+import EventLocation from "../Events/EventLocation";
+import EventDetailPage from "../Events/EventDetailPage";
+import RightSlide from "../Events/RightSlide";
 
 export default class Route extends Component {
   getIcon = () => {
@@ -83,14 +86,7 @@ export default class Route extends Component {
       />
     );
   };
-  getIconFilter = () => {
-    return (
-      <Image
-        style={{ height: 20, width: 20, resizeMode: "contain" }}
-        source={require("../../../assets/images/filtericon.svg")}
-      />
-    );
-  };
+
   getImage = () => {
     return (<Image
       style={{ height: 20, width: 20, resizeMode: "contain" }}
@@ -223,10 +219,11 @@ export default class Route extends Component {
 
             <Scene
               key="chat"
-              icon={this.getIcon}
+             
               hideNavBar={true}
               component={Chat}
             />
+             
             <Scene key="vipCenter" component={VIPCenter} hideNavBar={true} />
             <Scene
               key="userProfile"
@@ -266,12 +263,32 @@ export default class Route extends Component {
               hideNavBar={true}
             />
             <Scene
-              icon={this.getIconPro}
+           
               key="Profile"
               hideNavBar={true}
               component={Profile}
             />
+            <Scene
+           
+            key="EventLocation"
+            hideNavBar={true}
+            component={EventLocation}
+          />
           </Scene>
+          <Scene
+            key="drawerRight"
+            drawer={true}
+            gesturesEnabled={false}
+            contentComponent={RightSlide}
+            hideNavBar={true}
+            drawerPosition="right"
+          >
+          <Scene
+              key="eventDetailPage"
+              
+              hideNavBar={true}
+              component={EventDetailPage}
+            /></Scene>
         </Scene>
       </Router>
     );
