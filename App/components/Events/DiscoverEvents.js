@@ -17,6 +17,8 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Images } from "../../../assets/imageAll";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import firebase from "react-native-firebase";
+import moment from "moment";
+import geolib from "geolib";
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
@@ -30,49 +32,20 @@ const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT;
 var arr = [];
 var markers = [];
+var check=false;
 export default class DiscoverEvents extends Component {
   constructor() {
     super();
     this.state = {
+      showme: 0,
+        userDistance: 200,
+        eventLat: 0,
+        eventLong: 0,
+        startDate: "20-03-2019",
+        endDate: "20-12-2019",
+       
       markers: [],
-      // markers: [
-      //   {
-      //     coordinate: {
-      //       latitude: 45.524548,
-      //       longitude: -122.6749817,
-      //     },
-      //     title: "Event fest",
-      //     description: "Cocktail Event",
-      //     image: ImagesData[0],
-      //   },
-      //   {
-      //     coordinate: {
-      //       latitude: 45.524698,
-      //       longitude: -122.6655507,
-      //     },
-      //     title: "NY Event",
-      //     description: "This is Evening party",
-      //     image: ImagesData[1],
-      //   },
-      //   {
-      //     coordinate: {
-      //       latitude: 45.5230786,
-      //       longitude: -122.6701034,
-      //     },
-      //     title: "KK Event",
-      //     description: "This is the Youth Event",
-      //     image: ImagesData[2],
-      //   },
-      //   {
-      //     coordinate: {
-      //       latitude: 45.521016,
-      //       longitude: -122.6561917,
-      //     },
-      //     title: "Night Part Event",
-      //     description: "This is night Party",
-      //     image: ImagesData[3],
-      //   },
-      // ],
+    
       initialPosition: {
         latitude: 0,
         longitude: 0,
@@ -86,7 +59,46 @@ export default class DiscoverEvents extends Component {
         longitudeDelta: 0.040142817690068,
       },
     };
+    this.getFilterEvent();
     this.getEventList();
+  }
+  getFilterEvent = async () => {
+    var snapExist = false;
+    var showme, endEventDate, startEventDate, distance;
+    var uidUser = await firebase.auth().currentUser.uid;
+    var searchFilter = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/EventSearchFilters/" + uidUser)
+
+    await searchFilter.once("value", function (snapshot) {
+
+      if (snapshot.exists()) {
+        showme = snapshot.val().show_me;
+        distance = snapshot.val().distance;
+        startEventDate = snapshot.val().start_Date;
+        endEventDate = snapshot.val().end_Date;
+        eventLati = snapshot.val().userLatitude;
+        eventLong = snapshot.val().userLongitude;
+        snapExist = true;
+      }
+      else
+      {
+        check=true;
+        var dddd=check;
+      }
+    });
+    if (snapExist)
+      this.setState({
+        ...this.state,
+        showme: showme,
+        userDistance: distance,
+        eventLat: eventLati,
+        eventLong: eventLong,
+        startDate: startEventDate,
+        endDate: endEventDate,
+
+      });
+   
   }
   getEventList = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
@@ -111,10 +123,27 @@ export default class DiscoverEvents extends Component {
           var eventType = childSnapshot.val().eventType;
           var eventUrl = childSnapshot.val().eventURL;
           var price = childSnapshot.val().price;
+
+          var elat = this.state.eventLat;
+          var elong = this.state.eventLong;
+          var searchDistance = this.state.userDistance;
+          var showMeEvent = this.state.showme;
+          var startEventDates = this.state.startDate;
+          var endEventDates = this.state.endDate;
+         // var searchExisted=this.state.searchExist;
+          var dates = moment(eventDate, "DD-MM-YYYY");
+          var startdates = moment(startEventDates, "DD-MM-YYYY");
+          var endDates = moment(endEventDates, "DD-MM-YYYY");
+        
+          var a = dates.toDate(), b = startdates.toDate(), c = endDates.toDate();
+         
+          var dis = this.getDistance(elat, elong, eventLatitude, eventLongitude);
           if (uidUser == userId) {
 
           }
           else {
+           if(check==true)
+           {
             arr.push({
               coordinate: {
                 latitude: eventLatitude,
@@ -124,6 +153,41 @@ export default class DiscoverEvents extends Component {
               description: desc,
               image: eventUrl,
             })
+           }
+           else{if (showMeEvent == 0) {
+            if (searchDistance >= dis) {
+              arr.push({
+                coordinate: {
+                  latitude: eventLatitude,
+                  longitude: eventLongitude,
+                },
+                title: eventTitle,
+                description: desc,
+                image: eventUrl,
+              })
+            }
+
+          }
+          else {
+            if (a.getTime() >= b.getTime() && a.getTime() <= c.getTime())
+             {
+
+              arr.push({
+                coordinate: {
+                  latitude: eventLatitude,
+                  longitude: eventLongitude,
+                },
+                title: eventTitle,
+                description: desc,
+                image: eventUrl,
+              })
+            }
+
+          }
+            
+           }
+
+//searchExist
           }
 
         })
@@ -131,6 +195,21 @@ export default class DiscoverEvents extends Component {
           markers: arr
         })
       })
+  }
+  getDistance(lat1, long1, eventLatitude, eventLongitude) {
+    var distanceBetweenFriends = geolib.getDistance(
+      {
+        lat: lat1,
+        lon: long1
+      },
+      { lat: eventLatitude, lon: eventLongitude }
+    );
+    var distance = distanceBetweenFriends / 1000;
+    this.setState({
+      distanceMiles: distance
+    })
+    return distance;
+    //alert(distance)
   }
   componentWillMount() {
     this.index = 0;
@@ -140,7 +219,7 @@ export default class DiscoverEvents extends Component {
     // Actions.drawerOpen("homeDrawer");
     Actions.drawerOpen();
   }
-async componentDidMount() {
+  async componentDidMount() {
 
 
     if (Platform.OS === "android") {
@@ -259,8 +338,8 @@ async componentDidMount() {
       <View style={styles.container}>
         <MapView
           ref={map => this.map = map}
-          // provider={PROVIDER_GOOGLE}
-          // followsUserLocation={true}
+          provider={PROVIDER_GOOGLE}
+         followsUserLocation={true}
 
           showsBuildings={true}
           // minZoomLevel={14}
