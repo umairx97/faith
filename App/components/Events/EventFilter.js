@@ -210,7 +210,7 @@ export default class EventFilter extends React.Component {
   _handleDatePicked = date => {
     Moment.locale("en");
     const NewDate = Moment(date).format("DD-MM-YYYY");
-    const filterDate = Moment(date).format("YYYY-M-DD HH:mm:ss");
+   // const filterDate = Moment(date).format("YYYY-M-DD HH:mm:ss");
     this._hideDateTimePicker();
     if (this.state.dateSelectFrom == 0)
       this.setState({

@@ -26,6 +26,7 @@ import { Images } from "../../../assets/imageAll";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import geolib from "geolib";
 import { ifIphoneX } from "react-native-iphone-x-helper";
+import firebase from "react-native-firebase";
 const GLOBAL = require("../Constant/Globals");
 
 const Screen = {
@@ -36,7 +37,7 @@ const ASPECT_RATIO = Screen.width / Screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
 var count = 0;
-
+var eventKey;
 export default class EventDetailPage extends Component {
     constructor(props) {
         super(props);
@@ -56,9 +57,65 @@ export default class EventDetailPage extends Component {
             markerPosition: {
                 latitude: 0,
                 longitude: 0
-            }
+            },
+            eventTitle: '',
+            eventTicketPrice: 0,
+            eventAdmin: "",
+            eventDate: '',
+            description: '',
+            userId: '',
+            eventOrganiser: '',
+            eventType: '',
+            eventEndDate: '',
+            eventEndTime: '',
+            startEventTime:'',
+            eventlocation:''
         };
+        this.getUserKey();
+    }
+    getUserKey = async () => {
+        eventKey = await AsyncStorage.getItem("event_key");
+        this.getEventDetails();
+    }
+    getEventDetails = async () => {
+        var displayEvent = firebase
+            .database()
+            .ref("Users/FaithMeetsLove/Event/EventList/" + eventKey);
+        await displayEvent
+            .once("value")
+            .then(snapshot => {
+                var eventAdmin = snapshot.val().eventAdmin;
+                var eventDate = snapshot.val().eventDate;
+                var desc = snapshot.val().eventDesc;
+                var userId = snapshot.val().eventId;
+                var eventLatitude = snapshot.val().eventLatitued;
+                var eventLocation = snapshot.val().eventLocation;
+                var eventLongitude = snapshot.val().eventLongituded;
+                var eventOrganiser = snapshot.val().eventOrganiser;
+                var startEventTime = snapshot.val().eventTime;
+                var eventTitle = snapshot.val().eventTitle;
+                var eventType = snapshot.val().eventType;
+                var eventUrl = snapshot.val().eventURL;
+                var price = snapshot.val().price;
+                var eventEndDate = snapshot.val().endEventDate;
+                var eventEndTime = snapshot.val().endEventTime;
+                var ticketPrice = snapshot.val().eventTicketPrice;
 
+                this.setState({
+                    eventTitle: eventTitle,
+                    eventTicketPrice: ticketPrice,
+                    eventAdmin: eventAdmin,
+                    eventDate: eventDate,
+                    description: desc,
+                    userId: userId,
+                    eventOrganiser: eventOrganiser,
+                    eventType: eventType,
+                    eventEndDate: eventEndDate,
+                    eventEndTime: eventEndTime,
+                    startEventTime:startEventTime,
+                    eventLocation:eventLocation,
+                })
+            })
     }
     onDrawerPressed = () => {
         Actions.drawerOpen();

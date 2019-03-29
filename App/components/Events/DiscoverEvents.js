@@ -110,6 +110,7 @@ export default class DiscoverEvents extends Component {
       .once("value")
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
+          var key=childSnapshot.key;
           var eventAdmin = childSnapshot.val().eventAdmin;
           var eventDate = childSnapshot.val().eventDate;
           var desc = childSnapshot.val().eventDesc;
@@ -123,7 +124,7 @@ export default class DiscoverEvents extends Component {
           var eventType = childSnapshot.val().eventType;
           var eventUrl = childSnapshot.val().eventURL;
           var price = childSnapshot.val().price;
-
+          var endEventDateActual=childSnapshot.val().endEventDate;
           var elat = this.state.eventLat;
           var elong = this.state.eventLong;
           var searchDistance = this.state.userDistance;
@@ -132,10 +133,11 @@ export default class DiscoverEvents extends Component {
           var endEventDates = this.state.endDate;
          // var searchExisted=this.state.searchExist;
           var dates = moment(eventDate, "DD-MM-YYYY");
+          var end_eventDate=moment(endEventDateActual,"DD-MM-YYYY")
           var startdates = moment(startEventDates, "DD-MM-YYYY");
           var endDates = moment(endEventDates, "DD-MM-YYYY");
         
-          var a = dates.toDate(), b = startdates.toDate(), c = endDates.toDate();
+          var a = dates.toDate(), b = startdates.toDate(), c = endDates.toDate(),d=end_eventDate.toDate();
          
           var dis = this.getDistance(elat, elong, eventLatitude, eventLongitude);
           if (uidUser == userId) {
@@ -149,6 +151,7 @@ export default class DiscoverEvents extends Component {
                 latitude: eventLatitude,
                 longitude: eventLongitude,
               },
+              id:key,
               title: eventTitle,
               description: desc,
               image: eventUrl,
@@ -161,6 +164,7 @@ export default class DiscoverEvents extends Component {
                   latitude: eventLatitude,
                   longitude: eventLongitude,
                 },
+                id:key,
                 title: eventTitle,
                 description: desc,
                 image: eventUrl,
@@ -169,7 +173,7 @@ export default class DiscoverEvents extends Component {
 
           }
           else {
-            if (a.getTime() >= b.getTime() && a.getTime() <= c.getTime())
+            if (a.getTime() >= b.getTime() && d.getTime() <= c.getTime())
              {
 
               arr.push({
@@ -306,10 +310,11 @@ export default class DiscoverEvents extends Component {
     alert(coordinate, index);
   }
 
-  onPressEvent = (lat, long) => {
-
+  onPressEvent = (lat, long, id) => {
+//alert(id);
     AsyncStorage.setItem("event_lat", lat);
     AsyncStorage.setItem("event_long", long);
+    AsyncStorage.setItem("event_key", id);
     // alert(long);
     // alert(lat)
     Actions.eventDetailPage();
@@ -338,8 +343,8 @@ export default class DiscoverEvents extends Component {
       <View style={styles.container}>
         <MapView
           ref={map => this.map = map}
-          provider={PROVIDER_GOOGLE}
-         followsUserLocation={true}
+        //   provider={PROVIDER_GOOGLE}
+        //  followsUserLocation={true}
 
           showsBuildings={true}
           // minZoomLevel={14}
@@ -366,7 +371,7 @@ export default class DiscoverEvents extends Component {
               //   title={'title'}
               //   description={'description'}
               // />
-              <MapView.Marker onPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude), JSON.stringify(marker.coordinate.longitude)) }} key={index} coordinate={marker.coordinate}>
+              <MapView.Marker onPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude), JSON.stringify(marker.coordinate.longitude),marker.id) }} key={index} coordinate={marker.coordinate}>
                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
                   <Animated.View style={[styles.ring, scaleStyle]} />
                   <View style={styles.marker} />
@@ -402,7 +407,7 @@ export default class DiscoverEvents extends Component {
           contentContainerStyle={styles.endPadding}
         >
           {this.state.markers.map((marker, index) => (
-            <TouchableOpacity onLongPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude), JSON.stringify(marker.coordinate.longitude)) }}>
+            <TouchableOpacity onLongPress={() => { this.onPressEvent(JSON.stringify(marker.coordinate.latitude), JSON.stringify(marker.coordinate.longitude),marker.id) }}>
               <View style={styles.card} key={index}>
                 <Image
                   source={{ uri: marker.image }}

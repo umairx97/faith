@@ -95,6 +95,7 @@ export default class AddEvent extends Component {
       fileName: '',
       fileSize: '',
       email: "",
+      eventTime: "",
       password: "",
       isDateTimePickerVisible: false,
       dob: "",
@@ -115,11 +116,18 @@ export default class AddEvent extends Component {
       _price: '',
       _eventOrganiser: '',
       _eventDate: '',
+      _eventTime: '',
       _eventFullAdd: '',
       _adminName: '',
       _doe: '',
       _latitude: 0,
-      _longitude: 0
+      _longitude: 0,
+      endEventDate: "",
+      endEventTime: "",
+      startDateTime: 0,
+      endEventDate: "",
+      endEventTime: "",
+      _eventTicketPrice:0,
     };
     this.updateIndex = this.updateIndex.bind(this);
     GoogleSignin.configure({
@@ -143,17 +151,16 @@ export default class AddEvent extends Component {
     var eventLongi = await AsyncStorage.getItem("event_longitude");
     var eventLatitude1 = parseFloat(eventLati)
     var eventLongitude1 = parseFloat(eventLongi)
-    if(eventLatitude1!=NaN)
-    {
+    if (eventLatitude1 != NaN) {
       this.setState({
         _latitude: eventLatitude1,
         _longitude: eventLongitude1
       })
     }
-    else{
+    else {
 
     }
-  
+
     if (eventAddress == null) {
       this.setState({
 
@@ -164,7 +171,7 @@ export default class AddEvent extends Component {
     else {
       this.setState({
         _eventFullAdd: eventAddress,
-       
+
       })
     }
 
@@ -186,85 +193,39 @@ export default class AddEvent extends Component {
     Actions.pop(); // Return to previous screen
     return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
-  _sendEmailVerification() {
-    firebase
-      .auth()
-      .currentUser.sendEmailVerification()
-      .then(() => {
-        firebase.auth().signOut();
-        this.setState({
-          ...this.state,
-          progressVisible: false,
-          dialogVisible: true
-        });
-      })
-      .catch(err => {
-        this.setState({ ...this.state, progressVisible: false });
-      });
-  }
-
-  //   _handleSignUp() {
-  //     // Actions.activityLoader();
-  //     this.setState({ ...this.state, progressVisible: true });
-  //     instance = this;
-  //     const {
-  //       _fullName,
-  //       _username,
-  //       _email,
-  //       _password,
-  //       _dob,
-  //       _gender
-  //     } = this.state;
-  //     if (
-  //       _email != "" &&
-  //       _password != "" &&
-  //       _fullName != "" &&
-  //       _username != null &&
-  //       _dob != null
-  //     ) {
-  //       firebase
-  //         .auth()
-  //         .signInWithEmailAndPassword(_email, _password)
-  //         .then(userData => {})
-  //         .catch(() => {
-  //           firebase
-  //             .auth()
-  //             .createUserWithEmailAndPassword(_email, _password)
-  //             .then(userData => {
-  //               this._updateUserProfile(
-  //                 userData.user.uid,
-  //                 userData.user.email,
-  //                 _username,
-  //                 _fullName,
-  //                 _gender,
-  //                 _dob
-  //               );
-  //             })
-  //             .catch(error => {
-  //               alert("Authentication failed." + error.toString());
-  //             });
-  //         });
-  //     } else {
-  //       alert("Please fill all fields");
-  //     }
-  //   }
 
   _showDateTimePicker = () =>
     this.setState({
-      isDateTimePickerVisible: true
+      isDateTimePickerVisible: true,
+      startDateTime: 0
     });
+  _showDateTimePickerEnd = () =>
+    this.setState({
+      isDateTimePickerVisible: true,
+      startDateTime: 1
+    });
+
   _hideDateTimePicker = () =>
     this.setState({
       isDateTimePickerVisible: false
     });
-  _handleDatePicked = date => {
+  _handleDatePicked = datetime => {
     Moment.locale("en");
-    const NewDate = Moment(date).format("DD-MM-YYYY");
+    const NewDate = Moment(datetime).format("DD-MM-YYYY");
+    const Time = Moment(datetime).format("h:mm A");
     this._hideDateTimePicker();
-    this.setState({
-      dob: NewDate,
-      _doe: NewDate
-    });
+    if (this.state.startDateTime == 0)
+      this.setState({
+        dob: NewDate,
+        _doe: NewDate,
+        eventTime: Time
+      });
+    else {
+      this.setState({
+        endEventDate: NewDate,
+        endEventTime: Time
+      });
+    }
   };
   onClickListener = viewId => {
     alert("Alert", "Button pressed " + viewId);
@@ -287,34 +248,43 @@ export default class AddEvent extends Component {
     this.setState({ ...this.state, progressVisible: true });
     var _id = await firebase.auth().currentUser.uid;
     var path = this.state.fileUri;
+    // var virtualId = new Date().getTime();
     var milliseconds = new Date().getTime();
+    var eventIdCreated = _id + milliseconds;
+    // alert(eventIdCreated);
     firebase
       .storage()
       .ref("Event/EventAttachments/" + _id + milliseconds)
       .putFile(path)
       .then(path => {
-        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/").push({ eventTitle: this.state._eventTitle, 
-          eventDesc: this.state._eventDesc, 
-          eventLocation: this.state._eventFullAdd, 
-          eventType: this.state._eventType, 
-          price: this.state._price, 
+        firebase.database().ref("Users/FaithMeetsLove/Event/EventList/").push({
+          id: eventIdCreated, eventTitle: this.state._eventTitle,
+          eventDesc: this.state._eventDesc,
+          eventLocation: this.state._eventFullAdd,
+          eventType: this.state._eventType,
+          price: this.state._price,
           eventOrganiser: this.state._eventOrganiser,
-           eventDate: this.state._doe,
-            eventURL: path.downloadURL, 
-           eventAdmin: this.state._adminName,
-            eventId: _id,
-             eventLatitued: this.state._latitude,
-              eventLongituded: this.state._longitude });
-      }).then(ref=>{
+          eventDate: this.state._doe,
+          eventTime: this.state.eventTime,
+          eventURL: path.downloadURL,
+          eventAdmin: this.state._adminName,
+          eventId: _id,
+          eventLatitued: this.state._latitude,
+          eventLongituded: this.state._longitude,
+          endEventDate: this.state.endEventDate,
+          endEventTime: this.state.endEventTime,
+          eventTicketPrice:this.state._eventTicketPrice,
+        });
+      }).then(ref => {
         this.setState({ ...this.state, progressVisible: false });
-        this.setState({...this.state, fileName : ''})
+        this.setState({ ...this.state, fileName: '' })
         alert('save');
       })
       .catch(error => {
         alert("Firebase profile upload failed: " + error)
       })
 
-    
+
   }
   handleChange = async () => {
 
@@ -369,7 +339,22 @@ export default class AddEvent extends Component {
     alert(selectedIndex);
     this.setState({ _price: selectedIndex });
   }
+showPriceInput=()=>{
+if(this.state._price==0)
+{
+  return(
+  <View style={{marginTop:10}}><MyInput
+    name="Price"
+    type="name"
 
+    onChangeText={text => this.setState({ _eventTicketPrice: text })}
+    placeholder="Please enter event ticket price"
+    style={styles.textInput}
+  /></View>)  
+}
+  
+
+}
 
   render() {
     const buttons = ["Paids", "Free",];
@@ -484,17 +469,12 @@ export default class AddEvent extends Component {
                     >
                       <View style={styles.showMeView}>
                         <Text style={styles.showMeText}>Price :</Text>
-                        <RadioForm
+                        <RadioForm 
                           radio_props={radio_props}
                           initial={0}
                           onPress={(value) => { this.setState({ _price: value }) }}
                         />
-                        {/* <ButtonGroup
-                          onPress={this.updateIndex}
-                          selectedIndex={selectedIndex}
-                          buttons={buttons}
-                          containerStyle={{ height: 50, marginTop: 15 }}
-                        /> */}
+                    {this.showPriceInput()}
                       </View>
                     </View>
                     <View
@@ -513,7 +493,6 @@ export default class AddEvent extends Component {
                       />
                     </View>
 
-
                     <View
                       style={{
                         flexDirection: "column"
@@ -522,34 +501,20 @@ export default class AddEvent extends Component {
                       <Text style={{
                         marginBottom: 2,
                         paddingBottom: 18
-                      }}>Event Date</Text>
-                      <TouchableOpacity onPress={this._showDateTimePicker}>
-                        <TextInput
-                          style={{
-                            paddingBottom: 10
-                          }}
-                          placeholder="Please select event date"
-                          value={this.state.dob}
-                          onChangeText={value =>
-                            this.setState({
-                              _eventDate: value
-                            })
-                          }
-                          onFocus={this._showDateTimePicker}
-                          style={styles.textInput}
-                        />
-                        {/* <Text
-                          placeholder="Plz, Select your date of event"
-                          style={{
-                            color: this.state.dob_color,
-                            marginTop: 20,
-                            marginBottom: 2,
-                            paddingBottom: 10
-                          }}
-                        >
-                          {this.state.dob}
-                        </Text> */}
-                      </TouchableOpacity>
+                      }}>Event Start Date and Time</Text><View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View >
+                          <Text
+                            style={{
+                              paddingBottom: 5
+                            }}
+                            placeholder="Please select event date"
+                            style={styles.textInput}
+                          >{this.state.dob} {this.state.eventTime}</Text></View>
+                        <View >
+                          <TouchableOpacity onPress={this._showDateTimePicker}>
+                            <Image style={{ height: 35, width: 35 }} source={Images.calenderIcon} />
+                          </TouchableOpacity>
+                        </View></View>
                       <View
                         style={{
                           backgroundColor: "#3090C7",
@@ -561,8 +526,49 @@ export default class AddEvent extends Component {
                         isVisible={this.state.isDateTimePickerVisible}
                         onConfirm={this._handleDatePicked}
                         onCancel={this._hideDateTimePicker}
+                        mode="datetime"
                       />
                     </View>
+
+
+                    <View
+                      style={{
+                        flexDirection: "column"
+                      }}
+                    >
+                      <Text style={{
+                        marginBottom: 2,
+                        paddingBottom: 18
+                      }}>Event End Date Time</Text><View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View >
+                          <Text
+                            style={{
+                              paddingBottom: 5
+                            }}
+                            placeholder="Please select event date"
+                            style={styles.textInput}
+                          >{this.state.endEventDate} {this.state.endEventTime}</Text></View>
+                        <View >
+                          <TouchableOpacity onPress={this._showDateTimePickerEnd}>
+                            <Image style={{ height: 35, width: 35 }} source={Images.calenderIcon} />
+                          </TouchableOpacity>
+                        </View></View>
+                      <View
+                        style={{
+                          backgroundColor: "#3090C7",
+                          height: 1.2,
+                          marginBottom: "4%"
+                        }}
+                      />
+                      <DateTimePicker
+                        isVisible={this.state.isDateTimePickerVisible}
+                        onConfirm={this._handleDatePicked}
+                        onCancel={this._hideDateTimePicker}
+                        mode="datetime"
+                      />
+                    </View>
+
+
 
                     <View
                       style={{
@@ -591,7 +597,7 @@ export default class AddEvent extends Component {
                       <Text style={styles.text}>
                         {this.state.fileName ? 'File Name ' + this.state.fileName + ' uploaded' : ''}
                       </Text>
-                  
+
                     </View>
 
 
@@ -784,7 +790,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
 
     marginTop: 5,
-    marginBottom:10,
+    marginBottom: 10,
     color: 'black',
   },
   ImageIconStyle: {
