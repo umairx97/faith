@@ -27,6 +27,7 @@ import LocationServicesDialogBox from "react-native-android-location-services-di
 import geolib from "geolib";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase from "react-native-firebase";
+
 const GLOBAL = require("../Constant/Globals");
 
 const Screen = {
@@ -68,8 +69,8 @@ export default class EventDetailPage extends Component {
             eventType: '',
             eventEndDate: '',
             eventEndTime: '',
-            startEventTime:'',
-            eventlocation:''
+            startEventTime: '',
+            eventlocation: ''
         };
         this.getUserKey();
     }
@@ -112,8 +113,8 @@ export default class EventDetailPage extends Component {
                     eventType: eventType,
                     eventEndDate: eventEndDate,
                     eventEndTime: eventEndTime,
-                    startEventTime:startEventTime,
-                    eventLocation:eventLocation,
+                    startEventTime: startEventTime,
+                    eventLocation: eventLocation,
                 })
             })
     }
@@ -217,7 +218,26 @@ export default class EventDetailPage extends Component {
         }
 
     }
-
+checkTicket=()=>{
+    if(this.state.eventTicketPrice==0)
+    {
+        return(<Text style={styles.myText}>Free</Text>)
+    }
+    else
+    {
+        return(<View><View><Text style={styles.myText}>{this.state.eventTicketPrice}</Text></View><View>
+             <RkButton
+                        rkType="rounded"
+                        style={styles.googleButton}
+                        onPress={() => {
+                          
+                        }}
+                      >
+                        Buy Ticket
+                      </RkButton>
+            </View></View>)
+    }
+}
     componentWillMount() {
         BackHandler.addEventListener(
             "hardwareBackPress",
@@ -257,13 +277,176 @@ export default class EventDetailPage extends Component {
                 </MapView>
 
                 </View>
-                <View style={{ flexDirection: 'column' }}>
+                <ScrollView><View style={{ flexDirection: 'column' }}>
                     <View>
-                        <Text>Event Name</Text>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Event Title :</Text>
+                                    <Text style={styles.myText}>{this.state.eventTitle}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+
+
                     </View>
-                    <View><Text>Event Description</Text></View>
-                    <View><Text>Event Type</Text></View>
+
+                    <View><View style={styles.panel2View}>
+                        <View style={styles.levelView}>
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    alignSelf: "stretch"
+                                }}
+                            ><Text style={styles.myWalletText}>Event description :</Text>
+                                <Text style={styles.myText}>{this.state.description}</Text>
+
+
+                            </View>
+                        </View>
+                    </View>
+
+                    </View>
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Event Organizer :</Text>
+                                    <Text style={styles.myText}>{this.state.eventOrganiser}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Event Admin :</Text>
+                                    <Text style={styles.myText}>{this.state.eventAdmin}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Event Location :</Text>
+                                    <Text style={styles.myText}>{this.state.eventTitle}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView1}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Event Location :</Text>
+                                    <Text style={styles.myText}>{this.state.eventLocation}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Start Date & Time :</Text>
+                                    <Text style={styles.myText}>{this.state.eventDate}, {this.state.startEventTime}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>End Date & Time :</Text>
+                                    <Text style={styles.myText}>{this.state.eventEndDate}, {this.state.eventEndTime}</Text>
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                
+                    <View>
+                        <View style={styles.panel2View}>
+                            <View style={styles.levelView}>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        alignSelf: "stretch"
+                                    }}
+                                ><Text style={styles.myWalletText}>Event Ticket Price</Text>
+                                    {this.checkTicket()}
+
+
+                                </View>
+                            </View>
+                        </View>
+                        
+                        
+                    </View>
+                
                 </View>
+                </ScrollView>
+             
+                
+                
                 <View style={{ position: 'absolute', right: 15, top: Screen.height / 3 - 30 }}>
                     <Text style={{ fontSize: 18, fontWeight: "600" }}>{this.state.distanceMiles}miles</Text>
                 </View>
@@ -290,6 +473,19 @@ const styles = StyleSheet.create({
         height: Screen.height / 3,
         ...ifIphoneX({ height: Screen.height / 3 - 3 }),
 
+    },
+    myText: {
+        backgroundColor: "rgba(0, 0, 0, 0.0)",
+        color: "rgb(38, 38, 40)",
+        fontSize: 15,
+        fontStyle: "normal",
+        fontWeight: "400",
+        textAlign: "left",
+        width:Screen.width-200,
+        
+        letterSpacing: 0,
+        marginLeft: 11,
+        marginTop: 3
     },
     rightContainer: {
         position: "absolute",
@@ -323,5 +519,64 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.0)",
         width: 30,
         height: 30
+    },
+    googleButton: {
+        backgroundColor: "rgb(252, 56, 80)",
+        borderRadius: 24,
+     marginTop:10,
+        width: 175,
+        height: 48,
+    
+        alignSelf: "center"
+      },
+    panel2View: {
+        backgroundColor: "rgb(255, 255, 255)",
+        borderRadius: 6,
+        shadowColor: "rgba(0, 0, 0, 0.08)",
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        marginBottom: 8,
+        marginLeft: 17,
+        marginTop: 8,
+        marginRight: 16
+    },
+    levelView: {
+        backgroundColor: "rgba(0, 0, 0, 0.0)",
+      marginBottom:9,
+        marginLeft: 1,
+        marginTop: 9,
+        marginRight: 1
+    },
+    levelView1: {
+        backgroundColor: "rgba(0, 0, 0, 0.0)",
+      marginBottom:9,
+        marginLeft: 1,
+        marginTop: 9,
+        marginRight: 1
+    },
+    rectangle2TwoView: {
+        borderRadius: 8,
+        width: 25,
+        height: 25,
+        marginLeft: 14
+    },
+    logoutImage: {
+        resizeMode: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.0)",
+        alignSelf: "center",
+        marginTop: 2,
+        width: 20,
+        height: 20
+    },
+    myWalletText: {
+        backgroundColor: "rgba(0, 0, 0, 0.0)",
+        color: "rgb(38, 38, 40)",
+        fontSize: 15,
+        fontStyle: "normal",
+        fontWeight: '800',
+        textAlign: "left",
+        letterSpacing: 0,
+        marginLeft: 11,
+        marginTop: 3
     },
 })

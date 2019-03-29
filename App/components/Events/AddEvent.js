@@ -113,7 +113,7 @@ export default class AddEvent extends Component {
       _eventDesc: '',
       _eventLocation: '',
       _eventType: '',
-      _price: '',
+      _price: 0,
       _eventOrganiser: '',
       _eventDate: '',
       _eventTime: '',
@@ -277,8 +277,8 @@ export default class AddEvent extends Component {
         });
       }).then(ref => {
         this.setState({ ...this.state, progressVisible: false });
-        this.setState({ ...this.state, fileName: '' })
-        alert('save');
+        this.setState({ ...this.state, fileName: '',_eventTicketPrice:0,dob:'', eventTime:'',endEventDate:"", endEventTime:'',eventLocation:"",_price:0,})
+      //  alert('save');
       })
       .catch(error => {
         alert("Firebase profile upload failed: " + error)
