@@ -337,8 +337,7 @@ export default class EventFilter extends React.Component {
               <View
                 style={styles.locationViewText}
               >
-                {/* <Text style={styles.currentLocationText}>Current Location</Text> */}
-
+                
                 <Text style={styles.sanFranciscoText}>
                   {this.state.place}
                 </Text>
@@ -394,31 +393,7 @@ export default class EventFilter extends React.Component {
           />
         </View>
         
-                {/* <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style={{ flex: 1 }}><Text style={styles.ageRangeText}>Date range</Text></View>
-                  <View style={{ flex: 1 }}><TouchableOpacity onPress={() => { this.onAddDateRanger() }}><Image source={Images.iconCalenderRange} style={{ height: 35, width: 35 }} /></TouchableOpacity></View>
-                </View> */}
-                {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View ><Text style={styles.distanceText}>Event Date Range : </Text></View>
-
-
-                </View> */}
-
-                {/* <View style={{ flexDirection: 'column', marginTop: 15 }}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-                    <Text>Start Date : {this.state.startDate}</Text>
-                    <TouchableOpacity onPress={() => { this.onStartDate() }}>
-                      <Image style={{ height: 30, width: 30 }} source={Images.iconCalenderRange} /></TouchableOpacity>
-                    <DateTimePicker
-                      isVisible={this.state.isDateTimePickerVisible}
-                      onConfirm={this._handleDatePicked}
-                      onCancel={this._hideDateTimePicker}
-                    />
-                  </View>
-
-                 
-
-                </View> */}
+         
 
               </View>
 

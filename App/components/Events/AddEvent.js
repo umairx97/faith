@@ -138,14 +138,7 @@ export default class AddEvent extends Component {
     });
   }
   async componentDidMount() {
-    // if(this.props.myProps==null)
-    // {
-    //   alert(this.props.myProps)
-    // }
-    // else
-    // {
-    //   alert(this.props.myProps)
-    // }
+    
     var eventAddress = await AsyncStorage.getItem("event_Location");
     var eventLati = await AsyncStorage.getItem("event_latitude");
     var eventLongi = await AsyncStorage.getItem("event_longitude");
@@ -279,6 +272,7 @@ export default class AddEvent extends Component {
         this.setState({ ...this.state, progressVisible: false });
         this.setState({ ...this.state, fileName: '',_eventTicketPrice:0,dob:'', eventTime:'',endEventDate:"", endEventTime:'',eventLocation:"",_price:0,})
       //  alert('save');
+      Actions.myEvent();
       })
       .catch(error => {
         alert("Firebase profile upload failed: " + error)
