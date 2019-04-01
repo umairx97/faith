@@ -92,7 +92,7 @@ export default class MyEvent extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: "rgb(255, 255, 255)", }}>
         <View
           style={{
             ...ifIphoneX({ marginTop: 25 }, { marginTop: 0 }),

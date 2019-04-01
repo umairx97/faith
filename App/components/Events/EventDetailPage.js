@@ -38,7 +38,7 @@ const ASPECT_RATIO = Screen.width / Screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
 var count = 0;
-var eventKey;
+var eventKey,uidUser;
 export default class EventDetailPage extends Component {
     constructor(props) {
         super(props);
@@ -76,8 +76,11 @@ export default class EventDetailPage extends Component {
     }
     getUserKey = async () => {
         eventKey = await AsyncStorage.getItem("event_key");
+        uidUser = await firebase.auth().currentUser.uid;
+
         this.getEventDetails();
     }
+ 
     getEventDetails = async () => {
         var displayEvent = firebase
             .database()
@@ -122,7 +125,12 @@ export default class EventDetailPage extends Component {
         Actions.drawerOpen();
     }
     onBackPressed = () => {
-        Actions.pop();
+       // var val="detailClick"
+       // AsyncStorage.setItem("eventDrawer", val);
+     
+     
+        Actions.DiscoverEvent();
+  
     }
     watchID = null;
     async componentDidMount() {
@@ -141,6 +149,7 @@ export default class EventDetailPage extends Component {
         }
         var eventLati = await AsyncStorage.getItem("event_lat");
         var eventLongi = await AsyncStorage.getItem("event_long");
+
         var eventLatitude = parseFloat(eventLati)
         var eventLongitude = parseFloat(eventLongi)
 
@@ -246,6 +255,8 @@ checkTicket=()=>{
     }
 
     componentWillUnmount() {
+//this.getUserKey();
+      //  alert("hjkj")
         navigator.geolocation.clearWatch(this.watchID);
         BackHandler.removeEventListener(
             "hardwareBackPress",

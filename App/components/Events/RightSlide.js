@@ -1,13 +1,74 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet ,AsyncStorage,Alert} from 'react-native'
 import { Images } from '../../../assets/imageAll';
-
+import firebase from "react-native-firebase";
+import { Actions } from 'react-native-router-flux';
+var eventKey, uidUser, eventTitle;
 export default class RightSlide extends Component {
+    constructor(props) {
+        super(props);
+        this.getEventKey();
+    }
+    getEventKey = async () => {
+        eventKey = await AsyncStorage.getItem("event_key");
+        eventTitle=await AsyncStorage.getItem("event_title")
+        uidUser = await firebase.auth().currentUser.uid;
+    }
+    getFavouriteEventId = () => {
+        firebase
+            .database()
+            .ref(
+                "Users/FaithMeetsLove/FavouriteEvent/" +
+                uidUser +
+                "/" +
+                eventKey
+            )
+            .set({
+                isLike: true
+            })
+            .then(ref => { })
+            .catch(error => {
+                Alert.alert("fail" + error.toString());
+            });
+    };
+    onSaveEvent=()=>{
+    this.getFavouriteEventId();
+    }
+    onHideEvent=()=>{
+        setTimeout(() => {
+            Alert.alert("Block!", "Are you sure you want to hide " + eventTitle + " event ?", [
+              {
+                text: "Cancel",
+                style: "cancel"
+              },
+              {
+                text: "Yes",
+                onPress: () => {
+                    this.blockEvent();
+              
+                }
+              }
+            ]);
+          }, 400);
+    }
+    blockEvent=()=>{
+       
+            firebase.database().ref('Users/FaithMeetsLove/HideEvent/' + uidUser + '/' + eventKey).set({
+              blockedEvent: true
+            }).then(()=>{Actions.drawerClose();
+               
+                Actions.refresh();
+              
+            })
+        
+        
+    }
+
     render() {
         return (
             <View style={{
                 backgroundColor: "rgb(252, 252, 252)",
-                marginTop:70
+                marginTop: 70
             }}>
                 <View style={styles.panel2View}>
                     <View style={styles.levelView}>
@@ -23,7 +84,7 @@ export default class RightSlide extends Component {
                                     style={styles.logoutImage}
                                 />
                             </View>
-                            <TouchableOpacity onPress={this.onFacebookPressed}>
+                            <TouchableOpacity onPress={this.onHideEvent}>
                                 <Text style={styles.myWalletText}>Hide Event</Text>
                             </TouchableOpacity>
 
@@ -128,7 +189,7 @@ export default class RightSlide extends Component {
                                     style={styles.logoutImage}
                                 />
                             </View>
-                            <TouchableOpacity onPress={this.onFacebookPressed}>
+                            <TouchableOpacity onPress={this.onSaveEvent}>
                                 <Text style={styles.myWalletText}>Save to Favorite</Text>
                             </TouchableOpacity>
 
@@ -168,7 +229,7 @@ const styles = StyleSheet.create({
         resizeMode: "center",
         backgroundColor: "rgba(0, 0, 0, 0.0)",
         alignSelf: "center",
-       marginTop:2,
+        marginTop: 2,
         width: 20,
         height: 20
     },
