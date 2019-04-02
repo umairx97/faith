@@ -36,6 +36,7 @@ import EventFilter from "../Events/EventFilter";
 import EventLocation from "../Events/EventLocation";
 import EventDetailPage from "../Events/EventDetailPage";
 import RightSlide from "../Events/RightSlide";
+import ReviewEvent from "../Events/ReviewEvent";
 
 export default class Route extends Component {
   getIcon = () => {
@@ -175,7 +176,7 @@ export default class Route extends Component {
 
               </Scene>
             </Scene>
-            <Scene key="event" hideNavBar={true} replace={true}>
+            <Scene key="event"  hideNavBar={true} replace={true}>
               <Scene key="homeTAB" tabs={true} hideNavBar={true}>
                 {/* <Scene
                   key="DiscoverEvent"
@@ -274,6 +275,12 @@ export default class Route extends Component {
             hideNavBar={true}
             component={EventLocation}
           />
+             <Scene
+           
+           key="EventReview"
+           hideNavBar={true}
+           component={ReviewEvent}
+         />
           </Scene>
           <Scene
             key="drawerRight"

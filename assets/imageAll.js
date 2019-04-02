@@ -51,5 +51,8 @@ export const Images = {
   ShareEvent:require("./images/ShareEvent.png"),
   listEvent:require("./images/listEvent.png"),
   saveEvent:require("./images/saveEvent.png"),
-  calenderIcon:require("./images/calenderIcon.png")
+  calenderIcon:require("./images/calenderIcon.png"),
+  reportIcon:require("./images/reportIcon.png"),
+  commentIcon:require("./images/commentIcon.png"),
+  likeIcon:require("./images/likeIcon.png")
 };

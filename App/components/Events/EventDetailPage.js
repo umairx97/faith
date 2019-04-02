@@ -127,10 +127,11 @@ export default class EventDetailPage extends Component {
     onBackPressed = () => {
        // var val="detailClick"
        // AsyncStorage.setItem("eventDrawer", val);
-     
-     
-        Actions.DiscoverEvent();
-  
+    // Actions.jump("DiscoverEvent");
+    // Actions.pop("DiscoverEvent");
+  //  Actions.push("DiscoverEvent")
+  //  Actions.DiscoverEvent();
+  Actions.home();
     }
     watchID = null;
     async componentDidMount() {
@@ -230,7 +231,17 @@ export default class EventDetailPage extends Component {
 checkTicket=()=>{
     if(this.state.eventTicketPrice==0)
     {
-        return(<Text style={styles.myText}>Free</Text>)
+        return(<View><View><Text style={styles.myText}>Free Entry</Text></View><View>
+            <RkButton
+                       rkType="rounded"
+                       style={styles.googleButton}
+                       onPress={() => {
+                         
+                       }}
+                     >
+                       Entry Pass
+                     </RkButton>
+           </View></View>)
     }
     else
     {
@@ -248,6 +259,7 @@ checkTicket=()=>{
     }
 }
     componentWillMount() {
+     
         BackHandler.addEventListener(
             "hardwareBackPress",
             this.handleBackButtonClick

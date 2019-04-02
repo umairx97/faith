@@ -10,6 +10,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  BackHandler,
   Platform,
 } from "react-native";
 import { Actions } from "react-native-router-flux";
@@ -76,8 +77,9 @@ export default class DiscoverEvents extends Component {
     // .child("Users/FaithMeetsLove/HideEvent/" + this.generateChatId());
   //this.chatRefData = this.chatRef.orderByChild("order");
   }
+  
   componentWillUnmount() {
-    alert("gggs")
+   // alert("gggs")
   //  this.chatRe.off();
     this.setState({ imagePath: "" });
     BackHandler.removeEventListener("hardwareBackPress", () =>
@@ -113,18 +115,21 @@ export default class DiscoverEvents extends Component {
   getBlockedEvent =async(key, userId,check,eventLatitude,eventLongitude,searchDistance,eventTitle,desc,eventUrl,showMeEvent,a,b,c,d) => {
     var uidUser = await firebase.auth().currentUser.uid;
     arr = [];
+    
+
     await firebase.database().ref('Users/FaithMeetsLove/HideEvent/' + uidUser + '/' + key).once("value").then(snapshot => {
   
       if (snapshot.exists()) {
       
       }
       else {
+        var currentDate=new Date();
         if (uidUser == userId) {
 
         }
         else {
        
-            if (check == true) 
+            if (check == true  && d.getTime() >= currentDate.getTime()) 
             {
               arr.push({
                 coordinate: {
@@ -141,7 +146,7 @@ export default class DiscoverEvents extends Component {
              {
               if (showMeEvent == 0) 
               {
-                if (searchDistance >= dis) 
+                if (searchDistance >= dis  && d.getTime() >= currentDate.getTime()) 
                 {
                   arr.push({
                     coordinate: {
@@ -157,7 +162,7 @@ export default class DiscoverEvents extends Component {
 
               }
               else {
-                if (a.getTime() >= b.getTime() && d.getTime() <= c.getTime()) 
+                if (a.getTime() >= b.getTime() && d.getTime() <= c.getTime()  && d.getTime() >= currentDate.getTime()) 
                 {
 
                   arr.push({
@@ -285,6 +290,11 @@ export default class DiscoverEvents extends Component {
     //alert(distance)
   }
   componentWillMount() {
+    Actions.popTo("DiscoverEvent");
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.handleBackButtonClick
+  );
     this.index = 0;
     this.animation = new Animated.Value(0);
   }
@@ -375,9 +385,14 @@ export default class DiscoverEvents extends Component {
       .ref("Users/FaithMeetsLove/EventSearchFilters/" + uidUser)
       BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); 
       setTimeout(() => {
-        this.listenForItems(this.chatRefData);
+     //   this.listenForItems(this.chatRefData);
       },600);
   
+  }
+  
+  backAndroid() {
+    Actions.pop(); // Return to previous screen
+    return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
   getLoactionInfo = (coordinate, index) => {
     alert(coordinate, index);

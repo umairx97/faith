@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image, StyleSheet ,AsyncStorage,Alert} from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet, AsyncStorage, Alert } from 'react-native'
 import { Images } from '../../../assets/imageAll';
 import firebase from "react-native-firebase";
 import { Actions } from 'react-native-router-flux';
@@ -11,7 +11,7 @@ export default class RightSlide extends Component {
     }
     getEventKey = async () => {
         eventKey = await AsyncStorage.getItem("event_key");
-        eventTitle=await AsyncStorage.getItem("event_title")
+        eventTitle = await AsyncStorage.getItem("event_title")
         uidUser = await firebase.auth().currentUser.uid;
     }
     getFavouriteEventId = () => {
@@ -31,39 +31,39 @@ export default class RightSlide extends Component {
                 Alert.alert("fail" + error.toString());
             });
     };
-    onSaveEvent=()=>{
-    this.getFavouriteEventId();
+    onSaveEvent = () => {
+        this.getFavouriteEventId();
     }
-    onHideEvent=()=>{
+    onHideEvent = () => {
         setTimeout(() => {
             Alert.alert("Block!", "Are you sure you want to hide " + eventTitle + " event ?", [
-              {
-                text: "Cancel",
-                style: "cancel"
-              },
-              {
-                text: "Yes",
-                onPress: () => {
-                    this.blockEvent();
-              
-                }
-              }
-            ]);
-          }, 400);
-    }
-    blockEvent=()=>{
-       
-            firebase.database().ref('Users/FaithMeetsLove/HideEvent/' + uidUser + '/' + eventKey).set({
-              blockedEvent: true
-            }).then(()=>{Actions.drawerClose();
-               
-                Actions.refresh();
-              
-            })
-        
-        
-    }
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {
+                    text: "Yes",
+                    onPress: () => {
+                        this.blockEvent();
 
+                    }
+                }
+            ]);
+        }, 400);
+    }
+    blockEvent = () => {
+
+        firebase.database().ref('Users/FaithMeetsLove/HideEvent/' + uidUser + '/' + eventKey).set({
+            blockedEvent: true
+        }).then(() => {
+            Actions.drawerClose();
+
+            Actions.refresh();
+        })
+    }
+onReviewPressed=()=>{
+    Actions.EventReview();
+}
     render() {
         return (
             <View style={{
@@ -101,7 +101,7 @@ export default class RightSlide extends Component {
                         >
                             <View style={styles.rectangle2TwoView}>
                                 <Image
-                                    source={Images.reviewEvent}
+                                    source={Images.reportIcon}
                                     style={styles.logoutImage}
                                 />
                             </View>
@@ -126,7 +126,7 @@ export default class RightSlide extends Component {
                                     style={styles.logoutImage}
                                 />
                             </View>
-                            <TouchableOpacity onPress={this.onFacebookPressed}>
+                            <TouchableOpacity onPress={this.onReviewPressed}>
                                 <Text style={styles.myWalletText}>Like Event & Review Event</Text>
                             </TouchableOpacity>
 
