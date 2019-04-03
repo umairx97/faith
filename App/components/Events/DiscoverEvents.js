@@ -32,7 +32,7 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT;
 var arr = [];
-var markers = [];
+//var markers = [];
 var check = false;
 var eventKey;
 var existEvent;
