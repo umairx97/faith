@@ -1197,6 +1197,7 @@ const styles = StyleSheet.create({
   },
   logoutImage: {
     resizeMode: "stretch",
+    marginTop: 2,
     width: 20,
     height: 20
   },
