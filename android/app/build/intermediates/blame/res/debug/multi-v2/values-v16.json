@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/rebby/faithmeetslove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/Users/Tech/Desktop/FMLapp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/home/rebby/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/b4f434601c33645880b0bdd0bfd17e84/res/values-v16/values-v16.xml",
+                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a334afa1a01401dd1f642fdcfd38546/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/rebby/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/90fec965b1cd85e8fdbfa4d62873fc9c/res/values-v16/values-v16.xml",
+                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

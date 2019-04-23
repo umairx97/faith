@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/rebby/faithmeetslove/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "/Users/Tech/Desktop/FMLapp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/home/rebby/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/90fec965b1cd85e8fdbfa4d62873fc9c/res/values-v23/values-v23.xml",
+                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/home/rebby/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.0.2.aar/5b924a4308fe4cbe64ef77e16b7d1fa9/res/values-v23/values-v23.xml",
+                    "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.0.2.aar/bc976cd9fa6895fdc3a45bea79888a42/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
