@@ -408,23 +408,24 @@ export default class SignUp extends Component {
     return (
       <KeyboardAvoidingView
         style={{
-          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" }), flex: 1,
-          backgroundColor: "#FFFFFF"
+          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" }), flex: 1
         }}
       >
         <Formik
           onSubmit={values => console.log(values)}
+          style={{flex: 1}}
           validationSchema={validationSchema}
           render={props => (
             <ScrollView
               keyboardDismissMode="on-drag"
               keyboardShouldPersistTaps="always"
               contentContainerStyle={{
+                flexGrow: 1,
                 justifyContent: "center",
                 backgroundColor: "#FFFFFF"
               }}
             >
-              <Form>
+              <Form style={{flex: 1}}>
                 <View style={{ flex: 1, marginTop: 30, marginBottom: 30 }}>
                   <OfflineNotice />
                   <View
