@@ -430,6 +430,7 @@ export default class SignUp extends Component {
                   <OfflineNotice />
                   <View
                     style={{
+                      flex: 1,
                       paddingLeft: 10 + "%",
                       paddingRight: 10 + "%"
                     }}
