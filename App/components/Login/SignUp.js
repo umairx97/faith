@@ -408,7 +408,7 @@ export default class SignUp extends Component {
     return (
       <KeyboardAvoidingView
         style={{
-          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" }),
+          ...ifIphoneX({ height: Screen.height, backgroundColor: "#FFFFFF" }), flex: 1,
           backgroundColor: "#FFFFFF"
         }}
       >
