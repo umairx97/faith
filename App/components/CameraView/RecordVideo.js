@@ -10,15 +10,15 @@ import {
   AsyncStorage
 } from "react-native";
 import { RNCamera, FaceDetector } from "react-native-camera";
-import RNFetchBlob from "react-native-fetch-blob";
+// import RNFetchBlob from "react-native-fetch-blob";
 import firebase from 'react-native-firebase'
 import { Images } from "../../../assets/imageAll"
 import { Actions } from "react-native-router-flux";
 // Prepare Blob support
-const Blob = RNFetchBlob.polyfill.Blob;
-const fs = RNFetchBlob.fs;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-window.Blob = Blob;
+// const Blob = RNFetchBlob.polyfill.Blob;
+// const fs = RNFetchBlob.fs;
+// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+// window.Blob = Blob;
 
 export default class RecordVideo extends Component {
   constructor(props) {

@@ -25,7 +25,6 @@ import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
-import RNFetchBlob from "react-native-fetch-blob";
 import Dialog from "react-native-dialog";
 import { MenuProvider } from "react-native-popup-menu";
 

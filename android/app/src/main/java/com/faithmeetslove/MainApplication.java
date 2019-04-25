@@ -13,7 +13,6 @@ import com.brentvatne.react.ReactVideoPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.RNFetchBlob.RNFetchBlobPackage;
 import org.reactnative.camera.RNCameraPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
@@ -25,7 +24,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.rnimmersive.RNImmersivePackage;
 import com.airbnb.android.react.maps.MapsPackage;
 
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebasePackage(),
             new RNFirebaseStoragePackage(),
             new MapsPackage(),
-          new ReactNativeDocumentPicker(),
+            new ReactNativeDocumentPicker(),
             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage(),
             new RNFirebaseDatabasePackage(),
@@ -66,14 +66,15 @@ public class MainApplication extends Application implements ReactApplication {
             new PickerPackage(),
             new LocationServicesDialogBoxPackage(),
             new RNDeviceInfo(),
-            new RNFetchBlobPackage(),
             new RNCameraPackage(),
             new FBSDKPackage(mCallbackManager),
             new RNGoogleSigninPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new RNI18nPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new RNFetchBlobPackage(),
+            new RNImmersivePackage()
       );
     }
 

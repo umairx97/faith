@@ -244,13 +244,34 @@ export default class DrawerScreen extends React.Component {
           });
         }
       });
-      AsyncStorage.setItem("reg_user_name", fullName);
-      AsyncStorage.setItem("reg_user_gender", "" + gender);
-      AsyncStorage.setItem("reg_user_latitude", "" + latitude);
-      AsyncStorage.setItem("reg_user_longitude", "" + longitude);
-      AsyncStorage.setItem("reg_user_email", email);
-      AsyncStorage.setItem("reg_user_dob", user_Dob);
-      AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+      
+      if(fullName != null) {
+        AsyncStorage.setItem("reg_user_name", fullName);
+      }
+
+      if(gender != null) {
+        AsyncStorage.setItem("reg_user_gender", "" + gender);
+      }
+      
+      if(latitude != null) {
+        AsyncStorage.setItem("reg_user_latitude", "" + latitude);
+      }
+
+      if(longitude != null) {
+        AsyncStorage.setItem("reg_user_longitude", "" + longitude);
+      }
+      
+      if(email != null) {
+        AsyncStorage.setItem("reg_user_email", email);
+      }
+      
+      if(user_Dob != null) {
+        AsyncStorage.setItem("reg_user_dob", user_Dob);
+      }
+      
+      if(profileImageURL != null) {
+        AsyncStorage.setItem("reg_user_profileImageURL", profileImageURL);
+      }
 
 
 
