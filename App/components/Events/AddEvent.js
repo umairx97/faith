@@ -52,7 +52,7 @@ import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Dialog from "react-native-dialog";
 import { ButtonGroup } from "react-native-elements";
-import RNFetchBlob from "react-native-fetch-blob";
+// import RNFetchBlob from "react-native-fetch-blob";
 
 
 var radio_props = [
@@ -80,9 +80,9 @@ const Screen = {
   height: Dimensions.get("window").height
 };
 var mainUri;
-const Blob = RNFetchBlob.polyfill.Blob;
-const fs = RNFetchBlob.fs;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+// const Blob = RNFetchBlob.polyfill.Blob;
+// const fs = RNFetchBlob.fs;
+// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
 
 

@@ -13,6 +13,7 @@ import React, { Component } from "react";
 import { Actions } from "react-native-router-flux";
 import AppSlider from "../Slider/Slider";
 import { StatusBar } from "react-native";
+import { Immersive } from 'react-native-immersive';
 console.disableYellowBox = true;
 import firebase from "react-native-firebase";
 export default class MyappSplash extends Component {
@@ -44,6 +45,10 @@ export default class MyappSplash extends Component {
 
   componentDidMount() {
     StatusBar.setHidden(true);
+    if(Platform.OS == "android") {
+      Immersive.on();
+      Immersive.setImmersive(true);
+    }
     var that = this;
     this.StartImageRotateFunction();
 

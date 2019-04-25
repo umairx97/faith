@@ -7,7 +7,6 @@ import Modal from "react-native-modal";
 import { Images } from "../../../assets/imageAll";
 import Dialog from "react-native-dialog";
 import firebase from "react-native-firebase";
-import RNFetchBlob from "react-native-fetch-blob";
 import { TagSelect } from 'react-native-tag-select';
 import { BackHandler, Dimensions, PermissionsAndroid } from "react-native";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
