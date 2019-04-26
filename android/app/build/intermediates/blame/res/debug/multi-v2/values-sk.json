@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Tech/Desktop/FMLapp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sk/values-sk.xml",
+            "outputFile": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sk/values-sk.xml",
             "map": [
                 {
                     "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/values-sk/values-sk.xml",
