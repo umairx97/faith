@@ -55,22 +55,6 @@
           }
         },
         {
-          "client_id": "390674890211-ucn7ntonidhd8kllrrf85o4eri6vh1lt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "d3f215e777ca2fa168bed319999302353c990b01"
-          }
-        },
-        {
-          "client_id": "390674890211-f7ru2jjhsnjsr70io0i9k31p1lqr1gao.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "cbd8a94255831e6264759087aee3617f3efd8156"
-          }
-        },
-        {
           "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -81,7 +65,11 @@
         }
       ],
       "services": {
+        "analytics_service": {
+          "status": 1
+        },
         "appinvite_service": {
+          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
@@ -95,6 +83,9 @@
               }
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
         }
       }
     }

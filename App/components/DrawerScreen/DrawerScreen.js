@@ -15,7 +15,8 @@ import {
   AsyncStorage,
   TouchableOpacity,
   Platform,
-  Dimensions
+  Dimensions,
+  PermissionsAndroid
 } from "react-native";
 import React from "react";
 import { Images } from "../../../assets/imageAll";
@@ -25,8 +26,9 @@ import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase from "react-native-firebase";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
-import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
-import { RNCamera } from "react-native-camera";
+// import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+// import { RNCamera } from "react-native-camera";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -65,8 +67,7 @@ export default class DrawerScreen extends React.Component {
     super(props);
     this.state = {
       user_name: "",
-      profileImageUrl:
-        "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+      profileImageUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
       initialPosition: {
         latitude: 0,
         longitude: 0,
@@ -109,6 +110,7 @@ export default class DrawerScreen extends React.Component {
     });
 
     var v = await AsyncStorage.getItem("checkLoggedType");
+    
     if (v == "firebaseLoggedin") {
       this.signOutGoogle();
     } else if (v == "facebookloggedin") {
@@ -122,20 +124,70 @@ export default class DrawerScreen extends React.Component {
   async componentDidMount() {
     this.getUid();
 
-    var uidUser = await firebase.auth().currentUser.uid;
-
-    if (Platform.OS === "android") {
-      LocationServicesDialogBox.checkLocationServicesIsEnabled({
-        message:
-          "<h2>Use Location?</h2> \
-                            This app wants to change your device settings:<br/><br/>\
-                            Use GPS for location<br/><br/>",
-        ok: "YES",
-        cancel: "NO"
-      }).then(() => {
-        locationTracking(dispatch, getState, geolocationSettings);
-      });
+    if (Platform.OS == "android") {
+      // LocationServicesDialogBox.checkLocationServicesIsEnabled({
+      //   message:
+      //     "<h2>Use Location?</h2> \
+      //                       This app wants to change your device settings:<br/><br/>\
+      //                       Use GPS for location<br/><br/>",
+      //   ok: "YES",
+      //   cancel: "NO",
+      //   showDialog: true, // false => Opens the Location access page directly
+      //   openLocationServices: false, // false => Directly catch method is called if location services are turned off
+      //   preventOutSideTouch: true, // true => To prevent the location services window from closing when it is clicked outside
+      //   preventBackClick: true // true => To prevent the location services popup from closing when it is clicked back button
+      // }).then((success) => {
+      //   // locationTracking(dispatch, getState, geolocationSettings);
+      //   console.warn('passato: ', success);
+      //   if(success.enabled == true) {
+      //     this.getLocation();
+      //   }
+      // }).catch((error) => {
+      //   console.warn(error);
+      // });
+      this.requestPermissionOnAndroid();
+      return;
     }
+    this.getLocation();
+  }
+
+  async requestPermissionOnAndroid() {
+    try {
+      var granted = await PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION],
+          {
+            title: 'Use Location?',
+            message:
+              'This app wants to change your device settings: ' +
+              'Use GPS for location',
+            buttonNegative: 'NO',
+            buttonPositive: 'YES',
+          },
+        );
+        if ((granted['android.permission.ACCESS_COARSE_LOCATION'] === PermissionsAndroid.RESULTS.GRANTED)&&
+        granted['android.permission.ACCESS_FINE_LOCATION'] === PermissionsAndroid.RESULTS.GRANTED) {
+          // console.log('You can use the camera');
+          this.getLocation();
+        } else {
+          // console.log('Camera permission denied');
+          Alert.alert(
+            'Info',
+            'To use this function of the app, you must enable the permission to use the GPS',
+            [
+              {text: 'Ask me later'},
+              {text: 'Ok, tell me the permissions', onPress: () => this.requestPermissionOnAndroid()},
+            ],
+            {cancelable: false},
+          );
+        }
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+
+  async getLocation() {
+    var uidUser = await firebase.auth().currentUser.uid;
     navigator.geolocation.getCurrentPosition(
       position => {
         var lat = parseFloat(position.coords.latitude);
@@ -183,10 +235,12 @@ export default class DrawerScreen extends React.Component {
       { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
     );
   }
+
   componentWillMount() {
     navigator.geolocation.clearWatch(this.watchID);
     this.getUid();
   }
+  
   componentWillReceiveProps() {
     //Actions.refresh("drawer")
     this.getUid();
@@ -209,6 +263,7 @@ export default class DrawerScreen extends React.Component {
         .database()
         .ref("Users/FaithMeetsLove/Registered/" + uidUser);
       await displayUserName.once("value", function (snapshot) {
+        
         var usrName = snapshot.val().fullName;
       
         fullName = snapshot.val().fullName;
@@ -218,22 +273,21 @@ export default class DrawerScreen extends React.Component {
         email = snapshot.val().email;
         user_Dob = snapshot.val().user_Dob;
         profileImageURL = snapshot.val().profileImageURL;
-           var dss=fullName;
-           if(fullName.length>18)
-           {
-             var x=fullName.substring(0,18)+ "...";
-            instance.setState({
-              user_name:x
-            })
-           }
-           else{
-            instance.setState({
-              user_name:fullName
-            })
-           }
+        var dss=fullName;
+        if(fullName.length>18)
+        {
+          var x=fullName.substring(0,18)+ "...";
+          instance.setState({
+            user_name:x
+          })
+        }else{
+          instance.setState({
+            user_name:fullName
+          })
+        }
           
         var fss=usrName;
-        if (profileImageURL == "") {
+        if ((profileImageURL == "")||(profileImageURL == null)) {
           instance.setState({
             profileImageUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
           });
@@ -299,6 +353,7 @@ export default class DrawerScreen extends React.Component {
       });
     await AsyncStorage.setItem("fcmToken", fcmToken);
   };
+
   _SignoutPress() {
     Alert.alert("Alert!", "Are you sure?", [
       {
@@ -451,12 +506,7 @@ export default class DrawerScreen extends React.Component {
           </View>
           <View style={styles.panel1View}>
             <View style={styles.likesView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.likesViewView}>
                 <View style={styles.rectangle2View}>
                   <Image
                     source={Images.homePage}
@@ -478,12 +528,7 @@ export default class DrawerScreen extends React.Component {
               </View>
             </View>
             <View style={styles.likesView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.likesViewView}>
                 <View style={styles.rectangle2View}>
                   <Image
                     source={Images.findFriendList}
@@ -510,12 +555,7 @@ export default class DrawerScreen extends React.Component {
             </View>
 
             <View style={styles.likesView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.likesViewView}>
                 <View style={styles.rectangle2TwoView}>
                   <Image
                     source={Images.informationCenter}
@@ -572,12 +612,7 @@ export default class DrawerScreen extends React.Component {
             </View>
 
             <View style={styles.likesView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.likesViewView}>
                 <View style={styles.rectangle2View}>
                   <Image source={Images.userGroups} style={styles.logoutImage} />
                 </View>
@@ -662,12 +697,7 @@ export default class DrawerScreen extends React.Component {
         
 
             <View style={styles.likesView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.likesViewView}>
                 <View style={styles.rectangle2View}>
                   <Image source={Images.chatIcons} style={styles.logoutImage} />
                 </View>
@@ -690,12 +720,7 @@ export default class DrawerScreen extends React.Component {
 
           <View style={styles.panel2View}>
             <View style={styles.levelView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.levelViewView}>
                 <View style={styles.rectangle2TwoView}>
                   <Image
                     source={Images.walletIcon}
@@ -722,12 +747,7 @@ export default class DrawerScreen extends React.Component {
            
             </View>
             <View style={styles.levelView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.levelViewView}>
                 <View style={styles.rectangle2FiveView}>
                   <Image source={Images.vipCenter} style={styles.logoutImage} />
                 </View>
@@ -783,12 +803,7 @@ export default class DrawerScreen extends React.Component {
               </View>
             </View>
             <View style={styles.blacklistView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SixView}>
                   <Image
                     source={Images.findFriendList}
@@ -816,12 +831,7 @@ export default class DrawerScreen extends React.Component {
             
 
             <View style={styles.blacklistView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SevenView}>
                   <Image
                     source={Images.shareIcons}
@@ -854,12 +864,7 @@ export default class DrawerScreen extends React.Component {
             </View>
 
             <View style={styles.blacklistView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "stretch"
-                }}
-              >
+              <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SevenView}>
                   <Image
                     source={Images.settingsApp}
@@ -975,7 +980,8 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 220,
+    // height: 220,
+    height: hp(33),
     marginLeft: 19,
     marginTop: 1,
     marginRight: 15
@@ -993,9 +999,16 @@ const styles = StyleSheet.create({
   },
   likesView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 35,
+    // backgroundColor: "blue",
+    // height: 35,
+    height: hp(5),
     marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
+  },
+  likesViewView: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: 'center'
   },
   rectangle2View: {
     borderRadius: 8,
@@ -1006,7 +1019,8 @@ const styles = StyleSheet.create({
   likesText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(38, 38, 40)",
-    fontSize: 15,
+    // fontSize: 15,
+    fontSize: hp(2),
     fontStyle: "normal",
     fontWeight: "normal",
     textAlign: "left",
@@ -1014,7 +1028,11 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginTop: 3
   },
-  
+  levelViewView: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: 'center'
+  },
   shapeImage: {
     resizeMode: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1055,7 +1073,8 @@ const styles = StyleSheet.create({
   },
   levelView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 35,
+    // height: 35,
+    height: hp(5),
     marginLeft: 1,
     marginTop: 9,
     marginRight: 1
@@ -1063,7 +1082,8 @@ const styles = StyleSheet.create({
   
   blacklistView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 35,
+    // height: 35,
+    height: hp(5),
     marginTop: 9,
     marginRight: 1
   },

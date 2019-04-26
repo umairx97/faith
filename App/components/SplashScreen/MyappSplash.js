@@ -59,6 +59,12 @@ export default class MyappSplash extends Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        if((user.providerData[0].providerId == "facebook.com")||(user.providerData[0].providerId == "google.com")) {
+          this.setState({
+            isLoggedIn: true
+          });
+          return;
+        }
         if (user.emailVerified == true) {
           this.setState({
             isLoggedIn: true

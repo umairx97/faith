@@ -114,7 +114,7 @@ export default class NearbyFilters extends React.Component {
         ok: "YES",
         cancel: "NO"
       }).then(() => {
-        locationTracking(dispatch, getState, geolocationSettings);
+        // locationTracking(dispatch, getState, geolocationSettings);
       });
     }
     navigator.geolocation.getCurrentPosition(
@@ -175,12 +175,13 @@ export default class NearbyFilters extends React.Component {
       Alert.alert(error.toString());
     }
   }
+
   multiSliderValuesChange = values => {
-    //alert(values)
     this.setState({
       values: values
     });
   };
+
   async onDonePressed() {
     var uidUser = await firebase.auth().currentUser.uid;
     firebase

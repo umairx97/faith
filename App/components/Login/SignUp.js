@@ -254,19 +254,18 @@ export default class SignUp extends Component {
       });
   };
 
-  updateUserProfile(uid, name, email,loginWith) {
-    var userName = name.split(" ").join("_");
+  updateUserProfile(uid, name, email,loginWith, photoUrl) {
+    // var userName = name.split(" ").join("_");
     var userRef = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + uid);
     userRef.once("value").then(snapshot => {
       if (snapshot.exists()) {
-        if (loginWith === "FB") {
+        if (loginWith == "FB") {
           this.openDrawerPage("facebookloggedin");
+          return;
         }
-        {
-          this.openDrawerPage("googleLoggedin");
-        }
+        this.openDrawerPage("googleLoggedin");
       } else {
         userRef
           .set({
@@ -280,10 +279,10 @@ export default class SignUp extends Component {
             longitude: 0,
             isVarified: true,
             isLogin: true,
-            profileImageURL: ""
+            profileImageURL: photoUrl
           })
           .then(ref => {
-            if (loginWith === "FB") {
+            if (loginWith == "FB") {
               this.openDrawerPage("facebookloggedin");
               return;
             }
@@ -397,7 +396,7 @@ export default class SignUp extends Component {
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-          this.updateUserProfile(user.user._user.uid, user.user._user.displayName, user.user._user.email, "FB");
+          this.updateUserProfile(user.user._user.uid, user.user._user.displayName, user.user._user.email, "FB", user.user._user.photoURL);
         })
         .catch(error => {
           const { code, message } = error;

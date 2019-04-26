@@ -36,6 +36,7 @@ var arr = [];
 var check = false;
 var eventKey;
 var existEvent;
+
 export default class DiscoverEvents extends Component {
   constructor() {
     super();
@@ -67,6 +68,7 @@ export default class DiscoverEvents extends Component {
     this.getFilterEvent();
     this.getEventList();
   }
+
   getUseEventKey = async () => {
 
     eventKey = await AsyncStorage.getItem("event_key");
@@ -79,7 +81,6 @@ export default class DiscoverEvents extends Component {
   }
   
   componentWillUnmount() {
-   // alert("gggs")
   //  this.chatRe.off();
     this.setState({ imagePath: "" });
     BackHandler.removeEventListener("hardwareBackPress", () =>
@@ -303,7 +304,6 @@ export default class DiscoverEvents extends Component {
     Actions.drawerOpen();
   }
   async componentDidMount() {
-   
 
     if (Platform.OS === "android") {
       LocationServicesDialogBox.checkLocationServicesIsEnabled({
@@ -314,7 +314,7 @@ export default class DiscoverEvents extends Component {
         ok: "YES",
         cancel: "NO"
       }).then(() => {
-        locationTracking(dispatch, getState, geolocationSettings);
+        // locationTracking(dispatch, getState, geolocationSettings);
       });
     }
     navigator.geolocation.getCurrentPosition(

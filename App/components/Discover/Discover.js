@@ -16,7 +16,7 @@ import LinearGradient from "react-native-linear-gradient";
 import CardStack, { Card } from "react-native-card-stack-swiper";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
-import OfflineNotice from "../OfflineNotice/OfflineNotice";
+// import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Modal from "react-native-modal";
 import firebase from "react-native-firebase";
 
@@ -42,8 +42,7 @@ export default class Discover extends Component {
       isFavouriteUser: false,
       nameFull: "",
       dateOfBirth: "",
-      imageProfileUrl:
-        "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+      imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
       isModalVisible: false,
       transparent: false,
       viewFullProfileId: "",
@@ -346,6 +345,7 @@ export default class Discover extends Component {
         Alert.alert("fail" + error.toString());
       });
   };
+
   getSearchFilter = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     instance = this;
@@ -378,6 +378,7 @@ export default class Discover extends Component {
       });
     this.getAllUser();
   };
+
   viewUserProfile = async id => {
     this.toggleModal();
     instance = this;
@@ -489,6 +490,7 @@ export default class Discover extends Component {
     AsyncStorage.setItem("userProfileKeys", id);
     setTimeout(() => Actions.userProfile(), 500);
   }
+
   render() {
     return (
       <View>
