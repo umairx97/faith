@@ -135,7 +135,7 @@ export default class EventFilter extends React.Component {
         ok: "YES",
         cancel: "NO"
       }).then(() => {
-        locationTracking(dispatch, getState, geolocationSettings);
+        // locationTracking(dispatch, getState, geolocationSettings);
       });
     }
     navigator.geolocation.getCurrentPosition(

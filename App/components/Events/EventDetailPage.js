@@ -145,7 +145,7 @@ export default class EventDetailPage extends Component {
                 ok: "YES",
                 cancel: "NO"
             }).then(() => {
-                locationTracking(dispatch, getState, geolocationSettings);
+                // locationTracking(dispatch, getState, geolocationSettings);
             });
         }
         var eventLati = await AsyncStorage.getItem("event_lat");

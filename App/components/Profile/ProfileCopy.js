@@ -123,7 +123,7 @@ export default class ProfileCopy extends Component {
         ok: "YES",
         cancel: "NO"
       }).then(() => {
-        locationTracking(dispatch, getState, geolocationSettings);
+        // locationTracking(dispatch, getState, geolocationSettings);
       });
     }
     navigator.geolocation.getCurrentPosition(
@@ -223,7 +223,7 @@ export default class ProfileCopy extends Component {
       else{
         convertGender="Unknown"
       }
-      if(ImageUrl=="")
+      if((ImageUrl == "")||(ImageUrl == null))
       {
         instance.setState({
           imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",

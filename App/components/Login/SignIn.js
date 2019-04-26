@@ -129,22 +129,19 @@ export default class SignIn extends Component {
         const { code, message } = error;
       });
   }
-  updateUserProfile(uid, name, email, loginWith) {
-    alert(name);
+  updateUserProfile(uid, name, email, loginWith, photoUrl) {
     var userUserName = name.split(" ").join("_");
-    var userName=name;
+    // var userName=name;
     var userRef = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + uid);
     userRef.once("value").then(snapshot => {
       if (snapshot.exists()) {
-        if (loginWith === "FB") {
+        if (loginWith == "FB") {
           this.openDrawerPage("facebookloggedin");
+          return;
         }
-        else
-        {
-          this.openDrawerPage("googleLoggedin");
-        }
+        this.openDrawerPage("googleLoggedin");
       } else {
         userRef
           .set({
@@ -158,16 +155,14 @@ export default class SignIn extends Component {
             longitude: 0,
             isVarified: true,
             isLogin: true,
-            profileImageURL: ""
+            profileImageURL: photoUrl
           })
           .then(ref => {
-            if (loginWith === "FB") {
+            if (loginWith == "FB") {
               this.openDrawerPage("facebookloggedin");
+              return;
             }
-            else
-            {
-              this.openDrawerPage("googleLoggedin");
-            }
+            this.openDrawerPage("googleLoggedin");
           })
           .catch(error => {
             alert(error);
@@ -314,16 +309,14 @@ export default class SignIn extends Component {
       const credential = firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
-      var x = JSON.stringify(credential);
+      // var x = JSON.stringify(credential);
 
       // login with credential
       const firebaseUserCredential = await firebase
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-        
-          this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB");
-
+          this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB", user.user.photoURL);
         })
         .catch(error => {
 
@@ -429,6 +422,9 @@ export default class SignIn extends Component {
                         >
                           <View style={{ flex: 1 }}>
                             <RkButton
+                              onPress={() => {
+                                this.loginWithFacebook();
+                              }}
                               rkType="rounded"
                               style={styles.facebookRk}
                             >
@@ -440,9 +436,6 @@ export default class SignIn extends Component {
                                 name="facebook"
                               />
                               <RkText
-                                onPress={() => {
-                                  this.loginWithFacebook();
-                                }}
                                 rkType="caption"
                               >
                                 Facebook

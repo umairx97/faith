@@ -51,6 +51,8 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Dialog from "react-native-dialog";
+let apiVersion;
+import DeviceInfo from "react-native-device-info";
 
 var radio_props = [
   {
@@ -100,6 +102,9 @@ export default class SignUp extends Component {
       dialogVisible: false,
       dob_color: "black"
     };
+    if (Platform.OS === "android") {
+      apiVersion = DeviceInfo.getAPILevel();
+    }
     GoogleSignin.configure({
       androidClientId:
         "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
@@ -183,6 +188,7 @@ export default class SignUp extends Component {
       alert("Please fill all fields");
     }
   }
+  
   _updateUserProfile(the_uid, _email, _username, _fullName, _gender, _dob) {
     firebase
       .database()
@@ -247,19 +253,19 @@ export default class SignUp extends Component {
         // Alert.alert(message + " Errorcode " + code);
       });
   };
-  updateUserProfile(uid, name, email,loginWith) {
-    var userName = name.split(" ").join("_");
+
+  updateUserProfile(uid, name, email,loginWith, photoUrl) {
+    // var userName = name.split(" ").join("_");
     var userRef = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + uid);
     userRef.once("value").then(snapshot => {
       if (snapshot.exists()) {
-        if (loginWith === "FB") {
+        if (loginWith == "FB") {
           this.openDrawerPage("facebookloggedin");
+          return;
         }
-        {
-          this.openDrawerPage("googleLoggedin");
-        }
+        this.openDrawerPage("googleLoggedin");
       } else {
         userRef
           .set({
@@ -273,14 +279,19 @@ export default class SignUp extends Component {
             longitude: 0,
             isVarified: true,
             isLogin: true,
-            profileImageURL: ""
+            profileImageURL: photoUrl
           })
           .then(ref => {
+            if (loginWith == "FB") {
+              this.openDrawerPage("facebookloggedin");
+              return;
+            }
             this.openDrawerPage("googleLoggedin");
           });
       }
     });
   }
+  
   async openDrawerPage(_val) {
     AsyncStorage.setItem("checkLoggedType", _val);
     var fullName;
@@ -347,6 +358,7 @@ export default class SignUp extends Component {
       Actions.login();
     }, 400);
   }
+
   loginWithFacebook = async () => {
     //Actions.activityLoader();
     try {
@@ -377,15 +389,14 @@ export default class SignUp extends Component {
       const credential = firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
-      var x = JSON.stringify(credential);
+      // var x = JSON.stringify(credential);
 
       // login with credential
       const firebaseUserCredential = await firebase
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-          this.updateUserProfile(user.uid, user.displayName, user.email, "FB");
-          
+          this.updateUserProfile(user.user._user.uid, user.user._user.displayName, user.user._user.email, "FB", user.user._user.photoURL);
         })
         .catch(error => {
           const { code, message } = error;
@@ -635,6 +646,9 @@ export default class SignUp extends Component {
                     >
                       <View style={{ flex: 1 }}>
                         <RkButton
+                          onPress={() => {
+                            this.loginWithFacebook();
+                          }}
                           rkType="rounded"
                           style={[
                             {
@@ -652,9 +666,6 @@ export default class SignUp extends Component {
                             name="facebook"
                           />
                           <RkText
-                            onPress={() => {
-                              this.loginWithFacebook();
-                            }}
                             rkType="caption"
                           >
                             Facebook
