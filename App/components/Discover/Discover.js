@@ -53,16 +53,27 @@ export default class Discover extends Component {
     };
 
   }
-  async componentWillMount() {
+
+  static onEnter() {
+    Actions.refresh({action:new Date().getTime()});
+  }
+
+  async componentWillReceiveProps(nextProps){
     await this.getSearchFilter();
+  }
+
+  async componentWillMount() {
+    // await this.getSearchFilter();
     BackHandler.addEventListener("hardwareBackPress", () => {
       return true;
     });
   }
+
   toggleModal = () => {
     this.swiper.goBackFromTop();
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
+
   getCurrentUserId =async () => {
     var uidUser =await firebase.auth().currentUser.uid;
     this.setState({
@@ -70,6 +81,7 @@ export default class Discover extends Component {
     });
    // alert(this.state.loginUserId)
   };
+
   componentDidMount() {
     this.getCurrentUserId();
   }
