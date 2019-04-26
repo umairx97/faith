@@ -130,9 +130,8 @@ export default class SignIn extends Component {
       });
   }
   updateUserProfile(uid, name, email, loginWith) {
-    alert(name);
     var userUserName = name.split(" ").join("_");
-    var userName=name;
+    // var userName=name;
     var userRef = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + uid);
@@ -314,16 +313,14 @@ export default class SignIn extends Component {
       const credential = firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
-      var x = JSON.stringify(credential);
+      // var x = JSON.stringify(credential);
 
       // login with credential
       const firebaseUserCredential = await firebase
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-        
           this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB");
-
         })
         .catch(error => {
 
@@ -429,6 +426,9 @@ export default class SignIn extends Component {
                         >
                           <View style={{ flex: 1 }}>
                             <RkButton
+                              onPress={() => {
+                                this.loginWithFacebook();
+                              }}
                               rkType="rounded"
                               style={styles.facebookRk}
                             >
@@ -440,9 +440,6 @@ export default class SignIn extends Component {
                                 name="facebook"
                               />
                               <RkText
-                                onPress={() => {
-                                  this.loginWithFacebook();
-                                }}
                                 rkType="caption"
                               >
                                 Facebook
