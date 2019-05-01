@@ -36,24 +36,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_assets_images_logo.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/assets_images_logo.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_rewind.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_controls_rewind.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_wallet.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_wallet.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxxhdpi/node_modules_reactnavigationstack_dist_views_assets_backicon.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_low_pressed.9.png.flat",
@@ -96,20 +80,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-xxhdpi-v4/exo_controls_repeat_one.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_crossmark.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_crossmark.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color_abc_tint_seek_thumb.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color/abc_tint_seek_thumb.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_groups.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_groups.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ucrop_ic_next.png.flat",
@@ -126,10 +102,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a334afa1a01401dd1f642fdcfd38546/res/layout-v21/notification_template_icon_group.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_homeindicatoronlight.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_homeindicatoronlight.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -188,12 +160,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl_light.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_rewind.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-xxhdpi-v4/exo_controls_rewind.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ucrop_ic_next.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-xxhdpi-v4/ucrop_ic_next.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-xxhdpi-v4/exo_controls_rewind.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
@@ -206,10 +178,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_amu_webview.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/049e069ce20e9473de8c9fde69266741/res/layout/amu_webview.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_previous.png.flat",
@@ -254,14 +222,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_locations.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_locations.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativerouterflux_images_back_chevron.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnativerouterflux_images_back_chevron.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_black_48dp.png.flat",
@@ -320,12 +280,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/049e069ce20e9473de8c9fde69266741/res/raw/amu_inline_style.kml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_angle.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-xhdpi-v4/ucrop_ic_angle.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_black_xout.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-xhdpi-v4/com_facebook_tooltip_black_xout.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_angle.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-xhdpi-v4/ucrop_ic_angle.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_support_simple_spinner_dropdown_item.xml.flat",
@@ -344,20 +304,16 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/049e069ce20e9473de8c9fde69266741/res/raw/amu_visibility_ground_overlay.kml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_homeindicatoronlight.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_homeindicatoronlight.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_messenger_bubble_large_white.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-xhdpi-v4/messenger_bubble_large_white.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_repeat_one.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_controls_repeat_one.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_controls_repeat_one.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_messenger_button_send_round_shadow.png.flat",
@@ -372,12 +328,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/7e236f0e2b644de9e7bbc852142f24a1/res/drawable-hdpi-v4/com_facebook_button_icon_blue.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_black_16dp.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_ic_star_black_16dp.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_black_16dp.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_ic_star_black_16dp.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_repeat_all.png.flat",
@@ -432,14 +388,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-anydpi-v21/exo_controls_fullscreen_enter.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_friends.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_friends.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-hdpi/node_modules_reactnavigationstack_dist_views_assets_backicon.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_play.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_controls_play.png"
     },
@@ -480,20 +428,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-v21/abc_btn_colored_material.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeuikitten_src_assets_img_choice_crossmark.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeuikitten_src_assets_img_choice_crossmark.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_superlike.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_superlike.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_next.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-xhdpi-v4/exo_controls_next.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_oval2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_oval2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
@@ -506,10 +442,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_fullscreen_enter.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-ldpi-v4/exo_controls_fullscreen_enter.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_oval2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_oval2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_play.xml.flat",
@@ -528,12 +460,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_screen_content_include.xml.flat",
@@ -558,10 +490,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_assets_images_3.jpg.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/assets_images_3.jpg"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -596,10 +524,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-hdpi-v4/exo_controls_shuffle.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_shape2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_shape2.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color-v23_abc_btn_colored_text_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color-v23/abc_btn_colored_text_material.xml"
     },
@@ -616,12 +540,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color-v23_abc_tint_seek_thumb.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_abc_textfield_search_material.xml.flat",
@@ -636,16 +560,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/7e236f0e2b644de9e7bbc852142f24a1/res/layout/com_facebook_device_auth_dialog_fragment.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_shape3.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_shape3.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_messenger_bubble_small_blue.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-hdpi-v4/messenger_bubble_small_blue.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxxhdpi/node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_messenger_bubble_small_white.png.flat",
@@ -658,10 +574,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_exo_edit_mode_logo.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-xxxhdpi-v4/exo_edit_mode_logo.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_empty.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_empty.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_ucrop_ic_reset.png.flat",
@@ -744,20 +656,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_ratingbar_material.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backiconmask.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backiconmask.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_superlike.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_superlike.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_assets_images_1.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/assets_images_1.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_16dp.png.flat",
@@ -778,10 +678,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_oval.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_oval.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
@@ -840,16 +736,16 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/7e236f0e2b644de9e7bbc852142f24a1/res/drawable-mdpi-v4/com_facebook_close.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ucrop_ic_scale.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-mdpi-v4/ucrop_ic_scale.png"
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_messenger_bubble_large_blue.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-hdpi-v4/messenger_bubble_large_blue.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/raw_amu_poly_style_boolean_numeric.kml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/049e069ce20e9473de8c9fde69266741/res/raw/amu_poly_style_boolean_numeric.kml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_messenger_bubble_large_blue.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-hdpi-v4/messenger_bubble_large_blue.png"
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ucrop_ic_scale.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-mdpi-v4/ucrop_ic_scale.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -864,12 +760,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-ldpi-v4/exo_controls_fullscreen_exit.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_edit_mode_logo.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_edit_mode_logo.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_full_open_on_phone.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable-xhdpi-v4/common_full_open_on_phone.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_edit_mode_logo.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_edit_mode_logo.png.flat",
@@ -878,10 +774,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_normal.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable/common_google_signin_btn_text_light_normal.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_neaby.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_neaby.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_pressed_holo_light.9.png.flat",
@@ -910,10 +802,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-watch-v20_common_google_signin_btn_text_light_normal.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/5241f168a328f4fccc3a601cce414f0b/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_settings.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_settings.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_button_icon_white.png.flat",
@@ -984,10 +872,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable-hdpi-v4/googleg_standard_color_18.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_assets_images_2.jpg.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/assets_images_2.jpg"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_ic_star_black_36dp.png"
     },
@@ -1020,20 +904,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-mdpi-v4/messenger_bubble_large_white.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_neaby.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_neaby.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_message2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_message2.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_friends.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_friends.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color-v23_abc_tint_switch_track.xml.flat",
@@ -1078,10 +950,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_blue_bottomnub.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_discover.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_discover.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
@@ -1168,12 +1036,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable-xhdpi-v4/googleg_standard_color_18.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_scale.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-xhdpi-v4/ucrop_ic_scale.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_standard_color_18.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable-xhdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
@@ -1200,10 +1068,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-ldpi-v4/exo_controls_fastforward.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativerouterflux_images_menu_burger.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnativerouterflux_images_menu_burger.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
@@ -1224,24 +1088,24 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_ucrop_activity_photobox.xml.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/layout/ucrop_activity_photobox.xml"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_ucrop_activity_photobox.xml.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/layout/ucrop_activity_photobox.xml"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_abc_ic_go_search_api_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_ic_go_search_api_material.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_action_mode_close_item_material.xml.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_action_mode_close_item_material.xml"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color_abc_tint_switch_track.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_action_mode_close_item_material.xml.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_select_dialog_item_material.xml.flat",
@@ -1328,12 +1192,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/menu/ucrop_menu_activity.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color_abc_search_url_text.xml.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color/abc_search_url_text.xml"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/anim_abc_slide_out_top.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color_abc_search_url_text.xml.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color/abc_search_url_text.xml"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -1360,12 +1224,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-anydpi-v21/exo_controls_fastforward.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_messenger_bubble_small_white.png.flat",
-        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-mdpi-v4/messenger_bubble_small_white.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_close.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/7e236f0e2b644de9e7bbc852142f24a1/res/drawable-xhdpi-v4/com_facebook_close.png"
+    },
+    {
+        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_messenger_bubble_small_white.png.flat",
+        "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-mdpi-v4/messenger_bubble_small_white.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_notification_media_cancel_action.xml.flat",
@@ -1428,10 +1292,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable/common_google_signin_btn_icon_dark.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_profile2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_profile2.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_pause.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-xhdpi-v4/exo_controls_pause.png"
     },
@@ -1480,10 +1340,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/049e069ce20e9473de8c9fde69266741/res/raw/amu_default_balloon.kml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_crossmark.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_crossmark.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_messenger_bubble_small_blue.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.40.0.aar/da82b960a26e7cc6314acf05c9d22fae/res/drawable-mdpi-v4/messenger_bubble_small_blue.png"
     },
@@ -1506,10 +1362,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color_abc_tint_btn_checkable.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color/abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_neaby2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_neaby2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_previous.png.flat",
@@ -1538,10 +1390,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color-v23/abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_wallet.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_wallet.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_black_xout.png.flat",
@@ -1600,10 +1448,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_topnub.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_viplevel.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_viplevel.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/anim_abc_slide_in_top.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/anim/abc_slide_in_top.xml"
     },
@@ -1628,20 +1472,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_iconsedit.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_iconsedit.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_ucrop_layout_scale_wheel.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/layout/ucrop_layout_scale_wheel.xml"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_abc_seekbar_thumb_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_seekbar_thumb_material.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_circle.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_circle.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
@@ -1696,14 +1532,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/anim/abc_popup_enter.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_filtersbtn2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_filtersbtn2.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnavigationstack_dist_views_assets_backicon.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_button_bar_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
@@ -1718,10 +1546,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_ic_star_half_black_36dp.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_oval.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_oval.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_shuffle.xml.flat",
@@ -1772,10 +1596,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/7e236f0e2b644de9e7bbc852142f24a1/res/drawable-xhdpi-v4/com_facebook_button_like_icon_selected.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeuikitten_src_assets_img_choice_circle.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeuikitten_src_assets_img_choice_circle.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
     },
@@ -1786,10 +1606,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_fullscreen_enter.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-hdpi-v4/exo_controls_fullscreen_enter.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_exo_player_control_view.xml.flat",
@@ -1826,10 +1642,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-xxxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_favorite.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_favorite.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/raw_amu_multigeometry_placemarks.kml.flat",
@@ -1940,10 +1752,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_blacklist.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_blacklist.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_black_background.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-mdpi-v4/com_facebook_tooltip_black_background.9.png"
     },
@@ -2000,10 +1808,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/react-native-0.57.2.aar/240bc802ea08d65147e1ae6cad65e01b/res/anim/catalyst_fade_out.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_shape5.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_shape5.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-hdpi-v4/abc_ic_star_black_36dp.png"
     },
@@ -2018,10 +1822,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_dialog_title_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_dialog_title_material.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_blacklist.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_blacklist.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/anim_catalyst_push_up_out.xml.flat",
@@ -2100,10 +1900,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-common-4.40.0.aar/7e236f0e2b644de9e7bbc852142f24a1/res/drawable/com_facebook_button_background.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_photos.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_photos.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_ucrop_controls.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/layout/ucrop_controls.xml"
     },
@@ -2176,10 +1972,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_neaby2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_neaby2.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
@@ -2198,10 +1990,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_abc_edit_text_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_edit_text_material.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_favorite.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_favorite.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_cross.png.flat",
@@ -2260,20 +2048,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color-v23/abc_tint_btn_checkable.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_slides2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_slides2.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_discover.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_discover.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeuikitten_src_assets_img_choice_empty.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeuikitten_src_assets_img_choice_empty.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_shuffle.png.flat",
@@ -2290,10 +2066,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_ucrop_ic_next.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-ldpi-v4/ucrop_ic_next.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_assets_images_4.jpg.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/assets_images_4.jpg"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_text_select_handle_middle_mtrl_dark.png.flat",
@@ -2340,10 +2112,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-mdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_black_topnub.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-hdpi-v4/com_facebook_tooltip_black_topnub.png"
     },
@@ -2354,10 +2122,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/color-v23_abc_tint_default.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/color-v23/abc_tint_default.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi_node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-hdpi/node_modules_reactnavigation_node_modules_reactnavigationstack_src_views_assets_backicon.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_fullscreen_exit.png.flat",
@@ -2394,10 +2158,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_ic_star_black_16dp.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_locations.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_locations.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_button_send_icon_white.png.flat",
@@ -2460,16 +2220,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_fullscreen_exit.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/drawable-mdpi-v4/exo_controls_fullscreen_exit.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_message2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_message2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
@@ -2492,10 +2244,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_settings.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_settings.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_screen_simple.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_screen_simple.xml"
     },
@@ -2514,10 +2262,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_title_material.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/layout/abc_alert_dialog_title_material.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_profile.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_profile.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
@@ -2576,10 +2320,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/05ffcd15ca9159fa9bbb11fd1122b92c/res/layout/notification_template_media_custom.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnavigationstack_dist_views_assets_backicon.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_profile_picture_blank_square.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-mdpi-v4/com_facebook_profile_picture_blank_square.png"
     },
@@ -2598,10 +2338,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_next.png.flat",
@@ -2634,10 +2370,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_discover2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_discover2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
@@ -2676,10 +2408,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl_light.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_groups.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_groups.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_list_selector_holo_light.xml"
     },
@@ -2702,10 +2430,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_tooltip_frame_light.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/tooltip_frame_light.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/node_modules_reactnavigationstack_dist_views_assets_backicon.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable_abc_cab_background_internal_bg.xml.flat",
@@ -2748,10 +2472,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable/abc_vector_test.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_shape5.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_shape5.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a334afa1a01401dd1f642fdcfd38546/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
     },
@@ -2792,20 +2512,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-xhdpi-v4/com_facebook_tooltip_black_topnub.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_slides2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_slides2.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_surface_view.xml.flat",
         "source": "/Users/Tech/Desktop/FMLapp copy/node_modules/react-native-camera/android/build/intermediates/packaged_res/debug/layout/surface_view.xml"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ucrop_ic_reset.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-mdpi-v4/ucrop_ic_reset.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_discover2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_discover2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -2864,20 +2576,12 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnavigationstack_dist_views_assets_backiconmask.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-mdpi/node_modules_reactnavigationstack_dist_views_assets_backiconmask.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_iconsedit.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_iconsedit.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_next.png.flat",
@@ -2894,10 +2598,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ucrop_ic_rotate.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/ucrop-2.2.2-native.aar/f83a9eb5a4f4d5fc7f72a19821c18ef3/res/drawable-xxhdpi-v4/ucrop_ic_rotate.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_profile2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_profile2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/mipmap-ldpi_ic_launcher.png.flat",
@@ -2924,16 +2624,8 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/anim/abc_tooltip_enter.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnativeuikitten_src_assets_img_choice_empty.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_empty.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_text_select_handle_left_mtrl_dark.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_superlike2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_superlike2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_16dp.png.flat",
@@ -2954,10 +2646,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/anim_abc_grow_fade_in_from_bottom.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/anim/abc_grow_fade_in_from_bottom.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_photos.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_photos.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
@@ -2982,10 +2670,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_ic_star_half_black_36dp.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_filtersbtn2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_filtersbtn2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_done.png.flat",
@@ -3020,10 +2704,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_assets_images_profile.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xxhdpi/assets_images_profile.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_blue_background.9.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/facebook-login-4.40.0.aar/cbc73d4c5753a91b11752e3f197673e7/res/drawable-hdpi-v4/com_facebook_tooltip_blue_background.9.png"
     },
@@ -3038,10 +2718,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_exo_player_view.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.7.3.aar/185a10a273f3473b6229655f1439d975/res/layout/exo_player_view.xml"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_shape2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_shape2.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
@@ -3108,10 +2784,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_shape3.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_shape3.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
@@ -3140,10 +2812,6 @@
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/play-services-base-16.1.0.aar/49859d6c17212ba25f76ef6fde3e3404/res/drawable/common_google_signin_btn_text_light_focused.xml"
     },
     {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_superlike2.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_superlike2.png"
-    },
-    {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/layout_notification_template_icon_group.xml.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/8a334afa1a01401dd1f642fdcfd38546/res/layout/notification_template_icon_group.xml"
     },
@@ -3170,10 +2838,6 @@
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "/Users/Tech/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/fd67202f231bfcd0a80749add536830c/res/drawable-mdpi-v4/abc_ic_star_black_48dp.png"
-    },
-    {
-        "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_assets_images_viplevel.png.flat",
-        "source": "/Users/Tech/Desktop/FMLapp copy/android/app/src/main/res/drawable-xhdpi/assets_images_viplevel.png"
     },
     {
         "merged": "/Users/Tech/Desktop/FMLapp copy/android/app/build/intermediates/res/merged/debug/raw_amu_poly_style_boolean_alpha.kml.flat",

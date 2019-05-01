@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:390674890211:android:7d14d1bd0e067f92",
+        "android_client_info": {
+          "package_name": "com.faithmeetslove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA98HPcqVgHGg5fUOtNXOFSzt_aTPUFAZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "390674890211-glp92qlfvd7prj6dgh9c8pe7vmveltkb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FaithMeetsLove.FaithMeetsLove6"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:390674890211:android:f14fe4bfc54d98f6",
         "android_client_info": {
           "package_name": "com.faithmeetsloves"

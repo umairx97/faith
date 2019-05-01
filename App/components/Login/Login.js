@@ -1,11 +1,3 @@
-//
-//  Login.js
-//  Project
-//
-//  Created by Boffin Coders.
-//  Copyright © 2018 Boffin Coders. All rights reserved.
-//
-
 import {
   TouchableOpacity,
   View,
