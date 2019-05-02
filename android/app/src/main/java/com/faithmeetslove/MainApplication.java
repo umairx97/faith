@@ -1,4 +1,4 @@
-package com.faithmeetsloves;
+package com.faithmeetslove;
 
 import android.app.Application;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;

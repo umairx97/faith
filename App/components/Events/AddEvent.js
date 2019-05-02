@@ -50,9 +50,9 @@ import { compose } from "recompose";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
-import Dialog from "react-native-dialog";
-import { ButtonGroup } from "react-native-elements";
-// import RNFetchBlob from "react-native-fetch-blob";
+// import Dialog from "react-native-dialog";
+// import { ButtonGroup } from "react-native-elements";
+// import RNFetchBlob from "rn-fetch-blob";
 
 
 var radio_props = [
