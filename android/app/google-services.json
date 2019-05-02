@@ -8,68 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:390674890211:android:f14fe4bfc54d98f6",
+        "mobilesdk_app_id": "1:390674890211:android:7d14d1bd0e067f92",
         "android_client_info": {
-          "package_name": "com.faithmeetsloves"
+          "package_name": "com.faithmeetslove"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "f97079d1ca6f00a458f39567309897f57b9a7cb1"
-          }
-        },
-        {
-          "client_id": "390674890211-eh1ef2nl8jd2j67uti9bc51gekdqerta.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "bdf99421e8cf9d430e26bb70d6fbf15944256a8f"
-          }
-        },
-        {
-          "client_id": "390674890211-nluh423islevdgernaljp4lld67evn7o.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "b8882160400c0b5c35f7df72fec181f841cb1300"
-          }
-        },
-        {
-          "client_id": "390674890211-ep087nhde3b6aqb8v018a160om51poi5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "d7f4905d81be2fbd37405b3ab6a3d7f84290029f"
-          }
-        },
-        {
-          "client_id": "390674890211-ebahu72gtos1b9743oa0cs36ss2sc10j.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "05970704b9431da7599f3ce14ac4ca28b83d03f0"
-          }
-        },
-        {
-          "client_id": "390674890211-ucn7ntonidhd8kllrrf85o4eri6vh1lt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "d3f215e777ca2fa168bed319999302353c990b01"
-          }
-        },
-        {
-          "client_id": "390674890211-f7ru2jjhsnjsr70io0i9k31p1lqr1gao.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faithmeetsloves",
-            "certificate_hash": "cbd8a94255831e6264759087aee3617f3efd8156"
-          }
-        },
         {
           "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
           "client_type": 3
@@ -88,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "390674890211-glp92qlfvd7prj6dgh9c8pe7vmveltkb.apps.googleusercontent.com",
+              "client_id": "390674890211-3k8l7no4j9jku84dag3j7cuq0637hvn2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.FaithMeetsLove.FaithMeetsLove6"
+                "bundle_id": "com.FaithMeetsLove.FaithMeetsLove"
               }
             }
           ]

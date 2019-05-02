@@ -283,6 +283,7 @@ export default class SignIn extends Component {
     //Actions.activityLoader();
     try {
       // LoginManager.setLoginBehavior("web");
+      LoginManager.logOut();
       const result = await LoginManager.logInWithReadPermissions([
         "public_profile",
         "email"

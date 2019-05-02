@@ -363,6 +363,7 @@ export default class SignUp extends Component {
     //Actions.activityLoader();
     try {
       // LoginManager.setLoginBehavior("web");
+      LoginManager.logOut();
       const result = await LoginManager.logInWithReadPermissions([
         "public_profile",
         "email"
@@ -400,6 +401,7 @@ export default class SignUp extends Component {
         })
         .catch(error => {
           const { code, message } = error;
+          console.warn('facebook error: ', JSON.stringify(error));
         });
     } catch (e) {
       console.error(e);

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FaithMeetsLove</string>
 
-    <string name="facebook_app_id">2261313954115934</string>
+    <string name="facebook_app_id">368586070589462</string>
 
-    <string name="fb_login_protocol_scheme">fb2261313954115934</string>
+    <string name="fb_login_protocol_scheme">fb368586070589462</string>
 </resources>

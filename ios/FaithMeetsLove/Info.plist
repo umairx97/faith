@@ -25,36 +25,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb2261313954115934</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.FaithMeetsLove.FaithMeetsLove</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.FaithMeetsLove.FaithMeetsLove</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.googleusercontent.apps.390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0</string>
+				<string>fb368586070589462</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>2261313954115934</string>
+	<string>368586070589462</string>
 	<key>FacebookDisplayName</key>
-	<string>FathMeetsLove</string>
+	<string>FaithMeetsLove</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

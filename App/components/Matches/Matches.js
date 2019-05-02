@@ -18,11 +18,14 @@ import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 
 import { Images } from "../../../assets/imageAll";
+import { NoDataComponent } from "../ui/NoData";
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
 };
+
 var arr = [];
+
 export default class Matches extends Component {
   constructor() {
     super();
@@ -54,6 +57,7 @@ export default class Matches extends Component {
     Actions.pop(); // Return to previous screen
     return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
+
   getAllUser = async () => {
     arr = [];
     instance = this;
@@ -80,8 +84,8 @@ export default class Matches extends Component {
       .catch(error => {
         console.log(JSON.stringify(error));
       });
-
   };
+
   frndList = (key) => {
     firebase
       .database()
@@ -98,8 +102,8 @@ export default class Matches extends Component {
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
-
   }
+
   getUserDetail = async key => {
     arr = [];
     instance = this;
@@ -145,6 +149,7 @@ export default class Matches extends Component {
         console.log(JSON.stringify(error));
       });
   };
+
   userAgeShow = dob => {
     var userAge = dob;
     //alert(userAge)
@@ -174,27 +179,30 @@ export default class Matches extends Component {
     }
     return age;
   }
+
   getCurrentUserId = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState(
       {
         loginUserId: uidUser
-      },
-      () => {
+      },() => {
         this.getAllUser();
       }
     );
   };
+
   openChatScreen(id, name) {
     this.frndList(id);
     AsyncStorage.setItem("friendsUid", '' + id);
     AsyncStorage.setItem("friendName", name);
     Actions.chat();
   }
+
   openProfile = (id) => {
     AsyncStorage.setItem("userProfileKeys", "" + id);
     setTimeout(() => Actions.userProfile(), 200);
   }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -210,7 +218,7 @@ export default class Matches extends Component {
               <View style={{ margin: 5 }}>
 
                 <View style={{ flexDirection: 'column' }}>
-                  <View>
+                  <TouchableOpacity onPress={() => { this.openProfile(item.ids) }}>
 
                     <ImageBackground
                       style={styles.mainImage}
@@ -235,7 +243,7 @@ export default class Matches extends Component {
                       </TouchableOpacity>
                     </ImageBackground>
 
-                  </View>
+                  </TouchableOpacity>
                   {/* <View style={{ flexDirection: "column", marginTop: 15 }}>
                       <View>
                         <Text style={{ fontSize: 15, marginLeft: 10 }}>
@@ -289,21 +297,18 @@ export default class Matches extends Component {
                  */}
 
               </View>
-
-              //     <ListItem
-              //     roundAvatar
-              //     title={item.pName}
-
-              //     containerStyle={{ borderBottomWidth: 0 }}
-              //    />
             )}
             keyExtractor={item => item.ids}
           />
         </View>
+        {this.state.showArr.length == 0 ?
+          <NoDataComponent text={"You have no matches yet"} onPress={() => Actions.Discover()}/>
+        : null}
       </View>
     );
   }
 }
+
 const styles = StyleSheet.create({
   mainTextStyle: {
     fontSize: 20,

@@ -230,9 +230,8 @@ export default class Discover extends Component {
       .then(snapshot => {
         if (snapshot.exists()) {
           //return;
-        } 
-        else {
-          if (this.state.loginUserId != id)
+        } else {
+          if (this.state.loginUserId != id){
             if (
               varifiedUser == true &&
               getAge >= this.state.ageFromShow &&
@@ -258,7 +257,7 @@ export default class Discover extends Component {
                 });
               }
             }
-
+          }
           this.setState({ showArr: arr });
         }
       })
@@ -269,6 +268,7 @@ export default class Discover extends Component {
     var getF = this.state.showAll;
     this.setState({ xData: getF });
   }
+
   getProfileId = id => {
     firebase
       .database()
@@ -285,6 +285,7 @@ export default class Discover extends Component {
         Alert.alert("fail" + error.toString());
       });
   };
+
   getAlsoLiked(myId, frndId) {
     firebase
       .database()
@@ -292,10 +293,10 @@ export default class Discover extends Component {
       .once("value", snapshot => {
         if (snapshot.exists()) {
           this.profileMatchWithMe(frndId, myId);
-        } else {
         }
       });
   }
+
   profileMatchWithMe(frndId, myId) {
     var now = new Date().getTime();
 
@@ -323,6 +324,7 @@ export default class Discover extends Component {
         Alert.alert("fail" + error.toString());
       });
   }
+
   getFavouriteProfileId = id => {
     firebase
       .database()
