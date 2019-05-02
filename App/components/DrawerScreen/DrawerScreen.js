@@ -111,7 +111,9 @@ export default class DrawerScreen extends React.Component {
 
     var v = await AsyncStorage.getItem("checkLoggedType");
     
-    if (v == "firebaseLoggedin") {
+    console.warn('log type: ', v);
+    
+    if ((v == "firebaseLoggedin")||(v == "googleLoggedin")) {
       this.signOutGoogle();
     } else if (v == "facebookloggedin") {
       this.signOutFacebook();

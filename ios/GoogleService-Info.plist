@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com</string>
+	<string>390674890211-3k8l7no4j9jku84dag3j7cuq0637hvn2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0</string>
+	<string>com.googleusercontent.apps.390674890211-3k8l7no4j9jku84dag3j7cuq0637hvn2</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>390674890211-0f3v7gk5naq51b6d5bu591qkitoue8jq.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyC-roQZVmdwRpHCfhvscVseNZnuGA46hmM</string>
 	<key>GCM_SENDER_ID</key>
@@ -23,11 +21,11 @@
 	<key>STORAGE_BUCKET</key>
 	<string>faithmeetslove-d4d6a.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>

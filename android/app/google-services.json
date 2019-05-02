@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "390674890211-km97uqrp2qe9g7uf42kh5p8ld8560crb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetslove",
+            "certificate_hash": "d3f215e777ca2fa168bed319999302353c990b01"
+          }
+        },
+        {
+          "client_id": "390674890211-0mv12951fgiuntgiv86t8h5p9nsujgnl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetslove",
+            "certificate_hash": "cbd8a94255831e6264759087aee3617f3efd8156"
+          }
+        },
+        {
+          "client_id": "390674890211-0f3v7gk5naq51b6d5bu591qkitoue8jq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faithmeetslove",
+            "certificate_hash": "07c455dd3563dd5c9f41f5be4c4ecfa24618c19f"
+          }
+        },
+        {
           "client_id": "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
           "client_type": 3
         }

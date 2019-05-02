@@ -105,11 +105,10 @@ export default class SignUp extends Component {
     if (Platform.OS === "android") {
       apiVersion = DeviceInfo.getAPILevel();
     }
+    
     GoogleSignin.configure({
-      androidClientId:
-        "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
-      iosClientId:
-        "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com"
+      webClientId: "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
+      iosClientId: "390674890211-3k8l7no4j9jku84dag3j7cuq0637hvn2.apps.googleusercontent.com"
     });
   }
   componentDidMount() {
@@ -245,12 +244,13 @@ export default class SignUp extends Component {
       })
       .then(user => {
         this.setState({ ...this.state, progressVisible: false });
-        this.updateUserProfile(user.uid, user.displayName, user.email,"g+");
+        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email,"g+", user.user.photoURL);
       })
       .catch(error => {
         this.setState({ ...this.state, progressVisible: false });
         const { code, message } = error;
-        // Alert.alert(message + " Errorcode " + code);
+        console.warn(message + " Errorcode " + code);
+        Alert.alert(message + " Errorcode " + code);
       });
   };
 
