@@ -19,15 +19,17 @@ import {
   AsyncStorage
 } from "react-native";
 import React from "react";
-import LinearGradient from "react-native-linear-gradient";
+// import LinearGradient from "react-native-linear-gradient";
 import { ButtonGroup } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import MultiSlider from "react-native-multi-slider";
 import firebase from "react-native-firebase";
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+// import Icon from 'react-native-vector-icons/MaterialIcons';
+// const myIcon = <Icon name="view-headline" size={30} color="black" />;
 
 const Screen = {
   width: Dimensions.get("window").width,
@@ -36,7 +38,8 @@ const Screen = {
 const ASPECT_RATIO = Screen.width / Screen.height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
-var count = 0;
+// var count = 0;
+
 
 export default class NearbyFilters extends React.Component {
  
@@ -98,7 +101,7 @@ export default class NearbyFilters extends React.Component {
 
   }
   getVal(val) {
-    console.warn(val);
+    // console.warn(val);
   }
   updateIndex(selectedIndex) {
     this.setState({ selectedIndex });
@@ -183,6 +186,7 @@ export default class NearbyFilters extends React.Component {
   };
 
   async onDonePressed() {
+
     var uidUser = await firebase.auth().currentUser.uid;
     firebase
       .database()
@@ -198,6 +202,7 @@ export default class NearbyFilters extends React.Component {
         //alert("Update Successfully");
       });
   }
+
   render() {
     const buttons = ["Guys", "Girls", "Both"];
     const { selectedIndex } = this.state;
@@ -207,13 +212,13 @@ export default class NearbyFilters extends React.Component {
       >
         <View style={styles.toplineView}>
           <Text style={styles.filterText}>Filter</Text>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               this.onDonePressed();
             }}
           >
             <Text style={styles.doneText}>Done</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <ScrollView style={{ backgroundColor: "rgb(255, 255, 255)" }}>
           <View style={styles.nearbyFiltersView}>
@@ -233,7 +238,7 @@ export default class NearbyFilters extends React.Component {
                   style={{
                     flex: 1,
                     flexDirection: "column",
-                    alignSelf: "stretch"
+                    alignSelf: "center"
                   }}
                 >
                   <Text style={styles.locationText}>Location</Text>
@@ -262,12 +267,14 @@ export default class NearbyFilters extends React.Component {
                   }}
                 >
                   <Text style={styles.distanceText}>Distance</Text>
-                  <View style={{ flex: 1, flexDirection: "row" }}>
+                  <View style={{ flex: 1, flexDirection: "row", alignContent: 'center', justifyContent: 'center' }}>
                     <Slider
-                      style={{ width: "85%", alignSelf: "center" }}
+                      style={{ width: "70%", alignSelf: "center" }}
                       step={2}
                       minimumValue={2}
                       maximumValue={200}
+                      minimumTrackTintColor={'rgb(255, 104, 154)'}
+                      thumbTintColor={'rgb(255, 104, 154)'}
                       value={this.state.Km}
                       onSlidingComplete={val => this.getVal(val)}
                       onValueChange={val => this.setState({ Km: val })}
@@ -277,21 +284,23 @@ export default class NearbyFilters extends React.Component {
                 </View>
               </View>
               <View style={styles.ageView}>
+
                 <View
                   style={{
                     flexDirection: "row",
-                    alignSelf: "stretch"
+                    alignSelf: "center"
                   }}
                 >
                   <Text style={styles.ageRangeText}>Age range</Text>
-                  <View
+                  {/* <View
                     style={styles.rangeViewValue}
                   >
                     <Text style={styles.textText}>
                       {this.state.values[0]}-{this.state.values[1]}
                     </Text>
-                  </View>
+                  </View> */}
                 </View>
+
                 <View
                   style={{
                     flex: 1,
@@ -302,22 +311,35 @@ export default class NearbyFilters extends React.Component {
                   <View
                     style={{
                       flexDirection: "row",
-                      alignSelf: "stretch"
+                      alignSelf: "center"
                     }}
                   >
+                    <Text>{this.state.values[0]}</Text>
                     <MultiSlider
                       values={[this.state.values[0], this.state.values[1]]}
                       sliderLength={270}
                       onValuesChange={this.multiSliderValuesChange}
+                      selectedStyle={{
+                        backgroundColor: "rgb(255, 104, 154)"
+                      }}
+                      markerStyle={
+                        Platform.OS == "android" ? {backgroundColor: "rgb(255, 104, 154)"} : null
+                      }
                       min={16}
                       max={100}
                       step={1}
                     />
+                    <Text>{this.state.values[1]}</Text>
                   </View>
                 </View>
               </View>
             </View>
           </View>
+          <TouchableHighlight style={styles.button} underlayColor="#ff6d72" onPress={() => this.onDonePressed()}>
+              <View>
+                  <Text style={styles.textBtn}>Save Filters</Text>
+              </View>
+          </TouchableHighlight>
         </ScrollView>
       </View>
     );
@@ -341,6 +363,8 @@ const styles = StyleSheet.create({
   },
   locationViewText:{
     flex: 1,
+    marginLeft: wp(8),
+    marginRight: wp(8),
     flexDirection: "row",
     justifyContent: "space-between",
     height: 30,
@@ -391,11 +415,11 @@ const styles = StyleSheet.create({
     color: "rgb(74, 74, 74)",
     fontSize: 17,
     fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
+    fontWeight: "bold",
+    textAlign: "center",
     lineHeight: 22,
     letterSpacing: -0.41,
-    marginTop: -3
+    marginTop: 5
   },
   guysText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -446,8 +470,8 @@ const styles = StyleSheet.create({
     color: "rgb(74, 74, 74)",
     fontSize: 17,
     fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
+    fontWeight: "bold",
+    textAlign: "center",
     lineHeight: 22,
     letterSpacing: -0.41,
     marginTop: -3
@@ -486,8 +510,8 @@ const styles = StyleSheet.create({
     color: "rgb(74, 74, 74)",
     fontSize: 17,
     fontStyle: "normal",
-    fontWeight: "normal",
-    textAlign: "left",
+    fontWeight: "bold",
+    textAlign: "center",
     lineHeight: 22,
     letterSpacing: -0.41,
     marginTop: -3
@@ -522,7 +546,7 @@ const styles = StyleSheet.create({
     color: "rgb(74, 74, 74)",
     fontSize: 17,
     fontStyle: "normal",
-    fontWeight: "normal",
+    fontWeight: "bold",
     textAlign: "left",
     lineHeight: 22,
     letterSpacing: -0.41,
@@ -630,5 +654,21 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 16,
     alignSelf: "flex-end"
-  }
+  },
+  button: {
+    width: wp(80),
+    marginLeft: wp(10),
+    marginRight: wp(10),
+    marginTop: hp(5),
+    backgroundColor: '#EA2027',
+    borderRadius: 5,
+    padding: wp(5),
+    paddingTop: hp(2),
+    paddingBottom: hp(2)
+  },
+  textBtn: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: hp(3.5)
+  },
 });

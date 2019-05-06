@@ -1,4 +1,3 @@
-//NearbyAllUser
 
 import {
   Text,
@@ -7,17 +6,27 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  ImageBackground,
+  Dimensions,
   Platform
 } from "react-native";
 import React from "react";
 import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
+import LinearGradient from "react-native-linear-gradient";
 import geolib from "geolib";
+import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
-var arr = [];
+import { NoDataComponent } from "../ui/NoData";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+// var arr = [];
+
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
 
 export default class NearbyAllUser extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -34,12 +43,22 @@ export default class NearbyAllUser extends React.Component {
       myLongitude: 0
     };
   }
+
   async componentWillMount() {
     await this.getSearchFilter();
   }
+
   async componentDidMount() {
-    this.getAllNearbyUser();
+    // this.getAllNearbyUser();
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.setState({
+        allArr: []
+      }, () => {
+        this.getAllNearbyUser();
+      });
+    });
   }
+
   async getAllNearbyUser() {
     var uidUser = await firebase.auth().currentUser.uid;
     arrayKey = [];
@@ -92,6 +111,7 @@ export default class NearbyAllUser extends React.Component {
             },
             { lat: friendLatitude, lon: friendLongitude }
           );
+          // console.warn('user: ', 'varifiedUser: ', varifiedUser + ' | ' + 'distance: ', distanceBetweenFriends/1000 + ' | ' + this.state.userDistanceShow + ' | ' + 'age: ', getAge + ' | from: ' + this.state.ageFromShow + ' | to: ' + this.state.ageToShow);
           if (
             varifiedUser == true &&
             getAge >= this.state.ageFromShow &&
@@ -115,12 +135,14 @@ export default class NearbyAllUser extends React.Component {
             }
           }
         }
+
         this.setState({
           allArr: arrayKey
         });
       });
     });
   }
+
   getSearchFilter = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     instance = this;
@@ -176,14 +198,29 @@ export default class NearbyAllUser extends React.Component {
     }
     return age;
   }
+
   openClickedProfile = usrId => {
     alert(usrId);
   };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          <ScrollView>
+        {/* <View style={{ flex: 1 }}> */}
+        <LinearGradient
+          start={{
+            x: 0.51,
+            y: 0.17
+          }}
+          end={{
+            x: 0.24,
+            y: 0.87
+          }}
+          locations={[0, 1]}
+          colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+          style={styles.colorPrimaryViewLinearGradient}
+        >
+          <ScrollView contentContainerStyle={{flex: 1}}>
             <GridView
               itemDimension={130}
               items={this.state.allArr}
@@ -199,9 +236,7 @@ export default class NearbyAllUser extends React.Component {
                       source={{ uri: item.ImageURL }}
                       style={[styles.imageContainer]}
                     />
-                    <View
-                      style={{ flexDirection: "row", justifyContent: "center" }}
-                    >
+                    <View style={styles.itemViewText}>
                       <Text
                        style={styles.listDataText}
                       >
@@ -222,18 +257,25 @@ export default class NearbyAllUser extends React.Component {
                 </View>
               )}
             />
+            {this.state.allArr.length == 0 ?
+                <NoDataComponent text={"No users nearby"} onPress={() => Actions.Discover()}/>
+            : null}
           </ScrollView>
-        </View>
+        {/* </View> */}
+        </LinearGradient>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  colorPrimaryViewLinearGradient: {
+    flex: 1,
+    height: Screen.height
+  },
   gridView: {
     paddingTop: Platform.OS === "ios" ? 30 : 20,
-
-    ...ifIphoneX({ paddingTop: 65 }),
+    ...ifIphoneX({ paddingTop: hp(15) }),
     flex: 1
   },
   itemContainer: {
@@ -243,15 +285,16 @@ const styles = StyleSheet.create({
     height: 175
   },
   listDataText:{
-    fontSize: 15,
-    marginTop: 5,
-    fontWeight: "bold"
+    fontSize: 12, 
+    marginTop:5, 
+    fontWeight: 'bold', 
+    color: 'white'
   },
   imageContainer: {
     justifyContent: "flex-end",
-    borderRadius: 5,
+    borderRadius: 15,
     padding: 10,
-    height: 150
+    height: hp(30)
   },
   itemName: {
     fontSize: 16,
@@ -262,6 +305,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 12,
     color: "#fff"
+  },
+  itemViewText: {
+    position: 'absolute',
+    top: hp(26),
+    width: wp(45),
+    flexDirection: 'row',
+    justifyContent:'center'
   },
   nearbyAllUserView: {
     backgroundColor: "rgb(255, 255, 255)",

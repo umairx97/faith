@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     height: 48,
     marginBottom: 40,
     alignSelf: "center",
-    textAlign: "center"
+    // textAlign: "center"
   },
   googleButton: {
     backgroundColor: "rgb(252, 56, 80)",

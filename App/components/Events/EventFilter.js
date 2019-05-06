@@ -19,20 +19,20 @@ import {
   AsyncStorage
 } from "react-native";
 import React from "react";
-import LinearGradient from "react-native-linear-gradient";
+// import LinearGradient from "react-native-linear-gradient";
 import { ButtonGroup } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
+// import MultiSlider from "react-native-multi-slider";
 import firebase from "react-native-firebase";
 import DateTimePicker from "react-native-modal-datetime-picker";
-import Dates from 'react-native-dates';
+// import Dates from 'react-native-dates';
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
-import DateRangePicker from './DateRangePicker';
+// import DateRangePicker from './DateRangePicker';
 
 import Moment from "moment";
-import SlidingUpPanel from 'rn-sliding-up-panel';
+// import SlidingUpPanel from 'rn-sliding-up-panel';
 import { Images } from "../../../assets/imageAll";
 const Screen = {
   width: Dimensions.get("window").width,

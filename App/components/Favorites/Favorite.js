@@ -1,11 +1,18 @@
 
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, ImageBackground,Platform } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, ImageBackground, Platform, Dimensions } from "react-native";
 import React from "react";
 import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
-
+import LinearGradient from "react-native-linear-gradient";
+import { NoDataComponent } from "../ui/NoData";
 import { ifIphoneX } from "react-native-iphone-x-helper";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 var arrayKey = [];
+
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
 
 export default class Favorite extends React.Component {
   constructor() {
@@ -16,14 +23,20 @@ export default class Favorite extends React.Component {
       allArr: [],
       dateOfBirth:'',
     };
-
-
   }
 
   componentDidMount() {
     //this.getCurrentUserId();
-    this.getAllFavouriteUser();
+    // this.getAllFavouriteUser();
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.setState({
+        allArr: []
+      }, () => {
+        this.getAllFavouriteUser();
+      });
+    });
   }
+
   async getAllFavouriteUser() {
     var uidUser = await firebase.auth().currentUser.uid;
     var alreadyFavouriteUser = firebase.database().ref("Users/FaithMeetsLove/FavouriteProfile/" + uidUser);
@@ -42,15 +55,17 @@ export default class Favorite extends React.Component {
     var displayUserName = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + id);
-    await displayUserName.once("value").then (snapshot=> {
-      var usrName = snapshot.val().fullName;
-      var imageUrl = snapshot.val().profileImageURL;
-      var userID = snapshot.val().uid;
-      var dob=snapshot.val().user_Dob;
-      var personAge=this.age(dob);
+      await displayUserName.once("value").then (snapshot=> {
+        // console.warn('data: ', snapshot.val());
+        var usrName = snapshot.val().fullName;
+        var imageUrl = snapshot.val().profileImageURL;
+        var userID = snapshot.val().uid;
+        var dob=snapshot.val().user_Dob;
+        var personAge=this.age(dob);
 
-      arrayKey.push({ id: userID, UserName: usrName, ImageURL: imageUrl, fullAge:personAge})
-    })
+        arrayKey.push({ id: userID, UserName: usrName, ImageURL: imageUrl, fullAge:personAge});
+      });
+
     this.setState({
       allArr: arrayKey
     })
@@ -91,8 +106,20 @@ export default class Favorite extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }} >
-        <View style={{ flex: 1 }}>
-          <ScrollView>
+        <LinearGradient
+          start={{
+            x: 0.51,
+            y: 0.17
+          }}
+          end={{
+            x: 0.24,
+            y: 0.87
+          }}
+          locations={[0, 1]}
+          colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+          style={styles.colorPrimaryViewLinearGradient}
+        >
+          <ScrollView contentContainerStyle={{flex: 1}}>
             <GridView
               itemDimension={130}
               items={this.state.allArr}
@@ -100,46 +127,50 @@ export default class Favorite extends React.Component {
               renderItem={item => (
                 <View
                   style={[styles.itemContainer]}
-                ><TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
-                  <Image source={{ uri: item.ImageURL }}
-                    style={[styles.imageContainer]}
-                  ></Image>
-                  <View style={{ flexDirection: 'row', justifyContent:'center' }}>
-                            <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold' }}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15 }}>,</Text>
-                            <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold'}}>{item.fullAge}</Text>
-                        </View> 
-                 
-                        </TouchableOpacity>
-
+                >
+                  <TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
+                    <Image source={{ uri: item.ImageURL }}
+                      style={[styles.imageContainer]}
+                    ></Image>
+                    <View style={styles.itemViewText}>
+                        <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                        <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
+                    </View>
+                  </TouchableOpacity>
                 </View>
               )}
             />
+            {this.state.allArr.length == 0 ?
+              <NoDataComponent text={"No favorite user to display"} onPress={() => Actions.Discover()}/>
+            : null}
           </ScrollView>
-        </View>
-      </View >
+        </LinearGradient>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  colorPrimaryViewLinearGradient: {
+    height: Screen.height,
+    flex: 1
+  },
   gridView: {
     paddingTop: Platform.OS === "ios" ? 30 : 20,
-
     ...ifIphoneX({ paddingTop: 65 }),
     flex: 1
   },
   itemContainer: {
-    justifyContent: "flex-end",
-    borderRadius: 5,
-    padding: 10,
-    height: 175,
-
+    // justifyContent: "flex-end",
+    borderRadius: 15,
+    padding: 5,
+    height: hp(30)
   },
   imageContainer: {
     justifyContent: "flex-end",
-    borderRadius: 5,
+    borderRadius: 15,
     padding: 10,
-    height: 150
+    height: hp(30)
   },
   itemName: {
     fontSize: 16,
@@ -150,6 +181,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 12,
     color: "#fff"
+  },
+  itemViewText: {
+    position: 'absolute',
+    top: hp(26),
+    width: wp(45),
+    flexDirection: 'row',
+    justifyContent:'center'
   },
   nearbyAllUserView: {
     backgroundColor: "rgb(255, 255, 255)",

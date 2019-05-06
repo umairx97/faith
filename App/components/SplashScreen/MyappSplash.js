@@ -58,6 +58,7 @@ export default class MyappSplash extends Component {
     }, 5000);
 
     firebase.auth().onAuthStateChanged(user => {
+      // console.warn('user: ', user);
       if (user) {
         if((user.providerData[0].providerId == "facebook.com")||(user.providerData[0].providerId == "google.com")) {
           this.setState({
@@ -123,8 +124,14 @@ export default class MyappSplash extends Component {
 class BaseEmpty extends Component {
   constructor() {
     super();
-    Actions.drawer();
   }
+  
+  componentDidMount() {
+    setTimeout(() => {
+      Actions.drawer();
+    }, 5000);
+  }
+
   render() {
     return <View />;
   }

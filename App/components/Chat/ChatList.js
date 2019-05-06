@@ -15,7 +15,7 @@ import firebase from "react-native-firebase";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
 import { MenuProvider } from 'react-native-popup-menu';
-
+import { NoDataComponent } from "../ui/NoData";
 import Moment from "moment";
 import {
   Menu,
@@ -23,8 +23,9 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import Dialog from "react-native-dialog";
+// import Dialog from "react-native-dialog";
 import { Images } from "../../../assets/imageAll";
+
 
 var arr = [];
 var chatOpen;
@@ -366,7 +367,12 @@ export default class ChatList extends Component {
   }
   render() {
     if (this.state.showArr === undefined || this.state.showArr.length == 0) {
-      return (<View style={styles.emptyView}><Text style={styles.emptyText}>Please select user from match list</Text></View>)
+      return (
+        <View style={styles.emptyView}>
+          {/* <Text style={styles.emptyText}>Please select user from match list</Text> */}
+          <NoDataComponent text={"No matched found yet"} onPress={() => Actions.Discover()}/>
+        </View>
+      )
 
     }
     else {
