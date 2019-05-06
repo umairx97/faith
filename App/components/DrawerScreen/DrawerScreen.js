@@ -74,6 +74,7 @@ export default class DrawerScreen extends React.Component {
     this.getUid();
     this.getUserLoginInfo();
   }
+
   getUserLoginInfo = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
     var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
@@ -89,6 +90,7 @@ export default class DrawerScreen extends React.Component {
     });
 
   }
+
   async logout() {
     var uidUser = await firebase.auth().currentUser.uid;
     var userStatusDatabaseRef = firebase.database().ref('Users/FaithMeetsLove/status/' + uidUser);
@@ -103,7 +105,9 @@ export default class DrawerScreen extends React.Component {
 
     var v = await AsyncStorage.getItem("checkLoggedType");
     
-    if (v == "firebaseLoggedin") {
+    console.warn('log type: ', v);
+    
+    if ((v == "firebaseLoggedin")||(v == "googleLoggedin")) {
       this.signOutGoogle();
     } else if (v == "facebookloggedin") {
       this.signOutFacebook();
@@ -113,6 +117,7 @@ export default class DrawerScreen extends React.Component {
   }
 
   watchID = null;
+
   async componentDidMount() {
     this.getUid();
 
@@ -237,8 +242,8 @@ export default class DrawerScreen extends React.Component {
     //Actions.refresh("drawer")
     this.getUid();
   }
-  getUid = async () => {
 
+  getUid = async () => {
     var FCM = firebase.messaging();
     instance = this;
     var fullName;
@@ -406,6 +411,7 @@ export default class DrawerScreen extends React.Component {
   onEventPressed=()=>{
     Actions.DiscoverEvent();
   }
+  
   render() {
     return (
       <ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>

@@ -29,10 +29,10 @@ import MaterialTextInput from "../OwnComponents/MaterialTextInput";
 import { compose } from "recompose";
 import * as Yup from "yup";
 import { RkButton, RkText, RkTextInput } from "react-native-ui-kitten";
-import LoadingButton from "react-native-loading-button";
-import AnimateLoadingButton from "react-native-animate-loading-button";
+// import LoadingButton from "react-native-loading-button";
+// import AnimateLoadingButton from "react-native-animate-loading-button";
 import OfflineNotice from "../OfflineNotice/OfflineNotice";
-import { ProgressDialog } from "react-native-simple-dialogs";
+// import { ProgressDialog } from "react-native-simple-dialogs";
 import { Images } from "../../../assets/imageAll";
 
 import DeviceInfo from "react-native-device-info";
@@ -71,13 +71,10 @@ export default class SignIn extends Component {
     if (Platform.OS === "android") {
       apiVersion = DeviceInfo.getAPILevel();
     }
-
+    // old 390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com
     GoogleSignin.configure({
-      androidClientId:
-        "390674890211-q9tdrigtg149nvvsd4c4j0reg1830htk.apps.googleusercontent.com",
-
-      iosClientId:
-        "390674890211-oniimc9c6cf0r1mqml75rfc9l94b29s0.apps.googleusercontent.com"
+      webClientId: "390674890211-p2orsbqht6g3d41p00d9r0hbf90se69b.apps.googleusercontent.com",
+      iosClientId: "390674890211-3k8l7no4j9jku84dag3j7cuq0637hvn2.apps.googleusercontent.com"
     });
   }
   showLoading() {
@@ -120,13 +117,11 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
-        alert(user.user.uid)
-        alert(user.user.displayName)
-        
-        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "g+");
+        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "g+", user.user.photoURL);
       })
       .catch(error => {
         const { code, message } = error;
+        Alert.alert(message + " Errorcode " + code);
       });
   }
   updateUserProfile(uid, name, email, loginWith, photoUrl) {

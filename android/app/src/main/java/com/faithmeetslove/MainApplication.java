@@ -3,6 +3,7 @@ package com.faithmeetslove;
 import android.app.Application;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
@@ -54,6 +55,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGestureHandlerPackage(),
             new RNFirebasePackage(),
             new RNFirebaseStoragePackage(),
             new MapsPackage(),
@@ -72,7 +74,6 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new RNI18nPackage(),
-            new RNGestureHandlerPackage(),
             new RNFetchBlobPackage(),
             new RNImmersivePackage()
       );

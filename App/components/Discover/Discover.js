@@ -460,6 +460,7 @@ export default class Discover extends Component {
       var userProfileId = item.id;
       return (
         <Card
+          key={item.id}
           style={{
             backgroundColor: "white",
             height: Screen.height - (Screen.height / 2 - 60),
@@ -621,6 +622,22 @@ export default class Discover extends Component {
               <TouchableOpacity
                 style={[styles.button, styles.orange]}
                 onPress={() => {
+                  this.swiper.swipeBottom();
+                }}
+              >
+                <Image
+                  source={require("../../../assets/images/icons-star3x.png")}
+                  style={{
+                    height: 35,
+                    width: 35,
+                    borderRadius: 18,
+                    resizeMode: "contain"
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, styles.orange]}
+                onPress={() => {
                   this.swiper.goBackFromLeft();
                 }}
               >
@@ -728,7 +745,6 @@ export default class Discover extends Component {
   }
 }
 const styles = StyleSheet.create({
-  
   colorPrimaryViewLinearGradient: {
     height: Screen.height
   },

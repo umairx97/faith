@@ -57,18 +57,26 @@ fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHand
   completionHandler();
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   
-  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                                openURL:url
-                                                      sourceApplication:sourceApplication
-                                                             annotation:annotation
-                  ];
+  // BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+  //                                                               openURL:url
+  //                                                     sourceApplication:sourceApplication
+  //                                                            annotation:annotation
+  //                 ];
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation
+         ]
+         || [RNGoogleSignin application:application
+                                openURL:url
+                      sourceApplication:sourceApplication
+                             annotation:annotation
+            ];
   // Add any custom logic here.
-  return handled;
+  // return handled;
 }
   
 

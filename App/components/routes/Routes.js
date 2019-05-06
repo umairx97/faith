@@ -4,7 +4,7 @@ import { Router, Scene, Stack } from "react-native-router-flux";
 import Login from "../Login/Login";
 import Discover from "../Discover/Discover";
 import NearbyAllUser from "../NearbyAllUser/NearbyAllUser";
-import Spotlight from "../Spotlight/Spotlight";
+// import Spotlight from "../Spotlight/Spotlight";
 import NearbyFilters from "../NearbyFilters/NearbyFilters";
 import Profile from "../Profile/Profile";
 import AppSlider from "../Slider/Slider";
@@ -15,9 +15,9 @@ import MyappSplash from "../SplashScreen/MyappSplash";
 import DrawerScreen from "../DrawerScreen/DrawerScreen";
 import VIPCenter from "../VIPCenter/VIPCenter";
 import UserProfile from "../UserProfile/UserProfile";
-import FavoritesScreen from "../Favorites/FavoritesScreen";
+// import FavoritesScreen from "../Favorites/FavoritesScreen";
 import Chat from "../Chat/Chat";
-import { ifIphoneX } from "react-native-iphone-x-helper";
+// import { ifIphoneX } from "react-native-iphone-x-helper";
 import Favorite from "../Favorites/Favorite";
 import ProfileCopy from "../Profile/ProfileCopy";
 import CaptureImage from "../CameraView/CaptureImage";
@@ -130,12 +130,12 @@ export default class Route extends Component {
           <Scene
             key="drawer"
             drawer={true}
-            gesturesEnabled={false}
+            gesturesEnabled={true}
             contentComponent={DrawerScreen}
             hideNavBar={true}
           >
             <Scene key="home" hideNavBar={true} replace={true}>
-              <Scene key="homeTAB" tabs={true} hideNavBar={true}>
+              <Scene key="homeTAB" tabs={true} lazy={true} hideNavBar={true}>
                 <Scene
                   key="Discover"
                   icon={this.getIcon}
@@ -165,6 +165,7 @@ export default class Route extends Component {
                   icon={this.getFavrouiteIcon}
                   hideNavBar={true}
                   component={Favorite}
+                  type={"refresh"}
                 />
 
                 <Scene key="Filter"
