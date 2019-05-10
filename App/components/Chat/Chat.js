@@ -16,13 +16,13 @@ import {
   Platform,
   PermissionsAndroid
 } from "react-native";
-import OfflineNotice from "../OfflineNotice/OfflineNotice";
+// import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import { Actions, Scene } from "react-native-router-flux";
 import { Images } from "../../../assets/imageAll";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase, { Firebase } from "react-native-firebase";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
 import Dialog from "react-native-dialog";
@@ -47,7 +47,7 @@ var dirName = "ChatImages/";
 var isImageUpload = true;
 var milliseconds;
 
-var friendName, friendUid, friendEmail, friendAvatar, friendToken, chatUserName, mutedChat = false;
+var myAvatar, friendName, friendUid, friendEmail, friendAvatar, friendToken, chatUserName, mutedChat = false;
 var mediaGallery = [];
 
 export default class Chat extends Component {
@@ -79,89 +79,102 @@ export default class Chat extends Component {
       friendChatId:''
     };
     this.user = firebase.auth().currentUser;
-
-  this.getChatGenerated();
+    // this.getChatGenerated();
   }
-getChatGenerated=async()=>{
-  chatUserName = await AsyncStorage.getItem("reg_user_name");
-  friendUid = await AsyncStorage.getItem("friendsUid");
-  this.setState({
-    friendChatId:friendUid
-  })
-  this.getMutedbyFriend();
-  this.chatRef =await firebase
-  .database()
-  .ref()
-  .child("Users/FaithMeetsLove/chat/" + this.generateChatId());
-this.chatRefData = this.chatRef.orderByChild("order");
-this.onSend = this.onSend.bind(this);
 
-firebase
-  .database()
-  .ref("Users/FaithMeetsLove/Registered/" + friendUid)
-  .once("value")
-  .then(snapshot => {
-    friendAvatar = snapshot.val().profileImageURL;
-    friendName = snapshot.val().fullName;
-    friendToken = snapshot.val().pushToken;
+  getChatGenerated=async()=>{
+    chatUserName = await AsyncStorage.getItem("reg_user_name");
+    friendUid = await AsyncStorage.getItem("friendsUid");
+    myAvatar = await AsyncStorage.getItem("reg_user_profileImageURL");
     this.setState({
-      friendProfileName: friendName
-    });
-  });
+      friendChatId:friendUid
+    })
+    this.getMutedbyFriend();
+    this.chatRef =await firebase
+    .database()
+    .ref()
+    .child("Users/FaithMeetsLove/chat/" + this.generateChatId());
+    console.warn("chatID: ", "Users/FaithMeetsLove/chat/" + this.generateChatId());
+    this.chatRefData = this.chatRef.orderByChild("order");
+    this.onSend = this.onSend.bind(this);
 
-}
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + friendUid)
+      .once("value")
+      .then(snapshot => {
+        friendAvatar = snapshot.val().profileImageURL;
+        friendName = snapshot.val().fullName;
+        friendToken = snapshot.val().pushToken;
+        console.warn('friendAvatar: ', friendAvatar);
+        this.setState({
+          friendProfileName: friendName
+        });
+      });
+
+  }
 
   generateChatId() {
-  
     if (this.user.uid > this.state.friendChatId) return `${this.user.uid}-${this.state.friendChatId}`;
     else return `${this.state.friendChatId}-${this.user.uid}`;
   }
 
-  async componentWillMount() { }
+  // async componentWillMount() { }
+
   async componentDidMount() {
-  
-    var isForward = await AsyncStorage.getItem("openChatFrom");
-    var isForwardText = await AsyncStorage.getItem("messageText");
-    var isForwardImage = await AsyncStorage.getItem("messageImage");
-    var isForwardVideo = await AsyncStorage.getItem("messageVideo");
-    if (isForwardImage == null) {
-      isForwardImage = "";
-    }
-    if (isForwardVideo == null) {
-      isForwardVideo = "";
-    }
-    
-    this.getBlokedUser();
-    var path = await AsyncStorage.getItem("file_path");
-    if (path != null && path != "") this.setState({ imagePath: path });
-    if (Platform.OS === "android") {
-      apiVersion = DeviceInfo.getAPILevel();
-    }
-    BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
-    setTimeout(() => {
-      this.listenForItems(this.chatRefData);
-
-      if (isForward == "false") {
-        AsyncStorage.setItem("openChatFrom", "true");
-        AsyncStorage.setItem("newChatMessage", "true");
-
-        var now = new Date().getTime();
-        this.chatRef.push({
-          _id: now,
-          text: isForwardText,
-          image: isForwardImage,
-          video: isForwardVideo,
-          createdAt: now,
-          uid: this.user.uid,
-          fuid: friendUid,
-          blockedByMe: this.state.blockedByMe,
-          blockedByFriend: this.state.blockedByFriend,
-          fName: friendName,
-          order: -1 * now
+    this.focusListener2 = this.props.navigation.addListener("willFocus", async () => {
+      if(this.state.messages.length != 0) {
+        this.setState({
+          messages: []
         });
       }
-    }, 600);
+    });
+    this.focusListener = this.props.navigation.addListener("didFocus", async () => {
+      this.getChatGenerated();
+      var isForward = await AsyncStorage.getItem("openChatFrom");
+      var isForwardText = await AsyncStorage.getItem("messageText");
+      var isForwardImage = await AsyncStorage.getItem("messageImage");
+      var isForwardVideo = await AsyncStorage.getItem("messageVideo");
+      if (isForwardImage == null) {
+        isForwardImage = "";
+      }
+      if (isForwardVideo == null) {
+        isForwardVideo = "";
+      }
+      
+      this.getBlokedUser();
+      var path = await AsyncStorage.getItem("file_path");
+      if (path != null && path != "") this.setState({ imagePath: path });
+      if (Platform.OS === "android") {
+        apiVersion = DeviceInfo.getAPILevel();
+      }
+      BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());
+      setTimeout(() => {
+        this.listenForItems(this.chatRefData);
+        if (isForward == "false") {
+          AsyncStorage.setItem("openChatFrom", "true");
+          AsyncStorage.setItem("newChatMessage", "true");
+
+          var now = new Date().getTime();
+          this.chatRef.push({
+            _id: now,
+            text: isForwardText,
+            image: isForwardImage,
+            video: isForwardVideo,
+            createdAt: now,
+            uid: this.user.uid,
+            fuid: friendUid,
+            blockedByMe: this.state.blockedByMe,
+            blockedByFriend: this.state.blockedByFriend,
+            fName: friendName,
+            order: -1 * now
+          });
+        }
+        console.warn('user: ', this.user);
+      }, 600);
+    });
   }
+
   getBlokedUser = async () => {
     var keyID;
     let blocked;
@@ -201,18 +214,25 @@ firebase
   };
 
   componentWillUnmount() {
+    this.unMountComponent();
+  }
+
+  unMountComponent() {
     this.chatRefData.off();
-    this.setState({ imagePath: "" });
+    this.setState({ imagePath: "", messages: [] });
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     );
   }
+
   listenForItems(chatRef) {
-    var keys;
+    // var keys;
+    var keys = 0;
     var allUsersChat = firebase
       .database()
       .ref("Users/FaithMeetsLove/ChatUser/" + this.user.uid);
     allUsersChat.once("value").then(snapshot => {
+      console.warn('userChatSnap: ', snapshot);
       if (snapshot.exists()) {
         snapshot.forEach(childSnapshot => {
           frndID = childSnapshot.val()._id;
@@ -220,9 +240,10 @@ firebase
             keys = childSnapshot.val().CreatedAt;
           }
         });
-      } else {
-        keys = 0;
-      }
+      } 
+      // else {
+      //   keys = 0;
+      // }
     });
 
     chatRef.on("value", snap => {
@@ -231,11 +252,19 @@ firebase
       var dataBlock;
       let i = 0;
       snap.forEach(child => {
+        console.warn('chat - child: ', child);
         lastChat = child.val().createdAt;
         dataBlock = child.val().blockedByFriend;
+        console.warn('lastChat: ', lastChat);
+        console.warn('keys: ', keys);
         if (lastChat > keys) {
           if (this.state.blockedByMe && dataBlock) {
-          } else
+
+          } else {
+            var avatar = friendAvatar;
+            if(child.val().uid == this.user.uid) {
+              avatar = myAvatar;
+            }
             items.push({
               key: child.key,
               _id: child.val().createdAt,
@@ -244,11 +273,12 @@ firebase
               user: {
                 _id: child.val().uid,
                 name: friendName,
-                avatar: friendAvatar
+                avatar: avatar
               },
               image: child.val().image,
               video: child.val().video
             });
+          }
           if (child.val().image.includes("http"))
             mediaGallery.push({ id: i++, image: child.val().image, video: "" });
           else if (child.val().video.includes("http")) {
@@ -256,6 +286,7 @@ firebase
           }
         }
       });
+      console.warn('messages: ', items);
       this.setState({
         loading: false,
         messages: items
@@ -263,13 +294,13 @@ firebase
     });
   }
 
-
   backAndroid() {
+    this.unMountComponent();
     Actions.chatList();
     return true;
   }
-  getMutedbyFriend = () => {
 
+  getMutedbyFriend = () => {
     var alreadyChatMutedUser = firebase.database().ref("Users/FaithMeetsLove/MuteChatNotifications/" + this.state.friendChatId + '/' + this.user.uid);
     alreadyChatMutedUser.once('value').then(snapshot => {
       if (snapshot.exists()) {
@@ -280,8 +311,8 @@ firebase
       }
 
     })
- 
   }
+
   sendNotification = (text) => {
     var key =
       "AAAAWvYJveM:APA91bH0GyTfgtn07tryKn4uTb-_VFlm1oODrfmtVdWyDHxfEZwO_GneT71SXjQ6Jh69-j2XKqFBXepdPgxkZKK7Mj_oDqWN7eSY-IuztW0x8PG8KJPKiS2MFh6oRwMK74ReHjfHB7sLh_QlNznducxSIjf4awstIQ";
@@ -300,8 +331,7 @@ firebase
     };
     if (this.state.chatMuted) {
 
-    }
-    else {
+    } else {
       fetch("https://fcm.googleapis.com/fcm/send", {
         method: "POST",
         headers: {
@@ -331,8 +361,7 @@ firebase
   async onSend(messages = []) {
     if (this.state.friendChatId==undefined) {
       alert("wait or open again");
-    }
-    else { 
+    } else { 
       //alert(this.state.friendChatId);
 
       if (this.state.blockedByMe == true) {
@@ -479,6 +508,7 @@ firebase
       }
     }
   }
+
   // sendMessage(messages = []) { }
   // async uploadMedia(uri, uid, mime, format, dirName, fs) {
   //   this.setState({ ...this.state, progressVisible: true });
@@ -511,6 +541,7 @@ firebase
   //       });
   //   });
   // }
+
   onChatMessageLongPressed(context, message) {
     if (message.video.includes("http"))
       this.setState({
@@ -531,11 +562,13 @@ firebase
         messageText: message.text
       });
   }
+
   showFriendProfile() {
     //alert(friendUid)
     AsyncStorage.setItem("userProfileKeys", "" + this.state.friendChatId);
     setTimeout(() => Actions.userProfile(), 200);
   }
+
   async openAction(val) {
     if (val == "img") {
 
@@ -601,6 +634,7 @@ firebase
         .catch(error => alert(error));
     }
   }
+
   handleBlock() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
@@ -622,6 +656,7 @@ firebase
       );
     }, 400);
   }
+
   blockFriend() {
     firebase
       .database()
@@ -633,6 +668,7 @@ firebase
       })
       .then(() => { this.listenForItems(this.chatRefData); });
   }
+
   handleVideo() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
@@ -640,6 +676,7 @@ firebase
       Actions.fullScreenVideo();
     }, 400);
   }
+
   handleDeleteMessage() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     firebase
@@ -652,7 +689,9 @@ firebase
       )
       .remove();
   }
+
   handleForward() {
+    this.unMountComponent();
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     AsyncStorage.setItem("newChatMessage", "false");
     AsyncStorage.setItem("messageText", this.state.messageText);
@@ -668,6 +707,7 @@ firebase
     //     this.state.messageKey
     //   )
   }
+
   handleCancel() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
   }
@@ -810,6 +850,7 @@ firebase
     }, 400);
 
   }
+
   onDeleteUserChat = friendUid => {
     var key;
     var uid;
@@ -834,6 +875,7 @@ firebase
         console.log(JSON.stringify(error));
       });
   };
+
   saveChat = (key, uid, fuid, createdAt, frndId) => {
     firebase
       .database()
@@ -851,6 +893,7 @@ firebase
         Alert.alert("fail" + error.toString());
       });
   };
+
   renderBubble(props) {
     return (
       <Bubble
@@ -863,6 +906,7 @@ firebase
       />
     );
   }
+
   render() {
     return (
       <MenuProvider>
@@ -887,6 +931,7 @@ firebase
                 <View>
                   <TouchableOpacity
                     onPress={() => {
+                      this.unMountComponent();
                       Actions.chatList();
                     }}
                   >
@@ -1054,6 +1099,7 @@ firebase
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

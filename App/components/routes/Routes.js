@@ -108,6 +108,14 @@ export default class Route extends Component {
       />
     );
   };
+  getIconMatch = () => {
+    return (
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain", tintColor: 'black' }}
+        source={require("../../../assets/images/discover.png")}
+      />
+    );
+  };
   render() {
     return (
       <Router>
@@ -130,9 +138,10 @@ export default class Route extends Component {
           <Scene
             key="drawer"
             drawer={true}
-            gesturesEnabled={true}
+            gesturesEnabled={false}
             contentComponent={DrawerScreen}
             hideNavBar={true}
+            replace={true}
           >
             <Scene key="home" hideNavBar={true} replace={true}>
               <Scene key="homeTAB" tabs={true} lazy={true} hideNavBar={true}>
@@ -142,6 +151,8 @@ export default class Route extends Component {
                   hideNavBar={true}
                   component={Discover}
                 />
+
+                <Scene key="matchProfile" icon={this.getIconMatch} component={Matches} hideNavBar={true} />
 
                 {/* <Scene
                   key="Nearbyuser"
@@ -232,7 +243,7 @@ export default class Route extends Component {
               component={UserProfile}
               hideNavBar={true}
             />
-            <Scene key="matchProfile" component={Matches} hideNavBar={true} />
+            {/* <Scene key="matchProfile" component={Matches} hideNavBar={true} /> */}
             <Scene
               key="fullScreenVideo"
               component={FullScreenVideo}

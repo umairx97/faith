@@ -11,12 +11,16 @@ import {
   AsyncStorage,
   Dimensions,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
+  Platform,
+  ScrollView
 } from "react-native";
+import GridView from "react-native-super-grid";
 import firebase from "react-native-firebase";
+import LinearGradient from "react-native-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import { ifIphoneX } from "react-native-iphone-x-helper";
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Images } from "../../../assets/imageAll";
 import { NoDataComponent } from "../ui/NoData";
 const Screen = {
@@ -36,13 +40,24 @@ export default class Matches extends Component {
       ImageProfileUrl: "",
       Gender: 0
     };
-    this.getCurrentUserId();
-    // this.getLikedProfile();
+    // this.getCurrentUserId();
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     // var jeck =await  AsyncStorage.getItem("userProfileKeys");
     // alert(jeck)
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      arr = [];
+      this.setState({
+        showArr: [],
+        allData: [],
+        FullName: "",
+        ImageProfileUrl: "",
+        Gender: 0
+      }, () => {
+        this.getCurrentUserId();
+      });
+    });
 
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
   }
@@ -141,6 +156,21 @@ export default class Matches extends Component {
             age: getAge,
             gender: genderName
           });
+          // test
+          // arr.push({
+          //   pName: userName,
+          //   pUrl: childData,
+          //   ids: userProfileId,
+          //   age: getAge,
+          //   gender: genderName
+          // });
+          // arr.push({
+          //   pName: userName,
+          //   pUrl: childData,
+          //   ids: userProfileId,
+          //   age: getAge,
+          //   gender: genderName
+          // });
         }
 
         this.setState({ showArr: arr });
@@ -206,20 +236,32 @@ export default class Matches extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+      <LinearGradient
+          start={{
+            x: 0.51,
+            y: 0.17
+          }}
+          end={{
+            x: 0.24,
+            y: 0.87
+          }}
+          locations={[0, 1]}
+          colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+          style={styles.colorPrimaryViewLinearGradient}
+        >
         <View
           style={{
+            flex: 1,
             ...ifIphoneX({ marginTop: 25 }, { marginTop: 0 }),
             ...ifIphoneX({ marginBottom: 25 }, { marginBottom: 0 })
           }}
         >
-          <FlatList
+          {/* <FlatList
             data={this.state.showArr}
             renderItem={({ item }) => (
               <View style={{ margin: 5 }}>
-
                 <View style={{ flexDirection: 'column' }}>
                   <TouchableOpacity onPress={() => { this.openProfile(item.ids) }}>
-
                     <ImageBackground
                       style={styles.mainImage}
                       imageStyle={{ borderRadius: 10 }}
@@ -237,79 +279,65 @@ export default class Matches extends Component {
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.openProfileIcon}
                         onPress={() => { this.openProfile(item.ids) }}>
-
                         <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
-
                       </TouchableOpacity>
                     </ImageBackground>
-
                   </TouchableOpacity>
-                  {/* <View style={{ flexDirection: "column", marginTop: 15 }}>
-                      <View>
-                        <Text style={{ fontSize: 15, marginLeft: 10 }}>
-                          {item.pName}
-                        </Text>
-                      </View>
-                      <View>
-                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                          {item.gender}
-                        </Text>
-                      </View>
-                      <View>
-                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                          {item.age}
-                        </Text>
-                      </View>
-                    </View>
-                   */}
                 </View>
-                {/* <View style={{ flexDirection: "row" }}>
-                    <View>
-                      <Image
-                        style={{
-                          height: 80,
-                          width: 80,
-                          margin: 3,
-                          resizeMode: "cover",
-                          borderRadius: 40
-                        }}
-                        source={{ uri: item.pUrl }}
-                      />
-                    </View>
-                    <View style={{ flexDirection: "column", marginTop: 15 }}>
-                      <View>
-                        <Text style={{ fontSize: 15, marginLeft: 10 }}>
-                          {item.pName}
-                        </Text>
-                      </View>
-                      <View>
-                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                          {item.gender}
-                        </Text>
-                      </View>
-                      <View>
-                        <Text style={{ fontSize: 12, marginLeft: 10 }}>
-                          {item.age}
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                 */}
-
               </View>
             )}
             keyExtractor={item => item.ids}
-          />
+          /> */}
+          <ScrollView contentContainerStyle={{flex: 1}}>
+            {this.state.showArr.length == 0 ?
+              <View style={{flex: 1}}>
+                <NoDataComponent text={"You have no matches yet"} onPress={() => Actions.Discover()}/>
+              </View>
+            : 
+              <GridView
+                itemDimension={130}
+                items={this.state.showArr}
+                style={styles.gridView}
+                renderItem={item => (
+                  <View
+                    style={[styles.itemContainer]}
+                  >
+                    <TouchableOpacity onPress={()=>{this.openProfile(item.ids)}}>
+                      <Image source={{ uri: item.pUrl }}
+                        style={[styles.imageContainer]}
+                      ></Image>
+                      <TouchableOpacity style={styles.openChatButton}
+                        onPress={() => { this.openChatScreen(item.ids, item.pName) }}>
+                        <Image style={styles.iconStyle} source={Images.chatIcons}></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.openProfileIcon}
+                        onPress={() => { this.openProfile(item.ids) }}>
+                        <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
+                      </TouchableOpacity>
+                      <View style={styles.itemViewText}>
+                          <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.pName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                          <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.age}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              />
+            }
+          </ScrollView>
         </View>
-        {this.state.showArr.length == 0 ?
+        {/* {this.state.showArr.length == 0 ?
           <NoDataComponent text={"You have no matches yet"} onPress={() => Actions.Discover()}/>
-        : null}
+        : null} */}
+        </LinearGradient>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  colorPrimaryViewLinearGradient: {
+    height: Screen.height
+  },
   mainTextStyle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -329,7 +357,9 @@ const styles = StyleSheet.create({
   },
   openChatButton: {
     position: 'absolute',
-    right: 80, bottom: 15,
+    // right: wp(30),
+    left: wp(4),
+    bottom: hp(4),
     height: 32,
     width: 32,
     backgroundColor: 'red',
@@ -345,12 +375,36 @@ const styles = StyleSheet.create({
   },
   openProfileIcon: {
     position: 'absolute',
-    right: 30,
-    bottom: 15,
+    right: wp(4),
+    bottom: hp(4),
     height: 32,
     width: 32,
     backgroundColor: 'red',
     borderRadius: 16,
     justifyContent: 'center'
+  },
+  gridView: {
+    paddingTop: Platform.OS === "ios" ? 30 : 20,
+    ...ifIphoneX({ paddingTop: 65 }),
+    flex: 1
+  },
+  itemContainer: {
+    // justifyContent: "flex-end",
+    borderRadius: 15,
+    padding: 5,
+    height: hp(30)
+  },
+  imageContainer: {
+    justifyContent: "flex-end",
+    borderRadius: 15,
+    padding: 10,
+    height: hp(30)
+  },
+  itemViewText: {
+    position: 'absolute',
+    top: hp(26),
+    width: wp(45),
+    flexDirection: 'row',
+    justifyContent:'center'
   },
 })

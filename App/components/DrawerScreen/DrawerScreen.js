@@ -533,7 +533,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={styles.likesView}>
+            {/* <View style={styles.likesView}>
               <View style={styles.likesViewView}>
                 <View style={styles.rectangle2View}>
                   <Image
@@ -558,7 +558,7 @@ export default class DrawerScreen extends React.Component {
                   <Image source={Images.shapeArrow} style={styles.shapeImage} />
                 </View>
               </View>
-            </View>
+            </View> */}
 
             <View style={styles.likesView}>
               <View style={styles.likesViewView}>
@@ -987,7 +987,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     // height: 220,
-    height: hp(33),
+    height: hp(27),
     marginLeft: 19,
     marginTop: 1,
     marginRight: 15
