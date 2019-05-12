@@ -53,7 +53,7 @@
     "react-native-multi-slider": "github:ptomasroos/react-native-multi-slider#master",
     "react-native-paper": "^2.2.8",
     "react-native-parallax-scroll-view": "^0.21.3",
-    "react-native-popup-menu": "^0.15.0",
+    "react-native-popup-menu": "0.15.6",
     "react-native-radio-buttons-group": "^1.0.7",
     "react-native-range-slider": "^0.1.1",
     "react-native-responsive-screen": "^1.2.2",

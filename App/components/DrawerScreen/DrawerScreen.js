@@ -833,9 +833,6 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-
-            
-
             <View style={styles.blacklistView}>
               <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SevenView}>
@@ -868,7 +865,6 @@ export default class DrawerScreen extends React.Component {
                 }}
               />
             </View>
-
             <View style={styles.blacklistView}>
               <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SevenView}>
@@ -910,7 +906,6 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
-
             <View
               style={{
                 flex: 1,
@@ -987,7 +982,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     // height: 220,
-    height: hp(27),
+    height: hp(30),
     marginLeft: 19,
     marginTop: 1,
     marginRight: 15
@@ -1007,7 +1002,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     // backgroundColor: "blue",
     // height: 35,
-    height: hp(5),
+    height: hp(5.8),
     marginTop: Platform.OS === "ios" ? 9 : 9,
     marginRight: 1
   },
@@ -1080,20 +1075,18 @@ const styles = StyleSheet.create({
   levelView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     // height: 35,
-    height: hp(5),
+    height: hp(5.8),
     marginLeft: 1,
     marginTop: 9,
     marginRight: 1
   },
-  
   blacklistView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     // height: 35,
-    height: hp(5),
+    height: hp(5.8),
     marginTop: 9,
     marginRight: 1
   },
-  
   myWalletText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     color: "rgb(38, 38, 40)",

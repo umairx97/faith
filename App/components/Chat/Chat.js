@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  ImageBackground,
   TextInput,
   Dimensions,
   BackHandler,
@@ -11,6 +12,7 @@ import {
   StyleSheet,
   Alert,
   ScrollView,
+  ActivityIndicator,
   AsyncStorage,
   TouchableHighlight,
   Platform,
@@ -27,6 +29,7 @@ import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
 import Dialog from "react-native-dialog";
 import { MenuProvider } from "react-native-popup-menu";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {
   Menu,
@@ -76,7 +79,8 @@ export default class Chat extends Component {
       userChatTime: 0,
       friendProfileName: "",
       chatMuted: false,
-      friendChatId:''
+      friendChatId:'',
+      isMediaLoaded: false
     };
     this.user = firebase.auth().currentUser;
     // this.getChatGenerated();
@@ -94,7 +98,7 @@ export default class Chat extends Component {
     .database()
     .ref()
     .child("Users/FaithMeetsLove/chat/" + this.generateChatId());
-    console.warn("chatID: ", "Users/FaithMeetsLove/chat/" + this.generateChatId());
+    // console.warn("chatID: ", "Users/FaithMeetsLove/chat/" + this.generateChatId());
     this.chatRefData = this.chatRef.orderByChild("order");
     this.onSend = this.onSend.bind(this);
 
@@ -106,7 +110,7 @@ export default class Chat extends Component {
         friendAvatar = snapshot.val().profileImageURL;
         friendName = snapshot.val().fullName;
         friendToken = snapshot.val().pushToken;
-        console.warn('friendAvatar: ', friendAvatar);
+        // console.warn('friendAvatar: ', friendAvatar);
         this.setState({
           friendProfileName: friendName
         });
@@ -125,7 +129,8 @@ export default class Chat extends Component {
     this.focusListener2 = this.props.navigation.addListener("willFocus", async () => {
       if(this.state.messages.length != 0) {
         this.setState({
-          messages: []
+          messages: [],
+          friendProfileName: ""
         });
       }
     });
@@ -170,7 +175,7 @@ export default class Chat extends Component {
             order: -1 * now
           });
         }
-        console.warn('user: ', this.user);
+        // console.warn('user: ', this.user);
       }, 600);
     });
   }
@@ -219,7 +224,7 @@ export default class Chat extends Component {
 
   unMountComponent() {
     this.chatRefData.off();
-    this.setState({ imagePath: "", messages: [] });
+    this.setState({ imagePath: "", messages: [], friendProfileName: "" });
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     );
@@ -232,7 +237,7 @@ export default class Chat extends Component {
       .database()
       .ref("Users/FaithMeetsLove/ChatUser/" + this.user.uid);
     allUsersChat.once("value").then(snapshot => {
-      console.warn('userChatSnap: ', snapshot);
+      // console.warn('userChatSnap: ', snapshot);
       if (snapshot.exists()) {
         snapshot.forEach(childSnapshot => {
           frndID = childSnapshot.val()._id;
@@ -252,11 +257,11 @@ export default class Chat extends Component {
       var dataBlock;
       let i = 0;
       snap.forEach(child => {
-        console.warn('chat - child: ', child);
+        // console.warn('chat - child: ', child);
         lastChat = child.val().createdAt;
         dataBlock = child.val().blockedByFriend;
-        console.warn('lastChat: ', lastChat);
-        console.warn('keys: ', keys);
+        // console.warn('lastChat: ', lastChat);
+        // console.warn('keys: ', keys);
         if (lastChat > keys) {
           if (this.state.blockedByMe && dataBlock) {
 
@@ -286,7 +291,7 @@ export default class Chat extends Component {
           }
         }
       });
-      console.warn('messages: ', items);
+      // console.warn('messages: ', items);
       this.setState({
         loading: false,
         messages: items
@@ -590,7 +595,8 @@ export default class Chat extends Component {
               this.setState({
                 imagePath: image.path,
                 videoPath: "",
-                imagedata: image.data
+                imagedata: image.data,
+                isMediaLoaded: true
               });
             })
             .catch(error => {
@@ -740,15 +746,18 @@ export default class Chat extends Component {
               includeBase64: true
             })
               .then(image => {
+                // console.warn('image: ', image);
+                // console.warn('imageData: ', image.data);
                 this.setState({
                   imagePath: image.path,
                   videoPath: "",
-                  imagedata: image.data
+                  imagedata: image.data,
+                  isMediaLoaded: true
                 });
               })
               .catch(error => {
                 this.setState({ ...this.state, progressVisible: false });
-                console.log(error);
+                console.warn('error on pick: ', error);
               });
           }, 500);
           this.setState({
@@ -907,6 +916,15 @@ export default class Chat extends Component {
     );
   }
 
+  onDeleteImage() {
+    this.setState({
+      isMediaLoaded: false,
+      imagePath: "",
+      videoPath: "",
+      imagedata: ""
+    });
+  }
+
   render() {
     return (
       <MenuProvider>
@@ -1000,11 +1018,33 @@ export default class Chat extends Component {
               onLongPress={(context, message) => {
                 this.onChatMessageLongPressed(context, message);
               }}
+              renderLoading={() =>  <ActivityIndicator size="large" color="#0000ff" />}
               renderBubble={this.renderBubble}
               onPressAvatar={message => {
                 this.showFriendProfile();
               }}
             />
+            {this.state.isMediaLoaded ?
+              <View style={styles.mediaView}>
+                {this.state.imagedata != null ?
+                  <View style={{flex: 1, width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                    <TouchableOpacity
+                          onPress={() => {
+                            this.onDeleteImage();
+                          }}
+                        style={styles.btnImageDelete}
+                      >
+                        <Image style={{width: 50, height: 50}} source={Images.deleteIcon} />
+                    </TouchableOpacity>
+                    <Image
+                      source={{uri: `data:image/jpg;base64,${this.state.imagedata}`}}
+                      resizeMode={"contain"}
+                      style={{width: wp(30), height: hp(20)}}
+                    />
+                  </View>
+                  : null }
+              </View>
+            : null }
           </View>
 
           <Dialog.Container visible={this.state.dialogVisible}>
@@ -1058,7 +1098,6 @@ export default class Chat extends Component {
               }}
             />
           </Dialog.Container>
-
           <View
             style={styles.bottomView}
           />
@@ -1093,8 +1132,8 @@ export default class Chat extends Component {
               <Image style={styles.btnImage} source={Images.viewGallery} />
             </TouchableOpacity>
           </View>
+          
         </View>
-
       </MenuProvider>
     );
   }
@@ -1120,6 +1159,12 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     color: "white"
   },
+  mediaView: {
+    height: hp(20),
+    textAlign: 'center',
+    justifyContent: 'center', 
+    alignContent: 'center'
+  },
   bottomView:{
     ...ifIphoneX({ bottom: 60 }, { bottom: 40 }),
     position: "absolute",
@@ -1142,6 +1187,15 @@ const styles = StyleSheet.create({
     width: Screen.width,
     borderRadius: 15,
     flexDirection: "row"
+  },
+  btnImageDelete: {
+    position: 'absolute',
+    zIndex: 100,
+    top: hp(5),
+    right: wp(10),
+    // alignSelf: "flex-end",
+    width: 50,
+    height: 50
   },
   btnImage: {
     alignSelf: "stretch",
