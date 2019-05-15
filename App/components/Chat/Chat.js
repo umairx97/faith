@@ -16,6 +16,7 @@ import {
   AsyncStorage,
   TouchableHighlight,
   Platform,
+  ActionSheetIOS,
   PermissionsAndroid
 } from "react-native";
 // import OfflineNotice from "../OfflineNotice/OfflineNotice";
@@ -23,12 +24,15 @@ import { Actions, Scene } from "react-native-router-flux";
 import { Images } from "../../../assets/imageAll";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase, { Firebase } from "react-native-firebase";
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, Time } from "react-native-gifted-chat";
+// import Video from 'react-native-video';
+import Video from "react-native-gifted-chat/node_modules/react-native-video";
 // import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
 import Dialog from "react-native-dialog";
 import { MenuProvider } from "react-native-popup-menu";
+import ActionSheet from 'react-native-action-sheet';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {
@@ -37,11 +41,24 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
+
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
 };
 //const originalXMLHttpRequest = window.XMLHttpRequest;
+
+var MEDIA_BUTTONS = [
+  'Photo Library',
+  'Video Library',
+  'Camera',
+  'Gallery',
+  'Cancel'
+];
+
+var DESTRUCTIVE_INDEX = 4;
+var CANCEL_INDEX = 4;
+
 
 let apiVersion = 1;
 var type = "image/jpg";
@@ -80,7 +97,9 @@ export default class Chat extends Component {
       friendProfileName: "",
       chatMuted: false,
       friendChatId:'',
-      isMediaLoaded: false
+      isMediaLoaded: false,
+      text: "",
+      isUploading: false
     };
     this.user = firebase.auth().currentUser;
     // this.getChatGenerated();
@@ -94,13 +113,13 @@ export default class Chat extends Component {
       friendChatId:friendUid
     })
     this.getMutedbyFriend();
-    this.chatRef =await firebase
+    this.chatRef = await firebase
     .database()
     .ref()
     .child("Users/FaithMeetsLove/chat/" + this.generateChatId());
     // console.warn("chatID: ", "Users/FaithMeetsLove/chat/" + this.generateChatId());
     this.chatRefData = this.chatRef.orderByChild("order");
-    this.onSend = this.onSend.bind(this);
+    // this.onSend = this.onSend.bind(this);
 
     firebase
       .database()
@@ -267,10 +286,12 @@ export default class Chat extends Component {
 
           } else {
             var avatar = friendAvatar;
+            
             if(child.val().uid == this.user.uid) {
               avatar = myAvatar;
             }
-            items.push({
+
+            var dataItem = {
               key: child.key,
               _id: child.val().createdAt,
               text: child.val().text,
@@ -280,9 +301,17 @@ export default class Chat extends Component {
                 name: friendName,
                 avatar: avatar
               },
+              read: child.val().read,
               image: child.val().image,
               video: child.val().video
-            });
+            };
+
+            // console.warn('check: ', child.val().uid + ' | ' + this.user.uid);
+            if((child.val().uid != this.user.uid)&&(child.val().read != "1")) {
+              this.setMessageRead(dataItem);
+            }
+
+            items.push(dataItem);
           }
           if (child.val().image.includes("http"))
             mediaGallery.push({ id: i++, image: child.val().image, video: "" });
@@ -297,6 +326,13 @@ export default class Chat extends Component {
         messages: items
       });
     });
+  }
+
+  setMessageRead(item) {
+    // item.read = "1";
+    // console.warn('Update on: ', "Users/FaithMeetsLove/chat/" + this.generateChatId() + '/' + item.key);
+    firebase.database().ref("Users/FaithMeetsLove/chat/" + this.generateChatId() + '/' + item.key).update({read:"1"});
+    // this.chatRef.update(item);
   }
 
   backAndroid() {
@@ -363,7 +399,8 @@ export default class Chat extends Component {
 
   }
 
-  async onSend(messages = []) {
+  // async onSend(messages = []) {
+  onSend(messages = []) {
     if (this.state.friendChatId==undefined) {
       alert("wait or open again");
     } else { 
@@ -377,12 +414,13 @@ export default class Chat extends Component {
 
           milliseconds = new Date().getTime();
           // Prepare Blob support
-
+          
           if (isImageUpload) {
             this.setState(
               {
                 filePath: this.state.imagePath,
-                imagePath: ""
+                imagePath: "",
+                isUploading: true
               },
               () => {
                 let fileUri = decodeURI(this.state.filePath)
@@ -395,8 +433,11 @@ export default class Chat extends Component {
                     this.setState({
                       file_url: uploadedFile.downloadURL,
                       imagePath: "",
+                      imagedata: "",
                       videoPath: "",
-                      filePath: ""
+                      filePath: "",
+                      isMediaLoaded: false,
+                      isUploading: false
                     });
                     var imageUrl = "";
                     var VideoUrl = "";
@@ -422,15 +463,15 @@ export default class Chat extends Component {
                         order: -1 * now
                       });
                     });
-
-                  })
+                  });
 
               }
             );
           } else {
             this.setState(
               {
-                filePath: this.state.videoPath
+                filePath: this.state.videoPath,
+                isUploading: true
               },
               () => {
                 let fileUri = decodeURI(this.state.filePath)
@@ -444,18 +485,20 @@ export default class Chat extends Component {
                 //   dirName,
                 //   fs
                 // )
+                
                 firebase
                   .storage()
                   .ref(dirName + this.user.uid + milliseconds + format)
                   .putFile(fileUri)
                   .then(uploadedFile => {
 
-
                     this.setState({
                       file_url: uploadedFile.downloadURL,
                       imagePath: "",
                       videoPath: "",
-                      filePath: ""
+                      filePath: "",
+                      isMediaLoaded: false,
+                      isUploading: false
                     });
                     var imageUrl = "";
                     var VideoUrl = "";
@@ -485,7 +528,7 @@ export default class Chat extends Component {
                   })
                   .catch(error => {
                     alert(JSON.stringify(error));
-                    console.log(error);
+                    console.warn(error);
                   });
               }
             );
@@ -493,6 +536,9 @@ export default class Chat extends Component {
         } else {
           // window.XMLHttpRequest = originalXMLHttpRequest;
           messages.forEach(message => {
+            if(message.text.trim() == "") {
+              return;
+            }
             this.sendNotification(message.text);
             var now = new Date().getTime();
             this.chatRef.push({
@@ -506,7 +552,8 @@ export default class Chat extends Component {
               blockedByMe: this.state.blockedByMe,
               blockedByFriend: this.state.blockedByFriend,
               fName: friendName,
-              order: -1 * now
+              order: -1 * now,
+              read: 0
             });
           });
         }
@@ -609,8 +656,7 @@ export default class Chat extends Component {
 
       if (Platform.OS === "android" && apiVersion >= 23) {
         this.requestCameraPermission(val);
-      }
-      else {
+      } else {
         type = "video/mp4";
         format = ".mp4";
         dirName = "ChatVideos/";
@@ -623,7 +669,8 @@ export default class Chat extends Component {
               this.setState({
                 videoPath: video.path,
                 videoData: video.data,
-                imagePath: ""
+                imagePath: "",
+                isMediaLoaded: true
               });
             })
             .catch(err => {
@@ -746,8 +793,6 @@ export default class Chat extends Component {
               includeBase64: true
             })
               .then(image => {
-                // console.warn('image: ', image);
-                // console.warn('imageData: ', image.data);
                 this.setState({
                   imagePath: image.path,
                   videoPath: "",
@@ -776,7 +821,8 @@ export default class Chat extends Component {
                 this.setState({
                   videoPath: video.path,
                   videoData: video.data,
-                  imagePath: ""
+                  imagePath: "",
+                  isMediaLoaded: true
                 });
               })
               .catch(err => {
@@ -916,12 +962,96 @@ export default class Chat extends Component {
     );
   }
 
-  onDeleteImage() {
+  renderTime(props) {
+    // console.warn('time: ', props.currentMessage);
+    // console.warn('read: ', props.currentMessage.read);
+    var isReaded = false;
+    // console.warn(props.currentMessage.user._id + ' | ' + this.user.uid);
+    if((props.currentMessage.user._id == this.user.uid)&&(props.currentMessage.read == "1")) {
+      // console.warn('readed');
+      isReaded = true;
+    }
+    return(
+      <View style={{flexDirection: 'row'}}>
+        <Time {...props} />
+        {isReaded ?
+          <Text>{"√"}</Text>
+        : null }
+      </View>
+    );
+  } 
+
+  // renderTime(props) {
+  //   if (props.currentMessage && props.currentMessage.createdAt) {
+  //     const {
+  //       containerStyle,
+  //       wrapperStyle,
+  //       textStyle,
+  //       ...timeProps
+  //     } = props;
+  //     if (props.renderTime) {
+  //       return props.renderTime(timeProps)
+  //     }
+  //     return <Time {...timeProps} />
+  //   }
+  //   return null
+  // }
+
+  onDeleteVideoAndImage() {
     this.setState({
       isMediaLoaded: false,
       imagePath: "",
       videoPath: "",
       imagedata: ""
+    });
+  }
+
+  setCustomText(value) {
+    this.setState({
+      text: value
+    });
+  }
+
+  showActions() {
+    // if(Platform.OS == 'ios') {
+    //   ActionSheetIOS.showActionSheetWithOptions(
+    //     {
+    //       options: MEDIA_BUTTONS,
+    //       destructiveButtonIndex: DESTRUCTIVE_INDEX,
+    //       cancelButtonIndex: CANCEL_INDEX,
+    //     },
+    //     (buttonIndex) => {
+    //       if (buttonIndex === 1) {
+    //         /* destructive action */
+    //       }
+    //     },
+    //   );
+    //   return;
+    // }
+    ActionSheet.showActionSheetWithOptions({
+      options: MEDIA_BUTTONS,
+      cancelButtonIndex: CANCEL_INDEX,
+      destructiveButtonIndex: DESTRUCTIVE_INDEX,
+      tintColor: 'blue'
+    },
+    (buttonIndex) => {
+      switch (buttonIndex) {
+        case 0:
+          this.openAction("img");
+          break;
+        case 1:
+          this.openAction("video");
+          break;
+        case 2:
+          this.openAction("cam");
+          break;
+        case 3:
+          this.openAction("gallery");
+          break;
+      
+        default:
+          break;
+      }
     });
   }
 
@@ -931,9 +1061,9 @@ export default class Chat extends Component {
         <View style={styles.container}>
           <View
             style={{
-              height: 50,
+              height: hp(10),
               width: Screen.width,
-              ...ifIphoneX({ height: 82 }),
+              ...ifIphoneX({ height: hp(12) }),
               backgroundColor: "red"
             }}
           >
@@ -946,7 +1076,7 @@ export default class Chat extends Component {
               }}
             >
               <View style={{ flexDirection: "row" }}>
-                <View>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   <TouchableOpacity
                     onPress={() => {
                       this.unMountComponent();
@@ -959,13 +1089,22 @@ export default class Chat extends Component {
                     />
                   </TouchableOpacity>
                 </View>
-                <View><TouchableOpacity onPress={() => { this.showFriendProfile() }}><Text
-                  style={styles.friendProfileViewShow}
-                >{this.state.friendProfileName}</Text></TouchableOpacity>
+                {/* <View style={{backgroundColor: 'blue', justifyContent: 'center'}}>
+                  <TouchableOpacity onPress={() => { this.showFriendProfile() }}>
+                    <Text style={styles.friendProfileViewShow}>{this.state.friendProfileName}</Text>
+                  </TouchableOpacity>
+                </View> */}
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <View style={{justifyContent: 'center'}}>
+                  <TouchableOpacity onPress={() => { this.showFriendProfile() }}>
+                    <Text style={styles.friendProfileViewShow}>{this.state.friendProfileName}</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
 
-              <View>
+              <View style={{justifyContent: 'center'}}>
                 <Menu>
                   <MenuTrigger>
                     <Image
@@ -1007,8 +1146,10 @@ export default class Chat extends Component {
             style={styles.gifetedChatView}
           >
             <GiftedChat
+              // text={this.state.text}
+              // onInputTextChanged={text => this.setCustomText(text)}
               messages={this.state.messages}
-              onSend={this.onSend.bind(this)}
+              onSend={messages => this.onSend(messages)}
               user={{
                 _id: this.user.uid
               }}
@@ -1018,19 +1159,58 @@ export default class Chat extends Component {
               onLongPress={(context, message) => {
                 this.onChatMessageLongPressed(context, message);
               }}
+              alwaysShowSend={true}
+              renderActions={() => {
+                  return(
+                    <TouchableOpacity
+                        testID='send'
+                        accessible
+                        accessibilityLabel='send'
+                        style={styles.containerSend}
+                        onPress={() =>this.showActions()}
+                        accessibilityTraits='button'
+                      >
+                        <View>
+                          <Image
+                            source={Images.addIcon}
+                            style={styles.imagePlusButton}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                  );
+                }}
+              // renderSend={(props) => {
+              //   console.warn('props: ', props);
+              //   console.warn('lenght: ', props.messages.length);
+              //   return(
+              //     <TouchableOpacity
+              //         testID='send'
+              //         accessible
+              //         accessibilityLabel='send'
+              //         style={styles.containerSend}
+              //         onPress={() => props.onSend(props.text)}
+              //         accessibilityTraits='button'
+              //       >
+              //         <View>
+              //           <Text style={styles.textSend}>{"Send"}</Text>
+              //         </View>
+              //       </TouchableOpacity>
+              //   );
+              // }}
               renderLoading={() =>  <ActivityIndicator size="large" color="#0000ff" />}
               renderBubble={this.renderBubble}
+              renderTime={(timeProps) => this.renderTime(timeProps)}
               onPressAvatar={message => {
                 this.showFriendProfile();
               }}
             />
             {this.state.isMediaLoaded ?
               <View style={styles.mediaView}>
-                {this.state.imagedata != null ?
+                {this.state.imagedata != "" ?
                   <View style={{flex: 1, width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
                     <TouchableOpacity
                           onPress={() => {
-                            this.onDeleteImage();
+                            this.onDeleteVideoAndImage();
                           }}
                         style={styles.btnImageDelete}
                       >
@@ -1042,6 +1222,28 @@ export default class Chat extends Component {
                       style={{width: wp(30), height: hp(20)}}
                     />
                   </View>
+                  : null }
+                  {this.state.videoPath != "" ?
+                    <View style={{flex: 1, height: '100%', width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                      <TouchableOpacity
+                            onPress={() => {
+                              this.onDeleteVideoAndImage();
+                            }}
+                          style={styles.btnVideoDelete}
+                        >
+                          <Image style={{width: 50, height: 50}} source={Images.deleteIcon} />
+                      </TouchableOpacity>
+                      <View style={{flex: 1, height: '100%', width: '65%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                        <Video source={{uri: this.state.videoPath}}
+                          controls={true}
+                          fullscreen={true}
+                          ref={(ref) => {
+                            this.player = ref
+                          }}
+                          style={styles.backgroundVideo} 
+                        />
+                      </View>
+                    </View>
                   : null }
               </View>
             : null }
@@ -1101,7 +1303,7 @@ export default class Chat extends Component {
           <View
             style={styles.bottomView}
           />
-          <View style={styles.positionViewBottom}>
+          {/* <View style={styles.positionViewBottom}>
             <TouchableOpacity
               onPress={() => {
                 this.openAction("img");
@@ -1131,8 +1333,12 @@ export default class Chat extends Component {
             >
               <Image style={styles.btnImage} source={Images.viewGallery} />
             </TouchableOpacity>
-          </View>
-          
+          </View> */}
+          {this.state.isUploading ?
+            <View style={{backgroundColor: "rgba(245,245,245, 0.4)", position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center'}}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          : null}
         </View>
       </MenuProvider>
     );
@@ -1151,6 +1357,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 5,
     tintColor: "white"
+  },
+  imagePlusButton:{
+    height: wp(7),
+    width: wp(7),
+    marginTop: hp(1),
+    marginLeft: hp(1),
+    // tintColor: "white"
   },
   friendProfileViewShow:{
     fontSize: 20,
@@ -1197,6 +1410,15 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50
   },
+  btnVideoDelete: {
+    position: 'absolute',
+    zIndex: 100,
+    top: hp(5),
+    right: wp(2),
+    // alignSelf: "flex-end",
+    width: 50,
+    height: 50
+  },
   btnImage: {
     alignSelf: "stretch",
     alignItems: "stretch",
@@ -1206,13 +1428,33 @@ const styles = StyleSheet.create({
   },
   gifetedChatView:{
     ...ifIphoneX({ bottom: 101 }, { bottom: 41 }),
-    ...ifIphoneX({ top: 85 }, { top: 51 }),
+    ...ifIphoneX({ top: hp(12) }, { top: hp(10) }),
     position: "absolute",
     width: Screen.width - 2,
     marginLeft: 2,
     ...ifIphoneX(
-      { height: Screen.height - 135 },
-      { height: Screen.height - 85 }
+      { height: Screen.height - hp(15) },
+      { height: Screen.height - hp(10) }
     )
-  }
+  },
+  containerSend: {
+    height: 44,
+    // justifyContent: 'flex-end',
+  },
+  textSend: {
+    color: '#0084ff',
+    fontWeight: '600',
+    fontSize: 17,
+    backgroundColor: 'transparent',
+    marginBottom: 12,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });

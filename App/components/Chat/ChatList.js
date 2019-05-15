@@ -15,7 +15,6 @@ import {
 import firebase from "react-native-firebase";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Actions } from "react-native-router-flux";
-import { MenuProvider } from 'react-native-popup-menu';
 import { NoDataComponent } from "../ui/NoData";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Moment from "moment";
@@ -24,6 +23,7 @@ import {
   MenuOptions,
   MenuOption,
   MenuTrigger,
+  MenuProvider
 } from 'react-native-popup-menu';
 // import Dialog from "react-native-dialog";
 import { Images } from "../../../assets/imageAll";
@@ -31,6 +31,7 @@ import { Images } from "../../../assets/imageAll";
 
 var arr = [];
 var chatOpen;
+
 export default class ChatList extends Component {
   constructor() {
     super();
@@ -65,13 +66,14 @@ export default class ChatList extends Component {
       });
     });
     // setInterval(() => this.getCurrentUserId(), 2000);
-    //setTimeout(  this.getCurrentUserId(), 500); 
+    //setTimeout(  this.getCurrentUserId(), 500);
   }
 
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     );
+    // this.clearInterval(this.timer);
   }
 
   backAndroid() {
@@ -80,13 +82,13 @@ export default class ChatList extends Component {
   }
 
   getChatRef = async (frndKey) => {
-    console.warn('getChatRef: ', frndKey);
+    // console.warn('getChatRef: ', frndKey);
     // console.warn('generateChatId:', this.generateChatId(frndKey));
     var chatRef = firebase.database().ref("Users/FaithMeetsLove/chat/" + this.generateChatId(frndKey));
 
     chatRef.once("value").then(async snapshot => {
         if (snapshot.exists()) {
-          console.warn('getChatRef - snapshot exist: ', snapshot);
+          // console.warn('getChatRef - snapshot exist: ', snapshot);
           await this.getLastChatHistory(frndKey);
           return;
         }
@@ -287,11 +289,13 @@ export default class ChatList extends Component {
     this.setState({
       loginUserId: uidUser
     });
-    this.getAllList();
+    
+    // this.getAllList();
+    // this.timer = setInterval(() => this.getAllList(), 5000);
   };
 
   onClickUser = (id, name) => {
-    console.warn('openChat: ', id);
+    // console.warn('openChat: ', id);
     AsyncStorage.setItem("friendsUid", "" + id);
     AsyncStorage.setItem("friendName", name);
     AsyncStorage.setItem("openChatFrom", chatOpen)
@@ -483,6 +487,7 @@ export default class ChatList extends Component {
     // }else {
       return (
         <View style={{ flex: 1 }}>
+        <MenuProvider>
           <View style={styles.header}>
             <View style={{flex: 0.25}}>
 
@@ -503,7 +508,6 @@ export default class ChatList extends Component {
             <FlatList
               data={this.state.showArr}
               renderItem={({ item, index }) => (
-                <MenuProvider>
                   <View style={styles.mainProviderView}>
                     <TouchableOpacity
                       onPress={() => {
@@ -553,12 +557,12 @@ export default class ChatList extends Component {
                       </Menu>
                     </View>
                   </View>
-                </MenuProvider>
               )}
               keyExtractor={item => item.ids}
             />
             }
           </View>
+          </MenuProvider>
         </View>
       );
     }
