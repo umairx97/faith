@@ -33,6 +33,7 @@ import ImagePicker from "react-native-image-crop-picker";
 import Dialog from "react-native-dialog";
 import { MenuProvider } from "react-native-popup-menu";
 import ActionSheet from 'react-native-action-sheet';
+import { Immersive } from 'react-native-immersive';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {
@@ -129,7 +130,6 @@ export default class Chat extends Component {
         friendAvatar = snapshot.val().profileImageURL;
         friendName = snapshot.val().fullName;
         friendToken = snapshot.val().pushToken;
-        // console.warn('friendAvatar: ', friendAvatar);
         this.setState({
           friendProfileName: friendName
         });
@@ -196,6 +196,7 @@ export default class Chat extends Component {
         }
         // console.warn('user: ', this.user);
       }, 600);
+      this.androidGoInImmersive();
     });
   }
 
@@ -276,11 +277,8 @@ export default class Chat extends Component {
       var dataBlock;
       let i = 0;
       snap.forEach(child => {
-        // console.warn('chat - child: ', child);
         lastChat = child.val().createdAt;
         dataBlock = child.val().blockedByFriend;
-        // console.warn('lastChat: ', lastChat);
-        // console.warn('keys: ', keys);
         if (lastChat > keys) {
           if (this.state.blockedByMe && dataBlock) {
 
@@ -306,7 +304,6 @@ export default class Chat extends Component {
               video: child.val().video
             };
 
-            // console.warn('check: ', child.val().uid + ' | ' + this.user.uid);
             if((child.val().uid != this.user.uid)&&(child.val().read != "1")) {
               this.setMessageRead(dataItem);
             }
@@ -320,7 +317,7 @@ export default class Chat extends Component {
           }
         }
       });
-      // console.warn('messages: ', items);
+
       this.setState({
         loading: false,
         messages: items
@@ -329,10 +326,7 @@ export default class Chat extends Component {
   }
 
   setMessageRead(item) {
-    // item.read = "1";
-    // console.warn('Update on: ', "Users/FaithMeetsLove/chat/" + this.generateChatId() + '/' + item.key);
     firebase.database().ref("Users/FaithMeetsLove/chat/" + this.generateChatId() + '/' + item.key).update({read:"1"});
-    // this.chatRef.update(item);
   }
 
   backAndroid() {
@@ -791,18 +785,19 @@ export default class Chat extends Component {
               height: 400,
               cropping: true,
               includeBase64: true
-            })
-              .then(image => {
+            }).then(image => {
                 this.setState({
                   imagePath: image.path,
                   videoPath: "",
                   imagedata: image.data,
                   isMediaLoaded: true
                 });
+                this.androidGoInImmersive();
               })
               .catch(error => {
                 this.setState({ ...this.state, progressVisible: false });
                 console.warn('error on pick: ', error);
+                this.androidGoInImmersive();
               });
           }, 500);
           this.setState({
@@ -824,9 +819,11 @@ export default class Chat extends Component {
                   imagePath: "",
                   isMediaLoaded: true
                 });
+                this.androidGoInImmersive();
               })
               .catch(err => {
                 console.log(err);
+                this.androidGoInImmersive();
               });
           }, 500);
           this.setState({
@@ -837,6 +834,7 @@ export default class Chat extends Component {
         alert(
           "Permissions are not granted. The application may not work properly"
         );
+        this.androidGoInImmersive();
       }
     } catch (err) {
       console.warn(err);
@@ -963,12 +961,8 @@ export default class Chat extends Component {
   }
 
   renderTime(props) {
-    // console.warn('time: ', props.currentMessage);
-    // console.warn('read: ', props.currentMessage.read);
     var isReaded = false;
-    // console.warn(props.currentMessage.user._id + ' | ' + this.user.uid);
     if((props.currentMessage.user._id == this.user.uid)&&(props.currentMessage.read == "1")) {
-      // console.warn('readed');
       isReaded = true;
     }
     return(
@@ -1048,22 +1042,28 @@ export default class Chat extends Component {
         case 3:
           this.openAction("gallery");
           break;
-      
         default:
+          this.androidGoInImmersive();
           break;
       }
     });
   }
 
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
+  }
+
   render() {
     return (
-      <MenuProvider>
         <View style={styles.container}>
+          <MenuProvider>
           <View
             style={{
-              height: hp(10),
+              height: hp(9),
               width: Screen.width,
-              ...ifIphoneX({ height: hp(12) }),
+              ...ifIphoneX({ height: hp(11) }),
               backgroundColor: "red"
             }}
           >
@@ -1118,23 +1118,23 @@ export default class Chat extends Component {
                         this.onDeleteConversation();
                       }}
                     >
-                      <Text style={{ color: "red" }}>Delete Chat</Text>
+                      <Text style={styles.menuChatRed}>Delete Chat</Text>
                     </MenuOption>
                     <MenuOption
                       onSelect={() => {
                         this.openAction("gallery");
                       }}
                     >
-                      <Text style={{ color: "black" }}>View gallery</Text>
+                      <Text style={styles.menuChatNormal}>View gallery</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => { this.handleBlock() }}>
-                      <Text style={{ color: "black" }}>Block</Text>
+                      <Text style={styles.menuChatNormal}>Block</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => { }}>
-                      <Text style={{ color: "black" }}>Report</Text>
+                      <Text style={styles.menuChatNormal}>Report</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => { this.onMuteChat() }}>
-                      <Text style={{ color: "black" }}>Mute Chat Notifications</Text>
+                      <Text style={styles.menuChatNormal}>Mute Chat</Text>
                     </MenuOption>
                   </MenuOptions>
                 </Menu>
@@ -1300,9 +1300,9 @@ export default class Chat extends Component {
               }}
             />
           </Dialog.Container>
-          <View
+          {/* <View
             style={styles.bottomView}
-          />
+          /> */}
           {/* <View style={styles.positionViewBottom}>
             <TouchableOpacity
               onPress={() => {
@@ -1339,8 +1339,8 @@ export default class Chat extends Component {
               <ActivityIndicator size="large" color="#0000ff" />
             </View>
           : null}
+          </MenuProvider>
         </View>
-      </MenuProvider>
     );
   }
 }
@@ -1427,15 +1427,15 @@ const styles = StyleSheet.create({
     marginLeft: "15%"
   },
   gifetedChatView:{
-    ...ifIphoneX({ bottom: 101 }, { bottom: 41 }),
-    ...ifIphoneX({ top: hp(12) }, { top: hp(10) }),
+    ...ifIphoneX({ bottom: hp(5) }, { bottom: 1 }),
+    ...ifIphoneX({ top: hp(11) }, { top: hp(9) }),
     position: "absolute",
     width: Screen.width - 2,
     marginLeft: 2,
-    ...ifIphoneX(
-      { height: Screen.height - hp(15) },
-      { height: Screen.height - hp(10) }
-    )
+    // ...ifIphoneX(
+    //   { height: Screen.height - hp(15) },
+    //   { height: Screen.height - hp(3) }
+    // )
   },
   containerSend: {
     height: 44,
@@ -1457,4 +1457,16 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
+  menuChatRed: {
+    color: "red", 
+    fontSize: wp(5),
+    marginTop: hp(1),
+    marginBottom: hp(1)
+  },
+  menuChatNormal: {
+    color: "black", 
+    fontSize: wp(5),
+    marginTop: hp(1),
+    marginBottom: hp(1)
+  }
 });

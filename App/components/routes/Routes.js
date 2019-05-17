@@ -152,7 +152,7 @@ export default class Route extends Component {
                   component={Discover}
                 />
 
-                <Scene key="matchProfile" icon={this.getIconMatch} component={Matches} hideNavBar={true} />
+                <Scene key="Matches" icon={this.getIconMatch} component={Matches} hideNavBar={true} />
 
                 {/* <Scene
                   key="Nearbyuser"

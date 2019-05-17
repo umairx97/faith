@@ -14,7 +14,7 @@ import { Actions } from "react-native-router-flux";
 import AppSlider from "../Slider/Slider";
 import { StatusBar } from "react-native";
 import { Immersive } from 'react-native-immersive';
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 import firebase from "react-native-firebase";
 export default class MyappSplash extends Component {
   constructor() {
@@ -141,9 +141,8 @@ const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
-
   SplashScreen_RootView: {
     justifyContent: "center",
     flex: 1,
@@ -152,7 +151,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-
   SplashScreen_ChildView: {
     justifyContent: "center",
     alignItems: "center",
@@ -160,7 +158,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0
   },
-
   TouchableOpacity_Style: {
     width: 25,
     height: 25,

@@ -3,6 +3,7 @@ import {
   Text,
   View,
   ListItem,
+  Dimensions,
   FlatList,
   BackHandler,
   Image,
@@ -10,7 +11,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   AsyncStorage,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import firebase from "react-native-firebase";
 import { ifIphoneX } from "react-native-iphone-x-helper";
@@ -18,16 +20,21 @@ import { Actions } from "react-native-router-flux";
 import { NoDataComponent } from "../ui/NoData";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Moment from "moment";
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-  MenuProvider
-} from 'react-native-popup-menu';
+import { Immersive } from 'react-native-immersive';
+import LinearGradient from "react-native-linear-gradient";
+// import {
+//   Menu,
+//   MenuOptions,
+//   MenuOption,
+//   MenuTrigger,
+//   MenuProvider
+// } from 'react-native-popup-menu';
 // import Dialog from "react-native-dialog";
-import { Images } from "../../../assets/imageAll";
-
+// import { Images } from "../../../assets/imageAll";
+const Screen = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height
+};
 
 var arr = [];
 var chatOpen;
@@ -46,13 +53,17 @@ export default class ChatList extends Component {
       userChatDelted: '',
       countedVal: 0,
       showOut: false,
-      isVisible: false
+      isVisible: false,
+      todayDate: Moment()
     };
     // this.getCurrentUserId();
   }
 
   async componentDidMount() {
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      if(Platform.OS == 'android') {
+        Immersive.setImmersive(true);
+      }
       arr = [];
       this.setState({
         showArr: [],
@@ -227,6 +238,11 @@ export default class ChatList extends Component {
           });
           return;
         }
+
+        console.warn('chats n: ', arr.length);
+
+        arr.sort((a, b) => Moment(b.time).valueOf() - Moment(a.time).valueOf());
+        
         this.setState({ showArr: arr, loading: false });
       })
       .catch(error => {
@@ -290,7 +306,7 @@ export default class ChatList extends Component {
       loginUserId: uidUser
     });
     
-    // this.getAllList();
+    this.getAllList();
     // this.timer = setInterval(() => this.getAllList(), 5000);
   };
 
@@ -470,6 +486,25 @@ export default class ChatList extends Component {
     alert(id)
   }
 
+  /* Riccardo
+  * like upwork chat, if the date is today then render the time, otherwise render the date
+  */
+  renderTime(time) {
+    var timeDisplay = '';
+
+    if (this.state.todayDate.isSame(Moment(time), 'd')) {
+      timeDisplay = Moment(time).format('h:mm');
+    } else {
+      timeDisplay = Moment(time).format('MM/DD/YYYY');
+    }
+
+    return(
+      <Text style={styles.chatListTime2}>
+        {timeDisplay}
+      </Text>
+    );
+  }
+
   render() {
     if(this.state.loading) {
       return(
@@ -486,14 +521,27 @@ export default class ChatList extends Component {
     //   )
     // }else {
       return (
-        <View style={{ flex: 1 }}>
-        <MenuProvider>
+        <View style={styles.contentView}>
+        {/* <MenuProvider> */}
+        <LinearGradient 
+          start={{
+            x: 0.51,
+            y: 0.17
+          }}
+          end={{
+            x: 0.24,
+            y: 0.87
+          }}
+          locations={[0, 1]}
+          colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
+          style={styles.colorPrimaryViewLinearGradient}
+        >
           <View style={styles.header}>
             <View style={{flex: 0.25}}>
 
             </View>
             <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
-              <Text style={{textAlign: 'center', fontSize: wp(8)}}>Chats</Text>
+              <Text style={{textAlign: 'center', fontSize: wp(8)}}>Messages</Text>
             </View>
             <View style={{flex: 0.25}}>
               
@@ -510,6 +558,7 @@ export default class ChatList extends Component {
               renderItem={({ item, index }) => (
                   <View style={styles.mainProviderView}>
                     <TouchableOpacity
+                      style={{flex: 1}}
                       onPress={() => {
                         this.onClickUser(item.ids, item.pName);
                       }}
@@ -521,26 +570,31 @@ export default class ChatList extends Component {
                             source={{ uri: item.pUrl }}
                           />
                         </View>
-                        <View >
-                          <View>
-                            <Text style={styles.chatListName}>
-                              {item.pName}
-                            </Text>
+                        <View style={styles.itemChatRight}>
+                          <View style={{ flexDirection: 'row' }}>
+                            <View>
+                              <Text style={styles.chatListName}>
+                                {item.pName}
+                              </Text>
+                            </View>
+                            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                              {this.renderTime(item.time)}
+                            </View>
                           </View>
                           <View>
                             <Text style={styles.chatListMessage}>
                               {item.messageText}
                             </Text>
                           </View>
-                          <View>
+                          {/* <View>
                             <Text style={styles.chatListTime}>
                               {item.time}
                             </Text>
-                          </View>
+                          </View> */}
                         </View>
                       </View>
                     </TouchableOpacity>
-                    <View>
+                    {/* <View style={styles.viewMenu}>
                       <Menu>
                         <MenuTrigger>
                           <Image source={Images.iconThreeDots} styles={styles.manupopUp} />
@@ -555,14 +609,15 @@ export default class ChatList extends Component {
                           <MenuOption onSelect={() => this.onClickMarkunread(item.ids, item.pName)} text='Mark unread' />
                         </MenuOptions>
                       </Menu>
-                    </View>
+                    </View> */}
                   </View>
               )}
               keyExtractor={item => item.ids}
             />
             }
           </View>
-          </MenuProvider>
+          {/* </MenuProvider> */}
+          </LinearGradient>
         </View>
       );
     }
@@ -570,29 +625,79 @@ export default class ChatList extends Component {
 
 
 const styles = StyleSheet.create({
+  colorPrimaryViewLinearGradient: {
+    height: Screen.height,
+    flex: 1
+  },
+  contentView: {
+    flex: 1,
+    ...ifIphoneX({ marginTop: hp(3) }, { marginTop: 0 }),
+  },
   emptyView: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   emptyText: { fontSize: 18, fontWeight: 'bold' },
   mainView: {
     flex: 0.9,
-    ...ifIphoneX({ marginTop: 30 }, { marginTop: 0 }),
+    ...ifIphoneX({ marginTop: hp(2) }, { marginTop: 0 }),
     ...ifIphoneX({ marginBottom: 30 }, { marginBottom: 0 })
   },
-  mainProviderView: { margin: 5, flexDirection: 'row', flex: 1, justifyContent: 'space-between' },
-  chatListImage: {
-    height: 80,
-    width: 80,
-    margin: 3,
-    resizeMode: "cover",
-    borderRadius: 40
+  mainProviderView: { 
+    // margin: 5,
+    marginTop: wp(2),
+    marginLeft: wp(3),
+    marginRight: wp(3),
+    flexDirection: 'row', 
+    flex: 1, 
+    justifyContent: 'space-between'
   },
-  chatListName: { fontSize: 16, marginLeft: 10, marginTop: 10, fontWeight: '700' },
-  chatListMessage: { fontSize: 14, marginLeft: 10, fontWeight: '300' },
-  chatListTime: { fontSize: 10, marginLeft: 10 },
-  manupopUp:{ height: 80, width: 80, resizeMode: 'cover' },
+  itemChatRight: {
+      flex: 1,
+      marginLeft: wp(2),
+      paddingBottom: hp(2),
+      borderBottomColor: "rgba(0, 0, 0, 0.1)",
+      borderBottomWidth: 1
+  },
+  chatListImage: {
+    height: wp(13),
+    width: wp(13),
+    marginLeft: wp(2),
+    marginRight: wp(2),
+    marginTop: hp(2),
+    resizeMode: "cover",
+    borderRadius: 25
+  },
+  chatListName: { 
+    fontSize: 16, 
+    // marginLeft: 10, 
+    marginTop: 10, 
+    fontWeight: '700' 
+  },
+  chatListMessage: { 
+    fontSize: 14, 
+    // marginLeft: 10, 
+    fontWeight: '300' 
+  },
+  chatListTime: { 
+    fontSize: 10, 
+    // marginLeft: 10
+  },
+  manupopUp:{
+    height: 100,
+    width: 100, 
+    // resizeMode: "cover",
+    // flex: 1,
+    // width: null,
+    // height: null,
+    // resizeMode: 'contain'
+  },
+  viewMenu: {
+    width: wp(8),
+    height: wp(8),
+    marginRight: wp(2)
+  },
   header: {
     flex: 0.1,
     flexDirection: 'row',
-    borderBottomColor: "rgba(0, 0, 0, 0.3)",
+    borderBottomColor: "rgba(0, 0, 0, 0.2)",
     borderBottomWidth: 1
   }
  

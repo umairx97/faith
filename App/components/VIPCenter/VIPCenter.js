@@ -23,7 +23,7 @@ export default class VIPCenter extends React.Component {
 
   constructor(props) {
     super(props);
-    console.disableYellowBox = true;
+    // console.disableYellowBox = true;
   }
 
   componentDidMount() {}

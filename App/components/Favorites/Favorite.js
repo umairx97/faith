@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStora
 import React from "react";
 import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
-// import LinearGradient from "react-native-linear-gradient";
+import LinearGradient from "react-native-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import { NoDataComponent } from "../ui/NoData";
 import { ifIphoneX } from "react-native-iphone-x-helper";
@@ -112,7 +112,7 @@ export default class Favorite extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }} >
-        {/* <LinearGradient 
+        <LinearGradient 
           start={{
             x: 0.51,
             y: 0.17
@@ -124,7 +124,7 @@ export default class Favorite extends React.Component {
           locations={[0, 1]}
           colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
           style={styles.colorPrimaryViewLinearGradient}
-        > */}
+        >
           <ScrollView contentContainerStyle={{flex: 1}}>
             {this.state.allArr.length == 0 ?
               <View style={{flex: 1}}>
@@ -153,7 +153,7 @@ export default class Favorite extends React.Component {
               />
             }
           </ScrollView>
-        {/* </LinearGradient> */}
+        </LinearGradient>
       </View>
     );
   }
