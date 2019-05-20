@@ -54,5 +54,6 @@ export const Images = {
   calenderIcon:require("./images/calenderIcon.png"),
   reportIcon:require("./images/reportIcon.png"),
   commentIcon:require("./images/commentIcon.png"),
-  likeIcon:require("./images/likeIcon.png")
+  likeIcon:require("./images/likeIcon.png"),
+  deleteIcon:require("./images/delete-64.png")
 };

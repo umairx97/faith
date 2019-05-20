@@ -117,6 +117,7 @@ export default class SignIn extends Component {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(user => {
+        // console.warn('user: ', user);
         this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "g+", user.user.photoURL);
       })
       .catch(error => {
@@ -124,6 +125,7 @@ export default class SignIn extends Component {
         Alert.alert(message + " Errorcode " + code);
       });
   }
+
   updateUserProfile(uid, name, email, loginWith, photoUrl) {
     var userUserName = name.split(" ").join("_");
     // var userName=name;
@@ -312,10 +314,10 @@ export default class SignIn extends Component {
         .auth()
         .signInWithCredential(credential)
         .then(user => {
+          // console.warn('data: ', user);
           this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB", user.user.photoURL);
         })
         .catch(error => {
-
           Alert.alert('An account already exists with the same email address.');
         });
     } catch (e) {

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
-  Platform
+  Platform,
+  AsyncStorage
 } from "react-native";
 import React from "react";
 import firebase from "react-native-firebase";
@@ -89,6 +90,7 @@ export default class NearbyAllUser extends React.Component {
       .ref("Users/FaithMeetsLove/Registered");
 
     allNearbyUser.once("value").then(snapshot => {
+      // console.warn('users: ', snapshot);
       snapshot.forEach(childSnapshot => {
         key = childSnapshot.key;
         this.setState({ userId: key });
@@ -101,16 +103,25 @@ export default class NearbyAllUser extends React.Component {
         userGender = childSnapshot.val().gender;
         friendLatitude = childSnapshot.val().latitude;
         friendLongitude = childSnapshot.val().longitude;
+        
         var getAge = this.userAgeShow(userAge);
 
+        
         if (uidUser != key) {
-          let distanceBetweenFriends = geolib.getDistance(
-            {
-              lat: this.state.myLatitude,
-              lon: this.state.myLongitude
-            },
-            { lat: friendLatitude, lon: friendLongitude }
-          );
+          
+          // console.warn('getDistance: ', 'myPos: ' + myLat + ':' + myLong + ' | friendPos: ' + friendLatitude + ':' + friendLongitude);
+          let distanceBetweenFriends = 1000000;
+          if((friendLatitude != null)&&(friendLongitude != null)) {
+            distanceBetweenFriends = geolib.getDistance(
+              {
+                lat: myLat,
+                lon: myLong
+              },
+              { lat: friendLatitude, lon: friendLongitude }
+            );
+          }
+          
+          
           // console.warn('user: ', 'varifiedUser: ', varifiedUser + ' | ' + 'distance: ', distanceBetweenFriends/1000 + ' | ' + this.state.userDistanceShow + ' | ' + 'age: ', getAge + ' | from: ' + this.state.ageFromShow + ' | to: ' + this.state.ageToShow);
           if (
             varifiedUser == true &&
@@ -118,27 +129,33 @@ export default class NearbyAllUser extends React.Component {
             getAge <= this.state.ageToShow &&
             distanceBetweenFriends/1000 <= this.state.userDistanceShow
           ) {
-            if (this.state.userGenderShow == 2) {
-              arrayKey.push({
-                id: userProfileId,
-                UserName: userName,
-                ImageURL: childData,
-                fullAge: getAge
-              });
-            } else if (this.state.userGenderShow == userGender) {
-              arrayKey.push({
-                id: userProfileId,
-                UserName: userName,
-                ImageURL: childData,
-                fullAge: getAge
-              });
+            try {
+              if (this.state.userGenderShow == 2) {
+                arrayKey.push({
+                  id: userProfileId,
+                  UserName: userName,
+                  ImageURL: childData,
+                  fullAge: getAge
+                });
+              } else if (this.state.userGenderShow == userGender) {
+                arrayKey.push({
+                  id: userProfileId,
+                  UserName: userName,
+                  ImageURL: childData,
+                  fullAge: getAge
+                });
+              }
+            } catch (error) {
+              console.warn('errore 3');
             }
+            
           }
+          
         }
-
-        this.setState({
-          allArr: arrayKey
-        });
+        
+      });
+      this.setState({
+        allArr: arrayKey
       });
     });
   }
@@ -199,8 +216,10 @@ export default class NearbyAllUser extends React.Component {
     return age;
   }
 
-  openClickedProfile = usrId => {
+  openClickedProfile(usrId) {
     alert(usrId);
+    AsyncStorage.setItem("userProfileKeys", usrId);
+    setTimeout(() => Actions.userProfile(), 500);
   };
 
   render() {
@@ -221,45 +240,48 @@ export default class NearbyAllUser extends React.Component {
           style={styles.colorPrimaryViewLinearGradient}
         >
           <ScrollView contentContainerStyle={{flex: 1}}>
-            <GridView
-              itemDimension={130}
-              items={this.state.allArr}
-              style={styles.gridView}
-              renderItem={item => (
-                <View style={[styles.itemContainer]}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.openClickedProfile(item.id);
-                    }}
-                  >
-                    <Image
-                      source={{ uri: item.ImageURL }}
-                      style={[styles.imageContainer]}
-                    />
-                    <View style={styles.itemViewText}>
-                      <Text
-                       style={styles.listDataText}
-                      >
-                        {item.UserName}
-                      </Text>
-                      <Text
-                       style={styles.listDataText}
-                      >
-                        ,
-                      </Text>
-                      <Text
-                        style={styles.listDataText}
-                      >
-                        {item.fullAge}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              )}
-            />
             {this.state.allArr.length == 0 ?
+              <View style={{flex: 1}}>
                 <NoDataComponent text={"No users nearby"} onPress={() => Actions.Discover()}/>
-            : null}
+              </View>
+            : 
+              <GridView
+                  itemDimension={130}
+                  items={this.state.allArr}
+                  style={styles.gridView}
+                  renderItem={item => (
+                    <View style={[styles.itemContainer]}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.openClickedProfile(item.id);
+                        }}
+                      >
+                        <Image
+                          source={{ uri: item.ImageURL }}
+                          style={[styles.imageContainer]}
+                        />
+                        <View style={styles.itemViewText}>
+                          <Text
+                          style={styles.listDataText}
+                          >
+                            {item.UserName}
+                          </Text>
+                          <Text
+                          style={styles.listDataText}
+                          >
+                            ,
+                          </Text>
+                          <Text
+                            style={styles.listDataText}
+                          >
+                            {item.fullAge}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                />
+            }
           </ScrollView>
         {/* </View> */}
         </LinearGradient>
@@ -274,15 +296,15 @@ const styles = StyleSheet.create({
     height: Screen.height
   },
   gridView: {
-    paddingTop: Platform.OS === "ios" ? 30 : 20,
+    paddingTop: Platform.OS === "ios" ? hp(5) : hp(5),
     ...ifIphoneX({ paddingTop: hp(15) }),
     flex: 1
   },
   itemContainer: {
-    justifyContent: "flex-end",
-    borderRadius: 5,
-    padding: 10,
-    height: 175
+    // justifyContent: "flex-end",
+    borderRadius: 15,
+    padding: 5,
+    height: hp(30)
   },
   listDataText:{
     fontSize: 12, 

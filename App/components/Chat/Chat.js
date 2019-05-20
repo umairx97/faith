@@ -4,41 +4,62 @@ import {
   View,
   TouchableOpacity,
   Image,
+  ImageBackground,
   TextInput,
   Dimensions,
   BackHandler,
   FlatList,
   StyleSheet,
   Alert,
-  ScrollView,
+  Keyboard,
+  ActivityIndicator,
   AsyncStorage,
   TouchableHighlight,
   Platform,
+  ActionSheetIOS,
   PermissionsAndroid
 } from "react-native";
-import OfflineNotice from "../OfflineNotice/OfflineNotice";
+// import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import { Actions, Scene } from "react-native-router-flux";
 import { Images } from "../../../assets/imageAll";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase, { Firebase } from "react-native-firebase";
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import { GiftedChat, Bubble, Time, MessageImage } from "react-native-gifted-chat";
+// import Video from 'react-native-video';
+import Video from "react-native-gifted-chat/node_modules/react-native-video";
 import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
 import Dialog from "react-native-dialog";
-import { MenuProvider } from "react-native-popup-menu";
+import ActionSheet from 'react-native-action-sheet';
+import { Immersive } from 'react-native-immersive';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {
   Menu,
   MenuOptions,
   MenuOption,
-  MenuTrigger
+  MenuTrigger,
+  MenuProvider
 } from "react-native-popup-menu";
+
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
 };
 //const originalXMLHttpRequest = window.XMLHttpRequest;
+
+var MEDIA_BUTTONS = [
+  'Photo Library',
+  'Video Library',
+  'Camera',
+  'Gallery',
+  'Choose Gif',
+  'Cancel'
+];
+
+var DESTRUCTIVE_INDEX = 4;
+var CANCEL_INDEX = 4;
+
 
 let apiVersion = 1;
 var type = "image/jpg";
@@ -47,7 +68,7 @@ var dirName = "ChatImages/";
 var isImageUpload = true;
 var milliseconds;
 
-var friendName, friendUid, friendEmail, friendAvatar, friendToken, chatUserName, mutedChat = false;
+var myAvatar, friendName, friendUid, friendEmail, friendAvatar, friendToken, chatUserName, mutedChat = false;
 var mediaGallery = [];
 
 export default class Chat extends Component {
@@ -76,92 +97,118 @@ export default class Chat extends Component {
       userChatTime: 0,
       friendProfileName: "",
       chatMuted: false,
-      friendChatId:''
+      friendChatId:'',
+      isMediaLoaded: false,
+      text: "",
+      isUploading: false,
+      keyboardOpen: false
     };
     this.user = firebase.auth().currentUser;
-
-  this.getChatGenerated();
+    // this.getChatGenerated();
   }
-getChatGenerated=async()=>{
-  chatUserName = await AsyncStorage.getItem("reg_user_name");
-  friendUid = await AsyncStorage.getItem("friendsUid");
-  this.setState({
-    friendChatId:friendUid
-  })
-  this.getMutedbyFriend();
-  this.chatRef =await firebase
-  .database()
-  .ref()
-  .child("Users/FaithMeetsLove/chat/" + this.generateChatId());
-this.chatRefData = this.chatRef.orderByChild("order");
-this.onSend = this.onSend.bind(this);
 
-firebase
-  .database()
-  .ref("Users/FaithMeetsLove/Registered/" + friendUid)
-  .once("value")
-  .then(snapshot => {
-    friendAvatar = snapshot.val().profileImageURL;
-    friendName = snapshot.val().fullName;
-    friendToken = snapshot.val().pushToken;
+  getChatGenerated=async()=>{
+    chatUserName = await AsyncStorage.getItem("reg_user_name");
+    friendUid = await AsyncStorage.getItem("friendsUid");
+    myAvatar = await AsyncStorage.getItem("reg_user_profileImageURL");
     this.setState({
-      friendProfileName: friendName
-    });
-  });
+      friendChatId:friendUid
+    })
+    this.getMutedbyFriend();
+    this.chatRef = await firebase
+    .database()
+    .ref()
+    .child("Users/FaithMeetsLove/chat/" + this.generateChatId());
+    // console.warn("chatID: ", "Users/FaithMeetsLove/chat/" + this.generateChatId());
+    this.chatRefData = this.chatRef.orderByChild("order");
+    // this.onSend = this.onSend.bind(this);
 
-}
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + friendUid)
+      .once("value")
+      .then(snapshot => {
+        friendAvatar = snapshot.val().profileImageURL;
+        friendName = snapshot.val().fullName;
+        friendToken = snapshot.val().pushToken;
+        this.setState({
+          friendProfileName: friendName
+        });
+      });
+
+  }
 
   generateChatId() {
-  
     if (this.user.uid > this.state.friendChatId) return `${this.user.uid}-${this.state.friendChatId}`;
     else return `${this.state.friendChatId}-${this.user.uid}`;
   }
 
-  async componentWillMount() { }
+  // async componentWillMount() { }
+
   async componentDidMount() {
-  
-    var isForward = await AsyncStorage.getItem("openChatFrom");
-    var isForwardText = await AsyncStorage.getItem("messageText");
-    var isForwardImage = await AsyncStorage.getItem("messageImage");
-    var isForwardVideo = await AsyncStorage.getItem("messageVideo");
-    if (isForwardImage == null) {
-      isForwardImage = "";
-    }
-    if (isForwardVideo == null) {
-      isForwardVideo = "";
-    }
-    
-    this.getBlokedUser();
-    var path = await AsyncStorage.getItem("file_path");
-    if (path != null && path != "") this.setState({ imagePath: path });
-    if (Platform.OS === "android") {
-      apiVersion = DeviceInfo.getAPILevel();
-    }
-    BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
-    setTimeout(() => {
-      this.listenForItems(this.chatRefData);
-
-      if (isForward == "false") {
-        AsyncStorage.setItem("openChatFrom", "true");
-        AsyncStorage.setItem("newChatMessage", "true");
-
-        var now = new Date().getTime();
-        this.chatRef.push({
-          _id: now,
-          text: isForwardText,
-          image: isForwardImage,
-          video: isForwardVideo,
-          createdAt: now,
-          uid: this.user.uid,
-          fuid: friendUid,
-          blockedByMe: this.state.blockedByMe,
-          blockedByFriend: this.state.blockedByFriend,
-          fName: friendName,
-          order: -1 * now
+    this.focusListener2 = this.props.navigation.addListener("willFocus", async () => {
+      if(this.state.messages.length != 0) {
+        this.setState({
+          messages: [],
+          friendProfileName: ""
         });
       }
-    }, 600);
+    });
+    this.focusListener = this.props.navigation.addListener("didFocus", async () => {
+      this.getChatGenerated();
+      var isForward = await AsyncStorage.getItem("openChatFrom");
+      var isForwardText = await AsyncStorage.getItem("messageText");
+      var isForwardImage = await AsyncStorage.getItem("messageImage");
+      var isForwardVideo = await AsyncStorage.getItem("messageVideo");
+      if (isForwardImage == null) {
+        isForwardImage = "";
+      }
+      if (isForwardVideo == null) {
+        isForwardVideo = "";
+      }
+      
+      this.getBlokedUser();
+      var path = await AsyncStorage.getItem("file_path");
+      if (path != null && path != "") this.setState({ imagePath: path });
+      if (Platform.OS === "android") {
+        apiVersion = DeviceInfo.getAPILevel();
+      }
+      BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());
+      setTimeout(() => {
+        this.listenForItems(this.chatRefData);
+        if (isForward == "false") {
+          AsyncStorage.setItem("openChatFrom", "true");
+          AsyncStorage.setItem("newChatMessage", "true");
+
+          var now = new Date().getTime();
+          this.chatRef.push({
+            _id: now,
+            text: isForwardText,
+            image: isForwardImage,
+            video: isForwardVideo,
+            createdAt: now,
+            uid: this.user.uid,
+            fuid: friendUid,
+            blockedByMe: this.state.blockedByMe,
+            blockedByFriend: this.state.blockedByFriend,
+            fName: friendName,
+            order: -1 * now
+          });
+        }
+        // console.warn('user: ', this.user);
+      }, 600);
+      this.androidGoInImmersive();
+      this.keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => this._keyboardDidHide(),
+      );
+      this.keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => this._keyboardDidShow(),
+      );
+    });
   }
+
   getBlokedUser = async () => {
     var keyID;
     let blocked;
@@ -201,18 +248,43 @@ firebase
   };
 
   componentWillUnmount() {
+    this.unMountComponent();
+  }
+
+  unMountComponent() {
     this.chatRefData.off();
-    this.setState({ imagePath: "" });
+    this.setState({ imagePath: "", messages: [], friendProfileName: "" });
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     );
+    this.keyboardDidHideListener.remove();
+    this.keyboardDidShowListener.remove();
   }
+
+  _keyboardDidHide() {
+    // this.setState({
+    //   keyboardOpen: false
+    // });
+    this.androidGoInImmersive();
+  }
+
+  _keyboardDidShow() {
+    // setTimeout(() => {
+      this.androidGoInImmersive();
+      // this.setState({
+      //   keyboardOpen: true
+      // });
+    // }, 600);
+  }
+
   listenForItems(chatRef) {
-    var keys;
+    // var keys;
+    var keys = 0;
     var allUsersChat = firebase
       .database()
       .ref("Users/FaithMeetsLove/ChatUser/" + this.user.uid);
     allUsersChat.once("value").then(snapshot => {
+      // console.warn('userChatSnap: ', snapshot);
       if (snapshot.exists()) {
         snapshot.forEach(childSnapshot => {
           frndID = childSnapshot.val()._id;
@@ -220,9 +292,10 @@ firebase
             keys = childSnapshot.val().CreatedAt;
           }
         });
-      } else {
-        keys = 0;
-      }
+      } 
+      // else {
+      //   keys = 0;
+      // }
     });
 
     chatRef.on("value", snap => {
@@ -235,8 +308,15 @@ firebase
         dataBlock = child.val().blockedByFriend;
         if (lastChat > keys) {
           if (this.state.blockedByMe && dataBlock) {
-          } else
-            items.push({
+
+          } else {
+            var avatar = friendAvatar;
+            
+            if(child.val().uid == this.user.uid) {
+              avatar = myAvatar;
+            }
+
+            var dataItem = {
               key: child.key,
               _id: child.val().createdAt,
               text: child.val().text,
@@ -244,11 +324,19 @@ firebase
               user: {
                 _id: child.val().uid,
                 name: friendName,
-                avatar: friendAvatar
+                avatar: avatar
               },
+              read: child.val().read,
               image: child.val().image,
               video: child.val().video
-            });
+            };
+
+            if((child.val().uid != this.user.uid)&&(child.val().read != "1")) {
+              this.setMessageRead(dataItem);
+            }
+
+            items.push(dataItem);
+          }
           if (child.val().image.includes("http"))
             mediaGallery.push({ id: i++, image: child.val().image, video: "" });
           else if (child.val().video.includes("http")) {
@@ -256,6 +344,7 @@ firebase
           }
         }
       });
+
       this.setState({
         loading: false,
         messages: items
@@ -263,13 +352,18 @@ firebase
     });
   }
 
+  setMessageRead(item) {
+    firebase.database().ref("Users/FaithMeetsLove/chat/" + this.generateChatId() + '/' + item.key).update({read:"1"});
+  }
 
   backAndroid() {
+    this.androidGoInImmersive();
+    this.unMountComponent();
     Actions.chatList();
     return true;
   }
-  getMutedbyFriend = () => {
 
+  getMutedbyFriend = () => {
     var alreadyChatMutedUser = firebase.database().ref("Users/FaithMeetsLove/MuteChatNotifications/" + this.state.friendChatId + '/' + this.user.uid);
     alreadyChatMutedUser.once('value').then(snapshot => {
       if (snapshot.exists()) {
@@ -280,8 +374,8 @@ firebase
       }
 
     })
- 
   }
+
   sendNotification = (text) => {
     var key =
       "AAAAWvYJveM:APA91bH0GyTfgtn07tryKn4uTb-_VFlm1oODrfmtVdWyDHxfEZwO_GneT71SXjQ6Jh69-j2XKqFBXepdPgxkZKK7Mj_oDqWN7eSY-IuztW0x8PG8KJPKiS2MFh6oRwMK74ReHjfHB7sLh_QlNznducxSIjf4awstIQ";
@@ -300,8 +394,7 @@ firebase
     };
     if (this.state.chatMuted) {
 
-    }
-    else {
+    } else {
       fetch("https://fcm.googleapis.com/fcm/send", {
         method: "POST",
         headers: {
@@ -328,11 +421,11 @@ firebase
 
   }
 
-  async onSend(messages = []) {
+  // async onSend(messages = []) {
+  onSend(messages = []) {
     if (this.state.friendChatId==undefined) {
       alert("wait or open again");
-    }
-    else { 
+    } else { 
       //alert(this.state.friendChatId);
 
       if (this.state.blockedByMe == true) {
@@ -343,12 +436,13 @@ firebase
 
           milliseconds = new Date().getTime();
           // Prepare Blob support
-
+          
           if (isImageUpload) {
             this.setState(
               {
                 filePath: this.state.imagePath,
-                imagePath: ""
+                imagePath: "",
+                isUploading: true
               },
               () => {
                 let fileUri = decodeURI(this.state.filePath)
@@ -361,8 +455,11 @@ firebase
                     this.setState({
                       file_url: uploadedFile.downloadURL,
                       imagePath: "",
+                      imagedata: "",
                       videoPath: "",
-                      filePath: ""
+                      filePath: "",
+                      isMediaLoaded: false,
+                      isUploading: false
                     });
                     var imageUrl = "";
                     var VideoUrl = "";
@@ -388,15 +485,15 @@ firebase
                         order: -1 * now
                       });
                     });
-
-                  })
+                  });
 
               }
             );
           } else {
             this.setState(
               {
-                filePath: this.state.videoPath
+                filePath: this.state.videoPath,
+                isUploading: true
               },
               () => {
                 let fileUri = decodeURI(this.state.filePath)
@@ -410,18 +507,20 @@ firebase
                 //   dirName,
                 //   fs
                 // )
+                
                 firebase
                   .storage()
                   .ref(dirName + this.user.uid + milliseconds + format)
                   .putFile(fileUri)
                   .then(uploadedFile => {
 
-
                     this.setState({
                       file_url: uploadedFile.downloadURL,
                       imagePath: "",
                       videoPath: "",
-                      filePath: ""
+                      filePath: "",
+                      isMediaLoaded: false,
+                      isUploading: false
                     });
                     var imageUrl = "";
                     var VideoUrl = "";
@@ -451,7 +550,7 @@ firebase
                   })
                   .catch(error => {
                     alert(JSON.stringify(error));
-                    console.log(error);
+                    console.warn(error);
                   });
               }
             );
@@ -459,6 +558,9 @@ firebase
         } else {
           // window.XMLHttpRequest = originalXMLHttpRequest;
           messages.forEach(message => {
+            if(message.text.trim() == "") {
+              return;
+            }
             this.sendNotification(message.text);
             var now = new Date().getTime();
             this.chatRef.push({
@@ -472,13 +574,15 @@ firebase
               blockedByMe: this.state.blockedByMe,
               blockedByFriend: this.state.blockedByFriend,
               fName: friendName,
-              order: -1 * now
+              order: -1 * now,
+              read: 0
             });
           });
         }
       }
     }
   }
+
   // sendMessage(messages = []) { }
   // async uploadMedia(uri, uid, mime, format, dirName, fs) {
   //   this.setState({ ...this.state, progressVisible: true });
@@ -511,6 +615,7 @@ firebase
   //       });
   //   });
   // }
+
   onChatMessageLongPressed(context, message) {
     if (message.video.includes("http"))
       this.setState({
@@ -531,13 +636,15 @@ firebase
         messageText: message.text
       });
   }
+
   showFriendProfile() {
     //alert(friendUid)
     AsyncStorage.setItem("userProfileKeys", "" + this.state.friendChatId);
     setTimeout(() => Actions.userProfile(), 200);
   }
+
   async openAction(val) {
-    if (val == "img") {
+    if ((val == "img")||(val == "gif")) {
 
       if (Platform.OS === "android" && apiVersion >= 23) {
         this.requestCameraPermission(val);
@@ -557,7 +664,8 @@ firebase
               this.setState({
                 imagePath: image.path,
                 videoPath: "",
-                imagedata: image.data
+                imagedata: image.data,
+                isMediaLoaded: true
               });
             })
             .catch(error => {
@@ -570,8 +678,7 @@ firebase
 
       if (Platform.OS === "android" && apiVersion >= 23) {
         this.requestCameraPermission(val);
-      }
-      else {
+      } else {
         type = "video/mp4";
         format = ".mp4";
         dirName = "ChatVideos/";
@@ -584,7 +691,8 @@ firebase
               this.setState({
                 videoPath: video.path,
                 videoData: video.data,
-                imagePath: ""
+                imagePath: "",
+                isMediaLoaded: true
               });
             })
             .catch(err => {
@@ -601,6 +709,7 @@ firebase
         .catch(error => alert(error));
     }
   }
+
   handleBlock() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
@@ -622,6 +731,7 @@ firebase
       );
     }, 400);
   }
+
   blockFriend() {
     firebase
       .database()
@@ -633,6 +743,7 @@ firebase
       })
       .then(() => { this.listenForItems(this.chatRefData); });
   }
+
   handleVideo() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
@@ -640,6 +751,7 @@ firebase
       Actions.fullScreenVideo();
     }, 400);
   }
+
   handleDeleteMessage() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     firebase
@@ -652,7 +764,9 @@ firebase
       )
       .remove();
   }
+
   handleForward() {
+    this.unMountComponent();
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
     AsyncStorage.setItem("newChatMessage", "false");
     AsyncStorage.setItem("messageText", this.state.messageText);
@@ -668,6 +782,7 @@ firebase
     //     this.state.messageKey
     //   )
   }
+
   handleCancel() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
   }
@@ -687,28 +802,34 @@ firebase
         results[PermissionsAndroid.PERMISSIONS.RECORD_AUDIO] ===
         PermissionsAndroid.RESULTS.GRANTED
       ) {
-        if (val == "img") {
+        if ((val == "img")||(val == "gif")) {
           type = "image/jpg";
           format = ".jpg";
           dirName = "PostImages/";
           isImageUpload = true;
           setTimeout(() => {
+            var crop = true;
+            if(val == "gif") {
+              crop = false;
+            }
             ImagePicker.openPicker({
               width: 300,
               height: 400,
-              cropping: true,
+              cropping: crop,
               includeBase64: true
-            })
-              .then(image => {
+            }).then(image => {
                 this.setState({
                   imagePath: image.path,
                   videoPath: "",
-                  imagedata: image.data
+                  imagedata: image.data,
+                  isMediaLoaded: true
                 });
+                this.androidGoInImmersive();
               })
               .catch(error => {
                 this.setState({ ...this.state, progressVisible: false });
-                console.log(error);
+                console.warn('error on pick: ', error);
+                this.androidGoInImmersive();
               });
           }, 500);
           this.setState({
@@ -727,11 +848,14 @@ firebase
                 this.setState({
                   videoPath: video.path,
                   videoData: video.data,
-                  imagePath: ""
+                  imagePath: "",
+                  isMediaLoaded: true
                 });
+                this.androidGoInImmersive();
               })
               .catch(err => {
                 console.log(err);
+                this.androidGoInImmersive();
               });
           }, 500);
           this.setState({
@@ -742,6 +866,7 @@ firebase
         alert(
           "Permissions are not granted. The application may not work properly"
         );
+        this.androidGoInImmersive();
       }
     } catch (err) {
       console.warn(err);
@@ -810,6 +935,7 @@ firebase
     }, 400);
 
   }
+
   onDeleteUserChat = friendUid => {
     var key;
     var uid;
@@ -834,6 +960,7 @@ firebase
         console.log(JSON.stringify(error));
       });
   };
+
   saveChat = (key, uid, fuid, createdAt, frndId) => {
     firebase
       .database()
@@ -851,6 +978,7 @@ firebase
         Alert.alert("fail" + error.toString());
       });
   };
+
   renderBubble(props) {
     return (
       <Bubble
@@ -863,15 +991,123 @@ firebase
       />
     );
   }
+
+  renderMessageImage(props) {
+    return (
+      <MessageImage
+        customOnClose={() => this.androidGoInImmersive()}
+        {...props}
+      />
+    );
+  }
+
+  renderTime(props) {
+    var isReaded = false;
+    if((props.currentMessage.user._id == this.user.uid)&&(props.currentMessage.read == "1")) {
+      isReaded = true;
+    }
+    return(
+      <View style={{flexDirection: 'row'}}>
+        <Time {...props} />
+        {isReaded ?
+          <Text>{"√"}</Text>
+        : null }
+      </View>
+    );
+  } 
+
+  // renderTime(props) {
+  //   if (props.currentMessage && props.currentMessage.createdAt) {
+  //     const {
+  //       containerStyle,
+  //       wrapperStyle,
+  //       textStyle,
+  //       ...timeProps
+  //     } = props;
+  //     if (props.renderTime) {
+  //       return props.renderTime(timeProps)
+  //     }
+  //     return <Time {...timeProps} />
+  //   }
+  //   return null
+  // }
+
+  onDeleteVideoAndImage() {
+    this.setState({
+      isMediaLoaded: false,
+      imagePath: "",
+      videoPath: "",
+      imagedata: ""
+    });
+  }
+
+  setCustomText(value) {
+    this.setState({
+      text: value
+    });
+  }
+
+  showActions() {
+    // if(Platform.OS == 'ios') {
+    //   ActionSheetIOS.showActionSheetWithOptions(
+    //     {
+    //       options: MEDIA_BUTTONS,
+    //       destructiveButtonIndex: DESTRUCTIVE_INDEX,
+    //       cancelButtonIndex: CANCEL_INDEX,
+    //     },
+    //     (buttonIndex) => {
+    //       if (buttonIndex === 1) {
+    //         /* destructive action */
+    //       }
+    //     },
+    //   );
+    //   return;
+    // }
+    ActionSheet.showActionSheetWithOptions({
+      options: MEDIA_BUTTONS,
+      cancelButtonIndex: CANCEL_INDEX,
+      destructiveButtonIndex: DESTRUCTIVE_INDEX,
+      tintColor: 'blue'
+    },
+    (buttonIndex) => {
+      switch (buttonIndex) {
+        case 0:
+          this.openAction("img");
+          break;
+        case 1:
+          this.openAction("video");
+          break;
+        case 2:
+          this.openAction("cam");
+          break;
+        case 3:
+          this.openAction("gallery");
+          break;
+        case 4:
+          this.openAction("gif");
+          break;
+        default:
+          this.androidGoInImmersive();
+          break;
+      }
+    });
+  }
+
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
+  }
+
   render() {
     return (
-      <MenuProvider>
         <View style={styles.container}>
+          <MenuProvider>
           <View
             style={{
-              height: 50,
+              height: hp(9),
               width: Screen.width,
-              ...ifIphoneX({ height: 82 }),
+              ...ifIphoneX({ height: hp(11) }),
               backgroundColor: "red"
             }}
           >
@@ -884,9 +1120,10 @@ firebase
               }}
             >
               <View style={{ flexDirection: "row" }}>
-                <View>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   <TouchableOpacity
                     onPress={() => {
+                      this.unMountComponent();
                       Actions.chatList();
                     }}
                   >
@@ -896,13 +1133,22 @@ firebase
                     />
                   </TouchableOpacity>
                 </View>
-                <View><TouchableOpacity onPress={() => { this.showFriendProfile() }}><Text
-                  style={styles.friendProfileViewShow}
-                >{this.state.friendProfileName}</Text></TouchableOpacity>
+                {/* <View style={{backgroundColor: 'blue', justifyContent: 'center'}}>
+                  <TouchableOpacity onPress={() => { this.showFriendProfile() }}>
+                    <Text style={styles.friendProfileViewShow}>{this.state.friendProfileName}</Text>
+                  </TouchableOpacity>
+                </View> */}
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <View style={{justifyContent: 'center'}}>
+                  <TouchableOpacity onPress={() => { this.showFriendProfile() }}>
+                    <Text style={styles.friendProfileViewShow}>{this.state.friendProfileName}</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
 
-              <View>
+              <View style={{justifyContent: 'center'}}>
                 <Menu>
                   <MenuTrigger>
                     <Image
@@ -916,23 +1162,23 @@ firebase
                         this.onDeleteConversation();
                       }}
                     >
-                      <Text style={{ color: "red" }}>Delete Chat</Text>
+                      <Text style={styles.menuChatRed}>Delete Chat</Text>
                     </MenuOption>
                     <MenuOption
                       onSelect={() => {
                         this.openAction("gallery");
                       }}
                     >
-                      <Text style={{ color: "black" }}>View gallery</Text>
+                      <Text style={styles.menuChatNormal}>View gallery</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => { this.handleBlock() }}>
-                      <Text style={{ color: "black" }}>Block</Text>
+                      <Text style={styles.menuChatNormal}>Block</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => { }}>
-                      <Text style={{ color: "black" }}>Report</Text>
+                      <Text style={styles.menuChatNormal}>Report</Text>
                     </MenuOption>
                     <MenuOption onSelect={() => { this.onMuteChat() }}>
-                      <Text style={{ color: "black" }}>Mute Chat Notifications</Text>
+                      <Text style={styles.menuChatNormal}>Mute Chat</Text>
                     </MenuOption>
                   </MenuOptions>
                 </Menu>
@@ -941,25 +1187,91 @@ firebase
           </View>
 
           <View
-            style={styles.gifetedChatView}
+            style={this.state.keyboardOpen ? styles.gifetedChatViewKeyboardOpen : styles.gifetedChatView}
           >
             <GiftedChat
-              messages={this.state.messages}
-              onSend={this.onSend.bind(this)}
-              user={{
-                _id: this.user.uid
-              }}
-              isAnimated
-              showAvatarForEveryMessage
-              renderAvatarOnTop={true}
-              onLongPress={(context, message) => {
-                this.onChatMessageLongPressed(context, message);
-              }}
-              renderBubble={this.renderBubble}
-              onPressAvatar={message => {
-                this.showFriendProfile();
-              }}
-            />
+                messages={this.state.messages}
+                onSend={messages => this.onSend(messages)}
+                user={{
+                  _id: this.user.uid
+                }}
+                isAnimated
+                showAvatarForEveryMessage
+                renderAvatarOnTop={true}
+                onLongPress={(context, message) => {
+                  this.onChatMessageLongPressed(context, message);
+                }}
+                alwaysShowSend={true}
+                renderActions={() => {
+                    return(
+                      <TouchableOpacity
+                          testID='send'
+                          accessible
+                          accessibilityLabel='send'
+                          style={styles.containerSend}
+                          onPress={() =>this.showActions()}
+                          accessibilityTraits='button'
+                        >
+                          <View>
+                            <Image
+                              source={Images.addIcon}
+                              style={styles.imagePlusButton}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                    );
+                  }}
+                renderLoading={() =>  <ActivityIndicator size="large" color="#0000ff" />}
+                renderBubble={this.renderBubble}
+                renderMessageImage={(messageProps) => this.renderMessageImage(messageProps)}
+                renderTime={(timeProps) => this.renderTime(timeProps)}
+                onPressAvatar={message => {
+                  this.showFriendProfile();
+                }}
+              />
+            {this.state.isMediaLoaded ?
+              <View style={styles.mediaView}>
+                {this.state.imagedata != "" ?
+                  <View style={{flex: 1, width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                    <TouchableOpacity
+                          onPress={() => {
+                            this.onDeleteVideoAndImage();
+                          }}
+                        style={styles.btnImageDelete}
+                      >
+                        <Image style={{width: 50, height: 50}} source={Images.deleteIcon} />
+                    </TouchableOpacity>
+                    <Image
+                      source={{uri: `data:image/jpg;base64,${this.state.imagedata}`}}
+                      resizeMode={"contain"}
+                      style={{width: wp(30), height: hp(20)}}
+                    />
+                  </View>
+                  : null }
+                  {this.state.videoPath != "" ?
+                    <View style={{flex: 1, height: '100%', width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                      <TouchableOpacity
+                            onPress={() => {
+                              this.onDeleteVideoAndImage();
+                            }}
+                          style={styles.btnVideoDelete}
+                        >
+                          <Image style={{width: 50, height: 50}} source={Images.deleteIcon} />
+                      </TouchableOpacity>
+                      <View style={{flex: 1, height: '100%', width: '65%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                        <Video source={{uri: this.state.videoPath}}
+                          controls={true}
+                          fullscreen={true}
+                          ref={(ref) => {
+                            this.player = ref
+                          }}
+                          style={styles.backgroundVideo} 
+                        />
+                      </View>
+                    </View>
+                  : null }
+              </View>
+            : null }
           </View>
 
           <Dialog.Container visible={this.state.dialogVisible}>
@@ -1013,11 +1325,10 @@ firebase
               }}
             />
           </Dialog.Container>
-
-          <View
+          {/* <View
             style={styles.bottomView}
-          />
-          <View style={styles.positionViewBottom}>
+          /> */}
+          {/* <View style={styles.positionViewBottom}>
             <TouchableOpacity
               onPress={() => {
                 this.openAction("img");
@@ -1047,18 +1358,24 @@ firebase
             >
               <Image style={styles.btnImage} source={Images.viewGallery} />
             </TouchableOpacity>
-          </View>
+          </View> */}
+          {this.state.isUploading ?
+            <View style={{backgroundColor: "rgba(245,245,245, 0.4)", position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center'}}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          : null}
+          </MenuProvider>
         </View>
-
-      </MenuProvider>
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor: 'white'
   },
   imageArrowBack:{
     height: 30,
@@ -1067,12 +1384,25 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     tintColor: "white"
   },
+  imagePlusButton:{
+    height: wp(7),
+    width: wp(7),
+    marginTop: hp(1),
+    marginLeft: hp(1),
+    // tintColor: "white"
+  },
   friendProfileViewShow:{
     fontSize: 20,
     fontWeight: "600",
     marginTop: 12,
     marginLeft: 8,
     color: "white"
+  },
+  mediaView: {
+    height: hp(20),
+    textAlign: 'center',
+    justifyContent: 'center', 
+    alignContent: 'center'
   },
   bottomView:{
     ...ifIphoneX({ bottom: 60 }, { bottom: 40 }),
@@ -1097,6 +1427,24 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     flexDirection: "row"
   },
+  btnImageDelete: {
+    position: 'absolute',
+    zIndex: 100,
+    top: hp(5),
+    right: wp(10),
+    // alignSelf: "flex-end",
+    width: 50,
+    height: 50
+  },
+  btnVideoDelete: {
+    position: 'absolute',
+    zIndex: 100,
+    top: hp(5),
+    right: wp(2),
+    // alignSelf: "flex-end",
+    width: 50,
+    height: 50
+  },
   btnImage: {
     alignSelf: "stretch",
     alignItems: "stretch",
@@ -1105,14 +1453,59 @@ const styles = StyleSheet.create({
     marginLeft: "15%"
   },
   gifetedChatView:{
-    ...ifIphoneX({ bottom: 101 }, { bottom: 41 }),
-    ...ifIphoneX({ top: 85 }, { top: 51 }),
+    ...ifIphoneX({ bottom: hp(3) }, { bottom: 1 }),
+    ...ifIphoneX({ top: hp(11) }, { top: hp(9) }),
     position: "absolute",
     width: Screen.width - 2,
     marginLeft: 2,
+    backgroundColor: 'white',
+    // ...ifIphoneX(
+    //   { height: Screen.height - hp(15) },
+    //   {height: Screen.height - hp(10) } 
+    // )
+  },
+  gifetedChatViewKeyboardOpen : {
+    ...ifIphoneX({ bottom: hp(3) }, { bottom: 1 }),
+    ...ifIphoneX({ top: hp(11) }, { top: hp(9) }),
+    position: "absolute",
+    width: Screen.width - 2,
+    marginLeft: 2,
+    backgroundColor: 'white',
     ...ifIphoneX(
-      { height: Screen.height - 135 },
-      { height: Screen.height - 85 }
+      {  },
+      { height: Screen.height - hp(4) }
     )
+  },
+  containerSend: {
+    height: 44,
+    // justifyContent: 'flex-end',
+  },
+  textSend: {
+    color: '#0084ff',
+    fontWeight: '600',
+    fontSize: 17,
+    backgroundColor: 'transparent',
+    marginBottom: 12,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  menuChatRed: {
+    color: "red", 
+    fontSize: wp(5),
+    marginTop: hp(1),
+    marginBottom: hp(1)
+  },
+  menuChatNormal: {
+    color: "black", 
+    fontSize: wp(5),
+    marginTop: hp(1),
+    marginBottom: hp(1)
   }
 });

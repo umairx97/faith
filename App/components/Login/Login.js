@@ -15,7 +15,7 @@ import Discover from "../Discover/Discover";
 import { Actions } from "react-native-router-flux";
 import { RkButton } from "react-native-ui-kitten";
 import { StatusBar } from "react-native";
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 export default class Login extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;

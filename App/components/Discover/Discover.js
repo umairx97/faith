@@ -19,6 +19,9 @@ import { Actions } from "react-native-router-flux";
 // import OfflineNotice from "../OfflineNotice/OfflineNotice";
 import Modal from "react-native-modal";
 import firebase from "react-native-firebase";
+// import { withPickerValues } from "react-native-formik";
+import { Immersive } from 'react-native-immersive';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Screen = {
   width: Dimensions.get("window").width,
@@ -54,19 +57,33 @@ export default class Discover extends Component {
 
   }
 
-  static onEnter() {
-    Actions.refresh({action:new Date().getTime()});
-  }
+  // static onEnter() {
+  //   Actions.refresh({action:new Date().getTime()});
+  // }
 
-  async componentWillReceiveProps(nextProps){
-    await this.getSearchFilter();
-  }
+  // async componentWillReceiveProps(nextProps){
+  //   await this.getSearchFilter();
+  // }
 
   async componentWillMount() {
     // await this.getSearchFilter();
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      arrayKey = [];
+      this.setState({
+        showArr: [],
+        showUrl: [],
+        showAll: [],
+      }, async () => {
+        await this.getSearchFilter();
+      });
+      this.androidGoInImmersive();
     });
+  }
+
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
   }
 
   toggleModal = () => {
@@ -84,6 +101,17 @@ export default class Discover extends Component {
 
   componentDidMount() {
     this.getCurrentUserId();
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+        return true;
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    if(this.backHandler != null) {
+      this.backHandler.remove();
+    }
   }
 
   getAllUser = async () => {
@@ -323,6 +351,39 @@ export default class Discover extends Component {
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
+
+      // Riccardo - profiles are matched so we create the possibility to chat together
+      firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ChatUserList/" +
+        myId +
+        "/" +
+        frndId
+      )
+      .set({
+        _show: true
+      })
+      .then(ref => { })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
+
+      firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ChatUserList/" +
+        frndId +
+        "/" +
+        myId
+      )
+      .set({
+        _show: true
+      })
+      .then(ref => { })
+      .catch(error => {
+        Alert.alert("fail" + error.toString());
+      });
   }
 
   getFavouriteProfileId = id => {
@@ -337,7 +398,9 @@ export default class Discover extends Component {
       .set({
         isLike: true
       })
-      .then(ref => { })
+      .then(ref => {
+         this.getProfileId(id);
+       })
       .catch(error => {
         Alert.alert("fail" + error.toString());
       });
@@ -413,6 +476,7 @@ export default class Discover extends Component {
       instance.age();
     });
   };
+
   age = () => {
     var userAge = this.state.dateOfBirth;
     var date = userAge.split("-")[0];
@@ -425,6 +489,7 @@ export default class Discover extends Component {
       totalAge: ageFull
     });
   };
+
   userAgeShow = dob => {
     var userAge = dob;
     //alert(userAge)
@@ -628,8 +693,8 @@ export default class Discover extends Component {
                 <Image
                   source={require("../../../assets/images/icons-star3x.png")}
                   style={{
-                    height: 35,
-                    width: 35,
+                    height: 50,
+                    width: 50,
                     borderRadius: 18,
                     resizeMode: "contain"
                   }}
@@ -644,8 +709,8 @@ export default class Discover extends Component {
                 <Image
                   source={require("../../../assets/images/back.png")}
                   style={{
-                    height: 35,
-                    width: 35,
+                    height: 50,
+                    width: 50,
                     borderRadius: 18,
                     resizeMode: "contain"
                   }}
@@ -751,8 +816,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignSelf: "center",
     alignContent: "center",
-    width: 220,
-
+    width: wp(70),
     flexDirection: "row",
     justifyContent: "space-between"
   },
@@ -761,7 +825,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 130,
     height: 130,
-
     borderRadius: 65,
     alignSelf: "center"
   }

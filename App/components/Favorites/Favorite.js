@@ -1,9 +1,10 @@
 
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, ImageBackground, Platform, Dimensions } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStorage, Platform, Dimensions } from "react-native";
 import React from "react";
 import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
 import LinearGradient from "react-native-linear-gradient";
+import { Actions } from "react-native-router-flux";
 import { NoDataComponent } from "../ui/NoData";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -29,6 +30,7 @@ export default class Favorite extends React.Component {
     //this.getCurrentUserId();
     // this.getAllFavouriteUser();
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      arrayKey = [];
       this.setState({
         allArr: []
       }, () => {
@@ -100,13 +102,17 @@ export default class Favorite extends React.Component {
           }
           return age;
       }
-      openClickedProfile=(usrId)=>{
-        alert(usrId);
-      }
+
+  openClickedProfile(id) {
+    alert(id);
+    AsyncStorage.setItem("userProfileKeys", id);
+    setTimeout(() => Actions.userProfile(), 500);
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }} >
-        <LinearGradient
+        <LinearGradient 
           start={{
             x: 0.51,
             y: 0.17
@@ -120,29 +126,32 @@ export default class Favorite extends React.Component {
           style={styles.colorPrimaryViewLinearGradient}
         >
           <ScrollView contentContainerStyle={{flex: 1}}>
-            <GridView
-              itemDimension={130}
-              items={this.state.allArr}
-              style={styles.gridView}
-              renderItem={item => (
-                <View
-                  style={[styles.itemContainer]}
-                >
-                  <TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
-                    <Image source={{ uri: item.ImageURL }}
-                      style={[styles.imageContainer]}
-                    ></Image>
-                    <View style={styles.itemViewText}>
-                        <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
-                        <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              )}
-            />
             {this.state.allArr.length == 0 ?
-              <NoDataComponent text={"No favorite user to display"} onPress={() => Actions.Discover()}/>
-            : null}
+              <View style={{flex: 1}}>
+                <NoDataComponent text={"No favorite user to display"} onPress={() => Actions.Discover()}/>
+              </View>
+            : 
+              <GridView
+                itemDimension={130}
+                items={this.state.allArr}
+                style={styles.gridView}
+                renderItem={item => (
+                  <View
+                    style={[styles.itemContainer]}
+                  >
+                    <TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
+                      <Image source={{ uri: item.ImageURL }}
+                        style={[styles.imageContainer]}
+                      ></Image>
+                      <View style={styles.itemViewText}>
+                          <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                          <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              />
+            }
           </ScrollView>
         </LinearGradient>
       </View>
