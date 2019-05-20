@@ -11,7 +11,7 @@ import {
   FlatList,
   StyleSheet,
   Alert,
-  ScrollView,
+  Keyboard,
   ActivityIndicator,
   AsyncStorage,
   TouchableHighlight,
@@ -24,14 +24,12 @@ import { Actions, Scene } from "react-native-router-flux";
 import { Images } from "../../../assets/imageAll";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import firebase, { Firebase } from "react-native-firebase";
-import { GiftedChat, Bubble, Time } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, Time, MessageImage } from "react-native-gifted-chat";
 // import Video from 'react-native-video';
 import Video from "react-native-gifted-chat/node_modules/react-native-video";
-// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import DeviceInfo from "react-native-device-info";
 import ImagePicker from "react-native-image-crop-picker";
 import Dialog from "react-native-dialog";
-import { MenuProvider } from "react-native-popup-menu";
 import ActionSheet from 'react-native-action-sheet';
 import { Immersive } from 'react-native-immersive';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -40,7 +38,8 @@ import {
   Menu,
   MenuOptions,
   MenuOption,
-  MenuTrigger
+  MenuTrigger,
+  MenuProvider
 } from "react-native-popup-menu";
 
 const Screen = {
@@ -54,6 +53,7 @@ var MEDIA_BUTTONS = [
   'Video Library',
   'Camera',
   'Gallery',
+  'Choose Gif',
   'Cancel'
 ];
 
@@ -100,7 +100,8 @@ export default class Chat extends Component {
       friendChatId:'',
       isMediaLoaded: false,
       text: "",
-      isUploading: false
+      isUploading: false,
+      keyboardOpen: false
     };
     this.user = firebase.auth().currentUser;
     // this.getChatGenerated();
@@ -197,6 +198,14 @@ export default class Chat extends Component {
         // console.warn('user: ', this.user);
       }, 600);
       this.androidGoInImmersive();
+      this.keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => this._keyboardDidHide(),
+      );
+      this.keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => this._keyboardDidShow(),
+      );
     });
   }
 
@@ -248,6 +257,24 @@ export default class Chat extends Component {
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     );
+    this.keyboardDidHideListener.remove();
+    this.keyboardDidShowListener.remove();
+  }
+
+  _keyboardDidHide() {
+    // this.setState({
+    //   keyboardOpen: false
+    // });
+    this.androidGoInImmersive();
+  }
+
+  _keyboardDidShow() {
+    // setTimeout(() => {
+      this.androidGoInImmersive();
+      // this.setState({
+      //   keyboardOpen: true
+      // });
+    // }, 600);
   }
 
   listenForItems(chatRef) {
@@ -330,6 +357,7 @@ export default class Chat extends Component {
   }
 
   backAndroid() {
+    this.androidGoInImmersive();
     this.unMountComponent();
     Actions.chatList();
     return true;
@@ -616,7 +644,7 @@ export default class Chat extends Component {
   }
 
   async openAction(val) {
-    if (val == "img") {
+    if ((val == "img")||(val == "gif")) {
 
       if (Platform.OS === "android" && apiVersion >= 23) {
         this.requestCameraPermission(val);
@@ -774,16 +802,20 @@ export default class Chat extends Component {
         results[PermissionsAndroid.PERMISSIONS.RECORD_AUDIO] ===
         PermissionsAndroid.RESULTS.GRANTED
       ) {
-        if (val == "img") {
+        if ((val == "img")||(val == "gif")) {
           type = "image/jpg";
           format = ".jpg";
           dirName = "PostImages/";
           isImageUpload = true;
           setTimeout(() => {
+            var crop = true;
+            if(val == "gif") {
+              crop = false;
+            }
             ImagePicker.openPicker({
               width: 300,
               height: 400,
-              cropping: true,
+              cropping: crop,
               includeBase64: true
             }).then(image => {
                 this.setState({
@@ -960,6 +992,15 @@ export default class Chat extends Component {
     );
   }
 
+  renderMessageImage(props) {
+    return (
+      <MessageImage
+        customOnClose={() => this.androidGoInImmersive()}
+        {...props}
+      />
+    );
+  }
+
   renderTime(props) {
     var isReaded = false;
     if((props.currentMessage.user._id == this.user.uid)&&(props.currentMessage.read == "1")) {
@@ -1041,6 +1082,9 @@ export default class Chat extends Component {
           break;
         case 3:
           this.openAction("gallery");
+          break;
+        case 4:
+          this.openAction("gif");
           break;
         default:
           this.androidGoInImmersive();
@@ -1143,67 +1187,48 @@ export default class Chat extends Component {
           </View>
 
           <View
-            style={styles.gifetedChatView}
+            style={this.state.keyboardOpen ? styles.gifetedChatViewKeyboardOpen : styles.gifetedChatView}
           >
             <GiftedChat
-              // text={this.state.text}
-              // onInputTextChanged={text => this.setCustomText(text)}
-              messages={this.state.messages}
-              onSend={messages => this.onSend(messages)}
-              user={{
-                _id: this.user.uid
-              }}
-              isAnimated
-              showAvatarForEveryMessage
-              renderAvatarOnTop={true}
-              onLongPress={(context, message) => {
-                this.onChatMessageLongPressed(context, message);
-              }}
-              alwaysShowSend={true}
-              renderActions={() => {
-                  return(
-                    <TouchableOpacity
-                        testID='send'
-                        accessible
-                        accessibilityLabel='send'
-                        style={styles.containerSend}
-                        onPress={() =>this.showActions()}
-                        accessibilityTraits='button'
-                      >
-                        <View>
-                          <Image
-                            source={Images.addIcon}
-                            style={styles.imagePlusButton}
-                          />
-                        </View>
-                      </TouchableOpacity>
-                  );
+                messages={this.state.messages}
+                onSend={messages => this.onSend(messages)}
+                user={{
+                  _id: this.user.uid
                 }}
-              // renderSend={(props) => {
-              //   console.warn('props: ', props);
-              //   console.warn('lenght: ', props.messages.length);
-              //   return(
-              //     <TouchableOpacity
-              //         testID='send'
-              //         accessible
-              //         accessibilityLabel='send'
-              //         style={styles.containerSend}
-              //         onPress={() => props.onSend(props.text)}
-              //         accessibilityTraits='button'
-              //       >
-              //         <View>
-              //           <Text style={styles.textSend}>{"Send"}</Text>
-              //         </View>
-              //       </TouchableOpacity>
-              //   );
-              // }}
-              renderLoading={() =>  <ActivityIndicator size="large" color="#0000ff" />}
-              renderBubble={this.renderBubble}
-              renderTime={(timeProps) => this.renderTime(timeProps)}
-              onPressAvatar={message => {
-                this.showFriendProfile();
-              }}
-            />
+                isAnimated
+                showAvatarForEveryMessage
+                renderAvatarOnTop={true}
+                onLongPress={(context, message) => {
+                  this.onChatMessageLongPressed(context, message);
+                }}
+                alwaysShowSend={true}
+                renderActions={() => {
+                    return(
+                      <TouchableOpacity
+                          testID='send'
+                          accessible
+                          accessibilityLabel='send'
+                          style={styles.containerSend}
+                          onPress={() =>this.showActions()}
+                          accessibilityTraits='button'
+                        >
+                          <View>
+                            <Image
+                              source={Images.addIcon}
+                              style={styles.imagePlusButton}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                    );
+                  }}
+                renderLoading={() =>  <ActivityIndicator size="large" color="#0000ff" />}
+                renderBubble={this.renderBubble}
+                renderMessageImage={(messageProps) => this.renderMessageImage(messageProps)}
+                renderTime={(timeProps) => this.renderTime(timeProps)}
+                onPressAvatar={message => {
+                  this.showFriendProfile();
+                }}
+              />
             {this.state.isMediaLoaded ?
               <View style={styles.mediaView}>
                 {this.state.imagedata != "" ?
@@ -1349,7 +1374,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor: 'white'
   },
   imageArrowBack:{
     height: 30,
@@ -1427,15 +1453,28 @@ const styles = StyleSheet.create({
     marginLeft: "15%"
   },
   gifetedChatView:{
-    ...ifIphoneX({ bottom: hp(5) }, { bottom: 1 }),
+    ...ifIphoneX({ bottom: hp(3) }, { bottom: 1 }),
     ...ifIphoneX({ top: hp(11) }, { top: hp(9) }),
     position: "absolute",
     width: Screen.width - 2,
     marginLeft: 2,
+    backgroundColor: 'white',
     // ...ifIphoneX(
     //   { height: Screen.height - hp(15) },
-    //   { height: Screen.height - hp(3) }
+    //   {height: Screen.height - hp(10) } 
     // )
+  },
+  gifetedChatViewKeyboardOpen : {
+    ...ifIphoneX({ bottom: hp(3) }, { bottom: 1 }),
+    ...ifIphoneX({ top: hp(11) }, { top: hp(9) }),
+    position: "absolute",
+    width: Screen.width - 2,
+    marginLeft: 2,
+    backgroundColor: 'white',
+    ...ifIphoneX(
+      {  },
+      { height: Screen.height - hp(4) }
+    )
   },
   containerSend: {
     height: 44,

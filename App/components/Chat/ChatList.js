@@ -239,7 +239,7 @@ export default class ChatList extends Component {
           return;
         }
 
-        console.warn('chats n: ', arr.length);
+        // console.warn('chats n: ', arr.length);
 
         arr.sort((a, b) => Moment(b.time).valueOf() - Moment(a.time).valueOf());
         
@@ -523,7 +523,7 @@ export default class ChatList extends Component {
       return (
         <View style={styles.contentView}>
         {/* <MenuProvider> */}
-        <LinearGradient 
+        {/* <LinearGradient 
           start={{
             x: 0.51,
             y: 0.17
@@ -535,7 +535,7 @@ export default class ChatList extends Component {
           locations={[0, 1]}
           colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
           style={styles.colorPrimaryViewLinearGradient}
-        >
+        > */}
           <View style={styles.header}>
             <View style={{flex: 0.25}}>
 
@@ -613,11 +613,12 @@ export default class ChatList extends Component {
                   </View>
               )}
               keyExtractor={item => item.ids}
+              extraData={this.state}
             />
             }
           </View>
           {/* </MenuProvider> */}
-          </LinearGradient>
+          {/* </LinearGradient> */}
         </View>
       );
     }

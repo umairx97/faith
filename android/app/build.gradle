@@ -210,6 +210,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:27.+"
     implementation "com.android.support:support-v4:27.+"
+    compile 'com.facebook.fresco:animated-gif:1.10.0'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }
 

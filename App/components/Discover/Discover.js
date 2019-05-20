@@ -20,6 +20,7 @@ import { Actions } from "react-native-router-flux";
 import Modal from "react-native-modal";
 import firebase from "react-native-firebase";
 // import { withPickerValues } from "react-native-formik";
+import { Immersive } from 'react-native-immersive';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Screen = {
@@ -75,7 +76,14 @@ export default class Discover extends Component {
       }, async () => {
         await this.getSearchFilter();
       });
+      this.androidGoInImmersive();
     });
+  }
+
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
   }
 
   toggleModal = () => {
