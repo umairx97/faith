@@ -217,6 +217,14 @@ PODS:
   - Protobuf (3.7.0)
   - React (0.57.2):
     - React/Core (= 0.57.2)
+  - react-native-camera (1.10.1):
+    - React
+    - react-native-camera/RCT (= 1.10.1)
+    - react-native-camera/RN (= 1.10.1)
+  - react-native-camera/RCT (1.10.1):
+    - React
+  - react-native-camera/RN (1.10.1):
+    - React
   - react-native-document-picker (2.3.0):
     - React
   - react-native-fbsdk (0.8.0):
@@ -279,6 +287,7 @@ DEPENDENCIES:
   - GoogleMaps (~> 2.7.0)
   - GoogleSignIn (~> 4.4.0)
   - GoogleUtilities (= 5.3.7)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
@@ -333,6 +342,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
   react-native-fbsdk:
@@ -382,12 +393,13 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-camera: a8d04ef12749def72cae86b0b8d28c2de891a392
   react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: d4cdd574f368671ef0d6b5c44ca6712cfa101d79
+PODFILE CHECKSUM: b4bfcb11d51fbcd643e10570002e94996674bace
 
 COCOAPODS: 1.5.2
