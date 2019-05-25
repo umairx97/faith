@@ -910,7 +910,8 @@ export default class DrawerScreen extends React.Component {
               style={{
                 flex: 1,
                 flexDirection: "column",
-                justifyContent: "flex-end"
+                justifyContent: "flex-end",
+                marginTop: wp(2)
               }}
             >
               <View style={styles.blacklistView}>
@@ -948,9 +949,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(249, 249, 249)",
     flex: 1
   },
-
   navBarViewLinearGradient: {
-    height: 100,
+    height: hp(20),
     ...ifIphoneX({ height: 110 })
   },
   navBarView: {
@@ -968,7 +968,8 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 140,
+    // height: 140,
+    height: hp(32),
     ...ifIphoneX({ height: 145 }),
     marginLeft: 18,
     marginTop: 20,
@@ -984,7 +985,7 @@ const styles = StyleSheet.create({
     // height: 220,
     height: hp(30),
     marginLeft: 19,
-    marginTop: 1,
+    marginTop: hp(6),
     marginRight: 15
   },
   panel2View: {
@@ -1208,11 +1209,11 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    marginLeft: 19,
-    marginTop: 14
+    width: wp(35),
+    height: wp(35),
+    borderRadius: wp(18),
+    // marginLeft: 19,
+    marginTop: hp(5)
   },
   landonGibsonText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1220,12 +1221,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: "center",
     fontStyle: "normal",
-
     fontWeight: "bold",
-    textAlign: "left",
+    textAlign: "center",
     letterSpacing: 0.23,
     marginTop: 10,
-    marginRight: 4
+    // marginRight: 4
   },
   barView: {
     backgroundColor: "rgb(248, 248, 248)",

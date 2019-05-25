@@ -249,13 +249,13 @@ export default class Matches extends Component {
           colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
           style={styles.colorPrimaryViewLinearGradient}
         >
-        <View
+        {/* <View
           style={{
             flex: 1,
             ...ifIphoneX({ marginTop: 25 }, { marginTop: 0 }),
             ...ifIphoneX({ marginBottom: 25 }, { marginBottom: 0 })
           }}
-        >
+        > */}
           {/* <FlatList
             data={this.state.showArr}
             renderItem={({ item }) => (
@@ -324,7 +324,7 @@ export default class Matches extends Component {
               />
             }
           </ScrollView>
-        </View>
+        {/* </View> */}
         {/* {this.state.showArr.length == 0 ?
           <NoDataComponent text={"You have no matches yet"} onPress={() => Actions.Discover()}/>
         : null} */}
@@ -384,8 +384,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   gridView: {
-    paddingTop: Platform.OS === "ios" ? 30 : 20,
-    ...ifIphoneX({ paddingTop: 65 }),
+    paddingTop: Platform.OS === "ios" ? hp(5) : hp(5),
+    ...ifIphoneX({ paddingTop: hp(10) }),
     flex: 1
   },
   itemContainer: {

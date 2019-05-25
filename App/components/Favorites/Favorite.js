@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   gridView: {
-    paddingTop: Platform.OS === "ios" ? 30 : 20,
-    ...ifIphoneX({ paddingTop: 65 }),
+    paddingTop: Platform.OS === "ios" ? hp(5) : hp(5),
+    ...ifIphoneX({ paddingTop: hp(10) }),
     flex: 1
   },
   itemContainer: {
