@@ -902,7 +902,8 @@ export default class DrawerScreen extends React.Component {
               style={{
                 flex: 1,
                 flexDirection: "column",
-                justifyContent: "flex-end"
+                justifyContent: "flex-end",
+                marginTop: wp(2)
               }}
             >
               <View style={styles.blacklistView}>
@@ -940,10 +941,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(249, 249, 249)",
     flex: 1
   },
-
   navBarViewLinearGradient: {
-    height: 100,
-    ...ifIphoneX({ height: 110 })
+    height: hp(20),
+    ...ifIphoneX({ height: hp(18) })
   },
   navBarView: {
     width: "100%",
@@ -951,8 +951,8 @@ const styles = StyleSheet.create({
   },
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 75,
-    ...ifIphoneX({ height: 85 })
+    height: hp(4),
+    ...ifIphoneX({ height: hp(8) })
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -960,11 +960,12 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    height: 140,
-    ...ifIphoneX({ height: 145 }),
+    // height: 140,
+    height: hp(24),
+    ...ifIphoneX({ height: hp(23.5) }),
     marginLeft: 18,
-    marginTop: 20,
-    ...ifIphoneX({ marginTop: 35 }),
+    marginTop: hp(4),
+    ...ifIphoneX({ marginTop: hp(6) }),
     marginRight: 16
   },
   panel1View: {
@@ -976,7 +977,7 @@ const styles = StyleSheet.create({
     // height: 220,
     height: hp(30),
     marginLeft: 19,
-    marginTop: 1,
+    marginTop: hp(6),
     marginRight: 15
   },
   panel2View: {
@@ -1200,11 +1201,16 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    marginLeft: 19,
-    marginTop: 14
+    width: wp(27),
+    height: wp(27),
+    ...ifIphoneX({ 
+      height: wp(30),
+      width: wp(30),
+      borderRadius: wp(15)
+    }),
+    borderRadius: wp(14),
+    marginTop: hp(3)
+    // marginLeft: 19,
   },
   landonGibsonText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -1212,12 +1218,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: "center",
     fontStyle: "normal",
-
     fontWeight: "bold",
-    textAlign: "left",
+    textAlign: "center",
     letterSpacing: 0.23,
     marginTop: 10,
-    marginRight: 4
+    // marginRight: 4
   },
   barView: {
     backgroundColor: "rgb(248, 248, 248)",
