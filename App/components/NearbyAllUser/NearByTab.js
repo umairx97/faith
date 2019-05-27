@@ -12,7 +12,7 @@ const SecondRoute = () => (
 // const AllUser=()=>(
 // <NearbyAllUser/>
 // )
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 export default class TabViewExample extends React.Component {
   state = {
     index: 0,

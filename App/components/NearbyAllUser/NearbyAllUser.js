@@ -1,4 +1,4 @@
-
+import React, { Component, Fragment } from "react";
 import {
   Text,
   StyleSheet,
@@ -8,9 +8,9 @@ import {
   ScrollView,
   Dimensions,
   Platform,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator
 } from "react-native";
-import React from "react";
 import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
 import LinearGradient from "react-native-linear-gradient";
@@ -31,6 +31,7 @@ export default class NearbyAllUser extends React.Component {
   constructor() {
     super();
     this.state = {
+      loading: true,
       loginUserId: "",
       userKey: "",
       allArr: [],
@@ -53,6 +54,7 @@ export default class NearbyAllUser extends React.Component {
     // this.getAllNearbyUser();
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       this.setState({
+        loading: true,
         allArr: []
       }, () => {
         this.getAllNearbyUser();
@@ -155,7 +157,8 @@ export default class NearbyAllUser extends React.Component {
         
       });
       this.setState({
-        allArr: arrayKey
+        allArr: arrayKey,
+        loading: false
       });
     });
   }
@@ -240,47 +243,55 @@ export default class NearbyAllUser extends React.Component {
           style={styles.colorPrimaryViewLinearGradient}
         >
           <ScrollView contentContainerStyle={{flex: 1}}>
-            {this.state.allArr.length == 0 ?
-              <View style={{flex: 1}}>
-                <NoDataComponent text={"No users nearby"} onPress={() => Actions.Discover()}/>
+          {this.state.loading ?
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <ActivityIndicator size="large" color="#0000ff" />
               </View>
-            : 
-              <GridView
-                  itemDimension={130}
-                  items={this.state.allArr}
-                  style={styles.gridView}
-                  renderItem={item => (
-                    <View style={[styles.itemContainer]}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          this.openClickedProfile(item.id);
-                        }}
-                      >
-                        <Image
-                          source={{ uri: item.ImageURL }}
-                          style={[styles.imageContainer]}
-                        />
-                        <View style={styles.itemViewText}>
-                          <Text
-                          style={styles.listDataText}
-                          >
-                            {item.UserName}
-                          </Text>
-                          <Text
-                          style={styles.listDataText}
-                          >
-                            ,
-                          </Text>
-                          <Text
-                            style={styles.listDataText}
-                          >
-                            {item.fullAge}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
+            :
+              <Fragment>
+                  {this.state.allArr.length == 0 ?
+                    <View style={{flex: 1}}>
+                      <NoDataComponent text={"No users nearby"} onPress={() => Actions.Discover()}/>
                     </View>
-                  )}
-                />
+                  : 
+                    <GridView
+                        itemDimension={130}
+                        items={this.state.allArr}
+                        style={styles.gridView}
+                        renderItem={item => (
+                          <View style={[styles.itemContainer]}>
+                            <TouchableOpacity
+                              onPress={() => {
+                                this.openClickedProfile(item.id);
+                              }}
+                            >
+                              <Image
+                                source={{ uri: item.ImageURL }}
+                                style={[styles.imageContainer]}
+                              />
+                              <View style={styles.itemViewText}>
+                                <Text
+                                style={styles.listDataText}
+                                >
+                                  {item.UserName}
+                                </Text>
+                                <Text
+                                style={styles.listDataText}
+                                >
+                                  ,
+                                </Text>
+                                <Text
+                                  style={styles.listDataText}
+                                >
+                                  {item.fullAge}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          </View>
+                        )}
+                      />
+                  }
+              </Fragment>
             }
           </ScrollView>
         {/* </View> */}
