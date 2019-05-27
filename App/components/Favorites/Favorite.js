@@ -1,6 +1,5 @@
-
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStorage, Platform, Dimensions } from "react-native";
-import React from "react";
+import React, { Component, Fragment } from "react";
+import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStorage, Platform, Dimensions, ActivityIndicator } from "react-native";
 import firebase from "react-native-firebase";
 import GridView from "react-native-super-grid";
 import LinearGradient from "react-native-linear-gradient";
@@ -19,6 +18,7 @@ export default class Favorite extends React.Component {
   constructor() {
     super();
     this.state = {
+      loading: true,
       loginUserId: '',
       userKey: '',
       allArr: [],
@@ -32,6 +32,7 @@ export default class Favorite extends React.Component {
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       arrayKey = [];
       this.setState({
+        loading: true,
         allArr: []
       }, () => {
         this.getAllFavouriteUser();
@@ -45,14 +46,16 @@ export default class Favorite extends React.Component {
     arrayKey = [];
     await alreadyFavouriteUser.once('value').then(snapshot => {
       snapshot.forEach(childSnapshot => {
-
         key = childSnapshot.key;
-
-        this.getUserFavorite(key)
-      })
-
-    })
+        this.getUserFavorite(key);
+        return;
+      });
+      this.setState({
+        loading: false
+      });
+    });
   }
+
   getUserFavorite = async (id) => {
     var displayUserName = firebase
       .database()
@@ -69,9 +72,11 @@ export default class Favorite extends React.Component {
       });
 
     this.setState({
-      allArr: arrayKey
+      allArr: arrayKey,
+      loading: false
     })
   }
+  
   age(dob){
   
   var userAge=dob;
@@ -126,31 +131,39 @@ export default class Favorite extends React.Component {
           style={styles.colorPrimaryViewLinearGradient}
         >
           <ScrollView contentContainerStyle={{flex: 1}}>
-            {this.state.allArr.length == 0 ?
-              <View style={{flex: 1}}>
-                <NoDataComponent text={"No favorite user to display"} onPress={() => Actions.Discover()}/>
+          {this.state.loading ?
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <ActivityIndicator size="large" color="#0000ff" />
               </View>
-            : 
-              <GridView
-                itemDimension={130}
-                items={this.state.allArr}
-                style={styles.gridView}
-                renderItem={item => (
-                  <View
-                    style={[styles.itemContainer]}
-                  >
-                    <TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
-                      <Image source={{ uri: item.ImageURL }}
-                        style={[styles.imageContainer]}
-                      ></Image>
-                      <View style={styles.itemViewText}>
-                          <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
-                          <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                )}
-              />
+            :
+              <Fragment>
+                  {this.state.allArr.length == 0 ?
+                    <View style={{flex: 1}}>
+                      <NoDataComponent text={"No favorite user to display"} onPress={() => Actions.Discover()}/>
+                    </View>
+                  : 
+                    <GridView
+                      itemDimension={130}
+                      items={this.state.allArr}
+                      style={styles.gridView}
+                      renderItem={item => (
+                        <View
+                          style={[styles.itemContainer]}
+                        >
+                          <TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
+                            <Image source={{ uri: item.ImageURL }}
+                              style={[styles.imageContainer]}
+                            ></Image>
+                            <View style={styles.itemViewText}>
+                                <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                                <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
+                            </View>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    />
+                  }
+              </Fragment>
             }
           </ScrollView>
         </LinearGradient>

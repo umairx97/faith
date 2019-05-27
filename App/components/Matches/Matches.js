@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Text,
   View,
@@ -13,7 +13,8 @@ import {
   StyleSheet,
   TouchableHighlight,
   Platform,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import GridView from "react-native-super-grid";
 import firebase from "react-native-firebase";
@@ -34,6 +35,7 @@ export default class Matches extends Component {
   constructor() {
     super();
     this.state = {
+      loading: true,
       showArr: [],
       allData: [],
       FullName: "",
@@ -45,10 +47,10 @@ export default class Matches extends Component {
 
   componentDidMount() {
     // var jeck =await  AsyncStorage.getItem("userProfileKeys");
-    // alert(jeck)
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       arr = [];
       this.setState({
+        loading: true,
         showArr: [],
         allData: [],
         FullName: "",
@@ -173,7 +175,7 @@ export default class Matches extends Component {
           // });
         }
 
-        this.setState({ showArr: arr });
+        this.setState({ showArr: arr, loading: false });
       })
       .catch(error => {
         console.log(JSON.stringify(error));
@@ -289,39 +291,47 @@ export default class Matches extends Component {
             keyExtractor={item => item.ids}
           /> */}
           <ScrollView contentContainerStyle={{flex: 1}}>
-            {this.state.showArr.length == 0 ?
-              <View style={{flex: 1}}>
-                <NoDataComponent text={"You have no matches yet"} onPress={() => Actions.Discover()}/>
+            {this.state.loading ?
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <ActivityIndicator size="large" color="#0000ff" />
               </View>
-            : 
-              <GridView
-                itemDimension={130}
-                items={this.state.showArr}
-                style={styles.gridView}
-                renderItem={item => (
-                  <View
-                    style={[styles.itemContainer]}
-                  >
-                    <TouchableOpacity onPress={()=>{this.openProfile(item.ids)}}>
-                      <Image source={{ uri: item.pUrl }}
-                        style={[styles.imageContainer]}
-                      ></Image>
-                      <TouchableOpacity style={styles.openChatButton}
-                        onPress={() => { this.openChatScreen(item.ids, item.pName) }}>
-                        <Image style={styles.iconStyle} source={Images.chatIcons}></Image>
+            :
+            <Fragment>
+              {this.state.showArr.length == 0 ?
+                <View style={{flex: 1}}>
+                  <NoDataComponent text={"You have no matches yet"} onPress={() => Actions.Discover()}/>
+                </View>
+              : 
+                <GridView
+                  itemDimension={130}
+                  items={this.state.showArr}
+                  style={styles.gridView}
+                  renderItem={item => (
+                    <View
+                      style={[styles.itemContainer]}
+                    >
+                      <TouchableOpacity onPress={()=>{this.openProfile(item.ids)}}>
+                        <Image source={{ uri: item.pUrl }}
+                          style={[styles.imageContainer]}
+                        ></Image>
+                        <TouchableOpacity style={styles.openChatButton}
+                          onPress={() => { this.openChatScreen(item.ids, item.pName) }}>
+                          <Image style={styles.iconStyle} source={Images.chatIcons}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.openProfileIcon}
+                          onPress={() => { this.openProfile(item.ids) }}>
+                          <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
+                        </TouchableOpacity>
+                        <View style={styles.itemViewText}>
+                            <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.pName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                            <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.age}</Text>
+                        </View>
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.openProfileIcon}
-                        onPress={() => { this.openProfile(item.ids) }}>
-                        <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
-                      </TouchableOpacity>
-                      <View style={styles.itemViewText}>
-                          <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.pName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
-                          <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.age}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                )}
-              />
+                    </View>
+                  )}
+                />
+              }
+            </Fragment>
             }
           </ScrollView>
         {/* </View> */}
