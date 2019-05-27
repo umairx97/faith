@@ -951,7 +951,7 @@ const styles = StyleSheet.create({
   },
   navBarViewLinearGradient: {
     height: hp(20),
-    ...ifIphoneX({ height: 110 })
+    ...ifIphoneX({ height: hp(18) })
   },
   navBarView: {
     width: "100%",
@@ -959,8 +959,8 @@ const styles = StyleSheet.create({
   },
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 75,
-    ...ifIphoneX({ height: 85 })
+    height: hp(4),
+    ...ifIphoneX({ height: hp(8) })
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -969,11 +969,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     // height: 140,
-    height: hp(32),
-    ...ifIphoneX({ height: 145 }),
+    height: hp(24),
+    ...ifIphoneX({ height: hp(23.5) }),
     marginLeft: 18,
-    marginTop: 20,
-    ...ifIphoneX({ marginTop: 35 }),
+    marginTop: hp(4),
+    ...ifIphoneX({ marginTop: hp(6) }),
     marginRight: 16
   },
   panel1View: {
@@ -1209,11 +1209,16 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: wp(35),
-    height: wp(35),
-    borderRadius: wp(18),
+    width: wp(27),
+    height: wp(27),
+    ...ifIphoneX({ 
+      height: wp(30),
+      width: wp(30),
+      borderRadius: wp(15)
+    }),
+    borderRadius: wp(14),
+    marginTop: hp(3)
     // marginLeft: 19,
-    marginTop: hp(5)
   },
   landonGibsonText: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
