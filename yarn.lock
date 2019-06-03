@@ -4573,7 +4573,7 @@ kefir@^3.7.3:
   dependencies:
     symbol-observable "1.0.4"
 
-keymirror@0.1.1, keymirror@^0.1.1:
+keymirror@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
   integrity sha1-kYiJ6hP40KQufFVyUO7nE63JXDU=
@@ -6686,7 +6686,7 @@ react-native-vector-icons@^6.1.0:
     prop-types "^15.6.2"
     yargs "^13.2.2"
 
-react-native-video@4.4.1:
+react-native-video@4.4.1, react-native-video@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-4.4.1.tgz#12c6a8bfbabfa7641338a52db3d857ac3073a4fd"
   integrity sha512-gTZKRqa4NkEBx6t6iAzTFlgxDY23IZW/8YClR0hMzhOD0/9I/AzOBBaOXDyFeKj4EQF+uZ/LUS3r+oDnz1ks5w==
@@ -6694,14 +6694,6 @@ react-native-video@4.4.1:
     keymirror "^0.1.1"
     prop-types "^15.5.10"
     shaka-player "^2.4.4"
-
-react-native-video@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-3.2.1.tgz#7ba3cbdfc5c747b5b00452811e98193824b16ce3"
-  integrity sha512-Xansfoo/to80FwhM1HKlf7pCxDZ5RtV+kG3piCVvsNAhPY4GGwiOGUH9y3Y+mFQIDEWcY8I9j16lsFYAbnue3g==
-  dependencies:
-    keymirror "0.1.1"
-    prop-types "^15.5.10"
 
 react-native-view-more-text@^2.0.1:
   version "2.1.0"
@@ -7182,10 +7174,10 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-falcon-gifted-chat@0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/rn-falcon-gifted-chat/-/rn-falcon-gifted-chat-0.8.2.tgz#16ef30b26cc90690fb593215482a515fbf6a3d0a"
-  integrity sha512-QbtepK7PcPk0nVZXOIvHC4VvbgYiQKLuL2NVqIL2sRlLIJj5slWZY+3P2774k3kCTlfwDxhTiXHcd1ksMa7XWw==
+rn-falcon-gifted-chat@0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/rn-falcon-gifted-chat/-/rn-falcon-gifted-chat-0.9.3.tgz#797dbfb4650bedfa0568f6c2e640d0fa28368c13"
+  integrity sha512-dpDj7F1SST0bTl9Onsiqsh+q35yxaxEAoXeX2pE+j2Gkd40nM4Owy1yQcplM+2Gd8QExVgQ5p+Gbfyt2bIhoZQ==
   dependencies:
     "@expo/react-native-action-sheet" "^2.0.1"
     moment "^2.19.0"
@@ -7193,7 +7185,7 @@ rn-falcon-gifted-chat@0.8.2:
     react-native-iphone-x-helper "^1.2.0"
     react-native-lightbox "^0.7.0"
     react-native-parsed-text "^0.0.20"
-    react-native-video "^3.2.1"
+    react-native-video "4.4.1"
     uuid "3.3.0"
 
 rn-fetch-blob@^0.10.15:

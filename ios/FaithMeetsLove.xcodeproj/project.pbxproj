@@ -24,7 +24,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		182DF7952238902C002FCFDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 182DF7942238902C002FCFDE /* GoogleService-Info.plist */; };
-		1860D291221C186C00EF9BB5 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1860D273221C185E00EF9BB5 /* libRCTVideo.a */; };
 		18E1BFFC221D2FD600B1D0C3 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1BFCC221D2FBB00B1D0C3 /* libimageCropPicker.a */; };
 		18E1BFFE221D300000B1D0C3 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1BFFD221D300000B1D0C3 /* RSKImageCropper.framework */; };
 		18E1BFFF221D300000B1D0C3 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18E1BFFD221D300000B1D0C3 /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -597,7 +596,6 @@
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				18E1BFFE221D300000B1D0C3 /* RSKImageCropper.framework in Frameworks */,
-				1860D291221C186C00EF9BB5 /* libRCTVideo.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
