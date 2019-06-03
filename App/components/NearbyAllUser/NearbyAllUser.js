@@ -258,7 +258,7 @@ export default class NearbyAllUser extends React.Component {
                         itemDimension={130}
                         items={this.state.allArr}
                         style={styles.gridView}
-                        renderItem={item => (
+                        renderItem={({ item, index }) => (
                           <View style={[styles.itemContainer]}>
                             <TouchableOpacity
                               onPress={() => {

@@ -6610,12 +6610,11 @@ react-native-snap-carousel@^3.7.5:
     prop-types "^15.6.1"
     react-addons-shallow-compare "15.6.2"
 
-react-native-super-grid@^2.4.3:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-2.4.4.tgz#6d13e4d6009022f40c1473ec810fe4d0cfcf7e1f"
-  integrity sha512-XHJabrphDc4JIz5bXcbxsZoLA9CBQEFcz9YYdikm05MkS5RkvgQg+2qzDAe7DWemcGv+5bpFNlE+FF4U+3kmdg==
+react-native-super-grid@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-3.0.4.tgz#bc0888f68d0960557dfe445970f96e36a0d61a1d"
+  integrity sha512-aoK71FGP5sFcLujuODYkAqyFDAZZRpvTeEwwaoXsc0JENhExEG7rGg65T5ELqyykiDOLBihuCLKasK5gLb0WtQ==
   dependencies:
-    lodash "^4.17.10"
     prop-types "^15.6.0"
 
 react-native-tab-navigator@^0.3.4:
