@@ -243,6 +243,11 @@ PODS:
     - React
   - react-native-maps (0.22.1):
     - React
+  - react-native-video (4.4.1):
+    - React
+    - react-native-video/Video (= 4.4.1)
+  - react-native-video/Video (4.4.1):
+    - React
   - React/Core (0.57.2):
     - yoga (= 0.57.2.React)
   - React/CxxBridge (0.57.2):
@@ -291,6 +296,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-video (from `../node_modules/react-native-video/react-native-video.podspec`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/RCTImage (from `../node_modules/react-native`)
@@ -350,6 +356,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-video:
+    :path: "../node_modules/react-native-video/react-native-video.podspec"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
   yoga:
@@ -405,10 +413,11 @@ SPEC CHECKSUMS:
   react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  react-native-video: 44c6befbc1526283ca1919891fcebe4680feade4
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 >>>>>>> 93792a357d3ba0ffcc45019fd235984ecc37f440
 
-PODFILE CHECKSUM: b4bfcb11d51fbcd643e10570002e94996674bace
+PODFILE CHECKSUM: fb200759b72c37cf0b1529774d5ba2cfd8b897d4
 
 COCOAPODS: 1.6.1

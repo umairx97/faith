@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStorage, Platform, Dimensions, ActivityIndicator } from "react-native";
 import firebase from "react-native-firebase";
-import GridView from "react-native-super-grid";
+import FlatGrid from "react-native-super-grid";
 import LinearGradient from "react-native-linear-gradient";
 import { Actions } from "react-native-router-flux";
 import { NoDataComponent } from "../ui/NoData";
@@ -142,18 +142,19 @@ export default class Favorite extends React.Component {
                       <NoDataComponent text={"No favorite user to display"} onPress={() => Actions.Discover()}/>
                     </View>
                   : 
-                    <GridView
-                      itemDimension={130}
+                    <FlatGrid
+                      itemDimension={wp(40)}
                       items={this.state.allArr}
                       style={styles.gridView}
-                      renderItem={item => (
+                      renderItem={({ item, index }) => (
                         <View
                           style={[styles.itemContainer]}
                         >
-                          <TouchableOpacity onPress={()=>{this.openClickedProfile(item.id)}}>
+                          <TouchableOpacity style={{flex: 1}} onPress={()=>{this.openClickedProfile(item.id)}}>
                             <Image source={{ uri: item.ImageURL }}
                               style={[styles.imageContainer]}
-                            ></Image>
+                              >
+                            </Image>
                             <View style={styles.itemViewText}>
                                 <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
                                 <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     // justifyContent: "flex-end",
+    flex: 1,
     borderRadius: 15,
     padding: 5,
     height: hp(30)
@@ -192,7 +194,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     borderRadius: 15,
     padding: 10,
-    height: hp(30)
+    height: hp(30),
+    // width: wp(20)
   },
   itemName: {
     fontSize: 16,

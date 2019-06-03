@@ -17,8 +17,8 @@ import { Actions } from "react-native-router-flux";
 
 import { Images } from "../../../assets/imageAll";
 import { ifIphoneX } from "react-native-iphone-x-helper";
-// import Video from "react-native-video";
-import Video from "rn-falcon-gifted-chat/node_modules/react-native-video";
+import Video from "react-native-video";
+// import Video from "rn-falcon-gifted-chat/node_modules/react-native-video";
 
 const Screen = {
   width: Dimensions.get("window").width,

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView, Button, Platform, TextInput } from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView, Button, Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Actions } from "react-native-router-flux";
 import ImagePicker from 'react-native-image-crop-picker';
 import Modal from "react-native-modal";
-
 import { Images } from "../../../assets/imageAll";
 import Dialog from "react-native-dialog";
 import firebase from "react-native-firebase";
@@ -13,15 +12,11 @@ import LocationServicesDialogBox from "react-native-android-location-services-di
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Moment from "moment";
 import SlidingUpPanel from 'rn-sliding-up-panel';
-
-import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
-import RadioForm, {
- 
-  RadioButtonInput,
-  RadioButtonLabel
-} from "react-native-simple-radio-button";
-
-
+import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
+import RadioForm, { RadioButtonInput, RadioButtonLabel } from "react-native-simple-radio-button";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { Immersive } from 'react-native-immersive';
+import { FlatGrid } from 'react-native-super-grid';
 
 var type = "image/jpg";
 var format = ".jpg";
@@ -50,15 +45,35 @@ const data = [
   { id: 6, label: 'Swiming' },
   { id: 7, label: 'Driving' },
   { id: 8, label: 'Travelling' },
-  { id: 9, label: 'Reading Books' }
+  { id: 9, label: 'Reading Books' },
+  { id: 10, label: 'Cars' },
+  { id: 11, label: 'Theatre' },
+  { id: 12, label: 'Politics' },
+  { id: 13, label: 'Dancing' },
+  { id: 14, label: 'Cooking' },
+  { id: 15, label: 'Watching Sports' },
+  { id: 16, label: 'Playing Sports' },
+  { id: 17, label: 'Fitness' },
+  { id: 18, label: 'Boating and Cruising' },
+  { id: 19, label: 'Outdoor' },
+  { id: 20, label: 'Country' },
+  { id: 21, label: 'Snow' },
+  { id: 22, label: 'Fine Dining' },
+  { id: 23, label: 'Shopping' },
+  { id: 24, label: 'Beach' },
+  { id: 25, label: 'Water Sports' },
+  { id: 26, label: 'Social' },
+  { id: 27, label: 'Photography' }
 ];
 const dataLifeStyle = [
   { id: 1, label: 'Smoke' },
   { id: 2, label: 'Foody' },
   { id: 3, label: 'Drink' },
   { id: 4, label: 'Party' },
-  { id: 5, label: 'Love Hill Stations' },
+  { id: 5, label: 'Pets' },
   { id: 6, label: 'Club' },
+  { id: 7, label: 'Introvert' },
+  { id: 8, label: 'Extrovert' },
 ]
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA + ASPECT_RATIO;
@@ -101,17 +116,39 @@ export default class ProfileCopy extends Component {
       isModalVisible: false,
       isModalVisibleLocation: false,
       isModalVisibleGender: false,
+      isModalVisibleBio: false,
+      isModalVisibleReligion: false,
+      isModalVisibleJobTitle: false,
+      isModalVisibleEducation: false,
+      isModalVisibleHeight: false,
+      isModalVisibleLanguage: false,
       relationShipStatus: 'Unknown',
       showComponmentB: '',
       permanentLocation: 'Unknown',
+      bioText: '',
+      religion: '',
+      jobTitle: '',
+      education: '',
+      height: '',
+      language: '',
+      likes: '',
+      matched: '',
       genderInfo: 'Unknown',
+      uploadMediaGallery: false,
+      uploadMediaGalleryIndex: null,
       _gender: 0,
-      imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png"
+      imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
+      galleryPhoto: []
     }
 
   }
 
   componentDidMount = async () => {
+    
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.androidGoInImmersive();
+    });
+
     userId = await firebase.auth().currentUser.uid;
     this.openProfileImage();
     if (Platform.OS === "android") {
@@ -162,11 +199,15 @@ export default class ProfileCopy extends Component {
       { enableHighAccuracy: true, timeout: 50000, maximumAge: 2000 }
     );
     BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) // Listen for the hardware back button on Android to be pressed
+    // load likes and matched stats
+    this.loadProfileStats();
   }
+
   componentWillMount() {
     this.openProfileImage();
     navigator.geolocation.clearWatch(this.watchID);
   }
+
   async getLocationAddress(the_lat, the_long) {
     try {
       let response = await fetch(
@@ -197,9 +238,52 @@ export default class ProfileCopy extends Component {
     Actions.pop()
     return true
   }
+  
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
+  }
+
+  loadProfileStats = async () => {
+    if((this.state.likes == '')||(this.state.matched == '')) {
+      var currentId = await firebase.auth().currentUser.uid;
+      var likes = 0;
+      var allUserProfile = firebase.database().ref("Users/FaithMeetsLove/ProfileLiked");
+
+      await allUserProfile
+      .once("value")
+      .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            if(JSON.stringify(childSnapshot).includes(currentId)) {
+              likes++;
+            }
+          });
+          
+          var allUserProfileMatch = firebase.database().ref("Users/FaithMeetsLove/MatchedProfiles/"+currentId);
+          allUserProfileMatch
+          .once("value")
+          .then(snapshot => {
+            snapshot.numChildren();
+            
+            this.setState({
+              likes: likes,
+              matched: snapshot.numChildren()
+            });
+          }).catch(error => {
+            console.log(JSON.stringify(error));
+          });
+          
+      }).catch(error => {
+        console.log('error1: ', JSON.stringify(error));
+      });
+    }
+  }
+
   onProfileImagePressed = () => {
     this.setState({ dialogVisible: true });
   }
+
   openProfileImage = async () => {
     instance = this;
     var convertGender;
@@ -211,7 +295,53 @@ export default class ProfileCopy extends Component {
       var dob = snapshot.val().user_Dob;
       var realtionshipS = snapshot.val().relationshipStatus;
       var permanentAdd = snapshot.val().permanentAddress;
+      var bioText = snapshot.val().bioText;
       var genderData = snapshot.val().gender;
+      var religionData = snapshot.val().religion;
+      var jobTitleData = snapshot.val().jobTitle;
+      var educationData = snapshot.val().education;
+      var heightData = snapshot.val().height;
+      var languageData = snapshot.val().language;
+
+      var ImageUrl1 = '';
+      if(snapshot.val().profileImageURL1 != null) {
+        ImageUrl1 = snapshot.val().profileImageURL1;
+      }
+      var ImageUrl2 = '';
+      if(snapshot.val().profileImageURL2 != null) {
+        ImageUrl2 = snapshot.val().profileImageURL2;
+      }
+      var ImageUrl3 = '';
+      if(snapshot.val().profileImageURL3 != null) {
+        ImageUrl3 = snapshot.val().profileImageURL3;
+      }
+      var ImageUrl4 = '';
+      if(snapshot.val().profileImageURL4 != null) {
+        ImageUrl4 = snapshot.val().profileImageURL4;
+      }
+      var ImageUrl5 = '';
+      if(snapshot.val().profileImageURL5 != null) {
+        ImageUrl5 = snapshot.val().profileImageURL5;
+      }
+      var ImageUrl6 = '';
+      if(snapshot.val().profileImageURL6 != null) {
+        ImageUrl6 = snapshot.val().profileImageURL6;
+      }
+      var ImageUrl7 = '';
+      if(snapshot.val().profileImageURL7 != null) {
+        ImageUrl7 = snapshot.val().profileImageURL7;
+      }
+
+      var mediaPhoto = [
+        { url: ImageUrl1 },
+        { url: ImageUrl2 },
+        { url: ImageUrl3 },
+        { url: ImageUrl4 },
+        { url: ImageUrl5 },
+        { url: ImageUrl6 },
+        { url: ImageUrl7 },
+      ];
+
       if(genderData==0)
       {
         convertGender="Man";
@@ -231,18 +361,32 @@ export default class ProfileCopy extends Component {
           dateOfBirth: dob,
           relationShipStatus: realtionshipS,
           permanentLocation: permanentAdd,
-          genderInfo: convertGender
+          bioText: bioText,
+          genderInfo: convertGender,
+          _gender: genderData,
+          religion: religionData,
+          jobTitle: jobTitleData,
+          education: educationData,
+          height: heightData,
+          language: languageData,
+          galleryPhoto: mediaPhoto
         });
-      }
-      else
-      {
+      } else {
         instance.setState({
           imageProfileUrl: ImageUrl,
           nameFull: userName,
           dateOfBirth: dob,
           relationShipStatus: realtionshipS,
           permanentLocation: permanentAdd,
-          genderInfo: convertGender
+          bioText: bioText,
+          genderInfo: convertGender,
+          _gender: genderData,
+          religion :religionData,
+          jobTitle: jobTitleData,
+          education: educationData,
+          height: heightData,
+          language: languageData,
+          galleryPhoto: mediaPhoto
         });
       }
      
@@ -300,10 +444,51 @@ export default class ProfileCopy extends Component {
   //     return age;
   // }
   handleCancel() {
+    this.androidGoInImmersive();
     this.setState({ dialogVisible: false });
   }
+
   handleCamera() {
     this.setState({ dialogVisible: false });
+    var _name = userId;
+    if(this.state.uploadMediaGalleryIndex != null) {
+      ImagePicker.openCamera({
+        width: 300,
+        height: 400,
+        cropping: true,
+        includeBase64: true
+      }).then(image => {
+            
+        let fileUri = decodeURI(image.path)
+        var milliseconds = new Date().getTime();
+
+        firebase
+          .storage()
+          .ref("ProfileImages/" + _name + milliseconds + '.jpg')
+          .putFile(fileUri)
+          .then(uploadedFile => {
+            
+            // change main photo
+            if(this.state.uploadMediaGallery == false) {
+              firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name).update({ profileImageURL: uploadedFile.downloadURL });
+              this.setState({ imageProfileUrl: uploadedFile.downloadURL });
+              return;
+            }
+            this.androidGoInImmersive();
+            // change media gallery photo
+            this.updateMediaGalleryPhoto(_name, uploadedFile);
+            
+            
+          }).catch(error => {
+            alert("Firebase profile upload failed: " + error)
+          });
+
+      }).catch(error => {
+        this.setState({ ...this.state, progressVisible: false });
+        console.log(error);
+      });
+      return;
+    }
     // if (this.state.isImage) {
     Actions.captureImage();
     // } else {
@@ -328,10 +513,7 @@ export default class ProfileCopy extends Component {
           height: 400,
           cropping: true,
           includeBase64: true
-        })
-          .then(image => {
-            // this.uploadImage(image.path,_name)
-
+        }).then(image => {
 
             let fileUri = decodeURI(image.path)
             var milliseconds = new Date().getTime();
@@ -341,24 +523,91 @@ export default class ProfileCopy extends Component {
               .ref("ProfileImages/" + _name + milliseconds + '.jpg')
               .putFile(fileUri)
               .then(uploadedFile => {
-
-                //alert("Firebase profile photo uploaded successfully")
-                this.setState({ imageProfileUrl: uploadedFile.downloadURL });
-                firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name).update({ profileImageURL: uploadedFile.downloadURL });
-              })
-              .catch(error => {
+                
+                // change main photo
+                if(this.state.uploadMediaGallery == false) {
+                  firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name).update({ profileImageURL: uploadedFile.downloadURL });
+                  this.setState({ imageProfileUrl: uploadedFile.downloadURL });
+                  return;
+                }
+                this.androidGoInImmersive();
+                // change media gallery photo
+                this.updateMediaGalleryPhoto(_name, uploadedFile);
+                
+                
+              }).catch(error => {
                 alert("Firebase profile upload failed: " + error)
-              })
+              });
 
-          })
-          .catch(error => {
+          }).catch(error => {
             this.setState({ ...this.state, progressVisible: false });
             console.log(error);
           });
       }, 500);
     }
-
   }
+
+  updateMediaGalleryPhoto(_name, uploadedFile) {
+    var mediaPhoto = this.state.galleryPhoto;
+    switch (this.state.uploadMediaGalleryIndex) {
+      case 0:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL1: uploadedFile.downloadURL
+        });
+        mediaPhoto[0] = { url: uploadedFile.downloadURL };
+        break;
+      case 1:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL2: uploadedFile.downloadURL 
+        });
+        mediaPhoto[1] = { url: uploadedFile.downloadURL };
+        break;
+      case 2:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL3: uploadedFile.downloadURL 
+        });
+        mediaPhoto[2] = { url: uploadedFile.downloadURL };
+        break;
+      case 3:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL4: uploadedFile.downloadURL 
+        });
+        mediaPhoto[3] = { url: uploadedFile.downloadURL };
+        break;
+      case 4:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL5: uploadedFile.downloadURL 
+        });
+        mediaPhoto[4] = { url: uploadedFile.downloadURL };
+        break;
+      case 5:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL6: uploadedFile.downloadURL 
+        });
+        mediaPhoto[5] = { url: uploadedFile.downloadURL };
+        break;
+      case 6:
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
+        .update({ 
+          profileImageURL7: uploadedFile.downloadURL 
+        });
+        mediaPhoto[6] = { url: uploadedFile.downloadURL };
+        break;
+    
+      default:
+        break;
+    }
+    this.setState({
+      galleryPhoto: mediaPhoto
+    });
+  }
+
   age = () => {
     var userAge = this.state.dateOfBirth;
 
@@ -385,31 +634,97 @@ export default class ProfileCopy extends Component {
     this.setState({
       isDateTimePickerVisible: true
     });
-
-
   }
 
-  // onLocationPress = () => {
-  //   alert('location')
-  // }
   onRelationshipPress = () => {
     this._toggleModal();
+    this.androidGoInImmersive();
   }
+
   onLocationPress = () => {
     this._toggleModalLoaction();
   }
+
   onGenderPress = () => {
     this._toggleModalGender();
   }
-  _toggleModal = () =>
-    this.setState({ isModalVisible: !this.state.isModalVisible });
 
-  _toggleModalLoaction = () =>
+  onReligionPress = () => {
+    this._toggleModalReligion();
+  }
+
+  onJobTitlePress = () => {
+    this._toggleModalJobTitle();
+  }
+
+  onEducationPress = () => {
+    this._toggleModalEducation();
+  }
+
+  onHeightPress = () => {
+    this._toggleModalHeight();
+  }
+
+  onLanguagePress = () => {
+    this._toggleModalLanguage();
+  }
+
+  _toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+    this.androidGoInImmersive();
+  }
+
+  _toggleModalLoaction = () => {
     this.setState({ isModalVisibleLocation: !this.state.isModalVisibleLocation });
+    this.androidGoInImmersive();
+  }
+
+  _toggleModalBio = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisibleBio: !this.state.isModalVisibleBio });
+  }
 
   _toggleModalGender = () => {
+    this.androidGoInImmersive();
     this.setState({ isModalVisibleGender: !this.state.isModalVisibleGender });
   }
+
+  _toggleModalReligion = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisibleReligion: !this.state.isModalVisibleReligion });
+  }
+
+  _toggleModalJobTitle = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisibleJobTitle: !this.state.isModalVisibleJobTitle });
+  }
+
+  _toggleModalEducation = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisibleEducation: !this.state.isModalVisibleEducation });
+  }
+
+  _toggleModalHeight = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisibleHeight: !this.state.isModalVisibleHeight });
+  }
+
+  _toggleModalLanguage = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisibleLanguage: !this.state.isModalVisibleLanguage });
+  }
+
+  onPressMediaItem(item, index) {
+    console.warn(item);
+    console.warn('index: ', index);
+    this.setState({ dialogVisible: true, uploadMediaGallery: true, uploadMediaGalleryIndex: index });
+    // if(item.url == '') {
+    //   this.setState({ dialogVisible: true, uploadMediaGallery: true, uploadMediaGalleryIndex: index });
+    //   return;
+    // }
+    // this.setState({ dialogVisible: true, uploadMediaGallery: true, uploadMediaGalleryIndex: index });
+  }
+
   onSlideData = () => {
     return (
 
@@ -418,22 +733,21 @@ export default class ProfileCopy extends Component {
         backgroundColor: 'white',
 
       }}>
-        <Text style={{ fontSize: 20, fontWeight: "700", margin: 15 }}>Status</Text>
+        {/* <Text style={{ fontSize: 20, fontWeight: "700", margin: 15 }}>Status</Text> */}
 
-        <TouchableOpacity onPress={() => { this.onRelationshipPress() }}>
+        <TouchableOpacity style={{marginTop: hp(10)}} onPress={() => { this.onRelationshipPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20 }} source={Images.statusIcon}></Image>
-            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Relationship</Text>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Relationship</Text>
 
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
           </View>
-
         </TouchableOpacity>
+
         <TouchableOpacity onPress={() => { this.onLocationPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
-            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>From where you are</Text>
-
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>From where you are</Text>
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
           </View>
         </TouchableOpacity>
@@ -441,15 +755,50 @@ export default class ProfileCopy extends Component {
         <TouchableOpacity onPress={() => { this.onGenderPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
-            < Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 100 }}>Gender</Text>
-
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Gender</Text>
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => { this.onReligionPress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Religion</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => { this.onJobTitlePress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Job Title</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => { this.onEducationPress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Education</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => { this.onHeightPress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Height</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => { this.onLanguagePress() }}>
+          <View style={{ marginLeft: 15, flexDirection: 'row' }}>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Language</Text>
           </View>
         </TouchableOpacity>
 
         <Button title='Hide' onPress={() => this._panel.hide()} />
       </View>)
   }
+
   _updateUserProfile = (the_uid, _dob) => {
     firebase
       .database()
@@ -503,14 +852,17 @@ export default class ProfileCopy extends Component {
 
     this._updateUserProfile(userId, bith_Date);
   };
+
   OnAddBio = () => {
-    alert('open bio')
+    this.setState({
+      isModalVisibleBio: true
+    });
   }
+
   OnAddPersonalInfo = () => {
-
     this._panel.show();
-
   }
+
   onSelectGender=(index,value)=>{
     // this.setState({
     //   text: value
@@ -580,6 +932,121 @@ export default class ProfileCopy extends Component {
     this._toggleModalLoaction();
     this._panel.hide()
   }
+
+  onSaveBio = () => {
+    var bioText = this.state.bioText;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        bioText: bioText
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalBio();
+    this._panel.hide();
+  }
+
+  onSaveReligion = () => {
+    var religionText = this.state.religion;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        religion: religionText
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalReligion();
+    // this._panel.hide();
+  }
+
+  onSaveJobTitle = () => {
+    var jobTitleText = this.state.jobTitle;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        jobTitle: jobTitleText
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalJobTitle();
+    // this._panel.hide();
+  }
+
+  onSaveEducation = () => {
+    var educationText = this.state.education;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        education: educationText
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalEducation();
+    // this._panel.hide();
+  }
+
+  onSaveHeight = () => {
+    var heightText = this.state.height;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        height: heightText
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalHeight();
+    // this._panel.hide();
+  }
+
+  onSaveLanguage = () => {
+    var languageText = this.state.language;
+    firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + userId)
+      .update({
+        language: languageText
+      })
+      .then(ref => {
+        this.componentDidMount()
+      })
+      .catch(error => {
+        alert("fail" + error.toString());
+      });
+
+    this._toggleModalLanguage();
+    // this._panel.hide();
+  }
+
   render() {
     return (<View>
       <View><ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -609,7 +1076,7 @@ export default class ProfileCopy extends Component {
               <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{this.state.totalAge}</Text>
             </View>
             <View>
-              <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text>
+              {/* <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text> */}
             </View>
             <View>
               <Text style={{ marginBottom: 10 }}>more info</Text>
@@ -680,12 +1147,81 @@ export default class ProfileCopy extends Component {
                 style={styles.personalDataView} />
                 <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
             </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                style={styles.personalDataView} />
+                <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
+            </View>
           </View>
         </View>
         <View style={styles.addPersonalView}>
           <View styel={{ margin: 10 }}><TouchableOpacity onPress={() => { this.OnAddPersonalInfo() }}>
             <View style={{ backgroundColor: '#DCDCDC', borderRadius: 6, height: 50, width: Screen.width - 20, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 17, fontWeight: '700' }}> + Add Personal Info</Text></View>
           </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={{
+          backgroundColor: "rgb(255, 255, 255)",
+          margin: 8,
+          borderRadius: 8,
+          shadowColor: "rgba(0, 0, 0, 0.08)",
+          shadowRadius: 5,
+          shadowOpacity: 1,
+        }}>
+          <View>
+            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Gallery</Text>
+          </View>
+          <View style={{ margin: 10 }}>
+
+            <View>
+              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: 10 }}>Photos</Text>
+            </View>
+            
+            <FlatGrid
+              itemDimension={wp(40)}
+              items={this.state.galleryPhoto}
+              style={styles.gridView}
+              renderItem={({ item, index }) => (
+                <TouchableOpacity style={styles.gridItem} onPress={() => this.onPressMediaItem(item, index)}>
+                  {item.url != ''?
+                    <Image source={{ uri: item.url }}
+                      style={styles.gridImage}
+                    />
+                  : null }
+                  {item.url == '' ?
+                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
+                  : null}
+                </TouchableOpacity>
+              )}
+            />
+
+            <View>
+              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: 10 }}>Video</Text>
+            </View>
+
+            
+
           </View>
         </View>
 
@@ -702,7 +1238,6 @@ export default class ProfileCopy extends Component {
         }}>
           <View style={styles.followTabView}>
             <Text style={styles.visitorsText}>Likes</Text>
-
             <View
               style={{
                 position: "absolute",
@@ -716,7 +1251,7 @@ export default class ProfileCopy extends Component {
                   alignSelf: "stretch"
                 }}
               >
-                <Text style={styles.textText}>2318</Text>
+                <Text style={styles.textText}>{this.state.likes}</Text>
                 <View
                   style={{
                     flexDirection: "row",
@@ -724,7 +1259,7 @@ export default class ProfileCopy extends Component {
                     justifyContent: "flex-end"
                   }}
                 >
-                  <Text style={styles.matchedText}>MATCHED</Text>
+                  <Text style={styles.matchedText}>Matched</Text>
                 </View>
               </View>
             </View>
@@ -736,7 +1271,7 @@ export default class ProfileCopy extends Component {
                 height: "100%"
               }}
             >
-              <Text style={styles.textThreeText}>15</Text>
+              <Text style={styles.textThreeText}>{this.state.matched}</Text>
             </View>
           </View>
 
@@ -811,28 +1346,31 @@ export default class ProfileCopy extends Component {
             />
           </View>
         </View>
-        <View><Dialog.Container visible={this.state.dialogVisible}>
-          <Dialog.Title>Select Option</Dialog.Title>
-          <Dialog.Description>{this.state.dialogMsg}</Dialog.Description>
-          <Dialog.Button
-            label="Cancel"
-            onPress={() => {
-              this.handleCancel();
-            }}
-          />
-          <Dialog.Button
-            label="Camera"
-            onPress={() => {
-              this.handleCamera();
-            }}
-          />
-          <Dialog.Button
-            label="Gallery"
-            onPress={() => {
-              this.handleLibrary();
-            }}
-          />
-        </Dialog.Container></View>
+
+        <View>
+          <Dialog.Container visible={this.state.dialogVisible}>
+            <Dialog.Title>Select Option</Dialog.Title>
+            <Dialog.Description>{this.state.dialogMsg}</Dialog.Description>
+            <Dialog.Button
+              label="Cancel"
+              onPress={() => {
+                this.handleCancel();
+              }}
+            />
+            <Dialog.Button
+              label="Camera"
+              onPress={() => {
+                this.handleCamera();
+              }}
+            />
+            <Dialog.Button
+              label="Gallery"
+              onPress={() => {
+                this.handleLibrary();
+              }}
+            />
+          </Dialog.Container>
+        </View>
 
         <Modal isVisible={this.state.isModalVisible}>
           <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -906,6 +1444,7 @@ export default class ProfileCopy extends Component {
 
               <RadioGroup
                 onSelect={(index, value) => this.onSelectGender(index, value)}
+                selectedIndex={this.state._gender}
               >
                 <RadioButton value={0} >
                   <Text>Man</Text>
@@ -965,6 +1504,186 @@ export default class ProfileCopy extends Component {
           </View>
         </Modal>
 
+        <Modal isVisible={this.state.isModalVisibleBio}>
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+
+              <View style={styles.modalBioViewContent}>
+                <TextInput style={styles.whereTextInput}
+                  multiline={true}
+                  numberOfLines={3}
+                  value={this.state.bioText}
+                  onChangeText={(text) => this.setState({ bioText: text })} placeholder="Enter your bio"
+                />
+              </View>
+
+            </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalBio}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveBio()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save your bio</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            
+          </KeyboardAvoidingView>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleReligion}>
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+
+              <View style={styles.modalBioViewContent}>
+                <TextInput style={styles.whereTextInput}
+                  multiline={true}
+                  numberOfLines={3}
+                  value={this.state.religion}
+                  onChangeText={(text) => this.setState({ religion: text })} placeholder="Enter your religion"
+                />
+              </View>
+
+            </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalReligion}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveReligion()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            
+          </KeyboardAvoidingView>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleJobTitle}>
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+
+              <View style={styles.modalBioViewContent}>
+                <TextInput style={styles.whereTextInput}
+                  multiline={true}
+                  numberOfLines={3}
+                  value={this.state.jobTitle}
+                  onChangeText={(text) => this.setState({ jobTitle: text })} placeholder="Enter your Job Title"
+                />
+              </View>
+
+            </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalJobTitle}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveJobTitle()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            
+          </KeyboardAvoidingView>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleEducation}>
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+
+              <View style={styles.modalBioViewContent}>
+                <TextInput style={styles.whereTextInput}
+                  multiline={true}
+                  numberOfLines={3}
+                  value={this.state.education}
+                  onChangeText={(text) => this.setState({ education: text })} placeholder="Enter your Education"
+                />
+              </View>
+
+            </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalEducation}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveEducation()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            
+          </KeyboardAvoidingView>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleHeight}>
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+
+              <View style={styles.modalBioViewContent}>
+                <TextInput style={styles.whereTextInput}
+                  multiline={true}
+                  numberOfLines={3}
+                  value={this.state.height}
+                  onChangeText={(text) => this.setState({ height: text })} placeholder="Enter your Height"
+                />
+              </View>
+
+            </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalHeight}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveHeight()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            
+          </KeyboardAvoidingView>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleLanguage}>
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+
+              <View style={styles.modalBioViewContent}>
+                <TextInput style={styles.whereTextInput}
+                  multiline={true}
+                  numberOfLines={3}
+                  value={this.state.language}
+                  onChangeText={(text) => this.setState({ language: text })} placeholder="Enter your Language"
+                />
+              </View>
+
+            </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalLanguage}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveLanguage()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            
+          </KeyboardAvoidingView>
+        </Modal>
+
       </ScrollView>
       </View>
       <SlidingUpPanel ref={c => this._panel = c}>
@@ -982,8 +1701,7 @@ const styles = StyleSheet.create({
   whereTextInput:{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 30 },
   container1: {
     flex: 1,
-    justifyContent: 'center',
-
+    justifyContent: 'center'
   },
   whereDataView:{ alignContent: 'center', marginLeft: 30, marginRight: 30 },
   valueText: {
@@ -1116,5 +1834,45 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     width: 0,
     height: 0
+  },
+  modalBioContainer: {
+    flex: 0.4,
+    // height: hp(35),
+    justifyContent: 'center',
+    backgroundColor: 'white'
+  },
+  modalBioViewContent:{
+    flex: 1,
+    alignContent: 'center',
+    marginLeft: 30, 
+    marginRight: 30,
+    justifyContent: 'center'
+  },
+  touchableCancel: {
+    backgroundColor: '#fc5c65',
+    flex: 1, 
+    justifyContent: 'center'
+  },
+  touchableOk: {
+    backgroundColor: '#20bf6b',
+    flex: 1, 
+    justifyContent: 'center'
+  },
+  gridView: {
+    marginTop: hp(2),
+    flex: 1,
+  },
+  gridImage: {
+    resizeMode: 'cover',
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+    width: '100%',
+    height: '100%'
+  },
+  gridItem: {
+    height: hp(25),
+    backgroundColor: 'rgba(238, 238, 238, 0.6)',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

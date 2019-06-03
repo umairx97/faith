@@ -306,7 +306,7 @@ export default class Matches extends Component {
                   itemDimension={130}
                   items={this.state.showArr}
                   style={styles.gridView}
-                  renderItem={item => (
+                  renderItem={({ item, index }) => (
                     <View
                       style={[styles.itemContainer]}
                     >
