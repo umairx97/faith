@@ -23,7 +23,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Images } from "../../../assets/imageAll";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
-
+import { Immersive } from 'react-native-immersive';
 
 import RadioForm, {
   RadioButton,
@@ -113,6 +113,7 @@ export default class SignUp extends Component {
   }
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
+    this.androidGoInImmersive();
   }
 
   componentWillUnmount() {
@@ -121,10 +122,17 @@ export default class SignUp extends Component {
     ); // Remove listener
   }
 
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
+  }
+
   backAndroid() {
     Actions.pop(); // Return to previous screen
     return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
   }
+  
   _sendEmailVerification() {
     firebase
       .auth()

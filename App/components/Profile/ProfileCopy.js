@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image, StyleSheet, ScrollView, Button, Platform, TextInput, KeyboardAvoidingView } from 'react-native';
+import React, { Component, Fragment } from 'react';
+import { Text, View, Alert, TouchableOpacity, ActivityIndicator, Image, StyleSheet, ScrollView, Button, Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Actions } from "react-native-router-flux";
 import ImagePicker from 'react-native-image-crop-picker';
 import Modal from "react-native-modal";
@@ -17,6 +17,8 @@ import RadioForm, { RadioButtonInput, RadioButtonLabel } from "react-native-simp
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Immersive } from 'react-native-immersive';
 import { FlatGrid } from 'react-native-super-grid';
+import Video from 'react-native-video';
+
 
 var type = "image/jpg";
 var format = ".jpg";
@@ -136,9 +138,12 @@ export default class ProfileCopy extends Component {
       genderInfo: 'Unknown',
       uploadMediaGallery: false,
       uploadMediaGalleryIndex: null,
+      uploadMediaGalleryCanDelete: false,
       _gender: 0,
       imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
-      galleryPhoto: []
+      galleryPhoto: [],
+      galleryVideo: null,
+      isLoading: false
     }
 
   }
@@ -302,6 +307,7 @@ export default class ProfileCopy extends Component {
       var educationData = snapshot.val().education;
       var heightData = snapshot.val().height;
       var languageData = snapshot.val().language;
+      var videoData = snapshot.val().profileVideo;
 
       var ImageUrl1 = '';
       if(snapshot.val().profileImageURL1 != null) {
@@ -369,7 +375,8 @@ export default class ProfileCopy extends Component {
           education: educationData,
           height: heightData,
           language: languageData,
-          galleryPhoto: mediaPhoto
+          galleryPhoto: mediaPhoto,
+          galleryVideo: videoData
         });
       } else {
         instance.setState({
@@ -386,7 +393,8 @@ export default class ProfileCopy extends Component {
           education: educationData,
           height: heightData,
           language: languageData,
-          galleryPhoto: mediaPhoto
+          galleryPhoto: mediaPhoto,
+          galleryVideo: videoData
         });
       }
      
@@ -448,6 +456,12 @@ export default class ProfileCopy extends Component {
     this.setState({ dialogVisible: false });
   }
 
+  handleRemovePhoto() {
+    this.androidGoInImmersive();
+    this.setState({ dialogVisible: false });
+    this.updateMediaGalleryPhoto(userId, ''); 
+  }
+
   handleCamera() {
     this.setState({ dialogVisible: false });
     var _name = userId;
@@ -459,7 +473,7 @@ export default class ProfileCopy extends Component {
         includeBase64: true
       }).then(image => {
             
-        let fileUri = decodeURI(image.path)
+        let fileUri = decodeURI(image.path);
         var milliseconds = new Date().getTime();
 
         firebase
@@ -495,9 +509,6 @@ export default class ProfileCopy extends Component {
     //   Actions.recordVideo();
     // }
   }
-
-
-
 
   async handleLibrary() {
     this.setState({ dialogVisible: false });
@@ -549,55 +560,61 @@ export default class ProfileCopy extends Component {
 
   updateMediaGalleryPhoto(_name, uploadedFile) {
     var mediaPhoto = this.state.galleryPhoto;
+    var photo = '';
+
+    if(uploadedFile.downloadURL != null) {
+      photo = uploadedFile.downloadURL;
+    }
+
     switch (this.state.uploadMediaGalleryIndex) {
       case 0:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL1: uploadedFile.downloadURL
+          profileImageURL1: photo
         });
-        mediaPhoto[0] = { url: uploadedFile.downloadURL };
+        mediaPhoto[0] = { url: photo };
         break;
       case 1:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL2: uploadedFile.downloadURL 
+          profileImageURL2: photo
         });
-        mediaPhoto[1] = { url: uploadedFile.downloadURL };
+        mediaPhoto[1] = { url: photo };
         break;
       case 2:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL3: uploadedFile.downloadURL 
+          profileImageURL3: photo
         });
-        mediaPhoto[2] = { url: uploadedFile.downloadURL };
+        mediaPhoto[2] = { url: photo };
         break;
       case 3:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL4: uploadedFile.downloadURL 
+          profileImageURL4: photo
         });
-        mediaPhoto[3] = { url: uploadedFile.downloadURL };
+        mediaPhoto[3] = { url: photo };
         break;
       case 4:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL5: uploadedFile.downloadURL 
+          profileImageURL5: photo
         });
-        mediaPhoto[4] = { url: uploadedFile.downloadURL };
+        mediaPhoto[4] = { url: photo };
         break;
       case 5:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL6: uploadedFile.downloadURL 
+          profileImageURL6: photo
         });
-        mediaPhoto[5] = { url: uploadedFile.downloadURL };
+        mediaPhoto[5] = { url: photo };
         break;
       case 6:
         firebase.database().ref("Users/FaithMeetsLove/Registered/" + _name)
         .update({ 
-          profileImageURL7: uploadedFile.downloadURL 
+          profileImageURL7: photo
         });
-        mediaPhoto[6] = { url: uploadedFile.downloadURL };
+        mediaPhoto[6] = { url: photo };
         break;
     
       default:
@@ -714,15 +731,99 @@ export default class ProfileCopy extends Component {
     this.setState({ isModalVisibleLanguage: !this.state.isModalVisibleLanguage });
   }
 
-  onPressMediaItem(item, index) {
-    console.warn(item);
-    console.warn('index: ', index);
-    this.setState({ dialogVisible: true, uploadMediaGallery: true, uploadMediaGalleryIndex: index });
-    // if(item.url == '') {
-    //   this.setState({ dialogVisible: true, uploadMediaGallery: true, uploadMediaGalleryIndex: index });
-    //   return;
-    // }
-    // this.setState({ dialogVisible: true, uploadMediaGallery: true, uploadMediaGalleryIndex: index });
+  videoUploadGalleryRemove() {
+    this.setState({
+      isLoading: true
+    }, () => {     
+        firebase.database().ref("Users/FaithMeetsLove/Registered/" + userId).update({ profileVideo: null });
+        this.setState({ 
+          galleryVideo: null,
+          isLoading: false
+        });
+        this.androidGoInImmersive();
+    });
+  }
+
+  videoUploadGallery() {
+    this.setState({
+      isLoading: true
+    }, () => {
+      ImagePicker.openPicker({
+        mediaType: "video",
+      }).then((video) => {
+          let fileUri = decodeURI(video.path);
+          var milliseconds = new Date().getTime();
+  
+          firebase
+            .storage()
+            .ref("ProfileVideos/" + userId + milliseconds + '.jpg')
+            .putFile(fileUri)
+            .then(uploadedFile => {
+              
+              firebase.database().ref("Users/FaithMeetsLove/Registered/" + userId).update({ profileVideo: uploadedFile.downloadURL });
+              this.setState({ 
+                galleryVideo: uploadedFile.downloadURL,
+                isLoading: false
+              });
+              this.androidGoInImmersive();
+              
+            }).catch(error => {
+              alert("Firebase profile upload failed: " + error)
+            });
+      });
+    });
+  }
+
+  onPressMediaItem(item, index, isVideo) {
+    if(isVideo) {
+      var buttons = [
+        {
+          text: 'CANCEL',
+          onPress: () => {
+            this.androidGoInImmersive();
+          },
+          style: 'cancel',
+        },
+        {text: 'CAMERA', onPress: () => console.log('OK Pressed')},
+        {text: 'GALLERY', onPress: () => this.videoUploadGallery()},
+      ];
+      if(this.state.galleryVideo != null) {
+        var buttons = [
+          {
+            text: 'CANCEL',
+            onPress: () => {
+              this.androidGoInImmersive();
+            },
+            style: 'cancel',
+          },
+          {text: 'REMOVE VIDEO', onPress: () => this.videoUploadGalleryRemove()}
+        ];
+      }
+      Alert.alert(
+        'Select Option',
+        'Select option from where you want to upload video',
+        buttons,
+        {cancelable: false},
+      );
+      return;
+    }
+
+    var canDelete = false;
+
+    try {
+      if(item.url.length > 0) {
+        canDelete = true;
+      } 
+    } catch (error) {
+      
+    }
+
+    this.setState({ 
+      dialogVisible: true, 
+      uploadMediaGallery: true, 
+      uploadMediaGalleryIndex: index,
+      uploadMediaGalleryCanDelete: canDelete
+    });
   }
 
   onSlideData = () => {
@@ -1217,9 +1318,31 @@ export default class ProfileCopy extends Component {
             />
 
             <View>
-              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: 10 }}>Video</Text>
+              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: hp(3), marginBottom: hp(3) }}>Video</Text>
             </View>
 
+            <View>
+                {this.state.galleryVideo != null ?
+                  <Fragment>
+                    <View style={{flex: 1, height: hp(35), width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                        <Video source={{uri: this.state.galleryVideo}}
+                            controls={true}
+                            paused={true}
+                            ref={(ref) => {
+                              this.player = ref
+                            }}
+                            style={styles.backgroundVideo} 
+                          />
+                    </View>
+                    <Button style={{marginTop: hp(25)}} title='Options' onPress={() => this.onPressMediaItem(null, null, true)} />
+                  </Fragment>
+                : null}
+                {this.state.galleryVideo == null ?
+                  <TouchableOpacity style={styles.gridItem} onPress={() => this.onPressMediaItem(null, null, true)}>
+                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
+                  </TouchableOpacity>
+                : null}
+            </View>
             
 
           </View>
@@ -1369,6 +1492,14 @@ export default class ProfileCopy extends Component {
                 this.handleLibrary();
               }}
             />
+            {this.state.uploadMediaGalleryCanDelete == true ?
+              <Dialog.Button
+                label="Remove Photo"
+                onPress={() => {
+                  this.handleRemovePhoto();
+                }}
+              />
+            : null }
           </Dialog.Container>
         </View>
 
@@ -1685,6 +1816,11 @@ export default class ProfileCopy extends Component {
         </Modal>
 
       </ScrollView>
+      {this.state.isLoading ?
+        <View style={styles.viewLoading}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      : null }
       </View>
       <SlidingUpPanel ref={c => this._panel = c}>
         {() => this.onSlideData()}
@@ -1874,5 +2010,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: hp(5),
+    right: 0,
+  },
+  viewLoading: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(238, 238, 238, 0.3)',
+    alignContent: 'center',
+    flex: 1,
+    zIndex: 300
   }
 });
