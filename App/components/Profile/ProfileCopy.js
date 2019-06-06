@@ -142,6 +142,8 @@ export default class ProfileCopy extends Component {
       _gender: 0,
       imageProfileUrl: "http://www.cybecys.com/wp-content/uploads/2017/07/no-profile.png",
       galleryPhoto: [],
+      interests: [],
+      lifestyleAndSocial: [],
       galleryVideo: null,
       isLoading: false
     }
@@ -308,6 +310,21 @@ export default class ProfileCopy extends Component {
       var heightData = snapshot.val().height;
       var languageData = snapshot.val().language;
       var videoData = snapshot.val().profileVideo;
+      var interestsData = [];
+      try {
+        interestsData = JSON.parse(snapshot.val().interests);
+        this.tag.setState({ value: interestsData });
+      } catch (error) {
+        
+      }
+      var lifestyleAndSocialData = [];
+      try {
+        lifestyleAndSocialData = JSON.parse(snapshot.val().lifestyleAndSocial);
+        this.tag2.setState({ value: lifestyleAndSocialData });
+      } catch (error) {
+        
+      }
+      
 
       var ImageUrl1 = '';
       if(snapshot.val().profileImageURL1 != null) {
@@ -376,7 +393,9 @@ export default class ProfileCopy extends Component {
           height: heightData,
           language: languageData,
           galleryPhoto: mediaPhoto,
-          galleryVideo: videoData
+          galleryVideo: videoData,
+          interests: interestsData,
+          lifestyleAndSocial: lifestyleAndSocialData
         });
       } else {
         instance.setState({
@@ -394,7 +413,9 @@ export default class ProfileCopy extends Component {
           height: heightData,
           language: languageData,
           galleryPhoto: mediaPhoto,
-          galleryVideo: videoData
+          galleryVideo: videoData,
+          interests: interestsData,
+          lifestyleAndSocial: lifestyleAndSocialData
         });
       }
      
@@ -1148,6 +1169,24 @@ export default class ProfileCopy extends Component {
     // this._panel.hide();
   }
 
+  onTagInterestPress(data) {
+    this.state.interests = this.tag.itemsSelected;
+
+    firebase.database().ref("Users/FaithMeetsLove/Registered/" + userId)
+    .update({ 
+      interests: JSON.stringify(this.state.interests)
+    });
+  }
+
+  onTagLifeAndSocialPress(data) {
+    this.state.lifestyleAndSocial = this.tag2.itemsSelected;
+
+    firebase.database().ref("Users/FaithMeetsLove/Registered/" + userId)
+    .update({ 
+      lifestyleAndSocial: JSON.stringify(this.state.lifestyleAndSocial)
+    });
+  }
+
   render() {
     return (<View>
       <View><ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -1413,16 +1452,19 @@ export default class ProfileCopy extends Component {
           </View>
 
           <View style={{ margin: 10 }}>
-            <TagSelect
-              data={data}
-
-              ref={(tag) => {
-                this.tag = tag;
-              }}
-              onMaxError={() => {
-                alert('Ops', 'Max reached');
-              }}
-            />
+            {this.state.nameFull != '' ?
+              <TagSelect
+                data={data}
+                value={this.state.interests}
+                onItemPress={(data) => this.onTagInterestPress(data)}
+                ref={(tag) => {
+                  this.tag = tag;
+                }}
+                onMaxError={() => {
+                  alert('Ops', 'Max reached');
+                }}
+              />
+            : null }
             {/* <View style={styles.buttonContainer}>
             <View style={styles.buttonInner}> */}
             {/* <Button
@@ -1460,13 +1502,20 @@ export default class ProfileCopy extends Component {
             <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Lifestyle and social</Text>
           </View>
           <View style={{ margin: 10 }}>
-            <TagSelect
-              data={dataLifeStyle}
-              itemStyle={styles.item}
-              itemLabelStyle={styles.label}
-              itemStyleSelected={styles.itemSelected}
-              itemLabelStyleSelected={styles.labelSelected}
-            />
+            {this.state.nameFull != '' ?
+              <TagSelect
+                ref={(tag) => {
+                  this.tag2 = tag;
+                }}
+                value={this.state.lifestyleAndSocial}
+                onItemPress={(data) => this.onTagLifeAndSocialPress(data)}
+                data={dataLifeStyle}
+                itemStyle={styles.item}
+                itemLabelStyle={styles.label}
+                itemStyleSelected={styles.itemSelected}
+                itemLabelStyleSelected={styles.labelSelected}
+              />
+            : null }
           </View>
         </View>
 
