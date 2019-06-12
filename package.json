@@ -23,6 +23,7 @@
     "react-native-calendars": "^1.22.0",
     "react-native-camera": "1.10.1",
     "react-native-card-stack-swiper": "^1.1.0",
+    "react-native-collapsible": "^1.4.0",
     "react-native-connection-info": "^1.1.0",
     "react-native-dates": "^2.0.4",
     "react-native-device-info": "^0.26.2",
