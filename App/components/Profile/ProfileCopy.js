@@ -11,13 +11,14 @@ import { BackHandler, Dimensions, PermissionsAndroid } from "react-native";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import Moment from "moment";
-import SlidingUpPanel from 'rn-sliding-up-panel';
+// import SlidingUpPanel from 'rn-sliding-up-panel';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
 import RadioForm, { RadioButtonInput, RadioButtonLabel } from "react-native-simple-radio-button";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Immersive } from 'react-native-immersive';
 import { FlatGrid } from 'react-native-super-grid';
 import Video from 'react-native-video';
+// import Collapsible from 'react-native-collapsible';
 
 
 var type = "image/jpg";
@@ -124,6 +125,8 @@ export default class ProfileCopy extends Component {
       isModalVisibleEducation: false,
       isModalVisibleHeight: false,
       isModalVisibleLanguage: false,
+      isModalVisiblePersonalInfo: false,
+      personalInfoIsCollapsed: true,
       relationShipStatus: 'Unknown',
       showComponmentB: '',
       permanentLocation: 'Unknown',
@@ -722,6 +725,11 @@ export default class ProfileCopy extends Component {
     this.setState({ isModalVisibleBio: !this.state.isModalVisibleBio });
   }
 
+  _toggleModalPersonalInfo = () => {
+    this.androidGoInImmersive();
+    this.setState({ isModalVisiblePersonalInfo: !this.state.isModalVisiblePersonalInfo });
+  }
+
   _toggleModalGender = () => {
     this.androidGoInImmersive();
     this.setState({ isModalVisibleGender: !this.state.isModalVisibleGender });
@@ -805,7 +813,7 @@ export default class ProfileCopy extends Component {
           },
           style: 'cancel',
         },
-        {text: 'CAMERA', onPress: () => console.log('OK Pressed')},
+        // {text: 'CAMERA', onPress: () => console.log('OK Pressed')},
         {text: 'GALLERY', onPress: () => this.videoUploadGallery()},
       ];
       if(this.state.galleryVideo != null) {
@@ -917,7 +925,7 @@ export default class ProfileCopy extends Component {
           </View>
         </TouchableOpacity>
 
-        <Button title='Hide' onPress={() => this._panel.hide()} />
+        {/* <Button title='Hide' onPress={() => this._panel.hide()} /> */}
       </View>)
   }
 
@@ -981,8 +989,15 @@ export default class ProfileCopy extends Component {
     });
   }
 
+  onShowPersonalInfoModal = () => {
+    this.setState({
+      isModalVisiblePersonalInfo: true
+    });
+  }
+
   OnAddPersonalInfo = () => {
-    this._panel.show();
+    // this._panel.show();
+    this.onShowPersonalInfoModal();
   }
 
   onSelectGender=(index,value)=>{
@@ -1187,6 +1202,12 @@ export default class ProfileCopy extends Component {
     });
   }
 
+  onChangePersonalInfoCollapse() {
+    this.setState({
+      personalInfoIsCollapsed: !this.state.personalInfoIsCollapsed
+    });
+  }
+
   render() {
     return (<View>
       <View><ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
@@ -1218,9 +1239,9 @@ export default class ProfileCopy extends Component {
             <View>
               {/* <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text> */}
             </View>
-            <View>
+            {/* <View>
               <Text style={{ marginBottom: 10 }}>more info</Text>
-            </View>
+            </View> */}
 
             <TouchableOpacity onPress={() => { this.onAgePress() }}><View style={{ flexDirection: 'row' }}>
               <Image style={{ height: 25, width: 25, tintColor: 'grey' }} source={Images.ageIcon} ></Image>
@@ -1247,147 +1268,85 @@ export default class ProfileCopy extends Component {
           </TouchableOpacity>
           </View>
         </View>
+          {/* <TouchableOpacity style={{marginTop: hp(1), width: wp(100), height: hp(10)}} onPress={() => { this.onChangePersonalInfoCollapse() }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Show Personal Info</Text>
+            </View>
+          </TouchableOpacity> */}
+        {/* <Collapsible collapsed={this.state.personalInfoIsCollapsed}> */}
+          <View style={{
+            backgroundColor: "rgb(255, 255, 255)",
 
-        <View style={{
-          backgroundColor: "rgb(255, 255, 255)",
+            margin: 8,
+            borderRadius: 8,
+            shadowColor: "rgba(0, 0, 0, 0.08)",
+            shadowRadius: 5,
+            shadowOpacity: 1,
+          }}>
+            <View>
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                <View><Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Personal Info</Text>
+                </View>
 
-          margin: 8,
-          borderRadius: 8,
-          shadowColor: "rgba(0, 0, 0, 0.08)",
-          shadowRadius: 5,
-          shadowOpacity: 1,
-        }}>
-          <View>
-            <View style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-              <View><Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Personal Info</Text>
               </View>
-
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.homePage}
-                style={{ height: 25, width: 25, tintColor: 'grey' }} />
-                <Text style={{ marginLeft: 10, marginTop: 5 }}>Lives in {this.state.place}</Text></View>
-
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>From : {this.state.permanentLocation}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.statusIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                style={styles.personalDataView} />
-                <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.homePage}
+                  style={{ height: 25, width: 25, tintColor: 'grey' }} />
+                  <Text style={{ marginLeft: 10, marginTop: 5 }}>Lives in {this.state.place}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>From : {this.state.permanentLocation}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.statusIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
+              </View>
             </View>
           </View>
-        </View>
+        {/* </Collapsible> */}
+
         <View style={styles.addPersonalView}>
           <View styel={{ margin: 10 }}><TouchableOpacity onPress={() => { this.OnAddPersonalInfo() }}>
             <View style={{ backgroundColor: '#DCDCDC', borderRadius: 6, height: 50, width: Screen.width - 20, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 17, fontWeight: '700' }}> + Add Personal Info</Text></View>
           </TouchableOpacity>
           </View>
         </View>
-
-        <View style={{
-          backgroundColor: "rgb(255, 255, 255)",
-          margin: 8,
-          borderRadius: 8,
-          shadowColor: "rgba(0, 0, 0, 0.08)",
-          shadowRadius: 5,
-          shadowOpacity: 1,
-        }}>
-          <View>
-            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Gallery</Text>
-          </View>
-          <View style={{ margin: 10 }}>
-
-            <View>
-              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: 10 }}>Photos</Text>
-            </View>
-            
-            <FlatGrid
-              itemDimension={wp(40)}
-              items={this.state.galleryPhoto}
-              style={styles.gridView}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity style={styles.gridItem} onPress={() => this.onPressMediaItem(item, index)}>
-                  {item.url != ''?
-                    <Image source={{ uri: item.url }}
-                      style={styles.gridImage}
-                    />
-                  : null }
-                  {item.url == '' ?
-                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
-                  : null}
-                </TouchableOpacity>
-              )}
-            />
-
-            <View>
-              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: hp(3), marginBottom: hp(3) }}>Video</Text>
-            </View>
-
-            <View>
-                {this.state.galleryVideo != null ?
-                  <Fragment>
-                    <View style={{flex: 1, height: hp(35), width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
-                        <Video source={{uri: this.state.galleryVideo}}
-                            controls={true}
-                            paused={true}
-                            ref={(ref) => {
-                              this.player = ref
-                            }}
-                            style={styles.backgroundVideo} 
-                          />
-                    </View>
-                    <Button style={{marginTop: hp(25)}} title='Options' onPress={() => this.onPressMediaItem(null, null, true)} />
-                  </Fragment>
-                : null}
-                {this.state.galleryVideo == null ?
-                  <TouchableOpacity style={styles.gridItem} onPress={() => this.onPressMediaItem(null, null, true)}>
-                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
-                  </TouchableOpacity>
-                : null}
-            </View>
-            
-
-          </View>
-        </View>
-
-
         <View style={{
           backgroundColor: "rgb(255, 255, 255)",
           justifyContent: 'center',
@@ -1436,8 +1395,77 @@ export default class ProfileCopy extends Component {
               <Text style={styles.textThreeText}>{this.state.matched}</Text>
             </View>
           </View>
-
         </View>
+        <View style={{
+          backgroundColor: "rgb(255, 255, 255)",
+          margin: 8,
+          borderRadius: 8,
+          shadowColor: "rgba(0, 0, 0, 0.08)",
+          shadowRadius: 5,
+          shadowOpacity: 1,
+        }}>
+          <View>
+            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Gallery</Text>
+          </View>
+          <View style={{ margin: 10 }}>
+
+            <View>
+              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: 10 }}>Photos</Text>
+            </View>
+            
+            <FlatGrid
+              itemDimension={wp(40)}
+              items={this.state.galleryPhoto}
+              style={styles.gridView}
+              renderItem={({ item, index }) => (
+                <TouchableOpacity style={styles.gridItem} onPress={() => this.onPressMediaItem(item, index)}>
+                  {item.url != ''?
+                    <Image source={{ uri: item.url }}
+                      style={styles.gridImage}
+                    />
+                  : null }
+                  {item.url == '' ?
+                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
+                  : null}
+                </TouchableOpacity>
+              )}
+              extraData={this.state}
+            />
+
+            <View>
+              <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: hp(3), marginBottom: hp(3) }}>Video</Text>
+            </View>
+
+            <View>
+                {this.state.galleryVideo != null ?
+                  <Fragment>
+                    <View style={{flex: 1, height: hp(35), width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
+                        <Video source={{uri: this.state.galleryVideo}}
+                            controls={true}
+                            paused={true}
+                            ref={(ref) => {
+                              this.player = ref
+                            }}
+                            style={styles.backgroundVideo} 
+                          />
+                    </View>
+                    <Button style={{marginTop: hp(25)}} title='Options' onPress={() => this.onPressMediaItem(null, null, true)} />
+                  </Fragment>
+                : null}
+                {this.state.galleryVideo == null ?
+                  <TouchableOpacity style={styles.gridItem} onPress={() => this.onPressMediaItem(null, null, true)}>
+                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
+                  </TouchableOpacity>
+                : null}
+            </View>
+            
+
+          </View>
+        </View>
+
+
+        
+
         <View style={{
           backgroundColor: "rgb(255, 255, 255)",
 
@@ -1714,6 +1742,28 @@ export default class ProfileCopy extends Component {
           </KeyboardAvoidingView>
         </Modal>
 
+        <Modal isVisible={this.state.isModalVisiblePersonalInfo}>
+          <KeyboardAvoidingView style={styles.modalPersonalInfoContainer} behavior="padding" enabled>
+            <View style={{flex: 0.9}}>
+
+              {this.onSlideData()}
+
+            </View>
+            <View style={{flex: 0.1, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalPersonalInfo}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <View style={{flex: 1}}>
+                <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveBio()}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Save your bio</Text>
+                </TouchableOpacity>
+              </View> */}
+            </View>
+          </KeyboardAvoidingView>
+        </Modal>
+
         <Modal isVisible={this.state.isModalVisibleReligion}>
           <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
             <View style={{flex: 0.7}}>
@@ -1871,9 +1921,9 @@ export default class ProfileCopy extends Component {
         </View>
       : null }
       </View>
-      <SlidingUpPanel ref={c => this._panel = c}>
+      {/* <SlidingUpPanel ref={c => this._panel = c}>
         {() => this.onSlideData()}
-      </SlidingUpPanel>
+      </SlidingUpPanel> */}
 
     </View>)
   }
@@ -2026,6 +2076,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white'
   },
+  modalPersonalInfoContainer: {
+    flex: 0.8,
+    // height: hp(35),
+    justifyContent: 'center',
+    backgroundColor: 'white'
+  },
   modalBioViewContent:{
     flex: 1,
     alignContent: 'center',
@@ -2054,7 +2110,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   gridItem: {
-    height: hp(25),
+    height: hp(20),
     backgroundColor: 'rgba(238, 238, 238, 0.6)',
     flex: 1,
     justifyContent: 'center',
