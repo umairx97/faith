@@ -128,6 +128,7 @@ export default class ProfileCopy extends Component {
       isModalVisiblePersonalInfo: false,
       personalInfoIsCollapsed: true,
       relationShipStatus: 'Unknown',
+      relationShipStatusIndex: 0,
       showComponmentB: '',
       permanentLocation: 'Unknown',
       bioText: '',
@@ -304,6 +305,7 @@ export default class ProfileCopy extends Component {
       var userName = snapshot.val().fullName;
       var dob = snapshot.val().user_Dob;
       var realtionshipS = snapshot.val().relationshipStatus;
+      var relationShipStatusIndex = snapshot.val().relationShipStatusIndex;
       var permanentAdd = snapshot.val().permanentAddress;
       var bioText = snapshot.val().bioText;
       var genderData = snapshot.val().gender;
@@ -365,7 +367,7 @@ export default class ProfileCopy extends Component {
         { url: ImageUrl4 },
         { url: ImageUrl5 },
         { url: ImageUrl6 },
-        { url: ImageUrl7 },
+        // { url: ImageUrl7 },
       ];
 
       if(genderData==0)
@@ -386,6 +388,7 @@ export default class ProfileCopy extends Component {
           nameFull: userName,
           dateOfBirth: dob,
           relationShipStatus: realtionshipS,
+          relationShipStatusIndex: relationShipStatusIndex,
           permanentLocation: permanentAdd,
           bioText: bioText,
           genderInfo: convertGender,
@@ -406,6 +409,7 @@ export default class ProfileCopy extends Component {
           nameFull: userName,
           dateOfBirth: dob,
           relationShipStatus: realtionshipS,
+          relationShipStatusIndex: relationShipStatusIndex,
           permanentLocation: permanentAdd,
           bioText: bioText,
           genderInfo: convertGender,
@@ -864,7 +868,6 @@ export default class ProfileCopy extends Component {
 
       }}>
         {/* <Text style={{ fontSize: 20, fontWeight: "700", margin: 15 }}>Status</Text> */}
-
         <TouchableOpacity style={{marginTop: hp(10)}} onPress={() => { this.onRelationshipPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20 }} source={Images.statusIcon}></Image>
@@ -877,7 +880,7 @@ export default class ProfileCopy extends Component {
         <TouchableOpacity onPress={() => { this.onLocationPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
-            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>From where you are</Text>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Location</Text>
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
           </View>
         </TouchableOpacity>
@@ -924,7 +927,6 @@ export default class ProfileCopy extends Component {
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Language</Text>
           </View>
         </TouchableOpacity>
-
         {/* <Button title='Hide' onPress={() => this._panel.hide()} /> */}
       </View>)
   }
@@ -1001,9 +1003,6 @@ export default class ProfileCopy extends Component {
   }
 
   onSelectGender=(index,value)=>{
-    // this.setState({
-    //   text: value
-    // })
     this.setState({ genderInfo: value });
     firebase
       .database()
@@ -1020,20 +1019,25 @@ export default class ProfileCopy extends Component {
       });
 
     this._toggleModalGender();
-    this._panel.hide()
+    // this._panel.hide()
   }
 
   onSelect(index, value) {
-    this.setState({
-      text: value
-    })
+    // this.setState({
+    //   text: value
+    // })
 
-    this.setState({ relationShipStatus: value });
+    this.setState({ 
+      relationShipStatus: value,
+      relationShipStatusIndex: index
+    });
+
     firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + userId)
       .update({
-        relationshipStatus: value
+        relationshipStatus: value,
+        relationShipStatusIndex: index
       })
       .then(ref => {
         this.componentDidMount()
@@ -1044,7 +1048,7 @@ export default class ProfileCopy extends Component {
       });
 
     this._toggleModal();
-    this._panel.hide()
+    // this._panel.hide()
   }
   // onSaveGender=()=>{
   //   alert("gender")
@@ -1067,7 +1071,7 @@ export default class ProfileCopy extends Component {
       });
 
     this._toggleModalLoaction();
-    this._panel.hide()
+    // this._panel.hide()
   }
 
   onSaveBio = () => {
@@ -1414,7 +1418,7 @@ export default class ProfileCopy extends Component {
             </View>
             
             <FlatGrid
-              itemDimension={wp(40)}
+              itemDimension={wp(20)}
               items={this.state.galleryPhoto}
               style={styles.gridView}
               renderItem={({ item, index }) => (
@@ -1581,141 +1585,144 @@ export default class ProfileCopy extends Component {
         </View>
 
         <Modal isVisible={this.state.isModalVisible}>
-          <View style={{ flex: 1, backgroundColor: 'white' }}>
+          {/* <View style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={styles.container1}>
-              {/* <Text style={styles.valueText}>
-                  Value = {selectedButton}
-              </Text> */}
-              {/* <RadioGroup radioButtons={this.state.data} onPress={(data, index) => { this.onPress(this.state.data.find(e => e.selected == true)) }} /> */}
               <View style={{ alignContent: 'center', marginLeft: 50 }}>
-              <RadioGroup
-                onSelect={(index, value) => this.onSelect(index, value)}
-              >
-                <RadioButton value={'Single'} >
-                  <Text>Single</Text>
-                </RadioButton>
-
-                <RadioButton value={'Married'}>
-                  <Text>Married</Text>
-                </RadioButton>
-
-                <RadioButton value={'In a relationship'}>
-                  <Text>In a relationship</Text>
-                </RadioButton>
-                <RadioButton value={'Separated'}>
-                  <Text>Separated</Text>
-                </RadioButton>
-                <RadioButton value={'In an open relationship'}>
-                  <Text>In an open relationship</Text>
-                </RadioButton>
-
-                <RadioButton value={'Widowed'}>
-                  <Text>Widowed</Text>
-                </RadioButton>
-                <RadioButton value={"It's complicated"}>
-                  <Text>It's complicated</Text>
-                </RadioButton>
-
-              </RadioGroup>
-             
+                <RadioGroup
+                  onSelect={(index, value) => this.onSelect(index, value)}
+                >
+                  <RadioButton value={'Single'} >
+                    <Text>Single</Text>
+                  </RadioButton>
+                  <RadioButton value={'Married'}>
+                    <Text>Married</Text>
+                  </RadioButton>
+                  <RadioButton value={'In a relationship'}>
+                    <Text>In a relationship</Text>
+                  </RadioButton>
+                  <RadioButton value={'Separated'}>
+                    <Text>Separated</Text>
+                  </RadioButton>
+                  <RadioButton value={'In an open relationship'}>
+                    <Text>In an open relationship</Text>
+                  </RadioButton>
+                  <RadioButton value={'Widowed'}>
+                    <Text>Widowed</Text>
+                  </RadioButton>
+                  <RadioButton value={"It's complicated"}>
+                    <Text>It's complicated</Text>
+                  </RadioButton>
+                </RadioGroup>
               </View>
-
             </View>
             <TouchableOpacity onPress={this._toggleModal}>
               <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
             </TouchableOpacity>
-          </View>
-        </Modal>
-        <Modal isVisible={this.state.isModalVisibleLocation}>
-          <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={styles.container1}>
-
-              <View style={styles.whereDataView}>
-                <TextInput style={styles.whereTextInput}
-                  onChangeText={(text) => this.setState({ permanentLocation: text })} placeholder="Enter where are you from?"
-                />
-                <Button title="Save your location" onPress={() => { this.onSaveLocation() }} />
+          </View> */}
+          <KeyboardAvoidingView style={styles.modalPersonalInfoContainer} behavior="padding" enabled>
+            <View style={{flex: 0.9}}>
+              <View style={styles.modalBioViewContent}>
+                <View style={{ alignContent: 'center', marginLeft: 50 }}>
+                  <RadioGroup
+                    onSelect={(index, value) => this.onSelect(index, value)}
+                    selectedIndex={this.state.relationShipStatusIndex}
+                  >
+                    <RadioButton value={'Single'} >
+                      <Text>Single</Text>
+                    </RadioButton>
+                    <RadioButton value={'Married'}>
+                      <Text>Married</Text>
+                    </RadioButton>
+                    <RadioButton value={'In a relationship'}>
+                      <Text>In a relationship</Text>
+                    </RadioButton>
+                    <RadioButton value={'Separated'}>
+                      <Text>Separated</Text>
+                    </RadioButton>
+                    <RadioButton value={'In an open relationship'}>
+                      <Text>In an open relationship</Text>
+                    </RadioButton>
+                    <RadioButton value={'Widowed'}>
+                      <Text>Widowed</Text>
+                    </RadioButton>
+                    <RadioButton value={"It's complicated"}>
+                      <Text>It's complicated</Text>
+                    </RadioButton>
+                  </RadioGroup>
+                </View>
               </View>
-
             </View>
-            <TouchableOpacity onPress={this._toggleModalLoaction}>
-              <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={{flex: 0.1, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModal}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </Modal>
+
+        <Modal isVisible={this.state.isModalVisibleLocation}>
+            <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+              <View style={{flex: 0.7}}>
+                <View style={styles.modalBioViewContent}>
+                  <View style={styles.whereDataView}>
+                    <TextInput style={styles.whereTextInput}
+                      defaultValue={this.state.permanentLocation}
+                      onChangeText={(text) => this.setState({ permanentLocation: text })} placeholder="Enter where are you from?"
+                    />
+                    {/* <Button title="Save your location" onPress={() => { this.onSaveLocation() }} /> */}
+                  </View>
+                </View>
+              </View>
+              <View style={{flex: 0.3, flexDirection: 'row'}}>
+                <View style={{flex: 1, justifyContent: 'center'}}>
+                  <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalLoaction}>
+                    <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{flex: 1}}>
+                  <TouchableOpacity style={styles.touchableOk} onPress={() => this.onSaveLocation()}>
+                    <Text style={{ alignSelf: 'center', color: 'white' }}>Save your location</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </KeyboardAvoidingView>
         </Modal>
 
         <Modal isVisible={this.state.isModalVisibleGender}>
-          <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={styles.container1}>
-
+          <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
+            <View style={{flex: 0.7}}>
+              <View style={styles.modalBioViewContent}>
               <View style={{ alignContent: 'center', marginLeft: 50 }}>
+                  <RadioGroup
+                    onSelect={(index, value) => this.onSelectGender(index, value)}
+                    selectedIndex={this.state._gender}
+                  >
+                    <RadioButton value={0} >
+                      <Text>Man</Text>
+                    </RadioButton>
 
-              <RadioGroup
-                onSelect={(index, value) => this.onSelectGender(index, value)}
-                selectedIndex={this.state._gender}
-              >
-                <RadioButton value={0} >
-                  <Text>Man</Text>
-                </RadioButton>
-
-                <RadioButton value={1}>
-                  <Text>Woman</Text>
-                </RadioButton>
-
-            
-
-              </RadioGroup>
-             
-                {/* <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 30 }}
-                  onChangeText={(text) => this.setState({ permanentLocation: text })} placeholder="Enter where are you from?"
-                /> */}
-                 {/* <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "row",
-
-                        marginBottom: 20,
-                        marginTop: 20
-                      }}
-                    >
-                      <Text
-                        style={{
-                          marginTop: 8,
-                          marginRight: 8
-                        }}
-                      >
-                        Gender
-                      </Text>
-                      <RadioForm
-                        radio_props={radio_props}
-                        initial={0}
-                        formHorizontal={true}
-                        labelHorizontal={true}
-                        buttonColor={"#2196f3"}
-                        animation={true}
-                        onPress={value => {
-                          this.setState({
-                            _gender: value
-                          });
-                        }}
-                      />
-                    </View>
-                     */}
-                    
-                {/* <Button title="Save" onPress={() => { this.onSaveGender() }} /> */}
+                    <RadioButton value={1}>
+                      <Text>Woman</Text>
+                    </RadioButton>
+                  </RadioGroup>
+                </View>
               </View>
-
             </View>
-            <TouchableOpacity onPress={this._toggleModalGender}>
-              <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.touchableCancel} onPress={this._toggleModalGender}>
+                  <Text style={{ alignSelf: 'center', color: 'white' }}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
         </Modal>
 
         <Modal isVisible={this.state.isModalVisibleBio}>
           <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
             <View style={{flex: 0.7}}>
-
               <View style={styles.modalBioViewContent}>
                 <TextInput style={styles.whereTextInput}
                   multiline={true}
@@ -1724,7 +1731,6 @@ export default class ProfileCopy extends Component {
                   onChangeText={(text) => this.setState({ bioText: text })} placeholder="Enter your bio"
                 />
               </View>
-
             </View>
             <View style={{flex: 0.3, flexDirection: 'row'}}>
               <View style={{flex: 1, justifyContent: 'center'}}>
@@ -1738,7 +1744,6 @@ export default class ProfileCopy extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            
           </KeyboardAvoidingView>
         </Modal>
 
@@ -1767,7 +1772,6 @@ export default class ProfileCopy extends Component {
         <Modal isVisible={this.state.isModalVisibleReligion}>
           <KeyboardAvoidingView style={styles.modalBioContainer} behavior="padding" enabled>
             <View style={{flex: 0.7}}>
-
               <View style={styles.modalBioViewContent}>
                 <TextInput style={styles.whereTextInput}
                   multiline={true}
@@ -1776,7 +1780,6 @@ export default class ProfileCopy extends Component {
                   onChangeText={(text) => this.setState({ religion: text })} placeholder="Enter your religion"
                 />
               </View>
-
             </View>
             <View style={{flex: 0.3, flexDirection: 'row'}}>
               <View style={{flex: 1, justifyContent: 'center'}}>
@@ -1790,7 +1793,6 @@ export default class ProfileCopy extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            
           </KeyboardAvoidingView>
         </Modal>
 
