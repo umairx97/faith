@@ -155,7 +155,6 @@ export default class ProfileCopy extends Component {
   }
 
   componentDidMount = async () => {
-    
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       this.androidGoInImmersive();
     });
@@ -682,36 +681,67 @@ export default class ProfileCopy extends Component {
   }
 
   onRelationshipPress = () => {
-    this._toggleModal();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModal();
+    }, 500);
     this.androidGoInImmersive();
   }
 
   onLocationPress = () => {
-    this._toggleModalLoaction();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalLoaction();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   onGenderPress = () => {
-    this._toggleModalGender();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalGender();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   onReligionPress = () => {
-    this._toggleModalReligion();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalReligion();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   onJobTitlePress = () => {
-    this._toggleModalJobTitle();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalJobTitle();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   onEducationPress = () => {
-    this._toggleModalEducation();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalEducation();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   onHeightPress = () => {
-    this._toggleModalHeight();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalHeight();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   onLanguagePress = () => {
-    this._toggleModalLanguage();
+    this._toggleModalPersonalInfo();
+    setTimeout(() => {
+      this._toggleModalLanguage();
+    }, 500);
+    this.androidGoInImmersive();
   }
 
   _toggleModal = () => {
@@ -880,7 +910,7 @@ export default class ProfileCopy extends Component {
         <TouchableOpacity onPress={() => { this.onLocationPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
             <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
-            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Location</Text>
+            <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>From</Text>
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
           </View>
         </TouchableOpacity>
@@ -1585,40 +1615,6 @@ export default class ProfileCopy extends Component {
         </View>
 
         <Modal isVisible={this.state.isModalVisible}>
-          {/* <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={styles.container1}>
-              <View style={{ alignContent: 'center', marginLeft: 50 }}>
-                <RadioGroup
-                  onSelect={(index, value) => this.onSelect(index, value)}
-                >
-                  <RadioButton value={'Single'} >
-                    <Text>Single</Text>
-                  </RadioButton>
-                  <RadioButton value={'Married'}>
-                    <Text>Married</Text>
-                  </RadioButton>
-                  <RadioButton value={'In a relationship'}>
-                    <Text>In a relationship</Text>
-                  </RadioButton>
-                  <RadioButton value={'Separated'}>
-                    <Text>Separated</Text>
-                  </RadioButton>
-                  <RadioButton value={'In an open relationship'}>
-                    <Text>In an open relationship</Text>
-                  </RadioButton>
-                  <RadioButton value={'Widowed'}>
-                    <Text>Widowed</Text>
-                  </RadioButton>
-                  <RadioButton value={"It's complicated"}>
-                    <Text>It's complicated</Text>
-                  </RadioButton>
-                </RadioGroup>
-              </View>
-            </View>
-            <TouchableOpacity onPress={this._toggleModal}>
-              <Text style={{ alignSelf: 'center' }}>Hide me!</Text>
-            </TouchableOpacity>
-          </View> */}
           <KeyboardAvoidingView style={styles.modalPersonalInfoContainer} behavior="padding" enabled>
             <View style={{flex: 0.9}}>
               <View style={styles.modalBioViewContent}>
