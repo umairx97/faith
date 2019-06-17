@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Text,
   View,
@@ -21,7 +21,8 @@ import { NoDataComponent } from "../ui/NoData";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Moment from "moment";
 import { Immersive } from 'react-native-immersive';
-import LinearGradient from "react-native-linear-gradient";
+import Icon from "react-native-vector-icons/FontAwesome";
+// import LinearGradient from "react-native-linear-gradient";
 // import {
 //   Menu,
 //   MenuOptions,
@@ -159,7 +160,7 @@ export default class ChatList extends Component {
             messageText: ''
           });
 
-          console.warn('chat nuova: ', chats);
+          // console.warn('chat nuova: ', chats);
 
           this.setState({
             loading: false,
@@ -304,6 +305,8 @@ export default class ChatList extends Component {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
       loginUserId: uidUser
+    }, () => {
+      this.getMatchedUsers();
     });
     
     this.getAllList();
@@ -505,6 +508,73 @@ export default class ChatList extends Component {
     );
   }
 
+  getMatchedUsers() {
+    var allUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/MatchedProfiles/" + this.state.loginUserId);
+    var key;
+    allUserProfile
+      .orderByChild("order")
+      .once("value")
+      .then(snapshot => {
+        // console.warn('test: ', snapshot);
+        snapshot.forEach(childSnapshot => {
+          key = childSnapshot.val().friendUid;
+          this.getUserDetail(key);
+        });
+      })
+      .catch(error => {
+        console.warn('getMatchedUsers', JSON.stringify(error));
+      });
+  }
+
+  getUserDetail = async key => {
+    // arr = [];
+    // instance = this;
+    var allUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + key);
+    // var varifiedUser;
+    var key;
+    var userProfileId;
+    var loginUser;
+    var userGender;
+    var userAge;
+    var genderName;
+    allUserProfile
+      .once("value")
+      .then(childSnapshot => {
+        // userProfileId = key;
+        // var childData = childSnapshot.val().profileImageURL;
+        var userName = childSnapshot.val().fullName;
+        console.warn('user matched: ', userName);
+        // varifiedUser = childSnapshot.val().isVarified;
+        // loginUser = childSnapshot.val().isLogin;
+        // userGender = childSnapshot.val().gender;
+        // if (userGender == 0) {
+        //   genderName = "Men";
+        // } else {
+        //   genderName = "Women";
+        // }
+        // userAge = childSnapshot.val().user_Dob;
+        // var getAge = this.userAgeShow(userAge);
+        // if (this.state.loginUserId != key) {
+        //   arr.push({
+        //     pName: userName,
+        //     pUrl: childData,
+        //     ids: userProfileId,
+        //     age: getAge,
+        //     gender: genderName
+        //   });
+        // }
+
+        this.setState({ showArr: arr, loading: false });
+      })
+      .catch(error => {
+        console.log(JSON.stringify(error));
+      });
+  };
+
   render() {
     if(this.state.loading) {
       return(
@@ -537,14 +607,29 @@ export default class ChatList extends Component {
           style={styles.colorPrimaryViewLinearGradient}
         > */}
           <View style={styles.header}>
-            <View style={{flex: 0.25}}>
-
+            <View style={styles.headerRow}>
+              <View style={{flex: 0.25, justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => Actions.pop()}>
+                  <Icon style={{fontSize: wp(7), marginLeft: wp(3)}} name="home" color="grey" />  
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
+                <Icon style={{textAlign: 'center', fontSize: wp(7)}} name="comments" color="red" />
+              </View>
+              <View style={{flex: 0.25}}>
+                
+              </View>
             </View>
-            <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
-              <Text style={{textAlign: 'center', fontSize: wp(8)}}>Messages</Text>
-            </View>
-            <View style={{flex: 0.25}}>
-              
+            <View style={styles.headerRow}>
+              <View style={{flex: 0.25}}>
+                
+              </View>
+              <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
+                <Text style={{textAlign: 'center', fontSize: wp(7), color: 'red', fontWeight: '500'}}>Messages</Text>
+              </View>
+              <View style={{flex: 0.25}}>
+                
+              </View>
             </View>
           </View>
           <View style={styles.mainView}>
@@ -553,68 +638,71 @@ export default class ChatList extends Component {
                 <NoDataComponent text={"No chats here yet"} onPress={() => Actions.Discover()}/>
               </View>
             :
-            <FlatList
-              data={this.state.showArr}
-              renderItem={({ item, index }) => (
-                  <View style={styles.mainProviderView}>
-                    <TouchableOpacity
-                      style={{flex: 1}}
-                      onPress={() => {
-                        this.onClickUser(item.ids, item.pName);
-                      }}
-                    >
-                      <View style={{ flexDirection: "row" }}>
-                        <View>
-                          <Image
-                            style={styles.chatListImage}
-                            source={{ uri: item.pUrl }}
-                          />
-                        </View>
-                        <View style={styles.itemChatRight}>
-                          <View style={{ flexDirection: 'row' }}>
+              <Fragment>
+                <Text style={styles.textSeparator}>Messages</Text>
+                <FlatList
+                  data={this.state.showArr}
+                  renderItem={({ item, index }) => (
+                      <View style={styles.mainProviderView}>
+                        <TouchableOpacity
+                          style={{flex: 1}}
+                          onPress={() => {
+                            this.onClickUser(item.ids, item.pName);
+                          }}
+                        >
+                          <View style={{ flexDirection: "row" }}>
                             <View>
-                              <Text style={styles.chatListName}>
-                                {item.pName}
-                              </Text>
+                              <Image
+                                style={styles.chatListImage}
+                                source={{ uri: item.pUrl }}
+                              />
                             </View>
-                            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
-                              {this.renderTime(item.time)}
+                            <View style={styles.itemChatRight}>
+                              <View style={{ flexDirection: 'row' }}>
+                                <View>
+                                  <Text style={styles.chatListName}>
+                                    {item.pName}
+                                  </Text>
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                                  {this.renderTime(item.time)}
+                                </View>
+                              </View>
+                              <View>
+                                <Text style={styles.chatListMessage}>
+                                  {item.messageText}
+                                </Text>
+                              </View>
+                              {/* <View>
+                                <Text style={styles.chatListTime}>
+                                  {item.time}
+                                </Text>
+                              </View> */}
                             </View>
                           </View>
-                          <View>
-                            <Text style={styles.chatListMessage}>
-                              {item.messageText}
-                            </Text>
-                          </View>
-                          {/* <View>
-                            <Text style={styles.chatListTime}>
-                              {item.time}
-                            </Text>
-                          </View> */}
-                        </View>
+                        </TouchableOpacity>
+                        {/* <View style={styles.viewMenu}>
+                          <Menu>
+                            <MenuTrigger>
+                              <Image source={Images.iconThreeDots} styles={styles.manupopUp} />
+                            </MenuTrigger>
+                            <MenuOptions>
+                              <MenuOption onSelect={() => this.onClickDelete(item.ids, index)} >
+                                <Text style={{ color: 'red' }}>Delete</Text>
+                              </MenuOption>
+                              <MenuOption onSelect={() => this.onClickBlock(item.ids, item.pName)}>
+                                <Text style={{ color: 'black' }}>Block</Text>
+                              </MenuOption>
+                              <MenuOption onSelect={() => this.onClickMarkunread(item.ids, item.pName)} text='Mark unread' />
+                            </MenuOptions>
+                          </Menu>
+                        </View> */}
                       </View>
-                    </TouchableOpacity>
-                    {/* <View style={styles.viewMenu}>
-                      <Menu>
-                        <MenuTrigger>
-                          <Image source={Images.iconThreeDots} styles={styles.manupopUp} />
-                        </MenuTrigger>
-                        <MenuOptions>
-                          <MenuOption onSelect={() => this.onClickDelete(item.ids, index)} >
-                            <Text style={{ color: 'red' }}>Delete</Text>
-                          </MenuOption>
-                          <MenuOption onSelect={() => this.onClickBlock(item.ids, item.pName)}>
-                            <Text style={{ color: 'black' }}>Block</Text>
-                          </MenuOption>
-                          <MenuOption onSelect={() => this.onClickMarkunread(item.ids, item.pName)} text='Mark unread' />
-                        </MenuOptions>
-                      </Menu>
-                    </View> */}
-                  </View>
-              )}
-              keyExtractor={item => item.ids}
-              extraData={this.state}
-            />
+                  )}
+                  keyExtractor={item => item.ids}
+                  extraData={this.state}
+                />
+              </Fragment>
             }
           </View>
           {/* </MenuProvider> */}
@@ -667,7 +755,7 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   chatListName: { 
-    fontSize: 16, 
+    fontSize: 16,
     // marginLeft: 10, 
     marginTop: 10, 
     fontWeight: '700' 
@@ -695,11 +783,39 @@ const styles = StyleSheet.create({
     height: wp(8),
     marginRight: wp(2)
   },
-  header: {
-    flex: 0.1,
+  headerRow: {
+    flex: 0.5,
     flexDirection: 'row',
-    borderBottomColor: "rgba(0, 0, 0, 0.2)",
-    borderBottomWidth: 1
+    // borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    // borderBottomWidth: 1
+  },
+  header: {
+    width: wp(100),
+    flex: 0.15,
+    backgroundColor: 'white',
+    // borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    // borderBottomWidth: 1,
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    elevation: 5,
+    // backgroundColor: 'blue'
+    // flexDirection: 'row',
+    // borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    // borderBottomWidth: 1
+  },
+  headerTop: {
+    flex: 0.5
+  },
+  textSeparator: {
+    color: 'red',
+    marginLeft: wp(3),
+    fontWeight: '500',
+    fontSize: 14
   }
  
 })

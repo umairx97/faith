@@ -960,7 +960,7 @@ const styles = StyleSheet.create({
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     height: hp(4),
-    ...ifIphoneX({ height: hp(8) })
+    ...ifIphoneX({ height: hp(7) })
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -969,11 +969,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     // height: 140,
-    height: hp(24),
-    ...ifIphoneX({ height: hp(23.5) }),
+    height: hp(22),
+    ...ifIphoneX({ height: hp(21) }),
     marginLeft: 18,
-    marginTop: hp(4),
-    ...ifIphoneX({ marginTop: hp(6) }),
+    marginTop: hp(3),
+    ...ifIphoneX({ marginTop: hp(5) }),
     marginRight: 16
   },
   panel1View: {
@@ -983,9 +983,9 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     // height: 220,
-    height: hp(30),
+    height: hp(28),
     marginLeft: 19,
-    marginTop: hp(6),
+    marginTop: hp(2.5),
     marginRight: 15
   },
   panel2View: {
@@ -1209,15 +1209,15 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: wp(27),
-    height: wp(27),
+    width: wp(26),
+    height: wp(26),
+    borderRadius: 50,
+    marginTop: hp(3),
     ...ifIphoneX({ 
-      height: wp(30),
-      width: wp(30),
-      borderRadius: wp(15)
+      height: wp(26),
+      width: wp(26),
+      borderRadius: 50
     }),
-    borderRadius: wp(14),
-    marginTop: hp(3)
     // marginLeft: 19,
   },
   landonGibsonText: {
