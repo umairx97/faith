@@ -12,7 +12,8 @@ import {
   ActivityIndicator,
   AsyncStorage,
   Alert,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
 import firebase from "react-native-firebase";
 import { ifIphoneX } from "react-native-iphone-x-helper";
@@ -45,7 +46,9 @@ export default class ChatList extends Component {
     super();
     this.state = {
       loading: true,
+      loadingNew: true,
       showArr: [],
+      showArrNew: [],
       allData: [],
       FullName: "",
       ImageProfileUrl: "",
@@ -68,12 +71,13 @@ export default class ChatList extends Component {
       arr = [];
       this.setState({
         showArr: [],
+        showArrNew: [],
         allData: [],
-        loading: true
+        loading: true,
+        loadingNew: true,
       }, async () => {
         chatOpen = await AsyncStorage.getItem("newChatMessage");
         this.getCurrentUserId();
-        // console.warn('chatOpen: ', chatOpen);
         BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());    
       });
     });
@@ -94,13 +98,10 @@ export default class ChatList extends Component {
   }
 
   getChatRef = async (frndKey) => {
-    // console.warn('getChatRef: ', frndKey);
-    // console.warn('generateChatId:', this.generateChatId(frndKey));
     var chatRef = firebase.database().ref("Users/FaithMeetsLove/chat/" + this.generateChatId(frndKey));
 
     chatRef.once("value").then(async snapshot => {
         if (snapshot.exists()) {
-          // console.warn('getChatRef - snapshot exist: ', snapshot);
           await this.getLastChatHistory(frndKey);
           return;
         }
@@ -159,8 +160,6 @@ export default class ChatList extends Component {
             time: '',
             messageText: ''
           });
-
-          // console.warn('chat nuova: ', chats);
 
           this.setState({
             loading: false,
@@ -240,8 +239,6 @@ export default class ChatList extends Component {
           return;
         }
 
-        // console.warn('chats n: ', arr.length);
-
         arr.sort((a, b) => Moment(b.time).valueOf() - Moment(a.time).valueOf());
         
         this.setState({ showArr: arr, loading: false });
@@ -253,12 +250,9 @@ export default class ChatList extends Component {
 
   getAllList = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
-    // console.warn('uidUser: ', uidUser);
     var alreadyChatUser = firebase.database().ref("Users/FaithMeetsLove/ChatUserList/" + uidUser);
     arrayKey = [];
     await alreadyChatUser.once('value').then(snapshot => {
-      // console.warn('snapshot test:', snapshot);
-      // console.warn('exists: ', snapshot.exists());
       // if((snapshot == null)||(snapshot == "null")||(snapshot == " null")||(snapshot.length == null)) {
       if (!snapshot.exists()) {
         this.setState({
@@ -267,7 +261,6 @@ export default class ChatList extends Component {
         return;
       }
       snapshot.forEach( async childSnapshot => {
-        // console.warn('childSnapshot: ', childSnapshot);
         key = childSnapshot.key;
         var x = childSnapshot.val()._show;
         if (x == true) {
@@ -306,7 +299,9 @@ export default class ChatList extends Component {
     this.setState({
       loginUserId: uidUser
     }, () => {
-      this.getMatchedUsers();
+      setTimeout(() => {
+        this.getMatchedUsers();
+      }, 3000);
     });
     
     this.getAllList();
@@ -314,7 +309,6 @@ export default class ChatList extends Component {
   };
 
   onClickUser = (id, name) => {
-    // console.warn('openChat: ', id);
     AsyncStorage.setItem("friendsUid", "" + id);
     AsyncStorage.setItem("friendName", name);
     AsyncStorage.setItem("openChatFrom", chatOpen)
@@ -390,7 +384,6 @@ export default class ChatList extends Component {
   }
 
   onClickBlock = (id, name) => {
-    //alert(id)
     // this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
       Alert.alert("Block!", "Are you sure you want to block " + name + " ?", [
@@ -517,7 +510,6 @@ export default class ChatList extends Component {
       .orderByChild("order")
       .once("value")
       .then(snapshot => {
-        // console.warn('test: ', snapshot);
         snapshot.forEach(childSnapshot => {
           key = childSnapshot.val().friendUid;
           this.getUserDetail(key);
@@ -529,51 +521,63 @@ export default class ChatList extends Component {
   }
 
   getUserDetail = async key => {
-    // arr = [];
+    var arr = [];
     // instance = this;
     var allUserProfile = firebase
       .database()
       .ref("Users/FaithMeetsLove/Registered/" + key);
     // var varifiedUser;
-    var key;
+    // var key;
     var userProfileId;
-    var loginUser;
+    // var loginUser;
     var userGender;
-    var userAge;
+    // var userAge;
     var genderName;
     allUserProfile
       .once("value")
       .then(childSnapshot => {
-        // userProfileId = key;
-        // var childData = childSnapshot.val().profileImageURL;
+        userProfileId = key;
+        var childData = childSnapshot.val().profileImageURL;
         var userName = childSnapshot.val().fullName;
-        console.warn('user matched: ', userName);
+        var uid = childSnapshot.val().uid;
         // varifiedUser = childSnapshot.val().isVarified;
         // loginUser = childSnapshot.val().isLogin;
-        // userGender = childSnapshot.val().gender;
-        // if (userGender == 0) {
-        //   genderName = "Men";
-        // } else {
-        //   genderName = "Women";
-        // }
+        userGender = childSnapshot.val().gender;
+        if (userGender == 0) {
+          genderName = "Men";
+        } else {
+          genderName = "Women";
+        }
         // userAge = childSnapshot.val().user_Dob;
         // var getAge = this.userAgeShow(userAge);
-        // if (this.state.loginUserId != key) {
-        //   arr.push({
-        //     pName: userName,
-        //     pUrl: childData,
-        //     ids: userProfileId,
-        //     age: getAge,
-        //     gender: genderName
-        //   });
-        // }
+        if (this.state.loginUserId != key) {
+          var isPresent = false;
+          for (let index = 0; index < this.state.showArr.length; index++) {
+            if(this.state.showArr[index].ids == userProfileId) {
+              isPresent = true;
+              return;
+            }
+          }
+          if(!isPresent) {
+            arr.push({
+              pName: userName,
+              pUrl: childData,
+              ids: userProfileId,
+              gender: genderName
+            });
+          }
+        }
 
-        this.setState({ showArr: arr, loading: false });
+        this.setState({ showArrNew: arr, loadingNew: false });
       })
       .catch(error => {
         console.log(JSON.stringify(error));
       });
   };
+
+  openNewChat(item) {
+    this.onClickUser(item.ids, item.pName);
+  }
 
   render() {
     if(this.state.loading) {
@@ -639,6 +643,28 @@ export default class ChatList extends Component {
               </View>
             :
               <Fragment>
+                {this.state.loadingNew ?
+                    <ActivityIndicator size="large" color="#0000ff" />
+                : null }
+                {this.state.showArrNew.length > 0 ?
+                  <View style={styles.viewNewMatches}>
+                    <Text style={styles.textSeparator}>New Matches</Text>
+                    <ScrollView
+                      horizontal={true}
+                    >
+                      {this.state.showArrNew.map((item, index) => (
+                        <TouchableOpacity key={index} onPress={()=>this.openNewChat(item)}>
+                          <View style={styles.viewNewMatchesItemView}>
+                            <Image source={{ uri: item.pUrl }}
+                              style={styles.chatListImage}
+                            ></Image>
+                            <Text>{item.pName}</Text>
+                          </View>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  </View>
+                : null }
                 <Text style={styles.textSeparator}>Messages</Text>
                 <FlatList
                   data={this.state.showArr}
@@ -816,6 +842,14 @@ const styles = StyleSheet.create({
     marginLeft: wp(3),
     fontWeight: '500',
     fontSize: 14
+  },
+  viewNewMatches: {
+    height: hp(20), 
+    marginTop: hp(2)
+  },
+  viewNewMatchesItemView: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
  
 })

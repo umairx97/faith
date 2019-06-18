@@ -969,7 +969,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1,
     // height: 140,
-    height: hp(22),
+    height: hp(24),
     ...ifIphoneX({ height: hp(21) }),
     marginLeft: 18,
     marginTop: hp(3),
@@ -985,8 +985,9 @@ const styles = StyleSheet.create({
     // height: 220,
     height: hp(28),
     marginLeft: 19,
-    marginTop: hp(2.5),
-    marginRight: 15
+    marginTop: hp(4),
+    marginRight: 15,
+    ...ifIphoneX({ marginTop: hp(3) }),
   },
   panel2View: {
     backgroundColor: "rgb(255, 255, 255)",
