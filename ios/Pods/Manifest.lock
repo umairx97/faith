@@ -217,6 +217,14 @@ PODS:
   - Protobuf (3.7.0)
   - React (0.57.2):
     - React/Core (= 0.57.2)
+  - react-native-camera (1.10.1):
+    - React
+    - react-native-camera/RCT (= 1.10.1)
+    - react-native-camera/RN (= 1.10.1)
+  - react-native-camera/RCT (1.10.1):
+    - React
+  - react-native-camera/RN (1.10.1):
+    - React
   - react-native-document-picker (2.3.0):
     - React
   - react-native-fbsdk (0.8.0):
@@ -234,6 +242,11 @@ PODS:
     - FBSDKShareKit
     - React
   - react-native-maps (0.22.1):
+    - React
+  - react-native-video (4.4.1):
+    - React
+    - react-native-video/Video (= 4.4.1)
+  - react-native-video/Video (4.4.1):
     - React
   - React/Core (0.57.2):
     - yoga (= 0.57.2.React)
@@ -279,9 +292,11 @@ DEPENDENCIES:
   - GoogleMaps (~> 2.7.0)
   - GoogleSignIn (~> 4.4.0)
   - GoogleUtilities (= 5.3.7)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-video (from `../node_modules/react-native-video/react-native-video.podspec`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/RCTImage (from `../node_modules/react-native`)
@@ -333,12 +348,16 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-video:
+    :path: "../node_modules/react-native-video/react-native-video.podspec"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
   yoga:
@@ -382,12 +401,14 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   React: f5ccb4f1a007ab0fd277417152a368900535bbf3
+  react-native-camera: 4987a0eec20dcf25dc0a61f8f8505c43379dd9ae
   react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
   react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
   react-native-maps: 5a3de82c153db99e5ac939cb2ed576f245514016
+  react-native-video: 481d46031d2a55c2b6fa8aaa9e9ad4a9b215aca5
   rn-fetch-blob: 766f85cabd2992300dfa1be2bc9e4e258abc6f04
   yoga: 46538ccbeefa7082c1406e895ae220e4d815c38b
 
-PODFILE CHECKSUM: b153bf8c3e193d58f529cee28ef64c01de88c9d7
+PODFILE CHECKSUM: 565f956328a6360531794040f457c204ba328b37
 
 COCOAPODS: 1.6.1

@@ -400,23 +400,14 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
-<<<<<<< HEAD
   React: f5ccb4f1a007ab0fd277417152a368900535bbf3
+  react-native-camera: 4987a0eec20dcf25dc0a61f8f8505c43379dd9ae
   react-native-document-picker: 8508bfda34be6c24a2cbecbe515b15108658c183
   react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
   react-native-maps: 5a3de82c153db99e5ac939cb2ed576f245514016
+  react-native-video: 481d46031d2a55c2b6fa8aaa9e9ad4a9b215aca5
   rn-fetch-blob: 766f85cabd2992300dfa1be2bc9e4e258abc6f04
   yoga: 46538ccbeefa7082c1406e895ae220e4d815c38b
-=======
-  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-camera: a8d04ef12749def72cae86b0b8d28c2de891a392
-  react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
-  react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
-  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
-  react-native-video: 44c6befbc1526283ca1919891fcebe4680feade4
-  rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
-  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
->>>>>>> 93792a357d3ba0ffcc45019fd235984ecc37f440
 
 PODFILE CHECKSUM: 565f956328a6360531794040f457c204ba328b37
 

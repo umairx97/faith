@@ -977,9 +977,9 @@ const styles = StyleSheet.create({
     // height: 220,
     height: hp(28),
     marginLeft: 19,
-    marginTop: hp(4),
+    marginTop: hp(3),
     marginRight: 15,
-    ...ifIphoneX({ marginTop: hp(3) }),
+    ...ifIphoneX({ marginTop: hp(2) }),
   },
   panel2View: {
     backgroundColor: "rgb(255, 255, 255)",
@@ -987,9 +987,9 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.08)",
     shadowRadius: 5,
     shadowOpacity: 1,
-    marginBottom: 17,
+    marginBottom: 25,
     marginLeft: 17,
-    marginTop: 15,
+    marginTop: 10,
     marginRight: 16
   },
   likesView: {
