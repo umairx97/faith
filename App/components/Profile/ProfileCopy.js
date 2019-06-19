@@ -13,7 +13,7 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import Moment from "moment";
 // import SlidingUpPanel from 'rn-sliding-up-panel';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
-import RadioForm, { RadioButtonInput, RadioButtonLabel } from "react-native-simple-radio-button";
+// import RadioForm, { RadioButtonInput, RadioButtonLabel } from "react-native-simple-radio-button";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Immersive } from 'react-native-immersive';
 import { FlatGrid } from 'react-native-super-grid';
@@ -424,10 +424,11 @@ export default class ProfileCopy extends Component {
           lifestyleAndSocial: lifestyleAndSocialData
         });
       }
-     
+
       instance.age();
     })
   }
+
   requestCameraPermission = async val => {
     try {
       const results = await PermissionsAndroid.requestMultiple([

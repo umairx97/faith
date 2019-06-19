@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Text,
   View,
@@ -12,7 +12,8 @@ import {
   ActivityIndicator,
   AsyncStorage,
   Alert,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
 import firebase from "react-native-firebase";
 import { ifIphoneX } from "react-native-iphone-x-helper";
@@ -21,7 +22,8 @@ import { NoDataComponent } from "../ui/NoData";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Moment from "moment";
 import { Immersive } from 'react-native-immersive';
-import LinearGradient from "react-native-linear-gradient";
+import Icon from "react-native-vector-icons/FontAwesome";
+// import LinearGradient from "react-native-linear-gradient";
 // import {
 //   Menu,
 //   MenuOptions,
@@ -44,7 +46,9 @@ export default class ChatList extends Component {
     super();
     this.state = {
       loading: true,
+      loadingNew: true,
       showArr: [],
+      showArrNew: [],
       allData: [],
       FullName: "",
       ImageProfileUrl: "",
@@ -67,12 +71,13 @@ export default class ChatList extends Component {
       arr = [];
       this.setState({
         showArr: [],
+        showArrNew: [],
         allData: [],
-        loading: true
+        loading: true,
+        loadingNew: true,
       }, async () => {
         chatOpen = await AsyncStorage.getItem("newChatMessage");
         this.getCurrentUserId();
-        // console.warn('chatOpen: ', chatOpen);
         BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid());    
       });
     });
@@ -93,13 +98,10 @@ export default class ChatList extends Component {
   }
 
   getChatRef = async (frndKey) => {
-    // console.warn('getChatRef: ', frndKey);
-    // console.warn('generateChatId:', this.generateChatId(frndKey));
     var chatRef = firebase.database().ref("Users/FaithMeetsLove/chat/" + this.generateChatId(frndKey));
 
     chatRef.once("value").then(async snapshot => {
         if (snapshot.exists()) {
-          // console.warn('getChatRef - snapshot exist: ', snapshot);
           await this.getLastChatHistory(frndKey);
           return;
         }
@@ -158,8 +160,6 @@ export default class ChatList extends Component {
             time: '',
             messageText: ''
           });
-
-          console.warn('chat nuova: ', chats);
 
           this.setState({
             loading: false,
@@ -239,8 +239,6 @@ export default class ChatList extends Component {
           return;
         }
 
-        // console.warn('chats n: ', arr.length);
-
         arr.sort((a, b) => Moment(b.time).valueOf() - Moment(a.time).valueOf());
         
         this.setState({ showArr: arr, loading: false });
@@ -252,12 +250,9 @@ export default class ChatList extends Component {
 
   getAllList = async () => {
     var uidUser = await firebase.auth().currentUser.uid;
-    // console.warn('uidUser: ', uidUser);
     var alreadyChatUser = firebase.database().ref("Users/FaithMeetsLove/ChatUserList/" + uidUser);
     arrayKey = [];
     await alreadyChatUser.once('value').then(snapshot => {
-      // console.warn('snapshot test:', snapshot);
-      // console.warn('exists: ', snapshot.exists());
       // if((snapshot == null)||(snapshot == "null")||(snapshot == " null")||(snapshot.length == null)) {
       if (!snapshot.exists()) {
         this.setState({
@@ -266,7 +261,6 @@ export default class ChatList extends Component {
         return;
       }
       snapshot.forEach( async childSnapshot => {
-        // console.warn('childSnapshot: ', childSnapshot);
         key = childSnapshot.key;
         var x = childSnapshot.val()._show;
         if (x == true) {
@@ -304,6 +298,10 @@ export default class ChatList extends Component {
     var uidUser = await firebase.auth().currentUser.uid;
     this.setState({
       loginUserId: uidUser
+    }, () => {
+      setTimeout(() => {
+        this.getMatchedUsers();
+      }, 3000);
     });
     
     this.getAllList();
@@ -311,7 +309,6 @@ export default class ChatList extends Component {
   };
 
   onClickUser = (id, name) => {
-    // console.warn('openChat: ', id);
     AsyncStorage.setItem("friendsUid", "" + id);
     AsyncStorage.setItem("friendName", name);
     AsyncStorage.setItem("openChatFrom", chatOpen)
@@ -387,7 +384,6 @@ export default class ChatList extends Component {
   }
 
   onClickBlock = (id, name) => {
-    //alert(id)
     // this.setState({ dialogVisible: false, dialogPlayVisible: false });
     setTimeout(() => {
       Alert.alert("Block!", "Are you sure you want to block " + name + " ?", [
@@ -505,6 +501,84 @@ export default class ChatList extends Component {
     );
   }
 
+  getMatchedUsers() {
+    var allUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/MatchedProfiles/" + this.state.loginUserId);
+    var key;
+    allUserProfile
+      .orderByChild("order")
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          key = childSnapshot.val().friendUid;
+          this.getUserDetail(key);
+        });
+      })
+      .catch(error => {
+        console.warn('getMatchedUsers', JSON.stringify(error));
+      });
+  }
+
+  getUserDetail = async key => {
+    var arr = [];
+    // instance = this;
+    var allUserProfile = firebase
+      .database()
+      .ref("Users/FaithMeetsLove/Registered/" + key);
+    // var varifiedUser;
+    // var key;
+    var userProfileId;
+    // var loginUser;
+    var userGender;
+    // var userAge;
+    var genderName;
+    allUserProfile
+      .once("value")
+      .then(childSnapshot => {
+        userProfileId = key;
+        var childData = childSnapshot.val().profileImageURL;
+        var userName = childSnapshot.val().fullName;
+        var uid = childSnapshot.val().uid;
+        // varifiedUser = childSnapshot.val().isVarified;
+        // loginUser = childSnapshot.val().isLogin;
+        userGender = childSnapshot.val().gender;
+        if (userGender == 0) {
+          genderName = "Men";
+        } else {
+          genderName = "Women";
+        }
+        // userAge = childSnapshot.val().user_Dob;
+        // var getAge = this.userAgeShow(userAge);
+        if (this.state.loginUserId != key) {
+          var isPresent = false;
+          for (let index = 0; index < this.state.showArr.length; index++) {
+            if(this.state.showArr[index].ids == userProfileId) {
+              isPresent = true;
+              return;
+            }
+          }
+          if(!isPresent) {
+            arr.push({
+              pName: userName,
+              pUrl: childData,
+              ids: userProfileId,
+              gender: genderName
+            });
+          }
+        }
+
+        this.setState({ showArrNew: arr, loadingNew: false });
+      })
+      .catch(error => {
+        console.log(JSON.stringify(error));
+      });
+  };
+
+  openNewChat(item) {
+    this.onClickUser(item.ids, item.pName);
+  }
+
   render() {
     if(this.state.loading) {
       return(
@@ -537,14 +611,29 @@ export default class ChatList extends Component {
           style={styles.colorPrimaryViewLinearGradient}
         > */}
           <View style={styles.header}>
-            <View style={{flex: 0.25}}>
-
+            <View style={styles.headerRow}>
+              <View style={{flex: 0.25, justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => Actions.pop()}>
+                  <Icon style={{fontSize: wp(7), marginLeft: wp(3)}} name="home" color="grey" />  
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
+                <Icon style={{textAlign: 'center', fontSize: wp(7)}} name="comments" color="red" />
+              </View>
+              <View style={{flex: 0.25}}>
+                
+              </View>
             </View>
-            <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
-              <Text style={{textAlign: 'center', fontSize: wp(8)}}>Messages</Text>
-            </View>
-            <View style={{flex: 0.25}}>
-              
+            <View style={styles.headerRow}>
+              <View style={{flex: 0.25}}>
+                
+              </View>
+              <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
+                <Text style={{textAlign: 'center', fontSize: wp(7), color: 'red', fontWeight: '500'}}>Messages</Text>
+              </View>
+              <View style={{flex: 0.25}}>
+                
+              </View>
             </View>
           </View>
           <View style={styles.mainView}>
@@ -553,68 +642,93 @@ export default class ChatList extends Component {
                 <NoDataComponent text={"No chats here yet"} onPress={() => Actions.Discover()}/>
               </View>
             :
-            <FlatList
-              data={this.state.showArr}
-              renderItem={({ item, index }) => (
-                  <View style={styles.mainProviderView}>
-                    <TouchableOpacity
-                      style={{flex: 1}}
-                      onPress={() => {
-                        this.onClickUser(item.ids, item.pName);
-                      }}
+              <Fragment>
+                {this.state.loadingNew ?
+                    <ActivityIndicator size="large" color="#0000ff" />
+                : null }
+                {this.state.showArrNew.length > 0 ?
+                  <View style={styles.viewNewMatches}>
+                    <Text style={styles.textSeparator}>New Matches</Text>
+                    <ScrollView
+                      horizontal={true}
                     >
-                      <View style={{ flexDirection: "row" }}>
-                        <View>
-                          <Image
-                            style={styles.chatListImage}
-                            source={{ uri: item.pUrl }}
-                          />
-                        </View>
-                        <View style={styles.itemChatRight}>
-                          <View style={{ flexDirection: 'row' }}>
-                            <View>
-                              <Text style={styles.chatListName}>
-                                {item.pName}
-                              </Text>
-                            </View>
-                            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
-                              {this.renderTime(item.time)}
-                            </View>
+                      {this.state.showArrNew.map((item, index) => (
+                        <TouchableOpacity key={index} onPress={()=>this.openNewChat(item)}>
+                          <View style={styles.viewNewMatchesItemView}>
+                            <Image source={{ uri: item.pUrl }}
+                              style={styles.chatListImage}
+                            ></Image>
+                            <Text>{item.pName}</Text>
                           </View>
-                          <View>
-                            <Text style={styles.chatListMessage}>
-                              {item.messageText}
-                            </Text>
-                          </View>
-                          {/* <View>
-                            <Text style={styles.chatListTime}>
-                              {item.time}
-                            </Text>
-                          </View> */}
-                        </View>
-                      </View>
-                    </TouchableOpacity>
-                    {/* <View style={styles.viewMenu}>
-                      <Menu>
-                        <MenuTrigger>
-                          <Image source={Images.iconThreeDots} styles={styles.manupopUp} />
-                        </MenuTrigger>
-                        <MenuOptions>
-                          <MenuOption onSelect={() => this.onClickDelete(item.ids, index)} >
-                            <Text style={{ color: 'red' }}>Delete</Text>
-                          </MenuOption>
-                          <MenuOption onSelect={() => this.onClickBlock(item.ids, item.pName)}>
-                            <Text style={{ color: 'black' }}>Block</Text>
-                          </MenuOption>
-                          <MenuOption onSelect={() => this.onClickMarkunread(item.ids, item.pName)} text='Mark unread' />
-                        </MenuOptions>
-                      </Menu>
-                    </View> */}
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
                   </View>
-              )}
-              keyExtractor={item => item.ids}
-              extraData={this.state}
-            />
+                : null }
+                <Text style={styles.textSeparator}>Messages</Text>
+                <FlatList
+                  data={this.state.showArr}
+                  renderItem={({ item, index }) => (
+                      <View style={styles.mainProviderView}>
+                        <TouchableOpacity
+                          style={{flex: 1}}
+                          onPress={() => {
+                            this.onClickUser(item.ids, item.pName);
+                          }}
+                        >
+                          <View style={{ flexDirection: "row" }}>
+                            <View>
+                              <Image
+                                style={styles.chatListImage}
+                                source={{ uri: item.pUrl }}
+                              />
+                            </View>
+                            <View style={styles.itemChatRight}>
+                              <View style={{ flexDirection: 'row' }}>
+                                <View>
+                                  <Text style={styles.chatListName}>
+                                    {item.pName}
+                                  </Text>
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                                  {this.renderTime(item.time)}
+                                </View>
+                              </View>
+                              <View>
+                                <Text style={styles.chatListMessage}>
+                                  {item.messageText}
+                                </Text>
+                              </View>
+                              {/* <View>
+                                <Text style={styles.chatListTime}>
+                                  {item.time}
+                                </Text>
+                              </View> */}
+                            </View>
+                          </View>
+                        </TouchableOpacity>
+                        {/* <View style={styles.viewMenu}>
+                          <Menu>
+                            <MenuTrigger>
+                              <Image source={Images.iconThreeDots} styles={styles.manupopUp} />
+                            </MenuTrigger>
+                            <MenuOptions>
+                              <MenuOption onSelect={() => this.onClickDelete(item.ids, index)} >
+                                <Text style={{ color: 'red' }}>Delete</Text>
+                              </MenuOption>
+                              <MenuOption onSelect={() => this.onClickBlock(item.ids, item.pName)}>
+                                <Text style={{ color: 'black' }}>Block</Text>
+                              </MenuOption>
+                              <MenuOption onSelect={() => this.onClickMarkunread(item.ids, item.pName)} text='Mark unread' />
+                            </MenuOptions>
+                          </Menu>
+                        </View> */}
+                      </View>
+                  )}
+                  keyExtractor={item => item.ids}
+                  extraData={this.state}
+                />
+              </Fragment>
             }
           </View>
           {/* </MenuProvider> */}
@@ -667,7 +781,7 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   chatListName: { 
-    fontSize: 16, 
+    fontSize: 16,
     // marginLeft: 10, 
     marginTop: 10, 
     fontWeight: '700' 
@@ -695,11 +809,47 @@ const styles = StyleSheet.create({
     height: wp(8),
     marginRight: wp(2)
   },
-  header: {
-    flex: 0.1,
+  headerRow: {
+    flex: 0.5,
     flexDirection: 'row',
-    borderBottomColor: "rgba(0, 0, 0, 0.2)",
-    borderBottomWidth: 1
+    // borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    // borderBottomWidth: 1
+  },
+  header: {
+    width: wp(100),
+    flex: 0.15,
+    backgroundColor: 'white',
+    // borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    // borderBottomWidth: 1,
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    elevation: 5,
+    // backgroundColor: 'blue'
+    // flexDirection: 'row',
+    // borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    // borderBottomWidth: 1
+  },
+  headerTop: {
+    flex: 0.5
+  },
+  textSeparator: {
+    color: 'red',
+    marginLeft: wp(3),
+    fontWeight: '500',
+    fontSize: 14
+  },
+  viewNewMatches: {
+    height: hp(20), 
+    marginTop: hp(2)
+  },
+  viewNewMatchesItemView: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
  
 })

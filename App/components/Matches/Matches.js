@@ -42,7 +42,6 @@ export default class Matches extends Component {
       ImageProfileUrl: "",
       Gender: 0
     };
-    // this.getCurrentUserId();
   }
 
   componentDidMount() {
@@ -158,21 +157,6 @@ export default class Matches extends Component {
             age: getAge,
             gender: genderName
           });
-          // test
-          // arr.push({
-          //   pName: userName,
-          //   pUrl: childData,
-          //   ids: userProfileId,
-          //   age: getAge,
-          //   gender: genderName
-          // });
-          // arr.push({
-          //   pName: userName,
-          //   pUrl: childData,
-          //   ids: userProfileId,
-          //   age: getAge,
-          //   gender: genderName
-          // });
         }
 
         this.setState({ showArr: arr, loading: false });
