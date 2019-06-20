@@ -1121,7 +1121,7 @@ export default class ProfileCopy extends Component {
       });
 
     this._toggleModalBio();
-    this._panel.hide();
+    // this._panel.hide();
   }
 
   onSaveReligion = () => {

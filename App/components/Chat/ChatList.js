@@ -613,9 +613,9 @@ export default class ChatList extends Component {
           <View style={styles.header}>
             <View style={styles.headerRow}>
               <View style={{flex: 0.25, justifyContent: 'center'}}>
-                <TouchableOpacity onPress={() => Actions.pop()}>
+                {/* <TouchableOpacity onPress={() => Actions.pop()}>
                   <Icon style={{fontSize: wp(7), marginLeft: wp(3)}} name="home" color="grey" />  
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
               <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
                 <Icon style={{textAlign: 'center', fontSize: wp(7)}} name="comments" color="red" />
