@@ -57,17 +57,13 @@ export default class Discover extends Component {
 
   }
 
-  // static onEnter() {
-  //   Actions.refresh({action:new Date().getTime()});
-  // }
-
-  // async componentWillReceiveProps(nextProps){
-  //   await this.getSearchFilter();
-  // }
-
   async componentWillMount() {
     // await this.getSearchFilter();
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+        this.androidGoInImmersive();
+        return true;
+      });
       arrayKey = [];
       this.setState({
         showArr: [],
@@ -101,11 +97,11 @@ export default class Discover extends Component {
 
   componentDidMount() {
     this.getCurrentUserId();
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-        return true;
-      });
-    });
+    // this.focusListener = this.props.navigation.addListener("didFocus", () => {
+    //   this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+    //     return true;
+    //   });
+    // });
   }
 
   componentWillUnmount() {
@@ -405,6 +401,7 @@ export default class Discover extends Component {
         Alert.alert("fail" + error.toString());
       });
   };
+
   rejectUserProfile = async id => {
     firebase
       .database()
@@ -503,6 +500,7 @@ export default class Discover extends Component {
     //   totalAge: ageFull
     // })
   };
+
   calculate_age = (birth_month, birth_day, birth_year) => {
     today_date = new Date();
     today_year = today_date.getFullYear();
@@ -518,6 +516,7 @@ export default class Discover extends Component {
     }
     return age;
   };
+
   renderAllAccount = items => {
     var x = items;
     return items.map(item => {
@@ -563,6 +562,7 @@ export default class Discover extends Component {
       );
     });
   };
+
   async viewFullProfile(id) {
     this.setState({ isModalVisible: !this.state.isModalVisible });
     this.swiper.goBackFromTop();

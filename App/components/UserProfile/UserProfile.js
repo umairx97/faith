@@ -1,5 +1,8 @@
-import { Text, StyleSheet, View, Image, BackHandler, AsyncStorage, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from "react-native";
-import React from "react";
+/*
+* User Public profile
+*/ 
+import React, { Component, Fragment } from "react";
+import { Text, StyleSheet, View, Image, BackHandler, AsyncStorage, TouchableOpacity, ActivityIndicator, Dimensions, Platform, Button } from "react-native";
 import { FlatGrid } from 'react-native-super-grid';
 import { ScrollView } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
@@ -8,7 +11,8 @@ import { Images } from "../../../assets/imageAll";
 import firebase from "react-native-firebase";
 import { TagSelect } from 'react-native-tag-select';
 import { Immersive } from 'react-native-immersive';
-import Moment from "moment";
+import Video from 'react-native-video';
+// import Moment from "moment";
 
 
 const Screen = {
@@ -96,10 +100,10 @@ export default class UserProfile extends React.Component {
       isModalVisibleLanguage: false,
       isModalVisiblePersonalInfo: false,
       personalInfoIsCollapsed: true,
-      relationShipStatus: 'Unknown',
+      relationShipStatus: '',
       relationShipStatusIndex: 0,
       showComponmentB: '',
-      permanentLocation: 'Unknown',
+      permanentLocation: '',
       bioText: '',
       religion: '',
       jobTitle: '',
@@ -108,7 +112,7 @@ export default class UserProfile extends React.Component {
       language: '',
       likes: '',
       matched: '',
-      genderInfo: 'Unknown',
+      genderInfo: '',
       uploadMediaGallery: false,
       uploadMediaGalleryIndex: null,
       uploadMediaGalleryCanDelete: false,
@@ -127,7 +131,9 @@ export default class UserProfile extends React.Component {
       var profileID = await AsyncStorage.getItem("userProfileKeys");
       this.loadProfileData(profileID);
       // load likes and matched stats
-      this.loadProfileStats(profileID);
+      setTimeout(() => {
+        this.loadProfileStats(profileID);
+      }, 2000);
       this.androidGoInImmersive();
     });
     
@@ -161,60 +167,68 @@ export default class UserProfile extends React.Component {
       var heightData = snapshot.val().height;
       var languageData = snapshot.val().language;
       var videoData = snapshot.val().profileVideo;
+      var bioText = snapshot.val().bioText;
       var interestsData = [];
       try {
         interestsData = JSON.parse(snapshot.val().interests);
-        this.tag.setState({ value: interestsData });
+        // instance.tag.setState({ value: interestsData });
       } catch (error) {
         
       }
       var lifestyleAndSocialData = [];
       try {
         lifestyleAndSocialData = JSON.parse(snapshot.val().lifestyleAndSocial);
-        this.tag2.setState({ value: lifestyleAndSocialData });
+        // instance.tag2.setState({ value: lifestyleAndSocialData });
       } catch (error) {
         
       }
-      
+
+      var mediaPhoto = [];
 
       var ImageUrl1 = '';
       if(snapshot.val().profileImageURL1 != null) {
         ImageUrl1 = snapshot.val().profileImageURL1;
+        mediaPhoto.push({url: ImageUrl1});
       }
       var ImageUrl2 = '';
       if(snapshot.val().profileImageURL2 != null) {
         ImageUrl2 = snapshot.val().profileImageURL2;
+        mediaPhoto.push({url: ImageUrl2});
       }
       var ImageUrl3 = '';
       if(snapshot.val().profileImageURL3 != null) {
         ImageUrl3 = snapshot.val().profileImageURL3;
+        mediaPhoto.push({url: ImageUrl3});
       }
       var ImageUrl4 = '';
       if(snapshot.val().profileImageURL4 != null) {
         ImageUrl4 = snapshot.val().profileImageURL4;
+        mediaPhoto.push({url: ImageUrl4});
       }
       var ImageUrl5 = '';
       if(snapshot.val().profileImageURL5 != null) {
         ImageUrl5 = snapshot.val().profileImageURL5;
+        mediaPhoto.push({url: ImageUrl5});
       }
       var ImageUrl6 = '';
       if(snapshot.val().profileImageURL6 != null) {
         ImageUrl6 = snapshot.val().profileImageURL6;
+        mediaPhoto.push({url: ImageUrl6});
       }
       var ImageUrl7 = '';
       if(snapshot.val().profileImageURL7 != null) {
         ImageUrl7 = snapshot.val().profileImageURL7;
+        mediaPhoto.push({url: ImageUrl7});
       }
 
-      var mediaPhoto = [
-        { url: ImageUrl1 },
-        { url: ImageUrl2 },
-        { url: ImageUrl3 },
-        { url: ImageUrl4 },
-        { url: ImageUrl5 },
-        { url: ImageUrl6 },
-        // { url: ImageUrl7 },
-      ];
+      // var mediaPhoto = [
+      //   { url: ImageUrl1 },
+      //   { url: ImageUrl2 },
+      //   { url: ImageUrl3 },
+      //   { url: ImageUrl4 },
+      //   { url: ImageUrl5 },
+      //   { url: ImageUrl6 }
+      // ];
       
       if(genderData==0)
       {
@@ -248,7 +262,8 @@ export default class UserProfile extends React.Component {
           galleryPhoto: mediaPhoto,
           galleryVideo: videoData,
           interests: interestsData,
-          lifestyleAndSocial: lifestyleAndSocialData
+          lifestyleAndSocial: lifestyleAndSocialData,
+          bioText: bioText
         });
       } else {
         instance.setState({
@@ -269,10 +284,11 @@ export default class UserProfile extends React.Component {
           galleryPhoto: mediaPhoto,
           galleryVideo: videoData,
           interests: interestsData,
-          lifestyleAndSocial: lifestyleAndSocialData
+          lifestyleAndSocial: lifestyleAndSocialData,
+          bioText: bioText
         });
       }
-     
+      
       // instance.age();
     });
   }
@@ -311,6 +327,36 @@ export default class UserProfile extends React.Component {
     }
   }
 
+  age = () => {
+    var userAge = this.state.dateOfBirth;
+
+    var date = userAge.split('-')[0]
+    var month = userAge.split('-')[1]
+    var year = userAge.split('-')[2]
+
+    var ageFull = this.calculate_age(month, date, year);
+
+    this.setState({
+      totalAge: ageFull
+    })
+  }
+
+  calculate_age = (birth_month, birth_day, birth_year) => {
+    today_date = new Date();
+    today_year = today_date.getFullYear();
+    today_month = today_date.getMonth();
+    today_day = today_date.getDate();
+    age = today_year - birth_year;
+
+    if (today_month < (birth_month - 1)) {
+      age--;
+    }
+    if (((birth_month - 1) == today_month) && (today_day < birth_day)) {
+      age--;
+    }
+    return age;
+  }
+
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) // Remove listener
   }
@@ -338,15 +384,18 @@ export default class UserProfile extends React.Component {
               <View>
 
               </View>
-              <TouchableOpacity onPress={() => { this.onProfileImagePressed() }}>
+              <TouchableOpacity>
                 <Image source={{ uri: this.state.imageProfileUrl }}
                   style={styles.ovalImage}
                 />
               </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text><Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text>
-              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{this.state.totalAge}</Text>
+              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text>
+              {/* <Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text> */}
+              {this.state.totalAge != '' ?
+                <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{', '+this.state.totalAge}</Text>
+              : null }
             </View>
 
             
@@ -389,51 +438,67 @@ export default class UserProfile extends React.Component {
                 </View>
 
               </View>
-              {/* <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.homePage}
-                  style={{ height: 25, width: 25, tintColor: 'grey' }} />
-                  <Text style={{ marginLeft: 10, marginTop: 5 }}>Lives in {this.state.place}</Text></View>
-              </View> */}
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>From : {this.state.permanentLocation}</Text></View>
+                <View style={{ flexDirection: 'row', marginRight: wp(6) }}>
+                  <Image source={Images.locationIcon} style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Bio : {this.state.bioText}</Text></View>
               </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.statusIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
-                  style={styles.personalDataView} />
-                  <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
-              </View>
+              {((this.state.permanentLocation != '')&&(this.state.permanentLocation != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>From : {this.state.permanentLocation}</Text></View>
+                </View>
+              : null }
+              {((this.state.relationShipStatus != '')&&(this.state.relationShipStatus != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.statusIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Realtionship Status : {this.state.relationShipStatus}</Text></View>
+                </View>
+              : null }
+              {((this.state.genderInfo != '')&&(this.state.genderInfo != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
+                </View>
+              : null }
+              {((this.state.religion != '')&&(this.state.religion != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
+                </View>
+              : null }
+              {((this.state.jobTitle != '')&&(this.state.jobTitle != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
+                </View>
+              : null }
+              {((this.state.education != '')&&(this.state.education != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
+                </View>
+              : null }
+              {((this.state.height != '')&&(this.state.height != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
+                </View>
+              : null }
+              {((this.state.language != '')&&(this.state.language != undefined)) ?
+                <View style={{ marginTop: 10 }}>
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                    style={styles.personalDataView} />
+                    <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
+                </View>
+              : null }
             </View>
           </View>
         {/* </Collapsible> */}
@@ -520,10 +585,10 @@ export default class UserProfile extends React.Component {
                       style={styles.gridImage}
                     />
                   : null }
-                  {/* {item.url == '' ?
-                    <Image style={{ height: wp(10), width: wp(10) }} source={Images.addIcon}></Image>
-                  : null} */}
                 </TouchableOpacity>
+              )}
+              ListEmptyComponent={() => (
+                <Text>No photos</Text>
               )}
               extraData={this.state}
             />
@@ -532,9 +597,8 @@ export default class UserProfile extends React.Component {
               <Text style={{ fontSize: 14, color: 'grey', marginLeft: 13, marginTop: hp(3), marginBottom: hp(3) }}>Video</Text>
             </View>
 
-            <View>
+            <View style={{flex: 0.5}}>
                 {this.state.galleryVideo != null ?
-                  <Fragment>
                     <View style={{flex: 1, height: hp(35), width: '100%', justifyContent: 'center', alignContent: 'center', alignItems: 'center', zIndex: 1}}>
                         <Video source={{uri: this.state.galleryVideo}}
                             controls={true}
@@ -545,8 +609,6 @@ export default class UserProfile extends React.Component {
                             style={styles.backgroundVideo} 
                           />
                     </View>
-                    <Button style={{marginTop: hp(25)}} title='Options' />
-                  </Fragment>
                 : null}
                 {this.state.galleryVideo == null ?
                   <Text>No video</Text>
@@ -572,39 +634,34 @@ export default class UserProfile extends React.Component {
 
           <View style={{ margin: 10 }}>
             {this.state.nameFull != '' ?
-              <TagSelect
-                data={data}
-                value={this.state.interests}
-                // onItemPress={(data) => this.onTagInterestPress(data)}
-                ref={(tag) => {
-                  this.tag = tag;
-                }}
-                onMaxError={() => {
-                  alert('Ops', 'Max reached');
-                }}
-              />
+              // <TagSelect
+              //   data={data}
+              //   value={this.state.interests}
+              //   // onItemPress={(data) => this.onTagInterestPress(data)}
+              //   ref={(tag) => {
+              //     this.tag = tag;
+              //   }}
+              //   onMaxError={() => {
+              //     alert('Ops', 'Max reached');
+              //   }}
+              // />
+              <Fragment>
+                <FlatGrid
+                  // itemDimension={wp(15)}
+                  items={this.state.interests}
+                  style={styles.gridView}
+                  renderItem={({ item, index }) => (
+                    <View style={styles.gridItemTag}>
+                      <Text>{item.label}</Text>
+                    </View>
+                  )}
+                  ListEmptyComponent={() => (
+                    <Text>No interests</Text>
+                  )}
+                  extraData={this.state}
+                />
+              </Fragment>
             : null }
-            {/* <View style={styles.buttonContainer}>
-            <View style={styles.buttonInner}> */}
-            {/* <Button
-                title="Get selected count"
-                style={styles.button}
-                onPress={() => {
-                 alert('Selected count', `Total: ${this.tag.totalSelected}`);
-                }}
-              /> */}
-
-            {/* </View>
-            <View> */}
-            {/* <Button
-                title="Get selected"
-                onPress={() => {
-                 alert('Selected items:', JSON.stringify(this.tag.itemsSelected));
-                }}
-              /> */}
-            {/* </View>
-          </View> */}
-
           </View>
         </View>
 
@@ -622,22 +679,37 @@ export default class UserProfile extends React.Component {
           </View>
           <View style={{ margin: 10 }}>
             {this.state.nameFull != '' ?
-              <TagSelect
-                ref={(tag) => {
-                  this.tag2 = tag;
-                }}
-                value={this.state.lifestyleAndSocial}
-                // onItemPress={(data) => this.onTagLifeAndSocialPress(data)}
-                data={dataLifeStyle}
-                itemStyle={styles.item}
-                itemLabelStyle={styles.label}
-                itemStyleSelected={styles.itemSelected}
-                itemLabelStyleSelected={styles.labelSelected}
-              />
+              // <TagSelect
+              //   ref={(tag) => {
+              //     this.tag2 = tag;
+              //   }}
+              //   value={this.state.lifestyleAndSocial}
+              //   // onItemPress={(data) => this.onTagLifeAndSocialPress(data)}
+              //   data={dataLifeStyle}
+              //   itemStyle={styles.item}
+              //   itemLabelStyle={styles.label}
+              //   itemStyleSelected={styles.itemSelected}
+              //   itemLabelStyleSelected={styles.labelSelected}
+              // />
+              <Fragment>
+                <FlatGrid
+                  // itemDimension={wp(20)}
+                  items={this.state.lifestyleAndSocial}
+                  style={styles.gridViewTags}
+                  renderItem={({ item, index }) => (
+                    <View style={styles.gridItemTag}>
+                      <Text>{item.label}</Text>
+                    </View>
+                  )}
+                  ListEmptyComponent={() => (
+                    <Text>No lifestyle and social</Text>
+                  )}
+                  extraData={this.state}
+                />
+              </Fragment>
             : null }
           </View>
         </View>
-
       </ScrollView>
       {this.state.isLoading ?
         <View style={styles.viewLoading}>
@@ -825,6 +897,9 @@ const styles = StyleSheet.create({
     marginTop: hp(2),
     flex: 1,
   },
+  gridViewTags: {
+    marginTop: hp(2)
+  },
   gridImage: {
     resizeMode: 'cover',
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -838,11 +913,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  gridItemTag: {
+    height: hp(7),
+    flex: 1,
+    padding: wp(2),
+    borderRadius: 25,
+    backgroundColor: 'rgba(238, 238, 238, 0.6)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   backgroundVideo: {
     position: 'absolute',
     top: 0,
     left: 0,
-    bottom: hp(5),
+    // bottom: hp(5),
+    bottom: 0,
     right: 0,
   },
   viewLoading: {

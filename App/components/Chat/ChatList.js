@@ -510,13 +510,15 @@ export default class ChatList extends Component {
       .orderByChild("order")
       .once("value")
       .then(snapshot => {
+        // console.warn('getMatchedUsers - response: ', snapshot);
         snapshot.forEach(childSnapshot => {
+          // console.warn('getMatchedUsers - childSnapshot: ', childSnapshot);
           key = childSnapshot.val().friendUid;
           this.getUserDetail(key);
         });
       })
       .catch(error => {
-        console.warn('getMatchedUsers', JSON.stringify(error));
+        // console.warn('getMatchedUsers', JSON.stringify(error));
       });
   }
 
@@ -536,6 +538,7 @@ export default class ChatList extends Component {
     allUserProfile
       .once("value")
       .then(childSnapshot => {
+        // console.warn('getUserDetail - childSnapshot: ', childSnapshot);
         userProfileId = key;
         var childData = childSnapshot.val().profileImageURL;
         var userName = childSnapshot.val().fullName;
@@ -553,8 +556,15 @@ export default class ChatList extends Component {
         if (this.state.loginUserId != key) {
           var isPresent = false;
           for (let index = 0; index < this.state.showArr.length; index++) {
+            // console.warn('test: ' + this.state.showArr[index].ids + ' | ' + userProfileId);
             if(this.state.showArr[index].ids == userProfileId) {
               isPresent = true;
+              // console.warn('stop here: ', userProfileId);
+              if(this.state.loadingNew) {
+                this.setState({
+                  loadingNew: false
+                });
+              }
               return;
             }
           }
@@ -567,11 +577,9 @@ export default class ChatList extends Component {
             });
           }
         }
-
         this.setState({ showArrNew: arr, loadingNew: false });
-      })
-      .catch(error => {
-        console.log(JSON.stringify(error));
+      }).catch(error => {
+        console.warn(JSON.stringify(error));
       });
   };
 

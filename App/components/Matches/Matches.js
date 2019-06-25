@@ -91,13 +91,16 @@ export default class Matches extends Component {
       .orderByChild("order")
       .once("value")
       .then(snapshot => {
+        if(snapshot.val() == null) {
+          this.setState({ loading: false });
+          return;
+        }
         snapshot.forEach(childSnapshot => {
           key = childSnapshot.val().friendUid;
           this.getUserDetail(key);
           // this.frndList(key);
         });
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log(JSON.stringify(error));
       });
   };

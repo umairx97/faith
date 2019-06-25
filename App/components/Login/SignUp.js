@@ -259,6 +259,7 @@ export default class SignUp extends Component {
         const { code, message } = error;
         console.warn(message + " Errorcode " + code);
         Alert.alert(message + " Errorcode " + code);
+        this.androidGoInImmersive();
       });
   };
 

@@ -655,10 +655,13 @@ export default class ProfileCopy extends Component {
 
   age = () => {
     var userAge = this.state.dateOfBirth;
+    if(this.state.dateOfBirth == "0") {
+      return;
+    }
 
-    var date = userAge.split('-')[0]
-    var month = userAge.split('-')[1]
-    var year = userAge.split('-')[2]
+    var date = userAge.split('-')[0];
+    var month = userAge.split('-')[1];
+    var year = userAge.split('-')[2];
 
     var ageFull = this.calculate_age(month, date, year);
 
@@ -1268,8 +1271,11 @@ export default class ProfileCopy extends Component {
               </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text><Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text>
-              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{this.state.totalAge}</Text>
+              <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text>
+              {/* <Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text> */}
+              {this.state.totalAge != '' ?
+                <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{', '+this.state.totalAge}</Text>
+              : null }
             </View>
             <View>
               {/* <Text style={{ margin: 10 }}>ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj</Text> */}
@@ -1326,6 +1332,11 @@ export default class ProfileCopy extends Component {
                 <View><Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Personal Info</Text>
                 </View>
 
+              </View>
+              <View style={{ marginTop: 10 }}>
+                <View style={{ flexDirection: 'row', marginRight: wp(6) }}>
+                  <Image source={Images.locationIcon} style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Bio : {this.state.bioText}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}><Image source={Images.homePage}

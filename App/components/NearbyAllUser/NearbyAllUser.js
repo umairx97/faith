@@ -220,7 +220,6 @@ export default class NearbyAllUser extends React.Component {
   }
 
   openClickedProfile(usrId) {
-    alert(usrId);
     AsyncStorage.setItem("userProfileKeys", usrId);
     setTimeout(() => Actions.userProfile(), 500);
   };
