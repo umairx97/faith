@@ -46,13 +46,14 @@ export default class NearbyAllUser extends React.Component {
     };
   }
 
-  async componentWillMount() {
-    await this.getSearchFilter();
-  }
+  // async componentWillMount() {
+  //   await this.getSearchFilter();
+  // }
 
   async componentDidMount() {
     // this.getAllNearbyUser();
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+    this.focusListener = this.props.navigation.addListener("didFocus", async () => {
+      await this.getSearchFilter();
       this.setState({
         loading: true,
         allArr: []
@@ -76,7 +77,7 @@ export default class NearbyAllUser extends React.Component {
       myLong = snapshot.val().longitude;
       this.setState({ myLatitude: myLat, myLongitude: myLong });
     });
-    //  alert(this.state.myLatitude)
+    
     var varifiedUser;
     var key;
     var userProfileId;
@@ -108,9 +109,7 @@ export default class NearbyAllUser extends React.Component {
         
         var getAge = this.userAgeShow(userAge);
 
-        
         if (uidUser != key) {
-          
           // console.warn('getDistance: ', 'myPos: ' + myLat + ':' + myLong + ' | friendPos: ' + friendLatitude + ':' + friendLongitude);
           let distanceBetweenFriends = 1000000;
           if((friendLatitude != null)&&(friendLongitude != null)) {
@@ -122,7 +121,6 @@ export default class NearbyAllUser extends React.Component {
               { lat: friendLatitude, lon: friendLongitude }
             );
           }
-          
           
           // console.warn('user: ', 'varifiedUser: ', varifiedUser + ' | ' + 'distance: ', distanceBetweenFriends/1000 + ' | ' + this.state.userDistanceShow + ' | ' + 'age: ', getAge + ' | from: ' + this.state.ageFromShow + ' | to: ' + this.state.ageToShow);
           if (
@@ -148,13 +146,10 @@ export default class NearbyAllUser extends React.Component {
                 });
               }
             } catch (error) {
-              console.warn('errore 3');
+              console.warn('error 3');
             }
-            
           }
-          
         }
-        
       });
       this.setState({
         allArr: arrayKey,
@@ -220,7 +215,6 @@ export default class NearbyAllUser extends React.Component {
   }
 
   openClickedProfile(usrId) {
-    alert(usrId);
     AsyncStorage.setItem("userProfileKeys", usrId);
     setTimeout(() => Actions.userProfile(), 500);
   };

@@ -381,11 +381,20 @@ export default class DrawerScreen extends React.Component {
     Actions.Discover();
     Actions.drawerClose();
   };
+
   onChatPressed = () => {
     AsyncStorage.setItem("newChatMessage", "true");
     Actions.chatList();
   };
+
   signOutGoogle = async () => {
+    try {
+      GoogleSignin.configure();
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+    } catch (error) {
+      console.error(error);
+    }
     firebase
       .auth()
       .signOut()
@@ -393,6 +402,7 @@ export default class DrawerScreen extends React.Component {
         Actions.reset("login");
       });
   };
+
   signOutFacebook = async () => {
     await LoginManager.logOut();
     await firebase
@@ -402,12 +412,15 @@ export default class DrawerScreen extends React.Component {
         Actions.reset("login");
       });
   };
+
   onProfileImagerPressed = () => {
     Actions.ProfileCopy();
   };
+
   onMatchPressed = () => {
     Actions.matchProfile();
   };
+
   onEventPressed=()=>{
     Actions.DiscoverEvent();
   }

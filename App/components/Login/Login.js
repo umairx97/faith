@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
-  ScrollView
+  Platform
 } from "react-native";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
@@ -15,7 +15,8 @@ import Discover from "../Discover/Discover";
 import { Actions } from "react-native-router-flux";
 import { RkButton } from "react-native-ui-kitten";
 import { StatusBar } from "react-native";
-console.disableYellowBox = true;
+import { Immersive } from 'react-native-immersive';
+// console.disableYellowBox = true;
 export default class Login extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -32,15 +33,18 @@ export default class Login extends React.Component {
 
   componentDidMount() {
     StatusBar.setHidden(true);
+    this.androidGoInImmersive();
   }
 
   onFacebookPressed = () => {
     this.props.navigation.navigate("UniversalTabView");
   };
 
-  // onGooglePressed = () => {
-
-  // }
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
+  }
 
   render() {
     return (

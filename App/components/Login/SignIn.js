@@ -118,7 +118,7 @@ export default class SignIn extends Component {
       })
       .then(user => {
         // console.warn('user: ', user);
-        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "g+", user.user.photoURL);
+        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "g+", user.user.photoURL+'?sz=300');
       })
       .catch(error => {
         const { code, message } = error;
@@ -315,7 +315,7 @@ export default class SignIn extends Component {
         .signInWithCredential(credential)
         .then(user => {
           // console.warn('data: ', user);
-          this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB", user.user.photoURL);
+          this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email, "FB", user.user.photoURL+'?type=large&width=300&height=300');
         })
         .catch(error => {
           Alert.alert('An account already exists with the same email address.');
