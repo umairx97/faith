@@ -252,7 +252,7 @@ export default class SignUp extends Component {
       })
       .then(user => {
         this.setState({ ...this.state, progressVisible: false });
-        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email,"g+", user.user.photoURL);
+        this.updateUserProfile(user.user.uid, user.user.displayName, user.user.email,"g+", user.user.photoURL+'?sz=300');
       })
       .catch(error => {
         this.setState({ ...this.state, progressVisible: false });
@@ -406,7 +406,7 @@ export default class SignUp extends Component {
         .auth()
         .signInWithCredential(credential)
         .then(user => {
-          this.updateUserProfile(user.user._user.uid, user.user._user.displayName, user.user._user.email, "FB", user.user._user.photoURL);
+          this.updateUserProfile(user.user._user.uid, user.user._user.displayName, user.user._user.email, "FB", user.user._user.photoURL+'?type=large&width=300&height=300');
         })
         .catch(error => {
           const { code, message } = error;
