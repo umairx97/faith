@@ -105,7 +105,7 @@ export default class DrawerScreen extends React.Component {
 
     var v = await AsyncStorage.getItem("checkLoggedType");
     
-    console.warn('log type: ', v);
+    // console.warn('log type: ', v);
     
     if ((v == "firebaseLoggedin")||(v == "googleLoggedin")) {
       this.signOutGoogle();
@@ -366,14 +366,15 @@ export default class DrawerScreen extends React.Component {
       }
     ]);
   }
+
   signOut = async () => {
     try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
+      // await GoogleSignin.revokeAccess();
+      // await GoogleSignin.signOut();
       await firebase.auth().signOut();
       Actions.login();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -393,7 +394,7 @@ export default class DrawerScreen extends React.Component {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
     firebase
       .auth()
