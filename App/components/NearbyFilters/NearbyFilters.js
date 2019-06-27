@@ -204,22 +204,23 @@ export default class NearbyFilters extends React.Component {
   }
 
   render() {
-    const buttons = ["Guys", "Girls", "Both"];
+    const buttons = ["Man", "Woman", "Both"];
     const { selectedIndex } = this.state;
     return (
       <View
         style={styles.mainViewContainer}
       >
-        <View style={styles.toplineView}>
+        {/*<View style={styles.toplineView}>
           <Text style={styles.filterText}>Filter</Text>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={() => {
               this.onDonePressed();
             }}
           >
             <Text style={styles.doneText}>Done</Text>
-          </TouchableOpacity> */}
-        </View>
+          </TouchableOpacity>
+        </View>*/}
+        
         <ScrollView style={{ backgroundColor: "rgb(255, 255, 255)" }}>
           <View style={styles.nearbyFiltersView}>
             <View style={styles.contentsView}>
