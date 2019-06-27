@@ -673,7 +673,7 @@ export default class ChatList extends Component {
                     </ScrollView>
                   </View>
                 : null }
-                <Text style={styles.textSeparator}>Messages</Text>
+                {/*<Text style={styles.textSeparator}>Messages</Text>*/}
                 <FlatList
                   data={this.state.showArr}
                   renderItem={({ item, index }) => (

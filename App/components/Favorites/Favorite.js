@@ -156,8 +156,9 @@ export default class Favorite extends React.Component {
                               >
                             </Image>
                             <View style={styles.itemViewText}>
-                                <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
-                                <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
+                                <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text>
+                                <Text style={{ fontWeight: 'bold', marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                                <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}> {item.fullAge}</Text>
                             </View>
                           </TouchableOpacity>
                         </View>
