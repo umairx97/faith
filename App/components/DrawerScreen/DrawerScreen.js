@@ -730,34 +730,7 @@ export default class DrawerScreen extends React.Component {
           
           </View>
 
-          <View style={styles.panel2View}>
-            <View style={styles.levelView}>
-              <View style={styles.levelViewView}>
-                <View style={styles.rectangle2TwoView}>
-                  <Image
-                    source={Images.walletIcon}
-                    style={styles.logoutImage}
-                  />
-                </View>
-                <TouchableOpacity onPress={this.onFacebookPressed}>
-                  <Text style={styles.myWalletText}>My wallet</Text>
-                </TouchableOpacity>
-
-                <View
-                  style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <Image
-                    source={Images.shapeArrow}
-                    style={styles.shapeFiveImage}
-                  />
-                </View>
-              </View>
-           
-            </View>
+          <View style={styles.panel2View}>         
             <View style={styles.levelView}>
               <View style={styles.levelViewView}>
                 <View style={styles.rectangle2FiveView}>
@@ -814,6 +787,34 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
+            
+            <View style={styles.levelView}>
+              <View style={styles.levelViewView}>
+                <View style={styles.rectangle2TwoView}>
+                  <Image
+                    source={Images.walletIcon}
+                    style={styles.logoutImage}
+                  />
+                </View>
+                <TouchableOpacity onPress={this.onFacebookPressed}>
+                  <Text style={styles.myWalletText}>My wallet</Text>
+                </TouchableOpacity>
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "flex-end"
+                  }}
+                >
+                  <Image
+                    source={Images.shapeArrow}
+                    style={styles.shapeFiveImage}
+                  />
+                </View>
+              </View>
+            </View>
+
             <View style={styles.blacklistView}>
               <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SixView}>
@@ -839,6 +840,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
+
             <View style={styles.blacklistView}>
               <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SevenView}>
@@ -871,6 +873,7 @@ export default class DrawerScreen extends React.Component {
                 }}
               />
             </View>
+
             <View style={styles.blacklistView}>
               <View style={styles.levelViewView}>
                 <View style={styles.rectangle2SevenView}>
@@ -912,6 +915,7 @@ export default class DrawerScreen extends React.Component {
                 </View>
               </View>
             </View>
+            
             <View
               style={{
                 flex: 1,

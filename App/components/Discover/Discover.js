@@ -527,7 +527,7 @@ export default class Discover extends Component {
           key={item.id}
           style={{
             backgroundColor: "white",
-            height: Screen.height - (Screen.height / 2 - 60),
+            height: Screen.height - (Screen.height / 2 - 100),
             width: Screen.width - 80,
             borderRadius: 10
           }}
@@ -548,15 +548,13 @@ export default class Discover extends Component {
             <Image
               source={{ uri: uriProfile }}
               style={{
-                height: Screen.height - (Screen.height / 2 - 20),
+                height: Screen.height - (Screen.height / 2 - 70),
                 width: Screen.width - 80,
                 borderRadius: 10,
                 resizeMode: "cover"
               }}
             />
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-              {item.pName}
-            </Text>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}> {item.pName} </Text>
           </View>
         </Card>
       );
@@ -587,7 +585,7 @@ export default class Discover extends Component {
           colors={["rgb(255, 137, 96)", "rgb(255, 98, 165)"]}
           style={styles.colorPrimaryViewLinearGradient}
         >
-          <View>
+          {/*<View>
             <View
               style={{
                 position: "absolute",
@@ -621,7 +619,8 @@ export default class Discover extends Component {
                 />
               </TouchableOpacity>
             </View>
-          </View>
+          </View> */}
+
           <View
             style={{
               position: "absolute",
@@ -659,6 +658,7 @@ export default class Discover extends Component {
               {this.renderAllAccount(this.state.xData)}
             </CardStack>
           </View>
+          
           <View
             style={{
               position: "absolute",
@@ -668,6 +668,7 @@ export default class Discover extends Component {
               ...ifIphoneX({ marginBottom: 70 })
             }}
           >
+            
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={[styles.button, styles.red]}
@@ -734,6 +735,7 @@ export default class Discover extends Component {
             </View>
           </View>
         </LinearGradient>
+       
         <Modal
           isVisible={this.state.isModalVisible}
           animationType="slide"
@@ -772,11 +774,7 @@ export default class Discover extends Component {
                 {this.state.totalAge}
               </Text>
             </View>
-            <View>
-              <Text style={{ margin: 10 }}>
-                ijkohdkfjchdskjdfvhdfkjvhdfdfkjhvdfjk kjdshvjkdf kjhvkj
-              </Text>
-            </View>
+
             <View
               style={{
                 flexDirection: "row",

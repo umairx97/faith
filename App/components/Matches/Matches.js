@@ -310,7 +310,8 @@ export default class Matches extends Component {
                           <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
                         </TouchableOpacity>
                         <View style={styles.itemViewText}>
-                            <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.pName}</Text><Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
+                            <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.pName}</Text>
+                            <Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
                             <Text style={{ fontSize: 15, marginTop:5,fontWeight: 'bold', color: 'white'}}> {item.age}</Text>
                         </View>
                       </TouchableOpacity>
