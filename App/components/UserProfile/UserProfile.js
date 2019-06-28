@@ -389,18 +389,16 @@ export default class UserProfile extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', paddingBottom: hp(1) }}>
               <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text>
               {/* <Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text> */}
               {this.state.totalAge != '' ?
                 <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{', '+this.state.totalAge}</Text>
               : null }
             </View>
-
-            
           </View>
         </View>
-        <View style={{
+        {/* <View style={{
           backgroundColor: "rgb(255, 255, 255)",
           margin: 8,
           borderRadius: 8,
@@ -410,8 +408,8 @@ export default class UserProfile extends React.Component {
         }}>
           <View styel={{ margin: 10 }}>
             
-          </View>
-        </View>
+          </View> 
+        </View> */}
           {/* <TouchableOpacity style={{marginTop: hp(1), width: wp(100), height: hp(10)}} onPress={() => { this.onChangePersonalInfoCollapse() }}>
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Show Personal Info</Text>
@@ -500,11 +498,11 @@ export default class UserProfile extends React.Component {
           </View>
         {/* </Collapsible> */}
 
-        <View style={styles.addPersonalView}>
+        {/* <View style={styles.addPersonalView}>
           <View styel={{ margin: 10 }}>
             
           </View>
-        </View>
+        </View> */}
         <View style={{
           backgroundColor: "rgb(255, 255, 255)",
           justifyContent: 'center',

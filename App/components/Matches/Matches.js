@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import {
   Text,
   View,
-  ListItem,
+  Alert,
   FlatList,
   BackHandler,
   Image,
@@ -24,6 +24,7 @@ import { ifIphoneX } from "react-native-iphone-x-helper";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Images } from "../../../assets/imageAll";
 import { NoDataComponent } from "../ui/NoData";
+import { Immersive } from 'react-native-immersive';
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height
@@ -72,6 +73,12 @@ export default class Matches extends Component {
   backAndroid() {
     Actions.pop(); // Return to previous screen
     return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
+  }
+
+  androidGoInImmersive() {
+    if(Platform.OS == 'android') {
+      Immersive.setImmersive(true);
+    }
   }
 
   getAllUser = async () => {
@@ -222,6 +229,86 @@ export default class Matches extends Component {
     setTimeout(() => Actions.userProfile(), 200);
   }
 
+  deleteFromMatches(id) {
+    // console.warn('user: ', this.state.loginUserId);
+    // console.warn('userRemove: ', id);
+    Alert.alert(
+      'Caution',
+      'Are you sure you want to delete the user from your matches?',
+      [
+        {
+          text: 'No',
+          onPress: () => this.androidGoInImmersive(),
+          style: 'cancel',
+        },
+        {text: 'YES, delete', onPress: () => this.deleteUserFromMatches(id)},
+      ],
+      {cancelable: false},
+    );
+  }
+
+  deleteUserFromMatches(id) {
+    firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id
+      ).remove();
+    firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ProfileLiked/" + id + "/" + this.state.loginUserId
+      ).remove();
+
+      firebase
+      .database()
+      .ref("Users/FaithMeetsLove/MatchedProfiles/" + this.state.loginUserId)
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          var key = childSnapshot.key;
+          var friendID = childSnapshot.val().friendUid;
+          if(friendID == id) {
+            firebase
+            .database()
+            .ref("Users/FaithMeetsLove/MatchedProfiles/" + this.state.loginUserId + '/' + key).remove();
+
+            firebase
+            .database()
+            .ref("Users/FaithMeetsLove/MatchedProfiles/" + id)
+            .once("value")
+            .then(snapshot => {
+              snapshot.forEach(childSnapshot => {
+                var key = childSnapshot.key;
+                var friendID = childSnapshot.val().friendUid;
+                if(friendID == this.state.loginUserId) {
+                  firebase
+                  .database()
+                  .ref("Users/FaithMeetsLove/MatchedProfiles/" + id + '/' + key).remove();
+                  arr = [];
+                  this.setState({
+                    loading: true,
+                    showArr: [],
+                    allData: [],
+                    FullName: "",
+                    ImageProfileUrl: "",
+                    Gender: 0
+                  }, () => {
+                    this.getCurrentUserId();
+                  });
+                }
+              });
+            }).catch(error => {
+              console.warn(JSON.stringify(error));
+            });
+          }
+        });
+      }).catch(error => {
+        console.warn(JSON.stringify(error));
+      });
+
+      this.androidGoInImmersive()
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -309,6 +396,10 @@ export default class Matches extends Component {
                           onPress={() => { this.openProfile(item.ids) }}>
                           <Image style={styles.iconStyle} source={Images.eyeIcon}></Image>
                         </TouchableOpacity>
+                        <TouchableOpacity style={styles.deleteProfileIcon}
+                          onPress={() => this.deleteFromMatches(item.ids)}>
+                          <Image style={styles.iconStyle2} source={Images.deleteIcon}></Image>
+                        </TouchableOpacity>
                         <View style={styles.itemViewText}>
                             <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.pName}</Text>
                             <Text style={{ fontWeight: 'bold',marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
@@ -366,8 +457,9 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     height: 24,
+    width: 24,
     backgroundColor: 'red',
-    width: 24, resizeMode: 'contain',
+    resizeMode: 'contain',
     alignSelf: 'center',
     tintColor: 'white'
   },
@@ -404,5 +496,20 @@ const styles = StyleSheet.create({
     width: wp(45),
     flexDirection: 'row',
     justifyContent:'center'
+  },
+  deleteProfileIcon: {
+    position: 'absolute',
+    right: wp(4),
+    top: hp(2),
+    height: 32,
+    width: 32,
+    borderRadius: 16,
+    justifyContent: 'center'
+  },
+  iconStyle2: {
+    height: wp(10),
+    width: wp(10),
+    resizeMode: 'contain',
+    alignSelf: 'center'
   },
 })
