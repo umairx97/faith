@@ -797,9 +797,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: wp(4),
     top: hp(2),
-    height: 32,
-    width: 32,
-    borderRadius: 16,
+    height: 10,
+    width: 10,
+    borderRadius: 10,
     justifyContent: 'center'
   },
   iconStyle: {
