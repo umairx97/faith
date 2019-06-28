@@ -1338,7 +1338,7 @@ export default class ProfileCopy extends Component {
               </View>
               <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row', marginRight: wp(6) }}>
-                  <Image source={Images.locationIcon} style={styles.personalDataView} />
+                  <Image source={Images.bio} style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Bio : {this.state.bioText}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>

@@ -152,7 +152,6 @@ export default class UserProfile extends React.Component {
     // var _name = await firebase.auth().currentUser.uid;
     var imgUserId = firebase.database().ref("Users/FaithMeetsLove/Registered/" + profileID);
     imgUserId.once('value', function (snapshot) {
-      // console.warn('data: ', snapshot.val());
       var ImageUrl = snapshot.val().profileImageURL;
       var userName = snapshot.val().fullName;
       var dob = snapshot.val().user_Dob;
@@ -289,7 +288,7 @@ export default class UserProfile extends React.Component {
         });
       }
       
-      // instance.age();
+      instance.age();
     });
   }
 
@@ -367,7 +366,7 @@ export default class UserProfile extends React.Component {
   }
 
   render() {
-    return (<View>
+    return (
       <View><ScrollView style={{ backgroundColor: "rgb(249, 249, 249)" }}>
         <View>
           <View style={{
@@ -394,7 +393,7 @@ export default class UserProfile extends React.Component {
               <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{this.state.nameFull}</Text>
               {/* <Text style={{ fontWeight: 'bold', marginTop: 10, fontSize: 22 }}>,</Text> */}
               {this.state.totalAge != '' ?
-                <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold', marginLeft: 10 }}>{', '+this.state.totalAge}</Text>
+                <Text style={{ fontSize: 22, marginTop: 10, fontWeight: 'bold' }}>{', '+this.state.totalAge}</Text>
               : null }
             </View>
 
@@ -403,7 +402,6 @@ export default class UserProfile extends React.Component {
         </View>
         <View style={{
           backgroundColor: "rgb(255, 255, 255)",
-
           margin: 8,
           borderRadius: 8,
           shadowColor: "rgba(0, 0, 0, 0.08)",
@@ -422,7 +420,6 @@ export default class UserProfile extends React.Component {
         {/* <Collapsible collapsed={this.state.personalInfoIsCollapsed}> */}
           <View style={{
             backgroundColor: "rgb(255, 255, 255)",
-
             margin: 8,
             borderRadius: 8,
             shadowColor: "rgba(0, 0, 0, 0.08)",
@@ -440,7 +437,7 @@ export default class UserProfile extends React.Component {
               </View>
               <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row', marginRight: wp(6) }}>
-                  <Image source={Images.locationIcon} style={styles.personalDataView} />
+                  <Image source={Images.bio} style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Bio : {this.state.bioText}</Text></View>
               </View>
               {((this.state.permanentLocation != '')&&(this.state.permanentLocation != undefined)) ?
@@ -466,35 +463,35 @@ export default class UserProfile extends React.Component {
               : null }
               {((this.state.religion != '')&&(this.state.religion != undefined)) ?
                 <View style={{ marginTop: 10 }}>
-                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.religion}
                     style={styles.personalDataView} />
                     <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
                 </View>
               : null }
               {((this.state.jobTitle != '')&&(this.state.jobTitle != undefined)) ?
                 <View style={{ marginTop: 10 }}>
-                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.job}
                     style={styles.personalDataView} />
                     <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
                 </View>
               : null }
               {((this.state.education != '')&&(this.state.education != undefined)) ?
                 <View style={{ marginTop: 10 }}>
-                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.education}
                     style={styles.personalDataView} />
                     <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
                 </View>
               : null }
               {((this.state.height != '')&&(this.state.height != undefined)) ?
                 <View style={{ marginTop: 10 }}>
-                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.height}
                     style={styles.personalDataView} />
                     <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
                 </View>
               : null }
               {((this.state.language != '')&&(this.state.language != undefined)) ?
                 <View style={{ marginTop: 10 }}>
-                  <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                  <View style={{ flexDirection: 'row' }}><Image source={Images.language}
                     style={styles.personalDataView} />
                     <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
                 </View>
@@ -618,98 +615,67 @@ export default class UserProfile extends React.Component {
 
           </View>
         </View>
-
-        <View style={{
-          backgroundColor: "rgb(255, 255, 255)",
-
-          margin: 8,
-          borderRadius: 8,
-          shadowColor: "rgba(0, 0, 0, 0.08)",
-          shadowRadius: 5,
-          shadowOpacity: 1,
-        }}>
-          <View>
-            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Interests</Text>
-          </View>
-
-          <View style={{ margin: 10 }}>
-            {this.state.nameFull != '' ?
-              // <TagSelect
-              //   data={data}
-              //   value={this.state.interests}
-              //   // onItemPress={(data) => this.onTagInterestPress(data)}
-              //   ref={(tag) => {
-              //     this.tag = tag;
-              //   }}
-              //   onMaxError={() => {
-              //     alert('Ops', 'Max reached');
-              //   }}
-              // />
-              <Fragment>
-                <FlatGrid
-                  // itemDimension={wp(15)}
-                  items={this.state.interests}
-                  style={styles.gridView}
-                  renderItem={({ item, index }) => (
-                    <View style={styles.gridItemTag}>
-                      <Text>{item.label}</Text>
-                    </View>
-                  )}
-                  ListEmptyComponent={() => (
-                    <Text>No interests</Text>
-                  )}
-                  extraData={this.state}
-                />
-              </Fragment>
-            : null }
-          </View>
-        </View>
-
-        <View style={{
-          backgroundColor: "rgb(255, 255, 255)",
-
-          margin: 8,
-          borderRadius: 8,
-          shadowColor: "rgba(0, 0, 0, 0.08)",
-          shadowRadius: 5,
-          shadowOpacity: 1,
-        }}>
-          <View>
-            <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Lifestyle and social</Text>
-          </View>
-          <View style={{ margin: 10 }}>
-            {this.state.nameFull != '' ?
-              // <TagSelect
-              //   ref={(tag) => {
-              //     this.tag2 = tag;
-              //   }}
-              //   value={this.state.lifestyleAndSocial}
-              //   // onItemPress={(data) => this.onTagLifeAndSocialPress(data)}
-              //   data={dataLifeStyle}
-              //   itemStyle={styles.item}
-              //   itemLabelStyle={styles.label}
-              //   itemStyleSelected={styles.itemSelected}
-              //   itemLabelStyleSelected={styles.labelSelected}
-              // />
-              <Fragment>
-                <FlatGrid
-                  // itemDimension={wp(20)}
-                  items={this.state.lifestyleAndSocial}
-                  style={styles.gridViewTags}
-                  renderItem={({ item, index }) => (
-                    <View style={styles.gridItemTag}>
-                      <Text>{item.label}</Text>
-                    </View>
-                  )}
-                  ListEmptyComponent={() => (
-                    <Text>No lifestyle and social</Text>
-                  )}
-                  extraData={this.state}
-                />
-              </Fragment>
-            : null }
-          </View>
-        </View>
+        
+        {this.state.nameFull != '' ?
+          <Fragment>
+            <View style={{
+              backgroundColor: "rgb(255, 255, 255)",
+              margin: 8,
+              borderRadius: 8,
+              shadowColor: "rgba(0, 0, 0, 0.08)",
+              shadowRadius: 5,
+              shadowOpacity: 1,
+            }}>
+              <View>
+                <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Interests</Text>
+              </View>
+              <View style={{ margin: 10 }}>
+                    <FlatGrid
+                      itemDimension={wp(20)}
+                      items={this.state.interests}
+                      style={styles.gridViewTags}
+                      renderItem={({ item, index }) => (
+                        <View style={styles.gridItemTag}>
+                          <Text style={styles.gridItemTagLabel}>{item.label}</Text>
+                        </View>
+                      )}
+                      ListEmptyComponent={() => (
+                        <Text>No interests</Text>
+                      )}
+                      extraData={this.state.interests}
+                    />
+              </View>
+            </View>
+            <View style={{
+              backgroundColor: "rgb(255, 255, 255)",
+              margin: 8,
+              borderRadius: 8,
+              shadowColor: "rgba(0, 0, 0, 0.08)",
+              shadowRadius: 5,
+              shadowOpacity: 1,
+            }}>
+              <View>
+                <Text style={{ fontSize: 20, color: '#DC4E4E', fontWeight: 'bold', marginLeft: 13, marginTop: 10 }}>Lifestyle and social</Text>
+              </View>
+              <View style={{ margin: 10 }}>
+                    <FlatGrid
+                      itemDimension={wp(20)}
+                      items={this.state.lifestyleAndSocial}
+                      style={styles.gridViewTags}
+                      renderItem={({ item, index }) => (
+                        <View style={styles.gridItemTag}>
+                          <Text style={styles.gridItemTagLabel}>{item.label}</Text>
+                        </View>
+                      )}
+                      ListEmptyComponent={() => (
+                        <Text>No lifestyle and social</Text>
+                      )}
+                      extraData={this.state.lifestyleAndSocial}
+                    />
+              </View>
+            </View>
+        </Fragment>
+      : null }
       </ScrollView>
       {this.state.isLoading ?
         <View style={styles.viewLoading}>
@@ -717,7 +683,6 @@ export default class UserProfile extends React.Component {
         </View>
       : null }
       </View>
-    </View>
     );
   }
 }
@@ -914,13 +879,16 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   gridItemTag: {
-    height: hp(7),
-    flex: 1,
+    // height: hp(7),
+    // flex: 1,
     padding: wp(2),
     borderRadius: 25,
     backgroundColor: 'rgba(238, 238, 238, 0.6)',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  gridItemTagLabel: {
+    fontSize: wp(3)
   },
   backgroundVideo: {
     position: 'absolute',

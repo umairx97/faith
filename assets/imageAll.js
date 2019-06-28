@@ -43,6 +43,7 @@ export const Images = {
   education:require("./images/icons8-university-filled-100.png"),
   height:require("./images/icons8-height-100.png"),
   language:require("./images/icons8-language-100.png"),
+  bio:require("./images/icons8-profile-100.png"),
   // filterSvgIcon:require("./images/svgFilter.svg"),
   genderIcon: require("./images/genderIcons.png"),
   eyeIcon:require("./images/eyeIcon.png"),
