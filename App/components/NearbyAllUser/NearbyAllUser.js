@@ -272,7 +272,7 @@ export default class NearbyAllUser extends React.Component {
                                 <Text
                                 style={styles.listDataText}
                                 >
-                                  ,
+                                  {", "}
                                 </Text>
                                 <Text
                                   style={styles.listDataText}

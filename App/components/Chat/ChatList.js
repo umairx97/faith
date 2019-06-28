@@ -538,7 +538,6 @@ export default class ChatList extends Component {
     allUserProfile
       .once("value")
       .then(childSnapshot => {
-        // console.warn('getUserDetail - childSnapshot: ', childSnapshot);
         userProfileId = key;
         var childData = childSnapshot.val().profileImageURL;
         var userName = childSnapshot.val().fullName;
@@ -559,7 +558,6 @@ export default class ChatList extends Component {
             // console.warn('test: ' + this.state.showArr[index].ids + ' | ' + userProfileId);
             if(this.state.showArr[index].ids == userProfileId) {
               isPresent = true;
-              // console.warn('stop here: ', userProfileId);
               if(this.state.loadingNew) {
                 this.setState({
                   loadingNew: false
@@ -651,28 +649,34 @@ export default class ChatList extends Component {
               </View>
             :
               <Fragment>
-                {this.state.loadingNew ?
-                    <ActivityIndicator size="large" color="#0000ff" />
-                : null }
-                {this.state.showArrNew.length > 0 ?
                   <View style={styles.viewNewMatches}>
                     <Text style={styles.textSeparator}>New Matches</Text>
-                    <ScrollView
-                      horizontal={true}
-                    >
-                      {this.state.showArrNew.map((item, index) => (
-                        <TouchableOpacity key={index} onPress={()=>this.openNewChat(item)}>
-                          <View style={styles.viewNewMatchesItemView}>
-                            <Image source={{ uri: item.pUrl }}
-                              style={styles.chatListImage}
-                            ></Image>
-                            <Text>{item.pName}</Text>
-                          </View>
-                        </TouchableOpacity>
-                      ))}
-                    </ScrollView>
+                      {this.state.showArrNew.length > 0 ?
+                        <ScrollView
+                          horizontal={true}
+                        >
+                          {this.state.showArrNew.map((item, index) => (
+                            <TouchableOpacity key={index} onPress={()=>this.openNewChat(item)}>
+                              <View style={styles.viewNewMatchesItemView}>
+                                <Image source={{ uri: item.pUrl }}
+                                  style={styles.chatListImage}
+                                ></Image>
+                                <Text>{item.pName}</Text>
+                              </View>
+                            </TouchableOpacity>
+                          ))}
+                        </ScrollView>
+                      :
+                        <Fragment>
+                          {this.state.loadingNew ?
+                            <ActivityIndicator size="large" color="#0000ff" />
+                          :
+                            <Text style={styles.textNoMatches}>No new matches</Text>
+                          }
+                        </Fragment>
+                      }
                   </View>
-                : null }
+                
                 {/*<Text style={styles.textSeparator}>Messages</Text>*/}
                 <FlatList
                   data={this.state.showArr}
@@ -851,8 +855,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 14
   },
+  textNoMatches: {
+    fontSize: 14,
+    marginLeft: wp(3),
+    marginTop: hp(3)
+  },
   viewNewMatches: {
-    height: hp(20), 
+    // height: hp(20),
+    minHeight: hp(10),
     marginTop: hp(2)
   },
   viewNewMatchesItemView: {

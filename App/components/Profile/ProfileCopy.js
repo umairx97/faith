@@ -1,3 +1,6 @@
+/*
+* Private user profile
+*/
 import React, { Component, Fragment } from 'react';
 import { Text, View, Alert, TouchableOpacity, ActivityIndicator, Image, StyleSheet, ScrollView, Button, Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Actions } from "react-native-router-flux";
@@ -921,7 +924,7 @@ export default class ProfileCopy extends Component {
 
         <TouchableOpacity onPress={() => { this.onGenderPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
-            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.genderIcon}></Image>
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Gender</Text>
             {/* <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15 }}>{this.state.relationShipStatus}</Text> */}
           </View>
@@ -929,35 +932,35 @@ export default class ProfileCopy extends Component {
 
         <TouchableOpacity onPress={() => { this.onReligionPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
-            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.religion}></Image>
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Religion</Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => { this.onJobTitlePress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
-            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.job}></Image>
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Job Title</Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => { this.onEducationPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
-            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.education}></Image>
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Education</Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => { this.onHeightPress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
-            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.height}></Image>
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Height</Text>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => { this.onLanguagePress() }}>
           <View style={{ marginLeft: 15, flexDirection: 'row' }}>
-            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.locationIcon}></Image>
+            <Image style={{ height: 20, width: 20, tintColor: 'black' }} source={Images.language}></Image>
             <Text style={{ fontSize: 17, fontWeight: "600", marginLeft: 15, marginBottom: 15 }}>Language</Text>
           </View>
         </TouchableOpacity>
@@ -1335,13 +1338,12 @@ export default class ProfileCopy extends Component {
               </View>
               <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row', marginRight: wp(6) }}>
-                  <Image source={Images.locationIcon} style={styles.personalDataView} />
+                  <Image source={Images.bio} style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Bio : {this.state.bioText}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.homePage}
-                  style={{ height: 25, width: 25, tintColor: 'grey' }} />
-                  <Text style={{ marginLeft: 10, marginTop: 5 }}>Lives in {this.state.place}</Text></View>
+                <View style={{ flexDirection: 'row' }}><Image source={Images.homePage} style={styles.personalDataView} />
+                  <Text style={styles.personalDataText}>Lives in {this.state.place}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}><Image source={Images.locationIcon}
@@ -1359,27 +1361,27 @@ export default class ProfileCopy extends Component {
                   <Text style={styles.personalDataText}>Gender : {this.state.genderInfo}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                <View style={{ flexDirection: 'row' }}><Image source={Images.religion}
                   style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Religion : {this.state.religion}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                <View style={{ flexDirection: 'row' }}><Image source={Images.job}
                   style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Job Title : {this.state.jobTitle}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                <View style={{ flexDirection: 'row' }}><Image source={Images.education}
                   style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Education : {this.state.education}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                <View style={{ flexDirection: 'row' }}><Image source={Images.height}
                   style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Height : {this.state.height}</Text></View>
               </View>
               <View style={{ marginTop: 10 }}>
-                <View style={{ flexDirection: 'row' }}><Image source={Images.genderIcon}
+                <View style={{ flexDirection: 'row' }}><Image source={Images.language}
                   style={styles.personalDataView} />
                   <Text style={styles.personalDataText}>Language : {this.state.language}</Text></View>
               </View>

@@ -750,6 +750,7 @@ export default class Chat extends Component {
       AsyncStorage.setItem("videoUrl", this.state.messageVideoUrl);
       Actions.fullScreenVideo();
     }, 400);
+    this.androidGoInImmersive();
   }
 
   handleDeleteMessage() {
@@ -763,6 +764,7 @@ export default class Chat extends Component {
         this.state.messageKey
       )
       .remove();
+      this.androidGoInImmersive();
   }
 
   handleForward() {
@@ -781,10 +783,12 @@ export default class Chat extends Component {
     //     "/" +
     //     this.state.messageKey
     //   )
+    this.androidGoInImmersive();
   }
 
   handleCancel() {
     this.setState({ dialogVisible: false, dialogPlayVisible: false });
+    this.androidGoInImmersive();
   }
 
   requestCameraPermission = async val => {
