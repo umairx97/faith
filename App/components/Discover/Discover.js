@@ -241,6 +241,7 @@ export default class Discover extends Component {
     getAge,
     userGender
   ) {
+    
     var alreadyFavouriteUser = firebase
       .database()
       .ref(
@@ -265,19 +266,22 @@ export default class Discover extends Component {
                 arr.push({
                   pName: userName,
                   pUrl: childData,
-                  id: userProfileId
+                  id: userProfileId,
+                  pAge: getAge
                 });
               } else if (this.state.userGenderShow == 1 && userGender == 1) {
                 arr.push({
                   pName: userName,
                   pUrl: childData,
-                  id: userProfileId
+                  id: userProfileId,
+                  pAge: getAge
                 });
               } else if (this.state.userGenderShow == 2) {
                 arr.push({
                   pName: userName,
                   pUrl: childData,
-                  id: userProfileId
+                  id: userProfileId,
+                  pAge: getAge
                 });
               }
             }
@@ -522,6 +526,7 @@ export default class Discover extends Component {
     return items.map(item => {
       var uriProfile = item.pUrl;
       var userProfileId = item.id;
+      
       return (
         <Card
           key={item.id}
@@ -554,7 +559,7 @@ export default class Discover extends Component {
                 resizeMode: "cover"
               }}
             />
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}> {item.pName} </Text>
+            <Text style={{ fontSize: wp(5), fontWeight: "bold", textAlign: 'center' }}> {item.pName + ', ' + item.pAge} </Text>
           </View>
         </Card>
       );
@@ -625,8 +630,8 @@ export default class Discover extends Component {
             style={{
               position: "absolute",
               left: 40,
-              top: 80,
-              ...ifIphoneX({ top: 100 }),
+              top: hp(5),
+              ...ifIphoneX({ top: hp(8) }),
               right: 40
             }}
           >

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStorage, Platform, Dimensions, ActivityIndicator } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, AsyncStorage, Platform, Dimensions, ActivityIndicator, Alert } from "react-native";
 import firebase from "react-native-firebase";
 import FlatGrid from "react-native-super-grid";
 import LinearGradient from "react-native-linear-gradient";
@@ -7,6 +7,8 @@ import { Actions } from "react-native-router-flux";
 import { NoDataComponent } from "../ui/NoData";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { Images } from "../../../assets/imageAll";
+
 var arrayKey = [];
 
 const Screen = {
@@ -27,7 +29,7 @@ export default class Favorite extends React.Component {
   }
 
   componentDidMount() {
-    //this.getCurrentUserId();
+    this.getCurrentUserId();
     // this.getAllFavouriteUser();
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       arrayKey = [];
@@ -39,6 +41,13 @@ export default class Favorite extends React.Component {
       });
     });
   }
+
+  getCurrentUserId = async () => {
+    var uidUser = await firebase.auth().currentUser.uid;
+    this.setState({
+      loginUserId: uidUser
+    });
+  };
 
   async getAllFavouriteUser() {
     var uidUser = await firebase.auth().currentUser.uid;
@@ -109,9 +118,46 @@ export default class Favorite extends React.Component {
       }
 
   openClickedProfile(id) {
-    alert(id);
     AsyncStorage.setItem("userProfileKeys", id);
     setTimeout(() => Actions.userProfile(), 500);
+  }
+
+  deleteFromFavorites(id) {
+    Alert.alert(
+      'Caution',
+      'Are you sure you want to delete the user from your favorites?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'YES, delete', onPress: () => this.deleteUserFromFavorites(id)},
+      ],
+      {cancelable: false},
+    );
+  }
+
+  deleteUserFromFavorites(id) {
+    firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/ProfileLiked/" + this.state.loginUserId + "/" + id
+      ).remove();
+
+      firebase
+      .database()
+      .ref(
+        "Users/FaithMeetsLove/FavouriteProfile/" + this.state.loginUserId + "/" + id
+      ).remove();
+
+      arrayKey = [];
+      this.setState({
+        loading: true,
+        allArr: []
+      }, () => {
+        this.getAllFavouriteUser();
+      });
   }
 
   render() {
@@ -155,6 +201,10 @@ export default class Favorite extends React.Component {
                               style={[styles.imageContainer]}
                               >
                             </Image>
+                            <TouchableOpacity style={styles.deleteProfileIcon}
+                              onPress={() => this.deleteFromFavorites(item.id)}>
+                              <Image style={styles.iconStyle} source={Images.deleteIcon}></Image>
+                            </TouchableOpacity>
                             <View style={styles.itemViewText}>
                                 <Text style={{ fontSize: 15, marginTop:5, fontWeight: 'bold', color: 'white'}}>{item.UserName}</Text>
                                 <Text style={{ fontWeight: 'bold', marginTop:5, fontSize: 15, color: 'white' }}>,</Text>
@@ -742,5 +792,20 @@ const styles = StyleSheet.create({
     height: 5,
     marginTop: 20,
     alignSelf: "center"
-  }
+  },
+  deleteProfileIcon: {
+    position: 'absolute',
+    right: wp(4),
+    top: hp(2),
+    height: 32,
+    width: 32,
+    borderRadius: 16,
+    justifyContent: 'center'
+  },
+  iconStyle: {
+    height: wp(10),
+    width: wp(10),
+    resizeMode: 'contain',
+    alignSelf: 'center'
+  },
 });
