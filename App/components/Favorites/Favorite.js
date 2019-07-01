@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   gridView: {
     paddingTop: Platform.OS === "ios" ? hp(5) : hp(5),
-    ...ifIphoneX({ paddingTop: hp(10) }),
+    ...ifIphoneX({ paddingTop: hp(7) }),
     flex: 1
   },
   itemContainer: {
@@ -245,7 +245,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     borderRadius: 15,
     padding: 10,
-    height: hp(30),
+    // height: hp(30),
+    height: Platform.OS == 'android' ? hp(30) : hp(26)
     // width: wp(20)
   },
   itemName: {
@@ -260,7 +261,8 @@ const styles = StyleSheet.create({
   },
   itemViewText: {
     position: 'absolute',
-    top: hp(26),
+    // top: hp(26),
+    top: Platform.OS == 'android' ? hp(26) : hp(22.5),
     width: wp(45),
     flexDirection: 'row',
     justifyContent:'center'
@@ -795,8 +797,8 @@ const styles = StyleSheet.create({
   },
   deleteProfileIcon: {
     position: 'absolute',
-    right: wp(4),
-    top: hp(2),
+    right: wp(6),
+    top: hp(3),
     height: 10,
     width: 10,
     borderRadius: 10,

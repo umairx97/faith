@@ -131,9 +131,9 @@ export default class UserProfile extends React.Component {
       var profileID = await AsyncStorage.getItem("userProfileKeys");
       this.loadProfileData(profileID);
       // load likes and matched stats
-      setTimeout(() => {
-        this.loadProfileStats(profileID);
-      }, 2000);
+      // setTimeout(() => {
+      //   this.loadProfileStats(profileID);
+      // }, 2000);
       this.androidGoInImmersive();
     });
     
@@ -503,7 +503,7 @@ export default class UserProfile extends React.Component {
             
           </View>
         </View> */}
-        <View style={{
+        {/* <View style={{
           backgroundColor: "rgb(255, 255, 255)",
           justifyContent: 'center',
           alignItems: 'center',
@@ -551,7 +551,8 @@ export default class UserProfile extends React.Component {
               <Text style={styles.textThreeText}>{this.state.matched}</Text>
             </View>
           </View>
-        </View>
+        </View> */}
+
         <View style={{
           backgroundColor: "rgb(255, 255, 255)",
           margin: 8,
@@ -755,11 +756,12 @@ const styles = StyleSheet.create({
   ovalImage: {
     resizeMode: 'cover',
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    width: 130,
-    height: 130,
-    marginLeft: 19,
-    marginTop: 22,
-    borderRadius: 65,
+    width: 120,
+    height: 120,
+    // marginLeft: 19,
+    // marginTop: 22,
+    marginTop: hp(3.5),
+    borderRadius: 65
   },
   followTabView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",

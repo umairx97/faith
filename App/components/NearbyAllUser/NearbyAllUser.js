@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
   },
   gridView: {
     paddingTop: Platform.OS === "ios" ? hp(5) : hp(5),
-    ...ifIphoneX({ paddingTop: hp(10) }),
+    ...ifIphoneX({ paddingTop: hp(7) }),
     flex: 1
   },
   itemContainer: {
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     height: hp(30)
   },
   listDataText:{
-    fontSize: 12, 
+    fontSize: 15,
     marginTop:5, 
     fontWeight: 'bold', 
     color: 'white'
@@ -321,7 +321,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     borderRadius: 15,
     padding: 10,
-    height: hp(30)
+    // height: hp(30)
+    height: Platform.OS == 'android' ? hp(30) : hp(26)
   },
   itemName: {
     fontSize: 16,
@@ -335,7 +336,8 @@ const styles = StyleSheet.create({
   },
   itemViewText: {
     position: 'absolute',
-    top: hp(26),
+    // top: hp(26),
+    top: Platform.OS == 'android' ? hp(26) : hp(22.5),
     width: wp(45),
     flexDirection: 'row',
     justifyContent:'center'
