@@ -1083,7 +1083,7 @@ const styles = StyleSheet.create({
   },
   iphoneXBarsTabBar5ItemsView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-    height: 83
+    height: 85
   },
   accountInforView: {
     backgroundColor: "rgb(255, 255, 255)",
