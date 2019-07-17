@@ -431,17 +431,20 @@ export default class DiscoverEvents extends Component {
 
     return (
       <View style={styles.container}>
+
+
+
+     
         <MapView
           ref={map => this.map = map}
-          //   provider={PROVIDER_GOOGLE}
+          style = {styles.container}
+          provider={PROVIDER_GOOGLE}
           //  followsUserLocation={true}
-
           showsBuildings={true}
           // minZoomLevel={14}
-          //  maxZoomLevel={20}
+          // maxZoomLevel={20}
           // initialRegion={this.state.region}
           region={this.state.initialPosition}
-          style={styles.container}
 
         >
           {this.state.markers.map((marker, index) => {
@@ -532,7 +535,7 @@ export default class DiscoverEvents extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   leftContainer: {
     position: "absolute",

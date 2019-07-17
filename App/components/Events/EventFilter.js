@@ -26,6 +26,7 @@ import { Actions } from "react-native-router-flux";
 // import MultiSlider from "react-native-multi-slider";
 import firebase from "react-native-firebase";
 import DateTimePicker from "react-native-modal-datetime-picker";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 // import Dates from 'react-native-dates';
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
@@ -48,12 +49,16 @@ export default class EventFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      minimumDate: new Date(),
+      minimumDate1: new Date(),
+      price: 0,
       date: null,
       focus: 'startDate',
       userLat: 0,
       userLong: 0,
       selectedIndex: 2,
       isDateTimePickerVisible: false,
+      isDateTimePickerVisible1: false,
       dateFrom: "From",
       dateTo: "To",
       filterDateFrom: "",
@@ -203,9 +208,9 @@ export default class EventFilter extends React.Component {
   _showFromDateTimePicker = () =>
     this.setState({ isDateTimePickerVisible: true, dateSelectFrom: 0 });
   _showToDateTimePicker = () =>
-    this.setState({ isDateTimePickerVisible: true, dateSelectFrom: 1 });
+    this.setState({ isDateTimePickerVisible1: true, dateSelectFrom: 1 });
 
-  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false, isDateTimePickerVisible1: false });
 
   _handleDatePicked = date => {
     Moment.locale("en");
@@ -215,6 +220,7 @@ export default class EventFilter extends React.Component {
     if (this.state.dateSelectFrom == 0)
       this.setState({
         dateFrom: NewDate,
+        minimumDate1: date,
         filterDateFrom: NewDate
       });
     else {
@@ -301,7 +307,7 @@ export default class EventFilter extends React.Component {
     const { selectedIndex } = this.state;
 
     return (<View style={{ flex: 1 }}>
-      <View style={styles.toplineView}>
+      {/* <View style={styles.toplineView}>
         <Text style={styles.filterText}>Filter</Text>
         <TouchableOpacity
           onPress={() => {
@@ -310,11 +316,11 @@ export default class EventFilter extends React.Component {
         >
           <Text style={styles.doneText}>Done</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <ScrollView style={{ flex: 1, backgroundColor: "rgb(255, 255, 255)" }}>
         <View style={styles.nearbyFiltersView}>
           <View style={styles.contentsView}>
-            <View style={styles.showMeView}>
+            {/* <View style={styles.showMeView}>
               <Text style={styles.showMeText}>Short By :</Text>
               <ButtonGroup
                 onPress={this.updateIndex}
@@ -322,7 +328,7 @@ export default class EventFilter extends React.Component {
                 buttons={buttons}
                 containerStyle={{ height: 50, marginTop: 15 }}
               />
-            </View>
+            </View> */}
 
             <View style={styles.locationsView}>
               <View
@@ -389,7 +395,16 @@ export default class EventFilter extends React.Component {
             isVisible={this.state.isDateTimePickerVisible}
             onConfirm={this._handleDatePicked}
             onCancel={this._hideDateTimePicker}
-            date={new Date()}
+            minimumDate={this.state.minimumDate}
+            // date={new Date()}
+          />
+
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible1}
+            onConfirm={this._handleDatePicked}
+            onCancel={this._hideDateTimePicker}
+            minimumDate={this.state.minimumDate1}
+            // date={new Date()}
           />
         </View>
         
@@ -424,8 +439,38 @@ export default class EventFilter extends React.Component {
               </View>
             </View>
 
+            <View style={styles.distanceView}>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "column",
+                  alignSelf: "stretch",
+                 
+                }}
+              >
+                <Text style={styles.distanceText}>Pricing <Text style={{color: '#ED396E'}}> $10 - $250 </Text></Text>
+                <View style={{ flex: 1, flexDirection: "row", marginTop: 15 }}>
+                  <Slider
+                    style={{ width: "85%", alignSelf: "center" }}
+                    step={1}
+                    minimumValue={0}
+                    maximumValue={250}
+                    value={this.state.price}
+                    onSlidingComplete={val => this.getVal(val)}
+                    onValueChange={val => this.setState({ price: val })}
+                  />
+                  <Text style={styles.kmText}>$ {this.state.price} </Text>
+                </View>
+              </View>
+            </View>
+
           </View>
         </View>
+        <TouchableHighlight style={styles.button} underlayColor="#ff6d72" onPress={() => this.onDonePressed()}>
+              <View>
+                  <Text style={styles.textBtn}>Save Filters</Text>
+              </View>
+          </TouchableHighlight>
         {/* <SlidingUpPanel ref={c => this._panel = c}>
           {() => this.onSlideData()}
         </SlidingUpPanel> */}
@@ -785,5 +830,21 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 16,
     alignSelf: "flex-end"
-  }
+  },
+  button: {
+    width: wp(80),
+    marginLeft: wp(10),
+    marginRight: wp(10),
+    marginTop: hp(5),
+    backgroundColor: '#EA2027',
+    borderRadius: 5,
+    padding: wp(5),
+    paddingTop: hp(2),
+    paddingBottom: hp(2)
+  },
+  textBtn: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: hp(3.5)
+  },
 });

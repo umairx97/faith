@@ -631,14 +631,14 @@ export default class ChatList extends Component {
               </View>
             </View>
             <View style={styles.headerRow}>
-              <View style={{flex: 0.25}}>  
+              <View style={{flex: 0.25}}>
+                
               </View>
-
-             {/* <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
+              <View style={{flex: 0.50, justifyContent: 'center', textAlign: 'center'}}>
                 <Text style={{textAlign: 'center', fontSize: wp(7), color: 'red', fontWeight: '500'}}>Messages</Text>
-              </View>*/}
-
-              <View style={{flex: 0.25}}>               
+              </View>
+              <View style={{flex: 0.25}}>
+                
               </View>
             </View>
           </View>

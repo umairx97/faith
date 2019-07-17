@@ -23,6 +23,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { Images } from "../../../assets/imageAll";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
+import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
 
 import RadioForm, {
@@ -90,6 +91,10 @@ export default class AddEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      minimumDate: new Date(),
+      minimumDate1: new Date(),
+      fullName: 'Marco Polo',
+      tos: false,
       fileUri: '',
       fileType: '',
       fileName: '',
@@ -98,6 +103,7 @@ export default class AddEvent extends Component {
       eventTime: "",
       password: "",
       isDateTimePickerVisible: false,
+      isDateTimePickerVisible1: false,
       dob: "",
       _email: "",
       _username: "",
@@ -127,7 +133,7 @@ export default class AddEvent extends Component {
       startDateTime: 0,
       endEventDate: "",
       endEventTime: "",
-      _eventTicketPrice:0,
+      _eventTicketPrice: 0,
     };
     this.updateIndex = this.updateIndex.bind(this);
     GoogleSignin.configure({
@@ -138,7 +144,7 @@ export default class AddEvent extends Component {
     });
   }
   async componentDidMount() {
-    
+
     var eventAddress = await AsyncStorage.getItem("event_Location");
     var eventLati = await AsyncStorage.getItem("event_latitude");
     var eventLongi = await AsyncStorage.getItem("event_longitude");
@@ -167,6 +173,25 @@ export default class AddEvent extends Component {
 
       })
     }
+    var uidUser = await firebase.auth().currentUser.uid;
+      var displayUserName = firebase
+        .database()
+        .ref("Users/FaithMeetsLove/Registered/" + uidUser);
+      await displayUserName.once("value",  (snapshot) => {
+        
+        var usrName = snapshot.val().fullName;
+      
+        fullName = snapshot.val().fullName;
+        gender = snapshot.val().gender;
+        latitude = snapshot.val().latitude;
+        longitude = snapshot.val().longitude;
+        email = snapshot.val().email;
+        user_Dob = snapshot.val().user_Dob;
+        profileImageURL = snapshot.val().profileImageURL;
+          this.setState({
+            _adminName: fullName
+          })
+      })        
 
     //   alert(eventAddress)
     BackHandler.addEventListener("hardwareBackPress", () => this.backAndroid()); // Listen for the hardware back button on Android to be pressed
@@ -176,12 +201,19 @@ export default class AddEvent extends Component {
     BackHandler.removeEventListener("hardwareBackPress", () =>
       this.backAndroid()
     ); // Remove listener
-  }
+
   getInitialState = () => {
     return {
       value: 0,
     }
   }
+}
+
+  handleValueChange(values) {
+    console.log('handleValueChange', values)
+    this.setState({ form: values })
+  }
+
   backAndroid() {
     Actions.pop(); // Return to previous screen
     return true; // Needed so BackHandler knows that you are overriding the default action and that it should not close the app
@@ -194,12 +226,13 @@ export default class AddEvent extends Component {
     });
   _showDateTimePickerEnd = () =>
     this.setState({
-      isDateTimePickerVisible: true,
+      isDateTimePickerVisible1: true,
       startDateTime: 1
     });
 
   _hideDateTimePicker = () =>
     this.setState({
+      isDateTimePickerVisible1: false,
       isDateTimePickerVisible: false
     });
   _handleDatePicked = datetime => {
@@ -211,7 +244,8 @@ export default class AddEvent extends Component {
       this.setState({
         dob: NewDate,
         _doe: NewDate,
-        eventTime: Time
+        eventTime: Time,
+        minimumDate1: datetime
       });
     else {
       this.setState({
@@ -238,8 +272,34 @@ export default class AddEvent extends Component {
     });
   }
   _addEventSave = async () => {
-    this.setState({ ...this.state, progressVisible: true });
-    var _id = await firebase.auth().currentUser.uid;
+    // this.setState({ ...this.state, progressVisible: true });
+    const { _eventTitle, _eventDesc, _eventType, _eventOrganiser, dob, eventTime, endEventDate, endEventTime, _adminName, _price,_eventTicketPrice, fileUri } = this.state
+    if(_eventTitle === ""){
+      alert("Event Title Required!!!")
+    }
+    else if(_eventDesc === ""){
+      alert("Event Description Required!!!")
+    }
+    else if(_eventType === ""){
+      alert("Event Type Required!!!")
+    }
+    else if(_eventOrganiser === ""){
+      alert("Event Organiser Required!!!")
+    }
+    else if(dob === "" || eventTime === ""){
+      alert("Event Start Date Required!!!")
+    }
+    else if(endEventDate === "" || endEventTime === ""){
+      alert("Event End Date Required!!!")
+    }
+    else if(_price === 0 && _eventTicketPrice === 0){
+      alert("Event Price Required!!!")
+    }
+    else if(fileUri === ""){
+      alert("Attachment is required")
+    }
+    else{
+      var _id = await firebase.auth().currentUser.uid;
     var path = this.state.fileUri;
     // var virtualId = new Date().getTime();
     var milliseconds = new Date().getTime();
@@ -266,17 +326,19 @@ export default class AddEvent extends Component {
           eventLongituded: this.state._longitude,
           endEventDate: this.state.endEventDate,
           endEventTime: this.state.endEventTime,
-          eventTicketPrice:this.state._eventTicketPrice,
+          eventTicketPrice: this.state._eventTicketPrice,
         });
       }).then(ref => {
         this.setState({ ...this.state, progressVisible: false });
-        this.setState({ ...this.state, fileName: '',_eventTicketPrice:0,dob:'', eventTime:'',endEventDate:"", endEventTime:'',eventLocation:"",_price:0,})
-      //  alert('save');
-      Actions.myEvent();
+        this.setState({ ...this.state, fileName: '', _eventTicketPrice: 0, dob: '', eventTime: '', endEventDate: "", endEventTime: '', eventLocation: "", _price: 0, })
+        //  alert('save');
+        Actions.myEvent();
       })
       .catch(error => {
         alert("Firebase profile upload failed: " + error)
       })
+    }
+    
 
 
   }
@@ -333,22 +395,21 @@ export default class AddEvent extends Component {
     alert(selectedIndex);
     this.setState({ _price: selectedIndex });
   }
-showPriceInput=()=>{
-if(this.state._price==0)
-{
-  return(
-  <View style={{marginTop:10}}><MyInput
-    name="Price"
-    type="name"
+  showPriceInput = () => {
+    if (this.state._price == 0) {
+      return (
+        <View style={{ marginTop: 10 }}><MyInput
+          name="Price"
+          type="name"
 
-    onChangeText={text => this.setState({ _eventTicketPrice: text })}
-    placeholder="Please enter event ticket price"
-    style={styles.textInput}
-  /></View>)  
-}
-  
+          onChangeText={text => this.setState({ _eventTicketPrice: text })}
+          placeholder="Please enter event ticket price"
+          style={styles.textInput}
+        /></View>)
+    }
 
-}
+
+  }
 
   render() {
     const buttons = ["Paids", "Free",];
@@ -366,12 +427,161 @@ if(this.state._price==0)
         style={{
           height: Screen.height - 40,
           ...ifIphoneX({ height: Screen.height - 70, backgroundColor: "#FFFFFF" }),
-          backgroundColor: "#FFFFFF"
+          backgroundColor: "#FFFFFF",
+          marginTop: 5
         }}
       >
-        <Formik
-          onSubmit={values => console.log(values)}
+        <GiftedForm
+          formName='AddEvent'
+          openModal={(route) => { this.props.navigator.push(route) }}
           validationSchema={validationSchema}
+          onValueChange={this.handleValueChange.bind(this)}
+        > 
+          <OfflineNotice />
+          <GiftedForm.SeparatorWidget />
+          <GiftedForm.TextInputWidget
+            name='eventTitle'
+            title='Title'
+            placeholder='Enter Event Title Here...'
+            onChangeText={text =>
+              this.setState({ _eventTitle: text })
+            }
+            clearButtonMode='while-editing'
+            value={this.state._eventTitle}
+          />
+          <GiftedForm.TextInputWidget
+            name='eventDescription'
+            title='Description'
+            placeholder='Enter Event Description Here...'
+            clearButtonMode='while-editing'
+            onChangeText={text =>
+              this.setState({ _eventDesc: text })
+            }
+            value={this.state._eventDesc}
+          />
+          <GiftedForm.SeparatorWidget />
+          <GiftedForm.SeparatorWidget />          
+
+          <GiftedForm.TextInputWidget
+            name='eventType'
+            title='Type'
+            placeholder='Enter Event Type Here...'
+            onChangeText={text => this.setState({ _eventType: text })}
+            clearButtonMode='while-editing'
+            value={this.state._eventType}
+          />
+          <GiftedForm.TextInputWidget
+            name='eventOrganizer'
+            title='Organizer'
+            placeholder='Enter Event Organizer Here...'
+            onChangeText={text => this.setState({ _eventOrganiser: text })}
+            clearButtonMode='while-editing'
+            value={this.state._eventOrganiser}
+          />
+          <GiftedForm.SeparatorWidget />
+          <GiftedForm.SeparatorWidget />
+          <View
+            style={{
+              flexDirection: "column",
+              backgroundColor: "#ffffff",
+              marginBottom: 2
+            }}
+          >
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 15, paddingLeft: "2.5%" }}>
+              <View >
+                <Text
+                  style={styles.textInput}
+                >{this.state.dob && this.state.eventTime ? this.state.dob + " " + this.state.eventTime : "Please select event start date"}</Text></View>
+              <View >
+                <TouchableOpacity onPress={this._showDateTimePicker}>
+                  <Image style={{ height: 28, width: 35 }} source={Images.calenderIcon} />
+                </TouchableOpacity>
+              </View></View>
+            <View
+              style={{
+                backgroundColor: "#FFFFFF",
+                height: 1.2,
+                marginBottom: "4%"
+              }}
+            />
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this._handleDatePicked}
+              onCancel={this._hideDateTimePicker}
+              minimumDate={this.state.minimumDate}
+              mode="datetime"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: "column",
+              backgroundColor: "#ffffff"
+            }}
+          ><View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: "#ffffff", paddingTop: 15, paddingLeft: "2.5%" }}>
+              <View >
+                <Text
+                  placeholder="Please select event date"
+                  style={styles.textInput}
+                >{this.state.endEventDate && this.state.endEventTime ? this.state.endEventDate + " " + this.state.endEventTime : "Please select event End date"}</Text></View>
+              <View >
+                <TouchableOpacity onPress={this._showDateTimePickerEnd}>
+                  <Image style={{ height: 28, width: 35 }} source={Images.calenderIcon} />
+                </TouchableOpacity>
+              </View></View>
+            <View
+              style={{
+                backgroundColor: "#FFFFFF",
+                height: 1.2,
+                marginBottom: "4%"
+              }}
+            />
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible1}
+              onConfirm={this._handleDatePicked}
+              onCancel={this._hideDateTimePicker}
+              minimumDate={this.state.minimumDate1}
+              mode="datetime"
+            />
+          </View>
+          <GiftedForm.SeparatorWidget />
+          <GiftedForm.SeparatorWidget />
+
+
+          <View style={{ flex: 1, paddingTop: 15, paddingBottom: 10, backgroundColor: "#ffffff", marginBottom: 2 }}>
+            <View
+              style={{
+                paddingLeft: 2.5 + "%",
+                // paddingRight: 10 + "%"
+              }}
+            ><View
+              style={{
+                flexDirection: "column"
+              }}
+            >
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <View ><Text style={{ width: "100%", color: "black" }}>{this.state._eventFullAdd}</Text></View>
+                  <View><TouchableOpacity onPress={() => { Actions.EventLocation() }}>
+                    <Image style={{ height: 28, width: 30 }} source={Images.locationPin} /></TouchableOpacity></View>
+
+                </View>
+
+              </View>
+            </View>
+          </View>
+          <GiftedForm.TextInputWidget
+            name='adminName'
+            title='Admin Name'
+            placeholder='Enter Event Admin Name Here...'
+            onChangeText={text => this.setState({ _adminName: text })}
+            clearButtonMode='while-editing'
+            value={this.state._adminName}
+          />
+          
+          <GiftedForm.SeparatorWidget />
+          <GiftedForm.SeparatorWidget />
+          <Formik
+          onSubmit={values => console.log(values)}
+          // validationSchema={validationSchema}
           render={props => (
             <ScrollView
               keyboardDismissMode="on-drag"
@@ -383,259 +593,81 @@ if(this.state._price==0)
               }}
             >
               <Form>
-                <View style={{ flex: 1, marginTop: 30, marginBottom: 30 }}>
-                  <OfflineNotice />
+                <View style={{ flex: 1, borderBottomColor: '	rgba(211,211,211,0.6)', borderStyle: 'solid', borderBottomWidth: 2}}>
                   <View
                     style={{
-                      paddingLeft: 10 + "%",
-                      paddingRight: 10 + "%"
-                    }}
-                  ><View
-                    style={{
-                      flexDirection: "column"
+                      paddingLeft: 2.5 + "%",
                     }}
                   >
-                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View ><Text style={styles.formInput}>Event Location</Text></View>
-                        <View><TouchableOpacity onPress={() => { Actions.EventLocation() }}>
-                          <Image style={{ height: 30, width: 30 }} source={Images.locationPin} /></TouchableOpacity></View>
-
-                      </View>
-
-                      <Text
-                        style={[styles.textInput, { borderBottomColor: '#007FFF', borderBottomWidth: 0.5, marginTop: 15 }]}>{this.state._eventFullAdd}</Text>
-
-                    </View>
-
                     <View
                       style={{
-                        flexDirection: "column",
-
-                        paddingTop: 30
-                      }}
-                    >
-                      <Text>Event Title</Text>
-                      <MyInput
-                        name="Title"
-                        type="name"
-                        onChangeText={text =>
-                          this.setState({ _eventTitle: text })
-                        }
-                        placeholder="Please enter event title"
-                        style={styles.textInput}
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={styles.formInput}>Event Description</Text>
-                      <MyInput
-                        name="Description"
-                        type="name"
-                        onChangeText={text =>
-                          this.setState({ _eventDesc: text })
-                        }
-                        placeholder="Please enter event description"
-                        style={styles.textInput}
-                      />
-                    </View>
-
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={styles.formInput}>Event Type</Text>
-                      <MyInput
-                        name="EventType"
-                        type="name"
-                        onChangeText={text => this.setState({ _eventType: text })}
-                        placeholder="Please enter event type"
-                        style={styles.textInput}
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: "column"
+                        flexDirection: "row"
                       }}
                     >
                       <View style={styles.showMeView}>
                         <Text style={styles.showMeText}>Price :</Text>
-                        <RadioForm 
+                        <View style={{ flex: 1}}>
+                        <RadioForm
+                          style={{ justifyContent: 'space-around' }}
                           radio_props={radio_props}
                           initial={0}
+                          formHorizontal={true}
+                          labelHorizontal={true}
                           onPress={(value) => { this.setState({ _price: value }) }}
                         />
-                    {this.showPriceInput()}
+                        </View>
                       </View>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={styles.formInput}>Event Organizer</Text>
-                      <MyInput
-                        name="Organizer"
-                        type="name"
-
-                        onChangeText={text => this.setState({ _eventOrganiser: text })}
-                        placeholder="Please enter event organiser"
-                        style={styles.textInput}
-                      />
-                    </View>
-
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={{
-                        marginBottom: 2,
-                        paddingBottom: 18
-                      }}>Event Start Date and Time</Text><View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View >
-                          <Text
-                            style={{
-                              paddingBottom: 5
-                            }}
-                            placeholder="Please select event date"
-                            style={styles.textInput}
-                          >{this.state.dob} {this.state.eventTime}</Text></View>
-                        <View >
-                          <TouchableOpacity onPress={this._showDateTimePicker}>
-                            <Image style={{ height: 35, width: 35 }} source={Images.calenderIcon} />
-                          </TouchableOpacity>
-                        </View></View>
-                      <View
-                        style={{
-                          backgroundColor: "#3090C7",
-                          height: 1.2,
-                          marginBottom: "4%"
-                        }}
-                      />
-                      <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleDatePicked}
-                        onCancel={this._hideDateTimePicker}
-                        mode="datetime"
-                      />
-                    </View>
-
-
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={{
-                        marginBottom: 2,
-                        paddingBottom: 18
-                      }}>Event End Date Time</Text><View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View >
-                          <Text
-                            style={{
-                              paddingBottom: 5
-                            }}
-                            placeholder="Please select event date"
-                            style={styles.textInput}
-                          >{this.state.endEventDate} {this.state.endEventTime}</Text></View>
-                        <View >
-                          <TouchableOpacity onPress={this._showDateTimePickerEnd}>
-                            <Image style={{ height: 35, width: 35 }} source={Images.calenderIcon} />
-                          </TouchableOpacity>
-                        </View></View>
-                      <View
-                        style={{
-                          backgroundColor: "#3090C7",
-                          height: 1.2,
-                          marginBottom: "4%"
-                        }}
-                      />
-                      <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleDatePicked}
-                        onCancel={this._hideDateTimePicker}
-                        mode="datetime"
-                      />
-                    </View>
-
-
-
-                    <View
-                      style={{
-                        flexDirection: "column",
-                        paddingTop: 15
-                      }}
-                    >
-                      <Text style={styles.formInput}>Admin Name</Text>
-                      <MyInput
-                        name="admin"
-                        type="name"
-
-                        onChangeText={text => this.setState({ _adminName: text })}
-                        placeholder="Please enter admin Name"
-                        style={styles.textInput}
-                      />
-                    </View>
-
-
-
-                    <View
-                      style={{
-                        flexDirection: "column"
-                      }}
-                    >
-                      <Text style={styles.text}>
-                        {this.state.fileName ? 'File Name ' + this.state.fileName + ' uploaded' : ''}
-                      </Text>
-
-                    </View>
-
-
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "row",
-                        justifyContent: 'space-around',
-
-                      }}
-                    ><TouchableOpacity
-                      activeOpacity={0.5}
-                      style={{ alignItems: 'center' }}
-                      onPress={this.handleChange.bind(this)}>
-                        <Image
-                          source={{
-                            uri:
-                              'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
-                          }}
-                          style={styles.ImageIconStyle}
-                        />
-                        <Text>Add Attachment</Text>
-                      </TouchableOpacity>
-                      <RkButton
-                        rkType="rounded"
-                        style={styles.googleButton}
-                        onPress={() => {
-                          this._addEventSave();
-                        }}
-                      >
-                        Add Event
-                      </RkButton>
-                    </View>
-
-
-
-
                   </View>
-
                 </View>
               </Form>
             </ScrollView>
           )}
         />
+        {this.state._price === 0 ? <GiftedForm.TextInputWidget
+            name='price'
+            title='Price'
+            placeholder='Please enter event ticket price'
+            onChangeText={text => this.setState({ _eventTicketPrice: text })}
+            clearButtonMode='while-editing'
+            value={this.state._eventTicketPrice}
+          /> : null}
+          <View
+            style={{
+              flex: 1,
+              paddingTop: 5,
+              paddingBottom: 5,
+              marginTop: 1,
+              flexDirection: "row",
+              justifyContent: 'space-around',
+              backgroundColor: "#ffffff",
+            }}
+          ><TouchableOpacity
+            activeOpacity={0.5}
+            style={{ alignItems: 'center' }}
+            onPress={this.handleChange.bind(this)}>
+              <Image
+                source={{
+                  uri:
+                    'https://aboutreact.com/wp-content/uploads/2018/09/clips.png',
+                }}
+                style={styles.ImageIconStyle}
+              />
+              <Text>Add Attachment</Text>
+            </TouchableOpacity>
+            <RkButton
+              rkType="rounded"
+              style={styles.googleButton}
+              onPress={() => {
+                this._addEventSave();
+              }}
+            >
+              Add Event
+                      </RkButton>
+          </View>
+
+          <GiftedForm.HiddenWidget name='tos' value={this.state.tos} />
+        </GiftedForm>
       </KeyboardAvoidingView>
     );
   }
@@ -685,10 +717,10 @@ const styles = StyleSheet.create({
     fontSize: 17
   },
   formInput: {
-    width: "100%"
+    width: "100%",
   },
   googleButton: {
-    backgroundColor: "rgb(252, 56, 80)",
+    backgroundColor: "#37A000",
     borderRadius: 24,
 
     width: 150,
@@ -738,14 +770,14 @@ const styles = StyleSheet.create({
     fontSize: 17,
     paddingBottom: 15,
     textAlign: "left",
+    flex: 1
 
   },
   showMeView: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
-
-    marginBottom: 15,
-
-    marginRight: 16
+    paddingTop: 10,
+    flex: 1,
+    flexDirection: 'row'
   },
   buttonContainer: {
     height: 45,

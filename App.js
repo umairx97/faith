@@ -3,7 +3,7 @@ import { View, Text, AsyncStorage } from "react-native";
 import firebase from "react-native-firebase";
 import Route from "./App/components/routes/Routes";
 import { Actions } from "react-native-router-flux";
-
+import MapView from 'react-native-maps'
 import MyappSplash from "./App/components/SplashScreen/MyappSplash";
 export default class App extends Component {
   constructor() {
@@ -105,5 +105,6 @@ export default class App extends Component {
   }
   render() {
     return <Route />;
+    // return <MapView style = {{flex: 1}}/>
   }
 }

@@ -38,6 +38,10 @@ import EventDetailPage from "../Events/EventDetailPage";
 import RightSlide from "../Events/RightSlide";
 import ReviewEvent from "../Events/ReviewEvent";
 
+
+
+
+
 export default class Route extends Component {
   getIcon = () => {
     return (
@@ -108,6 +112,8 @@ export default class Route extends Component {
       />
     );
   };
+
+  
   getIconMatch = () => {
     return (
       <Image

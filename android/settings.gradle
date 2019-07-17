@@ -1,4 +1,6 @@
 rootProject.name = 'FaithMeetsLove'
+include ':react-native-share'
+project(':react-native-share').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-share/android')
 include ':react-native-action-sheet'
 project(':react-native-action-sheet').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-action-sheet/android')
 include ':react-native-gesture-handler'
